@@ -10,6 +10,10 @@
  * @property string $estado_codigo_ibge
  */
 class Estados extends CActiveRecord
+
+
+
+
 {
 	/**
 	 * Returns the static model of the specified AR class.
