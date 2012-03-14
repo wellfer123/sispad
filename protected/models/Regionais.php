@@ -66,9 +66,9 @@ class Regionais extends CActiveRecord
 	{
 		return array(
 			'id' => 'Id',
-			'regional_nome' => 'Regional Nome',
-			'regional_codigo_ibge' => 'Regional Codigo Ibge',
-			'regional_estado' => 'Regional Estado',
+			'regional_nome' => 'Nome',
+			'regional_codigo_ibge' => 'Código Ibge',
+			'regional_estado' => 'Estado',
 		);
 	}
 

@@ -90,11 +90,7 @@ class Unidade extends CActiveRecord
 
 		$criteria->compare('cnes',$this->cnes,true);
 
-		$criteria->compare('descricao',$this->descricao,true);
-
 		$criteria->compare('nome',$this->nome,true);
-
-		$criteria->compare('cidade_id',$this->cidade_id);
 
 		return new CActiveDataProvider('Unidade', array(
 			'criteria'=>$criteria,
