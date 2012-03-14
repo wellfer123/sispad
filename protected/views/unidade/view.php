@@ -1,21 +1,21 @@
 <?php
 $this->breadcrumbs=array(
-	'Unidades'=>array('index'),
-	$model->cnes,
+	'Unidade'=>array('index'),
+	$model->nome,
 );
 
 $this->menu=array(
     
     
-	array('label'=>'List Unidade', 'url'=>array('index')),
-	array('label'=>'Create Unidade', 'url'=>array('create')),
-	array('label'=>'Update Unidade', 'url'=>array('update', 'id'=>$model->cnes)),
-	array('label'=>'Delete Unidade', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->cnes),'confirm'=>'Are you sure you want to delete this item?')),
-	array('label'=>'Manage Unidade', 'url'=>array('admin')),
+	array('label'=>'Lista de Unidades', 'url'=>array('index')),
+	array('label'=>'Cadastro de Unidade', 'url'=>array('create')),
+	array('label'=>'Atualização de Unidade', 'url'=>array('update', 'id'=>$model->cnes)),
+	array('label'=>'Exclusão de Unidade', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->cnes),'confirm'=>'Deseja realmente excluir essa unidade?')),
+	array('label'=>'Gerencimento de Unidade', 'url'=>array('admin')),
 );
 ?>
 
-<h1>View Unidade #<?php echo $model->cnes; ?></h1>
+<h1>Unidade </h1>
 
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
@@ -23,6 +23,7 @@ $this->menu=array(
 		'cnes',
 		'descricao',
 		'nome',
+                'regional.regional_nome',
 		'cidade.cidade_nome',
 	),
 )); ?>

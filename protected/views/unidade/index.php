@@ -4,8 +4,10 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Create Unidade', 'url'=>array('create')),
-	array('label'=>'Manage Unidade', 'url'=>array('admin')),
+	array('label'=>'Lista de Unidades', 'url'=>array('index')),
+	array('label'=>'Cadastro de Unidade', 'url'=>array('create')),
+	array('label'=>'Atualização de Unidade', 'url'=>array('update', 'id'=>$model->cnes)),
+	array('label'=>'Gerencimento de Unidade', 'url'=>array('admin')),
 );
 ?>
 

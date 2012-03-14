@@ -5,8 +5,8 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List Unidade', 'url'=>array('index')),
-	array('label'=>'Manage Unidade', 'url'=>array('admin')),
+	array('label'=>'Lista de Unidades', 'url'=>array('index')),
+        array('label'=>'Gerencimento de Unidade', 'url'=>array('admin')),
 );
 ?>
 
