@@ -56,7 +56,7 @@ class Cidades extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-                    'unidades'=>array(self::HAS_MANY,'Unidade','id')
+                    'unidades'=>array(self::HAS_MANY,'Unidade','cidade_id')
 		);
 	}
 

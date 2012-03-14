@@ -53,7 +53,9 @@ class Regionais extends CActiveRecord
 	{
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
+            
 		return array(
+                    'cidades'=>array(self::HAS_MANY,'Cidades','cidade_id_regional')
 		);
 	}
 
