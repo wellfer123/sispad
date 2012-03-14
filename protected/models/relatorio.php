@@ -39,13 +39,51 @@ class relatorio extends CActiveRecord
 		return array(
 			array('conteudo, data_envio', 'required'),
 			array('servidor_cpf', 'numerical', 'integerOnly'=>true),
+                        array('data_trabalho', 'validaDiferencaDatas','dias'=>7),
+                        array('data_trabalho', 'validaRelatorioExistente'),
 			array('data_trabalho', 'safe'),
+                        
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, conteudo, data_envio, data_trabalho, servidor_cpf', 'safe', 'on'=>'search'),
 		);
 	}
 
+
+        public function validaDiferencaDatas($attribute,$params){
+           $data_envio= date('d/m/Y');//$data_envio recebe a data atual
+           $data_trabalho= $this->data_trabalho;
+
+           
+           $result =  $data_trabalho - $data_envio;
+            if(($result >= 0) && ($result <=$params["dias"])){
+                $this->formataDataDeTrabalho();
+                return true;
+            }
+            $this->addError('data_trabalho','Data inválida. Insira uma data de até 7 dias até a data atual ');
+            return false;
+            
+        }
+
+        
+         public function formataDataDeTrabalho(){
+            $dataarray = explode('/',$this->data_trabalho);
+            $this->data_trabalho = $dataarray[2] . '/' . $dataarray[1] . '/' . $dataarray[0];
+            
+        }
+        public function formataDataDeEnvio(){
+            //$this->data_envio = strrev($this->data_envio);
+        }
+
+         public function  validaRelatorioExistente($data_trabalho){
+
+             if((relatorio::model()->find('data_trabalho= :data_trabalho',array(':data_trabalho'=>$this->data_trabalho)))==null){
+                 return true;
+             }
+             $this->addError('data_trabalho','relatorio ja existe');
+             $this->formataDataDeTrabalho();
+             return false;
+        }
 	/**
 	 * @return array relational rules.
 	 */
@@ -56,6 +94,10 @@ class relatorio extends CActiveRecord
 		return array(
 		);
 	}
+
+        public function formatarDataDeTrabalhoMysql(){
+
+        }
 
 	/**
 	 * @return array customized attribute labels (name=>label)

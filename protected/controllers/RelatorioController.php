@@ -72,15 +72,34 @@ class RelatorioController extends Controller
 
 		if(isset($_POST['relatorio']))
 		{
-			$model->attributes=$_POST['relatorio'];
-			if($model->save())
+                            $model->data_trabalho=$_POST['relatorio']['data_trabalho'];//$this->formataData($data_trabalho);
+                            $model->data_envio = date('Y/m/d  H:i:s');
+                            $model->servidor_cpf=$_POST['relatorio']['servidor_cpf'];
+                            $model->conteudo=$_POST['relatorio']['conteudo'];
+                           // $model->formataDataDeTrabalho();
+                            if($model->save()){
+                                
 				$this->redirect(array('view','id'=>$model->id));
+
+                        }
+
+
 		}
 
 		$this->render('create',array(
 			'model'=>$model,
 		));
-	}
+        }
+
+  
+
+       public function  validaRelatorioExistente($data_trabalho){
+
+             if(relatorio::model()->find(array('data_trabalho'=>$data_trabalho))){
+                 return true;
+             }
+             return false;
+        }
 
 	/**
 	 * Updates a particular model.
