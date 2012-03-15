@@ -159,7 +159,7 @@ class UnidadeController extends Controller
 		if($this->_model===null)
 		{
 			if(isset($_GET['id']))
-				$this->_model=Unidade::model()->with('cidade')->findbyPk($_GET['id']);
+				$this->_model=Unidade::model()->with('cidade','regional')->findbyPk($_GET['id']);
 			if($this->_model===null)
 				throw new CHttpException(404,'The requested page does not exist.');
 		}

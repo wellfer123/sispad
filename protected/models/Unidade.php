@@ -8,6 +8,7 @@
  * @property string $descricao
  * @property string $nome
  * @property integer $cidade_id
+ * @property integer $regional_id
  */
 class Unidade extends CActiveRecord
 {
@@ -36,8 +37,9 @@ class Unidade extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('cnes, descricao', 'required'),
+			array('cnes, descricao,nome,cidade_id, regional_id', 'required'),
 			array('cidade_id', 'numerical', 'integerOnly'=>true),
+                        array('regional_id', 'numerical', 'integerOnly'=>true),
 			array('cnes', 'length', 'max'=>10),
                         array('cnes', 'numerical', 'integerOnly'=>true),
 			array('descricao', 'length', 'max'=>100),
@@ -56,7 +58,8 @@ class Unidade extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-                    'cidade'=>array(self::BELONGS_TO,'Cidades','cidade_id')
+                    'cidade'=>array(self::BELONGS_TO,'Cidades','cidade_id'),
+                    'regional'=>array(self::BELONGS_TO,'Regionais','regional_id')
 		);
 	}
 
@@ -70,6 +73,7 @@ class Unidade extends CActiveRecord
 			'descricao' => 'Descricão',
 			'nome' => 'Nome',
 			'cidade_id' => 'Cidade',
+                        'regional_id' => 'Regional',
 		);
 	}
 
@@ -86,11 +90,7 @@ class Unidade extends CActiveRecord
 
 		$criteria->compare('cnes',$this->cnes,true);
 
-		$criteria->compare('descricao',$this->descricao,true);
-
 		$criteria->compare('nome',$this->nome,true);
-
-		$criteria->compare('cidade_id',$this->cidade_id);
 
 		return new CActiveDataProvider('Unidade', array(
 			'criteria'=>$criteria,

@@ -56,7 +56,7 @@ class Cidades extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-                    'unidades'=>array(self::HAS_MANY,'Unidade','id')
+                    'unidades'=>array(self::HAS_MANY,'Unidade','cidade_id')
 		);
 	}
 
@@ -67,11 +67,11 @@ class Cidades extends CActiveRecord
 	{
 		return array(
 			'id' => 'Id',
-			'cidade_nome' => 'Cidade Nome',
-			'cidade_codigo_ibge' => 'Cidade Codigo Ibge',
-			'cidade_id_estado' => 'Cidade Id Estado',
-			'cidade_id_regional' => 'Cidade Id Regional',
-			'cidade_codigo_estado_ibge' => 'Cidade Codigo Estado Ibge',
+			'cidade_nome' => 'Nome',
+			'cidade_codigo_ibge' => 'Código Ibge',
+			'cidade_id_estado' => 'Id Estado',
+			'cidade_id_regional' => 'Id Regional',
+			'cidade_codigo_estado_ibge' => 'Código Estado Ibge',
 		);
 	}
 

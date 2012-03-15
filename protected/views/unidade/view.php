@@ -23,7 +23,13 @@ $this->menu=array(
 		'cnes',
 		'descricao',
 		'nome',
-                'regional.regional_nome',
-		'cidade.cidade_nome',
+                array(
+                    'label'=>'Regional',
+                    'value'=>$model->regional->regional_nome,
+                ),
+                 array(
+                    'label'=>'Cidade',
+                    'value'=>$model->cidade->cidade_nome,
+                ),
 	),
 )); ?>

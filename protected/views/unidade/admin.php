@@ -29,7 +29,7 @@ You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&g
 or <b>=</b>) at the beginning of each of your search values to specify how the comparison should be done.
 </p>
 
-<?php echo CHtml::link('Pesquisa Avançada','#',array('class'=>'search-button')); ?>
+<?php echo CHtml::link('Pesquisa','#',array('class'=>'search-button')); ?>
 <div class="search-form" style="display:none">
 <?php $this->renderPartial('_search',array(
 	'model'=>$model,
@@ -39,12 +39,17 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'unidade-grid',
 	'dataProvider'=>$model->search(),
-	'filter'=>$model,
 	'columns'=>array(
 		'cnes',
-		'descricao',
 		'nome',
-		'cidade_id',
+                array(
+                    'name'=>'regional',
+                    'value'=>'$data->regional->regional_nome',
+                ),
+                array(
+                    'name'=>'cidade',
+                    'value'=>'$data->cidade->cidade_nome',
+                ),
 		array(
 			'class'=>'CButtonColumn',
 		),
