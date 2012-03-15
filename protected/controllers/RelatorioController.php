@@ -93,13 +93,7 @@ class RelatorioController extends Controller
 
   
 
-       public function  validaRelatorioExistente($data_trabalho){
-
-             if(relatorio::model()->find(array('data_trabalho'=>$data_trabalho))){
-                 return true;
-             }
-             return false;
-        }
+      
 
 	/**
 	 * Updates a particular model.
