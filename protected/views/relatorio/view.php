@@ -19,9 +19,9 @@ $this->menu=array(
 	'data'=>$model,
 	'attributes'=>array(
 		'id',
-		'conteudo',
+                'servidor_cpf',
 		'data_envio',
 		'data_trabalho',
-		'servidor_cpf',
+                'conteudo',
 	),
 )); ?>

@@ -10,6 +10,6 @@ $this->menu=array(
 );
 ?>
 
-<h1>Create relatorio</h1>
+<h1>Novo relatório</h1>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
