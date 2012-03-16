@@ -79,7 +79,13 @@ class RelatorioController extends Controller
                             $model->data_trabalho=$_POST['relatorio']['data_trabalho'];
                             $model->data_envio = date('Y/m/d  H:i:s');
                             $model->servidor_cpf=$_POST['relatorio']['servidor_cpf'];
-                            $model->conteudo=$_POST['relatorio']['conteudo'];
+                            //$model->beforeSave();
+                             //}
+
+                           // $model->arquivo=CUploadedFile::getInstance($model,'arquivo');
+                           // $model->beforeSave();
+                            //$model->arquivo=$_POST['relatorio']['arquivo'];
+                            //$model->conteudo=$_POST['relatorio']['conteudo'];
                            // $model->formataDataDeTrabalho();
                             if($model->save()){
                                 
@@ -95,7 +101,8 @@ class RelatorioController extends Controller
 		));
         }
 
-  
+        
+
 
        public function  validaRelatorioExistente($data_trabalho){
 

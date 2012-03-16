@@ -5,13 +5,17 @@
  *
  * The followings are the available columns in table 'relatorio':
  * @property integer $id
- * @property string $conteudo
+ * @property string $arquivo
  * @property string $data_envio
  * @property string $data_trabalho
  * @property integer $servidor_cpf
  */
 class relatorio extends CActiveRecord
+
+
 {
+
+        public $uploadFile;
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return relatorio the static model class
@@ -37,15 +41,16 @@ class relatorio extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('conteudo, data_envio', 'required'),
+			array('data_trabalho', 'required'),
+                        //array('uploadFile', 'file', 'types'=>'jpg, gif, png'),
 			array('servidor_cpf', 'numerical', 'integerOnly'=>true),
                         array('data_trabalho', 'validaDiferencaDatas','dias'=>7),
-                        array('data_trabalho', 'validaRelatorioExistente'),
+                        array('data_trabalho', 'validaRelatorioExistente','on'=>'create'),
 			array('data_trabalho', 'safe'),
                         
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, conteudo, data_envio, data_trabalho, servidor_cpf', 'safe', 'on'=>'search'),
+			array('id, data_envio, data_trabalho, servidor_cpf', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -55,7 +60,7 @@ class relatorio extends CActiveRecord
            $data_trabalho= $this->data_trabalho;
 
            
-           $result =  $data_trabalho - $data_envio;
+           $result = $data_envio - $data_trabalho;
             if(($result >= 0) && ($result <=$params["dias"])){
                 $this->formataDataDeTrabalho();
                 return true;
@@ -71,6 +76,8 @@ class relatorio extends CActiveRecord
             $this->data_trabalho = $dataarray[2] . '/' . $dataarray[1] . '/' . $dataarray[0];
             
         }
+       
+      
         public function formataDataDeEnvio(){
             //$this->data_envio = strrev($this->data_envio);
         }
@@ -84,6 +91,24 @@ class relatorio extends CActiveRecord
              $this->formataDataDeTrabalho();
              return false;
         }
+
+
+        public function beforeSave()
+    {
+        if($file=CUploadedFile::getInstance($this,'uploadFile'))
+            {
+
+            $this->file_name=$file->name;
+            $this->file_type=$file->type;
+            $this->file_size=$file->size;
+            $this->file_data=file_get_contents($file->tempName);
+
+            }
+
+            return parent::beforeSave();;
+
+    }
+
 	/**
 	 * @return array relational rules.
 	 */
@@ -95,9 +120,7 @@ class relatorio extends CActiveRecord
 		);
 	}
 
-        public function formatarDataDeTrabalhoMysql(){
-
-        }
+       
 
 	/**
 	 * @return array customized attribute labels (name=>label)
@@ -106,7 +129,7 @@ class relatorio extends CActiveRecord
 	{
 		return array(
 			'id' => 'Id',
-			'conteudo' => 'Conteudo',
+			'file_data' => 'Arquivo',
 			'data_envio' => 'Data Envio',
 			'data_trabalho' => 'Data Trabalho',
 			'servidor_cpf' => 'Servidor Cpf',
@@ -126,7 +149,7 @@ class relatorio extends CActiveRecord
 
 		$criteria->compare('id',$this->id);
 
-		$criteria->compare('conteudo',$this->conteudo,true);
+		$criteria->compare('arquivo',$this->arquivo,true);
 
 		$criteria->compare('data_envio',$this->data_envio,true);
 

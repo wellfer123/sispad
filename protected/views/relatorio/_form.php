@@ -3,7 +3,8 @@
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'relatorio-form',
         'enableClientValidation'=>true,
-	'enableAjaxValidation'=>false,
+	'enableAjaxValidation'=>true,
+       
 )); ?>
 
 	<p class="note">Campos com <span class="required">*</span> são obrigatórios.</p>
@@ -33,9 +34,10 @@
 	</div>
 
         <div class="row">
-		<?php echo $form->labelEx($model,'conteudo'); ?>
-		<?php echo $form->textArea($model,'conteudo',array('rows'=>6, 'cols'=>50)); ?>
-		<?php echo $form->error($model,'conteudo'); ?>
+		<?php echo $form->labelEx($model,'uploadFile'); ?>
+		<?php //echo $form->textArea($model,'conteudo',array('rows'=>6, 'cols'=>50)); ?>
+                <?php echo $form->fileField($model,'uploadFile'); ?>
+		<?php echo $form->error($model,'uploadFile'); ?>
 	</div>
 
 	<div class="row buttons">

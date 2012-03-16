@@ -22,6 +22,6 @@ $this->menu=array(
                 'servidor_cpf',
 		'data_envio',
 		'data_trabalho',
-                'conteudo',
+                'arquivo',
 	),
 )); ?>
