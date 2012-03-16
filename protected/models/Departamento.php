@@ -36,14 +36,14 @@ class Departamento extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id, descricao', 'required'),
+			array('nome, descricao', 'required'),
 			array('unidade_cnes', 'numerical', 'integerOnly'=>true),
 			array('id', 'length', 'max'=>10),
 			array('nome', 'length', 'max'=>40),
 			array('descricao', 'length', 'max'=>100),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, nome, descricao, unidade_cnes', 'safe', 'on'=>'search'),
+			array('nome', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -55,6 +55,8 @@ class Departamento extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+                    'unidade'=>array(self::BELONGS_TO,'Unidade','unidade_cnes'),
+                    'setores'=>array(self::HAS_MANY,'Setor','departamento_id')
 		);
 	}
 
@@ -66,8 +68,8 @@ class Departamento extends CActiveRecord
 		return array(
 			'id' => 'Id',
 			'nome' => 'Nome',
-			'descricao' => 'Descricao',
-			'unidade_cnes' => 'Unidade Cnes',
+			'descricao' => 'Descrição',
+			'unidade_cnes' => 'Unidade',
 		);
 	}
 
@@ -82,13 +84,8 @@ class Departamento extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id',$this->id,true);
 
 		$criteria->compare('nome',$this->nome,true);
-
-		$criteria->compare('descricao',$this->descricao,true);
-
-		$criteria->compare('unidade_cnes',$this->unidade_cnes);
 
 		return new CActiveDataProvider('Departamento', array(
 			'criteria'=>$criteria,

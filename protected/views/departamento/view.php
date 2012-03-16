@@ -21,6 +21,9 @@ $this->menu=array(
 		'id',
 		'nome',
 		'descricao',
-		'unidade_cnes',
+                array(
+                    'label'=>'Unidade',
+                    'value'=>$model->unidade->nome,
+                ),
 	),
 )); ?>

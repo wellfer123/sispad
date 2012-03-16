@@ -133,6 +133,8 @@ class DepartamentoController extends Controller
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
+                
+                $this->redirect(array('admin'));
 	}
 
 	/**
@@ -159,7 +161,7 @@ class DepartamentoController extends Controller
 		if($this->_model===null)
 		{
 			if(isset($_GET['id']))
-				$this->_model=Departamento::model()->findbyPk($_GET['id']);
+				$this->_model=Departamento::model()->with('unidade')->findbyPk($_GET['id']);
 			if($this->_model===null)
 				throw new CHttpException(404,'The requested page does not exist.');
 		}

@@ -15,7 +15,6 @@
         
         <div class="row">
 		<?php echo $form->labelEx($model,'cnes'); ?>
-		<?//php echo $form->textField($model,'cnes',array('size'=>60,'maxlength'=>100)); ?>
                 <?php $this->widget('CMaskedTextField', array(
                     'model'=>$model,
                     'attribute'=>'cnes',
@@ -41,7 +40,7 @@
             
                 <?php echo CHtml::activedropDownList($model, 
                                                'regional_id',
-                                               CHtml::listData(Regionais::model()->findAll(), 'id', 'regional_nome'),
+                                               CHtml::listData(Regionais::model()->findAll('regional_codigo_ibge=:id',array(':id'=>'2604')), 'id', 'regional_nome'),
                                                                array('empty'=>'Escolha uma Regional')) ;?>
 		
 	</div>
@@ -66,7 +65,7 @@
             
                 <?php echo CHtml::activedropDownList($model, 
                                                'cidade_id',
-                                               CHtml::listData(Cidades::model()->findAll('cidade_codigo_estado_ibge=:estado',array(':estado'=>'26')), 'id', 'cidade_nome'),
+                                               CHtml::listData(Cidades::model()->findAll('cidade_id_regional=:regional',array(':regional'=>'2604')), 'id', 'cidade_nome'),
                                                                array('empty'=>'Escolha uma cidade')) ;?>
 		
 	</div>
