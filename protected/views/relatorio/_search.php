@@ -11,8 +11,8 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'conteudo'); ?>
-		<?php echo $form->textArea($model,'conteudo',array('rows'=>6, 'cols'=>50)); ?>
+		<?php //echo $form->label($model,'conteudo'); ?>
+		<?php //echo $form->textArea($model,'conteudo',array('rows'=>6, 'cols'=>50)); ?>
 	</div>
 
 	<div class="row">

@@ -34,7 +34,7 @@ class RelatorioController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
+				'actions'=>array('index','view','display'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -76,17 +76,11 @@ class RelatorioController extends Controller
 
 		if(isset($_POST['relatorio']))
 		{
+                           
                             $model->data_trabalho=$_POST['relatorio']['data_trabalho'];
                             $model->data_envio = date('Y/m/d  H:i:s');
                             $model->servidor_cpf=$_POST['relatorio']['servidor_cpf'];
-                            //$model->beforeSave();
-                             //}
-
-                           // $model->arquivo=CUploadedFile::getInstance($model,'arquivo');
-                           // $model->beforeSave();
-                            //$model->arquivo=$_POST['relatorio']['arquivo'];
-                            //$model->conteudo=$_POST['relatorio']['conteudo'];
-                           // $model->formataDataDeTrabalho();
+                          
                             if($model->save()){
                                 
 				$this->redirect(array('view','id'=>$model->id));
@@ -140,6 +134,23 @@ class RelatorioController extends Controller
             $model->data_trabalho = $dataarray[2] . '/' . $dataarray[1] . '/' . $dataarray[0];
 
         }
+
+
+        public function actionDisplay()
+        {
+          
+            $model=$this->loadModel($_GET['id']);
+
+                header('Pragma: public');
+                header('Expires: 0');
+                header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+                header('Content-Transfer-Encoding: binary');
+                header('Content-length: '.$model->file_size);
+                header('Content-Type: '.$model->file_type);
+                header('Content-Disposition: attachment; filename='.$model->file_name);
+                die($model->file_data);
+            //echo $model->file_data;
+}
 
 	/**
 	 * Deletes a particular model.

@@ -22,6 +22,7 @@ $this->menu=array(
                 'servidor_cpf',
 		'data_envio',
 		'data_trabalho',
-                'arquivo',
+               
 	),
 )); ?>
+<?php echo CHtml::link('Download relatorio',array('display','id'=>$model->id)); ?>

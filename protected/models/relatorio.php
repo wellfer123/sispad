@@ -15,7 +15,7 @@ class relatorio extends CActiveRecord
 
 {
 
-        public $uploadFile;
+        
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return relatorio the static model class
@@ -42,7 +42,7 @@ class relatorio extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('data_trabalho', 'required'),
-                        //array('uploadFile', 'file', 'types'=>'jpg, gif, png'),
+                        array('file_data', 'file', 'types'=>'txt,doc,docx'),
 			array('servidor_cpf', 'numerical', 'integerOnly'=>true),
                         array('data_trabalho', 'validaDiferencaDatas','dias'=>7),
                         array('data_trabalho', 'validaRelatorioExistente','on'=>'create'),
@@ -95,17 +95,18 @@ class relatorio extends CActiveRecord
 
         public function beforeSave()
     {
-        if($file=CUploadedFile::getInstance($this,'uploadFile'))
-            {
+        $file=CUploadedFile::getInstance($this,'file_data');
+        if(!$file->error){
+            
 
             $this->file_name=$file->name;
             $this->file_type=$file->type;
             $this->file_size=$file->size;
-            $this->file_data=file_get_contents($file->tempName);
+            $this->file_data=file_get_contents($file->getTempName());
 
-            }
+        }
 
-            return parent::beforeSave();;
+            return parent::beforeSave();
 
     }
 
@@ -149,7 +150,7 @@ class relatorio extends CActiveRecord
 
 		$criteria->compare('id',$this->id);
 
-		$criteria->compare('arquivo',$this->arquivo,true);
+		$criteria->compare('file_data',$this->file_data,true);
 
 		$criteria->compare('data_envio',$this->data_envio,true);
 

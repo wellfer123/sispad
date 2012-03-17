@@ -4,6 +4,7 @@
 	'id'=>'relatorio-form',
         'enableClientValidation'=>true,
 	'enableAjaxValidation'=>true,
+        'htmlOptions'=>array('enctype' => 'multipart/form-data'),
        
 )); ?>
 
@@ -34,10 +35,9 @@
 	</div>
 
         <div class="row">
-		<?php echo $form->labelEx($model,'uploadFile'); ?>
-		<?php //echo $form->textArea($model,'conteudo',array('rows'=>6, 'cols'=>50)); ?>
-                <?php echo $form->fileField($model,'uploadFile'); ?>
-		<?php echo $form->error($model,'uploadFile'); ?>
+		<?php echo $form->labelEx($model,'file_data'); ?>
+                <?php echo $form->fileField($model,'file_data'); ?>
+		<?php echo $form->error($model,'file_data'); ?>
 	</div>
 
 	<div class="row buttons">
