@@ -7,7 +7,8 @@
 // CWebApplication properties can be configured here.
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
-	'name'=>'My Web Application',
+	'name'=>'SISPAD',
+         'theme'=>'sispadred',
 
 	// preloading 'log' component
 	'preload'=>array('log'),
@@ -32,10 +33,24 @@ return array(
 
 	// application components
 	'components'=>array(
+                 'widgetFactory'=>array(
+                        'widgets'=>array(
+                            'CDetailView'=>array(
+
+                                'cssFile' =>'/sispad/themes/sispadred/css/detailViewStyle.css',
+                            ),
+                            'CGridView'=>array(
+
+                                'cssFile' =>'/sispad/themes/sispadred/css/gridViewStyle.css',
+                            ),
+               
+                        ),
+                ),
 		'user'=>array(
 			// enable cookie-based authentication
 			'allowAutoLogin'=>true,
 		),
+               
 		// uncomment the following to enable URLs in path-format
 		/*
 		'urlManager'=>array(

@@ -17,12 +17,19 @@ $this->menu=array(
 
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
+        //'cssFile' => Yii::app()->theme->baseUrl .'/css/profile.css',
+
 	'attributes'=>array(
 		'id',
                 'servidor_cpf',
 		'data_envio',
 		'data_trabalho',
+                array(
+                    'name'=>'Arquivo',
+                    'type'=>'raw',
+                    'value'=> CHtml::link('Download',array('display','id'=>$model->id)),
+                ),
                
 	),
 )); ?>
-<?php echo CHtml::link('Download relatorio',array('display','id'=>$model->id)); ?>
+
