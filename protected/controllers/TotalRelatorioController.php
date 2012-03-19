@@ -1,6 +1,6 @@
 <?php
 
-class DepartamentoController extends Controller
+class TotalRelatorioController extends Controller
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -65,16 +65,16 @@ class DepartamentoController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new Departamento;
+		$model=new TotalRelatorio;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Departamento']))
+		if(isset($_POST['TotalRelatorio']))
 		{
-			$model->attributes=$_POST['Departamento'];
+			$model->attributes=$_POST['TotalRelatorio'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+				$this->redirect(array('view','id'=>$model->ano));
 		}
 
 		$this->render('create',array(
@@ -93,11 +93,11 @@ class DepartamentoController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Departamento']))
+		if(isset($_POST['TotalRelatorio']))
 		{
-			$model->attributes=$_POST['Departamento'];
+			$model->attributes=$_POST['TotalRelatorio'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+				$this->redirect(array('view','id'=>$model->ano));
 		}
 
 		$this->render('update',array(
@@ -129,12 +129,10 @@ class DepartamentoController extends Controller
 	 */
 	public function actionIndex()
 	{
-		/*$dataProvider=new CActiveDataProvider('Departamento');
+		$dataProvider=new CActiveDataProvider('TotalRelatorio');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
-		));*/
-                
-                $this->redirect(array('admin'));
+		));
 	}
 
 	/**
@@ -142,10 +140,10 @@ class DepartamentoController extends Controller
 	 */
 	public function actionAdmin()
 	{
-		$model=new Departamento('search');
+		$model=new TotalRelatorio('search');
 		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['Departamento']))
-			$model->attributes=$_GET['Departamento'];
+		if(isset($_GET['TotalRelatorio']))
+			$model->attributes=$_GET['TotalRelatorio'];
 
 		$this->render('admin',array(
 			'model'=>$model,
@@ -161,7 +159,7 @@ class DepartamentoController extends Controller
 		if($this->_model===null)
 		{
 			if(isset($_GET['id']))
-				$this->_model=Departamento::model()->with('unidade')->findbyPk($_GET['id']);
+				$this->_model=TotalRelatorio::model()->findbyPk($_GET['id']);
 			if($this->_model===null)
 				throw new CHttpException(404,'The requested page does not exist.');
 		}
@@ -174,7 +172,7 @@ class DepartamentoController extends Controller
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='departamento-form')
+		if(isset($_POST['ajax']) && $_POST['ajax']==='total-relatorio-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
