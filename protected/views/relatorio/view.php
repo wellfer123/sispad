@@ -1,4 +1,4 @@
-
+<?php include 'protected/services/FormataData.php'?>
 <?php
 $this->breadcrumbs=array(
 	'Relatorios'=>array('index'),
@@ -16,7 +16,11 @@ $this->menu=array(
 
 <h1>View relatorio #<?php echo $model->id; ?></h1>
 
-<?php $this->widget('zii.widgets.CDetailView', array(
+<?php
+    
+
+
+$this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
         //'cssFile' => Yii::app()->theme->baseUrl .'/css/profile.css',
 
@@ -24,7 +28,10 @@ $this->menu=array(
 		'id',
                 'servidor_cpf',
 		'data_envio',
-		'data_trabalho',
+		array(
+                    'name'=>'Data Trabalho',
+                    'value'=> FormataData::inverteData($model->data_trabalho,"-"),
+                ),
                 array(
                     'name'=>'Arquivo',
                     'type'=>'raw',

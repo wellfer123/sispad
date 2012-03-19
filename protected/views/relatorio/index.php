@@ -1,4 +1,4 @@
-
+<?php include 'protected/services/FormataData.php'?>
 <?php
 $this->breadcrumbs=array(
 	'Relatorios',
@@ -13,8 +13,7 @@ $this->menu=array(
 <h1>Relatorios</h1>
 
 <?php
-    
-    //$data3=inverteData($data->data_trabalho);
+
     $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'relatorio-grid',
 	'dataProvider'=>$model->search(),
@@ -22,7 +21,7 @@ $this->menu=array(
 		'id',
 		array(
                     'name'=>'Data Trabalho',
-                    'value'=> '$data->data_trabalho',
+                    'value'=> 'FormataData::inverteData($data->data_trabalho,"-")',
                 ),
 		array(
 			'class'=>'CButtonColumn',
@@ -31,7 +30,7 @@ $this->menu=array(
 	),
 ));
 
-
+    
         ?>
 <?php /*$this->widget('zii.widgets.CListView', array(
 	'dataProvider'=>$dataProvider,
