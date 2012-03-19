@@ -24,7 +24,40 @@
 	<div id="header">
 		<div id="logo"><?php echo CHtml::encode(Yii::app()->name); ?></div>
 	</div><!-- header -->
-
+<?php $this->widget('application.extensions.menu.SMenu',
+array(
+"menu"=>array(
+          //menu raiz
+          array("url"=>array("route"=>"/"), "label"=>"Início"),
+          array("url"=>array(
+                       "route"=>"/event/create"),
+                       "label"=>"Relatório",
+                       array("url"=>array("route"=>"/Relatorio/create"),"label"=>"Enviar Meu Relatório"),
+                       array("url"=>array("route"=>"/Relatorio/create"),"label"=>"Enviar do Servidor"),
+                       array("url"=>array("route"=>"/Relatorio/create"),"label"=>"Enviar Quantidade")
+              ),
+                
+          array("url"=>array(),
+                            "label"=>"Cadastro",
+                      array("url"=>array("route"=>"/departamento/index"), "label"=>"Departamento"),
+                      array("url"=>array("route"=>"/Setor/index"), "label"=>"Setor"),
+                      array("url"=>array("route"=>"/Servidor/index"), "label"=>"Servidor"),
+                      array("url"=>array("route"=>"/Unidade/index"), "label"=>"Unidade")
+              ),
+          //menu raiz
+          array("url"=>array(), "label"=>"Ajuda",
+                        array("url"=>array("route"=>"/site/page", "view"=>"about"), "label"=>"Sobre"),
+                        array("url"=>array("route"=>"/site/contact"), "label"=>"Contato")),
+          array("url"=>array("route"=>"site/login"), "label"=>"Entrar","visible"=>Yii::app()->user->isGuest),
+          array("url"=>array("route"=>"site/logout"), "label"=>'Sair ('.Yii::app()->user->name.')',"visible"=>!Yii::app()->user->isGuest),
+          
+          ),
+"stylesheet"=>"menu_white.css",
+"menuID"=>"myMenu",
+"delay"=>3
+)
+); ?>
+        
 	<div id="mainmenu">
 		<?php $this->widget('zii.widgets.CMenu',array(
 			'items'=>array(

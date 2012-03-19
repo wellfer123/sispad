@@ -2,6 +2,7 @@
 
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'departamento-form',
+        'enableClientValidation'=>true,
 	'enableAjaxValidation'=>false,
 )); ?>
 
@@ -15,20 +16,23 @@
 		<?php echo $form->error($model,'nome'); ?>
 	</div>
 
+         <div class="row">
+                <?php echo CHtml::activeLabel($model, 'unidade_cnes');?>
+            
+                <?php echo CHtml::activedropDownList($model, 
+                                               'unidade_cnes',
+                                               CHtml::listData(Unidade::model()->findAll(), 'cnes', 'nome'),
+                                                               array('empty'=>'Escolha a unidade')) ;?>
+		
+	</div>
 	<div class="row">
 		<?php echo $form->labelEx($model,'descricao'); ?>
 		<?php echo $form->textField($model,'descricao',array('size'=>60,'maxlength'=>100)); ?>
 		<?php echo $form->error($model,'descricao'); ?>
 	</div>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'unidade_cnes'); ?>
-		<?php echo $form->textField($model,'unidade_cnes'); ?>
-		<?php echo $form->error($model,'unidade_cnes'); ?>
-	</div>
-
 	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
+		<?php echo CHtml::submitButton($model->isNewRecord ? 'Cadastrar' : 'Salvar'); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

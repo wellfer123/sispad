@@ -55,6 +55,7 @@ class Setor extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+                    'departamento'=>array(self::BELONGS_TO,'Departamento','departamento_id'),
 		);
 	}
 

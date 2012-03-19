@@ -227,3 +227,6 @@ class RelatorioController extends Controller
 	}
 }
 
+
+
+

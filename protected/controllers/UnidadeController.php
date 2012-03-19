@@ -129,10 +129,11 @@ class UnidadeController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('Unidade');
+		/*$dataProvider=new CActiveDataProvider('Unidade');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
-		));
+		));*/
+                $this->redirect(array('admin'));
 	}
 
 	/**
