@@ -20,6 +20,7 @@ return array(
 	),
 
 	'modules'=>array(
+                'rbac'
 		// uncomment the following to enable the Gii tool
 		/*
 		'gii'=>array(
@@ -33,6 +34,16 @@ return array(
 
 	// application components
 	'components'=>array(
+               'rbac'=>array(
+                    // Table where Users are stored. RBAC Manager use it as read-only
+                    'tableUser'=>'User',
+                    // The PRIMARY column of the User Table
+                    'columnUserid'=>'id',
+                    // only for display name and could be same as id
+                    'columnUsername'=>'username',
+                    // only for display email for better identify Users
+                    'columnEmail'=>'email' // email (only for display)
+                    ),
                  'widgetFactory'=>array(
                         'widgets'=>array(
                             'CDetailView'=>array(
@@ -76,6 +87,12 @@ return array(
 			'password' => '',
 			'charset' => 'utf8',
 		),
+               'authManager'=>array(
+                         'class'=>'CDbAuthManager', // Database driven Yii-Auth Manager
+                          'connectionID'=>'db', // db connection as above
+                         'defaultRoles'=>array('registered'), // default Role for logged in users
+                         'showErrors'=>true, // show eval()-errors in buisnessRules
+    ),
 		
 		'errorHandler'=>array(
 			// use 'site/error' action to display errors

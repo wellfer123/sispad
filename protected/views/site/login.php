@@ -11,7 +11,7 @@ $this->breadcrumbs=array(
 
 <div class="form">
 <?php $form=$this->beginWidget('CActiveForm', array(
-	'id'=>'login-form',
+	'id'=>'user-form',
 	'enableClientValidation'=>true,
 	'clientOptions'=>array(
 		'validateOnSubmit'=>true,
@@ -36,9 +36,9 @@ $this->breadcrumbs=array(
 	</div>
 
 	<div class="row rememberMe">
-		<?php echo $form->checkBox($model,'rememberMe'); ?>
-		<?php echo $form->label($model,'rememberMe'); ?>
-		<?php echo $form->error($model,'rememberMe'); ?>
+		<?php //echo $form->checkBox($model,'rememberMe'); ?>
+		<?php //echo $form->label($model,'rememberMe'); ?>
+		<?php //echo $form->error($model,'rememberMe'); ?>
 	</div>
 
 	<div class="row buttons">
