@@ -28,8 +28,8 @@ class Unidade extends CActiveRecord
 	{
 		return 'Unidade';
 	}
-
-	/**
+        
+        	/**
 	 * @return array validation rules for model attributes.
 	 */
 	public function rules()
@@ -41,6 +41,7 @@ class Unidade extends CActiveRecord
 			array('cidade_id', 'numerical', 'integerOnly'=>true),
                         array('regional_id', 'numerical', 'integerOnly'=>true),
 			array('cnes', 'length', 'max'=>10),
+                        array('cnes', 'unique'),
                         array('cnes', 'numerical', 'integerOnly'=>true),
 			array('descricao', 'length', 'max'=>100),
 			array('nome', 'length', 'max'=>40),
