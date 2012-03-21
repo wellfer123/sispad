@@ -65,7 +65,7 @@ class UnidadeController extends Controller
 	 */
 	public function actionView()
 	{       
-                $this->_RBAC->checkAccess('viewUnidade');
+                $this->_RBAC->checkAccess(array('viewUnidade','registered'),true);
 		$this->render('view',array(
 			'model'=>$this->loadModel(),
 		));
@@ -87,8 +87,10 @@ class UnidadeController extends Controller
 		if(isset($_POST['Unidade']))
 		{
 			$model->attributes=$_POST['Unidade'];
-			if($model->save())
+                        if($model->validate()){
+                            if($model->save())
 				$this->redirect(array('view','id'=>$model->cnes));
+                        }
 		}
 
 		$this->render('create',array(
@@ -126,7 +128,7 @@ class UnidadeController extends Controller
 	 */
 	public function actionDelete()
 	{
-                $this->_RBAC->denyAccess();
+                $this->_RBAC->checkAccess('delete',true);
 		if(Yii::app()->request->isPostRequest)
 		{
 			// we only allow deletion via POST request
@@ -151,6 +153,15 @@ class UnidadeController extends Controller
 			'dataProvider'=>$dataProvider,
 		));*/
                 $this->redirect(array('admin'));
+	}
+        
+        public function actionList()
+	{
+                $this->_RBAC->checkAccess(array('manegeUnidade', 'registered'),true);
+		$dataProvider=new CActiveDataProvider('Unidade');
+		$this->render('list',array(
+			'dataProvider'=>$dataProvider,
+		));
 	}
 
 	/**
