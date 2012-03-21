@@ -1,5 +1,6 @@
 <?php
 
+Yii::import('application.modules.rbac.components.*');
 class UnidadeController extends Controller
 {
 	/**
@@ -12,6 +13,16 @@ class UnidadeController extends Controller
 	 * @var CActiveRecord the currently loaded data model instance.
 	 */
 	private $_model;
+        
+        private $_RBAC;
+        
+        
+        
+        public function __construct($id, $module = null) {
+            
+            $this->_RBAC= new RBACAccessVerifier;
+            parent::__construct($id, $module);
+        }
 
 	/**
 	 * @return array action filters
@@ -31,7 +42,7 @@ class UnidadeController extends Controller
 	public function accessRules()
 	{
 		return array(
-			array('allow',  // allow all users to perform 'index' and 'view' actions
+			/*array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('index','view'),
 				'users'=>array('*'),
 			),
@@ -45,7 +56,7 @@ class UnidadeController extends Controller
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
-			),
+			),*/
 		);
 	}
 
@@ -53,7 +64,8 @@ class UnidadeController extends Controller
 	 * Displays a particular model.
 	 */
 	public function actionView()
-	{
+	{       
+                $this->_RBAC->checkAccess('viewUnidade');
 		$this->render('view',array(
 			'model'=>$this->loadModel(),
 		));
@@ -65,6 +77,8 @@ class UnidadeController extends Controller
 	 */
 	public function actionCreate()
 	{
+                $this->_RBAC->checkAccess('manegeUnidade',true);
+                //$this->_RBAC->denyAccess();
 		$model=new Unidade;
 
 		// Uncomment the following line if AJAX validation is needed
@@ -88,6 +102,7 @@ class UnidadeController extends Controller
 	 */
 	public function actionUpdate()
 	{
+                $this->_RBAC->checkAccess('manegeUnidade',true);
 		$model=$this->loadModel();
 
 		// Uncomment the following line if AJAX validation is needed
@@ -111,6 +126,7 @@ class UnidadeController extends Controller
 	 */
 	public function actionDelete()
 	{
+                $this->_RBAC->denyAccess();
 		if(Yii::app()->request->isPostRequest)
 		{
 			// we only allow deletion via POST request
@@ -129,6 +145,7 @@ class UnidadeController extends Controller
 	 */
 	public function actionIndex()
 	{
+                $this->_RBAC->checkAccess('manegeUnidade',true);
 		/*$dataProvider=new CActiveDataProvider('Unidade');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
@@ -141,6 +158,7 @@ class UnidadeController extends Controller
 	 */
 	public function actionAdmin()
 	{
+                $this->_RBAC->checkAccess('manegeUnidade',true);
 		$model=new Unidade('search');
 		$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['Unidade']))

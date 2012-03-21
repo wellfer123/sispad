@@ -93,6 +93,10 @@ class SiteController extends Controller
 		// display the login form
 		$this->render('login',array('model'=>$model));
 	}
+        
+        public function actionAccessDenied(){
+            $this->render('accessDenied');
+        }
 
 	/**
 	 * Logs out the current user and redirect to homepage.

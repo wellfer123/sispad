@@ -43,8 +43,8 @@ class RBACAccessVerifier implements IBehavior{
     // vars changeable by attachBehavior
 	public $checkDefaultIndex='id';
 	public $allowCaching=false;
-	public $accessDeniedUrl = array("/user/login");
-	public $loginUrl = array("/user/login");
+	public $accessDeniedUrl = '/site/accessDenied';
+	public $loginUrl = '/site/login';
 	
 	// this array will contain the Data to check by buisness Rule
 	private $_checkAccessData=array();
@@ -55,7 +55,8 @@ class RBACAccessVerifier implements IBehavior{
 	 */
 	public function denyAccess()
 	{
-		$this->redirect(array(!Yii::app()->user->isGuest ? $this->accessDeniedUrl : $this->loginUrl));
+            
+		Yii::app()->getController()->redirect(array(!Yii::app()->user->isGuest ? $this->accessDeniedUrl : $this->loginUrl));
 		Yii::app()->end();
 	}
 
@@ -153,7 +154,7 @@ class RBACAccessVerifier implements IBehavior{
 			}
 			if($autoRedirect)
 			{
-				Yii::app()->controller->redirect(!Yii::app()->user->isGuest ? $this->accessDeniedUrl : $this->loginUrl);
+				Yii::app()->getController()->redirect(!array(Yii::app()->user->isGuest ? $this->accessDeniedUrl : $this->loginUrl));
 				Yii::app()->end();
 			}
 			return false;
@@ -163,7 +164,7 @@ class RBACAccessVerifier implements IBehavior{
 			{
 				if($autoRedirect)
 				{
-					Yii::app()->controller->redirect(array(!Yii::app()->user->isGuest ? $this->accessDeniedUrl : $this->loginUrl));
+					Yii::app()->getController()->redirect(array(!Yii::app()->user->isGuest ? $this->accessDeniedUrl : $this->loginUrl));
 					Yii::app()->end();
 				}
 				return false;
