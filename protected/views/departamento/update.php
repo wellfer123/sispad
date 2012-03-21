@@ -1,18 +1,17 @@
 <?php
 $this->breadcrumbs=array(
 	'Departamentos'=>array('index'),
-	$model->id=>array('view','id'=>$model->id),
-	'Update',
+	$model->nome=>array('view','id'=>$model->id),
+	'Atualização',
 );
 
 $this->menu=array(
-	array('label'=>'List Departamento', 'url'=>array('index')),
-	array('label'=>'Create Departamento', 'url'=>array('create')),
-	array('label'=>'View Departamento', 'url'=>array('view', 'id'=>$model->id)),
-	array('label'=>'Manage Departamento', 'url'=>array('admin')),
+	array('label'=>'Cadastro de Departamento', 'url'=>array('create')),
+	array('label'=>'Visualizar Departamento', 'url'=>array('view', 'id'=>$model->id)),
+	array('label'=>'Gerenciamento de Departamentos', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Update Departamento <?php echo $model->id; ?></h1>
+<h1>Atualização do Departamento <?php echo $model->nome; ?></h1>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

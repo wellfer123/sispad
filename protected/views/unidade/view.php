@@ -6,11 +6,8 @@ $this->breadcrumbs=array(
 
 $this->menu=array(
     
-    
-	array('label'=>'Lista de Unidades', 'url'=>array('index')),
 	array('label'=>'Cadastro de Unidade', 'url'=>array('create')),
 	array('label'=>'Atualização de Unidade', 'url'=>array('update', 'id'=>$model->cnes)),
-	array('label'=>'Exclusão de Unidade', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->cnes),'confirm'=>'Deseja realmente excluir essa unidade?')),
 	array('label'=>'Gerencimento de Unidade', 'url'=>array('admin')),
 );
 ?>
