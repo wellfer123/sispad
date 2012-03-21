@@ -46,7 +46,10 @@ body
 	padding: 10px 20px;
 	font-size: 200%;
 }
-
+#mainmenu2
+{
+    height: 29px;
+}
 #mainmenu
 {
 	background:#CE0500;/*white url(bg.gif) repeat-x left top;*/
@@ -139,11 +142,11 @@ div.breadcrumbs
 {
 	font-size: 0.9em;
 	padding: 5px 20px;
-        color:#446700;
+        
 }
 div.breadcrumbs a
 {
-    color:#698B22;
+   
 }
 div.breadcrumbs span
 {
