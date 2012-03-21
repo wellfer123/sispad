@@ -1,7 +1,7 @@
 
 
 <?php
-
+Yii::import('application.modules.rbac.components.*');
 class RelatorioController extends Controller
 {
 	/**
@@ -14,6 +14,14 @@ class RelatorioController extends Controller
 	 * @var CActiveRecord the currently loaded data model instance.
 	 */
 	private $_model;
+
+        private $_RBAC;
+
+        public function __construct($id, $module = null) {
+
+            $this->_RBAC= new RBACAccessVerifier;
+            parent::__construct($id, $module);
+        }
 
 	/**
 	 * @return array action filters
@@ -33,7 +41,7 @@ class RelatorioController extends Controller
 	public function accessRules()
 	{
 		return array(
-			array('allow',  // allow all users to perform 'index' and 'view' actions
+			/*array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('index','view','display'),
 				'users'=>array('*'),
 			),
@@ -47,7 +55,7 @@ class RelatorioController extends Controller
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
-			),
+			),*/
 		);
 	}
 
@@ -56,6 +64,7 @@ class RelatorioController extends Controller
 	 */
 	public function actionView()
 	{
+                $this->_RBAC->checkAccess('register');
 		$this->render('view',array(
 			'model'=>$this->loadModel(),
 		));
@@ -67,6 +76,7 @@ class RelatorioController extends Controller
 	 */
 	public function actionCreate()
 	{
+                $this->_RBAC->checkAccess('manage',true);
 		$model=new relatorio;
                 //configura um cenario para o modelo, desse modo pode-se validar apenas essa actions 
                 $model->scenario='create';
@@ -112,6 +122,7 @@ class RelatorioController extends Controller
 	 */
 	public function actionUpdate()
 	{
+                $this->_RBAC->checkAccess('manage',true);
 		$model=$this->loadModel();
                 $this->formataDataDeTrabalho($model);
 		// Uncomment the following line if AJAX validation is needed
@@ -158,6 +169,8 @@ class RelatorioController extends Controller
 	 */
 	public function actionDelete()
 	{
+                $this->_RBAC->checkAccess('deleteRelatorio',true);
+                //$this->_RBAC->denyAccess();
 		if(Yii::app()->request->isPostRequest)
 		{
 			// we only allow deletion via POST request
@@ -175,7 +188,10 @@ class RelatorioController extends Controller
 	 * Lists all models.
 	 */
 	public function actionIndex()
-	{       $model=new relatorio('search');
+
+	{
+            $this->_RBAC->checkAccess('manage',true);
+            $model=new relatorio('search');
 		$dataProvider=new CActiveDataProvider('relatorio');
 		$this->render('index',array(
 			'model'=>$model,
@@ -187,6 +203,7 @@ class RelatorioController extends Controller
 	 */
 	public function actionAdmin()
 	{
+                $this->_RBAC->checkAccess('manage',true);
 		$model=new relatorio('search');
 		$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['relatorio']))

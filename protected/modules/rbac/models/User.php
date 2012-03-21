@@ -45,7 +45,7 @@ class User extends CActiveRecord
 
 
 
-        public function authenticate($attribute,$params)
+       /* public function authenticate($attribute,$params)
 	{
 		if(!$this->hasErrors())
 		{
@@ -53,7 +53,7 @@ class User extends CActiveRecord
 			if(!$this->_identity->authenticate())
 				$this->addError('password','Usuário ou senha incorretos.');
 		}
-	}
+	}*/
 
 	/**
 	 * Logs in the user using the given username and password in the model.
@@ -64,7 +64,8 @@ class User extends CActiveRecord
 		if($this->_identity===null)
 		{
 			$this->_identity=new UserIdentity($this->username,$this->password);
-			$this->_identity->authenticate();
+			if(!$this->_identity->authenticate())
+				$this->addError('password','Usuário ou senha incorretos.');
 		}
 		if($this->_identity->errorCode===UserIdentity::ERROR_NONE)
 		{
