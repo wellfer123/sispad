@@ -21,7 +21,8 @@
                         'name'=>'Data',
                         'language'=>'pt',
                         'model'=>$model,
-                        'attribute'=>'data_trabalho',))?>
+                        'attribute'=>'data_trabalho',
+                        'htmlOptions'=>array('disabled'=>!$model->isNewRecord)))?>
 		<?php echo $form->error($model,'data_trabalho'); ?>
 
 	</div>
@@ -30,14 +31,16 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'servidor_cpf'); ?>
-		<?php echo $form->textField($model,'servidor_cpf'); ?>
+		<?php echo $form->textField($model,'servidor_cpf',array('disabled'=>'true')); ?>
 		<?php echo $form->error($model,'servidor_cpf'); ?>
 	</div>
 
         <div class="row">
 		<?php echo $form->labelEx($model,'file_data'); ?>
                 <?php echo $form->fileField($model,'file_data'); ?>
-		<?php echo $form->error($model,'file_data'); ?>
+                <?php echo CHtml::link($model->file_name,array('display','id'=>$model->id));?>
+		<?php echo $form->error($model,'file_data');?>
+               
 	</div>
 
 	<div class="row buttons">

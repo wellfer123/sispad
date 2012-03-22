@@ -42,7 +42,7 @@ class relatorio extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('data_trabalho', 'required'),
-                        array('file_data', 'file', 'types'=>'txt,doc,docx'),
+                        array('file_data', 'file', 'types'=>'txt,doc,docx,pdf,log'),
 			array('servidor_cpf', 'numerical', 'integerOnly'=>true),
                         array('data_trabalho', 'validaDiferencaDatas','dias'=>7),
                         array('data_trabalho', 'validaRelatorioExistente','on'=>'create'),
@@ -156,7 +156,28 @@ class relatorio extends CActiveRecord
 
 		$criteria->compare('data_trabalho',$this->data_trabalho,true);
 
-		$criteria->compare('servidor_cpf',$this->servidor_cpf);
+		$criteria->compare('servidor_cpf',Yii::app()->user->cpfservidor);
+
+		return new CActiveDataProvider('relatorio', array(
+			'criteria'=>$criteria,
+		));
+	}
+        public function searchAll()
+	{
+		// Warning: Please modify the following code to remove attributes that
+		// should not be searched.
+
+		$criteria=new CDbCriteria;
+
+		$criteria->compare('id',$this->id);
+
+		$criteria->compare('file_data',$this->file_data,true);
+
+		$criteria->compare('data_envio',$this->data_envio,true);
+
+		$criteria->compare('data_trabalho',$this->data_trabalho,true);
+
+		$criteria->compare('servidor_cpf',  $this->servidor_cpf);
 
 		return new CActiveDataProvider('relatorio', array(
 			'criteria'=>$criteria,

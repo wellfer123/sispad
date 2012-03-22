@@ -1,5 +1,5 @@
 <?php
-
+//Yii::import('protected.models.Servidor');
 /**
  * 
  * feel free to mod this Class
@@ -35,7 +35,9 @@ class User extends CActiveRecord
 
 	public function relations()
 	{
-		return array();
+		return array(
+                    'servidor'=>array(self::BELONGS_TO, 'servidor', 'cpfservidor'),
+                );
 	}
 
 	public function attributeLabels()

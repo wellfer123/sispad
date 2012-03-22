@@ -1,4 +1,4 @@
-<?php include 'protected/services/FormataData.php'?>
+<?php Yii::import('application.services.FormataData');//include 'protected/services/FormataData.php'?>
 <?php
 $this->breadcrumbs=array(
 	'Relatorios'=>array('index'),
@@ -26,16 +26,17 @@ $this->widget('zii.widgets.CDetailView', array(
 
 	'attributes'=>array(
 		'id',
-                'servidor_cpf',
 		'data_envio',
-		array(
+                'servidor_cpf',
+               'data_trabalho',
+		/*array(
                     'name'=>'Data Trabalho',
                     'value'=> FormataData::inverteData($model->data_trabalho,"-"),
-                ),
+                ),*/
                 array(
                     'name'=>'Arquivo',
                     'type'=>'raw',
-                    'value'=> CHtml::link('Download',array('display','id'=>$model->id)),
+                    'value'=> CHtml::link($model->file_name,array('display','id'=>$model->id)),
                 ),
                
 	),

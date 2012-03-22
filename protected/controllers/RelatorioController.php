@@ -2,6 +2,7 @@
 
 <?php
 Yii::import('application.modules.rbac.components.*');
+Yii::import('application.services.FormataData');
 class RelatorioController extends Controller
 {
 	/**
@@ -65,6 +66,8 @@ class RelatorioController extends Controller
 	public function actionView()
 	{
                 $this->_RBAC->checkAccess('register');
+                $model=$this->loadModel();
+                $model->data_trabalho=FormataData::inverteData($model->data_trabalho,"-");
 		$this->render('view',array(
 			'model'=>$this->loadModel(),
 		));
@@ -78,6 +81,7 @@ class RelatorioController extends Controller
 	{
                 $this->_RBAC->checkAccess('manage',true);
 		$model=new relatorio;
+                $model->servidor_cpf=Yii::app()->user->cpfservidor;
                 //configura um cenario para o modelo, desse modo pode-se validar apenas essa actions 
                 $model->scenario='create';
 
