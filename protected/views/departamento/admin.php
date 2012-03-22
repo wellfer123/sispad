@@ -1,12 +1,11 @@
 <?php
 $this->breadcrumbs=array(
 	'Departamentos'=>array('index'),
-	'Manage',
+	'Gerenciamento',
 );
 
 $this->menu=array(
-	array('label'=>'List Departamento', 'url'=>array('index')),
-	array('label'=>'Create Departamento', 'url'=>array('create')),
+	array('label'=>'Cadastro de Departamento', 'url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -23,14 +22,14 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Manage Departamentos</h1>
+<h1>Gerenciamento de Departamentos</h1>
 
 <p>
-You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
-or <b>=</b>) at the beginning of each of your search values to specify how the comparison should be done.
+Você pode opcionalmente entrar com um operador de comparação(<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
+ou <b>=</b>) iniciar cada uma de suas pesquisa com valores específicos de como a comparação deve ser feita.
 </p>
 
-<?php echo CHtml::link('Advanced Search','#',array('class'=>'search-button')); ?>
+<?php echo CHtml::link('Pesquisa avançada','#',array('class'=>'search-button')); ?>
 <div class="search-form" style="display:none">
 <?php $this->renderPartial('_search',array(
 	'model'=>$model,

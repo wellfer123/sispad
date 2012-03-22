@@ -36,14 +36,13 @@ class Setor extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id, descricao', 'required'),
+			array('descricao', 'required'),
 			array('departamento_id', 'numerical', 'integerOnly'=>true),
-			array('id', 'length', 'max'=>10),
 			array('nome', 'length', 'max'=>40),
 			array('descricao', 'length', 'max'=>100),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, nome, descricao, departamento_id', 'safe', 'on'=>'search'),
+			array(' nome, descricao', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -65,7 +64,7 @@ class Setor extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'Id',
+			'id' => 'Código',
 			'nome' => 'Nome',
 			'descricao' => 'Descricao',
 			'departamento_id' => 'Departamento',

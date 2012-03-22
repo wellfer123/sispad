@@ -1,5 +1,6 @@
 <?php
 
+Yii::import('application.modules.rbac.components.*');
 class DepartamentoController extends Controller
 {
 	/**
@@ -12,6 +13,8 @@ class DepartamentoController extends Controller
 	 * @var CActiveRecord the currently loaded data model instance.
 	 */
 	private $_model;
+        
+        private $_RBAC;
 
 	/**
 	 * @return array action filters
@@ -30,7 +33,7 @@ class DepartamentoController extends Controller
 	 */
 	public function accessRules()
 	{
-		return array(
+		return array(/*
 			array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('index','view'),
 				'users'=>array('*'),
@@ -45,15 +48,22 @@ class DepartamentoController extends Controller
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
-			),
+			),*/
 		);
 	}
+        
+        public function __construct($id, $module = null) {
+            
+            $this->_RBAC= new RBACAccessVerifier;
+            parent::__construct($id, $module);
+        }
 
 	/**
 	 * Displays a particular model.
 	 */
 	public function actionView()
 	{
+                $this->_RBAC->checkAccess(array('viewDepartamento','registered'),true);
 		$this->render('view',array(
 			'model'=>$this->loadModel(),
 		));
@@ -65,6 +75,7 @@ class DepartamentoController extends Controller
 	 */
 	public function actionCreate()
 	{
+                $this->_RBAC->checkAccess('manageDepartamento',true);
 		$model=new Departamento;
 
 		// Uncomment the following line if AJAX validation is needed
@@ -88,6 +99,7 @@ class DepartamentoController extends Controller
 	 */
 	public function actionUpdate()
 	{
+                $this->_RBAC->checkAccess('manageDepartamento',true);
 		$model=$this->loadModel();
 
 		// Uncomment the following line if AJAX validation is needed
@@ -111,6 +123,7 @@ class DepartamentoController extends Controller
 	 */
 	public function actionDelete()
 	{
+                $this->_RBAC->checkAccess('delete',true);
 		if(Yii::app()->request->isPostRequest)
 		{
 			// we only allow deletion via POST request
@@ -136,12 +149,22 @@ class DepartamentoController extends Controller
                 
                 $this->redirect(array('admin'));
 	}
+        
+        public function actionList()
+	{
+		$dataProvider=new CActiveDataProvider('Departamento');
+		$this->render('list',array(
+			'dataProvider'=>$dataProvider,
+		));
+                
+	}
 
 	/**
 	 * Manages all models.
 	 */
 	public function actionAdmin()
 	{
+                $this->_RBAC->checkAccess('manageDepartamento',true);
 		$model=new Departamento('search');
 		$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['Departamento']))

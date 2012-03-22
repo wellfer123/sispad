@@ -7,12 +7,12 @@
 
 	<div class="row">
 		<?php echo $form->label($model,'cnes'); ?>
-		<?php echo $form->textField($model,'cnes',array('size'=>10,'maxlength'=>10)); ?>
+		<?php echo $form->textField($model,'cnes',array('size'=>10,'maxlength'=>10,'style'=>'text-transform:uppercase')); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->label($model,'nome'); ?>
-		<?php echo $form->textField($model,'nome',array('size'=>40,'maxlength'=>40)); ?>
+		<?php echo $form->textField($model,'nome',array('size'=>40,'maxlength'=>40,'style'=>'text-transform:uppercase')); ?>
 	</div>
 
 	<div class="row buttons">

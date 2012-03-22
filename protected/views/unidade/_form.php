@@ -9,29 +9,35 @@
 	),
 )); ?>
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
+	<p class="note">Todos os campos <span class="required">*</span> são de preenchimento obrigatório.</p>
 
 	<?php echo $form->errorSummary($model); ?>
         
         <div class="row">
-		<?php echo $form->labelEx($model,'cnes'); ?>
-                <?php $this->widget('CMaskedTextField', array(
-                    'model'=>$model,
-                    'attribute'=>'cnes',
-                    'mask'=>'9999999999'
-                )); ?>
-		<?php echo $form->error($model,'cnes'); ?>
+		<?php 
+                    //if($model->isNewRecord){
+                        echo $form->labelEx($model,'cnes'); 
+                        $this->widget('CMaskedTextField', array(
+                        'model'=>$model,
+                        'attribute'=>'cnes',
+                        'mask'=>'9999999999',
+                        'htmlOptions'=>array('disabled'=>!$model->isNewRecord,'style'=>'text-transform:uppercase'),
+                        ));
+                    echo $form->error($model,'cnes');
+                    //}
+                    ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'descricao'); ?>
-		<?php echo $form->textField($model,'descricao',array('size'=>60,'maxlength'=>100)); ?>
+		<?php echo $form->textField($model,'descricao',array('size'=>60,'maxlength'=>100,'style'=>'text-transform:uppercase')); ?>
 		<?php echo $form->error($model,'descricao'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'nome'); ?>
-		<?php echo $form->textField($model,'nome',array('size'=>40,'maxlength'=>40)); ?>
+		<?php echo $form->textField($model,'nome',
+                            array('size'=>40,'maxlength'=>40,'style'=>'text-transform:uppercase')); ?>
 		<?php echo $form->error($model,'nome'); ?>
 	</div>
         
@@ -47,22 +53,6 @@
         
 	<div class="row">
                 <?php echo CHtml::activeLabel($model, 'cidade_id');?>
-            
-                <?php /*$this->widget('zii.widgets.jui.CJuiAutoComplete', array(
-                        'model'=>$model,
-                        'name'=>'teste',
-                        'attribute'=>'cidade_id',
-                        'source'=>$this->createUrl('cidade/SeachName?'),
-                        'htmlOptions' => array(
-                            'style' => 'height:15px;'
-                             ),
-                        'options'=>array(
-                            'showAnim'=>'fold',
-                            'minLength'=>'3',
-                        ), ));*/ ?>
-            
-                
-            
                 <?php echo CHtml::activedropDownList($model, 
                                                'cidade_id',
                                                CHtml::listData(Cidades::model()->findAll('cidade_id_regional=:regional',array(':regional'=>'2604')), 'id', 'cidade_nome'),

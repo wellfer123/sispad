@@ -1,15 +1,15 @@
 <?php
 $this->breadcrumbs=array(
-	'Setors',
+	'Setores',
 );
 
 $this->menu=array(
-	array('label'=>'Create Setor', 'url'=>array('create')),
-	array('label'=>'Manage Setor', 'url'=>array('admin')),
+	array('label'=>'Cadastro de Setor', 'url'=>array('create')),
+	array('label'=>'Gerenciamento de Setores', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Setors</h1>
+<h1>Setores</h1>
 
 <?php $this->widget('zii.widgets.CListView', array(
 	'dataProvider'=>$dataProvider,

@@ -36,14 +36,13 @@ class Departamento extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('nome, descricao', 'required'),
+			array('nome, descricao, unidade_cnes', 'required'),
 			array('unidade_cnes', 'numerical', 'integerOnly'=>true),
-			array('id', 'length', 'max'=>10),
 			array('nome', 'length', 'max'=>40),
 			array('descricao', 'length', 'max'=>100),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('nome', 'safe', 'on'=>'search'),
+			//array('nome, descricao','safe', 'on'=>'search'),
 		);
 	}
 
@@ -66,7 +65,7 @@ class Departamento extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'Id',
+			'id' => 'Código',
 			'nome' => 'Nome',
 			'descricao' => 'Descrição',
 			'unidade_cnes' => 'Unidade',
@@ -86,6 +85,7 @@ class Departamento extends CActiveRecord
 
 
 		$criteria->compare('nome',$this->nome,true);
+                $criteria->compare('descricao',$this->descricao,true);
 
 		return new CActiveDataProvider('Departamento', array(
 			'criteria'=>$criteria,

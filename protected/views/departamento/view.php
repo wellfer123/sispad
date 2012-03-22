@@ -1,19 +1,17 @@
 <?php
 $this->breadcrumbs=array(
 	'Departamentos'=>array('index'),
-	$model->id,
+	$model->nome,
 );
 
 $this->menu=array(
-	array('label'=>'List Departamento', 'url'=>array('index')),
-	array('label'=>'Create Departamento', 'url'=>array('create')),
-	array('label'=>'Update Departamento', 'url'=>array('update', 'id'=>$model->id)),
-	array('label'=>'Delete Departamento', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
-	array('label'=>'Manage Departamento', 'url'=>array('admin')),
+	array('label'=>'Cadastro de Departamento', 'url'=>array('create')),
+	array('label'=>'Atualização de Departamento', 'url'=>array('update', 'id'=>$model->id)),
+	array('label'=>'Gerenciamento de Departamentos', 'url'=>array('admin')),
 );
 ?>
 
-<h1>View Departamento #<?php echo $model->id; ?></h1>
+<h1>Departamento: <?php echo $model->nome; ?></h1>
 
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
