@@ -36,7 +36,7 @@ class Setor extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('descricao', 'required'),
+			array('descricao, departamento_id', 'required'),
 			array('departamento_id', 'numerical', 'integerOnly'=>true),
 			array('nome', 'length', 'max'=>40),
 			array('descricao', 'length', 'max'=>100),
@@ -66,7 +66,7 @@ class Setor extends CActiveRecord
 		return array(
 			'id' => 'Código',
 			'nome' => 'Nome',
-			'descricao' => 'Descricao',
+			'descricao' => 'Descrição',
 			'departamento_id' => 'Departamento',
 		);
 	}

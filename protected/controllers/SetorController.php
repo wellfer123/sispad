@@ -1,5 +1,5 @@
 <?php
-
+Yii::import('application.modules.rbac.components.*');
 class SetorController extends Controller
 {
 	/**
@@ -11,7 +11,9 @@ class SetorController extends Controller
 	/**
 	 * @var CActiveRecord the currently loaded data model instance.
 	 */
-	private $_model;
+	private $_model; 
+        
+        private $_RBAC;
 
 	/**
 	 * @return array action filters
@@ -22,6 +24,12 @@ class SetorController extends Controller
 			'accessControl', // perform access control for CRUD operations
 		);
 	}
+        
+        public function __construct($id, $module = null) {
+            
+            $this->_RBAC= new RBACAccessVerifier;
+            parent::__construct($id, $module);
+        }
 
 	/**
 	 * Specifies the access control rules.
@@ -30,7 +38,7 @@ class SetorController extends Controller
 	 */
 	public function accessRules()
 	{
-		return array(
+		return array(/*
 			array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('index','view'),
 				'users'=>array('*'),
@@ -45,7 +53,7 @@ class SetorController extends Controller
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
-			),
+			),*/
 		);
 	}
 
@@ -54,6 +62,7 @@ class SetorController extends Controller
 	 */
 	public function actionView()
 	{
+                $this->_RBAC->checkAccess(array('viewSetor','registered'),true);
 		$this->render('view',array(
 			'model'=>$this->loadModel(),
 		));
@@ -65,6 +74,7 @@ class SetorController extends Controller
 	 */
 	public function actionCreate()
 	{
+                $this->_RBAC->checkAccess('manageSetor',true);
 		$model=new Setor;
 
 		// Uncomment the following line if AJAX validation is needed
@@ -88,6 +98,7 @@ class SetorController extends Controller
 	 */
 	public function actionUpdate()
 	{
+                $this->_RBAC->checkAccess('manageSetor',true);
 		$model=$this->loadModel();
 
 		// Uncomment the following line if AJAX validation is needed
@@ -111,6 +122,7 @@ class SetorController extends Controller
 	 */
 	public function actionDelete()
 	{
+                $this->_RBAC->checkAccess('delete',true);
 		if(Yii::app()->request->isPostRequest)
 		{
 			// we only allow deletion via POST request
@@ -129,6 +141,12 @@ class SetorController extends Controller
 	 */
 	public function actionIndex()
 	{
+		$this->redirect(array('admin'));
+	}
+        
+        public function actionList()
+	{
+                $this->_RBAC->checkAccess('registered',true);
 		$dataProvider=new CActiveDataProvider('Setor');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
@@ -140,6 +158,7 @@ class SetorController extends Controller
 	 */
 	public function actionAdmin()
 	{
+                $this->_RBAC->checkAccess('manageSetor',true);
 		$model=new Setor('search');
 		$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['Setor']))
@@ -159,9 +178,9 @@ class SetorController extends Controller
 		if($this->_model===null)
 		{
 			if(isset($_GET['id']))
-				$this->_model=Setor::model()->findbyPk($_GET['id']);
+				$this->_model=Setor::model()->with('departamento.unidade')->findbyPk($_GET['id']);
 			if($this->_model===null)
-				throw new CHttpException(404,'The requested page does not exist.');
+				throw new CHttpException(404,'A página requisitada não existe!');
 		}
 		return $this->_model;
 	}

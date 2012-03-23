@@ -1,5 +1,6 @@
 <?php
 
+Yii::import('application.modules.rbac.components.*');
 class TotalFrequenciaController extends Controller
 {
 	/**
@@ -12,6 +13,8 @@ class TotalFrequenciaController extends Controller
 	 * @var CActiveRecord the currently loaded data model instance.
 	 */
 	private $_model;
+        
+        private $_RBAC;
 
 	/**
 	 * @return array action filters
@@ -31,7 +34,7 @@ class TotalFrequenciaController extends Controller
 	public function accessRules()
 	{
 		return array(
-			array('allow',  // allow all users to perform 'index' and 'view' actions
+			/*array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('view'),
 				'users'=>array('*'),
 			),
@@ -45,7 +48,7 @@ class TotalFrequenciaController extends Controller
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
-			),
+			),*/
 		);
 	}
 
@@ -54,6 +57,7 @@ class TotalFrequenciaController extends Controller
 	 */
 	public function actionView()
 	{
+                $this->_RBAC->checkAccess(array('viewTotalFrequencia','registered'),true);
 		$this->render('view',array(
 			'model'=>$this->loadModel(),
 		));
@@ -65,6 +69,7 @@ class TotalFrequenciaController extends Controller
 	 */
 	public function actionCreate()
 	{
+                $this->_RBAC->checkAccess('manageTotalFrequencia',true);
 		$model=new TotalFrequencia;
                 //inicia os campos com valores
                 $model->ano=date('Y');
@@ -132,11 +137,21 @@ class TotalFrequenciaController extends Controller
 	 */
 	public function actionIndex()
 	{
+                $this->_RBAC->checkAccess('manageTotalFrequencia',true);
 		/*$dataProvider=new CActiveDataProvider('TotalFrequencia');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));*/
                 $this->redirect(array('admin'));
+	}
+        
+        public function actionList()
+	{
+                $this->_RBAC->checkAccess(array('manageTotalFrequencia','registered'),true);
+		$dataProvider=new CActiveDataProvider('TotalFrequencia');
+		$this->render('index',array(
+			'dataProvider'=>$dataProvider,
+		));
 	}
 
 	/**

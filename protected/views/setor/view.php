@@ -1,13 +1,13 @@
 <?php
 $this->breadcrumbs=array(
 	'Setores'=>array('index'),
-	$model->id,
+	$model->nome.'/Departamento: '.$model->departamento->nome,
 );
 
 $this->menu=array(
 	array('label'=>'Cadastro de Setor', 'url'=>array('create')),
 	array('label'=>'Atualização de Setor', 'url'=>array('update', 'id'=>$model->id)),
-	array('label'=>'Manage de Setor', 'url'=>array('admin')),
+	array('label'=>'Gerenciamento de Setor', 'url'=>array('admin')),
 );
 ?>
 
@@ -19,6 +19,9 @@ $this->menu=array(
 		'id',
 		'nome',
 		'descricao',
-		'departamento_id',
+		array(
+                    'label'=>'Departamento',
+                    'value'=>$model->departamento->nome,
+                ),
 	),
 )); ?>

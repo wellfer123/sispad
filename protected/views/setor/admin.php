@@ -40,12 +40,10 @@ ou <b>=</b>) iniciar cada uma de suas pesquisa com valores específicos de como 
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'setor-grid',
 	'dataProvider'=>$model->search(),
-	'filter'=>$model,
 	'columns'=>array(
 		'id',
 		'nome',
 		'descricao',
-		'departamento_id',
 		array(
 			'class'=>'CButtonColumn',
 		),
