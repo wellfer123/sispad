@@ -18,5 +18,14 @@
             return $data = $dataarray[2] . '/' . $dataarray[1] . '/' . $dataarray[0];
 
         }
+
+
+   public static function inverteDataComHora($data,$delim){
+       $dataHoraArray= explode(" ", $data);
+       $dataarray = explode($delim,$dataHoraArray[0]);
+       $data = $dataarray[2] . '/' . $dataarray[1] . '/' . $dataarray[0];
+       $data=$data." ".$dataHoraArray[1];
+       return ($data);
+   }
 }
 ?>

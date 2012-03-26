@@ -31,7 +31,7 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'servidor_cpf'); ?>
-		<?php echo $form->textField($model,'servidor_cpf',array('disabled'=>'true')); ?>
+		<?php echo $form->textField($model,'servidor_cpf'); ?>
 		<?php echo $form->error($model,'servidor_cpf'); ?>
 	</div>
 

@@ -126,7 +126,7 @@ class RelatorioController extends Controller
 	 */
 	public function actionUpdate()
 	{
-                $this->_RBAC->checkAccess('manage',true);
+                $this->_RBAC->checkAccess('updateRelatorio',true);
 		$model=$this->loadModel();
                 $this->formataDataDeTrabalho($model);
 		// Uncomment the following line if AJAX validation is needed

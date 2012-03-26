@@ -26,7 +26,11 @@ $this->widget('zii.widgets.CDetailView', array(
 
 	'attributes'=>array(
 		'id',
-		'data_envio',
+		//'data_envio',
+                 array(
+                    'name'=>'Data Envio',
+                    'value'=> FormataData::inverteDataComHora($model->data_envio, "-") ,
+                ),
                 'servidor_cpf',
                'data_trabalho',
 		/*array(

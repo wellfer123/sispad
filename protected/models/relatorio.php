@@ -56,11 +56,12 @@ class relatorio extends CActiveRecord
 
 
         public function validaDiferencaDatas($attribute,$params){
-           $data_envio= date('d/m/Y');//$data_envio recebe a data atual
-           $data_trabalho= $this->data_trabalho;
+          
+            $data_envio = strtotime("today");
+            $data_trabalho = new DateTime(FormataData::inverteData($this->data_trabalho, "/"));
 
-           
-           $result = $data_envio - $data_trabalho;
+
+            $result = ($data_envio - $data_trabalho->getTimestamp())/(60*60*24);
             if(($result >= 0) && ($result <=$params["dias"])){
                 $this->formataDataDeTrabalho();
                 return true;
