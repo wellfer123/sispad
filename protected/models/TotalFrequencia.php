@@ -37,8 +37,8 @@ class TotalFrequencia extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('ano,mes,quantidade', 'required'),
-                        array('ano','numerical','min'=>2012),
+			array('servidor_cpf,ano,mes,quantidade', 'required'),
+                        array('ano','numerical','min'=>2012, 'max'=>date('Y')+1),
                         array('mes','numerical','max'=>12,'min'=>1),
                         array('quantidade','numerical','max'=>25,'min'=>0),
 			array('ano, mes, quantidade', 'numerical', 'integerOnly'=>true),
@@ -102,4 +102,5 @@ class TotalFrequencia extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+        
 }

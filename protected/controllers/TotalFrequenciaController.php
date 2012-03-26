@@ -1,25 +1,25 @@
 <?php
 
-Yii::import('application.modules.rbac.components.*');
-class TotalFrequenciaController extends Controller
-{
-	/**
-	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
-	 * using two-column layout. See 'protected/views/layouts/column2.php'.
-	 */
-	public $layout='//layouts/column2';
 
+class TotalFrequenciaController extends SISPADBaseController{
+	
+    
+    public $layout='//layouts/column2';
 	/**
 	 * @var CActiveRecord the currently loaded data model instance.
 	 */
 	private $_model;
         
-        private $_RBAC;
 
-	/**
+        	/**
 	 * @return array action filters
 	 */
-	public function filters()
+        
+        public function __construct($id, $module = null) {
+            parent::__construct($id, $module);
+        }
+
+        public function filters()
 	{
 		return array(
 			'accessControl', // perform access control for CRUD operations
@@ -72,8 +72,6 @@ class TotalFrequenciaController extends Controller
                 $this->_RBAC->checkAccess('manageTotalFrequencia',true);
 		$model=new TotalFrequencia;
                 //inicia os campos com valores
-                $model->ano=date('Y');
-                $model->mes=date('m');
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
@@ -81,15 +79,35 @@ class TotalFrequenciaController extends Controller
 		if(isset($_POST['TotalFrequencia']))
 		{
 			$model->attributes=$_POST['TotalFrequencia'];
-			if($model->save())
-				$this->redirect(array('view','ano'=>$model->ano,'mes'=>$model->mes,'serv'=>$model->servidor_cpf));
+                        $tmp=TotalFrequencia::model()->with('servidor')->findbyPk(array('ano'=>$model->ano,'mes'=>$model->mes,'servidor_cpf'=>$model->servidor_cpf));
+                        if(null==$tmp){
+                           
+                            if($model->save()){
+				//$this->redirect(array('view','ano'=>$model->ano,'mes'=>$model->mes,'serv'=>$model->servidor_cpf));
+                                $this->addMessageSuccess("Frequência referente à $model->mes/$model->ano registrada com sucesso!");
+                                $this->beginModel($model);
+                            } 
+                        }
+                        else{
+                            $this->addMessageErro("A Frequência de ".$model->servidor->nome." referente à $model->mes/$model->ano encontra-se registrada no sistema!");
+                            $this->beginModel($model);
+                        }
+                    
+                     //como cadastrou com sucesso ou já foi cadastrada, então limpa os dados
+                    
 		}
-
+                
 		$this->render('create',array(
 			'model'=>$model,
 		));
 	}
-
+        
+        private function beginModel($model){
+            $model->unsetAttributes();
+            //inicia os dados
+            $model->ano=date('Y');
+            $model->mes=date('m');
+        }
 	/**
 	 * Updates a particular model.
 	 * If update is successful, the browser will be redirected to the 'view' page.
@@ -197,4 +215,26 @@ class TotalFrequenciaController extends Controller
 			Yii::app()->end();
 		}
 	}
+        
+         public function actionFindServidores() {
+             $this->_RBAC->checkAccess('registered',true);
+            $q = $_GET['term'];
+            if(isset($q)) {
+                $servidores = Servidor::model()->findAll();
+ 
+                if (!empty($servidores)) {
+                    $out = array();
+                    foreach ($servidores as $s) {
+                            $out[] = array(
+                            // expression to give the string for the autoComplete drop-down
+                            'label' => $s->nome,  
+                            'value' => $s->nome,
+                            'id' => $s->cpf, // return value from autocomplete
+                     );
+                    }
+                echo CJSON::encode($out);
+                Yii::app()->end();
+           }
+       }
+   }
 }

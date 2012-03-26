@@ -95,4 +95,9 @@ class Servidor extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+        
+        
+        public function getNome(){
+            return $this->nome;
+        }
 }

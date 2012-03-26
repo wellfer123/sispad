@@ -33,14 +33,16 @@ array(
 "menu"=>array(
           //menu raiz
           array("url"=>array("route"=>"/"), "label"=>"Início"),
-          array("url"=>array(
-                       "route"=>"/event/create"),
+          array("url"=>array(),
                        "label"=>"Relatório",
                        array("url"=>array("route"=>"/Relatorio/create"),"label"=>"Enviar Meu Relatório"),
                        array("url"=>array("route"=>"/Relatorio/create"),"label"=>"Enviar do Servidor"),
                        array("url"=>array("route"=>"/Relatorio/create"),"label"=>"Enviar Quantidade")
               ),
-
+          array("url"=>array(),
+                       "label"=>"Frequência",
+                       array("url"=>array("route"=>"/TotalFrequencia/create"),"label"=>"Enviar")
+              ),
           array("url"=>array(),
                             "label"=>"Cadastro",
                       array("url"=>array("route"=>"/departamento/index"), "label"=>"Departamento"),
