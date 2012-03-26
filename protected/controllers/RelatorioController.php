@@ -126,15 +126,25 @@ class RelatorioController extends Controller
 	 */
 	public function actionUpdate()
 	{
-                $this->_RBAC->checkAccess('updateRelatorio',true);
-		$model=$this->loadModel();
-                $this->formataDataDeTrabalho($model);
+                $model=$this->loadModel();
+
+
+                $data_hoje=date("Y-m-d");
+                $dias=FormataData::calculaDiferencaDatas($data_hoje,$model->data_envio, null, "-");
+                $params=array("dias"=>$dias);
+
+                $this->_RBAC->checkAccessByData('updateRelatorio',$params,true);
+		
+                $model->data_trabalho=  FormataData::inverteData($model->data_trabalho, "-");
+                //$this->formataDataDeTrabalho($model);
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
 		if(isset($_POST['relatorio']))
 		{
 			$model->attributes=$_POST['relatorio'];
+                        $model->data_trabalho=  FormataData::inverteData($model->data_trabalho, "/");
+                        //$this->formataDataDeTrabalho($model);
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}

@@ -1,4 +1,4 @@
-<?php include 'protected/services/FormataData.php'?>
+<?php Yii::import('application.services.FormataData');//include 'protected/services/FormataData.php'?>
 <?php
 $this->breadcrumbs=array(
 	'Relatorios'=>array('index'),

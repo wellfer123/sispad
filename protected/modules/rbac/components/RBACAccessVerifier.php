@@ -130,7 +130,7 @@ class RBACAccessVerifier implements IBehavior{
 		$this->_resetCheckAccessData();
 		if($autoRedirect)
 		{
-			$this->redirect(array(!Yii::app()->user->isGuest ? $this->accessDeniedUrl : $this->loginUrl));
+			Yii::app()->getController()->redirect(array(!Yii::app()->user->isGuest ? $this->accessDeniedUrl : $this->loginUrl));
 			Yii::app()->end();
 		}
 		return false;

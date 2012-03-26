@@ -1,3 +1,4 @@
+<?php Yii::import('application.services.FormataData');?>
 <?php
 
 /**
@@ -44,7 +45,7 @@ class relatorio extends CActiveRecord
 			array('data_trabalho', 'required'),
                         array('file_data', 'file', 'types'=>'txt,doc,docx,pdf,log'),
 			array('servidor_cpf', 'numerical', 'integerOnly'=>true),
-                        array('data_trabalho', 'validaDiferencaDatas','dias'=>7),
+                        array('data_trabalho', 'validaDiferencaDatas','dias'=>7,'on'=>'create'),
                         array('data_trabalho', 'validaRelatorioExistente','on'=>'create'),
 			array('data_trabalho', 'safe'),
                         
@@ -57,13 +58,14 @@ class relatorio extends CActiveRecord
 
         public function validaDiferencaDatas($attribute,$params){
           
-            $data_envio = strtotime("today");
-            $data_trabalho = new DateTime(FormataData::inverteData($this->data_trabalho, "/"));
+            $data_envio = date("d/m/Y");//strtotime("today");
+            //$data_trabalho = //new DateTime(FormataData::inverteData($this->data_trabalho, "/"));
 
 
-            $result = ($data_envio - $data_trabalho->getTimestamp())/(60*60*24);
+            $result = FormataData::calculaDiferencaDatas($data_envio,$this->data_trabalho,"br", "/");//($data_envio - $data_trabalho->getTimestamp())/(60*60*24);
             if(($result >= 0) && ($result <=$params["dias"])){
-                $this->formataDataDeTrabalho();
+                $this->data_trabalho=  FormataData::inverteData($this->data_trabalho, "/");
+                ////$this->formataDataDeTrabalho();
                 return true;
             }
             $this->addError('data_trabalho','Data inválida. Insira uma data de até 7 dias até a data atual ');
@@ -89,7 +91,8 @@ class relatorio extends CActiveRecord
                  return true;
              }
              $this->addError('data_trabalho','relatorio ja existe');
-             $this->formataDataDeTrabalho();
+             $this->data_trabalho=  FormataData::inverteData($this->data_trabalho, "/");
+             //$this->formataDataDeTrabalho();
              return false;
         }
 

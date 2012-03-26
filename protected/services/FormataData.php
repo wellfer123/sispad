@@ -27,5 +27,20 @@
        $data=$data." ".$dataHoraArray[1];
        return ($data);
    }
+
+   public static function calculaDiferencaDatas($data1,$data2,$formato,$delim){
+
+            if($formato=="br"){
+                $data1=self::inverteData($data1, $delim);
+                $data2=self::inverteData($data2, $delim);
+
+            }
+                $data1Obj= new DateTime($data1);
+                $data2Obj= new DateTime($data2);
+
+                $result= ($data1Obj->getTimestamp()-$data2Obj->getTimestamp())/(60*60*24);
+                return $result;
+
+        }
 }
 ?>
