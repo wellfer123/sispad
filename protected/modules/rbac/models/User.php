@@ -36,7 +36,7 @@ class User extends CActiveRecord
 	public function relations()
 	{
 		return array(
-                    'servidor'=>array(self::BELONGS_TO, 'servidor', 'cpfservidor'),
+                    'servidor'=>array(self::BELONGS_TO, 'servidor', 'servidor_cpf'),
                 );
 	}
 
