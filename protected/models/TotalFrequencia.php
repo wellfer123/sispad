@@ -38,9 +38,9 @@ class TotalFrequencia extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('servidor_cpf,ano,mes,quantidade', 'required'),
-                        array('ano','numerical','min'=>2012, 'max'=>date('Y')+1),
+                        array('ano','numerical','min'=>date('Y'), 'max'=>date('Y')+1),
                         array('mes','numerical','max'=>12,'min'=>1),
-                        array('quantidade','numerical','max'=>25,'min'=>0),
+                        array('quantidade','numerical','max'=>23,'min'=>0),
 			array('ano, mes, quantidade', 'numerical', 'integerOnly'=>true),
 			array('servidor_cpf', 'length', 'max'=>11),
 			// The following rule is used by search().
@@ -86,7 +86,7 @@ class TotalFrequencia extends CActiveRecord
 
 		$criteria=new CDbCriteria;
                 
-                $criteria->
+                //$criteria->
 
 		$criteria->compare('ano',$this->ano,true);
 
