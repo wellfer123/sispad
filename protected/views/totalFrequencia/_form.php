@@ -39,7 +39,7 @@
                                     'model'=>$model, 
                                     'attribute'=>'servidor_cpf', //the FK field (from CJuiInputWidget)
                                      // controller method to return the autoComplete data (from CJuiAutoComplete)
-                                    'sourceUrl'=>Yii::app()->createUrl('TotalFrequencia/findServidores'), 
+                                    'sourceUrl'=>Yii::app()->createUrl('Servidor/findServidores'), 
                                     // defaults to false.  set 'true' to display the FK field with 'readonly' attribute.
                                     'showFKField'=>false,
                                     // display size of the FK field.  only matters if not hidden.  defaults to 10
@@ -53,7 +53,7 @@
                                     'options'=>array(
                                         // number of characters that must be typed before 
                                             // autoCompleter returns a value, defaults to 2
-                                        'minLength'=>3, 
+                                        'minLength'=>6, 
                                         ),
                                 ));?>
                 

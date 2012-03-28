@@ -6,7 +6,6 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Cadastrar Frequência', 'url'=>array('create')),
 	array('label'=>'Gerenciar Frequências', 'url'=>array('admin')),
 );
 ?>
