@@ -56,6 +56,7 @@ class Servidor extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
                      'user'=>array(self::HAS_MANY, 'user', 'servidor_cpf'),
+                     'relatorio'=>array(self::HAS_MANY, 'servidor', 'servidor_cpf'),
 		);
 	}
 

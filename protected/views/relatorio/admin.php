@@ -52,6 +52,11 @@ $this->widget('zii.widgets.grid.CGridView', array(
                     'value'=> 'FormataData::inverteData($data->data_trabalho,"-")',
                 ),
 		'servidor_cpf',
+                array(
+                    'name'=>'Servidor',
+                    'value'=>"2",
+                ),
+               
 		array(
 			'class'=>'CButtonColumn',
 		),

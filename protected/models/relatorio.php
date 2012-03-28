@@ -15,12 +15,13 @@ class relatorio extends CActiveRecord
 
 
 {
-
+        public $arquivo;
         
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return relatorio the static model class
 	 */
+        
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
@@ -43,7 +44,7 @@ class relatorio extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('data_trabalho', 'required'),
-                        array('file_data', 'file', 'types'=>'txt,doc,docx,pdf,log'),
+                       
 			array('servidor_cpf', 'numerical', 'integerOnly'=>true),
                         array('data_trabalho', 'validaDiferencaDatas','dias'=>7,'on'=>'create'),
                         array('data_trabalho', 'validaRelatorioExistente','on'=>'create'),
@@ -97,31 +98,86 @@ class relatorio extends CActiveRecord
         }
 
 
-        public function beforeSave()
+       /* public function beforeSave()
     {
         $file=CUploadedFile::getInstance($this,'file_data');
         if(!$file->error){
             
-
-            $this->file_name=$file->name;
-            $this->file_type=$file->type;
-            $this->file_size=$file->size;
-            $this->file_data=file_get_contents($file->getTempName());
+           // $arquivo= new Arquivo();
+            $this->arquivo->file_name=$file->name;
+            $this->arquivo->file_type=$file->type;
+            $this->arquivo->file_size=$file->size;
+            $this->arquivo->file_data=file_get_contents($file->getTempName());
+            $this->arquivo->relatorio_id=$this->id;
 
         }
 
             return parent::beforeSave();
 
-    }
+    }**/
+
 
 	/**
 	 * @return array relational rules.
 	 */
+
+
+        protected function afterSave() {
+              /*$file=CUploadedFile::getInstance($this->arquivo,'file_data');
+            if(!$file->error){
+
+               // $arquivo= new Arquivo();
+                $this->arquivo->file_name=$file->name;
+                $this->arquivo->file_type=$file->type;
+                $this->arquivo->file_size=$file->size;
+                $this->arquivo->file_data=file_get_contents($file->getTempName());
+                $this->arquivo->relatorio_id=$this->id;
+                $this->arquivo->save();
+            }*/
+         return parent::afterSave();
+       }
+
+
+       public function salvaArquivo(){
+            $file=CUploadedFile::getInstance($this->arquivo,'file_data');
+            if(!$file->error){
+
+              
+                $this->arquivo->file_name=$file->name;
+                $this->arquivo->file_type=$file->type;
+                $this->arquivo->file_size=$file->size;
+                $this->arquivo->file_data=file_get_contents($file->getTempName());
+                $this->arquivo->relatorio_id=$this->id;
+                if($this->arquivo->save()){
+                    return true;
+                }
+                return false;
+            }
+       }
+
+         public function atualizaArquivo(){
+            $file=CUploadedFile::getInstance($this->arquivo,'file_data');
+            if(!$file->error){
+
+               
+                $this->arquivo->file_name=$file->name;
+                $this->arquivo->file_type=$file->type;
+                $this->arquivo->file_size=$file->size;
+                $this->arquivo->file_data=file_get_contents($file->getTempName());
+                
+                if($this->arquivo->save()){
+                    return true;
+                }
+                return false;
+            }
+       }
 	public function relations()
 	{
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+                    'servidor'=>array(self::BELONGS_TO, 'servidor', 'servidor_cpf'),
+                    'temp_arquivo'=>array(self::HAS_ONE, 'arquivo', 'relatorio_id'),
 		);
 	}
 
@@ -134,7 +190,7 @@ class relatorio extends CActiveRecord
 	{
 		return array(
 			'id' => 'Id',
-			'file_data' => 'Arquivo',
+			//'file_data' => 'Arquivo',
 			'data_envio' => 'Data Envio',
 			'data_trabalho' => 'Data Trabalho',
 			'servidor_cpf' => 'Servidor Cpf',
@@ -154,13 +210,16 @@ class relatorio extends CActiveRecord
 
 		$criteria->compare('id',$this->id);
 
-		$criteria->compare('file_data',$this->file_data,true);
+		//$criteria->compare('file_data',$this->file_data,true);
 
 		$criteria->compare('data_envio',$this->data_envio,true);
 
 		$criteria->compare('data_trabalho',$this->data_trabalho,true);
 
 		$criteria->compare('servidor_cpf',Yii::app()->user->cpfservidor);
+
+                
+
 
 		return new CActiveDataProvider('relatorio', array(
 			'criteria'=>$criteria,
@@ -175,13 +234,15 @@ class relatorio extends CActiveRecord
 
 		$criteria->compare('id',$this->id);
 
-		$criteria->compare('file_data',$this->file_data,true);
+		//$criteria->compare('file_data',$this->file_data,true);
 
 		$criteria->compare('data_envio',$this->data_envio,true);
 
 		$criteria->compare('data_trabalho',$this->data_trabalho,true);
 
 		$criteria->compare('servidor_cpf',  $this->servidor_cpf);
+
+               
 
 		return new CActiveDataProvider('relatorio', array(
 			'criteria'=>$criteria,

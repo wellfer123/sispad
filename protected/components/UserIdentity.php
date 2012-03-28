@@ -29,6 +29,7 @@ class UserIdentity extends CUserIdentity
             {
                 $this->_id=$record->id;
                 $this->setState('cpfservidor', $record->servidor->cpf);
+                 
                 $this->errorCode=self::ERROR_NONE;
             }
         return !$this->errorCode;
