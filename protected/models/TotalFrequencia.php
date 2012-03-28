@@ -45,7 +45,7 @@ class TotalFrequencia extends CActiveRecord
 			array('servidor_cpf', 'length', 'max'=>11),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('ano, mes, quantidade, data_envio, servidor_cpf', 'safe', 'on'=>'search'),
+			array('ano, mes, servidor_cpf', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -92,14 +92,14 @@ class TotalFrequencia extends CActiveRecord
 
 		$criteria->compare('mes',$this->mes);
 
-		$criteria->compare('quantidade',$this->quantidade,true);
-
-		$criteria->compare('data_envio',$this->data_envio,true);
 
 		$criteria->compare('servidor_cpf',$this->servidor_cpf,true);
 
 		return new CActiveDataProvider('TotalFrequencia', array(
 			'criteria'=>$criteria,
+                        'pagination'=>array(
+                                      'pageSize'=>20
+                        )
 		));
 	}
         

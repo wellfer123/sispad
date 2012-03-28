@@ -37,12 +37,15 @@ class TotalRelatorio extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('data_envio', 'required'),
+			array('servidor_cpf,ano,mes,quantidade', 'required'),
+                        array('ano','numerical','min'=>date('Y'), 'max'=>date('Y')+1),
+                        array('mes','numerical','max'=>12,'min'=>1),
+                        array('quantidade','numerical','max'=>23,'min'=>0),
 			array('ano, mes, quantidade', 'numerical', 'integerOnly'=>true),
 			array('servidor_cpf', 'length', 'max'=>11),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('ano, mes, quantidade, data_envio, servidor_cpf', 'safe', 'on'=>'search'),
+			array('ano, mes, servidor_cpf', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -54,6 +57,7 @@ class TotalRelatorio extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+                    'servidor'=>array(self::BELONGS_TO,'Servidor','servidor_cpf')
 		);
 	}
 
@@ -64,10 +68,10 @@ class TotalRelatorio extends CActiveRecord
 	{
 		return array(
 			'ano' => 'Ano',
-			'mes' => 'Mes',
+			'mes' => 'Mês',
 			'quantidade' => 'Quantidade',
-			'data_envio' => 'Data Envio',
-			'servidor_cpf' => 'Servidor Cpf',
+			'data_envio' => 'Data de Envio',
+			'servidor_cpf' => 'Servidor',
 		);
 	}
 
@@ -86,14 +90,13 @@ class TotalRelatorio extends CActiveRecord
 
 		$criteria->compare('mes',$this->mes);
 
-		$criteria->compare('quantidade',$this->quantidade);
-
-		$criteria->compare('data_envio',$this->data_envio,true);
-
 		$criteria->compare('servidor_cpf',$this->servidor_cpf,true);
 
 		return new CActiveDataProvider('TotalRelatorio', array(
 			'criteria'=>$criteria,
+                        'pagination'=>array(
+                                      'pageSize'=>20
+                        )
 		));
 	}
 }
