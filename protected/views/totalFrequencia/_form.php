@@ -13,13 +13,17 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'mes'); ?>
-		<?php echo $form->textField($model,'mes'); ?>
+                <?php echo Chtml::activeDropDownList($model, 'mes', 
+                                                    Chtml::listData(meses::model()->findAll(), 'id','nome'),
+                                                    array('empty'=>'Escolha um mês')); ?>
 		<?php echo $form->error($model,'mes'); ?>
 	</div>
         
         <div class="row">
 		<?php echo $form->labelEx($model,'ano'); ?>
-		<?php echo $form->textField($model,'ano'); ?>
+            
+		<?php echo Chtml::activeDropDownList($model, 'ano', array(date('Y')-1=>date('Y')-1,date('Y')=>date('Y'),date('Y')+1=>date('Y')+1),
+                                                    array('empty'=>'Escolha um ano')); ?>
 		<?php echo $form->error($model,'ano'); ?>
 	</div>
 

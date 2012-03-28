@@ -79,12 +79,15 @@ class TotalFrequenciaController extends SISPADBaseController{
 		if(isset($_POST['TotalFrequencia']))
 		{
 			$model->attributes=$_POST['TotalFrequencia'];
-                        $tmp=TotalFrequencia::model()->with('servidor')->findbyPk(array('ano'=>$model->ano,'mes'=>$model->mes,'servidor_cpf'=>$model->servidor_cpf));
+                        
+                        $tmp=TotalFrequencia::model()->with('servidor')->findbyPk(array(
+                            'ano'=>$model->ano,'mes'=>$model->mes,'servidor_cpf'=>$model->servidor_cpf));
+                        
                         if(null==$tmp){
                            
                             if($model->save()){
-				//$this->redirect(array('view','ano'=>$model->ano,'mes'=>$model->mes,'serv'=>$model->servidor_cpf));
-                                $this->addMessageSuccess("Frequência referente à $model->mes/$model->ano registrada com sucesso!");
+                                
+                                $this->addMessageSuccess("Frequência de ".Servidor::model()->findByPk($model->servidor_cpf)->nome." referente à $model->mes/$model->ano registrada com sucesso!");
                                 $this->beginModel($model);
                             } 
                         }
@@ -220,7 +223,9 @@ class TotalFrequenciaController extends SISPADBaseController{
              $this->_RBAC->checkAccess('registered',true);
             $q = $_GET['term'];
             if(isset($q)) {
-                $servidores = Servidor::model()->findAll();
+                 $servidores = Servidor::model()->findAll('nome like :nome',array(':nome'=> strtoupper(trim($q)).'%'));
+                //$servidores = Servidor::model()->findAllByAttributes(array('nome','cpf'),
+                                             // 'where nome like :nome',array(':nome'=> strtoupper(trim($q)).'%'));
  
                 if (!empty($servidores)) {
                     $out = array();
