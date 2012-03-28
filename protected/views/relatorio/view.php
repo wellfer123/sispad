@@ -40,7 +40,7 @@ $this->widget('zii.widgets.CDetailView', array(
                 array(
                     'name'=>'Arquivo',
                     'type'=>'raw',
-                    'value'=> CHtml::link($model->file_name,array('display','id'=>$model->id)),
+                    'value'=> CHtml::link($model->temp_arquivo->file_name,array('display','id'=>$model->id)),
                 ),
                
 	),

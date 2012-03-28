@@ -3,7 +3,7 @@
 <?php
 Yii::import('application.modules.rbac.components.*');
 Yii::import('application.services.FormataData');
-class RelatorioController extends Controller
+class RelatorioController extends SISPADBaseController
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -16,11 +16,9 @@ class RelatorioController extends Controller
 	 */
 	private $_model;
 
-        private $_RBAC;
+        
 
         public function __construct($id, $module = null) {
-
-            $this->_RBAC= new RBACAccessVerifier;
             parent::__construct($id, $module);
         }
 
@@ -81,6 +79,7 @@ class RelatorioController extends Controller
 	{
                 $this->_RBAC->checkAccess('manage',true);
 		$model=new relatorio;
+                $model->arquivo=new Arquivo();
                 $model->servidor_cpf=Yii::app()->user->cpfservidor;
                 //configura um cenario para o modelo, desse modo pode-se validar apenas essa actions 
                 $model->scenario='create';
@@ -93,23 +92,24 @@ class RelatorioController extends Controller
                            
                             $model->data_trabalho=$_POST['relatorio']['data_trabalho'];
                             $model->data_envio = date('Y/m/d  H:i:s');
-                            $model->servidor_cpf=$_POST['relatorio']['servidor_cpf'];
+                            $model->servidor_cpf=Yii::app()->user->cpfservidor;//$_POST['relatorio']['servidor_cpf'];
                           
                             if($model->save()){
-                                
-				$this->redirect(array('view','id'=>$model->id));
-
-                        }
-
-
-		}
+                               if($model->salvaArquivo()){
+                                  $this->addMessageSuccess("Relatorio Cadastrado com sucesso");
+                                  $model=new relatorio;
+                                  $model->arquivo=new Arquivo();
+                                  $model->servidor_cpf=Yii::app()->user->cpfservidor;
+                              }
+                            }
+                }
 
 		$this->render('create',array(
-			'model'=>$model,
+			'model'=>$model
 		));
         }
 
-        
+       
 
 
        public function  validaRelatorioExistente($data_trabalho){
@@ -136,16 +136,20 @@ class RelatorioController extends Controller
                 $this->_RBAC->checkAccessByData('updateRelatorio',$params,true);
 		
                 $model->data_trabalho=  FormataData::inverteData($model->data_trabalho, "-");
+                $model->arquivo=$model->temp_arquivo;
                 //$this->formataDataDeTrabalho($model);
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['relatorio']))
+		if(isset($_POST['Arquivo']))
 		{
-			$model->attributes=$_POST['relatorio'];
-                        $model->data_trabalho=  FormataData::inverteData($model->data_trabalho, "/");
+                   
+			//$model->attributes=$_POST['relatorio'];
+                        //$model->data_trabalho=  FormataData::inverteData($model->data_trabalho, "/");
                         //$this->formataDataDeTrabalho($model);
-			if($model->save())
+			//if($model->save())
+                        
+                        if($model->atualizaArquivo())
 				$this->redirect(array('view','id'=>$model->id));
 		}
 
@@ -170,10 +174,10 @@ class RelatorioController extends Controller
                 header('Expires: 0');
                 header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
                 header('Content-Transfer-Encoding: binary');
-                header('Content-length: '.$model->file_size);
-                header('Content-Type: '.$model->file_type);
-                header('Content-Disposition: attachment; filename='.$model->file_name);
-                die($model->file_data);
+                header('Content-length: '.$model->temp_arquivo->file_size);
+                header('Content-Type: '.$model->temp_arquivo->file_type);
+                header('Content-Disposition: attachment; filename='.$model->temp_arquivo->file_name);
+                die($model->temp_arquivo->file_data);
             //echo $model->file_data;
 }
 
@@ -237,13 +241,19 @@ class RelatorioController extends Controller
 		if($this->_model===null)
 		{
 			if(isset($_GET['id']))
-				$this->_model=relatorio::model()->findbyPk($_GET['id']);
+				$this->_model=relatorio::model()->with('temp_arquivo')->findbyPk($_GET['id']);
 			if($this->_model===null)
 				throw new CHttpException(404,'The requested page does not exist.');
 		}
 		return $this->_model;
 	}
 
+         private function beginModel($model){
+           $model->data_trabalho=null;
+           $model->file_data=null;
+            //inicia os dados
+
+        }
 	/**
 	 * Performs the AJAX validation.
 	 * @param CModel the model to be validated
