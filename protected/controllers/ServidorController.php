@@ -1,6 +1,6 @@
 <?php
 
-class ServidorController extends Controller
+class ServidorController extends SISPADBaseController
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -12,8 +12,13 @@ class ServidorController extends Controller
 	 * @var CActiveRecord the currently loaded data model instance.
 	 */
 	private $_model;
+        
+        
+        public function __construct($id, $module = null) {
+            parent::__construct($id, $module);
+        }
 
-	/**
+        	/**
 	 * @return array action filters
 	 */
 	public function filters()
@@ -31,21 +36,6 @@ class ServidorController extends Controller
 	public function accessRules()
 	{
 		return array(
-			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
-				'users'=>array('*'),
-			),
-			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
-				'users'=>array('@'),
-			),
-			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
-				'users'=>array('admin'),
-			),
-			array('deny',  // deny all users
-				'users'=>array('*'),
-			),
 		);
 	}
 
@@ -178,4 +168,29 @@ class ServidorController extends Controller
 			Yii::app()->end();
 		}
 	}
+        
+        public function actionFindServidores() {
+            
+             $this->_RBAC->checkAccess('registered',true);
+            $q = $_GET['term'];
+            if(isset($q)) {
+                 $servidores = Servidor::model()->findAll('nome like :nome',array(':nome'=> strtoupper(trim($q)).'%'));
+                //$servidores = Servidor::model()->findAllByAttributes(array('nome','cpf'),
+                                             // 'where nome like :nome',array(':nome'=> strtoupper(trim($q)).'%'));
+ 
+                if (!empty($servidores)) {
+                    $out = array();
+                    foreach ($servidores as $s) {
+                            $out[] = array(
+                            // expression to give the string for the autoComplete drop-down
+                            'label' => $s->nome,  
+                            'value' => $s->nome,
+                            'id' => $s->cpf, // return value from autocomplete
+                     );
+                    }
+                echo CJSON::encode($out);
+                Yii::app()->end();
+           }
+       }
+   }
 }

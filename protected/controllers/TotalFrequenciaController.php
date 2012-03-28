@@ -107,9 +107,6 @@ class TotalFrequenciaController extends SISPADBaseController{
         
         private function beginModel($model){
             $model->unsetAttributes();
-            //inicia os dados
-            $model->ano=date('Y');
-            $model->mes=date('m');
         }
 	/**
 	 * Updates a particular model.
@@ -158,7 +155,7 @@ class TotalFrequenciaController extends SISPADBaseController{
 	 */
 	public function actionIndex()
 	{
-                $this->_RBAC->checkAccess('manageTotalFrequencia',true);
+                //$this->_RBAC->checkAccess('manageTotalFrequencia',true);
 		/*$dataProvider=new CActiveDataProvider('TotalFrequencia');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
@@ -180,6 +177,7 @@ class TotalFrequenciaController extends SISPADBaseController{
 	 */
 	public function actionAdmin()
 	{
+                $this->_RBAC->checkAccess('manageTotalFrequencia',true);
 		$model=new TotalFrequencia('search');
 		$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['TotalFrequencia']))
@@ -219,27 +217,5 @@ class TotalFrequenciaController extends SISPADBaseController{
 		}
 	}
         
-         public function actionFindServidores() {
-             $this->_RBAC->checkAccess('registered',true);
-            $q = $_GET['term'];
-            if(isset($q)) {
-                 $servidores = Servidor::model()->findAll('nome like :nome',array(':nome'=> strtoupper(trim($q)).'%'));
-                //$servidores = Servidor::model()->findAllByAttributes(array('nome','cpf'),
-                                             // 'where nome like :nome',array(':nome'=> strtoupper(trim($q)).'%'));
- 
-                if (!empty($servidores)) {
-                    $out = array();
-                    foreach ($servidores as $s) {
-                            $out[] = array(
-                            // expression to give the string for the autoComplete drop-down
-                            'label' => $s->nome,  
-                            'value' => $s->nome,
-                            'id' => $s->cpf, // return value from autocomplete
-                     );
-                    }
-                echo CJSON::encode($out);
-                Yii::app()->end();
-           }
-       }
-   }
+         
 }
