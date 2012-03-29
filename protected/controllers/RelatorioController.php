@@ -187,7 +187,7 @@ class RelatorioController extends SISPADBaseController
 	 */
 	public function actionDelete()
 	{
-                $this->_RBAC->checkAccess('deleteRelatorio',true);
+                $this->_RBAC->checkAccess('manage',true);
                 //$this->_RBAC->denyAccess();
 		if(Yii::app()->request->isPostRequest)
 		{

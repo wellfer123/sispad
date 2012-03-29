@@ -43,12 +43,13 @@ class relatorio extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('data_trabalho', 'required'),
-                       
+                        array('data_trabalho','required'),
+                        array('arquivo', 'file', 'types'=>'txt,doc,docx,pdf,log'),
 			array('servidor_cpf', 'numerical', 'integerOnly'=>true),
+                        
                         array('data_trabalho', 'validaDiferencaDatas','dias'=>7,'on'=>'create'),
                         array('data_trabalho', 'validaRelatorioExistente','on'=>'create'),
-			array('data_trabalho', 'safe'),
+			//array('data_trabalho', 'safe'),
                         
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
@@ -56,9 +57,10 @@ class relatorio extends CActiveRecord
 		);
 	}
 
+       
 
         public function validaDiferencaDatas($attribute,$params){
-          
+         
             $data_envio = date("d/m/Y");//strtotime("today");
             //$data_trabalho = //new DateTime(FormataData::inverteData($this->data_trabalho, "/"));
 
@@ -71,7 +73,7 @@ class relatorio extends CActiveRecord
             }
             $this->addError('data_trabalho','Data inválida. Insira uma data de até 7 dias até a data atual ');
             return false;
-            
+          
         }
 
         
@@ -86,7 +88,7 @@ class relatorio extends CActiveRecord
             //$this->data_envio = strrev($this->data_envio);
         }
 
-         public function  validaRelatorioExistente($data_trabalho){
+         public function  validaRelatorioExistente($attribute,$params){
 
              if((relatorio::model()->find('data_trabalho= :data_trabalho',array(':data_trabalho'=>$this->data_trabalho)))==null){
                  return true;
@@ -241,6 +243,7 @@ class relatorio extends CActiveRecord
 		$criteria->compare('data_trabalho',$this->data_trabalho,true);
 
 		$criteria->compare('servidor_cpf',  $this->servidor_cpf);
+                //$criteria->compare('servidor_cpf',  $this->getServidorName($this->servidor_cpf));
 
                
 
@@ -248,4 +251,17 @@ class relatorio extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+
+        public function getServidorName($servidor_cpf){
+
+            if(empty ($servidor_cpf))return null;
+
+            $criteria=new CDbCriteria;
+            $criteria->select='nome'; //select id field
+            $criteria->compare('cpf',$servidor_cpf,true);
+            $ser=Servidor::model()->find($criteria);
+
+            return $ser->attributes['nome'];
+
+        }
 }

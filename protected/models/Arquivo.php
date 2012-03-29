@@ -37,15 +37,16 @@ class Arquivo extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
+                       // array('file_data','required'),
                         array('file_data', 'file', 'types'=>'txt,doc,docx,pdf,log'),
 			//array('relatorio_id', 'length', 'max'=>11),
 			//array('file_name', 'length', 'max'=>45),
 			//array('file_type', 'length', 'max'=>200),
 			//array('file_size', 'length', 'max'=>10),
-			///array('file_data', 'safe'),
+			//array('file_data', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			//array('relatorio_id, file_data, file_name, file_type, file_size', 'safe', 'on'=>'search'),
+			array('relatorio_id, file_data, file_name, file_type, file_size', 'safe', 'on'=>'search'),
 		);
 	}
 
