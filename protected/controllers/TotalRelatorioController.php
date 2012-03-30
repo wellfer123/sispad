@@ -44,10 +44,21 @@ class TotalRelatorioController extends SISPADBaseController
 	 */
 	public function actionView()
 	{
-                 $this->_RBAC->checkAccess('registered',true);
-		$this->render('view',array(
-			'model'=>$this->loadModel(),
-		));
+                if(isset($_GET['serv'])){
+                    $this->_RBAC->checkAccess('registered',true);
+                    //se or o dono das frequencias ou se for o gerenciador
+                    if($_GET['serv']==Yii::app()->user->cpfservidor || 
+                            $this->_RBAC->checkAccess('manageTotalRelatorio')){
+                        
+                      $this->render('view',array(
+                            'model'=>$this->loadModel(),
+                       ));  
+                    }
+                    else{
+                        $this->_RBAC->denyAccess();
+                    }
+                    
+                }
 	}
 
 	/**
@@ -146,8 +157,18 @@ class TotalRelatorioController extends SISPADBaseController
         
         public function actionList()
 	{
-                $this->_RBAC->checkAccess(array('manageTotalRelatorio','registered'),true);
-		$dataProvider=new CActiveDataProvider('TotalRelatorio');
+                $this->_RBAC->checkAccess('registered',true);
+                $criteria=new CDbCriteria;
+
+		$criteria->condition=" servidor_cpf=".Yii::app()->user->cpfservidor;
+                
+		$dataProvider=new CActiveDataProvider('TotalRelatorio', array(
+			'criteria'=>$criteria,
+                        'pagination'=>array(
+                                      'pageSize'=>20
+                        )
+		));
+                
 		$this->render('list',array(
 			'dataProvider'=>$dataProvider,
 		));
