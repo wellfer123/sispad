@@ -39,8 +39,9 @@
         <div class="row">
 		<?php echo $form->labelEx($model->arquivo,'file_data'); ?>
                 <?php echo $form->fileField($model->arquivo,'file_data'); ?>
+                <?php echo $form->error($model->arquivo,'file_data');?>
                 <?php echo CHtml::link($model->arquivo->file_name,array('display','id'=>$model->id));?>
-		<?php echo $form->error($model,'file_data');?>
+		
 
 	</div>
 

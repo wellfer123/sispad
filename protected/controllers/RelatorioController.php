@@ -92,10 +92,11 @@ class RelatorioController extends SISPADBaseController
                            
                             $model->data_trabalho=$_POST['relatorio']['data_trabalho'];
                             $model->data_envio = date('Y/m/d  H:i:s');
-                            $model->servidor_cpf=Yii::app()->user->cpfservidor;//$_POST['relatorio']['servidor_cpf'];
-                          
-                            if($model->save()){
-                               if($model->salvaArquivo()){
+                            $model->servidor_cpf=Yii::app()->user->cpfservidor;
+                          if( $model->arquivo->validate('file_data'))
+                            if($model->save($model)){
+                                $model->arquivo->relatorio_id=$model->id;
+                               if($model->arquivo->save()){
                                   $this->addMessageSuccess("Relatorio Cadastrado com sucesso");
                                   $model=new relatorio;
                                   $model->arquivo=new Arquivo();
@@ -137,19 +138,14 @@ class RelatorioController extends SISPADBaseController
 		
                 $model->data_trabalho=  FormataData::inverteData($model->data_trabalho, "-");
                 $model->arquivo=$model->temp_arquivo;
-                //$this->formataDataDeTrabalho($model);
+               
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
 		if(isset($_POST['Arquivo']))
 		{
-                   
-			//$model->attributes=$_POST['relatorio'];
-                        //$model->data_trabalho=  FormataData::inverteData($model->data_trabalho, "/");
-                        //$this->formataDataDeTrabalho($model);
-			//if($model->save())
-                        
-                        if($model->atualizaArquivo())
+                        $model->arquivo->relatorio_id=$model->id;
+                        if($model->arquivo->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
 

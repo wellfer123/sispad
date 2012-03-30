@@ -43,12 +43,12 @@ class relatorio extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-                        array('data_trabalho','required'),
-                        array('arquivo', 'file', 'types'=>'txt,doc,docx,pdf,log'),
+                      
+                        //array('arquivo', 'file', 'types'=>'txt,doc,docx,pdf,log'),
 			array('servidor_cpf', 'numerical', 'integerOnly'=>true),
-                        
-                        array('data_trabalho', 'validaDiferencaDatas','dias'=>7,'on'=>'create'),
                         array('data_trabalho', 'validaRelatorioExistente','on'=>'create'),
+                        array('data_trabalho', 'validaDiferencaDatas','dias'=>7,'on'=>'create'),
+                        array('data_trabalho','required','on'=>'create'),
 			//array('data_trabalho', 'safe'),
                         
 			// The following rule is used by search().
