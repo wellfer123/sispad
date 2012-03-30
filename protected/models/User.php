@@ -12,6 +12,9 @@
  */
 class User extends CActiveRecord
 {
+    
+    
+        private $_identity;
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return User the static model class
@@ -32,13 +35,32 @@ class User extends CActiveRecord
 	/**
 	 * @return array validation rules for model attributes.
 	 */
-	public function rules()
+        
+        /*public function servidorExistente($attribute, $params){
+            
+            $servidor= Servidor::model()->findb
+        }*/
+        
+     public function servidorExiste($attribute, $params) {
+         
+         $servid= Servidor::model()->findByPk($this->servidor_cpf);
+         if($servid==null){
+             $this->addError('servidor_cpf',"Servidor não existe em nosso sistema!");
+             return false;
+             }
+         return true;
+     }
+
+     public function rules()
 	{
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('password, email, username, servidor_cpf', 'required'),
+			array('password, email, username, servidor_cpf', 'required', 'on'=>'register'),
+                        array('password,username' ,'required', 'on'=>'login'),
 			array('password', 'length', 'max'=>15),
+                        array('email', 'email'),
+                        array('servidor_cpf','servidorExiste', 'on'=>'register'),
 			array('email, username', 'length', 'max'=>30),
 			array('servidor_cpf', 'length', 'max'=>11),
 			// The following rule is used by search().
@@ -55,7 +77,7 @@ class User extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'servidor_cpf0' => array(self::BELONGS_TO, 'Servidor', 'servidor_cpf'),
+			'servidor' => array(self::BELONGS_TO, 'Servidor', 'servidor_cpf'),
 		);
 	}
 
@@ -65,11 +87,11 @@ class User extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'Id',
-			'password' => 'Password',
-			'email' => 'Email',
-			'username' => 'Username',
-			'servidor_cpf' => 'Servidor Cpf',
+			'id' => 'Código',
+			'password' => 'Senha',
+			'email' => 'E-mail',
+			'username' => 'Nome de usuário',
+			'servidor_cpf' => 'CPF',
 		);
 	}
 
@@ -97,5 +119,23 @@ class User extends CActiveRecord
 		return new CActiveDataProvider('User', array(
 			'criteria'=>$criteria,
 		));
+	}
+        
+        public function login()
+	{
+		if($this->_identity===null)
+		{
+			$this->_identity=new UserIdentity($this->username,$this->password);
+			if(!$this->_identity->authenticate())
+				$this->addError('password','Usuário ou senha incorretos.');
+		}
+		if($this->_identity->errorCode===UserIdentity::ERROR_NONE)
+		{
+			$duration=3600*24; // 30 days
+			Yii::app()->user->login($this->_identity,$duration);
+			return true;
+		}
+		else
+			return false;
 	}
 }

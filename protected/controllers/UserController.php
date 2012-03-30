@@ -53,13 +53,13 @@ class UserController extends SISPADBaseController
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
-	public function actionCreate()
+	public function actionRegister()
 	{
                 
-		$model=new User;
+		$model=new User('register');
 
 		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
+		$this->performAjaxValidation($model);
 
 		if(isset($_POST['User']))
 		{
@@ -68,7 +68,7 @@ class UserController extends SISPADBaseController
 				$this->redirect(array('view','id'=>$model->id));
 		}
 
-		$this->render('create',array(
+		$this->render('register',array(
 			'model'=>$model,
 		));
 	}
