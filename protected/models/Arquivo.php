@@ -76,6 +76,21 @@ class Arquivo extends CActiveRecord
 		);
 	}
 
+       
+
+        protected function beforeSave() {
+             $file=CUploadedFile::getInstance($this,'file_data');
+            if(!$file->error){
+                $this->file_name=$file->name;
+                $this->file_type=$file->type;
+                $this->file_size=$file->size;
+                $this->file_data=file_get_contents($file->getTempName());
+              
+               
+            }
+            return parent::beforeSave();
+        }
+
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
 	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
