@@ -37,11 +37,13 @@ array(
                        "label"=>"Relatório",
                        array("url"=>array("route"=>"/Relatorio/create"),"label"=>"Enviar Meu Relatório"),
                        array("url"=>array("route"=>"/Relatorio/create"),"label"=>"Enviar do Servidor"),
-                       array("url"=>array("route"=>"/TotalRelatorio/create"),"label"=>"Enviar Quantidade")
+                       array("url"=>array("route"=>"/TotalRelatorio/create"),"label"=>"Enviar Quantidade"),
+                        array("url"=>array("route"=>"/TotalRelatorio/list"),"label"=>"Total de Relatórios (Meus)")
               ),
           array("url"=>array(),
                        "label"=>"Frequência",
-                       array("url"=>array("route"=>"/TotalFrequencia/create"),"label"=>"Enviar")
+                       array("url"=>array("route"=>"/TotalFrequencia/create"),"label"=>"Enviar"),
+                       array("url"=>array("route"=>"/TotalFrequencia/list"),"label"=>"Total de Frequências (Minhas)")
               ),
           array("url"=>array(),
                             "label"=>"Cadastro",
@@ -49,6 +51,11 @@ array(
                       array("url"=>array("route"=>"/Setor/index"), "label"=>"Setor"),
                       array("url"=>array("route"=>"/Servidor/index"), "label"=>"Servidor"),
                       array("url"=>array("route"=>"/Unidade/index"), "label"=>"Unidade")
+              ),
+          array("url"=>array(),
+                            "label"=>"Administração",
+                      array("url"=>array("route"=>"/user/admin"), "label"=>"Usuário"),
+                      array("url"=>array("route"=>"/rbac/assignment"), "label"=>"Permissões")
               ),
           //menu raiz
           array("url"=>array(), "label"=>"Ajuda",
