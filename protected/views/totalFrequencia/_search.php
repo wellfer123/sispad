@@ -31,6 +31,9 @@
                                     'displayAttr'=>'nome',  // attribute or pseudo-attribute to display
                                     // length of the AutoComplete/display field, defaults to 50
                                     'autoCompleteLength'=>60,
+                                    'htmlOptions'=>array(
+                                        'style'=>'text-transform:uppercase'
+                                    ),
                                      // any attributes of CJuiAutoComplete and jQuery JUI AutoComplete widget may 
                                      // also be defined.  read the code and docs for all options
                                     'options'=>array(

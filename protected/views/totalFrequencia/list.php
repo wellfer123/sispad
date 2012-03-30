@@ -9,7 +9,7 @@ $this->breadcrumbs=array(
 <h1>Total Relatorios</h1>
 
 <?php $this->widget('zii.widgets.grid.CGridView', array(
-	'id'=>'total-relatorio-grid',
+	'id'=>'total-frequencia-grid',
 	'dataProvider'=>$dataProvider,
 	'columns'=>array(
                 array(
@@ -22,7 +22,7 @@ $this->breadcrumbs=array(
 		'data_envio',
 		array(
 			'class'=>'CButtonColumn',
-                        'viewButtonUrl'=>'Yii::app()->createUrl("TotalRelatorio/view", array("ano"=>$data->ano,"mes"=>$data->mes,"serv"=>$data->servidor_cpf  ))',
+                        'viewButtonUrl'=>'Yii::app()->createUrl("TotalFrequencia/view", array("ano"=>$data->ano,"mes"=>$data->mes,"serv"=>$data->servidor_cpf  ))',
                         'buttons'=>array(
                                         'update'=>array(
                                                         'visible'=>'false',
