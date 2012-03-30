@@ -1,19 +1,20 @@
 <?php
 
 /**
- * This is the model class for table "Departamento".
+ * This is the model class for table "User".
  *
- * The followings are the available columns in table 'Departamento':
- * @property string $id
- * @property string $nome
- * @property string $descricao
- * @property integer $unidade_cnes
+ * The followings are the available columns in table 'User':
+ * @property integer $id
+ * @property string $password
+ * @property string $email
+ * @property string $username
+ * @property string $servidor_cpf
  */
-class Departamento extends CActiveRecord
+class User extends CActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
-	 * @return Departamento the static model class
+	 * @return User the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
@@ -25,7 +26,7 @@ class Departamento extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'Departamento';
+		return 'User';
 	}
 
 	/**
@@ -36,13 +37,13 @@ class Departamento extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('nome, descricao, unidade_cnes', 'required'),
-			array('unidade_cnes', 'numerical', 'integerOnly'=>true),
-			array('nome', 'length', 'max'=>40),
-			array('descricao', 'length', 'max'=>100),
+			array('password, email, username, servidor_cpf', 'required'),
+			array('password', 'length', 'max'=>15),
+			array('email, username', 'length', 'max'=>30),
+			array('servidor_cpf', 'length', 'max'=>11),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			//array('nome, descricao','safe', 'on'=>'search'),
+			array('id, password, email, username, servidor_cpf', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -54,8 +55,7 @@ class Departamento extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-                    'unidade'=>array(self::BELONGS_TO,'Unidade','unidade_cnes'),
-                    'setores'=>array(self::HAS_MANY,'Setor','departamento_id')
+			'servidor_cpf0' => array(self::BELONGS_TO, 'Servidor', 'servidor_cpf'),
 		);
 	}
 
@@ -65,10 +65,11 @@ class Departamento extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'Código',
-			'nome' => 'Nome',
-			'descricao' => 'Descrição',
-			'unidade_cnes' => 'Unidade',
+			'id' => 'Id',
+			'password' => 'Password',
+			'email' => 'Email',
+			'username' => 'Username',
+			'servidor_cpf' => 'Servidor Cpf',
 		);
 	}
 
@@ -83,15 +84,18 @@ class Departamento extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
+		$criteria->compare('id',$this->id);
 
-		$criteria->compare('nome',$this->nome,true);
-                $criteria->compare('descricao',$this->descricao,true);
+		$criteria->compare('password',$this->password,true);
 
-		return new CActiveDataProvider('Departamento', array(
+		$criteria->compare('email',$this->email,true);
+
+		$criteria->compare('username',$this->username,true);
+
+		$criteria->compare('servidor_cpf',$this->servidor_cpf,true);
+
+		return new CActiveDataProvider('User', array(
 			'criteria'=>$criteria,
-                        'pagination'=>array(
-                                      'pageSize'=>20
-                        )
 		));
 	}
 }

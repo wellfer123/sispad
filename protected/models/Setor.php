@@ -92,6 +92,9 @@ class Setor extends CActiveRecord
 
 		return new CActiveDataProvider('Setor', array(
 			'criteria'=>$criteria,
+                        'pagination'=>array(
+                                      'pageSize'=>20
+                        )
 		));
 	}
 }

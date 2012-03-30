@@ -96,6 +96,9 @@ class Unidade extends CActiveRecord
 
 		return new CActiveDataProvider('Unidade', array(
 			'criteria'=>$criteria,
+                        'pagination'=>array(
+                                      'pageSize'=>20
+                        )
 		));
 	}
 }
