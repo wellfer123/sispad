@@ -9,11 +9,16 @@
  * @property string $email
  * @property string $username
  * @property string $servidor_cpf
+ * @property string $ativo
  */
 class User extends CActiveRecord
 {
     
     
+    
+        public static $ATIVO=1;
+        public static $DESATIVO=0;
+        
         private $_identity;
 	/**
 	 * Returns the static model of the specified AR class.
@@ -29,7 +34,7 @@ class User extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'User';
+		return 'user';
 	}
 
 	/**
@@ -41,15 +46,7 @@ class User extends CActiveRecord
             $servidor= Servidor::model()->findb
         }*/
         
-     public function servidorExiste($attribute, $params) {
-         
-         $servid= Servidor::model()->findByPk($this->servidor_cpf);
-         if($servid==null){
-             $this->addError('servidor_cpf',"Servidor não existe em nosso sistema!");
-             return false;
-             }
-         return true;
-     }
+     
 
      public function rules()
 	{
@@ -59,13 +56,15 @@ class User extends CActiveRecord
 			array('password, email, username, servidor_cpf', 'required', 'on'=>'register'),
                         array('password,username' ,'required', 'on'=>'login'),
 			array('password', 'length', 'max'=>15),
-                        array('email', 'email'),
+                        array('email', 'email', 'on'=>'register'),
+			array('email, username', 'length', 'max'=>30, 'on'=>'register'),
                         array('servidor_cpf','servidorExiste', 'on'=>'register'),
-			array('email, username', 'length', 'max'=>30),
-			array('servidor_cpf', 'length', 'max'=>11),
+			array('servidor_cpf', 'servidorIsUser', 'on'=>'register'),
+                        array('username', 'usernameExiste', 'on'=>'register'),
+			array('email', 'emailExiste', 'on'=>'register'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, password, email, username, servidor_cpf', 'safe', 'on'=>'search'),
+			array('email, username, servidor_cpf', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -90,10 +89,21 @@ class User extends CActiveRecord
 			'id' => 'Código',
 			'password' => 'Senha',
 			'email' => 'E-mail',
-			'username' => 'Nome de usuário',
+			'username' => 'Nome do usuário',
 			'servidor_cpf' => 'CPF',
+                        'ativo'=>'Ativo',
 		);
 	}
+        
+        public function labelStatus(){
+            if($this->ativo== User::$ATIVO){
+                return 'ATIVO';
+            }
+            else if($this->ativo==User::$DESATIVO){
+                return 'DESATIVO';
+            }
+            return 'DESCONHECIDO';
+        }
 
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
@@ -106,10 +116,6 @@ class User extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id',$this->id);
-
-		$criteria->compare('password',$this->password,true);
-
 		$criteria->compare('email',$this->email,true);
 
 		$criteria->compare('username',$this->username,true);
@@ -118,6 +124,9 @@ class User extends CActiveRecord
 
 		return new CActiveDataProvider('User', array(
 			'criteria'=>$criteria,
+                        'pagination'=>array(
+                                      'pageSize'=>20
+                        )
 		));
 	}
         
@@ -125,17 +134,64 @@ class User extends CActiveRecord
 	{
 		if($this->_identity===null)
 		{
+                        
 			$this->_identity=new UserIdentity($this->username,$this->password);
 			if(!$this->_identity->authenticate())
 				$this->addError('password','Usuário ou senha incorretos.');
 		}
 		if($this->_identity->errorCode===UserIdentity::ERROR_NONE)
 		{
-			$duration=3600*24; // 30 days
+			$duration=1200; // 20 minutes
 			Yii::app()->user->login($this->_identity,$duration);
 			return true;
 		}
 		else
 			return false;
 	}
+        
+        public function servidorExiste($attribute, $params) {
+         
+         $servid= Servidor::model()->findByPk($this->servidor_cpf);
+         if($servid==null){
+             $this->addError('servidor_cpf',"Servidor não existe em nosso sistema!");
+             return false;
+             }
+         return true;
+        }
+        
+        public function usernameExiste($attribute, $params) {
+         
+         $user= $this->model()->findByAttributes(array('username'=>$this->username));
+         if($user!=null){
+             $this->addError('username',"Usuário com esse nome já existe!");
+             return false;
+             }
+         return true;
+        }
+        
+        public function emailExiste($attribute, $params) {
+         
+         $user= $this->model()->findByAttributes(array('email'=>$this->email));
+         if($user!=null){
+             $this->addError('email',"Usuário com esse email já existe!");
+             return false;
+             }
+         return true;
+        }
+        
+        public function servidorIsUser($attribute, $params) {
+         
+         $user= $this->model()->findByAttributes(array('servidor_cpf'=>$this->servidor_cpf));
+         if($user!=null){
+             $this->addError('servidor_cpf',"Este servidor já está cadastrado como usuário em nosso sistema!");
+             return false;
+             }
+         return true;
+        }
+        
+
+        public function criptografarPassword(){
+           $this->password=md5($this->password); 
+        }
+        
 }

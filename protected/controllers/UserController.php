@@ -64,6 +64,7 @@ class UserController extends SISPADBaseController
 		if(isset($_POST['User']))
 		{
 			$model->attributes=$_POST['User'];
+                        $model->criptografarPassword();
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
@@ -100,7 +101,23 @@ class UserController extends SISPADBaseController
 	 * Deletes a particular model.
 	 * If deletion is successful, the browser will be redirected to the 'index' page.
 	 */
-	public function actionDelete()
+	public function actionActiveUser()
+	{
+		if(Yii::app()->request->isPostRequest)
+		{
+			// we only allow deletion via POST request
+			$this->loadModel()->delete();
+
+			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+			if(!isset($_GET['ajax']))
+				$this->redirect(array('index'));
+		}
+		else
+			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
+	}
+        
+        
+        public function actionDesactiveUser()
 	{
 		if(Yii::app()->request->isPostRequest)
 		{
@@ -150,7 +167,7 @@ class UserController extends SISPADBaseController
 		if($this->_model===null)
 		{
 			if(isset($_GET['id']))
-				$this->_model=User::model()->findbyPk($_GET['id']);
+				$this->_model=User::model()->with('servidor')->findbyPk($_GET['id']);
 			if($this->_model===null)
 				throw new CHttpException(404,'The requested page does not exist.');
 		}

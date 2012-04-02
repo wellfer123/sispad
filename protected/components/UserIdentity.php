@@ -20,16 +20,20 @@ class UserIdentity extends CUserIdentity
         private $_id;
         
         public function authenticate(){
+            
+            //pega o usuário no banco
             $record=User::model()->with('servidor')->findByAttributes(array('username'=>$this->username));
             if($record===null)
+                //usuário não existe
                 $this->errorCode=self::ERROR_USERNAME_INVALID;
-            else if($record->password!==$this->password)
+                //compara as senhas
+            else if(!$record->password==md5($this->password))
                 $this->errorCode=self::ERROR_PASSWORD_INVALID;
             else
             {
+                //está logado com sucesso
                 $this->_id=$record->id;
                 $this->setState('cpfservidor', $record->servidor->cpf);
-                 
                 $this->errorCode=self::ERROR_NONE;
             }
         return !$this->errorCode;

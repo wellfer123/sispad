@@ -1,5 +1,5 @@
 <?php
-Yii::import('application.modules.rbac.models.*');
+//Yii::import('application.modules.rbac.models.*');
 //include_once '../modules/rbac/models/User.php';
 class SiteController extends Controller
 {
@@ -93,6 +93,7 @@ class SiteController extends Controller
 		// display the login form
 		$this->render('login',array('model'=>$model));
 	}
+        
         
         public function actionAccessDenied(){
             $this->render('accessDenied');
