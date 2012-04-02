@@ -55,7 +55,7 @@ class User extends CActiveRecord
 		return array(
 			array('password, email, username, servidor_cpf', 'required', 'on'=>'register'),
                         array('password,username' ,'required', 'on'=>'login'),
-			array('password', 'length', 'max'=>15),
+			array('password', 'length', 'max'=>32),
                         array('email', 'email', 'on'=>'register'),
 			array('email, username', 'length', 'max'=>30, 'on'=>'register'),
                         array('servidor_cpf','servidorExiste', 'on'=>'register'),

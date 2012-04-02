@@ -37,7 +37,7 @@ class Arquivo extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-                       // array('file_data','required'),
+                        //array('file_data','required'),
                         array('file_data', 'file', 'types'=>'txt,doc,docx,pdf,log'),
 			//array('relatorio_id', 'length', 'max'=>11),
 			//array('file_name', 'length', 'max'=>45),

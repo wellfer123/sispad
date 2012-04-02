@@ -65,6 +65,7 @@ class UserController extends SISPADBaseController
 		{
 			$model->attributes=$_POST['User'];
                         $model->criptografarPassword();
+                        $model->ativo=0;
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}

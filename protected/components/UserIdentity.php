@@ -27,8 +27,10 @@ class UserIdentity extends CUserIdentity
                 //usuário não existe
                 $this->errorCode=self::ERROR_USERNAME_INVALID;
                 //compara as senhas
-            else if(!$record->password==md5($this->password))
+            else if(!($record->password===md5($this->password)))
                 $this->errorCode=self::ERROR_PASSWORD_INVALID;
+            else if($record->ativo!=1)
+                $this->errorCode=self::ERROR_UNKNOWN_IDENTITY;
             else
             {
                 //está logado com sucesso

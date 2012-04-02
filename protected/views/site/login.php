@@ -31,7 +31,7 @@ $this->breadcrumbs=array(
 		<?php echo $form->passwordField($model,'password'); ?>
 		<?php echo $form->error($model,'password'); ?>
 		
-            <p>Caso não tenha se registrado no sistema <a href=<?php echo yii::app()->baseUrl.'/index.php?r=user/create'?>>clique aqui</a></p>
+            <p>Caso não tenha se registrado no sistema <a href=<?php echo yii::app()->baseUrl.'/index.php?r=user/register'?>>clique aqui</a></p>
 	</div>
 
 	<div class="row rememberMe">

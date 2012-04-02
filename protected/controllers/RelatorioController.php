@@ -77,7 +77,17 @@ class RelatorioController extends SISPADBaseController
 	 */
 	public function actionCreate()
 	{
+            
                 $this->_RBAC->checkAccess('manage',true);
+
+
+                $email = Yii::app()->email;
+                $email->to = 'juniorpiresupe@gmail.com';
+                $email->subject = 'Hello';
+                $email->message = 'Hello brother';
+                $email->send();
+
+
 		$model=new relatorio;
                 $model->arquivo=new Arquivo();
                 $model->servidor_cpf=Yii::app()->user->cpfservidor;
@@ -85,14 +95,16 @@ class RelatorioController extends SISPADBaseController
                 $model->scenario='create';
 
 		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
+		//$this->performAjaxValidation($model);
 
 		if(isset($_POST['relatorio']))
 		{
                            
                             $model->data_trabalho=$_POST['relatorio']['data_trabalho'];
+                           
                             $model->data_envio = date('Y/m/d  H:i:s');
                             $model->servidor_cpf=Yii::app()->user->cpfservidor;
+                            //$model->data_trabalho=FormataData::inverteData($model->data_trabalho,"/");
                           if( $model->arquivo->validate('file_data'))
                             if($model->save($model)){
                                 $model->arquivo->relatorio_id=$model->id;
@@ -113,13 +125,7 @@ class RelatorioController extends SISPADBaseController
        
 
 
-       public function  validaRelatorioExistente($data_trabalho){
-
-             if(relatorio::model()->find(array('data_trabalho'=>$data_trabalho))){
-                 return true;
-             }
-             return false;
-        }
+      
 
 	/**
 	 * Updates a particular model.
