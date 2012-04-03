@@ -18,6 +18,8 @@ return array(
 		'application.models.*',
                 'application.extensions.*',
 		'application.components.*',
+                'application.extensions.yii-mail.*',
+
 	),
 
 	'modules'=>array(
@@ -62,10 +64,20 @@ return array(
 			// enable cookie-based authentication
 			'allowAutoLogin'=>true,
 		),
-                'email'=>array(
-                'class'=>'application.extensions.email.Email',
-                'delivery'=>'php', //Will use the php mailing function.
-                //May also be set to 'debug' to instead dump the contents of the email into the view
+                 'mail' => array(
+                'class' => 'application.extensions.yii-mail.YiiMail',
+                'transportType'=>'smtp', /// case sensitive!
+                'transportOptions'=>array(
+                    'host'=>'smtp.gmail.com',
+                    'username'=>'juniorpiresupe@gmail.com',
+                    // or email@googleappsdomain.com
+                    'password'=>'',
+                    'port'=>'25'   ,//'465',
+                    //'encryption'=>'ssl',
+                    ),
+                'viewPath' => 'application.views.mail',
+                'logging' => true,
+                'dryRun' => false
             ),
 
 		// uncomment the following to enable URLs in path-format

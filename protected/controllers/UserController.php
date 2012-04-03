@@ -14,6 +14,7 @@ class UserController extends SISPADBaseController
 	private $_model;
 
         public $_bodyEmail="Sua conta foi ativada";
+        public $_bodyEmailDes="Sua conta foi desativada";
         
         
         
@@ -124,7 +125,7 @@ class UserController extends SISPADBaseController
                         $mo=$this->loadModel();
                         if($mo!=null){
                             $mo->ativo=User::ATIVO;
-                            $this->enviaEmail($model->email,$model->username,
+                            $this->enviaEmail($mo->email,$mo->username,
                                         "juniorpiresupe@gmail.com","ATIVACAO DE CONTA",$this->_bodyEmail);
                             $mo->save();
                         }
@@ -146,6 +147,8 @@ class UserController extends SISPADBaseController
 			$mo=$this->loadModel($id);
                         if($mo!=null){
                             $mo->ativo=User::DESATIVO;
+                            $this->enviaEmail($mo->email,$mo->username,
+                                        "juniorpiresupe@gmail.com","DESATIVACAO DE CONTA",$this->_bodyEmailDes);
                             $mo->save();
                         }
 

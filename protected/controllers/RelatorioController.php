@@ -70,7 +70,7 @@ class RelatorioController extends SISPADBaseController
 			'model'=>$this->loadModel(),
 		));
 	}
-
+       
 	/**
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
@@ -79,13 +79,9 @@ class RelatorioController extends SISPADBaseController
 	{
             
                 $this->_RBAC->checkAccess('manage',true);
+               
 
-
-                $email = Yii::app()->email;
-                $email->to = 'juniorpiresupe@gmail.com';
-                $email->subject = 'Hello';
-                $email->message = 'Hello brother';
-                $email->send();
+               
 
 
 		$model=new relatorio;
