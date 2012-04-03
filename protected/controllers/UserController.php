@@ -12,6 +12,9 @@ class UserController extends SISPADBaseController
 	 * @var CActiveRecord the currently loaded data model instance.
 	 */
 	private $_model;
+
+        public $_bodyEmail="Sua conta foi ativada";
+        
         
         
         public function __construct($id, $module = null) {
@@ -49,6 +52,17 @@ class UserController extends SISPADBaseController
 		));
 	}
 
+         private function enviaEmail($to,$nameTo,$from,$subject,$body){
+             $message = new YiiMailMessage();
+
+                $message->setTo(
+                array($to=>$nameTo));
+                $message->setFrom($from);
+                $message->setSubject($subject);
+                $message->setBody($body);
+
+                $numsent = Yii::app()->mail->send($message);
+        }
 	/**
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
@@ -67,7 +81,7 @@ class UserController extends SISPADBaseController
                         $model->criptografarPassword();
                         $model->ativo=0;
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+                               $this->redirect(array('view','id'=>$model->id));
 		}
 
 		$this->render('register',array(
@@ -110,6 +124,8 @@ class UserController extends SISPADBaseController
                         $mo=$this->loadModel();
                         if($mo!=null){
                             $mo->ativo=User::ATIVO;
+                            $this->enviaEmail($model->email,$model->username,
+                                        "juniorpiresupe@gmail.com","ATIVACAO DE CONTA",$this->_bodyEmail);
                             $mo->save();
                         }
 
