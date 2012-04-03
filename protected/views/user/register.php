@@ -1,7 +1,7 @@
 <?php
 $this->breadcrumbs=array(
-	'Users'=>array('index'),
-	'Create',
+	'Usuários'=>array('index'),
+	'Registro',
 );
 
 

@@ -102,12 +102,16 @@ class UserController extends SISPADBaseController
 	 * Deletes a particular model.
 	 * If deletion is successful, the browser will be redirected to the 'index' page.
 	 */
-	public function actionActiveUser()
+	public function actionActive()
 	{
 		if(Yii::app()->request->isPostRequest)
 		{
 			// we only allow deletion via POST request
-			$this->loadModel()->delete();
+                        $mo=$this->loadModel();
+                        if($mo!=null){
+                            $mo->ativo=User::$ATIVO;
+                            $mo->save();
+                        }
 
 			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 			if(!isset($_GET['ajax']))
@@ -118,12 +122,16 @@ class UserController extends SISPADBaseController
 	}
         
         
-        public function actionDesactiveUser()
+        public function actionInactive()
 	{
 		if(Yii::app()->request->isPostRequest)
 		{
-			// we only allow deletion via POST request
-			$this->loadModel()->delete();
+			// we only allow  via POST request
+			$mo=$this->loadModel();
+                        if($mo!=null){
+                            $mo->ativo=User::$DESATIVO;
+                            $mo->save();
+                        }
 
 			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 			if(!isset($_GET['ajax']))

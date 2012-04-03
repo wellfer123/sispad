@@ -16,8 +16,8 @@ class User extends CActiveRecord
     
     
     
-        public static $ATIVO=1;
-        public static $DESATIVO=0;
+        const ATIVO=1;
+        const DESATIVO=0;
         
         private $_identity;
 	/**
@@ -96,10 +96,10 @@ class User extends CActiveRecord
 	}
         
         public function labelStatus(){
-            if($this->ativo== User::$ATIVO){
+            if($this->ativo== User::ATIVO){
                 return 'ATIVO';
             }
-            else if($this->ativo==User::$DESATIVO){
+            else if($this->ativo==User::DESATIVO){
                 return 'DESATIVO';
             }
             return 'DESCONHECIDO';
@@ -136,15 +136,34 @@ class User extends CActiveRecord
 		{
                         
 			$this->_identity=new UserIdentity($this->username,$this->password);
-			if(!$this->_identity->authenticate())
-				$this->addError('password','Usuário ou senha incorretos.');
+                        //autentica o usuário
+			$this->_identity->authenticate();
 		}
+                //o usuário está tem acesso ao sistema
 		if($this->_identity->errorCode===UserIdentity::ERROR_NONE)
 		{
 			$duration=1200; // 20 minutes
 			Yii::app()->user->login($this->_identity,$duration);
 			return true;
 		}
+                //o usuário errou o nome
+                else if($this->_identity->errorCode===UserIdentity::ERROR_USERNAME_INVALID){
+                        $this->addError('username','Usuário Incorreto.');                
+                        
+                        }
+                //o usuário errou a senha
+                else if($this->_identity->errorCode===UserIdentity::ERROR_PASSWORD_INVALID){
+                        $this->addError('password','Senha incorreta.'.md5($this->_identity->password));                
+                        
+                        }
+                else if($this->_identity->errorCode===UserIdentity::ERROR_USER_INACTIVE){
+                        $this->addError('username','Usuário desativado.');                
+                        
+                        }
+                else if($this->_identity->errorCode===UserIdentity::ERROR_UNKNOWN_IDENTITY){
+                        $this->addError('username','Usuário inexistente.');                
+                        
+                        }
 		else
 			return false;
 	}

@@ -8,6 +8,10 @@
  */
 class UserIdentity extends CUserIdentity
 {
+    
+        
+
+        const ERROR_USER_INACTIVE=10;
 	/**
 	 * Authenticates a user.
 	 * The example implementation makes sure if the username and password
@@ -16,21 +20,23 @@ class UserIdentity extends CUserIdentity
 	 * against some persistent user identity storage (e.g. database).
 	 * @return boolean whether authentication succeeds.
 	 */
-
         private $_id;
         
         public function authenticate(){
             
             //pega o usuário no banco
             $record=User::model()->with('servidor')->findByAttributes(array('username'=>$this->username));
-            if($record===null)
+            if($record===null){
                 //usuário não existe
                 $this->errorCode=self::ERROR_USERNAME_INVALID;
                 //compara as senhas
-            else if(!($record->password===md5($this->password)))
+            }
+            else if($record->password!==md5($this->password)){
                 $this->errorCode=self::ERROR_PASSWORD_INVALID;
-            else if($record->ativo!=1)
-                $this->errorCode=self::ERROR_UNKNOWN_IDENTITY;
+            }
+            else if($record->ativo===User::$DESATIVO){
+                $this->errorCode=self::$ERROR_USER_INACTIVE;
+            }
             else
             {
                 //está logado com sucesso

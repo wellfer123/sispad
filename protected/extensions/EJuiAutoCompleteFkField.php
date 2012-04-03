@@ -224,8 +224,8 @@ class EJuiAutoCompleteFkField extends CJuiAutoComplete {
         parent::run();
 
         // fouth, an image button to empty all three fields
-        $label=Yii::t('DR','Remove '). ucfirst($this->relName); // TODO: how to translate relname?
-        $deleteImageURL = '/images/text_field_remove.png'; 
+        $label=Yii::t('DR','Limpar '). ucfirst($this->relName); // TODO: how to translate relname?
+        $deleteImageURL = Yii::app()->request->baseUrl.'/images/clear.png'; 
         echo CHtml::image($deleteImageURL, $label,
             array('title'=>$label,
                 //'name'=>'remove_'.$this->attribute,

@@ -40,7 +40,6 @@ ou <b>=</b>) iniciar cada uma de suas pesquisa com valores específicos de como 
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'user-grid',
 	'dataProvider'=>$model->search(),
-	'filter'=>$model,
 	'columns'=>array(
 		'id',
 		'email',
@@ -51,6 +50,19 @@ ou <b>=</b>) iniciar cada uma de suas pesquisa com valores específicos de como 
                 ),
 		array(
 			'class'=>'CButtonColumn',
+                        'buttons'=>array(
+                                        'update'=>array(
+                                                        'visible'=>'true',
+                                                        'label'=>'Ativar Usuário',
+                                                        'imageUrl'=>  Yii::app()->request->baseUrl.'/images/unlocked.png',
+                                                ),
+                                        'delete'=>array(
+                                                        'visible'=>'true',
+                                                        'url'=> 'Yii::app()->createUrl("/user/active",array("id"=>$data->id))',
+                                                        'label'=>'Desativar Usuário',
+                                                        'imageUrl'=>  Yii::app()->request->baseUrl.'/images/locked.png',
+                                                ),
+                        ),
 		),
 	),
 )); ?>
