@@ -90,7 +90,7 @@ class User extends CActiveRecord
 			'password' => 'Senha',
 			'email' => 'E-mail',
 			'username' => 'Nome do usuário',
-			'servidor_cpf' => 'CPF',
+			'servidor_cpf' => 'Servidor',
                         'ativo'=>'Ativo',
 		);
 	}

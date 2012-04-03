@@ -26,6 +26,7 @@
                                     'sourceUrl'=>Yii::app()->createUrl('Servidor/findServidores'), 
                                     // defaults to false.  set 'true' to display the FK field with 'readonly' attribute.
                                     'showFKField'=>false,
+                                    'htmlOptions'=>array('style'=>'text-transform:uppercase'),
                                     // display size of the FK field.  only matters if not hidden.  defaults to 10
                                     'FKFieldSize'=>11, 
                                     'relName'=>'servidor', // the relation name defined above
