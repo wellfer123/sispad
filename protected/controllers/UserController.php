@@ -109,7 +109,7 @@ class UserController extends SISPADBaseController
 			// we only allow deletion via POST request
                         $mo=$this->loadModel();
                         if($mo!=null){
-                            $mo->ativo=User::$ATIVO;
+                            $mo->ativo=User::ATIVO;
                             $mo->save();
                         }
 
@@ -129,7 +129,7 @@ class UserController extends SISPADBaseController
 			// we only allow  via POST request
 			$mo=$this->loadModel();
                         if($mo!=null){
-                            $mo->ativo=User::$DESATIVO;
+                            $mo->ativo=User::DESATIVO;
                             $mo->save();
                         }
 

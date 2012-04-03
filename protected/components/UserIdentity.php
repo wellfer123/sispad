@@ -34,7 +34,7 @@ class UserIdentity extends CUserIdentity
             else if($record->password!==md5($this->password)){
                 $this->errorCode=self::ERROR_PASSWORD_INVALID;
             }
-            else if($record->ativo===User::$DESATIVO){
+            else if($record->ativo===User::DESATIVO){
                 $this->errorCode=self::$ERROR_USER_INACTIVE;
             }
             else
