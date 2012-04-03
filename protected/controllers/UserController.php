@@ -93,7 +93,7 @@ class UserController extends SISPADBaseController
 	 * Updates a particular model.
 	 * If update is successful, the browser will be redirected to the 'view' page.
 	 */
-	public function actionUpdate()
+	/*public function actionUpdate()
 	{
 		$model=$this->loadModel();
 
@@ -110,7 +110,7 @@ class UserController extends SISPADBaseController
 		$this->render('update',array(
 			'model'=>$model,
 		));
-	}
+	}*/
 
 	/**
 	 * Deletes a particular model.
@@ -138,12 +138,12 @@ class UserController extends SISPADBaseController
 	}
         
         
-        public function actionInactive()
+        public function actionInactive($id)
 	{
 		if(Yii::app()->request->isPostRequest)
 		{
 			// we only allow  via POST request
-			$mo=$this->loadModel();
+			$mo=$this->loadModel($id);
                         if($mo!=null){
                             $mo->ativo=User::DESATIVO;
                             $mo->save();

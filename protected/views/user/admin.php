@@ -6,7 +6,6 @@ $this->breadcrumbs=array(
 
 $this->menu=array(
 	array('label'=>'Registrar Usuário', 'url'=>array('register')),
-        array('label'=>'Delete User', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -19,6 +18,47 @@ $('.search-form form').submit(function(){
 		data: $(this).serialize()
 	});
 	return false;
+});
+");
+
+Yii::app()->clientScript->registerScript('active', "
+jQuery('#user-grid a.active').live('click',function() {
+        if(!confirm('Você deseja realmente ativar esse usuário?')) return false;
+        
+        var th=this;
+        var afterActive=function(){};
+        $.fn.yiiGridView.update('user-grid', {
+                type:'POST',
+                url:$(this).attr('href'),
+                success:function(data) {
+                        $.fn.yiiGridView.update('user-grid');
+                        afterActive(th,true,data);
+                },
+                error:function(XHR) {
+                        return afterActive(th,false,XHR);
+                }
+        });
+        return false;
+});
+");
+
+Yii::app()->clientScript->registerScript('inactive', "
+jQuery('#user-grid a.inactive').live('click',function() {
+        if(!confirm('Você deseja realmente desativar esse usuário?')) return false;
+        var th=this;
+        var afterInactive=function(){};
+        $.fn.yiiGridView.update('user-grid', {
+                type:'POST',
+                url:$(this).attr('href'),
+                success:function(data) {
+                        $.fn.yiiGridView.update('user-grid');
+                        afterInactive(th,true,data);
+                },
+                error:function(XHR) {
+                        return afterInactive(th,false,XHR);
+                }
+        });
+        return false;
 });
 ");
 ?>
@@ -41,7 +81,6 @@ ou <b>=</b>) iniciar cada uma de suas pesquisa com valores específicos de como 
 	'id'=>'user-grid',
 	'dataProvider'=>$model->search(),
 	'columns'=>array(
-		'id',
 		'email',
 		'username',
                 array(
@@ -50,16 +89,27 @@ ou <b>=</b>) iniciar cada uma de suas pesquisa com valores específicos de como 
                 ),
 		array(
 			'class'=>'CButtonColumn',
+                        'template'=>'{active}{inactive}{view}',
                         'buttons'=>array(
-                                        'update'=>array(
+                                        'view'=>array(
                                                         'visible'=>'true',
+                                                        'label'=>'Ver usuário',
+                                                        'url'=> 'Yii::app()->createUrl("/user/view",array("id"=>$data->id))',
+                                                        'options'=>array('style'=>"padding-right:10px"),
+                                                        'imageUrl'=>  Yii::app()->request->baseUrl.'/images/view.png',
+                                                ),
+                                        'active'=>array(
+                                                        'visible'=>'$data->ativo==User::DESATIVO',
                                                         'label'=>'Ativar Usuário',
+                                                        'url'=> 'Yii::app()->createUrl("/user/active",array("id"=>$data->id))',
+                                                        'options'=>array('class'=>'active', 'style'=>"padding-right:10px"),
                                                         'imageUrl'=>  Yii::app()->request->baseUrl.'/images/unlocked.png',
                                                 ),
-                                        'delete'=>array(
-                                                        'visible'=>'true',
-                                                        'url'=> 'Yii::app()->createUrl("/user/active",array("id"=>$data->id))',
+                                        'inactive'=>array(
+                                                        'visible'=>'$data->ativo==User::ATIVO',
+                                                        'url'=> 'Yii::app()->createUrl("/user/inactive",array("id"=>$data->id))',
                                                         'label'=>'Desativar Usuário',
+                                                        'options'=>array('class'=>'inactive','style'=>"padding-right:10px"),
                                                         'imageUrl'=>  Yii::app()->request->baseUrl.'/images/locked.png',
                                                 ),
                         ),

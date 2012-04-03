@@ -43,7 +43,8 @@
                                     // defaults to false.  set 'true' to display the FK field with 'readonly' attribute.
                                     'showFKField'=>false,
                                     // display size of the FK field.  only matters if not hidden.  defaults to 10
-                                    'FKFieldSize'=>11, 
+                                    'FKFieldSize'=>11,
+                                    'htmlOptions'=>array('style'=>'text-transform:uppercase'),
                                     'relName'=>'servidor', // the relation name defined above
                                     'displayAttr'=>'nome',  // attribute or pseudo-attribute to display
                                     // length of the AutoComplete/display field, defaults to 50
