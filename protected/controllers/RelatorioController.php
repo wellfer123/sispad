@@ -78,7 +78,7 @@ class RelatorioController extends SISPADBaseController
 	public function actionCreate()
 	{
             
-                $this->_RBAC->checkAccess('manage',true);
+                $this->_RBAC->checkAccess('createRelatorio',true);
                
 
                
@@ -185,7 +185,7 @@ class RelatorioController extends SISPADBaseController
 	 */
 	public function actionDelete()
 	{
-                $this->_RBAC->checkAccess('manage',true);
+                $this->_RBAC->checkAccess('deleteRelatorio',true);
                 //$this->_RBAC->denyAccess();
 		if(Yii::app()->request->isPostRequest)
 		{
@@ -206,7 +206,7 @@ class RelatorioController extends SISPADBaseController
 	public function actionIndex()
 
 	{
-            $this->_RBAC->checkAccess('manage',true);
+            $this->_RBAC->checkAccess('indexRelatorio',true);
             $model=new relatorio('search');
 		$dataProvider=new CActiveDataProvider('relatorio');
 		$this->render('index',array(
@@ -219,7 +219,7 @@ class RelatorioController extends SISPADBaseController
 	 */
 	public function actionAdmin()
 	{
-                $this->_RBAC->checkAccess('manage',true);
+                $this->_RBAC->checkAccess('adminRelatorio',true);
 		$model=new relatorio('search');
 		$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['relatorio']))

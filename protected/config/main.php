@@ -69,9 +69,9 @@ return array(
                 'transportType'=>'smtp', /// case sensitive!
                 'transportOptions'=>array(
                     'host'=>'smtp.gmail.com',
-                    'username'=>'juniorpiresupe@gmail.com',
+                    'username'=>'sispadcaruaru@gmail.com',
                     // or email@googleappsdomain.com
-                    'password'=>'',
+                    'password'=>'padti20123',
                     'port'=>'25'   ,//'465',
                     //'encryption'=>'ssl',
                     ),

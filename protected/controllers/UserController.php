@@ -117,6 +117,7 @@ class UserController extends SISPADBaseController
 	 * Deletes a particular model.
 	 * If deletion is successful, the browser will be redirected to the 'index' page.
 	 */
+        
 	public function actionActive()
 	{
 		if(Yii::app()->request->isPostRequest)
@@ -125,9 +126,9 @@ class UserController extends SISPADBaseController
                         $mo=$this->loadModel();
                         if($mo!=null){
                             $mo->ativo=User::ATIVO;
-                            $this->enviaEmail($mo->email,$mo->username,
-                                        "juniorpiresupe@gmail.com","ATIVACAO DE CONTA",$this->_bodyEmail);
                             $mo->save();
+                            $this->enviaEmail($mo->email,$mo->username,
+                                        "sispadcaruaru@gmail.com","ATIVACAO DE CONTA",$this->_bodyEmail);
                         }
 
 			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
@@ -147,9 +148,9 @@ class UserController extends SISPADBaseController
 			$mo=$this->loadModel($id);
                         if($mo!=null){
                             $mo->ativo=User::DESATIVO;
-                            $this->enviaEmail($mo->email,$mo->username,
-                                        "juniorpiresupe@gmail.com","DESATIVACAO DE CONTA",$this->_bodyEmailDes);
                             $mo->save();
+                            $this->enviaEmail($mo->email,$mo->username,
+                                        "sispadcaruaru@gmail.com","DESATIVACAO DE CONTA",$this->_bodyEmailDes);
                         }
 
 			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
