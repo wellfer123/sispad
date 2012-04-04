@@ -36,9 +36,8 @@ array(
           array("url"=>array(),
                        "label"=>"Relatório",
                        array("url"=>array("route"=>"/Relatorio/create"),"label"=>"Enviar Meu Relatório"),
-                       array("url"=>array("route"=>"/Relatorio/create"),"label"=>"Enviar do Servidor"),
                        array("url"=>array("route"=>"/TotalRelatorio/create"),"label"=>"Enviar Quantidade"),
-                        array("url"=>array("route"=>"/TotalRelatorio/list"),"label"=>"Total de Relatórios (Meus)")
+                       array("url"=>array("route"=>"/TotalRelatorio/list"),"label"=>"Total de Relatórios (Meus)")
               ),
           array("url"=>array(),
                        "label"=>"Frequência",
