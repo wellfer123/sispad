@@ -20,6 +20,7 @@ class User extends CActiveRecord
         const DESATIVO=0;
         
         private $_identity;
+        public $verifyCode;
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return User the static model class
@@ -65,6 +66,8 @@ class User extends CActiveRecord
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('email, username, servidor_cpf', 'safe', 'on'=>'search'),
+                        // verifyCode needs to be entered correctly
+			array('verifyCode', 'captcha', 'allowEmpty'=>!CCaptcha::checkRequirements()),
 		);
 	}
 
