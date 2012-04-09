@@ -25,7 +25,7 @@ $this->menu=array(
                 ),
 		array(
 			'class'=>'CButtonColumn',
-                         'template'=>'{view}',
+                         'template'=>'{view}{update}',
 		),
 	),
 ));
