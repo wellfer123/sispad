@@ -19,7 +19,10 @@ body
 {
 	margin: 0;
 	padding: 0;
-	border-top: 3px solid #FF8C69;
+	/*border-top: 3px solid #FF8C69;*/
+        background-image: url('sispadlogo.jpg');
+        background-repeat: no-repeat;
+	height: 125px;
 }
 
 #content
@@ -45,6 +48,7 @@ body
 {
 	padding: 10px 20px;
 	font-size: 200%;
+
 }
 #mainmenu2
 {
