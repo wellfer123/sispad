@@ -22,12 +22,14 @@
 <div class="container" id="page">
 
 	<div id="header">
-		<div id="logo"><?php echo CHtml::encode(Yii::app()->name); ?></div>
+		<div id="logo"><?php //echo CHtml::encode(Yii::app()->name); ?></div>
 	</div><!-- header -->
 
         
         <div id="mainmenu2">
                 <?php
+                    //instancia do RBAC para verificação de acesso ao menu
+                    $RBAC2=new RBACAccessVerifier();
                     $this->widget('application.extensions.menu.SMenu',
 array(
 "menu"=>array(
@@ -37,7 +39,8 @@ array(
                        "label"=>"Relatório",
                        array("url"=>array("route"=>"/Relatorio/create"),"label"=>"Enviar Meu Relatório"),
                        array("url"=>array("route"=>"/TotalRelatorio/create"),"label"=>"Enviar Quantidade"),
-                       array("url"=>array("route"=>"/TotalRelatorio/list"),"label"=>"Total de Relatórios (Meus)")
+                       array("url"=>array("route"=>"/TotalRelatorio/list"),"label"=>"Total de Relatórios (Meus)"),
+                       
               ),
           array("url"=>array(),
                        "label"=>"Frequência",
@@ -49,12 +52,14 @@ array(
                       array("url"=>array("route"=>"/departamento/index"), "label"=>"Departamento"),
                       array("url"=>array("route"=>"/Setor/index"), "label"=>"Setor"),
                       array("url"=>array("route"=>"/Servidor/index"), "label"=>"Servidor"),
-                      array("url"=>array("route"=>"/Unidade/index"), "label"=>"Unidade")
+                      array("url"=>array("route"=>"/Unidade/index"), "label"=>"Unidade"),
+                      'visible'=>$RBAC2->checkAccess('SuperAdmin'),
               ),
           array("url"=>array(),
                             "label"=>"Administração",
                       array("url"=>array("route"=>"/user/admin"), "label"=>"Usuário"),
-                      array("url"=>array("route"=>"/rbac/assignment"), "label"=>"Permissões")
+                      array("url"=>array("route"=>"/rbac/assignment"), "label"=>"Permissões"),
+                      'visible'=>$RBAC2->checkAccess('SuperAdmin'),
               ),
           //menu raiz
           array("url"=>array(), "label"=>"Ajuda",
