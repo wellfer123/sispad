@@ -13,9 +13,9 @@ $this->menu=array(
 	array('label'=>'Manage relatorio', 'url'=>array('admin')),
 );
 ?>
-
+<div class="update">
 <h1>View relatorio #<?php echo $model->id; ?></h1>
-
+</div>
 <?php
     
 

@@ -6,9 +6,9 @@ $this->breadcrumbs=array(
 
 
 ?>
-
+<div class="update">
 <h1>Usuário: <?php echo $model->username; ?></h1>
-
+</div>
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
 	'attributes'=>array(

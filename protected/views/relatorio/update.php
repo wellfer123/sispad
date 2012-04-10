@@ -12,7 +12,7 @@ $this->menu=array(
 	array('label'=>'Manage relatorio', 'url'=>array('admin')),
 );
 ?>
-
+<div class="form">
 <h1>Update relatorio <?php echo $model->id; ?></h1>
-
+</div>
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
