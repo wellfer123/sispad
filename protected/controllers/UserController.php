@@ -59,6 +59,7 @@ class UserController extends SISPADBaseController
 	 */
 	public function actionView()
 	{
+                $this->_RBAC->checkAccess('registered',true);
 		$this->render('view',array(
 			'model'=>$this->loadModel(),
 		));
@@ -131,6 +132,7 @@ class UserController extends SISPADBaseController
         
 	public function actionActive()
 	{
+                $this->_RBAC->checkAccess('adminUser',true);
 		if(Yii::app()->request->isPostRequest)
 		{
 			// we only allow deletion via POST request
@@ -153,6 +155,7 @@ class UserController extends SISPADBaseController
         
         public function actionInactive($id)
 	{
+                $this->_RBAC->checkAccess('adminUser',true);
 		if(Yii::app()->request->isPostRequest)
 		{
 			// we only allow  via POST request
@@ -184,6 +187,7 @@ class UserController extends SISPADBaseController
 	}
         
         public function actionHome(){
+            $this->_RBAC->checkAccess('registered',true);
             $this->render('home');
         }
 
@@ -192,6 +196,7 @@ class UserController extends SISPADBaseController
 	 */
 	public function actionAdmin()
 	{
+                $this->_RBAC->checkAccess('adminUser',true);
 		$model=new User('search');
 		$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['User']))
