@@ -14,7 +14,7 @@
 
 Yii::import('application.modules.rbac.components.*');
 
-class SISPADBaseController extends Controller{
+abstract class SISPADBaseController extends Controller{
     
         
     //put your code here
@@ -61,6 +61,17 @@ class SISPADBaseController extends Controller{
      
      protected function addMessageSuccess($message){
          $this->messageSuccess[]=$message;
+     }
+     
+     protected abstract function getModelName();
+     
+     protected function factoryActionName(){
+         //$this->get
+         return $this->getAction()->getId().$this->getModelName();
+     }
+     
+     protected function CheckAcessAction(){
+         $this->_RBAC->checkAccess($this->factoryActionName(),true);
      }
 }
 
