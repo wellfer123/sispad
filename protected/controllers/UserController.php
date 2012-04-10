@@ -182,6 +182,10 @@ class UserController extends SISPADBaseController
 			'dataProvider'=>$dataProvider,
 		));
 	}
+        
+        public function actionHome(){
+            $this->render('home');
+        }
 
 	/**
 	 * Manages all models.

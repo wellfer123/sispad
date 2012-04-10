@@ -55,7 +55,7 @@ class User extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('password, email, username, servidor_cpf', 'required', 'on'=>'register'),
-                        array('password,username' ,'required', 'on'=>'login'),
+                        array('password,username, verifyCode' ,'required', 'on'=>'login'),
 			array('password', 'length', 'max'=>32),
                         array('email', 'email', 'on'=>'register'),
 			array('email, username', 'length', 'max'=>30, 'on'=>'register'),
@@ -95,6 +95,7 @@ class User extends CActiveRecord
 			'username' => 'Nome do usuário',
 			'servidor_cpf' => 'Servidor',
                         'ativo'=>'Ativo',
+                        'verifyCode'=>'Código de verificação (Captcha)',
 		);
 	}
         
@@ -167,8 +168,8 @@ class User extends CActiveRecord
                         $this->addError('username','Usuário inexistente.');                
                         
                         }
-		else
-			return false;
+		//nao entrou no if de autenticação correta!
+		return false;
 	}
         
         public function servidorExiste($attribute, $params) {

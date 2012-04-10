@@ -30,7 +30,7 @@ class SiteController extends Controller
 	{
 		// renders the view file 'protected/views/site/index.php'
 		// using the default layout 'protected/views/layouts/main.php'
-		$this->render('index');
+		$this->redirect(yii::app()->baseUrl.'/index.php?r=user/home');
 	}
 
 	/**
@@ -59,8 +59,8 @@ class SiteController extends Controller
 			if($model->validate())
 			{
 				$headers="From: {$model->email}\r\nReply-To: {$model->email}";
-				mail(Yii::app()->params['adminEmail'],$model->subject,$model->body,$headers);
-				Yii::app()->user->setFlash('contact','Thank you for contacting us. We will respond to you as soon as possible.');
+				//mail(Yii::app()->params['adminEmail'],$model->subject,$model->body,$headers);
+				Yii::app()->user->setFlash('contact','Obrigado pelo seu contato. Assim que pudermos responderemos ao seu email.');
 				$this->refresh();
 			}
 		}
@@ -72,6 +72,8 @@ class SiteController extends Controller
 	 */
 	public function actionLogin()
 	{
+            if(yii::app()->user->isGuest){
+                //classe User do SISPAD
 		$model=new User('login');
 
 
@@ -87,12 +89,19 @@ class SiteController extends Controller
 		{
 			$model->attributes=$_POST['User'];
 			// validate user input and redirect to the previous page if valid
-			if($model->validate() && $model->login())
+			if($model->validate() && $model->login()){
+                                //if(Yii::app()->getController()->)
 				$this->redirect(Yii::app()->user->returnUrl);
+                        }
 		}
 		// display the login form
 		$this->render('login',array('model'=>$model));
-	}
+            }
+            else{
+                $this->redirect(yii::app()->baseUrl.'/index.php?r=user/home');
+            }
+            
+        }
         
         
         public function actionAccessDenied(){

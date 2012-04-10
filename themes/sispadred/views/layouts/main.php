@@ -59,7 +59,7 @@ array(
                             "label"=>"Administração",
                       array("url"=>array("route"=>"/user/admin"), "label"=>"Usuário"),
                       array("url"=>array("route"=>"/rbac/assignment"), "label"=>"Permissões"),
-                      'visible'=>$RBAC2->checkAccess('SuperAdmin'),
+                      
               ),
           //menu raiz
           array("url"=>array(), "label"=>"Ajuda",

@@ -1,10 +1,9 @@
 <?php
-$this->pageTitle=Yii::app()->name . ' - About';
+$this->pageTitle=Yii::app()->name . ' - Sobre';
 $this->breadcrumbs=array(
 	'About',
 );
 ?>
-<h1>About</h1>
+<h1>Sobre</h1>
 
-<p>This is a "static" page. You may change the content of this page
-by updating the file <tt><?php echo __FILE__; ?></tt>.</p>
+<p>SISPAD (Sistema de Planejamento, Acompanhamento e Desenvolvimento de Secretária de Saúde da Prefeitura de Caruaru.).</p>

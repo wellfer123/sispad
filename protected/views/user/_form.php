@@ -18,7 +18,7 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'servidor_cpf'); ?>
+		<?php echo 'CPF do '.$form->labelEx($model,'servidor_cpf'); ?>
                 <?php   $this->widget('CMaskedTextField', array(
                         'model'=>$model,
                         'attribute'=>'servidor_cpf',
