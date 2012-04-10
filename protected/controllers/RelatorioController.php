@@ -63,7 +63,7 @@ class RelatorioController extends SISPADBaseController
 	 */
 	public function actionView()
 	{
-                $this->_RBAC->checkAccess('register');
+                $this->CheckAcessAction();
                 $model=$this->loadModel();
                 $model->data_trabalho=FormataData::inverteData($model->data_trabalho,"-");
 		$this->render('view',array(
@@ -77,14 +77,8 @@ class RelatorioController extends SISPADBaseController
 	 */
 	public function actionCreate()
 	{
-            
-                $this->_RBAC->checkAccess('createRelatorio',true);
-               
-
-               
-
-
-		$model=new relatorio;
+                $this->CheckAcessAction();
+                $model=new relatorio;
                 $model->arquivo=new Arquivo();
                 $model->servidor_cpf=Yii::app()->user->cpfservidor;
                 //configura um cenario para o modelo, desse modo pode-se validar apenas essa actions 
@@ -136,7 +130,7 @@ class RelatorioController extends SISPADBaseController
                 $dias=FormataData::calculaDiferencaDatas($data_hoje,$model->data_envio, null, "-");
                 $params=array("dias"=>$dias);
 
-                $this->_RBAC->checkAccessByData('updateRelatorio',$params,true);
+                $this->_RBAC->checkAccessByData($this->factoryActionName(),$params,true);
 		
                 $model->data_trabalho=  FormataData::inverteData($model->data_trabalho, "-");
                 $model->arquivo=$model->temp_arquivo;
@@ -185,7 +179,7 @@ class RelatorioController extends SISPADBaseController
 	 */
 	public function actionDelete()
 	{
-                $this->_RBAC->checkAccess('deleteRelatorio',true);
+                $this->CheckAcessAction();
                 //$this->_RBAC->denyAccess();
 		if(Yii::app()->request->isPostRequest)
 		{
@@ -206,7 +200,7 @@ class RelatorioController extends SISPADBaseController
 	public function actionIndex()
 
 	{
-            $this->_RBAC->checkAccess('indexRelatorio',true);
+            $this->CheckAcessAction();
             $model=new relatorio('search');
 		$dataProvider=new CActiveDataProvider('relatorio');
 		$this->render('index',array(
@@ -219,7 +213,7 @@ class RelatorioController extends SISPADBaseController
 	 */
 	public function actionAdmin()
 	{
-                $this->_RBAC->checkAccess('adminRelatorio',true);
+                $this->CheckAcessAction();
 		$model=new relatorio('search');
 		$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['relatorio']))
@@ -264,6 +258,11 @@ class RelatorioController extends SISPADBaseController
 			Yii::app()->end();
 		}
 	}
+
+        protected function getModelName() {
+         return 'Relatorio';
+        }
+
 }
 
 
