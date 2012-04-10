@@ -1,7 +1,7 @@
 <?php
 
 Yii::import('application.modules.rbac.components.*');
-class DepartamentoController extends Controller
+class DepartamentoController extends SISPADBaseController
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -14,7 +14,7 @@ class DepartamentoController extends Controller
 	 */
 	private $_model;
         
-        private $_RBAC;
+       
 
 	/**
 	 * @return array action filters
@@ -53,8 +53,6 @@ class DepartamentoController extends Controller
 	}
         
         public function __construct($id, $module = null) {
-            
-            $this->_RBAC= new RBACAccessVerifier;
             parent::__construct($id, $module);
         }
 
@@ -63,7 +61,7 @@ class DepartamentoController extends Controller
 	 */
 	public function actionView()
 	{
-                $this->_RBAC->checkAccess(array('viewDepartamento','registered'),true);
+                $this->CheckAcessAction();
 		$this->render('view',array(
 			'model'=>$this->loadModel(),
 		));
@@ -75,7 +73,7 @@ class DepartamentoController extends Controller
 	 */
 	public function actionCreate()
 	{
-                $this->_RBAC->checkAccess('manageDepartamento',true);
+                $this->CheckAcessAction();
 		$model=new Departamento;
 
 		// Uncomment the following line if AJAX validation is needed
@@ -99,7 +97,7 @@ class DepartamentoController extends Controller
 	 */
 	public function actionUpdate()
 	{
-                $this->_RBAC->checkAccess('manageDepartamento',true);
+                $this->CheckAcessAction();
 		$model=$this->loadModel();
 
 		// Uncomment the following line if AJAX validation is needed
@@ -123,7 +121,7 @@ class DepartamentoController extends Controller
 	 */
 	public function actionDelete()
 	{
-                $this->_RBAC->checkAccess('delete',true);
+                $this->CheckAcessAction();
 		if(Yii::app()->request->isPostRequest)
 		{
 			// we only allow deletion via POST request
@@ -164,7 +162,7 @@ class DepartamentoController extends Controller
 	 */
 	public function actionAdmin()
 	{
-                $this->_RBAC->checkAccess('manageDepartamento',true);
+                $this->CheckAcessAction();
 		$model=new Departamento('search');
 		$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['Departamento']))
@@ -203,4 +201,11 @@ class DepartamentoController extends Controller
 			Yii::app()->end();
 		}
 	}
+
+        protected function getModelName() {
+            return 'Departamento';
+        }
+
+
+
 }

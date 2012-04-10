@@ -10,9 +10,9 @@ $this->menu=array(
 	array('label'=>'Gerenciamento de Departamentos', 'url'=>array('admin')),
 );
 ?>
-
+<div class="update">
 <h1>Departamento: <?php echo $model->nome; ?></h1>
-
+</div>
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
 	'attributes'=>array(

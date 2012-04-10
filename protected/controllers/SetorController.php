@@ -1,6 +1,6 @@
 <?php
 Yii::import('application.modules.rbac.components.*');
-class SetorController extends Controller
+class SetorController extends SISPADBaseController
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -13,7 +13,7 @@ class SetorController extends Controller
 	 */
 	private $_model; 
         
-        private $_RBAC;
+      
 
 	/**
 	 * @return array action filters
@@ -26,8 +26,6 @@ class SetorController extends Controller
 	}
         
         public function __construct($id, $module = null) {
-            
-            $this->_RBAC= new RBACAccessVerifier;
             parent::__construct($id, $module);
         }
 
@@ -62,7 +60,7 @@ class SetorController extends Controller
 	 */
 	public function actionView()
 	{
-                $this->_RBAC->checkAccess(array('viewSetor','registered'),true);
+                $this->CheckAcessAction();
 		$this->render('view',array(
 			'model'=>$this->loadModel(),
 		));
@@ -74,7 +72,7 @@ class SetorController extends Controller
 	 */
 	public function actionCreate()
 	{
-                $this->_RBAC->checkAccess('manageSetor',true);
+                $this->CheckAcessAction();
 		$model=new Setor;
 
 		// Uncomment the following line if AJAX validation is needed
@@ -98,7 +96,7 @@ class SetorController extends Controller
 	 */
 	public function actionUpdate()
 	{
-                $this->_RBAC->checkAccess('manageSetor',true);
+                $this->CheckAcessAction();
 		$model=$this->loadModel();
 
 		// Uncomment the following line if AJAX validation is needed
@@ -122,7 +120,7 @@ class SetorController extends Controller
 	 */
 	public function actionDelete()
 	{
-                $this->_RBAC->checkAccess('delete',true);
+                $this->CheckAcessAction();
 		if(Yii::app()->request->isPostRequest)
 		{
 			// we only allow deletion via POST request
@@ -146,7 +144,7 @@ class SetorController extends Controller
         
         public function actionList()
 	{
-                $this->_RBAC->checkAccess('registered',true);
+                $this->CheckAcessAction();
 		$dataProvider=new CActiveDataProvider('Setor');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
@@ -158,7 +156,7 @@ class SetorController extends Controller
 	 */
 	public function actionAdmin()
 	{
-                $this->_RBAC->checkAccess('manageSetor',true);
+                $this->CheckAcessAction();
 		$model=new Setor('search');
 		$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['Setor']))
@@ -197,4 +195,9 @@ class SetorController extends Controller
 			Yii::app()->end();
 		}
 	}
+
+        protected function getModelName() {
+            return 'Setor';
+        }
+
 }
