@@ -11,9 +11,9 @@ $this->menu=array(
 	array('label'=>'Gerencimento de Unidade', 'url'=>array('admin')),
 );
 ?>
-
+<div class="update">
 <h1>Unidade </h1>
-
+</div>
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
 	'attributes'=>array(

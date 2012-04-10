@@ -1,7 +1,6 @@
 <?php
 
-Yii::import('application.modules.rbac.components.*');
-class UnidadeController extends Controller
+class UnidadeController extends SISPADBaseController
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -14,13 +13,9 @@ class UnidadeController extends Controller
 	 */
 	private $_model;
         
-        private $_RBAC;
-        
         
         
         public function __construct($id, $module = null) {
-            
-            $this->_RBAC= new RBACAccessVerifier;
             parent::__construct($id, $module);
         }
 
@@ -42,21 +37,6 @@ class UnidadeController extends Controller
 	public function accessRules()
 	{
 		return array(
-			/*array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
-				'users'=>array('*'),
-			),
-			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
-				'users'=>array('@'),
-			),
-			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
-				'users'=>array('admin'),
-			),
-			array('deny',  // deny all users
-				'users'=>array('*'),
-			),*/
 		);
 	}
 
@@ -65,7 +45,7 @@ class UnidadeController extends Controller
 	 */
 	public function actionView()
 	{       
-                $this->_RBAC->checkAccess(array('viewUnidade','registered'),true);
+                $this->CheckAcessAction();
 		$this->render('view',array(
 			'model'=>$this->loadModel(),
 		));
@@ -77,7 +57,7 @@ class UnidadeController extends Controller
 	 */
 	public function actionCreate()
 	{
-                $this->_RBAC->checkAccess('manegeUnidade',true);
+                $this->CheckAcessAction();
                 //$this->_RBAC->denyAccess();
 		$model=new Unidade;
 
@@ -104,7 +84,7 @@ class UnidadeController extends Controller
 	 */
 	public function actionUpdate()
 	{
-                $this->_RBAC->checkAccess('manegeUnidade',true);
+                $this->CheckAcessAction();
 		$model=$this->loadModel();
 
 		// Uncomment the following line if AJAX validation is needed
@@ -128,7 +108,7 @@ class UnidadeController extends Controller
 	 */
 	public function actionDelete()
 	{
-                $this->_RBAC->checkAccess('delete',true);
+                $this->CheckAcessAction();
 		if(Yii::app()->request->isPostRequest)
 		{
 			// we only allow deletion via POST request
@@ -147,7 +127,7 @@ class UnidadeController extends Controller
 	 */
 	public function actionIndex()
 	{
-                $this->_RBAC->checkAccess('manegeUnidade',true);
+                //$this->_RBAC->checkAccess('manegeUnidade',true);
 		/*$dataProvider=new CActiveDataProvider('Unidade');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
@@ -157,7 +137,7 @@ class UnidadeController extends Controller
         
         public function actionList()
 	{
-                $this->_RBAC->checkAccess(array('manegeUnidade', 'registered'),true);
+                $this->CheckAcessAction();
 		$dataProvider=new CActiveDataProvider('Unidade');
 		$this->render('list',array(
 			'dataProvider'=>$dataProvider,
@@ -169,7 +149,7 @@ class UnidadeController extends Controller
 	 */
 	public function actionAdmin()
 	{
-                $this->_RBAC->checkAccess('manegeUnidade',true);
+                $this->CheckAcessAction();
 		$model=new Unidade('search');
 		$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['Unidade']))
@@ -208,4 +188,8 @@ class UnidadeController extends Controller
 			Yii::app()->end();
 		}
 	}
+
+    protected function getModelName() {
+        return 'Unidade';
+    }
 }
