@@ -102,7 +102,7 @@ class UserController extends SISPADBaseController
 		$this->render('login',array('model'=>$model));
             }
             else{
-                $this->redirect(yii::app()->baseUrl.'/index.php?r=user/home');
+                $this->redirect(yii::app()->baseUrl.'/index.php?r=perfil/home');
             }
             
         }
@@ -216,18 +216,8 @@ class UserController extends SISPADBaseController
 	/**
 	 * Lists all models.
 	 */
-	public function actionIndex()
-	{
-		$dataProvider=new CActiveDataProvider('User');
-		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
-		));
-	}
         
-        public function actionHome(){
-            $this->CheckAcessAction();
-            $this->render('home');
-        }
+        
 
 	/**
 	 * Manages all models.
