@@ -44,7 +44,7 @@ class RBACAccessVerifier implements IBehavior{
 	public $checkDefaultIndex='id';
 	public $allowCaching=false;
 	public $accessDeniedUrl = '/site/accessDenied';
-	public $loginUrl = '/site/login';
+	public $loginUrl = '/user/login';
 	
 	// this array will contain the Data to check by buisness Rule
 	private $_checkAccessData=array();

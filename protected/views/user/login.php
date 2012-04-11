@@ -12,11 +12,7 @@ $this->breadcrumbs=array(
 <div class="form">
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'user-form',
-	'enableClientValidation'=>true,
-        'enableAjaxValidation'=>false,
-	'clientOptions'=>array(
-		'validateOnSubmit'=>true,
-	),
+        'enableAjaxValidation'=>true,
 )); ?>
 
 	<p class="note">Todos os campos com <span class="required">*</span> são de prenchimento obrigatório.</p>

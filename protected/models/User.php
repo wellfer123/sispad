@@ -62,6 +62,7 @@ class User extends CActiveRecord
                         array('servidor_cpf','servidorExiste', 'on'=>'register'),
 			array('servidor_cpf', 'servidorIsUser', 'on'=>'register'),
                         array('username', 'usernameExiste', 'on'=>'register'),
+                        array('username', 'usernameNaoExiste', 'on'=>'register'),
 			array('email', 'emailExiste', 'on'=>'register'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
@@ -187,6 +188,15 @@ class User extends CActiveRecord
          $user= $this->model()->findByAttributes(array('username'=>$this->username));
          if($user!=null){
              $this->addError('username',"Usuário com esse nome já existe!");
+             return false;
+             }
+         return true;
+        }
+        public function usernameNaoExiste($attribute, $params) {
+         
+         $user= $this->model()->findByAttributes(array('username'=>$this->username));
+         if($user==null){
+             $this->addError('username',"Usuário não existe!");
              return false;
              }
          return true;

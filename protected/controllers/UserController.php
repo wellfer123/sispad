@@ -76,6 +76,44 @@ class UserController extends SISPADBaseController
 
                 $numsent = Yii::app()->mail->send($message);
         }
+        
+        //logar usuário
+        public function actionLogin()
+	{
+            if(yii::app()->user->isGuest){
+                //classe User do SISPAD
+		$model=new User('login');
+
+
+		// if it is ajax validation request
+		$this->performAjaxValidation($model);
+
+		// collect user input data
+		if(isset($_POST['User']))
+		{
+			$model->attributes=$_POST['User'];
+			// validate user input and redirect to the previous page if valid
+			if($model->validate() && $model->login()){
+                                //if(Yii::app()->getController()->)
+				$this->redirect(Yii::app()->user->returnUrl);
+                        }
+		}
+		// display the login form
+		$this->render('login',array('model'=>$model));
+            }
+            else{
+                $this->redirect(yii::app()->baseUrl.'/index.php?r=user/home');
+            }
+            
+        }
+        
+        //desloga usuário
+        
+        public function actionLogout()
+	{
+		Yii::app()->user->logout();
+		$this->redirect(Yii::app()->homeUrl);
+	}
 	/**
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
