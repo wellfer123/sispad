@@ -200,11 +200,11 @@ class relatorio extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'Id',
+			'id' => 'Código',
 			//'file_data' => 'Arquivo',
-			'data_envio' => 'Data Envio',
-			'data_trabalho' => 'Data Trabalho',
-			'servidor_cpf' => 'Servidor Cpf',
+			'data_envio' => 'Data de Envio',
+			'data_trabalho' => 'Data de Trabalho',
+			'servidor_cpf' => 'Servidor',
 		);
 	}
 

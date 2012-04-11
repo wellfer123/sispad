@@ -1,18 +1,18 @@
 <?php
 $this->breadcrumbs=array(
 	'Relatorios'=>array('index'),
-	$model->id=>array('view','id'=>$model->id),
-	'Update',
+	'Data->'.FormataData::inverteDataComHora($model->data_trabalho,'-')=>array('view','id'=>$model->id),
+	'Atualização',
 );
 
 $this->menu=array(
-	array('label'=>'List relatorio', 'url'=>array('index')),
-	array('label'=>'Create relatorio', 'url'=>array('create')),
-	array('label'=>'View relatorio', 'url'=>array('view', 'id'=>$model->id)),
-	array('label'=>'Manage relatorio', 'url'=>array('admin')),
+	array('label'=>'Listar relatórios', 'url'=>array('index')),
+	array('label'=>'Enviar Relatório', 'url'=>array('create')),
+	array('label'=>'Ver Relatório', 'url'=>array('view', 'id'=>$model->id)),
+	array('label'=>'Gerenciamento de Relatório', 'url'=>array('admin')),
 );
 ?>
 <div class="form">
-<h1>Update relatorio <?php echo $model->id; ?></h1>
+<h1>Atualização de Relatório <?php echo FormataData::inverteDataComHora($model->data_trabalho,'-'); ?></h1>
 </div>
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

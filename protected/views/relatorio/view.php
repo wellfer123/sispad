@@ -1,20 +1,19 @@
-<?php Yii::import('application.services.FormataData');//include 'protected/services/FormataData.php'?>
 <?php
+Yii::import('application.services.FormataData');
 $this->breadcrumbs=array(
 	'Relatorios'=>array('index'),
-	$model->id,
+	FormataData::inverteDataComHora($model->data_trabalho,"-"),
 );
 
 $this->menu=array(
-	array('label'=>'List relatorio', 'url'=>array('index')),
-	array('label'=>'Create relatorio', 'url'=>array('create')),
-	array('label'=>'Update relatorio', 'url'=>array('update', 'id'=>$model->id)),
-	array('label'=>'Delete relatorio', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
-	array('label'=>'Manage relatorio', 'url'=>array('admin')),
+	array('label'=>'Listar meus relatórios', 'url'=>array('index')),
+	array('label'=>'Enviar relatório', 'url'=>array('create')),
+	array('label'=>'Atualizar relatório', 'url'=>array('update', 'id'=>$model->id)),
+	array('label'=>'Gerenciamento de relatório', 'url'=>array('admin')),
 );
 ?>
 <div class="update">
-<h1>View relatorio #<?php echo $model->id; ?></h1>
+<h1>Relatório referente à <?php echo FormataData::inverteDataComHora($model->data_trabalho,"-"); ?></h1>
 </div>
 <?php
     

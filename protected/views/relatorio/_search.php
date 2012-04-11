@@ -25,11 +25,6 @@
 		<?php echo $form->textField($model,'data_trabalho'); ?>
 	</div>
 
-	<div class="row">
-		<?php echo $form->label($model,'servidor_cpf'); ?>
-		<?php echo $form->textField($model,'servidor_cpf'); ?>
-	</div>
-
         <div class="row">
 
 		<?php echo $form->labelEx($model,'servidor_cpf'); ?>
@@ -58,7 +53,7 @@
 	</div>
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton('Search'); ?>
+		<?php echo CHtml::submitButton('Pesquisar'); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

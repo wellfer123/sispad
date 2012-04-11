@@ -31,8 +31,12 @@
 	
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'servidor_cpf'); ?>
-		<?php echo $form->textField($model,'servidor_cpf',array('disabled'=>true)); ?>
+		<?php echo Chtml::label('Servidor', 'servidor'); ?>
+                <?php 
+                      $servidor=Servidor::model()->findByPk($model->servidor_cpf);
+                      echo Chtml::textField('servidor_nome',$servidor->nome,array('disabled'=>true)) 
+                
+                 ?>
 		<?php echo $form->error($model,'servidor_cpf'); ?>
 	</div>
 
@@ -46,7 +50,7 @@
 	</div>
 
 	<div class="row buttons">
-		<?php  echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
+		<?php  echo CHtml::submitButton($model->isNewRecord ? 'Enviar' : 'Atualizar'); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

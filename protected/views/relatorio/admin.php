@@ -1,13 +1,13 @@
-<?php Yii::import('application.services.FormataData');?>
 <?php
+Yii::import('application.services.FormataData');
 $this->breadcrumbs=array(
 	'Relatorios'=>array('index'),
 	'Manage',
 );
 
 $this->menu=array(
-	array('label'=>'List relatorio', 'url'=>array('index')),
-	array('label'=>'Create relatorio', 'url'=>array('create')),
+	array('label'=>'Listar relatórios', 'url'=>array('index')),
+	array('label'=>'Enviar Relatório', 'url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -24,11 +24,11 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Manage Relatorios</h1>
+<h1>Gerenciamento de Relatórios</h1>
 
 <p>
-You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
-or <b>=</b>) at the beginning of each of your search values to specify how the comparison should be done.
+Você pode opcionalmente entrar com um operador de comparação(<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
+ou <b>=</b>) iniciar cada uma de suas pesquisa com valores específicos de como a comparação deve ser feita.
 </p>
 
 <?php echo CHtml::link('Pesquisa Avançada','#',array('class'=>'search-button')); ?>

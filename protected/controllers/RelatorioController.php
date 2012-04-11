@@ -1,8 +1,6 @@
-
-
 <?php
-Yii::import('application.modules.rbac.components.*');
 Yii::import('application.services.FormataData');
+
 class RelatorioController extends SISPADBaseController
 {
 	/**
