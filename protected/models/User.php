@@ -55,7 +55,7 @@ class User extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('password, email, username, servidor_cpf', 'required', 'on'=>'register'),
-                        array('password,username, verifyCode' ,'required', 'on'=>'login'),
+                        array('password,username' ,'required', 'on'=>'login'),
 			array('password', 'length', 'max'=>32),
                         array('email', 'email', 'on'=>'register'),
 			array('email, username', 'length', 'max'=>30, 'on'=>'register'),
@@ -68,7 +68,7 @@ class User extends CActiveRecord
 			// Please remove those attributes that should not be searched.
 			array('email, username, servidor_cpf', 'safe', 'on'=>'search'),
                         // verifyCode needs to be entered correctly
-			array('verifyCode', 'captcha', 'allowEmpty'=>!CCaptcha::checkRequirements()),
+			array('verifyCode', 'captcha', 'allowEmpty'=>!CCaptcha::checkRequirements(),'on'=>'register'),
 		);
 	}
 

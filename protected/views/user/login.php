@@ -37,18 +37,7 @@ $this->breadcrumbs=array(
 		<?php //echo $form->label($model,'rememberMe'); ?>
 		<?php //echo $form->error($model,'rememberMe'); ?>
 	</div>
-        <?php if(CCaptcha::checkRequirements()): ?>
-	<div class="row">
-		<?php echo $form->labelEx($model,'verifyCode'); ?>
-		<div>
-		<?php $this->widget('CCaptcha'); ?>
-		<?php echo $form->textField($model,'verifyCode'); ?>
-		</div>
-		<div class="hint">Por favor coloque as letras como elas são exibidas na imagem acima.
-		<br/>Letras maiúsculas não são diferentes de letras minúsculas</div>
-		<?php echo $form->error($model,'verifyCode'); ?>
-	</div>
-	<?php endif; ?>
+        
 
 	<div class="row buttons">
 		<?php echo CHtml::submitButton('Entrar'); ?>
