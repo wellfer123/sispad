@@ -152,20 +152,20 @@ class User extends CActiveRecord
 			return true;
 		}
                 //o usuário errou o nome
-                else if($this->_identity->errorCode===UserIdentity::ERROR_USERNAME_INVALID){
+                elseif($this->_identity->errorCode===UserIdentity::ERROR_USERNAME_INVALID){
                         $this->addError('username','Usuário Incorreto.');                
                         
                         }
                 //o usuário errou a senha
-                else if($this->_identity->errorCode===UserIdentity::ERROR_PASSWORD_INVALID){
+                elseif($this->_identity->errorCode===UserIdentity::ERROR_PASSWORD_INVALID){
                         $this->addError('password','Senha incorreta.'.md5($this->_identity->password));                
                         
                         }
-                else if($this->_identity->errorCode===UserIdentity::ERROR_USER_INACTIVE){
+                elseif($this->_identity->errorCode===UserIdentity::ERROR_USER_INACTIVE){
                         $this->addError('username','Usuário desativado.');                
                         
                         }
-                else if($this->_identity->errorCode===UserIdentity::ERROR_UNKNOWN_IDENTITY){
+                elseif($this->_identity->errorCode===UserIdentity::ERROR_UNKNOWN_IDENTITY){
                         $this->addError('username','Usuário inexistente.');                
                         
                         }
