@@ -24,6 +24,13 @@ class PerfilController extends SISPADBaseController{
             $this->CheckAcessAction();
             $this->render('home');
         }
+        
+        
+        protected function getModelName() {
+            
+            return 'Perfil';
+        }
+
 }
 
 ?>

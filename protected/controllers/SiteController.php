@@ -1,7 +1,7 @@
 <?php
 //Yii::import('application.modules.rbac.models.*');
 //include_once '../modules/rbac/models/User.php';
-class SiteController extends Controller
+class SiteController extends SISPADBaseController
 {
 	/**
 	 * Declares class-based actions.
@@ -30,6 +30,13 @@ class SiteController extends Controller
 		// renders the view file 'protected/views/site/index.php'
 		// using the default layout 'protected/views/layouts/main.php'
 		$this->redirect(yii::app()->baseUrl.'/index.php?r=perfil/home');
+	}
+        
+        public function actionPage()
+	{
+		// renders the view file 'protected/views/site/index.php'
+		// using the default layout 'protected/views/layouts/main.php'
+		$this->render('about');
 	}
 
 	/**
@@ -69,35 +76,6 @@ class SiteController extends Controller
 	/**
 	 * Displays the login page
 	 */
-	public function actionLogin()
-	{
-            if(yii::app()->user->isGuest){
-                //classe User do SISPAD
-		$model=new User('login');
-
-
-		// if it is ajax validation request
-		$this->performAjaxValidation($model);
-
-		// collect user input data
-		if(isset($_POST['User']))
-		{
-			$model->attributes=$_POST['User'];
-			// validate user input and redirect to the previous page if valid
-			if($model->validate() && $model->login()){
-                                //if(Yii::app()->getController()->)
-				$this->redirect(Yii::app()->user->returnUrl);
-                        }
-		}
-		// display the login form
-		$this->render('login',array('model'=>$model));
-            }
-            else{
-                $this->redirect(yii::app()->baseUrl.'/index.php?r=user/home');
-            }
-            
-        }
-        
         
         public function actionAccessDenied(){
             $this->render('accessDenied');
@@ -116,4 +94,13 @@ class SiteController extends Controller
 			Yii::app()->end();
 		}
 	}
+        
+        public function __construct($id, $module = null) {
+            parent::__construct($id, $module);
+        }
+
+        protected function getModelName() {
+            return 'Site';
+        }
+
 }
