@@ -34,21 +34,7 @@ class TotalFrequenciaController extends SISPADBaseController{
 	public function accessRules()
 	{
 		return array(
-			/*array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('view'),
-				'users'=>array('*'),
-			),
-			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create'),
-				'users'=>array('@'),
-			),
-			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin'),
-				'users'=>array('admin'),
-			),
-			array('deny',  // deny all users
-				'users'=>array('*'),
-			),*/
+			
 		);
 	}
 
@@ -62,7 +48,7 @@ class TotalFrequenciaController extends SISPADBaseController{
                     $this->_RBAC->checkAccess('registered',true);
                     //se or o dono das frequencias ou se for o gerenciador
                     if($_GET['serv']==Yii::app()->user->cpfservidor || 
-                            $this->_RBAC->checkAccess('manageTotalFrequencia')){
+                            $this->_RBAC->checkAccess('viewTotalFrequencia')){
                         
                       $this->render('view',array(
                             'model'=>$this->loadModel(),
@@ -81,7 +67,7 @@ class TotalFrequenciaController extends SISPADBaseController{
 	 */
 	public function actionCreate()
 	{
-                $this->_RBAC->checkAccess('manageTotalFrequencia',true);
+                $this->CheckAcessAction();
 		$model=new TotalFrequencia;
                 //inicia os campos com valores
 
@@ -177,7 +163,7 @@ class TotalFrequenciaController extends SISPADBaseController{
         
         public function actionList()
 	{
-                $this->_RBAC->checkAccess('registered',true);
+                $this->CheckAcessAction();
                 $criteria=new CDbCriteria;
 
 		$criteria->condition=" servidor_cpf=".Yii::app()->user->cpfservidor;
@@ -199,7 +185,7 @@ class TotalFrequenciaController extends SISPADBaseController{
 	 */
 	public function actionAdmin()
 	{
-                $this->_RBAC->checkAccess('manageTotalFrequencia',true);
+                $this->CheckAcessAction();
 		$model=new TotalFrequencia('search');
 		$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['TotalFrequencia']))
@@ -239,5 +225,9 @@ class TotalFrequenciaController extends SISPADBaseController{
 		}
 	}
         
-         
+        protected function getModelName() {
+            return 'TotalFrequencia';
+        }
+
+
 }

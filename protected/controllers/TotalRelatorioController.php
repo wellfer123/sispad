@@ -45,10 +45,9 @@ class TotalRelatorioController extends SISPADBaseController
 	public function actionView()
 	{
                 if(isset($_GET['serv'])){
-                    $this->_RBAC->checkAccess('registered',true);
                     //se or o dono das frequencias ou se for o gerenciador
                     if($_GET['serv']==Yii::app()->user->cpfservidor || 
-                            $this->_RBAC->checkAccess('manageTotalRelatorio')){
+                            $this->_RBAC->checkAccess('viewTotalRelatorio')){
                         
                       $this->render('view',array(
                             'model'=>$this->loadModel(),
@@ -67,7 +66,7 @@ class TotalRelatorioController extends SISPADBaseController
 	 */
 	public function actionCreate()
 	{
-                 $this->_RBAC->checkAccess('manageTotalRelatorio',true);
+                 $this->CheckAcessAction();
 		$model=new TotalRelatorio;
 
 		// Uncomment the following line if AJAX validation is needed
@@ -157,7 +156,7 @@ class TotalRelatorioController extends SISPADBaseController
         
         public function actionList()
 	{
-                $this->_RBAC->checkAccess('registered',true);
+                $this->CheckAcessAction();
                 $criteria=new CDbCriteria;
 
 		$criteria->condition=" servidor_cpf=".Yii::app()->user->cpfservidor;
@@ -179,7 +178,7 @@ class TotalRelatorioController extends SISPADBaseController
 	 */
 	public function actionAdmin()
 	{
-                $this->_RBAC->checkAccess('manageTotalRelatorio',true);
+                $this->CheckAcessAction();
 		$model=new TotalRelatorio('search');
 		$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['TotalRelatorio']))
@@ -218,4 +217,9 @@ class TotalRelatorioController extends SISPADBaseController
 			Yii::app()->end();
 		}
 	}
+        
+        protected function getModelName() {
+            return 'TotalRelatorio';
+        }
+
 }

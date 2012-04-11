@@ -8,8 +8,9 @@ $this->breadcrumbs=array(
 $this->menu=array(
 );
 ?>
-
-<h1>Relatórios <?php echo ' '.$model->mes.'/'.$model->ano; ?></h1>
+<div class="update">
+<h1>Relatório <?php echo ' '.$model->mes.'/'.$model->ano; ?></h1>
+</div>
 
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,

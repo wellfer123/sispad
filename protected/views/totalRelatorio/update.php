@@ -12,7 +12,8 @@ $this->menu=array(
 	array('label'=>'Manage TotalRelatorio', 'url'=>array('admin')),
 );
 ?>
-
+<div class="form">
 <h1>Update TotalRelatorio <?php echo $model->ano; ?></h1>
+</div>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
