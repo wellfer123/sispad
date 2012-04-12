@@ -9,6 +9,7 @@
 	<?php
 		$this->beginWidget('zii.widgets.CPortlet', array(
 			'title'=>'Operações',
+                        'htmlOptions'=>array('class'=>'side_menu')
 		));
 		$this->widget('zii.widgets.CMenu', array(
 			'items'=>$this->menu,

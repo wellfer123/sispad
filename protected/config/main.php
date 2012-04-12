@@ -99,7 +99,7 @@ return array(
 		*/
 		
 		'db'=>array(
-			'connectionString' => 'mysql:host=169.254.18.175;dbname=sispad',
+			'connectionString' => 'mysql:host=localhost;dbname=sispad',
 			'emulatePrepare' => true,
 			'username' => 'root',
 			'password' => '',
