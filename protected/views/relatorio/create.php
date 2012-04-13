@@ -9,7 +9,9 @@ $this->menu=array(
 	array('label'=>'Gerenciamento de relatórios', 'url'=>array('admin')),
 );
 ?>
-<div class="form">
-<h1>Envio de relatório</h1>
-</div>
+<?php $this->beginWidget('zii.widgets.CPortlet', array(
+			'title'=>'Envio de Relatório',
+                        'htmlOptions'=>array('class'=>'portlet_form')
+		));?>
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php $this->endWidget(); ?>

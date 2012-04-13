@@ -34,7 +34,22 @@
 }
  .portlet_perfil .portlet-decoration
 {
-	
+    background-color: #000;
+}
+
+.portlet_notificacoes .portlet-decoration
+{
+    background-color: #227;
+}
+
+.portlet_administracao .portlet-decoration
+{
+    background-color: #63812a;
+}
+
+.portlet_cadastro .portlet-decoration
+{
+    background-color: #cd0000;
 }
 
 

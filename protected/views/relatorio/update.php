@@ -1,7 +1,8 @@
 <?php
+
 $this->breadcrumbs=array(
 	'Relatorios'=>array('index'),
-	'Data->'.FormataData::inverteDataComHora($model->data_trabalho,'-')=>array('view','id'=>$model->id),
+	'Data->'.$model->data_trabalho=>array('view','id'=>$model->id),
 	'Atualização',
 );
 
@@ -12,7 +13,9 @@ $this->menu=array(
 	array('label'=>'Gerenciamento de Relatório', 'url'=>array('admin')),
 );
 ?>
-<div class="form">
-<h1>Atualização de Relatório <?php echo FormataData::inverteDataComHora($model->data_trabalho,'-'); ?></h1>
-</div>
+<?php $this->beginWidget('zii.widgets.CPortlet', array(
+			'title'=>'Atualização de Relatório',
+                        'htmlOptions'=>array('class'=>'portlet_form')
+		));?>
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php $this->endWidget(); ?>
