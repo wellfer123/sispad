@@ -1,0 +1,42 @@
+/* 
+    Document   : perfil
+    Created on : Apr 12, 2012, 1:25:40 PM
+    Author     : Junior Pires
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+.span-inf_perfil{
+    
+    width: 250px;
+    /*border: 1px #000 solid;*/
+    margin-right: 10px;
+    
+}
+.span-content_perfil{
+    float:right;
+    width: 680px;
+    /*border: 1px #000 solid;*/
+    margin-right: 10px;
+    
+}
+.span-inf_perfil, .span-content_perfil{
+    margin-top: 15px;
+}
+
+/*BARRA LATERAL*/
+#sidebar_perfil{
+    padding-left:5px;
+}
+ .portlet_perfil .portlet-decoration
+{
+	
+}
+
+
+
+

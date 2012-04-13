@@ -168,19 +168,51 @@ div.search-form
 .search-button{
       color:#698B22;
 }
-.portlet
+/*PORTLET PADRAO*/
+.portlet{
+     
+}
+ .portlet-decoration
+{
+	padding: 3px 8px;
+	background: #333;
+	border: none;
+        
+}
+
+ .portlet-title{
+    font-size: 1.5em;
+    font-weight: bold;
+    padding: 0;
+    margin: 0;
+    color: #FFF;
+
+}
+
+  .portlet-content
+{
+	font-size:0.9em;
+	margin: 0 0 15px 0;
+	padding: 0px 0px;
+	background:none;
+        border:1px solid #444;
+        
+}
+/*FIM PORTLET PADRAO*/
+
+.side_menu
 {
 
 }
 
-.portlet-decoration
+.side_menu .portlet-decoration
 {
 	padding: 3px 8px;
 	background: #63812a;
 	border-left: 5px solid #447700;
 }
 
-.portlet-title
+.side_menu .portlet-title
 {
 	font-size: 12px;
 	font-weight: bold;
@@ -189,7 +221,7 @@ div.search-form
 	color: #9ACD32;
 }
 
-.portlet-content
+.side_menu .portlet-content
 {
 	font-size:0.9em;
 	margin: 0 0 15px 0;
@@ -197,7 +229,7 @@ div.search-form
 	background:#B4EA4D;
 }
 
-.portlet-content ul
+.side_menu .portlet-content ul
 {
 	list-style-image:none;
 	list-style-position:outside;
@@ -206,7 +238,7 @@ div.search-form
 	padding: 0;
 }
 
-.portlet-content li
+.side_menu .portlet-content li
 {
 	padding: 2px 0 4px 0px;
 }
@@ -250,3 +282,4 @@ div.search-form
 {
 	background: #CAFF70;
 }
+

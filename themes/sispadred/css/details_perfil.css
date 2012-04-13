@@ -1,0 +1,48 @@
+table.detail-view .null
+{
+	color: red;
+}
+
+table.detail-view
+{
+	background: white;
+	border-collapse: collapse;
+	width: 100%;
+	margin: 0;
+}
+
+table.detail-view th, table.detail-view td
+{
+	font-size: 1.2em;
+	border: 1px white solid;
+	padding: 0.3em 0.3em;
+	vertical-align: top;
+        width: 200px;
+       /* border-bottom: 1px solid #999;*/
+}
+
+table.detail-view th
+{
+	text-align: left;
+	
+}
+
+table.detail-view tr.odd
+{
+	background:#FFF;
+}
+
+table.detail-view tr.even
+{
+	background:#FFF;
+}
+
+table.detail-view tr.odd th
+{
+    
+}
+
+table.detail-view tr.even th
+{
+    
+}
