@@ -162,3 +162,13 @@ div.wide.form .buttons, div.wide.form .hint, div.wide.form .errorMessage
 	clear: left;
 	padding-left: 110px;
 }
+
+.portlet_form .portlet-decoration
+{
+    background-color: #63812a;
+}
+
+.portlet_form .portlet-content
+{
+    border: none;
+}

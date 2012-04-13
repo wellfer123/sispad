@@ -10,10 +10,8 @@ $this->beginWidget('zii.widgets.CPortlet', array(
                                 <li>TESTE</li>
                                 <li>TESTE</li>
                                 <li>TESTE</li>
-                                <li>TESTE</li>
-                                <li>TESTE</li>
-                                <li>TESTE</li>
-                                <li>TESTE</li>
+                                
                           </ul>";
 $this->endWidget();
+
 ?>

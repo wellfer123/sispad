@@ -2,7 +2,7 @@
 Yii::import('application.services.FormataData');
 $this->breadcrumbs=array(
 	'Relatorios'=>array('index'),
-	FormataData::inverteDataComHora($model->data_trabalho,"-"),
+	$model->data_trabalho,
 );
 
 $this->menu=array(
@@ -13,7 +13,7 @@ $this->menu=array(
 );
 ?>
 <div class="update">
-<h1>Relatório referente à <?php echo FormataData::inverteDataComHora($model->data_trabalho,"-"); ?></h1>
+<h1>Relatório</h1>
 </div>
 <?php
     

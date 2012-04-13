@@ -5,11 +5,13 @@ $this->breadcrumbs=array(
 );
 ?>
 
-<h1>Login</h1>
 
-<p>Forneça seus dados para poder ter acesso ao sistema
-
+<?php $this->beginWidget('zii.widgets.CPortlet', array(
+			'title'=>'Login',
+                        'htmlOptions'=>array('class'=>'portlet_form')
+		));?>
 <div class="form">
+
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'user-form',
         'enableAjaxValidation'=>true,
@@ -44,6 +46,8 @@ $this->breadcrumbs=array(
 	</div>
 
         
+<?php $this->endWidget(); ?>
+
 <?php $this->endWidget(); ?>
 </div><!-- form -->
 
