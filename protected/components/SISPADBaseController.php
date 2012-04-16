@@ -63,13 +63,23 @@ abstract class SISPADBaseController extends Controller{
          $this->messageSuccess[]=$message;
      }
      
+     /**
+	 * Deve retornar o nome a ser utilizado no método factoryActionName().
+	 */
      protected abstract function getModelName();
      
+     /**
+	 * Devolve o noma da action mais o modelo para verificar o acesso.
+	 * Segue o seguinte padrão: id da action +  o nome fornecido pelo método getModelName()
+	 */
      protected function factoryActionName(){
          //$this->get
          return $this->getAction()->getId().$this->getModelName();
      }
      
+     /**
+	 * Verifica o acesso a action usando o métod factoryActionName().
+	 */
      protected function CheckAcessAction(){
          $this->_RBAC->checkAccess($this->factoryActionName(),true);
      }
