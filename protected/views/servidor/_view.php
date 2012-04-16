@@ -12,8 +12,16 @@
 	<?php echo CHtml::encode($data->nome); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('setor_id')); ?>:</b>
-	<?php echo CHtml::encode($data->setor_id); ?>
+	<b><?php echo CHtml::encode($data->getAttributeLabel('estado_civil')); ?>:</b>
+	<?php echo CHtml::encode($data->estado_civil); ?>
+	<br />
+
+	<b><?php echo CHtml::encode($data->getAttributeLabel('endereco_id')); ?>:</b>
+	<?php echo CHtml::encode($data->endereco_id); ?>
+	<br />
+
+	<b><?php echo CHtml::encode($data->getAttributeLabel('unidade_cnes')); ?>:</b>
+	<?php echo CHtml::encode($data->unidade_cnes); ?>
 	<br />
 
 

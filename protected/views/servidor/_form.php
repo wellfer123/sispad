@@ -22,9 +22,21 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'setor_id'); ?>
-		<?php echo $form->textField($model,'setor_id'); ?>
-		<?php echo $form->error($model,'setor_id'); ?>
+		<?php echo $form->labelEx($model,'estado_civil'); ?>
+		<?php echo $form->textField($model,'estado_civil',array('size'=>1,'maxlength'=>1)); ?>
+		<?php echo $form->error($model,'estado_civil'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'endereco_id'); ?>
+		<?php echo $form->textField($model,'endereco_id'); ?>
+		<?php echo $form->error($model,'endereco_id'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'unidade_cnes'); ?>
+		<?php echo $form->textField($model,'unidade_cnes',array('size'=>10,'maxlength'=>10)); ?>
+		<?php echo $form->error($model,'unidade_cnes'); ?>
 	</div>
 
 	<div class="row buttons">

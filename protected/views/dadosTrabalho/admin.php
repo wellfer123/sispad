@@ -1,12 +1,12 @@
 <?php
 $this->breadcrumbs=array(
-	'Servidors'=>array('index'),
+	'Dados Trabalhos'=>array('index'),
 	'Manage',
 );
 
 $this->menu=array(
-	array('label'=>'List Servidor', 'url'=>array('index')),
-	array('label'=>'Create Servidor', 'url'=>array('create')),
+	array('label'=>'List DadosTrabalho', 'url'=>array('index')),
+	array('label'=>'Create DadosTrabalho', 'url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -15,7 +15,7 @@ $('.search-button').click(function(){
 	return false;
 });
 $('.search-form form').submit(function(){
-	$.fn.yiiGridView.update('servidor-grid', {
+	$.fn.yiiGridView.update('dados-trabalho-grid', {
 		data: $(this).serialize()
 	});
 	return false;
@@ -23,7 +23,7 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Manage Servidors</h1>
+<h1>Manage Dados Trabalhos</h1>
 
 <p>
 You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
@@ -38,16 +38,24 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 </div><!-- search-form -->
 
 <?php $this->widget('zii.widgets.grid.CGridView', array(
-	'id'=>'servidor-grid',
+	'id'=>'dados-trabalho-grid',
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
 	'columns'=>array(
-		'cpf',
-		'matricula',
-		'nome',
-		'estado_civil',
-		'endereco_id',
-		'unidade_cnes',
+		'servidor_cpf',
+		'data_admissao',
+		'pis',
+		'carga_horaria',
+		'turno',
+		'profissao',
+		/*
+		'salario',
+		'conselho_classe',
+		'data_afastamento',
+		'data_retorno',
+		'situacao_funcional',
+		'vinculo',
+		*/
 		array(
 			'class'=>'CButtonColumn',
 		),
