@@ -13,3 +13,4 @@ $this->menu=array(
 </div>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php echo $this->renderPartial('_list', array('model'=>$model)); ?>
