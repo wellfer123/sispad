@@ -188,6 +188,29 @@ class UnidadeController extends SISPADBaseController
 			Yii::app()->end();
 		}
 	}
+        
+        public function actionFindUnidades() {
+            
+             $this->CheckAcessAction();
+            $q = $_GET['term'];
+            if(isset($q)) {
+                 $unidades = Unidade::model()->findAll('nome like :nome',array(':nome'=> strtoupper(trim($q)).'%'));
+ 
+                if (!empty($unidades)) {
+                    $out = array();
+                    foreach ($unidades as $u) {
+                            $out[] = array(
+                            // expression to give the string for the autoComplete drop-down
+                            'label' => $u->NomeDescricao,  
+                            'value' => $u->NomeDescricao,
+                            'id' => $s->cnes, // return value from autocomplete
+                     );
+                    }
+                echo CJSON::encode($out);
+                Yii::app()->end();
+           }
+       }
+   }
 
     protected function getModelName() {
         return 'Unidade';
