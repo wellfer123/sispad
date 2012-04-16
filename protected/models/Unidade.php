@@ -101,4 +101,20 @@ class Unidade extends CActiveRecord
                         )
 		));
 	}
+        
+        
+        public function getNomeDescricao(){
+            return $this->nome."/".$this->descricao;
+        }
+        
+        public function upperCaseAllFieds(){
+            $this->descricao=strtoupper($this->descricao);
+            $this->nome=strtoupper($this->nome);
+        }
+        
+        protected function beforeSave() {
+            $this->upperCaseAllFieds();
+            return parent::beforeSave();
+        }
+        
 }
