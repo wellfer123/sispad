@@ -13,6 +13,13 @@ $this->menu=array(
 );
 ?>
 
-<h1>Update Servidor <?php echo $model->cpf; ?></h1>
+
+<?php $this->beginWidget('zii.widgets.CPortlet', array(
+			'title'=>'Atualização do Servidor:'.$model->nome ,
+                        'htmlOptions'=>array('class'=>'portlet_form')
+		));?>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
+
+<?php $this->endWidget(); ?>
+

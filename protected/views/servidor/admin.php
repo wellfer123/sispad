@@ -45,7 +45,9 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		'cpf',
 		'matricula',
 		'nome',
-		'setor_id',
+		'estado_civil',
+		'endereco_id',
+		'unidade_cnes',
 		array(
 			'class'=>'CButtonColumn',
 		),

@@ -7,7 +7,9 @@
  * @property string $cpf
  * @property string $matricula
  * @property string $nome
- * @property integer $setor_id
+ * @property string $estado_civil
+ * @property integer $endereco_id
+ * @property string $unidade_cnes
  */
 class Servidor extends CActiveRecord
 {
@@ -36,14 +38,16 @@ class Servidor extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('cpf, matricula', 'required'),
-			array('setor_id', 'numerical', 'integerOnly'=>true),
-			array('cpf', 'length', 'max'=>11),
+			array('cpf, matricula,nome,estado_civil', 'required'),
+			array('endereco_id, matricula, cpf', 'numerical', 'integerOnly'=>true),
+			array('cpf', 'length', 'max'=>11, 'min'=>11),
 			array('matricula', 'length', 'max'=>20),
 			array('nome', 'length', 'max'=>40),
+			array('estado_civil', 'length', 'max'=>1),
+			array('unidade_cnes', 'length', 'max'=>10,'min'=>10),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('cpf, matricula, nome, setor_id', 'safe', 'on'=>'search'),
+			array('cpf, matricula, nome, estado_civil, endereco_id, unidade_cnes', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -55,8 +59,13 @@ class Servidor extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-                     'user'=>array(self::HAS_MANY, 'user', 'servidor_cpf'),
-                     'relatorio'=>array(self::HAS_MANY, 'servidor', 'servidor_cpf'),
+			'dadosTrabalho' => array(self::HAS_ONE, 'DadosTrabalho', 'servidor_cpf'),
+			'identidade' => array(self::HAS_ONE, 'Identidade', 'servidor_cpf'),
+			'endereco' => array(self::BELONGS_TO, 'Endereco', 'endereco_id'),
+			'unidade' => array(self::BELONGS_TO, 'Unidade', 'unidade_cnes'),
+			'tituloEleitor' => array(self::HAS_ONE, 'TituloEleitor', 'servidor_cpf'),
+                        'user'=>array(self::HAS_MANY, 'user', 'servidor_cpf'),
+                        'relatorio'=>array(self::HAS_MANY, 'servidor', 'servidor_cpf'),
 		);
 	}
 
@@ -66,10 +75,12 @@ class Servidor extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'cpf' => 'Cpf',
-			'matricula' => 'Matricula',
+			'cpf' => 'CPF',
+			'matricula' => 'Matrícula',
 			'nome' => 'Nome',
-			'setor_id' => 'Setor',
+			'estado_civil' => 'Estado Civil',
+			'endereco_id' => 'Endereço',
+			'unidade_cnes' => 'Unidade Pertencente',
 		);
 	}
 
@@ -90,15 +101,25 @@ class Servidor extends CActiveRecord
 
 		$criteria->compare('nome',$this->nome,true);
 
-		$criteria->compare('setor_id',$this->setor_id);
+		$criteria->compare('estado_civil',$this->estado_civil,true);
+
+		$criteria->compare('endereco_id',$this->endereco_id);
+
+		$criteria->compare('unidade_cnes',$this->unidade_cnes,true);
 
 		return new CActiveDataProvider('Servidor', array(
 			'criteria'=>$criteria,
+                        'pagination'=>array(
+                                'pageSize'=>20
+                        )
 		));
 	}
-        
-        
-        public function getNome(){
-            return $this->nome;
+        protected function beforeSave() {
+            $this->upperCaseAllFields();
+            return parent::beforeSave();
+        }
+
+        public function upperCaseAllFields(){
+            $this->nome=strtoupper($this->nome);
         }
 }

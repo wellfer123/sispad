@@ -193,4 +193,8 @@ class ServidorController extends SISPADBaseController
            }
        }
    }
+   protected function getModelName() {
+       return 'Servidor';
+   }
+
 }

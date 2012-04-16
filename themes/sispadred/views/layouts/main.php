@@ -66,7 +66,7 @@ array(
               ),
           //menu raiz
           array("url"=>array(), "label"=>"Ajuda",
-                        array("url"=>array("route"=>"/site/page", "view"=>"about"), "label"=>"Sobre"),
+                        array("url"=>array("route"=>"/site/page/about", "view"=>"about"), "label"=>"Sobre"),
                         array("url"=>array("route"=>"/site/contact"), "label"=>"Contato")),
           array("url"=>array("route"=>"user/login"), "label"=>"Entrar","visible"=>Yii::app()->user->isGuest),
           array("url"=>array("route"=>"user/logout"), "label"=>'Sair ('.Yii::app()->user->name.')',"visible"=>!Yii::app()->user->isGuest),

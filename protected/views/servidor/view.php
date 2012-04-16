@@ -21,6 +21,8 @@ $this->menu=array(
 		'cpf',
 		'matricula',
 		'nome',
-		'setor_id',
+		'estado_civil',
+		'endereco_id',
+		'unidade_cnes',
 	),
 )); ?>

@@ -1,15 +1,19 @@
 <?php
 $this->breadcrumbs=array(
 	'Servidors'=>array('index'),
-	'Create',
+	'Cadastro',
 );
 
 $this->menu=array(
-	array('label'=>'List Servidor', 'url'=>array('index')),
-	array('label'=>'Manage Servidor', 'url'=>array('admin')),
+	array('label'=>'Gerenciamento de Servidores', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Create Servidor</h1>
+<?php $this->beginWidget('zii.widgets.CPortlet', array(
+			'title'=>'Cadastro de Servidor',
+                        'htmlOptions'=>array('class'=>'portlet_form')
+		));?>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
+
+<?php $this->endWidget(); ?>

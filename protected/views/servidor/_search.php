@@ -21,8 +21,18 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'setor_id'); ?>
-		<?php echo $form->textField($model,'setor_id'); ?>
+		<?php echo $form->label($model,'estado_civil'); ?>
+		<?php echo $form->textField($model,'estado_civil',array('size'=>1,'maxlength'=>1)); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->label($model,'endereco_id'); ?>
+		<?php echo $form->textField($model,'endereco_id'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->label($model,'unidade_cnes'); ?>
+		<?php echo $form->textField($model,'unidade_cnes',array('size'=>10,'maxlength'=>10)); ?>
 	</div>
 
 	<div class="row buttons">

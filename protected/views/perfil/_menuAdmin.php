@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?php
 Yii::import('application.services.GridMenu');
 
@@ -34,3 +35,22 @@ $this->beginWidget('zii.widgets.CPortlet', array(
 $this->endWidget();
 
 ?>
+=======
+<?php
+
+$this->beginWidget('zii.widgets.CPortlet', array(
+			'title'=>'Administracao',
+                        'htmlOptions'=>array('class'=>'portlet_administracao')
+		));
+                    echo "<ul>
+                                <li>TESTE</li>
+                                <li>TESTE</li>
+                                <li>TESTE</li>
+                                <li>TESTE</li>
+                                <li>TESTE</li>
+                                
+                          </ul>";
+$this->endWidget();
+
+?>
+>>>>>>> 8c7a80812f01051c94758f9823dab8b93b074534
