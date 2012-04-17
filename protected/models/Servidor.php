@@ -110,6 +110,8 @@ class Servidor extends CActiveRecord
 
 		$criteria->compare('unidade_cnes',$this->unidade_cnes,true);
 
+
+
 		return new CActiveDataProvider('Servidor', array(
 			'criteria'=>$criteria,
                         'pagination'=>array(
@@ -117,7 +119,15 @@ class Servidor extends CActiveRecord
                         )
 		));
 	}
-        
+
+        public static function existeEmTotalRelatorio($cpf) {
+            if(TotalRelatorio::model()->find('servidor_cpf= :cpf',array(':cpf'=>$cpf))){
+                return true;
+            }
+
+            return false;
+
+        }
         protected function beforeSave() {
             $this->upperCaseAllFields();
             return parent::beforeSave();
