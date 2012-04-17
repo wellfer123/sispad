@@ -203,7 +203,7 @@ class UnidadeController extends SISPADBaseController
                             // expression to give the string for the autoComplete drop-down
                             'label' => $u->NomeDescricao,  
                             'value' => $u->NomeDescricao,
-                            'id' => $s->cnes, // return value from autocomplete
+                            'id' => $u->cnes, // return value from autocomplete
                      );
                     }
                 echo CJSON::encode($out);
