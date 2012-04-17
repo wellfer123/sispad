@@ -1,6 +1,6 @@
 <div class="form">
 
-<?php $form=$this->beginWidget('CActiveForm', array(
+<?php $form=$this->beginWidget('SISPADActiveForm', array(
 	'id'=>'servidor-form',
         'enableClientValidation'=>true,
 	'enableAjaxValidation'=>false,
@@ -49,7 +49,7 @@
 	<div class="row">
 		<?php echo $form->labelEx($model,'estado_civil'); ?>
                 <?php echo Chtml::activeDropDownList($model, 'estado_civil', 
-                                                    array('S'=>'SOLTEIRO','C'=>'CASADO','D'=>'DIVORCIADO'),array('size'=>1,'maxlength'=>1)) ?>
+                                                    Servidor::$ESTADOS_CIVIS,array('size'=>1,'maxlength'=>1)) ?>
 		<?php echo $form->error($model,'estado_civil'); ?>
                 
 	</div>

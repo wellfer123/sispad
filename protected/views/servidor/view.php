@@ -5,11 +5,13 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List Servidor', 'url'=>array('index')),
-	array('label'=>'Create Servidor', 'url'=>array('create')),
-	array('label'=>'Update Servidor', 'url'=>array('update', 'id'=>$model->cpf)),
-	array('label'=>'Delete Servidor', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->cpf),'confirm'=>'Are you sure you want to delete this item?')),
-	array('label'=>'Manage Servidor', 'url'=>array('admin')),
+	array('label'=>'Cadastrar Servidor', 'url'=>array('index')),
+	array('label'=>'Atualizar Servidor', 'url'=>array('update', 'id'=>$model->cpf)),
+	array('label'=>'Cadastrar Dados de Trabalho', 'url'=>array('DadosTrabalho/create')),
+	array('label'=>'Cadastrar Identidade', 'url'=>array('create')),
+	array('label'=>'Cadastrar Título de Eleitor', 'url'=>array('create')),
+	array('label'=>'Cadastrar Endereço', 'url'=>array('create')),
+	array('label'=>'Gerenciamento de Servidores', 'url'=>array('admin')),
 );
 ?>
 

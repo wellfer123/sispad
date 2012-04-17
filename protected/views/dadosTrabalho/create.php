@@ -1,7 +1,7 @@
 <?php
 $this->breadcrumbs=array(
 	'Dados Trabalhos'=>array('index'),
-	'Create',
+	'Cadastro',
 );
 
 $this->menu=array(
@@ -9,7 +9,11 @@ $this->menu=array(
 	array('label'=>'Manage DadosTrabalho', 'url'=>array('admin')),
 );
 ?>
-
-<h1>Create DadosTrabalho</h1>
+<?php $this->beginWidget('zii.widgets.CPortlet', array(
+			'title'=>'Cadastro de dados de trabalho do servidor: ',
+                        'htmlOptions'=>array('class'=>'portlet_form')
+		));?>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
+
+<?php $this->endWidget(); ?>
