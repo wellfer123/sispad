@@ -13,6 +13,9 @@
  */
 class Servidor extends CActiveRecord
 {
+    
+    
+        public static $ESTADOS_CIVIS=array('S'=>'SOLTEIRO','C'=>'CASADO','D'=>'DIVORCIADO');
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return Servidor the static model class
@@ -114,6 +117,7 @@ class Servidor extends CActiveRecord
                         )
 		));
 	}
+        
         protected function beforeSave() {
             $this->upperCaseAllFields();
             return parent::beforeSave();
@@ -121,5 +125,9 @@ class Servidor extends CActiveRecord
 
         public function upperCaseAllFields(){
             $this->nome=strtoupper($this->nome);
+        }
+        
+        public function getLabelEstadoCivil(){
+            return Servidor::$ESTADOS_CIVIS[$this->estado_civil];
         }
 }

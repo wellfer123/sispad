@@ -19,7 +19,12 @@
  */
 class DadosTrabalho extends CActiveRecord
 {
-	/**
+    
+    public static $SITUACOES_FUNCIONAIS=array('AT'=>'ATIVO','DE'=>'DESATIVO');
+    public static $TIPOS_VINCULOS=array('C'=>'CONTRATADO','P'=>'CONCURSO PÚBLICO','S'=>'PRESTADOR DE SERVIÇO');
+    public static $TIPOS_TURNOS=array('M'=>'MANHÃ','T'=>'TARDE','N'=>'NOTURNO','D'=>'DIURNO');
+
+    /**
 	 * Returns the static model of the specified AR class.
 	 * @return Dados_Trabalho the static model class
 	 */
@@ -44,7 +49,7 @@ class DadosTrabalho extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('data_admissao, carga_horaria, salario', 'required'),
+			array('profissao,vinculo,situacao_funcional,turno,data_admissao, carga_horaria, salario', 'required'),
 			array('carga_horaria', 'numerical', 'integerOnly'=>true),
 			array('servidor_cpf, pis', 'length', 'max'=>11),
 			array('turno, vinculo', 'length', 'max'=>1),
@@ -75,18 +80,18 @@ class DadosTrabalho extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'servidor_cpf' => 'Servidor Cpf',
-			'data_admissao' => 'Data Admissao',
-			'pis' => 'Pis',
-			'carga_horaria' => 'Carga Horaria',
+			'servidor_cpf' => 'CPF',
+			'data_admissao' => 'Data de Admissão',
+			'pis' => 'PIS/PASEF/NIT',
+			'carga_horaria' => 'Carga Horária',
 			'turno' => 'Turno',
-			'profissao' => 'Profissao',
-			'salario' => 'Salario',
-			'conselho_classe' => 'Conselho Classe',
-			'data_afastamento' => 'Data Afastamento',
-			'data_retorno' => 'Data Retorno',
+			'profissao' => 'Profissão',
+			'salario' => 'Salário',
+			'conselho_classe' => 'Conselho de Classe',
+			'data_afastamento' => 'Data de Afastamento',
+			'data_retorno' => 'Data de Retorno',
 			'situacao_funcional' => 'Situacao Funcional',
-			'vinculo' => 'Vinculo',
+			'vinculo' => 'Vínculo',
 		);
 	}
 
