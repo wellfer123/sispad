@@ -17,7 +17,7 @@ class ProfissaoController extends SISPADBaseController {
 
     public function actionFindProfissoes() {
 
-        $this->CheckAcessAction();
+      //$this->CheckAcessAction();
         $q = $_GET['term'];
         if (isset($q)) {
             $profissoes = Profissao::model()->findAll('nome like :nome', array(':nome' => strtoupper(trim($q)) . '%'));

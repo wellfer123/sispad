@@ -7,7 +7,7 @@ $this->breadcrumbs=array(
 $this->menu=array(
 	array('label'=>'Cadastrar Servidor', 'url'=>array('index')),
 	array('label'=>'Atualizar Servidor', 'url'=>array('update', 'id'=>$model->cpf)),
-	array('label'=>'Cadastrar Dados de Trabalho', 'url'=>array('DadosTrabalho/create')),
+	array('label'=>'Cadastrar Dados de Trabalho', 'url'=>array('DadosTrabalho/create','id'=>$model->cpf)),
 	array('label'=>'Cadastrar Identidade', 'url'=>array('create')),
 	array('label'=>'Cadastrar Título de Eleitor', 'url'=>array('create')),
 	array('label'=>'Cadastrar Endereço', 'url'=>array('create')),

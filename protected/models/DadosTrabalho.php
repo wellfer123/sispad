@@ -49,11 +49,11 @@ class DadosTrabalho extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('profissao,vinculo,situacao_funcional,turno,data_admissao, carga_horaria, salario', 'required'),
-			array('carga_horaria', 'numerical', 'integerOnly'=>true),
+			array('servidor_cpf,profissao_codigo,vinculo,situacao_funcional,turno,data_admissao, carga_horaria, salario', 'required'),
+			array('carga_horaria,profissao_codigo', 'numerical', 'integerOnly'=>true),
 			array('servidor_cpf, pis', 'length', 'max'=>11),
 			array('turno, vinculo', 'length', 'max'=>1),
-			array('profissao, conselho_classe', 'length', 'max'=>20),
+			array(' conselho_classe', 'length', 'max'=>20),
 			array('salario', 'length', 'max'=>7),
 			array('situacao_funcional', 'length', 'max'=>2),
 			array('data_afastamento, data_retorno', 'safe'),
@@ -71,6 +71,7 @@ class DadosTrabalho extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+                    'profissao'=>array(self::BELONGS_TO,'Profissao','profissao_codigo'),
 		);
 	}
 
@@ -85,7 +86,7 @@ class DadosTrabalho extends CActiveRecord
 			'pis' => 'PIS/PASEF/NIT',
 			'carga_horaria' => 'Carga Horária',
 			'turno' => 'Turno',
-			'profissao' => 'Profissão',
+			'profissao_codigo' => 'Profissão',
 			'salario' => 'Salário',
 			'conselho_classe' => 'Conselho de Classe',
 			'data_afastamento' => 'Data de Afastamento',
@@ -116,7 +117,7 @@ class DadosTrabalho extends CActiveRecord
 
 		$criteria->compare('turno',$this->turno,true);
 
-		$criteria->compare('profissao',$this->profissao,true);
+		$criteria->compare('profissao_codigo',$this->profissao,true);
 
 		$criteria->compare('salario',$this->salario,true);
 
@@ -134,4 +135,14 @@ class DadosTrabalho extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+        
+   public function upperCaseAllFields(){
+       $this->conselho_classe=strtoupper($this->conselho_classe);
+   }
+   
+   protected function beforeSave() {
+       $this->upperCaseAllFields();
+       return parent::beforeSave();
+   }
+
 }

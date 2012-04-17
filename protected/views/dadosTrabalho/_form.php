@@ -2,21 +2,42 @@
 
 <?php $form=$this->beginWidget('SISPADActiveForm', array(
 	'id'=>'dados-trabalho-form',
-        'uniform'=>array('theme'=>'default'),
-	'enableAjaxValidation'=>false,
+        //'uniform'=>array('theme'=>'default'),
+	'enableClientValidation'=>true,
 )); ?>
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
+        <p class="note">Todos os campos com <span class="required">*</span> são de preenchimento obrigatório.</p>
 
 	<?php echo $form->errorSummary($model); ?>
 
         <table>
             <tbody>
                 <tr>
-                    <td>
-                        <?php echo $form->labelEx($model,'profissao'); ?>
-                        <?php echo $form->textField($model,'profissao',array('size'=>20,'maxlength'=>20)); ?>
-                        <?php echo $form->error($model,'profissao'); ?>
+                    <td colspan="2">
+                        <?php echo $form->labelEx($model,'profissao_codigo'); ?>
+                        <?php $this->widget('EJuiAutoCompleteFkField', array(
+                                    'model'=>$model, 
+                                    'attribute'=>'profissao_codigo', //the FK field (from CJuiInputWidget)
+                                     // controller method to return the autoComplete data (from CJuiAutoComplete)
+                                    'sourceUrl'=>Yii::app()->createUrl('Profissao/findProfissoes'), 
+                                    // defaults to false.  set 'true' to display the FK field with 'readonly' attribute.
+                                    'showFKField'=>false,
+                                    // display size of the FK field.  only matters if not hidden.  defaults to 10
+                                    'FKFieldSize'=>11,
+                                    'htmlOptions'=>array('style'=>'text-transform:uppercase'),
+                                    'relName'=>'profissao', // the relation name defined above
+                                    'displayAttr'=>'nome',  // attribute or pseudo-attribute to display
+                                    // length of the AutoComplete/display field, defaults to 50
+                                    'autoCompleteLength'=>60,
+                                     // any attributes of CJuiAutoComplete and jQuery JUI AutoComplete widget may 
+                                     // also be defined.  read the code and docs for all options
+                                    'options'=>array(
+                                        // number of characters that must be typed before 
+                                            // autoCompleter returns a value, defaults to 2
+                                        'minLength'=>6, 
+                                        ),
+                                ));?>
+                        <?php echo $form->error($model,'profissao_codigo'); ?>
                     </td>
                     <td>
                         <?php echo $form->labelEx($model,'conselho_classe'); ?>
@@ -70,7 +91,7 @@
                     <td>
                         <?php echo $form->labelEx($model,'data_admissao'); ?>
                         <?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
-                                                'name'=>'Data',
+                                                'name'=>'data_admisao',
                                                 'language'=>'pt',
                                                 'model'=>$model,
                                                 'attribute'=>'data_admissao',
@@ -80,7 +101,7 @@
                     <td>
                         <?php echo $form->labelEx($model,'data_afastamento'); ?>
                         <?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
-                                                'name'=>'Data',
+                                                'name'=>'data_afastamento',
                                                 'language'=>'pt',
                                                 'model'=>$model,
                                                 'attribute'=>'data_afastamento',
@@ -90,7 +111,7 @@
                     <td>
                         <?php echo $form->labelEx($model,'data_retorno'); ?>
                         <?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
-                                                'name'=>'Data',
+                                                'name'=>'data_retorno',
                                                 'language'=>'pt',
                                                 'model'=>$model,
                                                 'attribute'=>'data_retorno',

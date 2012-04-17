@@ -193,6 +193,21 @@ class ServidorController extends SISPADBaseController
            }
        }
    }
+   
+   public function actiontestepost(){
+        sleep(2);
+        if(isset($_POST)){
+            //return the POST variable back
+            //the widget will show an alert() with this data
+            print_r($_POST);
+            $set= new setor;
+            $set->nome="teste";
+            $set->departamento_id=1;
+            $set->descricao="So testando rapaz";
+            $set->save();
+        }
+    }
+    
    protected function getModelName() {
        return 'Servidor';
    }
