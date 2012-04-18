@@ -90,13 +90,20 @@ class TotalRelatorio extends CActiveRecord
 
 		$criteria->compare('mes',$this->mes);
 
-		$criteria->compare('servidor_cpf',$this->servidor_cpf,true);
-
+	        $criteria->compare('servidor_cpf',$this->servidor_cpf,true);
+                
 		return new CActiveDataProvider('TotalRelatorio', array(
-			'criteria'=>$criteria,
+			'criteria'=>array(
+                            'select'=>'ano,mes,quantidade,data_envio,servidor_cpf',
+                            'with'=>array('servidor'=>array('select'=>'nome')),
+                            ),
+                            
+                    ////$criteria,
                         'pagination'=>array(
                                       'pageSize'=>20
                         )
 		));
 	}
+
+       
 }

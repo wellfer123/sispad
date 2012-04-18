@@ -36,7 +36,7 @@ ou <b>=</b>) iniciar cada uma de suas pesquisa com valores específicos de como 
 )); ?>
 </div><!-- search-form -->
 
-<?php $this->widget('zii.widgets.grid.CGridView', array(
+<?php /*$this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'total-relatorio-grid',
 	'dataProvider'=>$model->search(),
 	'columns'=>array(
@@ -64,4 +64,6 @@ ou <b>=</b>) iniciar cada uma de suas pesquisa com valores específicos de como 
                         ),
 		),
 	),
-)); ?>
+));*/ 
+
+?>

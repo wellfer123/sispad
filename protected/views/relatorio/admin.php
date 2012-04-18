@@ -62,4 +62,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
 			'class'=>'CButtonColumn',
 		),
 	),
-)); ?>
+));
+
+
+?>

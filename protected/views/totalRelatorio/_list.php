@@ -31,6 +31,30 @@ $this->widget('zii.widgets.grid.CGridView', array(
                         ),
 		),
 	),
-)); ?>
+));
+
+
+$columnsArray = array('id','name','lastname','tel','email');
+    $this->widget('ext.htmltableui.htmlTableUi',array(
+    'ajaxUrl'=>'TotalRelatorioController/actionUpdate',
+    'arProvider'=>$model->search(),
+    'collapsed'=>false,
+    'columns'=>$columnsArray,
+    'cssFile'=>'',
+    'editable'=>true,
+    'enableSort'=>true,
+    'exportUrl'=>'site/exportCsv',
+    'extra'=>'Additional Information',
+    'footer'=>'',
+    'formTitle'=>'Form Title',
+    
+    'sortColumn'=>1,
+    'sortOrder'=>'desc',
+    'subtitle'=>'Rev 1.3.3',
+    'title'=>'Table 2',
+    'useInternalCss'=>true,
+));
+
+?>
 
 
