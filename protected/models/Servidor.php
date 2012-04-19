@@ -69,6 +69,7 @@ class Servidor extends CActiveRecord
 			'tituloEleitor' => array(self::HAS_ONE, 'TituloEleitor', 'servidor_cpf'),
                         'user'=>array(self::HAS_MANY, 'user', 'servidor_cpf'),
                         'relatorio'=>array(self::HAS_MANY, 'servidor', 'servidor_cpf'),
+                        'totalRelatorio'=>array(self::HAS_MANY,'TotalRelatorio','servidor_cpf'),
 		);
 	}
 
@@ -104,16 +105,59 @@ class Servidor extends CActiveRecord
 
 		$criteria->compare('nome',$this->nome,true);
 
-		$criteria->compare('estado_civil',$this->estado_civil,true);
+		//$criteria->compare('estado_civil',$this->estado_civil,true);
 
-		$criteria->compare('endereco_id',$this->endereco_id);
+		//$criteria->compare('endereco_id',$this->endereco_id);
 
-		$criteria->compare('unidade_cnes',$this->unidade_cnes,true);
+		//$criteria->compare('unidade_cnes',$this->unidade_cnes,true);
 
 
 
 		return new CActiveDataProvider('Servidor', array(
 			'criteria'=>$criteria,
+                        'pagination'=>array(
+                                'pageSize'=>20
+                        )
+		));
+	}
+
+        public function searchTotalRelatorio()
+	{
+		// Warning: Please modify the following code to remove attributes that
+		// should not be searched.
+
+		$criteria=new CDbCriteria;
+
+		$criteria->compare('servidor_cpf',$this->cpf,true);
+
+		//$criteria->compare('matricula',$this->matricula,true);
+
+		//$criteria->compare('nome',$this->nome,true);
+
+		//$criteria->compare('estado_civil',$this->estado_civil,true);
+
+		//$criteria->compare('endereco_id',$this->endereco_id);
+
+		//$criteria->compare('unidade_cnes',$this->unidade_cnes,true);
+
+                $string=$this->cpf;
+
+		return new CActiveDataProvider('Servidor', array(
+                       
+			'criteria'=>array(
+                            'with'=>array(
+                                'totalRelatorio'=>array(
+                                    
+                                    'condition'=>'servidor_cpf=cpf',
+                                    
+                                ),
+                              
+                            ),
+                            'together' =>true,
+                            //'on' => 'totalRelatorio.servidor_cpf <> t.cpf',
+                            
+                            //'joinType' => 'INNER JOIN',
+                        ),
                         'pagination'=>array(
                                 'pageSize'=>20
                         )

@@ -2,11 +2,13 @@
 <?php $servidor = new Servidor();
 $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'total-relatorio-grid',
-	'dataProvider'=>$servidor->search(),
-	'columns'=>array(
+	'dataProvider'=>$servidor->searchTotalRelatorio(),
+        
+        'columns'=>array(
                
 		'nome',
 		'cpf',
+                //'totalRelatorio.mes',
 		
 		array(
 			'class'=>'CButtonColumn',
@@ -24,9 +26,9 @@ $this->widget('zii.widgets.grid.CGridView', array(
                                         'inactive'=>array(
                                                         'visible'=>'!Servidor::existeEmTotalRelatorio($data->cpf)',
                                                        
-                                                        'label'=>'Desativar Usuário',
+                                                        'label'=>'Usuário sem frequencia',
                                                         'options'=>array('class'=>'inactive','style'=>"padding-right:10px"),
-                                                        'imageUrl'=>  Yii::app()->request->baseUrl.'/images/locked.png',
+                                                        'imageUrl'=>  Yii::app()->request->baseUrl.'/css/error.png',
                                                 ),
                         ),
 		),
