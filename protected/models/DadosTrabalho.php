@@ -72,6 +72,7 @@ class DadosTrabalho extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
                     'profissao'=>array(self::BELONGS_TO,'Profissao','profissao_codigo'),
+                    'servidor'=>array(self::HAS_ONE,'Servidor','cpf'),
 		);
 	}
 
@@ -96,47 +97,20 @@ class DadosTrabalho extends CActiveRecord
 		);
 	}
 
-	/**
-	 * Retrieves a list of models based on the current search/filter conditions.
-	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
-	 */
-	public function search()
-	{
-		// Warning: Please modify the following code to remove attributes that
-		// should not be searched.
-
-		$criteria=new CDbCriteria;
-
-		$criteria->compare('servidor_cpf',$this->servidor_cpf,true);
-
-		$criteria->compare('data_admissao',$this->data_admissao,true);
-
-		$criteria->compare('pis',$this->pis,true);
-
-		$criteria->compare('carga_horaria',$this->carga_horaria);
-
-		$criteria->compare('turno',$this->turno,true);
-
-		$criteria->compare('profissao_codigo',$this->profissao,true);
-
-		$criteria->compare('salario',$this->salario,true);
-
-		$criteria->compare('conselho_classe',$this->conselho_classe,true);
-
-		$criteria->compare('data_afastamento',$this->data_afastamento,true);
-
-		$criteria->compare('data_retorno',$this->data_retorno,true);
-
-		$criteria->compare('situacao_funcional',$this->situacao_funcional,true);
-
-		$criteria->compare('vinculo',$this->vinculo,true);
-
-		return new CActiveDataProvider('Dados_Trabalho', array(
-			'criteria'=>$criteria,
-		));
-	}
+	public function getLabelSituacaoFuncional(){
+            return DadosTrabalho::$SITUACOES_FUNCIONAIS[$this->situacao_funcional];
+        }
         
-   public function upperCaseAllFields(){
+        public function getLabelVinculo(){
+            return DadosTrabalho::$TIPOS_VINCULOS[$this->vinculo];
+        }
+        
+        public function getLabelTurno(){
+            return DadosTrabalho::$TIPOS_TURNOS[$this->turno];
+        }
+
+
+        public function upperCaseAllFields(){
        $this->conselho_classe=strtoupper($this->conselho_classe);
    }
    

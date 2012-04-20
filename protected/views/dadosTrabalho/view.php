@@ -1,34 +1,45 @@
 <?php
 $this->breadcrumbs=array(
-	'Dados Trabalhos'=>array('index'),
-	$model->servidor_cpf,
+	'Servidor'=>array('Servidor/view','id'=>$model->servidor_cpf),
+	$model->servidor->nome,
 );
 
 $this->menu=array(
-	array('label'=>'List DadosTrabalho', 'url'=>array('index')),
-	array('label'=>'Create DadosTrabalho', 'url'=>array('create')),
-	array('label'=>'Update DadosTrabalho', 'url'=>array('update', 'id'=>$model->servidor_cpf)),
-	array('label'=>'Delete DadosTrabalho', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->servidor_cpf),'confirm'=>'Are you sure you want to delete this item?')),
-	array('label'=>'Manage DadosTrabalho', 'url'=>array('admin')),
+	array('label'=>'Atualizar Dados de Trabalho', 'url'=>array('update', 'id'=>$model->servidor_cpf)),
 );
 ?>
-
-<h1>View DadosTrabalho #<?php echo $model->servidor_cpf; ?></h1>
+<div class="update">
+<h1>Dados de Trabalho do Servidor <?php echo $model->servidor->nome; ?></h1>
 
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
 	'attributes'=>array(
 		'servidor_cpf',
-		'data_admissao',
 		'pis',
 		'carga_horaria',
 		'turno',
-		'profissao',
+                array(
+                    'label'=>'Turno',
+                    'value'=>$model->getLabelTurno(),
+                ),
 		'salario',
+                array(
+                    'label'=>'Profissão',
+                    'value'=>$model->profissao->nome,
+                ),
+                array(
+                    'label'=>'Vínculo',
+                    'value'=>$model->getLabelVinculo(),
+                ),
+                array(
+                    'label'=>'Situação Funcional',
+                    'value'=>$model->getLabelSituacaoFuncional(),
+                ),
 		'conselho_classe',
 		'data_afastamento',
+		'data_admissao',
 		'data_retorno',
-		'situacao_funcional',
-		'vinculo',
 	),
 )); ?>
+
+</div>

@@ -30,9 +30,10 @@ class DadosTrabalhoController extends Controller
 	public function actionView()
 	{
 		$this->render('view',array(
-			'model'=>$this->loadModel(),
+			'model'=>$this->loadModel(),'nome'=>'',
 		));
 	}
+        
 
 	/**
 	 * Creates a new model.
@@ -81,40 +82,33 @@ class DadosTrabalhoController extends Controller
 		));
 	}
 
-	/**
-	 * Deletes a particular model.
-	 * If deletion is successful, the browser will be redirected to the 'index' page.
-	 */
-	public function actionDelete()
-	{
-		if(Yii::app()->request->isPostRequest)
-		{
-			// we only allow deletion via POST request
-			$this->loadModel()->delete();
-
-			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-			if(!isset($_GET['ajax']))
-				$this->redirect(array('index'));
-		}
-		else
-			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
-	}
 
 	/**
 	 * Lists all models.
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('DadosTrabalho');
-		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
-		));
+		if(isset($_GET['id'])){
+                        //verifica se ja existe dados de trablho para o servido
+			$this->_model=DadosTrabalho::model()->with('servidor','profissao')->findbyPk($_GET['id']);
+                        if($this->_model!=null){   
+                            $this->redirect(array('view','id'=>$this->_model->servidor_cpf));
+                        }
+                        //redireciona para criar, caso nao exista
+                        else{
+                            $this->redirect(array('create','id'=>$this->_model->servidor_cpf));
+                        }
+                                
+                }
+                else{
+                   throw new CHttpException(404,'Página requisitada não existe.'); 
+                }
 	}
 
 	/**
 	 * Manages all models.
 	 */
-	public function actionAdmin()
+	/*public function actionAdmin()
 	{
 		$model=new DadosTrabalho('search');
 		$model->unsetAttributes();  // clear any default values
@@ -124,7 +118,7 @@ class DadosTrabalhoController extends Controller
 		$this->render('admin',array(
 			'model'=>$model,
 		));
-	}
+	}*/
 
 	/**
 	 * Returns the data model based on the primary key given in the GET variable.
@@ -137,7 +131,7 @@ class DadosTrabalhoController extends Controller
 			if(isset($_GET['id']))
 				$this->_model=DadosTrabalho::model()->findbyPk($_GET['id']);
 			if($this->_model===null)
-				throw new CHttpException(404,'The requested page does not exist.');
+				throw new CHttpException(404,'Página requisitada não existe.');
 		}
 		return $this->_model;
 	}
