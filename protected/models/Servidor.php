@@ -154,9 +154,7 @@ class Servidor extends CActiveRecord
                               
                             ),
                             'together' =>true,
-                            //'on' => 'totalRelatorio.servidor_cpf <> t.cpf',
-                            
-                            //'joinType' => 'INNER JOIN',
+                           
                         ),
                         'pagination'=>array(
                                 'pageSize'=>20
