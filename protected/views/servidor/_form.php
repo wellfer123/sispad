@@ -1,6 +1,6 @@
 <div class="form">
 
-<?php $form=$this->beginWidget('SISPADActiveForm', array(
+<?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'servidor-form',
         'enableClientValidation'=>true,
 	'enableAjaxValidation'=>false,

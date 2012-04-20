@@ -64,6 +64,13 @@ array(
                       'visible'=>$RBAC2->checkAccess('SuperAdmin'),
                       
               ),
+          array("url"=>array(),
+                            "label"=>"_servidor",
+                      array("url"=>array("route"=>"/endereco/create"), "label"=>"cadastro Endereco"),
+                      //array("url"=>array("route"=>"/rbac/assignment"), "label"=>"Permissões"),
+                      //'visible'=>$RBAC2->checkAccess('SuperAdmin'),
+
+              ),
           //menu raiz
           array("url"=>array(), "label"=>"Ajuda",
                         array("url"=>array("route"=>"/site/page/about", "view"=>"about"), "label"=>"Sobre"),

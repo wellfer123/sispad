@@ -111,4 +111,7 @@ class Endereco extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+
+
+        
 }
