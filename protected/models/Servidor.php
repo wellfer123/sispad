@@ -121,45 +121,29 @@ class Servidor extends CActiveRecord
 		));
 	}
 
-        public function searchTotalRelatorio()
+           public function searchAllNotSendReport($ano, $mes)
 	{
 		// Warning: Please modify the following code to remove attributes that
 		// should not be searched.
 
-		$criteria=new CDbCriteria;
+                $dados=Yii::app()->db->createCommand('SELECT serv.nome, serv.cpf FROM servidor serv
+                                                       WHERE (SELECT r.servidor_cpf FROM total_relatorio r 
+                                                       WHERE r.servidor_cpf=serv.cpf AND 
+                                                       r.ano='.$ano.' AND r.mes='.$mes.') IS NULL')->queryAll();
 
-		$criteria->compare('servidor_cpf',$this->cpf,true);
+		return new CArrayDataProvider($dados, array(
+                                    'id'=>'servidor',
+                                    'sort'=>array(
+                                            'attributes'=>array(
+                                                'cpf', 'nome',
+                                             ),
+                                     ),
+                                    'pagination'=>array(
+                                            'pageSize'=>20
+                                    )
 
-		//$criteria->compare('matricula',$this->matricula,true);
-
-		//$criteria->compare('nome',$this->nome,true);
-
-		//$criteria->compare('estado_civil',$this->estado_civil,true);
-
-		//$criteria->compare('endereco_id',$this->endereco_id);
-
-		//$criteria->compare('unidade_cnes',$this->unidade_cnes,true);
-
-                $string=$this->cpf;
-
-		return new CActiveDataProvider('Servidor', array(
-                       
-			'criteria'=>array(
-                            'with'=>array(
-                                'totalRelatorio'=>array(
-                                    
-                                    'condition'=>'servidor_cpf=cpf',
-                                    
-                                ),
-                              
-                            ),
-                            'together' =>true,
-                           
-                        ),
-                        'pagination'=>array(
-                                'pageSize'=>20
-                        )
 		));
+		
 	}
 
         public static function existeEmTotalRelatorio($cpf) {

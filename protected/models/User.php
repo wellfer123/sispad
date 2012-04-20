@@ -127,8 +127,8 @@ class User extends CActiveRecord
 
 		$criteria->compare('servidor_cpf',$this->servidor_cpf,true);
 
-		return new CActiveDataProvider('User', array(
-			'criteria'=>$criteria,
+		return new CArrayDataProvider(User::model()->findAll(), array(
+			//'criteria'=>$criteria,
                         'pagination'=>array(
                                       'pageSize'=>20
                         )
