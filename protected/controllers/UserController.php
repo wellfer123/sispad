@@ -178,8 +178,8 @@ class UserController extends SISPADBaseController
                         if($mo!=null){
                             $mo->ativo=User::ATIVO;
                             $mo->save();
-                            $this->enviaEmail($mo->email,$mo->username,
-                                        "sispadcaruaru@gmail.com","ATIVACAO DE CONTA",$this->_bodyEmail);
+                            //$this->enviaEmail($mo->email,$mo->username,
+                                       // "sispadcaruaru@gmail.com","ATIVACAO DE CONTA",$this->_bodyEmail);
                         }
 
 			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
@@ -201,8 +201,8 @@ class UserController extends SISPADBaseController
                         if($mo!=null){
                             $mo->ativo=User::DESATIVO;
                             $mo->save();
-                            $this->enviaEmail($mo->email,$mo->username,
-                                        "sispadcaruaru@gmail.com","DESATIVACAO DE CONTA",$this->_bodyEmailDes);
+                            //$this->enviaEmail($mo->email,$mo->username,
+                                       // "sispadcaruaru@gmail.com","DESATIVACAO DE CONTA",$this->_bodyEmailDes);
                         }
 
 			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser

@@ -261,6 +261,8 @@ class relatorio extends CActiveRecord
 		));
 	}
 
+     
+        
         public function getServidorName($servidor_cpf){
 
             if(empty ($servidor_cpf))return null;
