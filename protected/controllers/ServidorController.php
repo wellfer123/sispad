@@ -119,10 +119,7 @@ class ServidorController extends SISPADBaseController
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('Servidor');
-		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
-		));
+		$this->redirect(array('admin'));
 	}
 
 	/**
