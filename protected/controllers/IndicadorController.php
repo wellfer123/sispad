@@ -36,7 +36,7 @@ class IndicadorController extends SISPADBaseController{
 
 
 		//Uncomment the following line if AJAX validation is needed
-		//$this->performAjaxValidation($model);
+		$this->performAjaxValidation($model);
 
 		if(isset($_POST['Indicador']))
 		{
@@ -59,5 +59,14 @@ class IndicadorController extends SISPADBaseController{
         protected function getModelName() {
             return 'Indicador';
     }
+
+     protected function performAjaxValidation($model)
+	{
+		if(isset($_POST['ajax']) && $_POST['ajax']==='indicador-form')
+		{
+			echo CActiveForm::validate($model);
+			Yii::app()->end();
+		}
+	}
 }
 ?>

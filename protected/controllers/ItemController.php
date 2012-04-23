@@ -38,15 +38,16 @@ class ItemController extends SISPADBaseController {
 
 
 		//Uncomment the following line if AJAX validation is needed
-		//$this->performAjaxValidation($model);
+		$this->performAjaxValidation($model);
 
 		if(isset($_POST['Item']))
 		{
 
                         $model->attributes=$_POST['Item'];
 			if($model->save()){
+                            $model=new Item;
                             $this->addMessageSuccess("Item criado!");
-                                  $model=new Item;
+                                 
                         }
 
                 }
@@ -59,6 +60,15 @@ class ItemController extends SISPADBaseController {
         protected function getModelName() {
             return 'Item';
         }
+
+         protected function performAjaxValidation($model)
+	{
+		if(isset($_POST['ajax']) && $_POST['ajax']==='item-form')
+		{
+			echo CActiveForm::validate($model);
+			Yii::app()->end();
+		}
+	}
 
 }
 ?>

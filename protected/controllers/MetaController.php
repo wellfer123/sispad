@@ -28,7 +28,7 @@ class MetaController extends SISPADBaseController{
 
 
 		//Uncomment the following line if AJAX validation is needed
-		//$this->performAjaxValidation($model);
+		$this->performAjaxValidation($model);
 
 		if((isset($_POST['Meta'])) && (isset($_GET['indicador_id'])))
 		{
@@ -48,8 +48,25 @@ class MetaController extends SISPADBaseController{
 
         }
 
+        public function actionAdmin() {
+            $model = new Meta();
+            $this->render('admin',array(
+			'model'=>$model,
+		));
+
+        }
+
     protected function getModelName() {
         return 'Meta';
     }
+
+     protected function performAjaxValidation($model)
+	{
+		if(isset($_POST['ajax']) && $_POST['ajax']==='meta-form')
+		{
+			echo CActiveForm::validate($model);
+			Yii::app()->end();
+		}
+	}
 }
 ?>

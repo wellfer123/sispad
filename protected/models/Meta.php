@@ -109,4 +109,20 @@ class Meta extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+
+        public function searchIndicadorId($indicador_id)
+	{
+		// Warning: Please modify the following code to remove attributes that
+		// should not be searched.
+
+		$criteria=new CDbCriteria;
+
+		$criteria->compare('indicador_id',$indicador_id);
+
+
+
+		return new CActiveDataProvider('Meta', array(
+			'criteria'=>$criteria,
+		));
+	}
 }

@@ -19,7 +19,7 @@
         </div>
          <div class="row">
 		<?php echo $form->labelEx($model,'descricao'); ?>
-		<?php echo $form->textField($model,'descricao'); ?>
+		<?php echo $form->textArea($model,'descricao'); ?>
                 <?php echo $form->error($model,'descricao'); ?>
         </div>
         <div class="row">
