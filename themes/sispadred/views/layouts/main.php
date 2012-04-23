@@ -65,8 +65,10 @@ array(
                       
               ),
           array("url"=>array(),
-                            "label"=>"_servidor",
-                      array("url"=>array("route"=>"/endereco/create"), "label"=>"cadastro Endereco"),
+                            "label"=>"indicadores",
+                       array("url"=>array("route"=>"/indicador/create"), "label"=>"cadastro Indicador"),
+                      array("url"=>array("route"=>"/item/create"), "label"=>"cadastro Itens"),
+                      array("url"=>array("route"=>"/meta/create"), "label"=>"cadastro Metas"),
                       //array("url"=>array("route"=>"/rbac/assignment"), "label"=>"Permissões"),
                       //'visible'=>$RBAC2->checkAccess('SuperAdmin'),
 
