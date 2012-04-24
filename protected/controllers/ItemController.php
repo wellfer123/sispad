@@ -57,6 +57,31 @@ class ItemController extends SISPADBaseController {
 		));
         }
 
+         public function actionFindItens() {
+
+             $this->_RBAC->checkAccess('registered',true);
+            $q = $_GET['term'];
+            if(isset($q)) {
+                 $itens = Item::model()->findAll('nome like :nome',array(':nome'=> strtoupper(trim($q)).'%'));
+                //$servidores = Servidor::model()->findAllByAttributes(array('nome','cpf'),
+                                             // 'where nome like :nome',array(':nome'=> strtoupper(trim($q)).'%'));
+
+                if (!empty($itens)) {
+                    $out = array();
+                    foreach ($itens as $s) {
+                            $out[] = array(
+                            // expression to give the string for the autoComplete drop-down
+                            'label' => $s->nome,
+                            'value' => $s->nome,
+                            'id' => $s->id, // return value from autocomplete
+                     );
+                    }
+                echo CJSON::encode($out);
+                Yii::app()->end();
+           }
+       }
+   }
+
         protected function getModelName() {
             return 'Item';
         }
