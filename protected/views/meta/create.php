@@ -11,5 +11,6 @@ $this->breadcrumbs=array(
                         'htmlOptions'=>array('class'=>'portlet_form')
 		));?>
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php echo $this->renderPartial('_admin', array('model'=>$model)); ?>
 
 <?php $this->endWidget(); ?>

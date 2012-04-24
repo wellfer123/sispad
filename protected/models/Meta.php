@@ -40,13 +40,13 @@ class Meta extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('nome, periodicidade_id, tipo, valor, item_id', 'required'),
-			array('periodicidade_id, valor, percentagem, item_id, indicador_id', 'numerical', 'integerOnly'=>true),
+			array('nome, periodicidade_id, tipo, valor', 'required'),
+			array('periodicidade_id, valor, percentagem,indicador_id', 'numerical', 'integerOnly'=>true),
 			array('nome', 'length', 'max'=>40),
 			array('tipo', 'length', 'max'=>2),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, nome, periodicidade_id, tipo, valor, percentagem, item_id, indicador_id', 'safe', 'on'=>'search'),
+			array('id, nome, periodicidade_id, tipo, valor, percentagem, indicador_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -57,7 +57,9 @@ class Meta extends CActiveRecord
 	{
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
-		return array(
+		return array('indicador'=>array(self::BELONGS_TO,'indicador','indicador_id'),
+                             'item'=>array(self::HAS_MANY,'item','meta_id'),
+                             'periodicidade'=>array(self::BELONGS_TO,'periodicidade','periodicidade_id')
 		);
 	}
 

@@ -40,10 +40,11 @@ class ItemController extends SISPADBaseController {
 		//Uncomment the following line if AJAX validation is needed
 		$this->performAjaxValidation($model);
 
-		if(isset($_POST['Item']))
+		if((isset($_POST['Item']))&&(isset($_GET['meta_id'])))
 		{
 
                         $model->attributes=$_POST['Item'];
+                        $model->meta_id=$_GET['meta_id'];
 			if($model->save()){
                             $model=new Item;
                             $this->addMessageSuccess("Item criado!");

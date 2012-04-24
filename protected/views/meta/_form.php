@@ -38,9 +38,9 @@
                 <?php echo $form->error($model,'tipo'); ?>
         </div>
          <div class="row">
-		<?php echo $form->labelEx($model,'item_id'); ?>
-		<?php echo $form->dropDownList($model,'item_id',CHtml::listData(Item::model()->findAll(),'id','nome'));?>
-                <?php echo $form->error($model,'item_id'); ?>
+		<?php //echo $form->labelEx($model,'item_id'); ?>
+		<?php //echo $form->dropDownList($model,'item_id',CHtml::listData(Item::model()->findAll(),'id','nome'));?>
+                <?php //echo $form->error($model,'item_id'); ?>
         </div>
         <div class="row buttons">
 		<?php  echo CHtml::submitButton($model->isNewRecord ? 'Enviar' : 'Atualizar'); ?>

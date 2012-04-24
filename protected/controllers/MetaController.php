@@ -48,17 +48,32 @@ class MetaController extends SISPADBaseController{
 
         }
 
-        public function actionAdmin() {
+        public function actionView() {
             $model = new Meta();
-            $this->render('admin',array(
+            $this->render('view',array(
 			'model'=>$model,
 		));
 
         }
+        
+       
 
     protected function getModelName() {
         return 'Meta';
     }
+    
+    public function loadModel()
+	{
+		if($this->_model===null)
+		{
+			if(isset($_GET['id']))
+				$this->_model=Meta::model()->findbyPk($_GET['id']);
+			if($this->_model===null)
+				throw new CHttpException(404,'The requested page does not exist.');
+		}
+		return $this->_model;
+	}
+
 
      protected function performAjaxValidation($model)
 	{

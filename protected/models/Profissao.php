@@ -48,7 +48,7 @@ class Profissao extends CActiveRecord
 	{
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
-		return array(
+		return array('indicador'=>array(self::HAS_MANY,'indicador','profissao_codigo')
 		);
 	}
 
@@ -58,7 +58,7 @@ class Profissao extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'codigo' => 'Código',
+			'codigo' => 'Cï¿½digo',
 			'nome' => 'Nome',
 		);
 	}

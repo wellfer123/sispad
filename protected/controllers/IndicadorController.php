@@ -10,7 +10,7 @@
  * @author Junior Pires
  */
 class IndicadorController extends SISPADBaseController{
-        public $layout='//layouts/column1';
+        public $layout='//layouts/column2';
 
 	/**
 	 * @var CActiveRecord the currently loaded data model instance.
@@ -50,11 +50,28 @@ class IndicadorController extends SISPADBaseController{
 
                 }
 
+               
+
+
+
 		$this->render('create',array(
 			'model'=>$model
 		));
 
         }
+
+        public function actionAdmin()
+	{
+                //$this->CheckAcessAction();
+		$model=new Indicador('search');
+		$model->unsetAttributes();  // clear any default values
+		if(isset($_GET['Indicador']))
+			$model->attributes=$_GET['Indicador'];
+
+		$this->render('admin',array(
+			'model'=>$model,
+		));
+	}
 
         protected function getModelName() {
             return 'Indicador';

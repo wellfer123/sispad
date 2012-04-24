@@ -1,7 +1,7 @@
 <div class="form">
 
 <?php $form=$this->beginWidget('CActiveForm', array(
-	'id'=>'meta-form',
+	'id'=>'indicador-form',
         'enableClientValidation'=>true,
 	'enableAjaxValidation'=>true,
 
@@ -26,12 +26,7 @@
 		<?php echo $form->labelEx($model,'profissao_codigo'); ?>
 		<?php echo $form->dropDownList($model,'profissao_codigo',CHtml::listData(Profissao::model()->findAll(),'codigo','nome'));?>
                 <?php echo $form->error($model,'profissao_codigo'); ?>
-        </div>
-         <div class="row">
-		<?php echo $form->labelEx($model,'status'); ?>
-		<?php echo $form->textField($model,'status'); ?>
-                <?php echo $form->error($model,'status'); ?>
-        </div>
+        </div>        
         <div class="row">
 		<?php echo $form->labelEx($model,'afericao'); ?>
 		<?php echo $form->textField($model,'afericao'); ?>

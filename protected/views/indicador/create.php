@@ -4,6 +4,10 @@ $this->breadcrumbs=array(
 	'Create',
 );
 
+$this->menu=array(
+	array('label'=>'Administrar Indicadores', 'url'=>array('admin')),
+);
+
 
 ?>
 <?php $this->beginWidget('zii.widgets.CPortlet', array(
@@ -11,6 +15,6 @@ $this->breadcrumbs=array(
                         'htmlOptions'=>array('class'=>'portlet_form')
 		));?>
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
-<?php echo $this->renderPartial('_view', array('model'=>$model)); ?>
+
 
 <?php $this->endWidget(); ?>
