@@ -47,7 +47,7 @@ class Servidor extends CActiveRecord
 			array('matricula', 'length', 'max'=>20),
 			array('nome', 'length', 'max'=>40),
 			array('estado_civil', 'length', 'max'=>1),
-			array('unidade_cnes', 'length', 'max'=>10,'min'=>10),
+			array('unidade_cnes', 'length', 'max'=>10,'min'=>6),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('cpf, matricula, nome, estado_civil, endereco_id, unidade_cnes', 'safe', 'on'=>'search'),

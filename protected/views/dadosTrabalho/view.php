@@ -1,7 +1,7 @@
 <?php
 $this->breadcrumbs=array(
 	'Servidor'=>array('Servidor/view','id'=>$model->servidor_cpf),
-	$model->servidor->nome,
+        'Dados de Trabalho de '.$model->servidor->nome,
 );
 
 $this->menu=array(
@@ -9,7 +9,7 @@ $this->menu=array(
 );
 ?>
 <div class="update">
-<h1>Dados de Trabalho do Servidor <?php echo $model->servidor->nome; ?></h1>
+<h3>Dados de Trabalho de <?php echo $model->servidor->nome; ?></h3>
 
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
@@ -17,7 +17,7 @@ $this->menu=array(
 		'servidor_cpf',
 		'pis',
 		'carga_horaria',
-		'turno',
+            'profissao_codigo',
                 array(
                     'label'=>'Turno',
                     'value'=>$model->getLabelTurno(),

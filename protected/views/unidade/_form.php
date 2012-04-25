@@ -20,7 +20,7 @@
                         $this->widget('CMaskedTextField', array(
                         'model'=>$model,
                         'attribute'=>'cnes',
-                        'mask'=>'9999999999',
+                        'mask'=>'999999?9999',
                         'htmlOptions'=>array('disabled'=>!$model->isNewRecord,'style'=>'text-transform:uppercase'),
                         ));
                     echo $form->error($model,'cnes');

@@ -10,28 +10,12 @@
  *
  * @author Albuquerque
  */
-class CidadeController extends Controller{
+class CidadeController extends SISPADBaseController{
     //put your code here
     
     public function accessRules()
 	{
-		return array(
-			/*array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
-				'users'=>array('*'),
-			),*/
-			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('seachname'),
-				'users'=>array('@'),
-			),
-			/*array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
-				'users'=>array('admin'),
-			),*/
-			array('deny',  // deny all users
-				'users'=>array('*'),
-			),
-		);
+		return array();
 	}
     public function actionSeachRegional(){
         //if (isset($_GET['regional_id'])){
@@ -40,12 +24,16 @@ class CidadeController extends Controller{
         yii::app()->end();
     }
     
+    public function __construct($id, $module = null) {
+        parent::__construct($id, $module);
+    }
+
+    
     
     public function actionSeachName(){
             $arr=array();
             if (isset($_GET['term'])){  
-                $cid=Cidades::model()->findAll('cidade_nome like :cidadeNome', 
-                                                array(':cidadeNome'=>$_GET['term'].'%'));
+                $cid=Cidades::model()->findb(35);
                 foreach ($cid as $cidade){
                     $arr[] = $cidade['cidade_nome'];
                 }
@@ -53,6 +41,35 @@ class CidadeController extends Controller{
             echo CJSON::encode($arr);
             yii::app()->end();
         }
+        
+    
+        
+   public function actionFindCidades() {
+            
+            //$this->_RBAC->checkAccess('registered',true);
+            $q = $_GET['term'];
+            if(isset($q)) {
+                 $cidades = Cidades::model()->with('estado')->findAll('cidade_nome like :nome',array(':nome'=> strtoupper(trim($q)).'%'));
+ 
+                if (!empty($cidades)) {
+                    $out = array();
+                    foreach ($cidades as $s) {
+                            $out[] = array(
+                            // expression to give the string for the autoComplete drop-down
+                            'label' => $s->NomeEstado,  
+                            'value' => $s->NomeEstado,
+                            'id' => $s->id, // return value from autocomplete
+                     );
+                    }
+                echo CJSON::encode($out);
+                Yii::app()->end();
+           }
+       }
+   }
+
+    protected function getModelName() {
+        return 'Cidade';
+    }
 
 }
 

@@ -30,7 +30,7 @@ class DadosTrabalhoController extends Controller
 	public function actionView()
 	{
 		$this->render('view',array(
-			'model'=>$this->loadModel(),'nome'=>'',
+			'model'=>$this->loadModel(),
 		));
 	}
         
@@ -45,10 +45,9 @@ class DadosTrabalhoController extends Controller
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
-
+                $model->servidor_cpf=$_GET['id'];
 		if(isset($_POST['DadosTrabalho']) )
 		{
-                        $model->servidor_cpf=$_GET['id'];
 			$model->attributes=$_POST['DadosTrabalho'];
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->servidor_cpf));
@@ -84,43 +83,6 @@ class DadosTrabalhoController extends Controller
 
 
 	/**
-	 * Lists all models.
-	 */
-	public function actionIndex()
-	{
-		if(isset($_GET['id'])){
-                        //verifica se ja existe dados de trablho para o servido
-			$this->_model=DadosTrabalho::model()->with('servidor','profissao')->findbyPk($_GET['id']);
-                        if($this->_model!=null){   
-                            $this->redirect(array('view','id'=>$this->_model->servidor_cpf));
-                        }
-                        //redireciona para criar, caso nao exista
-                        else{
-                            $this->redirect(array('create','id'=>$this->_model->servidor_cpf));
-                        }
-                                
-                }
-                else{
-                   throw new CHttpException(404,'Página requisitada não existe.'); 
-                }
-	}
-
-	/**
-	 * Manages all models.
-	 */
-	/*public function actionAdmin()
-	{
-		$model=new DadosTrabalho('search');
-		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['DadosTrabalho']))
-			$model->attributes=$_GET['DadosTrabalho'];
-
-		$this->render('admin',array(
-			'model'=>$model,
-		));
-	}*/
-
-	/**
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.
 	 */
@@ -128,10 +90,15 @@ class DadosTrabalhoController extends Controller
 	{
 		if($this->_model===null)
 		{
-			if(isset($_GET['id']))
-				$this->_model=DadosTrabalho::model()->findbyPk($_GET['id']);
-			if($this->_model===null)
-				throw new CHttpException(404,'Página requisitada não existe.');
+			if(isset($_GET['id'])){
+				$this->_model=DadosTrabalho::model()->with('servidor','profissao')->findbyPk($_GET['id']);
+                                if($this->_model===null){
+                                    $this->redirect(array('create','id'=>$_GET['id'])); 
+                                }
+                        }
+			else {
+				throw new CHttpException(404,'Servidor não existente no sistema.');
+                        }
 		}
 		return $this->_model;
 	}

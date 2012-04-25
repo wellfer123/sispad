@@ -1,18 +1,20 @@
 <?php
 $this->breadcrumbs=array(
-	'Dados Trabalhos'=>array('index'),
-	$model->servidor_cpf=>array('view','id'=>$model->servidor_cpf),
-	'Update',
+	'Servidor'=>array('Servidor/view','id'=>$model->servidor_cpf),
+	'Dados do Trabalho',
+	'Atualização',
 );
 
 $this->menu=array(
-	array('label'=>'List DadosTrabalho', 'url'=>array('index')),
-	array('label'=>'Create DadosTrabalho', 'url'=>array('create')),
-	array('label'=>'View DadosTrabalho', 'url'=>array('view', 'id'=>$model->servidor_cpf)),
-	array('label'=>'Manage DadosTrabalho', 'url'=>array('admin')),
+	array('label'=>'Ver dados do trabalho', 'url'=>array('view', 'id'=>$model->servidor_cpf)),
 );
 ?>
 
-<h1>Update DadosTrabalho <?php echo $model->servidor_cpf; ?></h1>
+<?php $this->beginWidget('zii.widgets.CPortlet', array(
+			'title'=>'Atualização dos dados de trabalho de '.$model->servidor->nome,
+                        'htmlOptions'=>array('class'=>'portlet_form')
+		));?>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
+
+<?php $this->endWidget(); ?>

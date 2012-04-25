@@ -10,13 +10,15 @@
  * @property string $orgao_expedidor
  * @property string $uf
  * @property string $sexo
- * @property integer $estado_naturalidade_id
  * @property integer $cidade_naturalidade_id
  * @property string $nome_pai
  * @property string $nome_mae
  */
 class Identidade extends CActiveRecord
 {
+    
+    public static $SEXOS=array('M'=>'MASCULINO', 'F'=>'FEMININO');
+    public static $ORGAO_EXPEDIDOR=array('SDS'=>'SECRETARIA DE DEFESA SOCIAL', 'SSS'=>'SECRETARIA DE SEGURANÇA PÚBLICA');
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return Identidade the static model class
@@ -31,7 +33,7 @@ class Identidade extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'Identidade';
+		return 'identidade';
 	}
 
 	/**
@@ -43,16 +45,13 @@ class Identidade extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('data_nascimento, numero, orgao_expedidor, uf, sexo', 'required'),
-			array('estado_naturalidade_id, cidade_naturalidade_id', 'numerical', 'integerOnly'=>true),
+			array('cidade_naturalidade_id, uf', 'numerical', 'integerOnly'=>true),
 			array('servidor_cpf', 'length', 'max'=>11),
 			array('numero', 'length', 'max'=>20),
 			array('orgao_expedidor', 'length', 'max'=>10),
-			array('uf', 'length', 'max'=>2),
+			array('uf', 'length', 'max'=>10),
 			array('sexo', 'length', 'max'=>1),
 			array('nome_pai, nome_mae', 'length', 'max'=>60),
-			// The following rule is used by search().
-			// Please remove those attributes that should not be searched.
-			array('servidor_cpf, data_nascimento, numero, orgao_expedidor, uf, sexo, estado_naturalidade_id, cidade_naturalidade_id, nome_pai, nome_mae', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -64,7 +63,9 @@ class Identidade extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'servidor_cpf0' => array(self::BELONGS_TO, 'Servidor', 'servidor_cpf'),
+			'servidor' => array(self::BELONGS_TO, 'Servidor', 'servidor_cpf'),
+                        'cidadeNaturalidade'=>array(self::BELONGS_TO,'Cidades','cidade_naturalidade_id'),
+                        'estado'=>array(self::BELONGS_TO,'Estados','uf'),
 		);
 	}
 
@@ -74,16 +75,15 @@ class Identidade extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'servidor_cpf' => 'Servidor Cpf',
-			'data_nascimento' => 'Data Nascimento',
-			'numero' => 'Numero',
-			'orgao_expedidor' => 'Orgao Expedidor',
-			'uf' => 'Uf',
+			'servidor_cpf' => 'CPF do Servidor',
+			'data_nascimento' => 'Data de Nascimento',
+			'numero' => 'Número',
+			'orgao_expedidor' => 'Orgão Expedidor',
+			'uf' => 'UF',
 			'sexo' => 'Sexo',
-			'estado_naturalidade_id' => 'Estado Naturalidade',
-			'cidade_naturalidade_id' => 'Cidade Naturalidade',
-			'nome_pai' => 'Nome Pai',
-			'nome_mae' => 'Nome Mae',
+			'cidade_naturalidade_id' => 'Cidade da Naturalidade',
+			'nome_pai' => 'Nome do Pai',
+			'nome_mae' => 'Nome da Mãe',
 		);
 	}
 
@@ -110,8 +110,6 @@ class Identidade extends CActiveRecord
 
 		$criteria->compare('sexo',$this->sexo,true);
 
-		$criteria->compare('estado_naturalidade_id',$this->estado_naturalidade_id);
-
 		$criteria->compare('cidade_naturalidade_id',$this->cidade_naturalidade_id);
 
 		$criteria->compare('nome_pai',$this->nome_pai,true);
@@ -122,4 +120,13 @@ class Identidade extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+        
+        
+        public function getLabelSexo(){
+            return Identidade::$SEXO[$this->sexo];
+        }
+        
+        public function getLabelOrgaoExpedidor(){
+            return Identidade::$ORGAO_EXPEDIDOR[$this->orgao_expedidor];
+        }
 }

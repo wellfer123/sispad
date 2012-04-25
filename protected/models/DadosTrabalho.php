@@ -9,7 +9,6 @@
  * @property string $pis
  * @property integer $carga_horaria
  * @property string $turno
- * @property string $profissao
  * @property string $salario
  * @property string $conselho_classe
  * @property string $data_afastamento
@@ -38,7 +37,7 @@ class DadosTrabalho extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'Dados_Trabalho';
+		return 'dados_trabalho';
 	}
 
 	/**
@@ -57,9 +56,6 @@ class DadosTrabalho extends CActiveRecord
 			array('salario', 'length', 'max'=>7),
 			array('situacao_funcional', 'length', 'max'=>2),
 			array('data_afastamento, data_retorno', 'safe'),
-			// The following rule is used by search().
-			// Please remove those attributes that should not be searched.
-			array('servidor_cpf, data_admissao, pis, carga_horaria, turno, profissao, salario, conselho_classe, data_afastamento, data_retorno, situacao_funcional, vinculo', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -88,7 +84,7 @@ class DadosTrabalho extends CActiveRecord
 			'carga_horaria' => 'Carga Horária',
 			'turno' => 'Turno',
 			'profissao_codigo' => 'Profissão',
-			'salario' => 'Salário',
+			'salario' => 'Salário R$ (0,00)',
 			'conselho_classe' => 'Conselho de Classe',
 			'data_afastamento' => 'Data de Afastamento',
 			'data_retorno' => 'Data de Retorno',

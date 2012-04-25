@@ -1,13 +1,11 @@
 <?php
 $this->breadcrumbs=array(
-	'Dados Trabalhos'=>array('index'),
+        'Servidor'=>array('Servidor/view','id'=>$model->servidor_cpf),
+	'Dados do Trabalho',
 	'Cadastro',
 );
 
-$this->menu=array(
-	array('label'=>'List DadosTrabalho', 'url'=>array('index')),
-	array('label'=>'Manage DadosTrabalho', 'url'=>array('admin')),
-);
+
 ?>
 <?php $this->beginWidget('zii.widgets.CPortlet', array(
 			'title'=>'Cadastro de dados de trabalho do servidor: ',

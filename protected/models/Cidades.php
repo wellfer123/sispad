@@ -27,7 +27,7 @@ class Cidades extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'Cidades';
+		return 'cidades';
 	}
 
 	/**
@@ -56,7 +56,9 @@ class Cidades extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-                    'unidades'=>array(self::HAS_MANY,'Unidade','cidade_id')
+                    'unidades'=>array(self::HAS_MANY,'Unidade','cidade_id'),
+                    'estado'=>array(self::BELONGS_TO,'Estados','cidade_id_estado'),
+                    'identidades'=>array(self::HAS_MANY,'Identidade','cidade_naturalidade_id'),
 		);
 	}
 
@@ -102,4 +104,8 @@ class Cidades extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+        
+        public function getNomeEstado(){
+            return $this->cidade_nome.'/'.$this->estado->estado_nome;
+        }
 }

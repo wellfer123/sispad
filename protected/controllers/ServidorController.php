@@ -96,25 +96,6 @@ class ServidorController extends SISPADBaseController
 	}
 
 	/**
-	 * Deletes a particular model.
-	 * If deletion is successful, the browser will be redirected to the 'index' page.
-	 */
-	public function actionDelete()
-	{
-		if(Yii::app()->request->isPostRequest)
-		{
-			// we only allow deletion via POST request
-			$this->loadModel()->delete();
-
-			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-			if(!isset($_GET['ajax']))
-				$this->redirect(array('index'));
-		}
-		else
-			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
-	}
-
-	/**
 	 * Lists all models.
 	 */
 	public function actionIndex()
@@ -146,7 +127,7 @@ class ServidorController extends SISPADBaseController
 		if($this->_model===null)
 		{
 			if(isset($_GET['id']))
-				$this->_model=Servidor::model()->findbyPk($_GET['id']);
+				$this->_model=Servidor::model()->with('unidade')->findbyPk($_GET['id']);
 			if($this->_model===null)
 				throw new CHttpException(404,'The requested page does not exist.');
 		}
@@ -191,7 +172,7 @@ class ServidorController extends SISPADBaseController
        }
    }
    
-   public function actiontestepost(){
+   /*public function actiontestepost(){
         sleep(2);
         if(isset($_POST)){
             //return the POST variable back
@@ -203,7 +184,7 @@ class ServidorController extends SISPADBaseController
             $set->descricao="So testando rapaz";
             $set->save();
         }
-    }
+    }*/
     
    protected function getModelName() {
        return 'Servidor';
