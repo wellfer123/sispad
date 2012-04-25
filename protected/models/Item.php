@@ -83,4 +83,22 @@ class Item extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+
+        public function searchMetaId($metaId)
+	{
+		// Warning: Please modify the following code to remove attributes that
+		// should not be searched.
+
+		$criteria=new CDbCriteria;
+                if($metaId!=null)
+		$criteria->compare('meta_id',$metaId);
+                else
+                $criteria->compare('id',$this->id);
+
+		
+
+		return new CActiveDataProvider('Item', array(
+			'criteria'=>$criteria,
+		));
+	}
 }

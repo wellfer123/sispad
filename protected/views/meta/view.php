@@ -25,9 +25,22 @@ $this->widget('zii.widgets.grid.CGridView', array(
                  array('name'=>'periodicidade',
                       'value'=>'$data->periodicidade->nome',),
                 'percentagem',
-               
+                array('class'=>'CButtonColumn',
+                      'template'=>'{ver_itens}',
+                      'buttons'=>array(
+                            'ver_itens'=>array(
+                                'label'=>'Ver Itens',
+                                'url'=>'Yii::app()->createUrl("/item/list",array("meta_id"=>$data->id))',
+                                'imageUrl'=>  Yii::app()->request->baseUrl.'/images/view.png',
+                            )
+                      )  ),
+
+
 	),
 ));
 
 
 ?>
+                     
+
+
