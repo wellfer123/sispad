@@ -58,6 +58,14 @@ class ItemController extends SISPADBaseController {
 		));
         }
 
+         public function actionList() {
+            $model = new  Item();
+            $this->render('list',array(
+			'model'=>$model,
+		));
+
+        }
+
          public function actionFindItens() {
 
              $this->_RBAC->checkAccess('registered',true);
