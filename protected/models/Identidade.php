@@ -47,6 +47,8 @@ class Identidade extends CActiveRecord
 			array('data_nascimento, numero, orgao_expedidor, uf, sexo', 'required'),
 			array('cidade_naturalidade_id, uf', 'numerical', 'integerOnly'=>true),
 			array('servidor_cpf', 'length', 'max'=>11),
+                        array('servidor_cpf', 'cpfExiste', 'on'=>'create'),
+                        array('numero', 'identidadeExiste', 'on'=>'create'),
 			array('numero', 'length', 'max'=>20),
 			array('orgao_expedidor', 'length', 'max'=>10),
 			array('uf', 'length', 'max'=>10),
@@ -121,9 +123,28 @@ class Identidade extends CActiveRecord
 		));
 	}
         
+        public function cpfExiste($attribute, $params) {
+         
+         $identidade= $this->model()->findByAttributes(array('servidor_cpf'=>$this->servidor_cpf));
+         if($identidade!=null){
+             $this->addError('nome',"O servidor já tem uma identidade cadastrada!");
+             return false;
+          }
+         return true;
+        }
+        
+        public function identidadeExiste($attribute, $params) {
+         
+         $identidade= $this->model()->findByAttributes(array('numero'=>$this->numero));
+         if($identidade!=null){
+             $this->addError('nome',"Essa identidade já encontra-se cadastro no sistema!");
+             return false;
+             }
+         return true;
+        }
         
         public function getLabelSexo(){
-            return Identidade::$SEXO[$this->sexo];
+            return Identidade::$SEXOS[$this->sexo];
         }
         
         public function getLabelOrgaoExpedidor(){

@@ -14,14 +14,14 @@
                 <tr>
                     <td colspan="3">
                         <?php echo $form->labelEx($model,'nome_mae'); ?>
-                        <?php echo $form->textField($model,'nome_mae',array('size'=>60,'maxlength'=>60)); ?>
+                        <?php echo $form->textField($model,'nome_mae',array('size'=>60,'maxlength'=>60,'style'=>'text-transform:uppercase')); ?>
                         <?php echo $form->error($model,'nome_mae'); ?>
                     </td>
                 </tr>
                 <tr>
                     <td colspan="3">
                         <?php echo $form->labelEx($model,'nome_pai'); ?>
-                        <?php echo $form->textField($model,'nome_pai',array('size'=>60,'maxlength'=>60)); ?>
+                        <?php echo $form->textField($model,'nome_pai',array('size'=>60,'maxlength'=>60,'style'=>'text-transform:uppercase')); ?>
                         <?php echo $form->error($model,'nome_pai'); ?>
                     </td>
                 </tr>

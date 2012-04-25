@@ -41,7 +41,7 @@
                     </td>
                     <td>
                         <?php echo $form->labelEx($model,'conselho_classe'); ?>
-                        <?php echo $form->textField($model,'conselho_classe',array('size'=>20,'maxlength'=>20)); ?>
+                        <?php echo $form->textField($model,'conselho_classe',array('size'=>20,'maxlength'=>20,'style'=>'text-transform:uppercase')); ?>
                         <?php echo $form->error($model,'conselho_classe'); ?>
                     </td>
                 </tr>

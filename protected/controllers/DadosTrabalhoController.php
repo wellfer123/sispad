@@ -41,7 +41,7 @@ class DadosTrabalhoController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new DadosTrabalho;
+		$model=new DadosTrabalho('create');
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
@@ -54,7 +54,7 @@ class DadosTrabalhoController extends Controller
 		}
 
 		$this->render('create',array(
-			'model'=>$model,
+			'model'=>$model,'serv'=>$_GET['serv']
 		));
 	}
 
@@ -93,7 +93,7 @@ class DadosTrabalhoController extends Controller
 			if(isset($_GET['id'])){
 				$this->_model=DadosTrabalho::model()->with('servidor','profissao')->findbyPk($_GET['id']);
                                 if($this->_model===null){
-                                    $this->redirect(array('create','id'=>$_GET['id'])); 
+                                    $this->redirect(array('create','id'=>$_GET['id'],'serv'=>$_GET['serv'])); 
                                 }
                         }
 			else {

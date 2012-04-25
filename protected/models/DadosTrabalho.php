@@ -51,6 +51,7 @@ class DadosTrabalho extends CActiveRecord
 			array('servidor_cpf,profissao_codigo,vinculo,situacao_funcional,turno,data_admissao, carga_horaria, salario', 'required'),
 			array('carga_horaria,profissao_codigo', 'numerical', 'integerOnly'=>true),
 			array('servidor_cpf, pis', 'length', 'max'=>11),
+                        array('servidor_cpf', 'cpfExiste', 'on'=>'create'),
 			array('turno, vinculo', 'length', 'max'=>1),
 			array(' conselho_classe', 'length', 'max'=>20),
 			array('salario', 'length', 'max'=>7),
@@ -107,8 +108,18 @@ class DadosTrabalho extends CActiveRecord
 
 
         public function upperCaseAllFields(){
-       $this->conselho_classe=strtoupper($this->conselho_classe);
-   }
+            $this->conselho_classe=strtoupper($this->conselho_classe);
+        }
+        
+        public function cpfExiste($attribute, $params) {
+         
+         $identidade= $this->model()->findByAttributes(array('servidor_cpf'=>$this->servidor_cpf));
+         if($identidade!=null){
+             $this->addError('nome',"O servidor já tem dados cadastrados referentes ao trabalho!");
+             return false;
+          }
+         return true;
+        }
    
    protected function beforeSave() {
        $this->upperCaseAllFields();

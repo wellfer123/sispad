@@ -10,7 +10,7 @@ $this->menu=array(
 ?>
 <div class="update">
 <h3>Dados de Trabalho de <?php echo $model->servidor->nome; ?></h3>
-
+</div>
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
 	'attributes'=>array(
@@ -42,4 +42,3 @@ $this->menu=array(
 	),
 )); ?>
 
-</div>

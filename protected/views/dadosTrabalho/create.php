@@ -8,7 +8,7 @@ $this->breadcrumbs=array(
 
 ?>
 <?php $this->beginWidget('zii.widgets.CPortlet', array(
-			'title'=>'Cadastro de dados de trabalho do servidor: ',
+			'title'=>'Cadastro de dados de trabalho do servidor: '.$serv,
                         'htmlOptions'=>array('class'=>'portlet_form')
 		));?>
 

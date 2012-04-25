@@ -55,7 +55,7 @@ class ServidorController extends SISPADBaseController
 	 */
 	public function actionCreate()
 	{
-		$model=new Servidor;
+		$model=new Servidor('create');
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);

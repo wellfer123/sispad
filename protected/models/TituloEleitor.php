@@ -25,7 +25,7 @@ class TituloEleitor extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'Titulo_Eleitor';
+		return 'titulo_eleitor';
 	}
 
 	/**
@@ -38,6 +38,7 @@ class TituloEleitor extends CActiveRecord
 		return array(
 			array('numero, zona, secao', 'required'),
 			array('servidor_cpf', 'length', 'max'=>11),
+                        array('servidor_cpf', 'cpfExiste', 'on'=>'create'),
 			array('numero', 'length', 'max'=>20),
 			array('zona, secao', 'length', 'max'=>4),
 			// The following rule is used by search().
@@ -63,10 +64,10 @@ class TituloEleitor extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'servidor_cpf' => 'Servidor Cpf',
-			'numero' => 'Numero',
+			'servidor_cpf' => 'CPF do Servidor',
+			'numero' => 'Número',
 			'zona' => 'Zona',
-			'secao' => 'Secao',
+			'secao' => 'Seção',
 		);
 	}
 
@@ -89,7 +90,7 @@ class TituloEleitor extends CActiveRecord
 
 		$criteria->compare('secao',$this->secao,true);
 
-		return new CActiveDataProvider('Titulo_Eleitor', array(
+		return new CActiveDataProvider('TituloEleitor', array(
 			'criteria'=>$criteria,
 		));
 	}

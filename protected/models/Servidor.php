@@ -44,6 +44,7 @@ class Servidor extends CActiveRecord
 			array('cpf, matricula,nome,estado_civil', 'required'),
 			array('endereco_id, matricula, cpf', 'numerical', 'integerOnly'=>true),
 			array('cpf', 'length', 'max'=>11, 'min'=>11),
+                        array('cpf', 'servidorExiste', 'on'=>'create'),
 			array('matricula', 'length', 'max'=>20),
 			array('nome', 'length', 'max'=>40),
 			array('estado_civil', 'length', 'max'=>1),
@@ -153,6 +154,15 @@ class Servidor extends CActiveRecord
 
             return false;
 
+        }
+        public function servidorExiste($attribute, $params) {
+         
+         $servidor= $this->model()->findByAttributes(array('cpf'=>$this->cpf));
+         if($servidor!=null){
+             $this->addError('nome',"Servidor já encontra-se cadastro no sistema!");
+             return false;
+             }
+         return true;
         }
         protected function beforeSave() {
             $this->upperCaseAllFields();

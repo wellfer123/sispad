@@ -1,18 +1,19 @@
 <?php
 $this->breadcrumbs=array(
-	'Identidades'=>array('index'),
-	$model->servidor_cpf=>array('view','id'=>$model->servidor_cpf),
-	'Update',
+	'Servidor'=>array('Servidor/view','id'=>$model->servidor_cpf),
+        'Identidade',
+	'Atualização',
 );
 
 $this->menu=array(
-	array('label'=>'List Identidade', 'url'=>array('index')),
-	array('label'=>'Create Identidade', 'url'=>array('create')),
-	array('label'=>'View Identidade', 'url'=>array('view', 'id'=>$model->servidor_cpf)),
-	array('label'=>'Manage Identidade', 'url'=>array('admin')),
+	array('label'=>'Ver identidade', 'url'=>array('view', 'id'=>$model->servidor_cpf)),
 );
 ?>
-
-<h1>Update Identidade <?php echo $model->servidor_cpf; ?></h1>
+<?php $this->beginWidget('zii.widgets.CPortlet', array(
+			'title'=>'Atualização da identidade '.$model->servidor->nome,
+                        'htmlOptions'=>array('class'=>'portlet_form')
+		));?>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
+
+<?php $this->endWidget(); ?>

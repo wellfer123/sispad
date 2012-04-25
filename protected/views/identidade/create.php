@@ -1,15 +1,17 @@
 <?php
 $this->breadcrumbs=array(
-	'Identidades'=>array('index'),
-	'Create',
+	'Servidor'=>array('Servidor/view','id'=>$model->servidor_cpf),
+        'Identidade',
+	'Cadastro',
 );
 
-$this->menu=array(
-	array('label'=>'List Identidade', 'url'=>array('index')),
-	array('label'=>'Manage Identidade', 'url'=>array('admin')),
-);
+
 ?>
-
-<h1>Create Identidade</h1>
+<?php $this->beginWidget('zii.widgets.CPortlet', array(
+			'title'=>'Cadastro de identidade do servidor '.$serv,
+                        'htmlOptions'=>array('class'=>'portlet_form')
+		));?>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
+
+<?php $this->endWidget(); ?>
