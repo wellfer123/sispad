@@ -67,6 +67,7 @@ array(
           array("url"=>array(),
                             "label"=>"indicadores",
                        array("url"=>array("route"=>"/indicador/create"), "label"=>"cadastro Indicador"),
+                        array("url"=>array("route"=>"/indicador/index"), "label"=>"Ver Indicadores"),
                       array("url"=>array("route"=>"/item/create"), "label"=>"cadastro Itens"),
                       array("url"=>array("route"=>"/meta/create"), "label"=>"cadastro Metas"),
                       //array("url"=>array("route"=>"/rbac/assignment"), "label"=>"Permissões"),

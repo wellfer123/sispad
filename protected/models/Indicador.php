@@ -17,6 +17,10 @@ class Indicador extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * @return Indicador the static model class
 	 */
+
+        const ATIVO=1;
+        const DESATIVO=0;
+
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
@@ -99,6 +103,24 @@ class Indicador extends CActiveRecord
 		$criteria->compare('status',$this->status,true);
 
 		$criteria->compare('afericao',$this->afericao,true);
+
+		return new CActiveDataProvider('Indicador', array(
+			'criteria'=>$criteria,
+		));
+	}
+
+        public function searchPorProfissao($profissaoCodigo)
+	{
+		// Warning: Please modify the following code to remove attributes that
+		// should not be searched.
+
+		$criteria=new CDbCriteria;
+
+
+
+		$criteria->compare('profissao_codigo',$profissaoCodigo);
+
+
 
 		return new CActiveDataProvider('Indicador', array(
 			'criteria'=>$criteria,
