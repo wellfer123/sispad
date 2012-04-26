@@ -87,7 +87,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
 
                                                         'label'=>'Adicionar Meta',
                                                         'url'=> 'Yii::app()->createUrl("/meta/create",array("indicador_id"=>$data->id))',
-                                                        //'options'=>array('class'=>'active', 'style'=>"padding-right:10px"),
+                                                        'options'=>array('class'=>'meta', 'style'=>"padding-right:2px"),
                                                         'imageUrl'=>  Yii::app()->request->baseUrl.'/images/add.png',
                                                 ),
                                         'ver_metas'=>array(
@@ -101,14 +101,14 @@ $this->widget('zii.widgets.grid.CGridView', array(
                                                         'visible'=>'$data->status==Indicador::DESATIVO',
                                                         'label'=>'Ativar Indicador',
                                                         'url'=> 'Yii::app()->createUrl("/indicador/active",array("id"=>$data->id))',
-                                                        'options'=>array('class'=>'active', 'style'=>"padding-right:10px"),
+                                                        'options'=>array('class'=>'active', 'style'=>"padding-right:2px"),
                                                         'imageUrl'=>  Yii::app()->request->baseUrl.'/images/unlocked.png',
                                                 ),
                                         'inactive'=>array(
                                                         'visible'=>'$data->status==Indicador::ATIVO',
                                                         'url'=> 'Yii::app()->createUrl("/indicador/inactive",array("id"=>$data->id))',
                                                         'label'=>'Desativar Indicador',
-                                                        'options'=>array('class'=>'inactive','style'=>"padding-right:10px"),
+                                                        'options'=>array('class'=>'inactive','style'=>"padding-right:2px"),
                                                         'imageUrl'=>  Yii::app()->request->baseUrl.'/images/locked.png',
                                                 ),
 

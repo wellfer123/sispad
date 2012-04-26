@@ -6,7 +6,7 @@
 )); ?>
 
 	<p class="note">Fields with <span class="required">*</span> are required.</p>
-
+        <?php echo $this->renderMessages(); ?>
 	<?php echo $form->errorSummary($model); ?>
 
 	<div class="row">
@@ -36,29 +36,29 @@
 	<div class="row">
 		
                 <?php echo $form->labelEx($model,'cidade_id'); ?>
-                <?php $this->widget('EJuiAutoCompleteFkField', array(
+                        <?php $this->widget('EJuiAutoCompleteFkField', array(
                                     'model'=>$model,
                                     'attribute'=>'cidade_id', //the FK field (from CJuiInputWidget)
                                      // controller method to return the autoComplete data (from CJuiAutoComplete)
-                                    'sourceUrl'=>Yii::app()->createUrl('Endereco/findCidades'),
+                                    'sourceUrl'=>Yii::app()->createUrl('Cidade/findCidades'),
                                     // defaults to false.  set 'true' to display the FK field with 'readonly' attribute.
-                                    'showFKField'=>true,
+                                    'showFKField'=>false,
                                     // display size of the FK field.  only matters if not hidden.  defaults to 10
-                                    'FKFieldSize'=>10,
+                                    'FKFieldSize'=>11,
                                     'htmlOptions'=>array('style'=>'text-transform:uppercase'),
-                                    //'relName'=>'unidade', // the relation name defined above
-                                    'displayAttr'=>'Nome',  // attribute or pseudo-attribute to display
+                                    'relName'=>'cidades', // the relation name defined above
+                                    'displayAttr'=>'NomeEstado',  // attribute or pseudo-attribute to display
                                     // length of the AutoComplete/display field, defaults to 50
-                                    'autoCompleteLength'=>80,
+                                    'autoCompleteLength'=>60,
                                      // any attributes of CJuiAutoComplete and jQuery JUI AutoComplete widget may
                                      // also be defined.  read the code and docs for all options
                                     'options'=>array(
                                         // number of characters that must be typed before
                                             // autoCompleter returns a value, defaults to 2
-                                        'minLength'=>6,
+                                        'minLength'=>4,
                                         ),
                                 ));?>
-		<?php echo $form->error($model,'cidade_id'); ?>
+                        <?php echo $form->error($model,'cidade_id'); ?>
 	</div>
 
 	<div class="row">

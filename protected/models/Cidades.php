@@ -59,6 +59,7 @@ class Cidades extends CActiveRecord
                     'unidades'=>array(self::HAS_MANY,'Unidade','cidade_id'),
                     'estado'=>array(self::BELONGS_TO,'Estados','cidade_id_estado'),
                     'identidades'=>array(self::HAS_MANY,'Identidade','cidade_naturalidade_id'),
+                    'endereco'=>array(self::HAS_MANY,'Endereco','cidade_id'),
 		);
 	}
 

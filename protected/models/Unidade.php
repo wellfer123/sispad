@@ -61,7 +61,8 @@ class Unidade extends CActiveRecord
 		return array(
                     'cidade'=>array(self::BELONGS_TO,'Cidades','cidade_id'),
                     'regional'=>array(self::BELONGS_TO,'Regionais','regional_id'),
-                    'departamentos'=>array(self::HAS_MANY,'Departamento','unidade_cnes')
+                    'departamentos'=>array(self::HAS_MANY,'Departamento','unidade_cnes'),
+                    'servidor'=>array(self::HAS_MANY,'Servidor','unidade_cnes'),
 		);
 	}
 
