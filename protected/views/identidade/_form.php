@@ -68,7 +68,16 @@
                     <td>
                        <?php echo $form->labelEx($model,'data_nascimento'); ?>
                         <?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
-                                                'name'=>'data_nascimento',
+                                                'options'=>array(
+                                                    'changeMonth'=>'true', 
+                                                    'changeYear'=>'true',   
+                                                    'yearRange' => '-99:+0', 
+                                                    'showAnim'=>'fadeIn', // 'show' (the default), 'slideDown', 'fadeIn', 'fold'
+                                                    'showOn'=>'button',
+                                                    'buttonText'=>Yii::t('ui','Selecione a data'), 
+                                                    'buttonImage'=>Yii::app()->request->baseUrl.'/images/calendar.png', 
+                                                    'buttonImageOnly'=>true,
+                                                ),
                                                 'language'=>'pt',
                                                 'model'=>$model,
                                                 'attribute'=>'data_nascimento',

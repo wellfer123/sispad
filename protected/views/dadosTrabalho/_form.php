@@ -49,7 +49,7 @@
                 <tr>
                     <td>
                         <?php echo $form->labelEx($model,'salario'); ?>
-                        <?php echo $form->textField($model,'salario',array('size'=>7,'maxlength'=>7)); ?>
+                        <?php echo $form->textField($model,'salario',array('size'=>8,'maxlength'=>8)); ?>
                         <?php echo $form->error($model,'salario'); ?>
                     </td>
                     
@@ -127,6 +127,16 @@
                                                 //'name'=>'data_afastamento',
                                                 'language'=>'pt',
                                                 'model'=>$model,
+                                                'options'=>array(
+                                                    'changeMonth'=>'true', 
+                                                    'changeYear'=>'true',   
+                                                    'yearRange' => '-99:+1', 
+                                                    'showAnim'=>'fadeIn', // 'show' (the default), 'slideDown', 'fadeIn', 'fold'
+                                                    'showOn'=>'button',
+                                                    'buttonText'=>Yii::t('ui','Selecione a data'), 
+                                                    'buttonImage'=>Yii::app()->request->baseUrl.'/images/calendar.png', 
+                                                    'buttonImageOnly'=>true,
+                                                ),
                                                 'attribute'=>'data_afastamento',
                                                 'htmlOptions'=>array()))?>
                         <?php echo $form->error($model,'data_afastamento'); ?>
@@ -137,6 +147,16 @@
                                                 //'name'=>'data_retorno',
                                                 'language'=>'pt',
                                                 'model'=>$model,
+                                                'options'=>array(
+                                                    'changeMonth'=>'true', 
+                                                    'changeYear'=>'true',   
+                                                    'yearRange' => '-99:+1', 
+                                                    'showAnim'=>'fadeIn', // 'show' (the default), 'slideDown', 'fadeIn', 'fold'
+                                                    'showOn'=>'button',
+                                                    'buttonText'=>Yii::t('ui','Selecione a data'), 
+                                                    'buttonImage'=>Yii::app()->request->baseUrl.'/images/calendar.png', 
+                                                    'buttonImageOnly'=>true,
+                                                ),
                                                 'attribute'=>'data_retorno',
                                                 'htmlOptions'=>array()))?>
                         <?php echo $form->error($model,'data_retorno'); ?>
