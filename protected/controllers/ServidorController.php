@@ -127,7 +127,7 @@ class ServidorController extends SISPADBaseController
 		if($this->_model===null)
 		{
 			if(isset($_GET['id']))
-				$this->_model=Servidor::model()->with('unidade','endereco.cidade')->findbyPk($_GET['id']);
+				$this->_model=Servidor::model()->with('unidade','endereco.cidades')->findbyPk($_GET['id']);
 			if($this->_model===null)
 				throw new CHttpException(404,'The requested page does not exist.');
 		}
