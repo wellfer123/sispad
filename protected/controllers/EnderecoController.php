@@ -1,6 +1,6 @@
 <?php
 
-class EnderecoController extends SISPADBaseController
+class EnderecoController  extends SISPADBaseController
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -13,6 +13,12 @@ class EnderecoController extends SISPADBaseController
 	 */
 	private $_model;
 
+         public function __construct($id, $module = null) {
+            parent::__construct($id, $module);
+        }
+        protected function getModelName() {
+            return 'Endereco';
+        }
 	/**
 	 * @return array action filters
 	 */
@@ -40,7 +46,6 @@ class EnderecoController extends SISPADBaseController
 	 */
 	public function actionCreate()
 	{
-           if(isset($_GET['id']) && isset($_GET['model']) && isset($_GET['idModel'])){
          
                 //tem os parãmetros necessários
 		$model=new Endereco;
@@ -51,21 +56,29 @@ class EnderecoController extends SISPADBaseController
 		if(isset($_POST['Endereco']))
 		{
 			$model->attributes=$_POST['Endereco'];
-			if($model->save()){
-                            $this->redirectViewModel($model);
-                        }
+			if($model->save())
+                                $this->salvaEmServidor($model);
+				
 		}
 
 		$this->render('create',array(
 			'model'=>$model,
 		));
-           }
-           //nao tem os parâmetros necessários
-           else{
-               throw new CHttpException(404,'Você acessou indevidamente uma página! Não repita a operção!');
-           }
 	}
 
+        public function salvaEmServidor($model) {
+            
+            $servidor =$this->loadModelServidor();
+            
+            $servidor->endereco_id = $model->id;
+            
+            if($servidor->save()){
+              $this->redirect(array('view','id'=>$model->id));
+            }else{
+                $this->addmessageErro("Erro ao cadastrar o endereço: verifique se os dados do servidor foram
+                    cadastrados corretamente");
+            }
+        }
 	/**
 	 * Updates a particular model.
 	 * If update is successful, the browser will be redirected to the 'view' page.
@@ -99,6 +112,36 @@ class EnderecoController extends SISPADBaseController
 			'model'=>$this->loadModel(),
 		));
 	}
+
+	/**
+	 * Returns the data model based on the primary key given in the GET variable.
+	 * If the data model is not found, an HTTP exception will be raised.
+	 */
+	public function loadModel()
+	{
+		if($this->_model===null)
+		{
+			if(isset($_GET['id']))
+				$this->_model=Endereco::model()->findbyPk($_GET['id']);
+			if($this->_model===null)
+                                 $this->redirect(array('create','cpf'=>$_GET['cpf'],'id'=>$_GET['id'],'serv'=>$_GET['serv']));
+				//throw new CHttpException(404,'The requested page does not exist.');
+		}
+		return $this->_model;
+	}
+
+        public function loadModelServidor()
+	{
+
+		if(isset($_GET['cpf']))
+                    $modelServidor=Servidor::model()->findbyPk($_GET['cpf']);
+                
+
+		return $modelServidor;
+	}
+
+
+        
 	/**
 	 * Performs the AJAX validation.
 	 * @param CModel the model to be validated
@@ -111,41 +154,4 @@ class EnderecoController extends SISPADBaseController
 			Yii::app()->end();
 		}
 	}
-        
-        public function loadModel()
-	{
-		if($this->_model===null)
-		{
-			if(isset($_GET['id'])){
-				$this->_model=Endereco::model()->with('cidade')->findbyPk($_GET['id']);
-                                if($this->_model===null){
-                                    $this->redirect(array('create','id'=>$_GET['id'],'model'=>$_GET['model'],'idModel'=>$_GET['idModel'])); 
-                                }
-                        }
-			else {
-				throw new CHttpException(404,'Servidor não existente no sistema.');
-                        }
-		}
-		return $this->_model;
-	}
-        
-        protected function redirectViewModel($model){
-                //vai verificar qual foi a entidade que está solicitando um endereco
-                            $ent=$_GET['model'];
-                            $id=$_GET['idModel'];
-                            switch($ent){
-                                case 'servidor':
-                                                $ser=Servidor::model()->findByPk($id);
-                                                //coloca o id do endereco no servidor
-                                                $ser->endereco_id=$model->id;
-                                                //salvar o servidor
-                                                $ser->save();
-                                                break;
-                            }
-                            $this->redirect(array("view",'id'=>$_GET['id'],'model'=>$_GET['model'],'idModel'=>$_GET['serv']));
-        }
-
-    protected function getModelName() {
-        return 'Endereco';
-    }
 }
