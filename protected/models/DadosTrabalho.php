@@ -54,7 +54,10 @@ class DadosTrabalho extends CActiveRecord
                         array('servidor_cpf', 'cpfExiste', 'on'=>'create'),
 			array('turno, vinculo', 'length', 'max'=>1),
 			array(' conselho_classe', 'length', 'max'=>20),
-			array('salario', 'length', 'max'=>7),
+                        //7+ 1 (vírgula)
+			array('salario', 'length', 'max'=>8),
+                        array('salario', 'numerical', 'numberPattern'=>'/^[0-9]+[,][0-9][0-9]$/',
+                                                'message'=>'Salário deve ser um número com duas casas decimais separadas por vírgula.'),
 			array('situacao_funcional', 'length', 'max'=>2),
 			array('data_afastamento, data_retorno', 'safe'),
 		);
@@ -85,7 +88,7 @@ class DadosTrabalho extends CActiveRecord
 			'carga_horaria' => 'Carga Horária',
 			'turno' => 'Turno',
 			'profissao_codigo' => 'Profissão',
-			'salario' => 'Salário R$ (0,00)',
+			'salario' => 'Salário R$ (00000,00)',
 			'conselho_classe' => 'Conselho de Classe',
 			'data_afastamento' => 'Data de Afastamento',
 			'data_retorno' => 'Data de Retorno',
@@ -125,6 +128,7 @@ class DadosTrabalho extends CActiveRecord
        $this->data_afastamento=ParserDate::inverteDataPtToEn($this->data_afastamento);
        $this->data_admissao=ParserDate::inverteDataPtToEn($this->data_admissao);
        $this->data_retorno=ParserDate::inverteDataPtToEn($this->data_retorno);
+       $this->salario=str_replace(',', '.', $this->salario);
        $this->upperCaseAllFields();
        return parent::beforeSave();
    }
@@ -133,6 +137,7 @@ class DadosTrabalho extends CActiveRecord
        $this->data_afastamento=ParserDate::inverteDataEnToPt($this->data_afastamento);
        $this->data_admissao=ParserDate::inverteDataEnToPt($this->data_admissao);
        $this->data_retorno=ParserDate::inverteDataEnToPt($this->data_retorno);
+       $this->salario=str_replace('.', ',', $this->salario);
        parent::afterFind();
    }
 
