@@ -57,6 +57,7 @@ class IdentidadeController extends Controller
 		if(isset($_POST['Identidade']))
 		{
 			$model->attributes=$_POST['Identidade'];
+                        $model->data_nascimento=$_POST['Identidade']['data_nascimento'];
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->servidor_cpf));
 		}
@@ -80,6 +81,8 @@ class IdentidadeController extends Controller
 		if(isset($_POST['Identidade']))
 		{
 			$model->attributes=$_POST['Identidade'];
+                        $model->data_nascimento=$_POST['Identidade']['data_nascimento'];
+                        
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->servidor_cpf));
 		}

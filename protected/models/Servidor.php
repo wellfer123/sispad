@@ -45,7 +45,7 @@ class Servidor extends CActiveRecord
 			array('endereco_id, matricula, cpf', 'numerical', 'integerOnly'=>true),
 			array('cpf', 'length', 'max'=>11, 'min'=>11),
                         array('cpf', 'servidorExiste', 'on'=>'create'),
-			array('matricula', 'length', 'max'=>20),
+			array('matricula', 'length', 'min'=>5 ,'max'=>20),
 			array('nome', 'length', 'max'=>40),
 			array('estado_civil', 'length', 'max'=>1),
 			array('unidade_cnes', 'length', 'max'=>10,'min'=>6),

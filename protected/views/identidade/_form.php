@@ -27,9 +27,16 @@
                 </tr>
                 <tr>
                     <td>
-                        <?php echo $form->labelEx($model,'numero'); ?>
-                        <?php echo $form->textField($model,'numero',array('size'=>20,'maxlength'=>20)); ?>
-                        <?php echo $form->error($model,'numero'); ?>
+                        <?php 
+                            echo    $form->labelEx($model,'numero'); 
+                                    $this->widget('CMaskedTextField', array(
+                                            'model'=>$model,
+                                            'attribute'=>'numero',
+                                            'mask'=>'9999?9999999999999999',
+                                            'htmlOptions'=>array('disable'=>!$model->isNewRecord,'maxlength'=>20,'style'=>'text-transform:uppercase'),
+                                    ));
+                            echo    $form->error($model,'numero');
+                        ?>
                     </td>
                     
                     <td>

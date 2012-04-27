@@ -1,11 +1,12 @@
 <?php
+Yii::import('application.services.FormataData');
 $this->breadcrumbs=array(
 	'Servidor'=>array('Servidor/view','id'=>$model->servidor_cpf),
         'Identidade de '.$model->servidor->nome,
 );
 
 $this->menu=array(
-	array('label'=>'Update Identidade', 'url'=>array('update', 'id'=>$model->servidor_cpf)),
+	array('label'=>'Atualizar identidade', 'url'=>array('update', 'id'=>$model->servidor_cpf)),
 );
 ?>
 
@@ -21,10 +22,6 @@ $this->menu=array(
 		'nome_pai',
 		'nome_mae',
 		'data_nascimento',
-                array(
-                    'label'=>'Data de nascimento',
-                    'value'=>$model->estado->estado_nome.' - '.$model->estado->estado_sigla,
-                ),
 		'numero',
                 array(
                     'label'=>'UF',

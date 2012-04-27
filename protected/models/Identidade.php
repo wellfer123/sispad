@@ -123,6 +123,14 @@ class Identidade extends CActiveRecord
 		));
 	}
         
+        
+        protected function beforeSave() {
+            $this->data_nascimento=ParserDate::inverteDataPtToEn($this->data_nascimento);
+            $this->upperAllFields();
+            return parent::beforeSave();
+        }
+
+        
         public function cpfExiste($attribute, $params) {
          
          $identidade= $this->model()->findByAttributes(array('servidor_cpf'=>$this->servidor_cpf));
@@ -150,4 +158,15 @@ class Identidade extends CActiveRecord
         public function getLabelOrgaoExpedidor(){
             return Identidade::$ORGAO_EXPEDIDOR[$this->orgao_expedidor];
         }
+        
+        public function upperAllFields(){
+            $this->nome_mae=strtoupper($this->nome_mae);
+            $this->nome_pai=strtoupper($this->nome_pai);
+        }
+        
+        protected function afterFind() {
+            $this->data_nascimento=ParserDate::inverteDataEnToPt($this->data_nascimento);
+            parent::afterFind();
+        }
+
 }

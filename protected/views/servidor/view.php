@@ -14,7 +14,11 @@ $this->menu=array(
 <div class="update">
 <h2>Servidor: <?php echo $model->nome; ?> </h2>
 
-<?php $this->widget('zii.widgets.CDetailView', array(
+</div>
+<?php 
+   // $labelEndereco=$model->endereco:null?'Cadastrar' :'Endereco';
+
+        $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
 	'attributes'=>array(
 		'cpf',
@@ -31,7 +35,7 @@ $this->menu=array(
                     'label'=>'Outros Dados',
                     'type'=>'raw',
                     'value'=>CHtml::link('Endereço',
-                                 array('endereco/view','cpf'=>$model->cpf,'id'=>$model->endereco_id,'serv'=>$model->nome)).' / '.
+                                 array('endereco/view','id'=>$model->endereco_id,'model'=>'servidor','idModel'=>$model->cpf)).'/ '.
                             CHtml::link('Dados do Trabalho',
                                  array('DadosTrabalho/view','id'=>$model->cpf,'serv'=>$model->nome)).' / '.
                             CHtml::link('Identidade',
@@ -42,4 +46,3 @@ $this->menu=array(
 	),
 )); ?>
 
-</div>

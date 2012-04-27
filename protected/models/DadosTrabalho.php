@@ -122,8 +122,18 @@ class DadosTrabalho extends CActiveRecord
         }
    
    protected function beforeSave() {
+       $this->data_afastamento=ParserDate::inverteDataPtToEn($this->data_afastamento);
+       $this->data_admissao=ParserDate::inverteDataPtToEn($this->data_admissao);
+       $this->data_retorno=ParserDate::inverteDataPtToEn($this->data_retorno);
        $this->upperCaseAllFields();
        return parent::beforeSave();
+   }
+
+   protected function afterFind() {
+       $this->data_afastamento=ParserDate::inverteDataEnToPt($this->data_afastamento);
+       $this->data_admissao=ParserDate::inverteDataEnToPt($this->data_admissao);
+       $this->data_retorno=ParserDate::inverteDataEnToPt($this->data_retorno);
+       parent::afterFind();
    }
 
 }

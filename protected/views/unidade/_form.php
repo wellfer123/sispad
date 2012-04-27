@@ -15,7 +15,6 @@
         
         <div class="row">
 		<?php 
-                    //if($model->isNewRecord){
                         echo $form->labelEx($model,'cnes'); 
                         $this->widget('CMaskedTextField', array(
                         'model'=>$model,
@@ -24,7 +23,6 @@
                         'htmlOptions'=>array('disabled'=>!$model->isNewRecord,'style'=>'text-transform:uppercase'),
                         ));
                     echo $form->error($model,'cnes');
-                    //}
                     ?>
 	</div>
 
