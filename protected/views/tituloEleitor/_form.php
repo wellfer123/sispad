@@ -5,13 +5,18 @@
 	'enableAjaxValidation'=>false,
 )); ?>
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
+	<p class="note">Campos com <span class="required">*</span> são obrigatórios.</p>
 
 	<?php echo $form->errorSummary($model); ?>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'numero'); ?>
-		<?php echo $form->textField($model,'numero',array('size'=>20,'maxlength'=>20)); ?>
+		<?php $this->widget('CMaskedTextField', array(
+                                            'model'=>$model,
+                                            'attribute'=>'numero',
+                                            'mask'=>'99999',
+                                            'htmlOptions'=>array('size'=>9),
+                            ));?>
 		<?php echo $form->error($model,'numero'); ?>
 	</div>
 

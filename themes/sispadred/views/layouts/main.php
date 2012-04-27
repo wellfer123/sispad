@@ -64,13 +64,6 @@ array(
                       'visible'=>$RBAC2->checkAccess('SuperAdmin'),
                       
               ),
-     array("url"=>array(),
-                            "label"=>"_servidor",
-                      array("url"=>array("route"=>"/endereco/create"), "label"=>"Endereco Create"),
-                      array("url"=>array("route"=>"/identidade/create"), "label"=>"Identidade"),
-                      //'visible'=>$RBAC2->checkAccess('SuperAdmin'),
-
-              ),
           array("url"=>array(),
                             "label"=>"indicadores",
                        array("url"=>array("route"=>"/indicador/create"), "label"=>"cadastro Indicador"),

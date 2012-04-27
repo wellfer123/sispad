@@ -5,8 +5,8 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List TituloEleitor', 'url'=>array('index')),
-	array('label'=>'Manage TituloEleitor', 'url'=>array('admin')),
+	//array('label'=>'List TituloEleitor', 'url'=>array('index')),
+	//array('label'=>'Manage TituloEleitor', 'url'=>array('admin')),
 );
 ?>
 
