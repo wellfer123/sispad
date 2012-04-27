@@ -214,8 +214,10 @@ CREATE TABLE `cidades` (
   `cidade_id_estado` int(10) unsigned DEFAULT NULL,
   `cidade_id_regional` varchar(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `cidade_codigo_estado_ibge` varchar(2) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5253 DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`id`),
+  KEY `foreign_key_cidade_id_estado` (`cidade_id_estado`),
+  CONSTRAINT `cidades_ibfk_1` FOREIGN KEY (`cidade_id_estado`) REFERENCES `estados` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5246 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `cidades`
@@ -223,7 +225,6 @@ CREATE TABLE `cidades` (
 
 /*!40000 ALTER TABLE `cidades` DISABLE KEYS */;
 INSERT INTO `cidades` (`id`,`cidade_nome`,`cidade_codigo_ibge`,`cidade_id_estado`,`cidade_id_regional`,`cidade_codigo_estado_ibge`) VALUES 
- (1,'IGNORADO OU EXTERIOR','000000',0,'0',''),
  (2,'MUNICIPIO IGNORADO - RO','110000',6,'0',''),
  (3,'ALTA FLORESTA D\'OESTE','110001',6,'0',''),
  (4,'ARIQUEMES','110002',6,'0',''),
@@ -1733,9 +1734,9 @@ INSERT INTO `cidades` (`id`,`cidade_nome`,`cidade_codigo_ibge`,`cidade_id_estado
  (1508,'BUIQUE','260280',1,'0','26'),
  (1509,'CABO DE SANTO AGOSTINHO','260290',1,'0','26'),
  (1510,'CABROBO','260300',1,'0','26'),
- (1511,'CACHOEIRINHA','260310',1,'2604','26');
+ (1511,'CACHOEIRINHA','260310',1,'2604','26'),
+ (1512,'CAETES','260320',1,'0','26');
 INSERT INTO `cidades` (`id`,`cidade_nome`,`cidade_codigo_ibge`,`cidade_id_estado`,`cidade_id_regional`,`cidade_codigo_estado_ibge`) VALUES 
- (1512,'CAETES','260320',1,'0','26'),
  (1513,'CALCADO','260330',1,'0','26'),
  (1514,'CALUMBI','260340',1,'0','26'),
  (1515,'CAMARAGIBE','260345',1,'0','26'),
@@ -3241,9 +3242,9 @@ INSERT INTO `cidades` (`id`,`cidade_nome`,`cidade_codigo_ibge`,`cidade_id_estado
  (3015,'SAO ROQUE DE MINAS','316430',19,'0',''),
  (3016,'SAO SEBASTIAO DA BELA VISTA','316440',19,'0',''),
  (3017,'SAO SEBASTIAO DA VARGEM ALEGRE','316443',19,'0',''),
- (3018,'SAO SEBASTIAO DO ANTA','316447',19,'0','');
+ (3018,'SAO SEBASTIAO DO ANTA','316447',19,'0',''),
+ (3019,'SAO SEBASTIAO DO MARANHAO','316450',19,'0','');
 INSERT INTO `cidades` (`id`,`cidade_nome`,`cidade_codigo_ibge`,`cidade_id_estado`,`cidade_id_regional`,`cidade_codigo_estado_ibge`) VALUES 
- (3019,'SAO SEBASTIAO DO MARANHAO','316450',19,'0',''),
  (3020,'SAO SEBASTIAO DO OESTE','316460',19,'0',''),
  (3021,'SAO SEBASTIAO DO PARAISO','316470',19,'0',''),
  (3022,'SAO SEBASTIAO DO RIO PRETO','316480',19,'0',''),
@@ -4774,9 +4775,9 @@ INSERT INTO `cidades` (`id`,`cidade_nome`,`cidade_codigo_ibge`,`cidade_id_estado
  (4547,'RIO DO CAMPO','421450',22,'0',''),
  (4548,'RIO DO OESTE','421460',22,'0',''),
  (4549,'RIO DOS CEDROS','421470',22,'0',''),
- (4550,'RIO DO SUL','421480',22,'0','');
+ (4550,'RIO DO SUL','421480',22,'0',''),
+ (4551,'RIO FORTUNA','421490',22,'0','');
 INSERT INTO `cidades` (`id`,`cidade_nome`,`cidade_codigo_ibge`,`cidade_id_estado`,`cidade_id_regional`,`cidade_codigo_estado_ibge`) VALUES 
- (4551,'RIO FORTUNA','421490',22,'0',''),
  (4552,'RIO NEGRINHO','421500',22,'0',''),
  (4553,'RIO RUFINO','421505',22,'0',''),
  (4554,'RIQUEZA','421507',22,'0',''),
@@ -5470,14 +5471,7 @@ INSERT INTO `cidades` (`id`,`cidade_nome`,`cidade_codigo_ibge`,`cidade_id_estado
  (5242,'CUIABA','510340',25,'0',''),
  (5243,'CURVELANDIA','510343',25,'0',''),
  (5244,'DENISE','510345',25,'0',''),
- (5245,'DIAMANTINO','510350',25,'0',''),
- (5246,'CIDADE_NOME','cidAde_cod',0,'0',''),
- (5247,'IV REGIONAL','26R004',1,'2604','26'),
- (5248,'I REGIONAL','26R001',1,'2601','26'),
- (5249,'TERRITORIO 01(IV GERES)','26RT01',1,'2604','26'),
- (5250,'TERRITORIO 02(IV GERES)','26RT02',1,'2604','26'),
- (5251,'TERRITORIO 03(IV GERES)','26RT03',1,'2604','26'),
- (5252,'TERRITORIO 04(IV GERES)','26RT04',1,'2604','26');
+ (5245,'DIAMANTINO','510350',25,'0','');
 /*!40000 ALTER TABLE `cidades` ENABLE KEYS */;
 
 
@@ -5492,7 +5486,6 @@ CREATE TABLE `dados_trabalho` (
   `pis` varchar(11) DEFAULT NULL,
   `carga_horaria` int(2) NOT NULL,
   `turno` char(1) DEFAULT NULL,
-  `profissao` varchar(20) DEFAULT NULL,
   `salario` decimal(7,2) NOT NULL,
   `conselho_classe` varchar(20) DEFAULT NULL,
   `data_afastamento` date DEFAULT NULL,
@@ -5511,8 +5504,11 @@ CREATE TABLE `dados_trabalho` (
 --
 
 /*!40000 ALTER TABLE `dados_trabalho` DISABLE KEYS */;
-INSERT INTO `dados_trabalho` (`servidor_cpf`,`data_admissao`,`pis`,`carga_horaria`,`turno`,`profissao`,`salario`,`conselho_classe`,`data_afastamento`,`data_retorno`,`situacao_funcional`,`vinculo`,`profissao_codigo`) VALUES 
- ('43243243242','0000-00-00','',23,'T',NULL,'23.23','','0000-00-00','0000-00-00','AT','C',2);
+INSERT INTO `dados_trabalho` (`servidor_cpf`,`data_admissao`,`pis`,`carga_horaria`,`turno`,`salario`,`conselho_classe`,`data_afastamento`,`data_retorno`,`situacao_funcional`,`vinculo`,`profissao_codigo`) VALUES 
+ ('09809809809','0000-00-00','32433',2333,'M','23.23','','0000-00-00','0000-00-00','AT','C',532),
+ ('09886798805','2012-04-20','',56,'N','0.34','32242EFEAF','2012-01-02','2012-04-23','AT','S',777),
+ ('0988909880','2012-04-13','32432423432',34,'N','45673.03','','1993-04-12','0000-00-00','DE','P',642),
+ ('43243243242','2012-04-28','',23,'T','23.23','','1915-03-15','2012-01-08','AT','C',2);
 /*!40000 ALTER TABLE `dados_trabalho` ENABLE KEYS */;
 
 
@@ -5553,13 +5549,19 @@ CREATE TABLE `endereco` (
   `telefone` varchar(11) DEFAULT NULL,
   `email` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `endereco`
 --
 
 /*!40000 ALTER TABLE `endereco` DISABLE KEYS */;
+INSERT INTO `endereco` (`id`,`logradouro`,`numero`,`complemento`,`bairro`,`cidade_id`,`telefone`,`email`) VALUES 
+ (1,'wefwfwfewr',2342,'dfdfd','dsfdsfdsfdsf',187,'232432','verferf@f34r43r'),
+ (2,'rua teste',12,'proximo','centro',1610,'2342143','wwrwqrw'),
+ (3,'rua teste',12,'proximo','centro',NULL,'2342143','wwrwqrw'),
+ (4,'rua teste',324,'33432','efewf',187,'45334','gergerg'),
+ (5,'werfew',3245,'afaseagt','asfafd',3850,'324324','dfwe@fwfmo4q');
 /*!40000 ALTER TABLE `endereco` ENABLE KEYS */;
 
 
@@ -5622,14 +5624,18 @@ CREATE TABLE `identidade` (
   `data_nascimento` date NOT NULL,
   `numero` varchar(20) NOT NULL,
   `orgao_expedidor` varchar(10) NOT NULL,
-  `uf` char(2) NOT NULL,
+  `uf` int(10) unsigned NOT NULL,
   `sexo` char(1) NOT NULL,
-  `estado_naturalidade_id` int(11) DEFAULT NULL,
-  `cidade_naturalidade_id` int(11) DEFAULT NULL,
   `nome_pai` varchar(60) DEFAULT NULL,
   `nome_mae` varchar(60) DEFAULT NULL,
+  `cidade_naturalidade_id` int(10) unsigned DEFAULT NULL,
   PRIMARY KEY (`servidor_cpf`),
-  CONSTRAINT `identidade_ibfk_1` FOREIGN KEY (`servidor_cpf`) REFERENCES `servidor` (`cpf`)
+  UNIQUE KEY `Index_4` (`numero`) USING BTREE,
+  KEY `foreign_key_cidade_naturalidade_id` (`cidade_naturalidade_id`),
+  KEY `FK_identidade_3` (`uf`),
+  CONSTRAINT `FK_identidade_3` FOREIGN KEY (`uf`) REFERENCES `estados` (`id`),
+  CONSTRAINT `identidade_ibfk_1` FOREIGN KEY (`servidor_cpf`) REFERENCES `servidor` (`cpf`),
+  CONSTRAINT `identidade_ibfk_2` FOREIGN KEY (`cidade_naturalidade_id`) REFERENCES `cidades` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -5637,6 +5643,12 @@ CREATE TABLE `identidade` (
 --
 
 /*!40000 ALTER TABLE `identidade` DISABLE KEYS */;
+INSERT INTO `identidade` (`servidor_cpf`,`data_nascimento`,`numero`,`orgao_expedidor`,`uf`,`sexo`,`nome_pai`,`nome_mae`,`cidade_naturalidade_id`) VALUES 
+ ('0912909880','0000-00-00','324','SSS',1,'M','JOAO TESTE 3','MAE DE PIRES',1602),
+ ('0988069880','2011-01-09','23213213','SDS',1,'M','NOME DO PAI DE PIRES','MARIAZINHA',1574),
+ ('43243243242','2003-04-16','34343434','SDS',7,'M','SEI LA','JAOANA BEZESAS',781),
+ ('45645645645','0000-00-00','32432432423','SDS',7,'M','3532532532','35345345345',1523),
+ ('45645645656','0000-00-00','432432','SDS',7,'M','ewfewfew','efefewew',1523);
 /*!40000 ALTER TABLE `identidade` ENABLE KEYS */;
 
 
@@ -5655,13 +5667,18 @@ CREATE TABLE `indicador` (
   PRIMARY KEY (`id`),
   KEY `foreign_key_profissao_codigo` (`profissao_codigo`),
   CONSTRAINT `indicador_ibfk_1` FOREIGN KEY (`profissao_codigo`) REFERENCES `profissao` (`codigo`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `indicador`
 --
 
 /*!40000 ALTER TABLE `indicador` DISABLE KEYS */;
+INSERT INTO `indicador` (`id`,`nome`,`descricao`,`profissao_codigo`,`status`,`afericao`) VALUES 
+ (4,'Atendimento Clinico na USF','Inclui consulta geral de Enfermagem, pré-natal puericultura e planejamento reprodutivo',31,'1','SIAB'),
+ (11,'Cadastro de gestantes','Cadastro',31,'1','SIAB'),
+ (12,'Indicador2','É',532,'1','SIAB'),
+ (13,'Indicador3','É',532,'1','SIA');
 /*!40000 ALTER TABLE `indicador` ENABLE KEYS */;
 
 
@@ -5673,14 +5690,27 @@ DROP TABLE IF EXISTS `item`;
 CREATE TABLE `item` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(50) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `meta_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `foreign_key_meta_id` (`meta_id`),
+  CONSTRAINT `item_ibfk_1` FOREIGN KEY (`meta_id`) REFERENCES `meta` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `item`
 --
 
 /*!40000 ALTER TABLE `item` DISABLE KEYS */;
+INSERT INTO `item` (`id`,`nome`,`meta_id`) VALUES 
+ (1,'Consultas',NULL),
+ (2,'Cadastro de gestantes',NULL),
+ (3,'Pre-natal',3),
+ (4,'Cadastro de gestantes',4),
+ (5,'Cad',4),
+ (6,'co-gestão',5),
+ (7,'co-gestão2',5),
+ (8,'Item',6),
+ (9,'Pre-natal2',7);
 /*!40000 ALTER TABLE `item` ENABLE KEYS */;
 
 
@@ -5729,21 +5759,24 @@ CREATE TABLE `meta` (
   `indicador_id` int(11) DEFAULT NULL,
   `valor` int(11) NOT NULL,
   `percentagem` int(3) DEFAULT '100',
-  `item_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `foreign_key_periodicidade_id` (`periodicidade_id`),
-  KEY `foreign_key_item_id` (`item_id`),
   KEY `foreign_key_indicador_id` (`indicador_id`),
   CONSTRAINT `meta_ibfk_1` FOREIGN KEY (`periodicidade_id`) REFERENCES `periodicidade` (`id`),
-  CONSTRAINT `meta_ibfk_2` FOREIGN KEY (`item_id`) REFERENCES `item` (`id`),
   CONSTRAINT `meta_ibfk_3` FOREIGN KEY (`indicador_id`) REFERENCES `indicador` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `meta`
 --
 
 /*!40000 ALTER TABLE `meta` DISABLE KEYS */;
+INSERT INTO `meta` (`id`,`nome`,`periodicidade_id`,`tipo`,`indicador_id`,`valor`,`percentagem`) VALUES 
+ (3,'Consulta',1,'cs',4,2,100),
+ (4,'Meta3',1,'cs',12,34,75),
+ (5,'Meta5',4,'cs',11,23,30),
+ (6,'Ind3',1,'cs',4,23,100),
+ (7,'Meta6',4,'cs',13,36,23);
 /*!40000 ALTER TABLE `meta` ENABLE KEYS */;
 
 
@@ -6804,16 +6837,16 @@ CREATE TABLE `servidor` (
 
 /*!40000 ALTER TABLE `servidor` DISABLE KEYS */;
 INSERT INTO `servidor` (`cpf`,`matricula`,`nome`,`estado_civil`,`endereco_id`,`unidade_cnes`) VALUES 
- ('0912909880','034832WER','CÉSAR HENRIQUE',NULL,NULL,NULL),
- ('09809809809','3244232432','césar henrique leite',NULL,NULL,NULL),
- ('0988069880','0348328MER','JÚNIOR PIRES',NULL,NULL,NULL),
- ('0988139880','034832LSDF32','ALEXANDRE',NULL,NULL,NULL),
- ('09886798805','03483284WER','ARI LUIZ',NULL,NULL,NULL),
- ('0988909880','0348328432','JOSÉ BARBOSA',NULL,NULL,NULL),
- ('43243243242','324','JOAO BOSQUINHO TESTE','S',NULL,'0324839483'),
- ('45645645645','3243mmm','JOÃO TESTE',NULL,NULL,NULL),
- ('45645645646','3243mmm','MARIA FELIZADA',NULL,NULL,NULL),
- ('45645645656','3243mmm','JOÃO BOQUINHO',NULL,NULL,NULL);
+ ('0912909880','034832WER','CÉSAR HENRIQUE',NULL,NULL,'2345668'),
+ ('09809809809','3244232432','CéSAR HENRIQUE LEITE','S',1,'2345668'),
+ ('0988069880','0348328MER','JÚNIOR PIRES',NULL,NULL,'2345668'),
+ ('0988139880','034832LSDF32','ALEXANDRE',NULL,NULL,'2345668'),
+ ('09886798805','03483284WER','ARI LUIZ',NULL,NULL,'2345668'),
+ ('0988909880','0348328432','JOSÉ BARBOSA',NULL,NULL,'2345668'),
+ ('43243243242','324','JOAO BOSQUINHO TESTE','S',NULL,'2345668'),
+ ('45645645645','23333','JOÃO TESTE','S',5,'2345668'),
+ ('45645645646','3243mmm','MARIA FELIZADA',NULL,NULL,'2345668'),
+ ('45645645656','3243mmm','JOÃO BOQUINHO',NULL,NULL,'2345668');
 /*!40000 ALTER TABLE `servidor` ENABLE KEYS */;
 
 
@@ -6998,9 +7031,55 @@ CREATE TABLE `unidade` (
 
 /*!40000 ALTER TABLE `unidade` DISABLE KEYS */;
 INSERT INTO `unidade` (`cnes`,`descricao`,`nome`,`cidade_id`,`regional_id`) VALUES 
- ('0324839483','descriçao do campo','unidade somente para teste',1574,1),
- ('2343254345','BAIRRO VASSOURAL','UNIDADE SANTO BELO MONTE',1523,1),
- ('9883433999','ai vai uma descriçao','unida de saude nair belo ramundo',1511,1);
+ ('2345544','SEM DESCRÇÃO','PSF ITAUNA ',1523,1),
+ ('2345560','SEM DESCRÇÃO','CENTRO DE SAUDE SANTA ROSA ',1523,1),
+ ('2345587','SEM DESCRÇÃO','CENTRO DE SAUDE COHAB I ',1523,1),
+ ('2345595','SEM DESCRÇÃO','CENTRO DE SAUDE INDIANOPOLIS ',1523,1),
+ ('2345625','SEM DESCRÇÃO','PSF LAJES ',1523,1),
+ ('2345633','SEM DESCRÇÃO','PSF PAU SANTO ',1523,1),
+ ('2345641','SEM DESCRÇÃO','PSF JOAO MOTA ',1523,1),
+ ('2345668','SEM DESCRÇÃO','PSF JOSE CARLOS DE OLIVEIRA ',1523,1),
+ ('2345676','SEM DESCRÇÃO','PSF MORRO SAO FRANCISCO ',1523,1),
+ ('2345684','SEM DESCRÇÃO','CENTRO DE SAUDE COHAB III ',1523,1),
+ ('2345692','SEM DESCRÇÃO','PSF XICURU ',1523,1),
+ ('2345706','SEM DESCRÇÃO','PSF SAO JOAO DA ESCOCIA ',1523,1),
+ ('2345714','SEM DESCRÇÃO','PSF MORRO BOM JESUS ',1523,1),
+ ('2345722','SEM DESCRÇÃO','PSF PADRE INACIO ',1523,1),
+ ('2345730','SEM DESCRÇÃO','PSF SALGADO I ',1523,1),
+ ('2345749','SEM DESCRÇÃO','PSF TERRA VERMELHA ',1523,1),
+ ('2345757','SEM DESCRÇÃO','PSF JUA ',1523,1),
+ ('2345803','SEM DESCRÇÃO','C S CEDRO ',1523,1),
+ ('2345846','SEM DESCRÇÃO','PSF GONCALVES FERREIRA ',1523,1),
+ ('2345854','SEM DESCRÇÃO','PSF MORRO CENTENARIO ',1523,1),
+ ('2345862','SEM DESCRÇÃO','PSF CAJA ',1523,1),
+ ('2345870','SEM DESCRÇÃO','PSF MALHADA DE BARREIRAS QUEIMADAS ',1523,1),
+ ('2345900','SEM DESCRÇÃO','PSF RAFAEL ',1523,1),
+ ('2345919','SEM DESCRÇÃO','PSF SALGADO II ',1523,1),
+ ('2345994','SEM DESCRÇÃO','C S SALGADO ',1523,1),
+ ('2346036','SEM DESCRÇÃO','PSF MURICI ',1523,1),
+ ('2346044','SEM DESCRÇÃO','PSF CENTENARIO ',1523,1),
+ ('2346052','SEM DESCRÇÃO','PSF AGAMENON MAGALHAES ',1523,1),
+ ('2346060','SEM DESCRÇÃO','PSF PELADAS ',1523,1),
+ ('2346087','SEM DESCRÇÃO','PSF RIACHO DOCE ',1523,1),
+ ('2682419','SEM DESCRÇÃO','PSF ALTO DO MOURA ',1523,1),
+ ('2682443','SEM DESCRÇÃO','PSF SERRA VELHA ',1523,1),
+ ('2682451','SEM DESCRÇÃO','PSF LAGOA DE PEDRA ',1523,1),
+ ('2682478','SEM DESCRÇÃO','PSF CIDADE JARDIM ',1523,1),
+ ('2682486','SEM DESCRÇÃO','PSF SANTA ROSA ',1523,1),
+ ('2682494','SEM DESCRÇÃO','PSF VILA KENNEDY I ',1523,1),
+ ('2682508','SEM DESCRÇÃO','PSF CAIUCA ',1523,1),
+ ('2682516','SEM DESCRÇÃO','PSF JARDIM PANORAMA ',1523,1),
+ ('2682524','SEM DESCRÇÃO','PSF JOSE LIBERATO ',1523,1),
+ ('2682532','SEM DESCRÇÃO','PSF VILA KENNEDY II ',1523,1),
+ ('2682559','SEM DESCRÇÃO','PSF SALGADO III ',1523,1),
+ ('2682567','SEM DESCRÇÃO','PSF SALGADO IV ',1523,1),
+ ('2797968','SEM DESCRÇÃO','PSF AGAMENON MAGALHAES II ',1523,1),
+ ('2797976','SEM DESCRÇÃO','PSF JOSE CARLOS DE OLIVEIRA II ',1523,1),
+ ('2797992','SEM DESCRÇÃO','PSF JARDIM PANORAMA II ',1523,1),
+ ('3020932','SEM DESCRÇÃO','PSF SAO JOAO DA ESCOCIA II ',1523,1),
+ ('3741265','SEM DESCRÇÃO','PSF JARDIM LIBERDADE ',1523,1),
+ ('3741273','SEM DESCRÇÃO','PSF CAIUCA II ',1523,1),
+ ('5481287','SEM DESCRÇÃO','PSF CANAA ',1523,1);
 /*!40000 ALTER TABLE `unidade` ENABLE KEYS */;
 
 
