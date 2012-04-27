@@ -1,6 +1,6 @@
 <?php
 
-class EnderecoController extends Controller
+class EnderecoController extends SISPADBaseController
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -30,34 +30,9 @@ class EnderecoController extends Controller
 	 */
 	public function accessRules()
 	{
-		return array(
-			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
-				'users'=>array('*'),
-			),
-			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
-				'users'=>array('@'),
-			),
-			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
-				'users'=>array('admin'),
-			),
-			array('deny',  // deny all users
-				'users'=>array('*'),
-			),
-		);
+		return array();
 	}
 
-	/**
-	 * Displays a particular model.
-	 */
-	public function actionView()
-	{
-		$this->render('view',array(
-			'model'=>$this->loadModel(),
-		));
-	}
 
 	/**
 	 * Creates a new model.
@@ -65,6 +40,9 @@ class EnderecoController extends Controller
 	 */
 	public function actionCreate()
 	{
+           if(isset($_GET['id']) && isset($_GET['model']) && isset($_GET['idModel'])){
+         
+                //tem os parãmetros necessários
 		$model=new Endereco;
 
 		// Uncomment the following line if AJAX validation is needed
@@ -73,13 +51,19 @@ class EnderecoController extends Controller
 		if(isset($_POST['Endereco']))
 		{
 			$model->attributes=$_POST['Endereco'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+			if($model->save()){
+                            $this->redirectViewModel($model);
+                        }
 		}
 
 		$this->render('create',array(
 			'model'=>$model,
 		));
+           }
+           //nao tem os parâmetros necessários
+           else{
+               throw new CHttpException(404,'Você acessou indevidamente uma página! Não repita a operção!');
+           }
 	}
 
 	/**
@@ -88,7 +72,8 @@ class EnderecoController extends Controller
 	 */
 	public function actionUpdate()
 	{
-		$model=$this->loadModel();
+            if(isset($_GET['id']) && isset($_GET['model']) && isset($_GET['idModel'])){
+		$model=Endereco::model()->findByPk($_GET['id']);
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
@@ -97,75 +82,23 @@ class EnderecoController extends Controller
 		{
 			$model->attributes=$_POST['Endereco'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+				$this->redirectViewModel($model);
 		}
 
 		$this->render('update',array(
 			'model'=>$model,
 		));
+            } else{
+                throw new CHttpException(404,'Você acessou indevidamente uma página! Não repita a operção!');
+            }
 	}
 
-	/**
-	 * Deletes a particular model.
-	 * If deletion is successful, the browser will be redirected to the 'index' page.
-	 */
-	public function actionDelete()
+        public function actionView()
 	{
-		if(Yii::app()->request->isPostRequest)
-		{
-			// we only allow deletion via POST request
-			$this->loadModel()->delete();
-
-			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-			if(!isset($_GET['ajax']))
-				$this->redirect(array('index'));
-		}
-		else
-			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
-	}
-
-	/**
-	 * Lists all models.
-	 */
-	public function actionIndex()
-	{
-		$dataProvider=new CActiveDataProvider('Endereco');
-		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
+		$this->render('view',array(
+			'model'=>$this->loadModel(),
 		));
 	}
-
-	/**
-	 * Manages all models.
-	 */
-	public function actionAdmin()
-	{
-		$model=new Endereco('search');
-		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['Endereco']))
-			$model->attributes=$_GET['Endereco'];
-
-		$this->render('admin',array(
-			'model'=>$model,
-		));
-	}
-
-	/**
-	 * Returns the data model based on the primary key given in the GET variable.
-	 * If the data model is not found, an HTTP exception will be raised.
-	 */
-	public function loadModel()
-	{
-		if($this->_model===null)
-		{
-			if(isset($_GET['id']))
-				$this->_model=Endereco::model()->findbyPk($_GET['id']);
-			if($this->_model===null)
-				throw new CHttpException(404,'The requested page does not exist.');
-		}
-		return $this->_model;
-	}
-
 	/**
 	 * Performs the AJAX validation.
 	 * @param CModel the model to be validated
@@ -178,4 +111,41 @@ class EnderecoController extends Controller
 			Yii::app()->end();
 		}
 	}
+        
+        public function loadModel()
+	{
+		if($this->_model===null)
+		{
+			if(isset($_GET['id'])){
+				$this->_model=Endereco::model()->with('cidade')->findbyPk($_GET['id']);
+                                if($this->_model===null){
+                                    $this->redirect(array('create','id'=>$_GET['id'],'model'=>$_GET['model'],'idModel'=>$_GET['idModel'])); 
+                                }
+                        }
+			else {
+				throw new CHttpException(404,'Servidor não existente no sistema.');
+                        }
+		}
+		return $this->_model;
+	}
+        
+        protected function redirectViewModel($model){
+                //vai verificar qual foi a entidade que está solicitando um endereco
+                            $ent=$_GET['model'];
+                            $id=$_GET['idModel'];
+                            switch($ent){
+                                case 'servidor':
+                                                $ser=Servidor::model()->findByPk($id);
+                                                //coloca o id do endereco no servidor
+                                                $ser->endereco_id=$model->id;
+                                                //salvar o servidor
+                                                $ser->save();
+                                                break;
+                            }
+                            $this->redirect(array("view",'id'=>$_GET['id'],'model'=>$_GET['model'],'idModel'=>$_GET['serv']));
+        }
+
+    protected function getModelName() {
+        return 'Endereco';
+    }
 }

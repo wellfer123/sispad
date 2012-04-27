@@ -60,6 +60,7 @@ class Endereco extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'servidors' => array(self::HAS_MANY, 'Servidor', 'endereco_id'),
+                        'cidade'=>  array(self::BELONGS_TO,'Cidades','cidade_id')
 		);
 	}
 
@@ -112,6 +113,9 @@ class Endereco extends CActiveRecord
 		));
 	}
 
-
+        public function toString(){
+            return $this->logradouro.', Nº'.$this->numero.' '.
+                    $this->complemento."\nBairro ".$this->bairro.' CEP '.$this->cidade->cidade_nome;
+        }
         
 }
