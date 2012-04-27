@@ -60,6 +60,7 @@ class Endereco extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'servidors' => array(self::HAS_MANY, 'Servidor', 'endereco_id'),
+                        'cidades'=>array(self::BELONGS_TO,'Cidades','cidade_id'),
 		);
 	}
 
