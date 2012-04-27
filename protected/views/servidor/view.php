@@ -41,7 +41,7 @@ $this->menu=array(
                             CHtml::link('Identidade',
                                  array('Identidade/view','id'=>$model->cpf,'serv'=>$model->nome)).' / '.
                             CHtml::link('Título de Eleitor',
-                                 array('TituloEleitor/view','id'=>$model->cpf,'serv'=>$model->nome)),
+                                 array('TituloEleitor/index','id'=>$model->cpf,'serv'=>$model->nome)),
         ),
 	),
 )); ?>

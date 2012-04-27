@@ -38,7 +38,7 @@ class TituloEleitor extends CActiveRecord
 		return array(
 			array('numero, zona, secao', 'required'),
 			array('servidor_cpf', 'length', 'max'=>11),
-                        array('servidor_cpf', 'cpfExiste', 'on'=>'create'),
+                       // array('servidor_cpf', 'cpfExiste', 'on'=>'create'),
 			array('numero', 'length', 'max'=>20),
 			array('zona, secao', 'length', 'max'=>4),
 			// The following rule is used by search().
@@ -94,4 +94,6 @@ class TituloEleitor extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+
+
 }

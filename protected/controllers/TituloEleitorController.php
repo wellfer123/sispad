@@ -52,7 +52,7 @@ class TituloEleitorController extends Controller
 	/**
 	 * Displays a particular model.
 	 */
-	public function actionView()
+	public function actionIndex()
 	{
 		$this->render('view',array(
 			'model'=>$this->loadModel(),
@@ -70,9 +70,10 @@ class TituloEleitorController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['TituloEleitor']))
+		if((isset($_POST['TituloEleitor'])) && ($_GET['id']))
 		{
 			$model->attributes=$_POST['TituloEleitor'];
+                        $model->servidor_cpf = $_GET['id'];
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->servidor_cpf));
 		}
@@ -97,7 +98,7 @@ class TituloEleitorController extends Controller
 		{
 			$model->attributes=$_POST['TituloEleitor'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->servidor_cpf));
+				$this->redirect(array('index','id'=>$model->servidor_cpf));
 		}
 
 		$this->render('update',array(
@@ -105,50 +106,10 @@ class TituloEleitorController extends Controller
 		));
 	}
 
-	/**
-	 * Deletes a particular model.
-	 * If deletion is successful, the browser will be redirected to the 'index' page.
-	 */
-	public function actionDelete()
-	{
-		if(Yii::app()->request->isPostRequest)
-		{
-			// we only allow deletion via POST request
-			$this->loadModel()->delete();
+	
 
-			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-			if(!isset($_GET['ajax']))
-				$this->redirect(array('index'));
-		}
-		else
-			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
-	}
-
-	/**
-	 * Lists all models.
-	 */
-	public function actionIndex()
-	{
-		$dataProvider=new CActiveDataProvider('TituloEleitor');
-		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
-		));
-	}
-
-	/**
-	 * Manages all models.
-	 */
-	public function actionAdmin()
-	{
-		$model=new TituloEleitor('search');
-		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['TituloEleitor']))
-			$model->attributes=$_GET['TituloEleitor'];
-
-		$this->render('admin',array(
-			'model'=>$model,
-		));
-	}
+	
+	
 
 	/**
 	 * Returns the data model based on the primary key given in the GET variable.
@@ -160,8 +121,11 @@ class TituloEleitorController extends Controller
 		{
 			if(isset($_GET['id']))
 				$this->_model=TituloEleitor::model()->findbyPk($_GET['id']);
+                                if($this->_model===null){
+                                    $this->redirect(array('create','id'=>$_GET['id'],'serv'=>$_GET['serv']));
+                                }
 			if($this->_model===null)
-				throw new CHttpException(404,'The requested page does not exist.');
+				throw new CHttpException(404,'Servidor não existente no sistema.');
 		}
 		return $this->_model;
 	}

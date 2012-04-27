@@ -5,11 +5,7 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List TituloEleitor', 'url'=>array('index')),
-	array('label'=>'Create TituloEleitor', 'url'=>array('create')),
 	array('label'=>'Update TituloEleitor', 'url'=>array('update', 'id'=>$model->servidor_cpf)),
-	array('label'=>'Delete TituloEleitor', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->servidor_cpf),'confirm'=>'Are you sure you want to delete this item?')),
-	array('label'=>'Manage TituloEleitor', 'url'=>array('admin')),
 );
 ?>
 
