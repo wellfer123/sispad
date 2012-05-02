@@ -72,8 +72,6 @@ class ItemController extends SISPADBaseController {
             $q = $_GET['term'];
             if(isset($q)) {
                  $itens = Item::model()->findAll('nome like :nome',array(':nome'=> strtoupper(trim($q)).'%'));
-                //$servidores = Servidor::model()->findAllByAttributes(array('nome','cpf'),
-                                             // 'where nome like :nome',array(':nome'=> strtoupper(trim($q)).'%'));
 
                 if (!empty($itens)) {
                     $out = array();
