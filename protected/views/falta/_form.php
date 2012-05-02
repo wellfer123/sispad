@@ -9,21 +9,14 @@
 	<p class="note">Fields with <span class="required">*</span> are required.</p>
 
 	<?php echo $form->errorSummary($model); ?>
-        <div class="row">
+        <div class="row row_line">
 		<?php echo $form->labelEx($model,'dia'); ?>
-		<?php echo $form->dropDownList($model,'dia',array('1'=>1,'2'=>2));?>
+		<?php echo $form->dropDownList($model,'dia',  FormataData::geraArrayDiasDoMes($model->mes, $model->ano));?>
 		<?php echo $form->error($model,'dia'); ?>
 	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'motivo'); ?>
-		<?php echo $form->textField($model,'motivo',array('size'=>45,'maxlength'=>45)); ?>
-		<?php echo $form->error($model,'motivo'); ?>
-	</div>
-
-	<div class="row">
+	<div class="row row_line">
 		<?php echo $form->labelEx($model,'motivo_id'); ?>
-		<?php echo $form->textField($model,'motivo_id',array('size'=>10,'maxlength'=>10)); ?>
+		<?php echo $form->dropDownList($model,'motivo_id',CHtml::listData(Motivo::model()->findAll(),'id','descricao'));?>
 		<?php echo $form->error($model,'motivo_id'); ?>
 	</div>
 

@@ -40,13 +40,14 @@ class Falta extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('servidor_cpf', 'length', 'max'=>11),
+                        array('dia','verificaFaltaExistente'),
                        // array('mes','ano','dia','required'),
-			array('motivo', 'length', 'max'=>45),
+			//array('obs_motivo', 'length', 'max'=>45),
 			array('motivo_id', 'length', 'max'=>10),
 			//array('data_envio', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('dia, mes, servidor_cpf, data_envio, motivo, motivo_id, ano', 'safe', 'on'=>'search'),
+			array('dia, mes, servidor_cpf, data_envio, obs_motivo, motivo_id, ano', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -59,6 +60,7 @@ class Falta extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
                         'servidor'=>array(self::BELONGS_TO,'Servidor','servidor_cpf'),
+                        'motivo'=>array(self::BELONGS_TO,'Motivo','motivo_id'),
 		);
 	}
 
@@ -72,11 +74,20 @@ class Falta extends CActiveRecord
 			'mes' => 'Mes',
 			'servidor_cpf' => 'Servidor Cpf',
 			'data_envio' => 'Data Envio',
-			'motivo' => 'Motivo',
+			'obs_motivo' => 'Motivo',
 			'motivo_id' => 'Motivo',
 			'ano' => 'Ano',
 		);
 	}
+
+         public function  verificaFaltaExistente($attribute,$params){
+
+             if((Falta::model()->findByPk(array('dia'=>$this->dia,'mes'=>$this->mes,'ano'=>$this->ano)))==null){
+                 return true;
+             }
+             $this->addError('dia','falta ja existe');
+             return false;
+        }
 
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
@@ -102,6 +113,24 @@ class Falta extends CActiveRecord
 		$criteria->compare('motivo_id',$this->motivo_id,true);
 
 		$criteria->compare('ano',$this->ano,true);
+
+		return new CActiveDataProvider('Falta', array(
+			'criteria'=>$criteria,
+		));
+	}
+
+        public function searchporServidor($servidorCpf,$mes,$ano)
+	{
+		// Warning: Please modify the following code to remove attributes that
+		// should not be searched.
+
+		$criteria=new CDbCriteria;
+
+		
+
+		$criteria->compare('servidor_cpf',$servidorCpf,true);
+                $criteria->compare('mes',$mes,true);
+                $criteria->compare('ano',$ano,true);
 
 		return new CActiveDataProvider('Falta', array(
 			'criteria'=>$criteria,
