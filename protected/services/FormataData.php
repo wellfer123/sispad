@@ -42,5 +42,25 @@
                 return $result;
 
         }
+
+         public static function geraArrayAnos($ano_inic,$ano_fim) {
+                ++$ano_fim;
+                $anos = array();
+                for(;$ano_inic<$ano_fim;$ano_inic++){
+                    $anos["$ano_inic"] = $ano_inic;
+                }
+
+                return $anos;
+         }
+           public static function geraArrayDiasDoMes($mes,$ano) {
+                $dias_fim = cal_days_in_month(CAL_GREGORIAN, $mes, $ano);
+                ++$dias_fim;
+                for($dias_inic=1;$diasInic<$dias_fim;$dias_inic++){
+                    $dias["$dias_inic"] = $dias_inic;
+                }
+
+                return $dias;
+          }
 }
+
 ?>
