@@ -1,29 +1,17 @@
 <?php
 $this->breadcrumbs=array(
 	'Faltas'=>array('index'),
-	$model->dia,
+	'Create',
 );
 
 $this->menu=array(
-	array('label'=>'List falta', 'url'=>array('index')),
-	array('label'=>'Create falta', 'url'=>array('create')),
-	array('label'=>'Update falta', 'url'=>array('update', 'id'=>$model->dia)),
-	array('label'=>'Delete falta', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->dia),'confirm'=>'Are you sure you want to delete this item?')),
-	array('label'=>'Manage falta', 'url'=>array('admin')),
+	array('label'=>'Escolher outro Servidor ou Data', 'url'=>array('preparedCreate')),
 );
 ?>
-
-<h1>View falta #<?php echo $model->dia; ?></h1>
-
-<?php $this->widget('zii.widgets.CDetailView', array(
-	'data'=>$model,
-	'attributes'=>array(
-		'dia',
-		'mes',
-		'servidor_cpf',
-		'data_envio',
-		'motivo',
-		'motivo_id',
-		'ano',
-	),
-)); ?>
+<?php $servidor = Servidor::model()->findByPk($_GET['cpf']);
+      $mes = Meses::model()->findByPk($_GET['mes']);
+?>
+<h2><?php echo "Faltas: ".$servidor->nome.' - '. $mes->nome.'/'.$_GET['ano'];?></h2>
+<?php echo CHtml::link("Gerar Relatório",array('relatorioDetalhado','title'=>'teste',
+    'servidorCpf'=>$_GET['cpf'],'mes'=>$_GET['mes'],'ano'=>$_GET['ano']));?>
+<?php echo $this->renderPartial('_view', array('model'=>$model)); ?>

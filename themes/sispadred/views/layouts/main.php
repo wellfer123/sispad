@@ -47,6 +47,7 @@ array(
           array("url"=>array(),
                        "label"=>"Faltas",
                        array("url"=>array("route"=>"/Falta/preparedCreate"),"label"=>"Enviar"),
+                       array("url"=>array("route"=>"/Falta/preparedViewDetail"),"label"=>"Relatorio Detalhado"),
                        array("url"=>array("route"=>"/TotalFrequencia/list"),"label"=>"Total de Frequências (Minhas)")
               ),
           array("url"=>array(),

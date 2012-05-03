@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <?php Yii::import('application.services.FormataData');?>
 <div class="form">
 

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <?php
 
 class FaltaController extends SISPADBaseController
@@ -56,10 +55,11 @@ class FaltaController extends SISPADBaseController
 	/**
 	 * Displays a particular model.
 	 */
-	public function actionView()
+	public function actionViewDetail()
 	{
+                $model = new Falta;
 		$this->render('view',array(
-			'model'=>$this->loadModel(),
+			'model'=>$model,
 		));
 	}
 
@@ -77,7 +77,26 @@ class FaltaController extends SISPADBaseController
 			$this->redirect(array('create','cpf'=>$model->servidor_cpf,'mes'=>$model->mes,
                             'ano'=>$model->ano));
 		}else
-                    $this->render('prepared_create',array(
+                    $this->render('prepared',array(
+			'model'=>$model,
+		));
+	}
+
+         public function actionPreparedViewDetail()
+        {
+                $model= new Falta;
+
+                $this->performAjaxValidation($model);
+                if(isset($_POST['Falta']))
+		{
+                        $model->servidor_cpf= $_POST['Falta']['servidor_cpf'];
+                        $model->mes= $_POST['Falta']['mes'];
+                        $model->ano= $_POST['Falta']['ano'];
+
+			$this->redirect(array('viewDetail','cpf'=>$model->servidor_cpf,'mes'=>$model->mes,
+                            'ano'=>$model->ano));
+		}else
+                    $this->render('prepared',array(
 			'model'=>$model,
 		));
 	}
@@ -114,6 +133,17 @@ class FaltaController extends SISPADBaseController
 		));
 	}
 
+        public function actionRelatorioDetalhado($title,$servidorCpf,$mes,$ano) {
+            $model = new Falta;
+            $this->widget('application.extensions.EExcelView',
+                        array('dataProvider'=>$model->searchPorServidor($servidorCpf,$mes,$ano),
+                             // 'items'=>$items,
+                            'exportType'=>'pdf',
+                            'title'=>$title,
+                            ));
+            YII::app()->end();
+
+        }
 	/**
 	 * Updates a particular model.
 	 * If update is successful, the browser will be redirected to the 'view' page.
