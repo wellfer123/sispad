@@ -73,9 +73,8 @@ class FaltaController extends SISPADBaseController
                         $model->mes= $_POST['Falta']['mes'];
                         $model->ano= $_POST['Falta']['ano'];
 
-			$this->render('create',array(
-			'model'=>$model,
-		));
+			$this->redirect(array('create','cpf'=>$model->servidor_cpf,'mes'=>$model->mes,
+                            'ano'=>$model->ano));
 		}else
                     $this->render('prepared_create',array(
 			'model'=>$model,
@@ -88,16 +87,25 @@ class FaltaController extends SISPADBaseController
 	 */
 	public function actionCreate()
 	{
-		//$model=new Falta;
+		$model=new Falta;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
+                $model->servidor_cpf = $_GET['cpf'];
+                $model->mes = $_GET['mes'];
+                $model->ano = $_GET['ano'];
+                $model->data_envio = date('Y-m-d');
 
 		if(isset($_POST['Falta']))
 		{
-			$model->attributes=$_POST['Falta'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->dia));
+			//$model->attributes=$_POST['Falta'];
+                        $model->dia = $_POST['Falta']['dia'];
+                        $model->motivo_id = $_POST['Falta']['motivo_id'];
+			if($model->save()){
+                          $this->redirect(array('create','cpf'=>$model->servidor_cpf,'mes'=>$model->mes,
+                            'ano'=>$model->ano));
+                        }
+				//$this->redirect(array('view','id'=>$model->dia));
 		}
 
 		$this->render('create',array(

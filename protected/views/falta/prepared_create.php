@@ -4,12 +4,13 @@ $this->breadcrumbs=array(
 	'Prepared Create',
 );
 
-$this->menu=array(
-	array('label'=>'List falta', 'url'=>array('index')),
-	array('label'=>'Manage falta', 'url'=>array('admin')),
-);
+
 ?>
 
-<h1>Faltas</h1>
 
+<?php $this->beginWidget('zii.widgets.CPortlet', array(
+			'title'=>'Faltas',
+                        'htmlOptions'=>array('class'=>'portlet_form')
+		));?>
 <?php echo $this->renderPartial('_form_prepared', array('model'=>$model)); ?>
+<?php $this->endWidget();?>

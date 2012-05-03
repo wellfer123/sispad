@@ -45,8 +45,8 @@ array(
                        
               ),
           array("url"=>array(),
-                       "label"=>"Frequência",
-                       array("url"=>array("route"=>"/TotalFrequencia/create"),"label"=>"Enviar"),
+                       "label"=>"Faltas",
+                       array("url"=>array("route"=>"/Falta/preparedCreate"),"label"=>"Enviar"),
                        array("url"=>array("route"=>"/TotalFrequencia/list"),"label"=>"Total de Frequências (Minhas)")
               ),
           array("url"=>array(),
@@ -55,6 +55,7 @@ array(
                       array("url"=>array("route"=>"/Setor/index"), "label"=>"Setor"),
                       array("url"=>array("route"=>"/Servidor/index"), "label"=>"Servidor"),
                       array("url"=>array("route"=>"/Unidade/index"), "label"=>"Unidade"),
+                      array("url"=>array("route"=>"/indicador/create"), "label"=>"Indicador"),
                       'visible'=>$RBAC2->checkAccess('SuperAdmin'),
               ),
           array("url"=>array(),
@@ -65,14 +66,9 @@ array(
                       
               ),
           array("url"=>array(),
-                            "label"=>"indicadores",
-                       array("url"=>array("route"=>"/indicador/create"), "label"=>"cadastro Indicador"),
+                            "label"=>"Indicadores",
+                       
                         array("url"=>array("route"=>"/indicador/index"), "label"=>"Ver Indicadores"),
-                      array("url"=>array("route"=>"/item/create"), "label"=>"cadastro Itens"),
-                      array("url"=>array("route"=>"/meta/create"), "label"=>"cadastro Metas"),
-                      //array("url"=>array("route"=>"/rbac/assignment"), "label"=>"Permissões"),
-                      //'visible'=>$RBAC2->checkAccess('SuperAdmin'),
-
               ),
           //menu raiz
           array("url"=>array(), "label"=>"Ajuda",

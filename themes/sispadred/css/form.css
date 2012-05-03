@@ -69,6 +69,7 @@ div.form .row
 	margin: 5px 0;
 }
 
+
 div.form .hint
 {
 	margin: 0;
@@ -171,4 +172,11 @@ div.wide.form .buttons, div.wide.form .hint, div.wide.form .errorMessage
 .portlet_form .portlet-content
 {
     border: none;
+}
+
+.table_form{
+    width: 150px;
+    margin: 0px;
+    padding: 0px;
+    
 }
