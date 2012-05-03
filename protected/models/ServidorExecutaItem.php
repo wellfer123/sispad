@@ -40,6 +40,7 @@ class ServidorExecutaItem extends CActiveRecord
 			array('servidor_cpf, item_id, total, data_inicio, data_fim', 'required'),
 			array('item_id, total', 'numerical', 'integerOnly'=>true),
 			array('servidor_cpf', 'length', 'max'=>11),
+                        array('servidor_cpf','existe','on'=>'send'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('servidor_cpf, item_id, total, data_inicio, data_fim', 'safe', 'on'=>'search'),
@@ -54,7 +55,8 @@ class ServidorExecutaItem extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-                    //'servidor'=>array(self::),
+                    'servidor'=>array(self::BELONGS_TO,'Servidor','servidor_cpf'),
+                    'item'=>array(self::BELONGS_TO,'Item','item_id'),
 		);
 	}
 
@@ -64,15 +66,30 @@ class ServidorExecutaItem extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'servidor_cpf' => 'Servidor Cpf',
+			'servidor_cpf' => 'Servidor',
 			'item_id' => 'Item',
 			'total' => 'Total',
-			'data_inicio' => 'Data Inicio',
+			'data_inicio' => 'Data Início',
 			'data_fim' => 'Data Fim',
 		);
 	}
+        
+       public function existe($attribute, $params) {
+         
+         $servidor= $this->model()->findByPk(array(
+                                                'servidor_cpf'=>$this->servidor_cpf,
+                                                'item_id'=>$this->item_id,
+                                                'data_inicio'=>ParserDate::inverteDataPtToEn($this->data_inicio),
+                                                 'data_fim'=>ParserDate::inverteDataPtToEn($this->data_fim),
+                                ));
+         if($servidor!=null){
+             $this->addError('servidor_cpf',"Já existe uma lançamento desses dados para o servidor informado e o período!");
+             return false;
+             }
+         return true;
+        }
 
-	/**
+        /**
 	 * Retrieves a list of models based on the current search/filter conditions.
 	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
 	 */
@@ -97,4 +114,17 @@ class ServidorExecutaItem extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+        
+        protected function afterFind() {
+            $this->data_fim=ParserDate::inverteDataEnToPt($this->data_fim);
+            $this->data_inicio=ParserDate::inverteDataEnToPt($this->data_inicio);
+            parent::afterFind();
+        }
+
+        protected function beforeSave() {
+            $this->data_fim=ParserDate::inverteDataPtToEn($this->data_fim);
+            $this->data_inicio=ParserDate::inverteDataPtToEn($this->data_inicio);
+            return parent::beforeSave();
+        }
+
 }

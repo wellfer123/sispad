@@ -55,46 +55,27 @@ class ServidorExecutaItemController extends SISPADBaseController
 	 */
 	public function actionSend()
 	{
-		$model=new ServidorExecutaItem;
+		$model=new ServidorExecutaItem('send');
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Servidor']))
+		if(isset($_POST['ServidorExecutaItem']))
 		{
-			$model->attributes=$_POST['Servidor'];
+			$model->attributes=$_POST['ServidorExecutaItem'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->cpf));
+				$this->redirect(array('view',
+                                            'item'=>$model->item_id,
+                                            'servidor'=>$model->servidor_cpf,
+                                            'data_inicio'=>$model->data_inicio,
+                                            'data_fim'=>$model->data_fim
+                                ));
 		}
 
 		$this->render('send',array(
 			'model'=>$model,
 		));
 	}
-
-	/**
-	 * Lists all models.
-	 */
-	public function actionIndex()
-	{
-		$this->redirect(array('admin'));
-	}
-
-	/**
-	 * Manages all models.
-	 */
-	public function actionAdmin()
-	{
-		$model=new Servidor('search');
-		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['Servidor']))
-			$model->attributes=$_GET['Servidor'];
-
-		$this->render('admin',array(
-			'model'=>$model,
-		));
-	}
-
 	/**
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.
@@ -103,10 +84,15 @@ class ServidorExecutaItemController extends SISPADBaseController
 	{
 		if($this->_model===null)
 		{
-			if(isset($_GET['id']))
-				$this->_model=Servidor::model()->findbyPk($_GET['id']);
+			if(isset($_GET['servidor']))
+				$this->_model=ServidorExecutaItem::model()->with('servidor','item')->findbyPk(array(
+                                                                    'servidor_cpf'=>$_GET['servidor'],
+                                                                    'item_id'=>$_GET['item'],
+                                                                    'data_inicio'=>$_GET['data_inicio'],
+                                                                    'data_fim'=>$_GET['data_fim'],
+                                ));
 			if($this->_model===null)
-				throw new CHttpException(404,'The requested page does not exist.');
+				throw new CHttpException(404,'O item executado que você pediu visualização não foi encontrado');
 		}
 		return $this->_model;
 	}
