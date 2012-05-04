@@ -135,13 +135,26 @@ class FaltaController extends SISPADBaseController
 
         public function actionRelatorioDetalhado($title,$servidorCpf,$mes,$ano) {
             $model = new Falta;
-            $this->widget('application.extensions.EExcelView',
-                        array('dataProvider'=>$model->searchPorServidor($servidorCpf,$mes,$ano),
-                             // 'items'=>$items,
-                            'exportType'=>'pdf',
-                            'title'=>$title,
+            $this->widget('application.extensions.phpexcel.EExcelView',
+                        array('dataProvider'=>$model->searchPorServidor2($servidorCpf,$mes,$ano),
+                             'title'=>$title,
+                             'grid_mode'=>'export',
+                             'exportType'=>'Excel2007',
                             ));
-            YII::app()->end();
+            Yii::app()->end();
+           /* $factory = new CWidgetFactory();
+            $widget = $factory->createWidget($this, 'application.extensions.phpexcel.EExcelView', array(
+            'dataProvider'=>$model->searchPorServidor($servidorCpf,$mes,$ano),
+            'grid_mode'=>'export',
+            'title'=>'Title',
+            'filename'=>'report.xlsx',
+            'stream'=>false,
+            'exportType'=>'Excel2007',
+           
+        ));*/
+
+       // $widget->init();
+      //  $widget->run();
 
         }
 	/**

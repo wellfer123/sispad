@@ -8,12 +8,13 @@ $this->widget('zii.widgets.grid.CGridView', array(
 	'dataProvider'=>$model->searchPorServidor($servidorCpf,$mes,$ano),
 	'columns'=>array(
 		'dia',
-		array(
+                'obs_motivo',
+                array(
                     'name'=>'motivo',
                     'value'=>'$data->motivo->descricao'
                 ),
 	),
-       
+
 ));
 
 ?>
