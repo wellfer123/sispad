@@ -59,7 +59,7 @@ class Item extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'Id',
+			'id' => 'Codigo',
 			'nome' => 'Nome',
 		);
 	}

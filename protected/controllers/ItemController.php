@@ -43,7 +43,8 @@ class ItemController extends SISPADBaseController {
 		if((isset($_POST['Item']))&&(isset($_GET['meta_id'])))
 		{
 
-                        $model->attributes=$_POST['Item'];
+                        $model->id=$_POST['Item']['id'];
+                        $model->nome=$_POST['Item']['nome'];
                         $model->meta_id=$_GET['meta_id'];
 			if($model->save()){
                             $model=new Item;
