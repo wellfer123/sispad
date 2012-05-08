@@ -5,7 +5,7 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Escolher outro Servidor ou Data', 'url'=>array('preparedCreate')),
+	array('label'=>'Escolher outra Data', 'url'=>array('preparedViewMonth')),
 );
 ?>
 <?php

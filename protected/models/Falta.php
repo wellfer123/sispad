@@ -77,7 +77,8 @@ class Falta extends CActiveRecord {
 
     public function verificaFaltaExistente($attribute, $params) {
 
-        if ((Falta::model()->findByPk(array('dia' => $this->dia, 'mes' => $this->mes, 'ano' => $this->ano))) == null) {
+        if ((Falta::model()->findByPk(array('dia' => $this->dia, 'mes' => $this->mes, 'ano' => $this->ano,
+            'servidor_cpf'=>$this->servidor_cpf))) == null) {
             return true;
         }
         $this->addError('dia', 'falta ja existe');
@@ -130,8 +131,8 @@ class Falta extends CActiveRecord {
     public function searchporServidor2($servidorCpf, $mes, $ano) {
 
                 $dados=Yii::app()->db->createCommand('select fal.dia, fal.obs_motivo as observacao,mot.descricao,
-                                                      (select distinct quantidade  from total_falta where ano=fal.ano
-                                                      AND mes=fal.mes AND servidor_cpf=fal.servidor_cpf) as total
+                                                     (select distinct quantidade  from total_falta where ano=fal.ano
+                                                      AND mes=fal.mes AND servidor_cpf=fal.servidor_cpf group by quantidade) as total
                                                       from falta as fal INNER JOIN motivo as mot
                                                       ON fal.motivo_id = mot.id where fal.servidor_cpf='.$servidorCpf.'
                                                       AND mes='.$mes.' AND ano='.$ano.' ORDER BY fal.dia')->queryAll();
