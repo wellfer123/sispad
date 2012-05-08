@@ -58,7 +58,15 @@ class FaltaController extends SISPADBaseController
 	public function actionViewDetail()
 	{
                 $model = new Falta;
-		$this->render('view',array(
+		$this->render('view_detail',array(
+			'model'=>$model,
+		));
+	}
+
+        public function actionViewMonth()
+	{
+                $model = new Falta;
+		$this->render('view_month',array(
 			'model'=>$model,
 		));
 	}
@@ -77,7 +85,7 @@ class FaltaController extends SISPADBaseController
 			$this->redirect(array('create','cpf'=>$model->servidor_cpf,'mes'=>$model->mes,
                             'ano'=>$model->ano));
 		}else
-                    $this->render('prepared',array(
+                    $this->render('prepared_create',array(
 			'model'=>$model,
 		));
 	}
@@ -96,7 +104,26 @@ class FaltaController extends SISPADBaseController
 			$this->redirect(array('viewDetail','cpf'=>$model->servidor_cpf,'mes'=>$model->mes,
                             'ano'=>$model->ano));
 		}else
-                    $this->render('prepared',array(
+                    $this->render('prepared_view_detail',array(
+			'model'=>$model,
+		));
+	}
+
+         public function actionPreparedViewMonth()
+        {
+                $model= new Falta;
+
+                $this->performAjaxValidation($model);
+                if(isset($_POST['Falta']))
+		{
+                        
+                        $model->mes= $_POST['Falta']['mes'];
+                        $model->ano= $_POST['Falta']['ano'];
+
+			$this->redirect(array('viewMonth','mes'=>$model->mes,
+                            'ano'=>$model->ano));
+		}else
+                    $this->render('prepared_view_month',array(
 			'model'=>$model,
 		));
 	}
@@ -142,19 +169,20 @@ class FaltaController extends SISPADBaseController
                              'exportType'=>'Excel2007',
                             ));
             Yii::app()->end();
-           /* $factory = new CWidgetFactory();
-            $widget = $factory->createWidget($this, 'application.extensions.phpexcel.EExcelView', array(
-            'dataProvider'=>$model->searchPorServidor($servidorCpf,$mes,$ano),
-            'grid_mode'=>'export',
-            'title'=>'Title',
-            'filename'=>'report.xlsx',
-            'stream'=>false,
-            'exportType'=>'Excel2007',
-           
-        ));*/
+          
 
-       // $widget->init();
-      //  $widget->run();
+        }
+
+        public function actionRelatorioMensal($title,$mes,$ano) {
+            $model = new TotalFalta;
+            $this->widget('application.extensions.phpexcel.EExcelView',
+                        array('dataProvider'=>$model->searchMensal2($mes,$ano),
+                             'title'=>$title,
+                             'grid_mode'=>'export',
+                             'exportType'=>'Excel2007',
+                            ));
+            Yii::app()->end();
+
 
         }
 	/**

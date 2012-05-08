@@ -1,16 +1,23 @@
 <?php
 $this->breadcrumbs=array(
 	'Faltas'=>array('index'),
-	'Faltas Detalhadas',
+	'Create',
 );
 
-
+$this->menu=array(
+	array('label'=>'Escolher outro Servidor ou Data', 'url'=>array('preparedCreate')),
+);
 ?>
+<?php
+    $cpf = $_GET['cpf'];
+    $mes = $_GET['mes'];
+    $ano = $_GET['ano'];
+    $servidor = Servidor::model()->findByPk($cpf);
+    $mes_model = Meses::model()->findByPk($mes);
+    $title = "Faltas: $servidor->nome - $mes_model->nome / $ano ";
+?>
+<h2><?php echo $title;?></h2>
 
-
-<?php $this->beginWidget('zii.widgets.CPortlet', array(
-			'title'=>'Faltas',
-                        'htmlOptions'=>array('class'=>'portlet_form')
-		));?>
-<?php echo $this->renderPartial('_form_prepared', array('model'=>$model)); ?>
-<?php $this->endWidget();?>
+<?php echo CHtml::link("Gerar Relatório",array('relatorioDetalhado','title'=>$title,
+    'servidorCpf'=>$cpf,'mes'=>$mes,'ano'=>$ano));?>
+<?php echo $this->renderPartial('_view', array('model'=>$model)); ?>

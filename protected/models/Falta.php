@@ -144,5 +144,7 @@ class Falta extends CActiveRecord {
 
     }
 
+    
+
 
 }
