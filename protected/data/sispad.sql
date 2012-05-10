@@ -23,6 +23,8 @@ USE sispad;
 
 --
 -- Definition of table `arquivo`
+
+
 --
 
 DROP TABLE IF EXISTS `arquivo`;
