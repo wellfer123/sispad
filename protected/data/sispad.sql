@@ -208,16 +208,14 @@ INSERT INTO `authitemchild` (`parent`,`child`) VALUES
 
 DROP TABLE IF EXISTS `cidades`;
 CREATE TABLE `cidades` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(10) NOT NULL AUTO_INCREMENT,
   `cidade_nome` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `cidade_codigo_ibge` varchar(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `cidade_id_estado` int(10) unsigned DEFAULT NULL,
   `cidade_id_regional` varchar(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `cidade_codigo_estado_ibge` varchar(2) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `foreign_key_cidade_id_estado` (`cidade_id_estado`),
-  CONSTRAINT `cidades_ibfk_1` FOREIGN KEY (`cidade_id_estado`) REFERENCES `estados` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5246 DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5253 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `cidades`
@@ -225,6 +223,7 @@ CREATE TABLE `cidades` (
 
 /*!40000 ALTER TABLE `cidades` DISABLE KEYS */;
 INSERT INTO `cidades` (`id`,`cidade_nome`,`cidade_codigo_ibge`,`cidade_id_estado`,`cidade_id_regional`,`cidade_codigo_estado_ibge`) VALUES 
+ (1,'IGNORADO OU EXTERIOR','000000',0,'0',''),
  (2,'MUNICIPIO IGNORADO - RO','110000',6,'0',''),
  (3,'ALTA FLORESTA D\'OESTE','110001',6,'0',''),
  (4,'ARIQUEMES','110002',6,'0',''),
@@ -1734,9 +1733,9 @@ INSERT INTO `cidades` (`id`,`cidade_nome`,`cidade_codigo_ibge`,`cidade_id_estado
  (1508,'BUIQUE','260280',1,'0','26'),
  (1509,'CABO DE SANTO AGOSTINHO','260290',1,'0','26'),
  (1510,'CABROBO','260300',1,'0','26'),
- (1511,'CACHOEIRINHA','260310',1,'2604','26'),
- (1512,'CAETES','260320',1,'0','26');
+ (1511,'CACHOEIRINHA','260310',1,'2604','26');
 INSERT INTO `cidades` (`id`,`cidade_nome`,`cidade_codigo_ibge`,`cidade_id_estado`,`cidade_id_regional`,`cidade_codigo_estado_ibge`) VALUES 
+ (1512,'CAETES','260320',1,'0','26'),
  (1513,'CALCADO','260330',1,'0','26'),
  (1514,'CALUMBI','260340',1,'0','26'),
  (1515,'CAMARAGIBE','260345',1,'0','26'),
@@ -3242,9 +3241,9 @@ INSERT INTO `cidades` (`id`,`cidade_nome`,`cidade_codigo_ibge`,`cidade_id_estado
  (3015,'SAO ROQUE DE MINAS','316430',19,'0',''),
  (3016,'SAO SEBASTIAO DA BELA VISTA','316440',19,'0',''),
  (3017,'SAO SEBASTIAO DA VARGEM ALEGRE','316443',19,'0',''),
- (3018,'SAO SEBASTIAO DO ANTA','316447',19,'0',''),
- (3019,'SAO SEBASTIAO DO MARANHAO','316450',19,'0','');
+ (3018,'SAO SEBASTIAO DO ANTA','316447',19,'0','');
 INSERT INTO `cidades` (`id`,`cidade_nome`,`cidade_codigo_ibge`,`cidade_id_estado`,`cidade_id_regional`,`cidade_codigo_estado_ibge`) VALUES 
+ (3019,'SAO SEBASTIAO DO MARANHAO','316450',19,'0',''),
  (3020,'SAO SEBASTIAO DO OESTE','316460',19,'0',''),
  (3021,'SAO SEBASTIAO DO PARAISO','316470',19,'0',''),
  (3022,'SAO SEBASTIAO DO RIO PRETO','316480',19,'0',''),
@@ -4775,9 +4774,9 @@ INSERT INTO `cidades` (`id`,`cidade_nome`,`cidade_codigo_ibge`,`cidade_id_estado
  (4547,'RIO DO CAMPO','421450',22,'0',''),
  (4548,'RIO DO OESTE','421460',22,'0',''),
  (4549,'RIO DOS CEDROS','421470',22,'0',''),
- (4550,'RIO DO SUL','421480',22,'0',''),
- (4551,'RIO FORTUNA','421490',22,'0','');
+ (4550,'RIO DO SUL','421480',22,'0','');
 INSERT INTO `cidades` (`id`,`cidade_nome`,`cidade_codigo_ibge`,`cidade_id_estado`,`cidade_id_regional`,`cidade_codigo_estado_ibge`) VALUES 
+ (4551,'RIO FORTUNA','421490',22,'0',''),
  (4552,'RIO NEGRINHO','421500',22,'0',''),
  (4553,'RIO RUFINO','421505',22,'0',''),
  (4554,'RIQUEZA','421507',22,'0',''),
@@ -5471,7 +5470,14 @@ INSERT INTO `cidades` (`id`,`cidade_nome`,`cidade_codigo_ibge`,`cidade_id_estado
  (5242,'CUIABA','510340',25,'0',''),
  (5243,'CURVELANDIA','510343',25,'0',''),
  (5244,'DENISE','510345',25,'0',''),
- (5245,'DIAMANTINO','510350',25,'0','');
+ (5245,'DIAMANTINO','510350',25,'0',''),
+ (5246,'CIDADE_NOME','cidAde_cod',0,'0',''),
+ (5247,'IV REGIONAL','26R004',1,'2604','26'),
+ (5248,'I REGIONAL','26R001',1,'2601','26'),
+ (5249,'TERRITORIO 01(IV GERES)','26RT01',1,'2604','26'),
+ (5250,'TERRITORIO 02(IV GERES)','26RT02',1,'2604','26'),
+ (5251,'TERRITORIO 03(IV GERES)','26RT03',1,'2604','26'),
+ (5252,'TERRITORIO 04(IV GERES)','26RT04',1,'2604','26');
 /*!40000 ALTER TABLE `cidades` ENABLE KEYS */;
 
 
@@ -5486,6 +5492,7 @@ CREATE TABLE `dados_trabalho` (
   `pis` varchar(11) DEFAULT NULL,
   `carga_horaria` int(2) NOT NULL,
   `turno` char(1) DEFAULT NULL,
+  `profissao` varchar(20) DEFAULT NULL,
   `salario` decimal(7,2) NOT NULL,
   `conselho_classe` varchar(20) DEFAULT NULL,
   `data_afastamento` date DEFAULT NULL,
@@ -5504,11 +5511,8 @@ CREATE TABLE `dados_trabalho` (
 --
 
 /*!40000 ALTER TABLE `dados_trabalho` DISABLE KEYS */;
-INSERT INTO `dados_trabalho` (`servidor_cpf`,`data_admissao`,`pis`,`carga_horaria`,`turno`,`salario`,`conselho_classe`,`data_afastamento`,`data_retorno`,`situacao_funcional`,`vinculo`,`profissao_codigo`) VALUES 
- ('09809809809','0000-00-00','32433',2333,'M','23.23','','0000-00-00','0000-00-00','AT','C',532),
- ('09886798805','2012-04-20','',56,'N','0.34','32242EFEAF','2012-01-02','2012-04-23','AT','S',777),
- ('0988909880','2012-04-13','32432423432',34,'N','45673.03','','1993-04-12','0000-00-00','DE','P',642),
- ('43243243242','2012-04-28','',23,'T','23.23','','1915-03-15','2012-01-08','AT','C',2);
+INSERT INTO `dados_trabalho` (`servidor_cpf`,`data_admissao`,`pis`,`carga_horaria`,`turno`,`profissao`,`salario`,`conselho_classe`,`data_afastamento`,`data_retorno`,`situacao_funcional`,`vinculo`,`profissao_codigo`) VALUES 
+ ('43243243242','0000-00-00','',23,'T',NULL,'23.23','','0000-00-00','0000-00-00','AT','C',2);
 /*!40000 ALTER TABLE `dados_trabalho` ENABLE KEYS */;
 
 
@@ -5548,8 +5552,10 @@ CREATE TABLE `endereco` (
   `cidade_id` int(11) DEFAULT NULL,
   `telefone` varchar(11) DEFAULT NULL,
   `email` varchar(30) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`id`),
+  KEY `FK_endereco_1` (`cidade_id`),
+  CONSTRAINT `FK_endereco_1` FOREIGN KEY (`cidade_id`) REFERENCES `cidades` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `endereco`
@@ -5557,12 +5563,112 @@ CREATE TABLE `endereco` (
 
 /*!40000 ALTER TABLE `endereco` DISABLE KEYS */;
 INSERT INTO `endereco` (`id`,`logradouro`,`numero`,`complemento`,`bairro`,`cidade_id`,`telefone`,`email`) VALUES 
- (1,'wefwfwfewr',2342,'dfdfd','dsfdsfdsfdsf',187,'232432','verferf@f34r43r'),
- (2,'rua teste',12,'proximo','centro',1610,'2342143','wwrwqrw'),
- (3,'rua teste',12,'proximo','centro',NULL,'2342143','wwrwqrw'),
- (4,'rua teste',324,'33432','efewf',187,'45334','gergerg'),
- (5,'werfew',3245,'afaseagt','asfafd',3850,'324324','dfwe@fwfmo4q');
+ (1,'Rua Dom Severino',108,'apt2 ','São Francisco',1523,'9999999','J@gmail.com'),
+ (2,'RuaDom',108,'apt3','São Franscisco',1523,'99999999','J@gmail.com'),
+ (3,'RuaDom',108,'apt3','São Franscisco',NULL,'99999999','J@gmail.com'),
+ (4,'q',1,'q','q',1523,'22','dd@ff'),
+ (5,'q',1,'q','q',NULL,'22','dd@ff'),
+ (6,'q',1,'q','q',NULL,'22','dd@ff'),
+ (7,'q',1,'q','q',NULL,'22','dd@ff'),
+ (8,'q',1,'q','q',NULL,'22','dd@ff'),
+ (9,'q',1,'q','q',NULL,'22','dd@ff'),
+ (10,'q',1,'q','q',NULL,'22','dd@ff'),
+ (11,'q',1,'q','q',NULL,'22','dd@ff'),
+ (12,'q\'',8,'j','j',NULL,'8','J@gmail.com'),
+ (13,'s',0,'k','k',NULL,'k','J@gmail.com'),
+ (14,'qq',888,'k','o',NULL,'0','J@gmail.com'),
+ (15,'Rua Dom Severino',108,'apt2 ','São Franscisco',1523,'99999999','J@gmail.com'),
+ (16,'Rua Dom Severino',108,'apt2 ','São Franscisco',NULL,'99999999','J@gmail.com'),
+ (17,'Rua Dom Severino',108,'apt2 ','São Franscisco',1523,'99999999','J@gmail.com'),
+ (18,'w\'',0,'l','k',NULL,'0','J@gmail.com'),
+ (19,'Rua Dom Severino',3,'d','ee',1523,'44556789090','J@gmail.com'),
+ (20,'Rua Dom Severino',3,'d','ee',NULL,'44556789090','J@gmail.com'),
+ (21,'Rua Dom Severino',3,'d','ee',NULL,'44556789090','J@gmail.com'),
+ (22,'Rua Dom Severino',3,'d','ee',NULL,'44556789090','J@gmail.com'),
+ (23,'Rua Dom Severino',3,'d','ee',NULL,'44556789090','J@gmail.com'),
+ (24,'Rua Dom Severino',3,'d','ee',NULL,'44556789090','J@gmail.com'),
+ (25,'Rua Dom Severino',1,'w','s',1523,'22','J@gmail.com'),
+ (26,'Rua Dom Severino',1,'w','s',NULL,'22','J@gmail.com'),
+ (27,'Rua Dom Severino',1,'w','s',NULL,'22','J@gmail.com'),
+ (28,'Rua Dom Severino',1,'w','s',NULL,'22','J@gmail.com'),
+ (29,'Rua Dom Severino',1,'w','s',NULL,'22','J@gmail.com'),
+ (30,'Rua Dom Severino',1,'w','s',NULL,'22','J@gmail.com'),
+ (31,'Rua Dom Severino',1,'w','s',NULL,'22','J@gmail.com'),
+ (32,'Rua Dom Severino',1,'w','s',NULL,'22','J@gmail.com'),
+ (33,'Rua Dom Severino',108,'apt2 ','São Franscisco',1523,'99999999','J@gmail.com'),
+ (34,'Rua Dom Severino',108,'apt2 ','São Franscisco',NULL,'99999999','J@gmail.com'),
+ (35,'Rua Dom Severino',108,'q','São Franscisco',1523,'22','J@gmail.com'),
+ (36,'Rua Dom Severino',108,'q','q',1523,'22','J@gmail.com'),
+ (37,'Rua Dom Severino',0,'q','q',1523,'3','J@gmail.com'),
+ (38,'Rua Dom Severino',0,'q','q',1523,'3','J@gmail.com'),
+ (39,'Rua Dom Severino',0,'q','q',NULL,'',''),
+ (40,'Rua Dom Severino',0,'q','q',NULL,'',''),
+ (41,'Rua Dom Severino',0,'q','q',NULL,'22','J@gmail.com'),
+ (42,'Rua Dom Severino',0,'q','q',NULL,'','J@gmail.com'),
+ (43,'Rua Dom Severino',0,'q','q',NULL,'','J@gmail.com'),
+ (44,'Rua Dom Severino',0,'q','q',NULL,'','J@gmail.com'),
+ (45,'Rua Dom Severino',0,'q','q',NULL,'22','J@gmail.com'),
+ (46,'Rua Dom Severino',0,'q','q',NULL,'22','J@gmail.com'),
+ (47,'Rua Dom Severino',0,'q','q',NULL,'22','J@gmail.com'),
+ (48,'Rua Dom Severino',0,'q','q',NULL,'22','J@gmail.com'),
+ (49,'Rua Dom Severino',0,'q','q',NULL,'22','J@gmail.com'),
+ (50,'Rua Dom Severino',0,'q','q',NULL,'','J@gmail.com'),
+ (51,'Rua Dom Severino',0,'q','q',NULL,'','J@gmail.com'),
+ (52,'Rua Dom Severino',0,'q','q',NULL,'','J@gmail.com'),
+ (53,'Rua Dom Severino',0,'q','q',NULL,'','J@gmail.com'),
+ (54,'Rua Dom Severino',0,'q','q',NULL,'22','J@gmail.com'),
+ (55,'Rua Dom Severino',0,'q','s',NULL,'22','J@gmail.com'),
+ (56,'Rua Dom Severino',0,'q','s',NULL,'22','J@gmail.com'),
+ (57,'Rua Dom severino vieira de Mel',0,'apt 2','São francisco',1523,'97369227','juniorpiresupe@gmail.com'),
+ (58,'Rua Dom severino vieira de Mel',0,'apt 2','São francisco',1523,'97369227','juniorpiresupe@gmail.com'),
+ (59,'Rua Dom severino vieira de Mel',0,'apt 2','São francisco',1523,'97369227','juniorpiresupe@gmail.com');
 /*!40000 ALTER TABLE `endereco` ENABLE KEYS */;
+
+
+--
+-- Definition of table `equipe`
+--
+
+DROP TABLE IF EXISTS `equipe`;
+CREATE TABLE `equipe` (
+  `codigo_segmento` int(2) NOT NULL,
+  `codigo_area` int(4) NOT NULL,
+  `tipo` int(2) NOT NULL,
+  `unidade_cnes` varchar(10) NOT NULL,
+  `codigo_microarea` int(2) NOT NULL,
+  PRIMARY KEY (`codigo_area`,`codigo_microarea`,`unidade_cnes`),
+  KEY `foreing_key` (`unidade_cnes`),
+  CONSTRAINT `foreing_key` FOREIGN KEY (`unidade_cnes`) REFERENCES `unidade` (`cnes`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `equipe`
+--
+
+/*!40000 ALTER TABLE `equipe` DISABLE KEYS */;
+/*!40000 ALTER TABLE `equipe` ENABLE KEYS */;
+
+
+--
+-- Definition of table `equipe_executa_procedimento`
+--
+
+DROP TABLE IF EXISTS `equipe_executa_procedimento`;
+CREATE TABLE `equipe_executa_procedimento` (
+  `unidade_cnes` varchar(10) NOT NULL DEFAULT '',
+  `procedimento_codigo` varchar(10) NOT NULL DEFAULT '',
+  `quantidade` int(11) DEFAULT NULL,
+  `competencia` int(6) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`unidade_cnes`,`procedimento_codigo`,`competencia`),
+  CONSTRAINT `equipe_executa_procedimento_ibfk_1` FOREIGN KEY (`unidade_cnes`) REFERENCES `unidade` (`cnes`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `equipe_executa_procedimento`
+--
+
+/*!40000 ALTER TABLE `equipe_executa_procedimento` DISABLE KEYS */;
+/*!40000 ALTER TABLE `equipe_executa_procedimento` ENABLE KEYS */;
 
 
 --
@@ -5615,6 +5721,78 @@ INSERT INTO `estados` (`id`,`estado_nome`,`estado_sigla`,`estado_codigo_ibge`) V
 
 
 --
+-- Definition of table `falta`
+--
+
+DROP TABLE IF EXISTS `falta`;
+CREATE TABLE `falta` (
+  `dia` int(2) unsigned NOT NULL DEFAULT '1',
+  `mes` int(2) unsigned NOT NULL,
+  `servidor_cpf` varchar(11) NOT NULL,
+  `data_envio` datetime NOT NULL,
+  `obs_motivo` varchar(45) NOT NULL,
+  `motivo_id` int(10) unsigned NOT NULL,
+  `ano` int(4) unsigned NOT NULL,
+  PRIMARY KEY (`dia`,`mes`,`ano`,`servidor_cpf`) USING BTREE,
+  KEY `FK_falta_3` (`servidor_cpf`),
+  KEY `FK_falta_4` (`motivo_id`),
+  CONSTRAINT `FK_falta_3` FOREIGN KEY (`servidor_cpf`) REFERENCES `servidor` (`cpf`),
+  CONSTRAINT `FK_falta_4` FOREIGN KEY (`motivo_id`) REFERENCES `motivo` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `falta`
+--
+
+/*!40000 ALTER TABLE `falta` DISABLE KEYS */;
+INSERT INTO `falta` (`dia`,`mes`,`servidor_cpf`,`data_envio`,`obs_motivo`,`motivo_id`,`ano`) VALUES 
+ (1,1,'0912909880','2012-05-02 00:00:00','',1,2012),
+ (1,1,'0988069880','2012-05-08 00:00:00','',1,2012),
+ (1,3,'0912909880','2012-05-03 00:00:00','',1,2012),
+ (1,4,'0912909880','2012-05-02 00:00:00','',1,2012),
+ (2,1,'0912909880','2012-05-07 00:00:00','',2,2012),
+ (2,3,'0912909880','2012-05-03 00:00:00','',1,2012),
+ (3,1,'0912909880','2012-05-07 00:00:00','',1,2012),
+ (3,1,'0988069880','2012-05-08 00:00:00','',2,2012),
+ (5,4,'0912909880','2012-05-02 00:00:00','',1,2012),
+ (6,1,'0912909880','2012-05-02 00:00:00','',1,2012),
+ (7,1,'0912909880','2012-05-07 00:00:00','',1,2012),
+ (8,4,'0912909880','2012-05-02 00:00:00','',1,2012),
+ (9,1,'0988069880','2012-05-08 00:00:00','',1,2012),
+ (9,4,'0912909880','2012-05-02 00:00:00','',1,2012),
+ (11,1,'0988069880','2012-05-08 00:00:00','',2,2012),
+ (14,1,'0912909880','2012-05-03 00:00:00','',1,2012),
+ (17,4,'0912909880','2012-05-02 00:00:00','',2,2012),
+ (18,4,'0912909880','2012-05-02 00:00:00','',2,2012),
+ (20,1,'0912909880','2012-05-02 00:00:00','',1,2012);
+/*!40000 ALTER TABLE `falta` ENABLE KEYS */;
+
+
+--
+-- Definition of trigger `total_falta_add`
+--
+
+DROP TRIGGER /*!50030 IF EXISTS */ `total_falta_add`;
+
+DELIMITER $$
+
+CREATE DEFINER = `root`@`localhost` TRIGGER `total_falta_add` AFTER INSERT ON `falta` FOR EACH ROW BEGIN
+    IF((SELECT COUNT(fal.mes) FROM total_falta fal
+			WHERE (fal.mes=NEW.mes AND  fal.ano=NEW.ano AND
+			fal.servidor_cpf=NEW.servidor_cpf)))THEN
+
+         UPDATE total_falta fal SET fal.quantidade=fal.quantidade+1 WHERE (fal.mes=NEW.mes AND  fal.ano=NEW.ano AND
+			fal.servidor_cpf=NEW.servidor_cpf);
+
+	   ELSE
+	     INSERT INTO total_falta SET quantidade=1,servidor_cpf=NEW.servidor_cpf,ano=NEW.ano,mes=NEW.mes;
+
+		END IF;
+    END $$
+
+DELIMITER ;
+
+--
 -- Definition of table `identidade`
 --
 
@@ -5624,18 +5802,14 @@ CREATE TABLE `identidade` (
   `data_nascimento` date NOT NULL,
   `numero` varchar(20) NOT NULL,
   `orgao_expedidor` varchar(10) NOT NULL,
-  `uf` int(10) unsigned NOT NULL,
+  `uf` char(2) NOT NULL,
   `sexo` char(1) NOT NULL,
+  `estado_naturalidade_id` int(11) DEFAULT NULL,
+  `cidade_naturalidade_id` int(11) DEFAULT NULL,
   `nome_pai` varchar(60) DEFAULT NULL,
   `nome_mae` varchar(60) DEFAULT NULL,
-  `cidade_naturalidade_id` int(10) unsigned DEFAULT NULL,
   PRIMARY KEY (`servidor_cpf`),
-  UNIQUE KEY `Index_4` (`numero`) USING BTREE,
-  KEY `foreign_key_cidade_naturalidade_id` (`cidade_naturalidade_id`),
-  KEY `FK_identidade_3` (`uf`),
-  CONSTRAINT `FK_identidade_3` FOREIGN KEY (`uf`) REFERENCES `estados` (`id`),
-  CONSTRAINT `identidade_ibfk_1` FOREIGN KEY (`servidor_cpf`) REFERENCES `servidor` (`cpf`),
-  CONSTRAINT `identidade_ibfk_2` FOREIGN KEY (`cidade_naturalidade_id`) REFERENCES `cidades` (`id`)
+  CONSTRAINT `identidade_ibfk_1` FOREIGN KEY (`servidor_cpf`) REFERENCES `servidor` (`cpf`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -5643,12 +5817,6 @@ CREATE TABLE `identidade` (
 --
 
 /*!40000 ALTER TABLE `identidade` DISABLE KEYS */;
-INSERT INTO `identidade` (`servidor_cpf`,`data_nascimento`,`numero`,`orgao_expedidor`,`uf`,`sexo`,`nome_pai`,`nome_mae`,`cidade_naturalidade_id`) VALUES 
- ('0912909880','0000-00-00','324','SSS',1,'M','JOAO TESTE 3','MAE DE PIRES',1602),
- ('0988069880','2011-01-09','23213213','SDS',1,'M','NOME DO PAI DE PIRES','MARIAZINHA',1574),
- ('43243243242','2003-04-16','34343434','SDS',7,'M','SEI LA','JAOANA BEZESAS',781),
- ('45645645645','0000-00-00','32432432423','SDS',7,'M','3532532532','35345345345',1523),
- ('45645645656','0000-00-00','432432','SDS',7,'M','ewfewfew','efefewew',1523);
 /*!40000 ALTER TABLE `identidade` ENABLE KEYS */;
 
 
@@ -5667,7 +5835,7 @@ CREATE TABLE `indicador` (
   PRIMARY KEY (`id`),
   KEY `foreign_key_profissao_codigo` (`profissao_codigo`),
   CONSTRAINT `indicador_ibfk_1` FOREIGN KEY (`profissao_codigo`) REFERENCES `profissao` (`codigo`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `indicador`
@@ -5675,10 +5843,11 @@ CREATE TABLE `indicador` (
 
 /*!40000 ALTER TABLE `indicador` DISABLE KEYS */;
 INSERT INTO `indicador` (`id`,`nome`,`descricao`,`profissao_codigo`,`status`,`afericao`) VALUES 
- (4,'Atendimento Clinico na USF','Inclui consulta geral de Enfermagem, pré-natal puericultura e planejamento reprodutivo',31,'1','SIAB'),
- (11,'Cadastro de gestantes','Cadastro',31,'1','SIAB'),
- (12,'Indicador2','É',532,'1','SIAB'),
- (13,'Indicador3','É',532,'1','SIA');
+ (1,'Atendimento Domiciliar','É a consulta geral de odontologia',1,'1',''),
+ (2,'Atendimento Domiciliar','É a consulta geral de odontologia',31,'1',''),
+ (3,'Atendimento Domiciliar','É a consulta geral de odontologia',31,'1','SIAB'),
+ (4,'Atendimento Domiciliar','É a consulta geral de odontologia',31,'1','SIAB'),
+ (5,'Indicador7','é algo',532,'1','SIAB');
 /*!40000 ALTER TABLE `indicador` ENABLE KEYS */;
 
 
@@ -5688,13 +5857,13 @@ INSERT INTO `indicador` (`id`,`nome`,`descricao`,`profissao_codigo`,`status`,`af
 
 DROP TABLE IF EXISTS `item`;
 CREATE TABLE `item` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL DEFAULT '0',
   `nome` varchar(50) NOT NULL,
-  `meta_id` int(11) DEFAULT NULL,
+  `meta_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `foreign_key_meta_id` (`meta_id`),
-  CONSTRAINT `item_ibfk_1` FOREIGN KEY (`meta_id`) REFERENCES `meta` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+  KEY `FK_item_1` (`meta_id`),
+  CONSTRAINT `FK_item_1` FOREIGN KEY (`meta_id`) REFERENCES `meta` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `item`
@@ -5702,15 +5871,13 @@ CREATE TABLE `item` (
 
 /*!40000 ALTER TABLE `item` DISABLE KEYS */;
 INSERT INTO `item` (`id`,`nome`,`meta_id`) VALUES 
- (1,'Consultas',NULL),
- (2,'Cadastro de gestantes',NULL),
- (3,'Pre-natal',3),
- (4,'Cadastro de gestantes',4),
- (5,'Cad',4),
- (6,'co-gestão',5),
- (7,'co-gestão2',5),
- (8,'Item',6),
- (9,'Pre-natal2',7);
+ (0,'Item22',1),
+ (1,'Item1',1),
+ (2,'Item3',1),
+ (3,'Item1',1),
+ (4,'Item22',1),
+ (34,'ewr',1),
+ (222,'34d',1);
 /*!40000 ALTER TABLE `item` ENABLE KEYS */;
 
 
@@ -5764,7 +5931,7 @@ CREATE TABLE `meta` (
   KEY `foreign_key_indicador_id` (`indicador_id`),
   CONSTRAINT `meta_ibfk_1` FOREIGN KEY (`periodicidade_id`) REFERENCES `periodicidade` (`id`),
   CONSTRAINT `meta_ibfk_3` FOREIGN KEY (`indicador_id`) REFERENCES `indicador` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `meta`
@@ -5772,12 +5939,30 @@ CREATE TABLE `meta` (
 
 /*!40000 ALTER TABLE `meta` DISABLE KEYS */;
 INSERT INTO `meta` (`id`,`nome`,`periodicidade_id`,`tipo`,`indicador_id`,`valor`,`percentagem`) VALUES 
- (3,'Consulta',1,'cs',4,2,100),
- (4,'Meta3',1,'cs',12,34,75),
- (5,'Meta5',4,'cs',11,23,30),
- (6,'Ind3',1,'cs',4,23,100),
- (7,'Meta6',4,'cs',13,36,23);
+ (1,'Meta8',4,'cs',5,34,100);
 /*!40000 ALTER TABLE `meta` ENABLE KEYS */;
+
+
+--
+-- Definition of table `motivo`
+--
+
+DROP TABLE IF EXISTS `motivo`;
+CREATE TABLE `motivo` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `descricao` varchar(45) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `motivo`
+--
+
+/*!40000 ALTER TABLE `motivo` DISABLE KEYS */;
+INSERT INTO `motivo` (`id`,`descricao`) VALUES 
+ (1,'não justificada'),
+ (2,'licensa');
+/*!40000 ALTER TABLE `motivo` ENABLE KEYS */;
 
 
 --
@@ -5807,6 +5992,44 @@ INSERT INTO `periodicidade` (`id`,`nome`,`valor_dias`) VALUES
  (7,'SEMESTRAL',180),
  (8,'ANUAL',365);
 /*!40000 ALTER TABLE `periodicidade` ENABLE KEYS */;
+
+
+--
+-- Definition of table `procedimento`
+--
+
+DROP TABLE IF EXISTS `procedimento`;
+CREATE TABLE `procedimento` (
+  `codigo` varchar(10) NOT NULL,
+  `nome` varchar(250) NOT NULL,
+  `tipo_complexidade` varchar(1) NOT NULL,
+  `tipo_sexo` varchar(1) NOT NULL,
+  `quantidade_maxima_execucao` int(4) unsigned NOT NULL,
+  `quantidade_dias_permanencia` int(4) unsigned NOT NULL,
+  `quantidade_pontos` int(4) unsigned NOT NULL,
+  `validade_idade_minima` int(4) unsigned NOT NULL,
+  `validade_idade_maxima` int(4) unsigned NOT NULL,
+  `validade_sh` int(10) unsigned NOT NULL,
+  `validade_sa` int(10) unsigned NOT NULL,
+  `validade_sp` int(10) unsigned NOT NULL,
+  `codigo_financiamento` varchar(2) NOT NULL,
+  `codigo_rubrica` varchar(6) NOT NULL,
+  `data_competencia` char(6) NOT NULL,
+  PRIMARY KEY (`codigo`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `procedimento`
+--
+
+/*!40000 ALTER TABLE `procedimento` DISABLE KEYS */;
+INSERT INTO `procedimento` (`codigo`,`nome`,`tipo_complexidade`,`tipo_sexo`,`quantidade_maxima_execucao`,`quantidade_dias_permanencia`,`quantidade_pontos`,`validade_idade_minima`,`validade_idade_maxima`,`validade_sh`,`validade_sa`,`validade_sp`,`codigo_financiamento`,`codigo_rubrica`,`data_competencia`) VALUES 
+ ('0101020015','AÇÃO COLETIVA DE APLICAÇÃO TÓPICA DE FLÚOR GEL','1','S',0,0,0,0,0,0,0,0,'02','005','032012'),
+ ('0101020023','AÇÃO COLETIVA DE BOCHECHO FLUORADO','1','S',0,0,0,0,0,0,0,0,'02','005','032012'),
+ ('0101020031','AÇÃO COLETIVA DE ESCOVAÇÃO DENTAL SUPERVISIONADA','1','S',0,0,0,0,0,0,0,0,'02','005','032012'),
+ ('0101030010','VISITA DOMICILIAR POR PROFISSIONAL DE NÍVEL MÉDIO','1','S',0,0,0,0,0,0,0,0,'02','005','032012'),
+ ('0301050058','ASSIT. DOMICILIAR POR PROFISSIONAL DE NÍVEL MÉDIO','1','S',0,0,0,0,0,0,0,0,'02','005','032012');
+/*!40000 ALTER TABLE `procedimento` ENABLE KEYS */;
 
 
 --
@@ -6837,16 +7060,16 @@ CREATE TABLE `servidor` (
 
 /*!40000 ALTER TABLE `servidor` DISABLE KEYS */;
 INSERT INTO `servidor` (`cpf`,`matricula`,`nome`,`estado_civil`,`endereco_id`,`unidade_cnes`) VALUES 
- ('0912909880','034832WER','CÉSAR HENRIQUE',NULL,NULL,'2345668'),
- ('09809809809','3244232432','CéSAR HENRIQUE LEITE','S',1,'2345668'),
- ('0988069880','0348328MER','JÚNIOR PIRES',NULL,NULL,'2345668'),
- ('0988139880','034832LSDF32','ALEXANDRE',NULL,NULL,'2345668'),
- ('09886798805','03483284WER','ARI LUIZ',NULL,NULL,'2345668'),
- ('0988909880','0348328432','JOSÉ BARBOSA',NULL,NULL,'2345668'),
- ('43243243242','324','JOAO BOSQUINHO TESTE','S',NULL,'2345668'),
- ('45645645645','23333','JOÃO TESTE','S',5,'2345668'),
- ('45645645646','3243mmm','MARIA FELIZADA',NULL,NULL,'2345668'),
- ('45645645656','3243mmm','JOÃO BOQUINHO',NULL,NULL,'2345668');
+ ('0912909880','0348323333','CÉSAR HENRIQUE','S',NULL,'0324839483'),
+ ('09809809809','3244232432','CéSAR HENRIQUE LEITE','S',43,'0324839483'),
+ ('0988069880','0348328MER','JÚNIOR PIRES','S',NULL,'0324839483'),
+ ('0988139880','0348322222','ALEXANDRE','C',NULL,'0324839483'),
+ ('09886798805','0348328000','ARI LUIZ','C',44,'0324839483'),
+ ('0988909880','0348328432','JOSÉ BARBOSA',NULL,NULL,NULL),
+ ('43243243242','324','JOAO BOSQUINHO TESTE','S',48,'0324839483'),
+ ('45645645645','3243','JOÃO TESTE','S',49,'0324839483'),
+ ('45645645646','3242222222','MARIA FELIZADA','C',59,'0324839483'),
+ ('45645645656','3243mmm','JOÃO BOQUINHO','S',NULL,'0324839483');
 /*!40000 ALTER TABLE `servidor` ENABLE KEYS */;
 
 
@@ -6901,6 +7124,28 @@ CREATE TABLE `servidor_executa_meta` (
 
 
 --
+-- Definition of table `servidor_executa_procedimento`
+--
+
+DROP TABLE IF EXISTS `servidor_executa_procedimento`;
+CREATE TABLE `servidor_executa_procedimento` (
+  `servidor_cpf` varchar(11) NOT NULL DEFAULT '',
+  `procedimento_codigo` varchar(10) NOT NULL DEFAULT '',
+  `quantidade` int(11) DEFAULT NULL,
+  `competencia` int(6) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`servidor_cpf`,`procedimento_codigo`,`competencia`),
+  KEY `foreign_key_procedimento_codigo` (`procedimento_codigo`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `servidor_executa_procedimento`
+--
+
+/*!40000 ALTER TABLE `servidor_executa_procedimento` DISABLE KEYS */;
+/*!40000 ALTER TABLE `servidor_executa_procedimento` ENABLE KEYS */;
+
+
+--
 -- Definition of table `setor`
 --
 
@@ -6943,7 +7188,37 @@ CREATE TABLE `titulo_eleitor` (
 --
 
 /*!40000 ALTER TABLE `titulo_eleitor` DISABLE KEYS */;
+INSERT INTO `titulo_eleitor` (`servidor_cpf`,`numero`,`zona`,`secao`) VALUES 
+ ('0912909880','99009988','77','66'),
+ ('0988069880','8.888.888','66','99'),
+ ('09886798805','123456','77','88');
 /*!40000 ALTER TABLE `titulo_eleitor` ENABLE KEYS */;
+
+
+--
+-- Definition of table `total_falta`
+--
+
+DROP TABLE IF EXISTS `total_falta`;
+CREATE TABLE `total_falta` (
+  `ano` int(4) unsigned NOT NULL,
+  `mes` int(2) unsigned NOT NULL,
+  `servidor_cpf` varchar(11) NOT NULL,
+  `quantidade` int(2) unsigned NOT NULL,
+  PRIMARY KEY (`ano`,`mes`,`servidor_cpf`) USING BTREE,
+  KEY `FK_total_falta_1` (`servidor_cpf`),
+  CONSTRAINT `FK_total_falta_3` FOREIGN KEY (`servidor_cpf`) REFERENCES `servidor` (`cpf`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `total_falta`
+--
+
+/*!40000 ALTER TABLE `total_falta` DISABLE KEYS */;
+INSERT INTO `total_falta` (`ano`,`mes`,`servidor_cpf`,`quantidade`) VALUES 
+ (2012,1,'0912909880',3),
+ (2012,1,'0988069880',4);
+/*!40000 ALTER TABLE `total_falta` ENABLE KEYS */;
 
 
 --
@@ -7031,55 +7306,9 @@ CREATE TABLE `unidade` (
 
 /*!40000 ALTER TABLE `unidade` DISABLE KEYS */;
 INSERT INTO `unidade` (`cnes`,`descricao`,`nome`,`cidade_id`,`regional_id`) VALUES 
- ('2345544','SEM DESCRÇÃO','PSF ITAUNA ',1523,1),
- ('2345560','SEM DESCRÇÃO','CENTRO DE SAUDE SANTA ROSA ',1523,1),
- ('2345587','SEM DESCRÇÃO','CENTRO DE SAUDE COHAB I ',1523,1),
- ('2345595','SEM DESCRÇÃO','CENTRO DE SAUDE INDIANOPOLIS ',1523,1),
- ('2345625','SEM DESCRÇÃO','PSF LAJES ',1523,1),
- ('2345633','SEM DESCRÇÃO','PSF PAU SANTO ',1523,1),
- ('2345641','SEM DESCRÇÃO','PSF JOAO MOTA ',1523,1),
- ('2345668','SEM DESCRÇÃO','PSF JOSE CARLOS DE OLIVEIRA ',1523,1),
- ('2345676','SEM DESCRÇÃO','PSF MORRO SAO FRANCISCO ',1523,1),
- ('2345684','SEM DESCRÇÃO','CENTRO DE SAUDE COHAB III ',1523,1),
- ('2345692','SEM DESCRÇÃO','PSF XICURU ',1523,1),
- ('2345706','SEM DESCRÇÃO','PSF SAO JOAO DA ESCOCIA ',1523,1),
- ('2345714','SEM DESCRÇÃO','PSF MORRO BOM JESUS ',1523,1),
- ('2345722','SEM DESCRÇÃO','PSF PADRE INACIO ',1523,1),
- ('2345730','SEM DESCRÇÃO','PSF SALGADO I ',1523,1),
- ('2345749','SEM DESCRÇÃO','PSF TERRA VERMELHA ',1523,1),
- ('2345757','SEM DESCRÇÃO','PSF JUA ',1523,1),
- ('2345803','SEM DESCRÇÃO','C S CEDRO ',1523,1),
- ('2345846','SEM DESCRÇÃO','PSF GONCALVES FERREIRA ',1523,1),
- ('2345854','SEM DESCRÇÃO','PSF MORRO CENTENARIO ',1523,1),
- ('2345862','SEM DESCRÇÃO','PSF CAJA ',1523,1),
- ('2345870','SEM DESCRÇÃO','PSF MALHADA DE BARREIRAS QUEIMADAS ',1523,1),
- ('2345900','SEM DESCRÇÃO','PSF RAFAEL ',1523,1),
- ('2345919','SEM DESCRÇÃO','PSF SALGADO II ',1523,1),
- ('2345994','SEM DESCRÇÃO','C S SALGADO ',1523,1),
- ('2346036','SEM DESCRÇÃO','PSF MURICI ',1523,1),
- ('2346044','SEM DESCRÇÃO','PSF CENTENARIO ',1523,1),
- ('2346052','SEM DESCRÇÃO','PSF AGAMENON MAGALHAES ',1523,1),
- ('2346060','SEM DESCRÇÃO','PSF PELADAS ',1523,1),
- ('2346087','SEM DESCRÇÃO','PSF RIACHO DOCE ',1523,1),
- ('2682419','SEM DESCRÇÃO','PSF ALTO DO MOURA ',1523,1),
- ('2682443','SEM DESCRÇÃO','PSF SERRA VELHA ',1523,1),
- ('2682451','SEM DESCRÇÃO','PSF LAGOA DE PEDRA ',1523,1),
- ('2682478','SEM DESCRÇÃO','PSF CIDADE JARDIM ',1523,1),
- ('2682486','SEM DESCRÇÃO','PSF SANTA ROSA ',1523,1),
- ('2682494','SEM DESCRÇÃO','PSF VILA KENNEDY I ',1523,1),
- ('2682508','SEM DESCRÇÃO','PSF CAIUCA ',1523,1),
- ('2682516','SEM DESCRÇÃO','PSF JARDIM PANORAMA ',1523,1),
- ('2682524','SEM DESCRÇÃO','PSF JOSE LIBERATO ',1523,1),
- ('2682532','SEM DESCRÇÃO','PSF VILA KENNEDY II ',1523,1),
- ('2682559','SEM DESCRÇÃO','PSF SALGADO III ',1523,1),
- ('2682567','SEM DESCRÇÃO','PSF SALGADO IV ',1523,1),
- ('2797968','SEM DESCRÇÃO','PSF AGAMENON MAGALHAES II ',1523,1),
- ('2797976','SEM DESCRÇÃO','PSF JOSE CARLOS DE OLIVEIRA II ',1523,1),
- ('2797992','SEM DESCRÇÃO','PSF JARDIM PANORAMA II ',1523,1),
- ('3020932','SEM DESCRÇÃO','PSF SAO JOAO DA ESCOCIA II ',1523,1),
- ('3741265','SEM DESCRÇÃO','PSF JARDIM LIBERDADE ',1523,1),
- ('3741273','SEM DESCRÇÃO','PSF CAIUCA II ',1523,1),
- ('5481287','SEM DESCRÇÃO','PSF CANAA ',1523,1);
+ ('0324839483','descriçao do campo','unidade somente para teste',1574,1),
+ ('2343254345','BAIRRO VASSOURAL','UNIDADE SANTO BELO MONTE',1523,1),
+ ('9883433999','ai vai uma descriçao','unida de saude nair belo ramundo',1511,1);
 /*!40000 ALTER TABLE `unidade` ENABLE KEYS */;
 
 
