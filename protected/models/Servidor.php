@@ -72,6 +72,7 @@ class Servidor extends CActiveRecord
                         'relatorio'=>array(self::HAS_MANY, 'servidor', 'servidor_cpf'),
                         'totalRelatorio'=>array(self::HAS_MANY,'TotalRelatorio','servidor_cpf'),
                         'falta'=>array(self::HAS_MANY,'Falta','servidor_cpf'),
+                        'equipe'=>array(self::BELONGS_TO,'Equipe','equipe_codigo_segmento'),
 		);
 	}
 

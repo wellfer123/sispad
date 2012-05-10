@@ -29,6 +29,7 @@ class Equipe extends CActiveRecord
 		return 'equipe';
 	}
 
+        public $cpf;
 	/**
 	 * @return array validation rules for model attributes.
 	 */
@@ -37,7 +38,7 @@ class Equipe extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('codigo_segmento, codigo_area, tipo, unidade_cnes, codigo_microarea', 'required'),
+			array('codigo_area, tipo, unidade_cnes, codigo_microarea', 'required'),
 			array('codigo_segmento, codigo_area, tipo, codigo_microarea', 'numerical', 'integerOnly'=>true),
 			array('unidade_cnes', 'length', 'max'=>10),
 			// The following rule is used by search().
@@ -54,7 +55,8 @@ class Equipe extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'unidade_cnes0' => array(self::BELONGS_TO, 'Unidade', 'unidade_cnes'),
+			'unidade' => array(self::BELONGS_TO, 'Unidade', 'unidade_cnes'),
+                        'servidor'=>array(self::HAS_MANY,'Servidor','equipe_codigo_segmento'),
 		);
 	}
 

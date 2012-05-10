@@ -71,7 +71,29 @@ class ServidorController extends SISPADBaseController
 			'model'=>$model,
 		));
 	}
+        public function actionAddToTeam()
+	{
 
+                $model = new Servidor;
+		// Uncomment the following line if AJAX validation is needed
+		// $this->performAjaxValidation($model);
+
+		if(isset($_POST['Servidor']))
+		{
+
+                        $model->cpf=$_POST['Servidor']['cpf'];
+                        $model=Servidor::model()->findbyPk($model->cpf);
+                        $model->equipe_codigo_segmento = $_GET['codigo_segmento'];
+                        if($model->save()){
+                            $model = new Servidor;
+                        }
+                        
+		}
+
+		$this->render('add_to_team',array(
+			'model'=>$model,
+		));
+	}
 	/**
 	 * Updates a particular model.
 	 * If update is successful, the browser will be redirected to the 'view' page.

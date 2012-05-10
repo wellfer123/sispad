@@ -10,6 +10,11 @@ $this->menu=array(
 );
 ?>
 
-<h1>Create Equipe</h1>
+<?php $this->beginWidget('zii.widgets.CPortlet', array(
+			'title'=>"Cadastrar Equipe",
+                        'htmlOptions'=>array('class'=>'portlet_form')
+		));?>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php $this->endWidget();?>
+<?php echo $this->renderPartial('_view', array('model'=>$model)); ?>

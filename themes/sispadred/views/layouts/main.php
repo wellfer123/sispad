@@ -58,6 +58,7 @@ array(
                       array("url"=>array("route"=>"/Servidor/index"), "label"=>"Servidor"),
                       array("url"=>array("route"=>"/Unidade/index"), "label"=>"Unidade"),
                       array("url"=>array("route"=>"/indicador/create"), "label"=>"Indicador"),
+                      array("url"=>array("route"=>"/equipe/create"), "label"=>"Equipe"),
                       'visible'=>$RBAC2->checkAccess('SuperAdmin'),
               ),
           array("url"=>array(),
