@@ -130,18 +130,21 @@ class Falta extends CActiveRecord {
 
     public function searchporServidor2($servidorCpf, $mes, $ano) {
 
-                $dados=Yii::app()->db->createCommand('select fal.dia, fal.obs_motivo as observacao,mot.descricao,
-                                                     (select distinct quantidade  from total_falta where ano=fal.ano
-                                                      AND mes=fal.mes AND servidor_cpf=fal.servidor_cpf group by quantidade) as total
+                $dados=Yii::app()->db->createCommand('select fal.dia, fal.obs_motivo as observacao,mot.descricao
+                          
                                                       from falta as fal INNER JOIN motivo as mot
                                                       ON fal.motivo_id = mot.id where fal.servidor_cpf='.$servidorCpf.'
-                                                      AND mes='.$mes.' AND ano='.$ano.' ORDER BY fal.dia')->queryAll();
+                                                      AND fal.mes='.$mes.' AND fal.ano='.$ano.' ORDER BY fal.dia')->queryAll();
 
-		return new CArrayDataProvider($dados, array(
+		 $tes=new CArrayDataProvider($dados, array(
                                     'id'=>'falta',
                                     'pagination'=>false
 
 		));
+                 $tes->rawData[]=array('dia'=>'','observacao'=>'','descricao'=>'');
+                 $tes->rawData[]=array('dia'=>'','observacao'=>'TOTAL DE FALTAS:','descricao'=>$tes->getTotalItemCount()-1);
+
+                 return $tes;
 
     }
 

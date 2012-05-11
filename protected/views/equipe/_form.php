@@ -9,11 +9,11 @@
 
 	<?php echo $form->errorSummary($model); ?>
 
-	<!--<div class="row">
-		<?php //echo $form->labelEx($model,'codigo_segmento'); ?>
-		<?php //echo $form->textField($model,'codigo_segmento'); ?>
-		<?php //echo $form->error($model,'codigo_segmento'); ?>
-	</div>-->
+        <div class="row">
+		<?php echo $form->labelEx($model,'codigo_segmento'); ?>
+		<?php echo $form->textField($model,'codigo_segmento'); ?>
+		<?php echo $form->error($model,'codigo_segmento'); ?>
+        </div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'tipo'); ?>

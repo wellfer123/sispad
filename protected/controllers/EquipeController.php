@@ -52,6 +52,7 @@ class EquipeController extends Controller
 	public function actionCreate()
 	{
 		$model=new Equipe;
+                $model->unsetAttributes();  // clear any default values
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
@@ -60,7 +61,7 @@ class EquipeController extends Controller
 		{
 			$model->attributes=$_POST['Equipe'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->codigo_segmento));
+				$this->redirect(array('view','area'=>$model->codigo_area,'cnes'=>$model->unidade_cnes));
 		}
 
 		$this->render('create',array(
@@ -84,7 +85,7 @@ class EquipeController extends Controller
 		{
 			$model->attributes=$_POST['Equipe'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->codigo_segmento));
+				$this->redirect(array('view','area'=>$model->codigo_area,'cnes'=>$model->unidade_cnes));
 		}
 
 		$this->render('update',array(
@@ -145,8 +146,9 @@ class EquipeController extends Controller
 	{
 		if($this->_model===null)
 		{
-			if(isset($_GET['id']))
-				$this->_model=Equipe::model()->findbyPk($_GET['id']);
+			if(isset($_GET['area'])&& isset($_GET['cnes']))
+				$this->_model=Equipe::model()->findbyPk(
+                                        array('codigo_area'=>$_GET['area'],'unidade_cnes'=>$_GET['cnes']));
 			if($this->_model===null)
 				throw new CHttpException(404,'The requested page does not exist.');
 		}

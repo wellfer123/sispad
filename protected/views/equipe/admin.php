@@ -49,6 +49,25 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		'codigo_microarea',
 		array(
 			'class'=>'CButtonColumn',
+                        'template'=>'{view}{update}{delete}',
+                        'buttons'=>array(
+                            'view'=>array(
+                                'label'=>'visualizar',
+                                'url'=>'Yii::app()->createUrl("/equipe/view",
+                                        array("area"=>$data->codigo_area,"cnes"=>$data->unidade_cnes))',
+                            ),
+                            'update'=>array(
+                                'label'=>'atualizar',
+                                'url'=>'Yii::app()->createUrl("/equipe/update",
+                                        array("area"=>$data->codigo_area,"cnes"=>$data->unidade_cnes))',
+                            ),
+                            'delete'=>array(
+                                'label'=>'deletar equipe',
+                                'url'=>'Yii::app()->createUrl("/equipe/delete",
+                                        array("area"=>$data->codigo_area,"cnes"=>$data->unidade_cnes))',
+                            ),
+                              
+                        ),
 		),
 	),
 )); ?>
