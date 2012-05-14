@@ -13,6 +13,44 @@
  */
 class AgenteSaudeExecutaProcedimento extends CActiveRecord
 {
+    
+    
+        /**
+         * @var string unidade que  faz parte
+         * @soap
+         */
+        public $agente_saude_unidade_cnes;
+        
+        /**
+         * @var string cpf do servidor
+         * @soap
+         */
+        public $agente_saude_cpf;
+        
+        /**
+         * @var int numero da competencia 
+         * @soap
+         */
+        public $competencia;
+        
+        /**
+         * @var int quantidade de execução do procedimento
+         * @soap
+         */
+        public $quantidade;
+        
+        /**
+         * @var string codigo do procedimento executado
+         * @soap
+         */
+        public $procedimento_codigo;
+        
+        /**
+         * @var int microarea do agente
+         * @soap
+         */
+        public $agente_saude_micro_area;
+    
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return agente_saude_executa_procedimento the static model class

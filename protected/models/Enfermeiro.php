@@ -12,6 +12,38 @@
  */
 class Enfermeiro extends CActiveRecord
 {
+        
+        /**
+         * @var string unidade que  faz parte
+         * @soap
+         */
+        public $unidade_cnes;
+        
+        /**
+         * @var string cpf do servidor
+         * @soap
+         */
+        public $servidor_cpf;
+        
+        /**
+         * @var string ativo: sim(1) não(0) 
+         * @soap
+         */
+        public $ativo;
+        
+        /**
+         * @var dateTime data de cadastro
+         * @soap
+         */
+        public $data_cadastro;
+        
+        /**
+         * @var date data de desativacao
+         * @soap
+         */
+        public $data_desativacao;
+        
+        
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return Enfermeiro the static model class

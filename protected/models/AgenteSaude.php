@@ -11,8 +11,44 @@
  * @property string $ativo
  * @property string $data_cadastro
  */
-class Agente_saude extends CActiveRecord
+class AgenteSaude extends CActiveRecord
 {
+    
+        /**
+         * @var string unidade que  faz parte
+         * @soap
+         */
+        public $unidade_cnes;
+        
+        /**
+         * @var string cpf do servidor
+         * @soap
+         */
+        public $servidor_cpf;
+        
+        /**
+         * @var string ativo: sim(1) não(0) 
+         * @soap
+         */
+        public $ativo;
+        
+        /**
+         * @var dateTime data de cadastro
+         * @soap
+         */
+        public $data_cadastro;
+        
+        /**
+         * @var date data de desativacao
+         * @soap
+         */
+        public $data_desativacao;
+        
+        /**
+         * @var int microarea do agente
+         * @soap
+         */
+        public $micro_area;
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return Agente_saude the static model class

@@ -19,8 +19,16 @@ class ProcedimentoController extends Controller
                 'class'=>'CWebServiceAction',
                 'classMap'=>array(
                     'Procedimento'=>'Procedimento',
+                    'Odontologo'=>'Odontologo',
+                    'Medico'=>'Medico',
+                    'Enfermeiro'=>'Enfermeiro',
+                    'Agente de Saude'=>'Agente de Saude',
                     'ServidorExecutaProcedimento'=>'ServidorExecutaProcedimento',
                     'EquipeExecutaProcedimento'=>'EquipeExecutaProcedimento',
+                    'MedicoExecutaProcedimento'=>'MedicoExecutaProcedimento',
+                    'EnfermeiroExecutaProcedimento'=>'EnfermeiroExecutaProcedimento',
+                    'AgenteSaudeExecutaProcedimento'=>'AgenteSaudeExecutaProcedimento',
+                    'OdontologoExecutaProcedimento'=>'OdontologoExecutaProcedimento',
                     'MessageWebService'=>'MessageWebService'
                 ),
             ),
@@ -28,14 +36,57 @@ class ProcedimentoController extends Controller
     }    
     
     //todas os métodos do serviço
-   
+    
+    /**
+     * @param string codigo da unidade
+     * @return Medico[]
+     * @soap
+     */
+    public function getMedicos($codigoUnidade){
+       
+       
+        return array();
+    }
+    
+    /**
+     * @param string codigo da unidade
+     * @return AgenteSaude[]
+     * @soap
+     */
+    public function getAgenteSaude($codigoUnidade){
+       
+       
+        return array();
+    }
+    
+    /**
+     * @param string codigo da unidade
+     * @return Odontologo[]
+     * @soap
+     */
+    public function getOdontologos($codigoUnidade){
+       
+       
+        return array();
+    }
+    
+    /**
+     * @param string codigo da unidade
+     * @return Enfermeiro[]
+     * @soap
+     */
+    public function getEnfermeiros($codigoUnidade){
+       
+       
+        return array();
+    }
     
     /**
      * @param ServidorExecutaProcedimento[]
      * @return MessageWebService[]
      * @soap
      */
-    public function sendProcedimentosExecutadosPorServidor($procedimentosExecutados){
+    public function sendExecutadosPorServidor($procedimentosExecutados){
        
        
         return 1;
@@ -46,7 +97,7 @@ class ProcedimentoController extends Controller
      * @return MessageWebService[]
      * @soap
      */
-    public function sendProcedimentosExecutadosPorEquipe($procedimentosExecutados){
+    public function sendExecutadosPorEquipe($procedimentosExecutados){
          
             $m= new MessageWebService;
         if(is_array($procedimentosExecutados)){
@@ -70,6 +121,50 @@ class ProcedimentoController extends Controller
             return array($m);
         }
         $m->valor="Falha no recebimento da competencia";
+        return array($m);
+    }
+    
+    /**
+     * @param MedicoExecutaProcedimento[]
+     * @return MessageWebService[]
+     * @soap
+     */
+    public function sendExecutadosPorMedico($procedimentosExecutados){
+         
+            $m= new MessageWebService;
+        return array($m);
+    }
+    
+    /**
+     * @param EnfermeiroExecutaProcedimento[]
+     * @return MessageWebService[]
+     * @soap
+     */
+    public function sendExecutadosPorEnfermeiro($procedimentosExecutados){
+         
+            $m= new MessageWebService;
+        return array($m);
+    }
+    
+    /**
+     * @param OdontologoExecutaProcedimento[]
+     * @return MessageWebService[]
+     * @soap
+     */
+    public function sendExecutadosPorOdontologo($procedimentosExecutados){
+         
+            $m= new MessageWebService;
+        return array($m);
+    }
+    
+    /**
+     * @param AgenteSaudeExecutaProcedimento[]
+     * @return MessageWebService[]
+     * @soap
+     */
+    public function sendExecutadosPorAgenteSaude($procedimentosExecutados){
+         
+            $m= new MessageWebService;
         return array($m);
     }
     
