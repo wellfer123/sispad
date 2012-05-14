@@ -19,7 +19,9 @@ class ProcedimentoController extends Controller
                 'class'=>'CWebServiceAction',
                 'classMap'=>array(
                     'Procedimento'=>'Procedimento',
-                    'ServidorExecutaProcedimento'=>'ServidorExecutaProcedimento'
+                    'ServidorExecutaProcedimento'=>'ServidorExecutaProcedimento',
+                    'EquipeExecutaProcedimento'=>'EquipeExecutaProcedimento',
+                    'MessageWebService'=>'MessageWebService'
                 ),
             ),
         );
@@ -29,30 +31,46 @@ class ProcedimentoController extends Controller
    
     
     /**
-     * @return Procedimento[]
-     * @soap
-     */
-    public function getProcedimentos(){
-        $p1=new Procedimento();
-        $p2= new Procedimento();
-        
-        $p1->codigo="90388438";
-        $p2->nome="procedimento de teste";
-        $p2->codigo="90388438";
-        $p1->nome="procedimento de teste 2";
-        
-        return array($p1,$p2);
-    }
-    
-    /**
      * @param ServidorExecutaProcedimento[]
-     * @return integer
+     * @return MessageWebService[]
      * @soap
      */
-    public function sendProcedimentosExecutados($procedimentosExecutados){
+    public function sendProcedimentosExecutadosPorServidor($procedimentosExecutados){
        
        
         return 1;
+    }
+    
+    /**
+     * @param EquipeExecutaProcedimento[]
+     * @return MessageWebService[]
+     * @soap
+     */
+    public function sendProcedimentosExecutadosPorEquipe($procedimentosExecutados){
+         
+            $m= new MessageWebService;
+        if(is_array($procedimentosExecutados)){
+            foreach ($procedimentosExecutados as $proced) {
+                try{
+                $procedimento= new EquipeExecutaProcedimento;
+                $procedimento->competencia=$proced->competencia;
+                $procedimento->equipe_codigo_area=$proced->equipe_codigo_area;
+                $procedimento->equipe_codigo_micro_area=$proced->equipe_codigo_micro_area;
+                $procedimento->procedimento_codigo=$proced->procedimento_codigo;
+                $procedimento->quantidade=$proced->quantidade;
+                $procedimento->unidade_cnes=$proced->unidade_cnes;
+                $procedimento->save();
+                }  catch (Exception $e){
+                    $m->valor="Falha no recebimento da competencia dados errdos".$e->getMessage();
+                    return array($m);
+                }
+                
+            }
+            $m->valor="Recebida com sucesso";
+            return array($m);
+        }
+        $m->valor="Falha no recebimento da competencia";
+        return array($m);
     }
     
 //
