@@ -25,11 +25,6 @@
 		<?php echo $form->textField($model,'unidade_cnes',array('size'=>10,'maxlength'=>10)); ?>
 	</div>
 
-	<div class="row">
-		<?php echo $form->label($model,'codigo_microarea'); ?>
-		<?php echo $form->textField($model,'codigo_microarea'); ?>
-	</div>
-
 	<div class="row buttons">
 		<?php echo CHtml::submitButton('Search'); ?>
 	</div>

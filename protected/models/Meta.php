@@ -59,7 +59,8 @@ class Meta extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array('indicador'=>array(self::BELONGS_TO,'indicador','indicador_id'),
                              'itens'=>array(self::HAS_MANY,'item','meta_id'),
-                             'periodicidade'=>array(self::BELONGS_TO,'periodicidade','periodicidade_id')
+                             'periodicidade'=>array(self::BELONGS_TO,'periodicidade','periodicidade_id'),
+                             'metaProcedimento'=>array(self::HAS_MANY,'metaProcedimento','meta_id'),
 		);
 	}
 

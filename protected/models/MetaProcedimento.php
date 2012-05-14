@@ -1,20 +1,17 @@
 <?php
 
 /**
- * This is the model class for table "Equipe".
+ * This is the model class for table "meta_procedimento".
  *
- * The followings are the available columns in table 'Equipe':
- * @property integer $codigo_segmento
- * @property integer $codigo_area
- * @property integer $tipo
- * @property string $unidade_cnes
- * @property integer $codigo_microarea
+ * The followings are the available columns in table 'meta_procedimento':
+ * @property integer $meta_id
+ * @property string $procedimento_codigo
  */
-class Equipe extends CActiveRecord
+class MetaProcedimento extends CActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
-	 * @return Equipe the static model class
+	 * @return meta_procedimento the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
@@ -26,10 +23,9 @@ class Equipe extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'equipe';
+		return 'meta_procedimento';
 	}
 
-        public $cpf;
 	/**
 	 * @return array validation rules for model attributes.
 	 */
@@ -38,12 +34,11 @@ class Equipe extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('codigo_area, tipo, unidade_cnes, codigo_microarea', 'required'),
-			array('codigo_segmento, codigo_area, tipo, codigo_microarea', 'numerical', 'integerOnly'=>true),
-			array('unidade_cnes', 'length', 'max'=>10),
+			array('meta_id', 'numerical', 'integerOnly'=>true),
+			array('procedimento_codigo', 'length', 'max'=>10),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('codigo_segmento, codigo_area, tipo, unidade_cnes, codigo_microarea', 'safe', 'on'=>'search'),
+			array('meta_id, procedimento_codigo', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -55,8 +50,8 @@ class Equipe extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'unidade' => array(self::BELONGS_TO, 'Unidade', 'unidade_cnes'),
-                        'servidor'=>array(self::HAS_MANY,'Servidor','equipe_codigo_segmento'),
+                    'procedimento'=>array(self::BELONGS_TO,'Procedimento','procedimento_codigo'),
+                    'meta'=>array(self::BELONGS_TO,'Meta','meta_id')
 		);
 	}
 
@@ -66,11 +61,8 @@ class Equipe extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'codigo_segmento' => 'Codigo Segmento',
-			'codigo_area' => 'Codigo Area',
-			'tipo' => 'Tipo',
-			'unidade_cnes' => 'Unidade Cnes',
-			'codigo_microarea' => 'Codigo Microarea',
+			'meta_id' => 'Meta',
+			'procedimento_codigo' => 'Procedimento',
 		);
 	}
 
@@ -85,15 +77,27 @@ class Equipe extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('codigo_segmento',$this->codigo_segmento);
+		$criteria->compare('meta_id',$this->meta_id);
 
-		$criteria->compare('codigo_area',$this->codigo_area);
+		$criteria->compare('procedimento_codigo',$this->procedimento_codigo,true);
 
-		$criteria->compare('tipo',$this->tipo);
+		return new CActiveDataProvider('meta_procedimento', array(
+			'criteria'=>$criteria,
+		));
+	}
 
-		$criteria->compare('unidade_cnes',$this->unidade_cnes,true);
+         public function searchMetaId($metaId)
+	{
+		// Warning: Please modify the following code to remove attributes that
+		// should not be searched.
 
-		return new CActiveDataProvider('Equipe', array(
+		$criteria=new CDbCriteria;
+               
+		$criteria->compare('meta_id',$metaId);
+            
+
+
+		return new CActiveDataProvider('metaProcedimento', array(
 			'criteria'=>$criteria,
 		));
 	}

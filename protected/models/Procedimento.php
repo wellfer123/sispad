@@ -80,6 +80,7 @@ class Procedimento extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+                    'metaProcedimento'=>array(self::HAS_MANY,'MetaProcedimento','procedimento_codigo')
 		);
 	}
 
@@ -152,4 +153,12 @@ class Procedimento extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+
+        protected function afterSave() {
+            parent::afterSave();
+
+            $modelMetaProcedimento = new MetaProcedimento();
+            $modelMetaProcedimento->procedimento_id = $this->codigo;
+            $modelMetaProcedimento->meta_id=$_GET['meta_id'];
+        }
 }

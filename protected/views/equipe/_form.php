@@ -54,11 +54,7 @@
                         <?php echo $form->error($model,'unidade_cnes'); ?>
 	</div>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'codigo_microarea'); ?>
-		<?php echo $form->textField($model,'codigo_microarea'); ?>
-		<?php echo $form->error($model,'codigo_microarea'); ?>
-	</div>
+	
 
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>

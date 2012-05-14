@@ -11,8 +11,6 @@
                     'name'=>'unidade',
                     'value'=>'$data->unidade->nome'
                 ),
-		
-		'codigo_microarea',
 		array(
 			'class'=>'CButtonColumn',
                         'template'=>'{adicionar_servidor}',

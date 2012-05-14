@@ -26,13 +26,27 @@ $this->widget('zii.widgets.grid.CGridView', array(
                       'value'=>'$data->periodicidade->nome',),
                 'percentagem',
                 array('class'=>'CButtonColumn',
-                      'template'=>'{ver_itens}',
+                      'template'=>'{ver_itens}{adicionar_item}{adicionar_procedimento}',
                       'buttons'=>array(
                             'ver_itens'=>array(
                                 'label'=>'Ver Itens',
                                 'url'=>'Yii::app()->createUrl("/item/list",array("meta_id"=>$data->id))',
                                 'imageUrl'=>  Yii::app()->request->baseUrl.'/images/view.png',
-                            )
+                            ),
+                           'adicionar_item'=>array(
+
+                                                        'label'=>'Adicionar Itens',
+                                                        'url'=> 'Yii::app()->createUrl("/item/create",array("meta_id"=>$data->id))',
+                                                        //'options'=>array('class'=>'active', 'style'=>"padding-right:10px"),
+                                                        'imageUrl'=>  Yii::app()->request->baseUrl.'/images/add.png',
+                                                ),
+                          'adicionar_procedimento'=>array(
+
+                                                        'label'=>'Adicionar Procedimentos',
+                                                        'url'=> 'Yii::app()->createUrl("/procedimento/create",array("meta_id"=>$data->id))',
+                                                        //'options'=>array('class'=>'active', 'style'=>"padding-right:10px"),
+                                                        'imageUrl'=>  Yii::app()->request->baseUrl.'/images/add2.png',
+                                                ),
                       )  ),
 
 

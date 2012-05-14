@@ -54,6 +54,10 @@ class ProcedimentoController extends Controller
        
         return 1;
     }
+
+   
+
+
     
 //
 //	/**
@@ -206,4 +210,27 @@ class ProcedimentoController extends Controller
 //			Yii::app()->end();
 //		}
 //	}
+
+     public function actionFindProcedimentos() {
+
+            $this->CheckAcessAction();
+            $q = $_GET['term'];
+            if(isset($q)) {
+                 $procedimentos = Procedimento::model()->findAll('nome like :nome',array(':nome'=> strtoupper(trim($q)).'%'));
+
+                if (!empty($procedimentos)) {
+                    $out = array();
+                    foreach ($procedimentos as $u) {
+                            $out[] = array(
+                            // expression to give the string for the autoComplete drop-down
+                            'label' => $u->nome,
+                            'value' => $u->nome,
+                            'id' => $u->codigo, // return value from autocomplete
+                     );
+                    }
+                echo CJSON::encode($out);
+                Yii::app()->end();
+           }
+       }
+   }
 }

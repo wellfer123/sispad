@@ -117,9 +117,11 @@ class EquipeController extends Controller
 	 */
 	public function actionIndex()
 	{
+                $model = new Equipe;
+                $model->unsetAttributes();
 		$dataProvider=new CActiveDataProvider('Equipe');
 		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
+			'model'=>$model,
 		));
 	}
 

@@ -11,7 +11,5 @@ $this->menu=array(
 
 <h1>Equipes</h1>
 
-<?php $this->widget('zii.widgets.CListView', array(
-	'dataProvider'=>$dataProvider,
-	'itemView'=>'_view',
-)); ?>
+<?php echo $this->renderPartial('_view', array('model'=>$model)); ?>
+
