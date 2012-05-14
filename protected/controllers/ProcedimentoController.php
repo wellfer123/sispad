@@ -326,7 +326,7 @@ class ProcedimentoController extends Controller
 
      public function actionFindProcedimentos() {
 
-            $this->CheckAcessAction();
+            //$this->_RBAC->checkAccess('registered',true);
             $q = $_GET['term'];
             if(isset($q)) {
                  $procedimentos = Procedimento::model()->findAll('nome like :nome',array(':nome'=> strtoupper(trim($q)).'%'));

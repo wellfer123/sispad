@@ -45,7 +45,7 @@ class MetaProcedimentoController extends SISPADBaseController
 		if((isset($_POST['MetaProcedimento']))&&(isset($_GET['meta_id'])))
 		{
 
-                        $model->procedimento_codigo=$_POST['MetaProcedimento'];
+                        $model->procedimento_codigo=$_POST['MetaProcedimento']['procedimento_codigo'];
                         $model->meta_id=$_GET['meta_id'];
 			if($model->save()){
                             $model=new MetaProcedimento;
