@@ -38,12 +38,12 @@ class Equipe extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('codigo_area, tipo, unidade_cnes, codigo_microarea', 'required'),
-			array('codigo_segmento, codigo_area, tipo, codigo_microarea', 'numerical', 'integerOnly'=>true),
+			array('codigo_area, tipo, unidade_cnes', 'required'),
+			array('codigo_segmento, codigo_area, tipo', 'numerical', 'integerOnly'=>true),
 			array('unidade_cnes', 'length', 'max'=>10),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('codigo_segmento, codigo_area, tipo, unidade_cnes, codigo_microarea', 'safe', 'on'=>'search'),
+			array('codigo_segmento, codigo_area, tipo, unidade_cnes', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -70,7 +70,6 @@ class Equipe extends CActiveRecord
 			'codigo_area' => 'Codigo Area',
 			'tipo' => 'Tipo',
 			'unidade_cnes' => 'Unidade Cnes',
-			'codigo_microarea' => 'Codigo Microarea',
 		);
 	}
 
@@ -92,8 +91,6 @@ class Equipe extends CActiveRecord
 		$criteria->compare('tipo',$this->tipo);
 
 		$criteria->compare('unidade_cnes',$this->unidade_cnes,true);
-
-		$criteria->compare('codigo_microarea',$this->codigo_microarea);
 
 		return new CActiveDataProvider('Equipe', array(
 			'criteria'=>$criteria,
