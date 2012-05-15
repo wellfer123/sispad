@@ -4,10 +4,11 @@
    $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'equipe-grid',
 	'dataProvider'=>$model->searchServidores($codigo_area,$unidade_cnes),
-	'filter'=>$model,
+	//'filter'=>$model,
 	'columns'=>array(
 		'servidor.nome',
                 'servidor.cpf',
+                'funcao',
 		
 	),
 ));

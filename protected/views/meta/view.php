@@ -43,7 +43,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
                           'adicionar_procedimento'=>array(
 
                                                         'label'=>'Adicionar Procedimentos',
-                                                        'url'=> 'Yii::app()->createUrl("/procedimento/create",array("meta_id"=>$data->id))',
+                                                        'url'=> 'Yii::app()->createUrl("/metaProcedimento/add",array("meta_id"=>$data->id))',
                                                         //'options'=>array('class'=>'active', 'style'=>"padding-right:10px"),
                                                         'imageUrl'=>  Yii::app()->request->baseUrl.'/images/add2.png',
                                                 ),

@@ -37,6 +37,12 @@
                                 ));?>
 		<?php echo $form->error($model,'servidor_cpf'); ?>
 	</div>
+        <div class="row">
+             <?php echo $form->labelEx($model,'funcao'); ?>
+             <?php echo $form->dropDownList($model,'funcao',array('Odontologo'=>'Odontólogo','Medico'=>'Médico',
+                 'Enfermeiro'=>'Enfermeiro','AgenteSaude'=>'Agente de Saúde'));?>
+
+        </div>
         <div class="row buttons">
 		<?php echo CHtml::submitButton('OK'); ?>
 	</div>

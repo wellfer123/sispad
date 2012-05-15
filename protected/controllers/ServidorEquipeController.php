@@ -38,6 +38,7 @@ class ServidorEquipeController extends SISPADBaseController
                 $model = new ServidorEquipe;
                 $model->equipe_codigo_area = $_GET['area'];
                 $model->equipe_unidade_cnes = $_GET['cnes'];
+
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
@@ -45,9 +46,18 @@ class ServidorEquipeController extends SISPADBaseController
 		{
 
                         $model->servidor_cpf=$_POST['ServidorEquipe']['servidor_cpf'];
+                        $model->funcao = $_POST['ServidorEquipe']['funcao'];
+
+                        $model2 = new $model->funcao;
+                        $model2->servidor_cpf = $model->servidor_cpf;
+                        $model2->unidade_cnes = $model->equipe_unidade_cnes;
+                        $model2->data_cadastro = date("Y-m-d");
+                        $model2->ativo=1;
                        
-                        if($model->save()){
+                        if(($model->save())){
                             $model = new ServidorEquipe();
+                            $model2=null;
+                            
                         }
 
 		}
