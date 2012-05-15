@@ -1,24 +1,16 @@
 <?php
 
 /**
- * This is the model class for table "Medico".
+ * This is the model class for table "Usuario_desktop".
  *
- * The followings are the available columns in table 'Medico':
+ * The followings are the available columns in table 'Usuario_desktop':
  * @property string $servidor_cpf
- * @property string $unidade_cnes
- * @property string $data_desativacao
- * @property string $data_cadastro
+ * @property string $token
+ * @property string $serial_aplicacao
  */
-class Medico extends CActiveRecord
+class UsuarioDesktop extends CActiveRecord
 {
-        
     
-        /**
-         * @var string unidade que  faz parte
-         * @soap
-         */
-        public $unidade_cnes;
-        
         /**
          * @var string cpf do servidor
          * @soap
@@ -26,27 +18,26 @@ class Medico extends CActiveRecord
         public $servidor_cpf;
         
         /**
-         * @var string ativo: sim(1) não(0) 
+         * @var string token para a sua aplicacao
          * @soap
          */
-        public $ativo;
+        public $token;
         
         /**
-         * @var date data de cadastro
+         * @var string usuário no sistema
          * @soap
          */
-        public $data_cadastro;
+        public $usuario_sistema;
         
         /**
-         * @var date data de desativacao
+         * @var string
          * @soap
          */
-        public $data_desativacao;
-  
+        public $serial_aplicacao;
         
 	/**
 	 * Returns the static model of the specified AR class.
-	 * @return Medico the static model class
+	 * @return Usuario_desktop the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
@@ -58,7 +49,7 @@ class Medico extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'Medico';
+		return 'usuario_desktop';
 	}
 
 	/**
@@ -69,13 +60,12 @@ class Medico extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('data_cadastro', 'required'),
+			array('servidor_cpf, token, serial_aplicacao', 'required'),
 			array('servidor_cpf', 'length', 'max'=>11),
-                        array('unidade_cnes', 'length', 'max'=>10),
-			array('data_desativacao', 'safe'),
+			array('token, serial_aplicacao', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('servidor_cpf, unidade_cnes, data_desativacao, data_cadastro', 'safe', 'on'=>'search'),
+			array('servidor_cpf, token, serial_aplicacao', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -87,7 +77,6 @@ class Medico extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'medico_executa_procedimentos' => array(self::HAS_MANY, 'MedicoExecutaProcedimento', 'medico_unidade_cnes'),
 		);
 	}
 
@@ -98,9 +87,8 @@ class Medico extends CActiveRecord
 	{
 		return array(
 			'servidor_cpf' => 'Servidor Cpf',
-			'unidade_cnes' => 'Unidade Cnes',
-			'data_desativacao' => 'Data Desativacao',
-			'data_cadastro' => 'Data Cadastro',
+			'token' => 'Token',
+			'serial_aplicacao' => 'Serial Aplicacao',
 		);
 	}
 
@@ -117,13 +105,11 @@ class Medico extends CActiveRecord
 
 		$criteria->compare('servidor_cpf',$this->servidor_cpf,true);
 
-		$criteria->compare('unidade_cnes',$this->unidade_cnes,true);
+		$criteria->compare('token',$this->token,true);
 
-		$criteria->compare('data_desativacao',$this->data_desativacao,true);
+		$criteria->compare('serial_aplicacao',$this->serial_aplicacao,true);
 
-		$criteria->compare('data_cadastro',$this->data_cadastro,true);
-
-		return new CActiveDataProvider('Medico', array(
+		return new CActiveDataProvider('Usuario_desktop', array(
 			'criteria'=>$criteria,
 		));
 	}

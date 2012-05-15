@@ -21,7 +21,13 @@ class MessageWebService {
      *@var string
      *@soap   
      */
-     public $valor;
+     public $message;
+     
+     /**
+     *@var string
+     *@soap   
+     */
+     public $tipo;
     
 }
 

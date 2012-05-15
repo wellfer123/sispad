@@ -33,7 +33,7 @@ class Odontologo extends CActiveRecord
         public $ativo;
         
         /**
-         * @var dateTime data de cadastro
+         * @var date data de cadastro
          * @soap
          */
         public $data_cadastro;
@@ -71,7 +71,8 @@ class Odontologo extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('data_cadastro', 'required'),
-			array('servidor_cpf, unidade_cnes', 'length', 'max'=>10),
+			array('servidor_cpf', 'length', 'max'=>11),
+                        array('unidade_cnes', 'length', 'max'=>10),
 			array('ativo', 'length', 'max'=>1),
 			array('data_desativacao', 'safe'),
 			// The following rule is used by search().
