@@ -22,9 +22,67 @@ CREATE DATABASE IF NOT EXISTS sispad;
 USE sispad;
 
 --
+-- Definition of table `agente_saude`
+--
+
+DROP TABLE IF EXISTS `agente_saude`;
+CREATE TABLE `agente_saude` (
+  `servidor_cpf` varchar(11) NOT NULL,
+  `unidade_cnes` varchar(10) NOT NULL DEFAULT '',
+  `micro_area` int(2) NOT NULL DEFAULT '0',
+  `data_desativacao` date DEFAULT NULL,
+  `ativo` char(1) DEFAULT NULL,
+  `data_cadastro` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`servidor_cpf`,`unidade_cnes`,`micro_area`),
+  KEY `foreign_key_unidade_cnes` (`unidade_cnes`),
+  CONSTRAINT `agente_saude_ibfk_1` FOREIGN KEY (`servidor_cpf`) REFERENCES `servidor` (`cpf`),
+  CONSTRAINT `agente_saude_ibfk_2` FOREIGN KEY (`unidade_cnes`) REFERENCES `unidade` (`cnes`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `agente_saude`
+--
+
+/*!40000 ALTER TABLE `agente_saude` DISABLE KEYS */;
+INSERT INTO `agente_saude` (`servidor_cpf`,`unidade_cnes`,`micro_area`,`data_desativacao`,`ativo`,`data_cadastro`) VALUES 
+ ('09886798805','2345676',1,'0000-00-00','1','0000-00-00 00:00:00'),
+ ('45645645645','2345676',1,'0000-00-00','1','0000-00-00 00:00:00'),
+ ('45645645646','2345676',2,'0000-00-00','1','0000-00-00 00:00:00'),
+ ('45645645656','2345676',3,'0000-00-00','1','0000-00-00 00:00:00');
+/*!40000 ALTER TABLE `agente_saude` ENABLE KEYS */;
+
+
+--
+-- Definition of table `agente_saude_executa_procedimento`
+--
+
+DROP TABLE IF EXISTS `agente_saude_executa_procedimento`;
+CREATE TABLE `agente_saude_executa_procedimento` (
+  `agente_saude_cpf` varchar(11) NOT NULL,
+  `procedimento_codigo` varchar(10) NOT NULL DEFAULT '',
+  `agente_saude_unidade_cnes` varchar(10) NOT NULL DEFAULT '',
+  `quantidade` int(11) DEFAULT NULL,
+  `competencia` int(6) NOT NULL DEFAULT '0',
+  `agente_saude_micro_area` int(2) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`agente_saude_cpf`,`procedimento_codigo`,`agente_saude_micro_area`,`agente_saude_unidade_cnes`,`competencia`),
+  KEY `i_agente_saude_micro_area` (`agente_saude_micro_area`),
+  KEY `foreign_key_agente_saude_unidade_cnes` (`agente_saude_unidade_cnes`),
+  KEY `foreign_key_procedimento_codigo` (`procedimento_codigo`),
+  CONSTRAINT `agente_saude_executa_procedimento_ibfk_1` FOREIGN KEY (`agente_saude_cpf`) REFERENCES `agente_saude` (`servidor_cpf`),
+  CONSTRAINT `agente_saude_executa_procedimento_ibfk_2` FOREIGN KEY (`agente_saude_unidade_cnes`) REFERENCES `agente_saude` (`unidade_cnes`),
+  CONSTRAINT `agente_saude_executa_procedimento_ibfk_3` FOREIGN KEY (`procedimento_codigo`) REFERENCES `procedimento` (`codigo`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `agente_saude_executa_procedimento`
+--
+
+/*!40000 ALTER TABLE `agente_saude_executa_procedimento` DISABLE KEYS */;
+/*!40000 ALTER TABLE `agente_saude_executa_procedimento` ENABLE KEYS */;
+
+
+--
 -- Definition of table `arquivo`
-
-
 --
 
 DROP TABLE IF EXISTS `arquivo`;
@@ -5628,6 +5686,58 @@ INSERT INTO `endereco` (`id`,`logradouro`,`numero`,`complemento`,`bairro`,`cidad
 
 
 --
+-- Definition of table `enfermeiro`
+--
+
+DROP TABLE IF EXISTS `enfermeiro`;
+CREATE TABLE `enfermeiro` (
+  `servidor_cpf` varchar(11) NOT NULL,
+  `unidade_cnes` varchar(10) NOT NULL DEFAULT '',
+  `ativo` char(1) DEFAULT NULL,
+  `data_cadastro` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `data_desativacao` date DEFAULT NULL,
+  PRIMARY KEY (`servidor_cpf`,`unidade_cnes`),
+  KEY `foreign_key_unidade_cnes` (`unidade_cnes`),
+  CONSTRAINT `enfermeiro_ibfk_1` FOREIGN KEY (`servidor_cpf`) REFERENCES `servidor` (`cpf`),
+  CONSTRAINT `enfermeiro_ibfk_2` FOREIGN KEY (`unidade_cnes`) REFERENCES `unidade` (`cnes`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `enfermeiro`
+--
+
+/*!40000 ALTER TABLE `enfermeiro` DISABLE KEYS */;
+/*!40000 ALTER TABLE `enfermeiro` ENABLE KEYS */;
+
+
+--
+-- Definition of table `enfermeiro_executa_procedimento`
+--
+
+DROP TABLE IF EXISTS `enfermeiro_executa_procedimento`;
+CREATE TABLE `enfermeiro_executa_procedimento` (
+  `enfermeiro_cpf` varchar(11) NOT NULL,
+  `procedimento_codigo` varchar(10) NOT NULL DEFAULT '',
+  `enfermeiro_unidade_cnes` varchar(10) NOT NULL DEFAULT '',
+  `quantidade` int(11) DEFAULT NULL,
+  `competencia` int(6) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`enfermeiro_cpf`,`procedimento_codigo`,`enfermeiro_unidade_cnes`,`competencia`),
+  KEY `foreign_key_enfermeiro_unidade_cnes` (`enfermeiro_unidade_cnes`),
+  KEY `foreign_key_procedimento_codigo` (`procedimento_codigo`),
+  CONSTRAINT `enfermeiro_executa_procedimento_ibfk_1` FOREIGN KEY (`enfermeiro_cpf`) REFERENCES `enfermeiro` (`servidor_cpf`),
+  CONSTRAINT `enfermeiro_executa_procedimento_ibfk_2` FOREIGN KEY (`enfermeiro_unidade_cnes`) REFERENCES `enfermeiro` (`unidade_cnes`),
+  CONSTRAINT `enfermeiro_executa_procedimento_ibfk_3` FOREIGN KEY (`procedimento_codigo`) REFERENCES `procedimento` (`codigo`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `enfermeiro_executa_procedimento`
+--
+
+/*!40000 ALTER TABLE `enfermeiro_executa_procedimento` DISABLE KEYS */;
+/*!40000 ALTER TABLE `enfermeiro_executa_procedimento` ENABLE KEYS */;
+
+
+--
 -- Definition of table `equipe`
 --
 
@@ -5637,8 +5747,7 @@ CREATE TABLE `equipe` (
   `codigo_area` int(4) NOT NULL,
   `tipo` int(2) NOT NULL,
   `unidade_cnes` varchar(10) NOT NULL,
-  `codigo_microarea` int(2) NOT NULL,
-  PRIMARY KEY (`codigo_area`,`codigo_microarea`,`unidade_cnes`),
+  PRIMARY KEY (`codigo_area`,`unidade_cnes`) USING BTREE,
   KEY `foreing_key` (`unidade_cnes`),
   CONSTRAINT `foreing_key` FOREIGN KEY (`unidade_cnes`) REFERENCES `unidade` (`cnes`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -5648,6 +5757,8 @@ CREATE TABLE `equipe` (
 --
 
 /*!40000 ALTER TABLE `equipe` DISABLE KEYS */;
+INSERT INTO `equipe` (`codigo_segmento`,`codigo_area`,`tipo`,`unidade_cnes`) VALUES 
+ (1,24,1,'2345676');
 /*!40000 ALTER TABLE `equipe` ENABLE KEYS */;
 
 
@@ -5657,12 +5768,18 @@ CREATE TABLE `equipe` (
 
 DROP TABLE IF EXISTS `equipe_executa_procedimento`;
 CREATE TABLE `equipe_executa_procedimento` (
+  `equipe_codigo_area` int(4) NOT NULL,
+  `equipe_codigo_microarea` int(2) NOT NULL,
   `unidade_cnes` varchar(10) NOT NULL DEFAULT '',
   `procedimento_codigo` varchar(10) NOT NULL DEFAULT '',
   `quantidade` int(11) DEFAULT NULL,
   `competencia` int(6) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`unidade_cnes`,`procedimento_codigo`,`competencia`),
-  CONSTRAINT `equipe_executa_procedimento_ibfk_1` FOREIGN KEY (`unidade_cnes`) REFERENCES `unidade` (`cnes`)
+  PRIMARY KEY (`equipe_codigo_area`,`equipe_codigo_microarea`,`unidade_cnes`,`procedimento_codigo`,`competencia`),
+  KEY `equipe_executa_procedimento_ibfk_2` (`unidade_cnes`),
+  KEY `equipe_executa_procedimento_ibfk_4` (`procedimento_codigo`),
+  CONSTRAINT `equipe_executa_procedimento_ibfk_1` FOREIGN KEY (`equipe_codigo_area`) REFERENCES `equipe` (`codigo_area`),
+  CONSTRAINT `equipe_executa_procedimento_ibfk_2` FOREIGN KEY (`unidade_cnes`) REFERENCES `equipe` (`unidade_cnes`),
+  CONSTRAINT `equipe_executa_procedimento_ibfk_4` FOREIGN KEY (`procedimento_codigo`) REFERENCES `procedimento` (`codigo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -5670,6 +5787,8 @@ CREATE TABLE `equipe_executa_procedimento` (
 --
 
 /*!40000 ALTER TABLE `equipe_executa_procedimento` DISABLE KEYS */;
+INSERT INTO `equipe_executa_procedimento` (`equipe_codigo_area`,`equipe_codigo_microarea`,`unidade_cnes`,`procedimento_codigo`,`quantidade`,`competencia`) VALUES 
+ (24,0,'2345676','0101030010',161,22012);
 /*!40000 ALTER TABLE `equipe_executa_procedimento` ENABLE KEYS */;
 
 
@@ -5884,6 +6003,60 @@ INSERT INTO `item` (`id`,`nome`,`meta_id`) VALUES
 
 
 --
+-- Definition of table `medico`
+--
+
+DROP TABLE IF EXISTS `medico`;
+CREATE TABLE `medico` (
+  `servidor_cpf` varchar(11) NOT NULL,
+  `unidade_cnes` varchar(10) NOT NULL DEFAULT '',
+  `data_desativacao` date DEFAULT NULL,
+  `data_cadastro` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `ativo` char(1) DEFAULT NULL,
+  PRIMARY KEY (`servidor_cpf`,`unidade_cnes`),
+  KEY `foreign_key_unidade_cnes` (`unidade_cnes`),
+  CONSTRAINT `medico_ibfk_1` FOREIGN KEY (`servidor_cpf`) REFERENCES `servidor` (`cpf`),
+  CONSTRAINT `medico_ibfk_2` FOREIGN KEY (`unidade_cnes`) REFERENCES `unidade` (`cnes`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `medico`
+--
+
+/*!40000 ALTER TABLE `medico` DISABLE KEYS */;
+INSERT INTO `medico` (`servidor_cpf`,`unidade_cnes`,`data_desativacao`,`data_cadastro`,`ativo`) VALUES 
+ ('09886798805','2345676',NULL,'2012-05-15 10:20:29',NULL);
+/*!40000 ALTER TABLE `medico` ENABLE KEYS */;
+
+
+--
+-- Definition of table `medico_executa_procedimento`
+--
+
+DROP TABLE IF EXISTS `medico_executa_procedimento`;
+CREATE TABLE `medico_executa_procedimento` (
+  `medico_cpf` varchar(11) NOT NULL,
+  `procedimento_codigo` varchar(10) NOT NULL DEFAULT '',
+  `medico_unidade_cnes` varchar(10) NOT NULL DEFAULT '',
+  `quantidade` int(11) DEFAULT NULL,
+  `competencia` int(6) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`medico_cpf`,`procedimento_codigo`,`medico_unidade_cnes`,`competencia`),
+  KEY `foreign_key_medico_unidade_cnes` (`medico_unidade_cnes`),
+  KEY `foreign_key_procedimento_codigo` (`procedimento_codigo`),
+  CONSTRAINT `medico_executa_procedimento_ibfk_1` FOREIGN KEY (`medico_cpf`) REFERENCES `medico` (`servidor_cpf`),
+  CONSTRAINT `medico_executa_procedimento_ibfk_2` FOREIGN KEY (`medico_unidade_cnes`) REFERENCES `medico` (`unidade_cnes`),
+  CONSTRAINT `medico_executa_procedimento_ibfk_3` FOREIGN KEY (`procedimento_codigo`) REFERENCES `procedimento` (`codigo`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `medico_executa_procedimento`
+--
+
+/*!40000 ALTER TABLE `medico_executa_procedimento` DISABLE KEYS */;
+/*!40000 ALTER TABLE `medico_executa_procedimento` ENABLE KEYS */;
+
+
+--
 -- Definition of table `meses`
 --
 
@@ -5965,6 +6138,58 @@ INSERT INTO `motivo` (`id`,`descricao`) VALUES
  (1,'não justificada'),
  (2,'licensa');
 /*!40000 ALTER TABLE `motivo` ENABLE KEYS */;
+
+
+--
+-- Definition of table `odontologo`
+--
+
+DROP TABLE IF EXISTS `odontologo`;
+CREATE TABLE `odontologo` (
+  `servidor_cpf` varchar(11) NOT NULL,
+  `unidade_cnes` varchar(10) NOT NULL DEFAULT '',
+  `ativo` char(1) DEFAULT NULL,
+  `data_cadastro` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `data_desativacao` date DEFAULT NULL,
+  PRIMARY KEY (`servidor_cpf`,`unidade_cnes`),
+  KEY `foreign_key_unidade_cnes` (`unidade_cnes`),
+  CONSTRAINT `odontologo_ibfk_1` FOREIGN KEY (`servidor_cpf`) REFERENCES `servidor` (`cpf`),
+  CONSTRAINT `odontologo_ibfk_2` FOREIGN KEY (`unidade_cnes`) REFERENCES `unidade` (`cnes`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `odontologo`
+--
+
+/*!40000 ALTER TABLE `odontologo` DISABLE KEYS */;
+/*!40000 ALTER TABLE `odontologo` ENABLE KEYS */;
+
+
+--
+-- Definition of table `odontologo_executa_procedimento`
+--
+
+DROP TABLE IF EXISTS `odontologo_executa_procedimento`;
+CREATE TABLE `odontologo_executa_procedimento` (
+  `odontologo_cpf` varchar(11) NOT NULL,
+  `procedimento_codigo` varchar(10) NOT NULL DEFAULT '',
+  `odontologo_unidade_cnes` varchar(10) NOT NULL DEFAULT '',
+  `quantidade` int(11) DEFAULT NULL,
+  `competencia` int(6) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`odontologo_cpf`,`procedimento_codigo`,`odontologo_unidade_cnes`,`competencia`),
+  KEY `foreign_key_odontologo_unidade_cnes` (`odontologo_unidade_cnes`),
+  KEY `foreign_key_procedimento_codigo` (`procedimento_codigo`),
+  CONSTRAINT `odontologo_executa_procedimento_ibfk_1` FOREIGN KEY (`odontologo_cpf`) REFERENCES `odontologo` (`servidor_cpf`),
+  CONSTRAINT `odontologo_executa_procedimento_ibfk_2` FOREIGN KEY (`odontologo_unidade_cnes`) REFERENCES `odontologo` (`unidade_cnes`),
+  CONSTRAINT `odontologo_executa_procedimento_ibfk_3` FOREIGN KEY (`procedimento_codigo`) REFERENCES `procedimento` (`codigo`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `odontologo_executa_procedimento`
+--
+
+/*!40000 ALTER TABLE `odontologo_executa_procedimento` DISABLE KEYS */;
+/*!40000 ALTER TABLE `odontologo_executa_procedimento` ENABLE KEYS */;
 
 
 --
@@ -7310,6 +7535,7 @@ CREATE TABLE `unidade` (
 INSERT INTO `unidade` (`cnes`,`descricao`,`nome`,`cidade_id`,`regional_id`) VALUES 
  ('0324839483','descriçao do campo','unidade somente para teste',1574,1),
  ('2343254345','BAIRRO VASSOURAL','UNIDADE SANTO BELO MONTE',1523,1),
+ ('2345676','ai ja vai','TESTE',1511,1),
  ('9883433999','ai vai uma descriçao','unida de saude nair belo ramundo',1511,1);
 /*!40000 ALTER TABLE `unidade` ENABLE KEYS */;
 
@@ -7341,6 +7567,27 @@ INSERT INTO `user` (`id`,`password`,`email`,`username`,`servidor_cpf`,`ativo`) V
  (2,'81dc9bdb52d04dc20036dbd8313ed055','cesar.consultorjr@gmail.com','cedsa','09809809809',1),
  (3,'81dc9bdb52d04dc20036dbd8313ed055','ewe@ded.com','teste','45645645645',0);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
+
+
+--
+-- Definition of table `usuario_desktop`
+--
+
+DROP TABLE IF EXISTS `usuario_desktop`;
+CREATE TABLE `usuario_desktop` (
+  `servidor_cpf` varchar(11) NOT NULL,
+  `token` varchar(255) NOT NULL,
+  `serial_aplicacao` varchar(255) NOT NULL,
+  PRIMARY KEY (`servidor_cpf`,`token`,`serial_aplicacao`),
+  CONSTRAINT `usuario_desktop_ibfk_1` FOREIGN KEY (`servidor_cpf`) REFERENCES `servidor` (`cpf`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `usuario_desktop`
+--
+
+/*!40000 ALTER TABLE `usuario_desktop` DISABLE KEYS */;
+/*!40000 ALTER TABLE `usuario_desktop` ENABLE KEYS */;
 
 
 
