@@ -1,19 +1,18 @@
 <?php
-
 class ProcedimentoController extends Controller
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
 	 */
-	public $layout='//layouts/column2';
+	//public $layout='//layouts/column2';
 
 	/**
 	 * @var CActiveRecord the currently loaded data model instance.
 	 */
-	private $_model;
-          public function actions()
-    {
+	//private $_model;
+        public function actions()
+        {
         return array(
             'service'=>array(
                 'class'=>'CWebServiceAction',
@@ -22,14 +21,15 @@ class ProcedimentoController extends Controller
                     'Odontologo'=>'Odontologo',
                     'Medico'=>'Medico',
                     'Enfermeiro'=>'Enfermeiro',
-                    'Agente de Saude'=>'Agente de Saude',
+                    'AgenteSaude'=>'AgenteSaude',
+                    'UsuarioDesktop'=>'UsuarioDesktop',
                     'ServidorExecutaProcedimento'=>'ServidorExecutaProcedimento',
                     'EquipeExecutaProcedimento'=>'EquipeExecutaProcedimento',
                     'MedicoExecutaProcedimento'=>'MedicoExecutaProcedimento',
                     'EnfermeiroExecutaProcedimento'=>'EnfermeiroExecutaProcedimento',
                     'AgenteSaudeExecutaProcedimento'=>'AgenteSaudeExecutaProcedimento',
                     'OdontologoExecutaProcedimento'=>'OdontologoExecutaProcedimento',
-                    'MessageWebService'=>'MessageWebService'
+                    'MessageWebService'=>'MessageWebService',
                 ),
             ),
         );
@@ -38,58 +38,97 @@ class ProcedimentoController extends Controller
     //todas os métodos do serviço
     
     /**
+     * @param UsuarioDesktop usuario da aplicao desktop
+     * @return MessageWebService[]
+     * @soap
+     */
+    public function getLastMessages($usuarioDesktop){
+       
+       
+        return array();
+    }
+    
+    /**
+     * @param UsuarioDesktop usuario da aplicao desktop
+     * @return MessageWebService[]
+     * @soap
+     */
+    public function login($usuarioDesktop){
+       
+       
+        return array();
+    
+    }
+    
+    /**
+     * @param UsuarioDesktop usuario da aplicao desktop
+     * @return MessageWebService[]
+     * @soap
+     */
+    public function logout($usuarioDesktop){
+       
+       
+        return array();
+    
+    }
+    /**
      * @param string codigo da unidade
+     * @param UsuarioDesktop usuario da aplicao desktop
      * @return Medico[]
      * @soap
      */
-    public function getMedicos($codigoUnidade){
+    public function getMedicos($codigoUnidade,$usuarioDesktop){
        
        
-        return array();
+        return Medico::model()->findAll();
     }
     
     /**
      * @param string codigo da unidade
+     * @param UsuarioDesktop usuario da aplicao desktop
      * @return AgenteSaude[]
      * @soap
      */
-    public function getAgenteSaude($codigoUnidade){
+    public function getAgenteSaude($codigoUnidade,$usuarioDesktop){
        
        
-        return array();
+        return AgenteSaude::model()->findAll();
     }
     
     /**
      * @param string codigo da unidade
+     * @param UsuarioDesktop usuario da aplicao desktop
      * @return Odontologo[]
      * @soap
      */
-    public function getOdontologos($codigoUnidade){
+    public function getOdontologos($codigoUnidade,$usuarioDesktop){
        
        
-        return array();
+        return Odontologo::model()->findAll();
     }
     
     /**
      * @param string codigo da unidade
+     * @param UsuarioDesktop usuario da aplicao desktop
      * @return Enfermeiro[]
      * @soap
      */
-    public function getEnfermeiros($codigoUnidade){
+    public function getEnfermeiros($codigoUnidade,$usuarioDesktop){
        
        
-        return array();
+        return Enfermeiro::model()->findAll();
     }
     
     /**
      * @param ServidorExecutaProcedimento[]
+     * @param UsuarioDesktop usuario da aplicao desktop
      * @return MessageWebService[]
      * @soap
      */
-    public function sendExecutadosPorServidor($procedimentosExecutados){
+    public function sendExecutadosPorServidor($procedimentosExecutados,$usuarioDesktop){
        
        
-        return 1;
+        return array();
     }
 
    
@@ -98,10 +137,11 @@ class ProcedimentoController extends Controller
     
     /**
      * @param EquipeExecutaProcedimento[]
+     * @param UsuarioDesktop usuario da aplicao desktop
      * @return MessageWebService[]
      * @soap
      */
-    public function sendExecutadosPorEquipe($procedimentosExecutados){
+    public function sendExecutadosPorEquipe($procedimentosExecutados,$usuarioDesktop){
          
             $m= new MessageWebService;
         if(is_array($procedimentosExecutados)){
@@ -130,10 +170,11 @@ class ProcedimentoController extends Controller
     
     /**
      * @param MedicoExecutaProcedimento[]
+     * @param UsuarioDesktop usuario da aplicao desktop
      * @return MessageWebService[]
      * @soap
      */
-    public function sendExecutadosPorMedico($procedimentosExecutados){
+    public function sendExecutadosPorMedico($procedimentosExecutados,$usuarioDesktop){
          
             $m= new MessageWebService;
         return array($m);
@@ -141,10 +182,11 @@ class ProcedimentoController extends Controller
     
     /**
      * @param EnfermeiroExecutaProcedimento[]
+     * @param UsuarioDesktop usuario da aplicao desktop
      * @return MessageWebService[]
      * @soap
      */
-    public function sendExecutadosPorEnfermeiro($procedimentosExecutados){
+    public function sendExecutadosPorEnfermeiro($procedimentosExecutados,$usuarioDesktop){
          
             $m= new MessageWebService;
         return array($m);
@@ -152,10 +194,11 @@ class ProcedimentoController extends Controller
     
     /**
      * @param OdontologoExecutaProcedimento[]
+     * @param UsuarioDesktop usuario da aplicao desktop
      * @return MessageWebService[]
      * @soap
      */
-    public function sendExecutadosPorOdontologo($procedimentosExecutados){
+    public function sendExecutadosPorOdontologo($procedimentosExecutados,$usuarioDesktop){
          
             $m= new MessageWebService;
         return array($m);
@@ -163,14 +206,17 @@ class ProcedimentoController extends Controller
     
     /**
      * @param AgenteSaudeExecutaProcedimento[]
+     * @param UsuarioDesktop usuario da aplicao desktop
      * @return MessageWebService[]
      * @soap
      */
-    public function sendExecutadosPorAgenteSaude($procedimentosExecutados){
+    public function sendExecutadosPorAgenteSaude($procedimentosExecutados,$usuarioDesktop){
          
             $m= new MessageWebService;
         return array($m);
     }
+  
+   
     
 //
 //	/**
