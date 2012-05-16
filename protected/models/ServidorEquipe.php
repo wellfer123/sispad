@@ -14,6 +14,12 @@ class ServidorEquipe extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * @return Servidor_Equipe the static model class
 	 */
+
+        const ATIVO=1;
+        const DESATIVO=0;
+
+        public $erro;
+
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
@@ -38,8 +44,8 @@ class ServidorEquipe extends CActiveRecord
 			array('equipe_codigo_area', 'numerical', 'integerOnly'=>true),
 			array('equipe_unidade_cnes', 'length', 'max'=>10),
 			array('servidor_cpf', 'length', 'max'=>11),
-                        array('servidor_cpf','verificaServidorExistente'),
-                        array('funcao','verificaFuncaoExistente'),
+                        array('servidor_cpf','verificaServidorExistente','on'=>'create'),
+                        array('funcao','verificaFuncaoExistente','on'=>'create active'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('equipe_codigo_area, equipe_unidade_cnes, servidor_cpf', 'safe', 'on'=>'search'),
@@ -61,25 +67,36 @@ class ServidorEquipe extends CActiveRecord
 	}
 
         public function  verificaServidorExistente($attribute,$params){
-
-             if((ServidorEquipe::model()->find('servidor_cpf= :servidor_cpf',array(':servidor_cpf'=>$this->servidor_cpf)))==null){
+             $servidor = ServidorEquipe::model()->find('servidor_cpf= :servidor_cpf',array(':servidor_cpf'=>$this->servidor_cpf));
+             if(($servidor)==null){
                  return true;
+             }else if($servidor->ativo==1){
+                  $this->addError('servidor_cpf','Este servidor já existe');
+
+             }  else {
+                   $this->addError('servidor_cpf','Este servidor já existe mas está inativo, vá no menu "Gerenciar Membros" e o ative');
              }
-             $this->addError('servidor_cpf','servidor já existe na equipe');
+            
              return false;
         }
 
         public function  verificaFuncaoExistente($attribute,$params){
 
-             $quantFuncao = count(ServidorEquipe::model()->findAll('funcao= :funcao',array(':funcao'=>$this->funcao)));
+             $quantFuncao = count(ServidorEquipe::model()->findAll('funcao= :funcao AND ativo=1',array(':funcao'=>$this->funcao)));
+
+
              if($this->funcao=='Odontologo' || $this->funcao=='Medico' || $this->funcao=='Enfermeiro'){
                  if($quantFuncao==1){
-                       $this->addError('funcao','Já existe 1 (um) servidor com esta função na equipe');
+                     $this->erro = 'Já existe 1 (um) servidor com esta função na equipe';
+                       $this->addError('funcao',$this->erro);
+                        
                        return false;
                  }
              }elseif($this->funcao=='AgenteSaude'){
                  if($quantFuncao==5){
-                       $this->addError('funcao','Já existem 5 (cinco) servidores com esta função na equipe');
+                       $this->erro = 'Já existem 5 (cinco) servidores com esta função na equipe';
+                       $this->addError('funcao',$this->erro);
+                        
                        return false;
                  }
              }else
@@ -98,6 +115,16 @@ class ServidorEquipe extends CActiveRecord
                         'funcao'=>'Função'
 		);
 	}
+
+         public function labelStatus(){
+            if($this->ativo== User::ATIVO){
+                return 'ATIVO';
+            }
+            else if($this->ativo==User::DESATIVO){
+                return 'DESATIVO';
+            }
+            return 'DESCONHECIDO';
+        }
 
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
@@ -138,4 +165,21 @@ class ServidorEquipe extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+
+        public function searchServidoresAtivos($codigo_area,$unidade_cnes) {
+
+                $dados=Yii::app()->db->createCommand('select ser_equ.*,ser.nome,ser.cpf,ser_equ.ativo as id from servidor_equipe as ser_equ INNER JOIN servidor as ser
+                                                      ON ser_equ.servidor_cpf = ser.cpf where ser_equ.equipe_codigo_area='
+                                                      .$codigo_area.' AND ser_equ.equipe_unidade_cnes='.$unidade_cnes.' AND ser_equ.ativo=1')->queryAll();
+
+
+
+                 return  new CArrayDataProvider($dados, array(
+                                    'id'=>'servidorEquipe',
+                                    'pagination'=>false
+
+		));
+
+    }
+
 }

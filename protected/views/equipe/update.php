@@ -10,6 +10,9 @@ $this->menu=array(
 	array('label'=>'Create Equipe', 'url'=>array('create')),
 	array('label'=>'View Equipe', 'url'=>array('view', 'id'=>$model->codigo_segmento)),
 	array('label'=>'Manage Equipe', 'url'=>array('admin')),
+        array('label'=>'Manage Membros', 'url'=>array('servidorEquipe/adminMembers',
+              'codigo_area'=>$model->codigo_area,'unidade_cnes'=>$model->unidade_cnes
+        )),
 );
 ?>
 

@@ -4,6 +4,10 @@ $this->breadcrumbs=array(
 	'Adicionar à Equipe',
 );
 
+$this->menu=array(
+	array('label'=>'Gerenciar Membros', 'url'=>array('servidorEquipe/adminMembers',"codigo_area"=>$model->equipe_codigo_area,
+                                                            "unidade_cnes"=>$model->equipe_unidade_cnes)),
+);
 
 ?>
 
