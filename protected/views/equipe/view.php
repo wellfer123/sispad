@@ -22,6 +22,9 @@ $this->menu=array(
 		'codigo_area',
 		'tipo',
 		'unidade_cnes',
-		'codigo_microarea',
+		
 	),
 )); ?>
+
+<?php $model2 = new ServidorEquipe;
+      echo $this->renderPartial('//servidorEquipe/_view', array('model'=>$model2)); ?>
