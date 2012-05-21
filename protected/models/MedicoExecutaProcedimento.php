@@ -69,7 +69,8 @@ class MedicoExecutaProcedimento extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('quantidade, competencia', 'numerical', 'integerOnly'=>true),
-			array('medico_cpf, procedimento_codigo, medico_unidade_cnes', 'length', 'max'=>10),
+			array(' procedimento_codigo, medico_unidade_cnes', 'length', 'max'=>10),
+                        array('medico_cpf', 'length', 'max'=>11),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('medico_cpf, procedimento_codigo, medico_unidade_cnes, quantidade, competencia', 'safe', 'on'=>'search'),
@@ -129,4 +130,47 @@ class MedicoExecutaProcedimento extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+        
+        
+        public function getMedico_unidade_cnes() {
+            return $this->medico_unidade_cnes;
+        }
+
+        public function getMedico_cpf() {
+            return $this->medico_cpf;
+        }
+
+        public function getCompetencia() {
+            return $this->competencia;
+        }
+
+        public function getQuantidade() {
+            return $this->quantidade;
+        }
+
+        public function getProcedimento_codigo() {
+            return $this->procedimento_codigo;
+        }
+
+        public function setMedico_unidade_cnes($medico_unidade_cnes) {
+            $this->medico_unidade_cnes = $medico_unidade_cnes;
+        }
+
+        public function setMedico_cpf($medico_cpf) {
+            $this->medico_cpf = $medico_cpf;
+        }
+
+        public function setCompetencia($competencia) {
+            $this->competencia = $competencia;
+        }
+
+        public function setQuantidade($quantidade) {
+            $this->quantidade = $quantidade;
+        }
+
+        public function setProcedimento_codigo($procedimento_codigo) {
+            $this->procedimento_codigo = $procedimento_codigo;
+        }
+
+
 }

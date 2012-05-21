@@ -175,9 +175,61 @@ class ProcedimentoController extends Controller
      * @soap
      */
     public function sendExecutadosPorMedico($procedimentosExecutados,$usuarioDesktop){
-         
-            $m= new MessageWebService;
-        return array($m);
+            $msg=array();
+            // verifica se o usuário está logado
+            if($this->usuarioEstaLogado($usuarioDesktop)){
+                //verifica se é um vetor de procedimentos executados por medicos
+                if(is_array($procedimentosExecutados)){
+                    foreach($procedimentosExecutados as $proc){
+                        $medExe= new MedicoExecutaProcedimento();
+                        
+                        //vai preencher os dados
+                        $medExe->setCompetencia($proc->competencia);
+                        $medExe->setMedico_cpf($proc->medico_cpf);
+                        $medExe->setMedico_unidade_cnes($proc->medico_unidade_cnes);
+                        $medExe->setProcedimento_codigo($proc->procedimento_codigo);
+                        $medExe->setQuantidade($proc->quantidade);
+                        $ser= $this->loadServidor($proc->medico_cpf);
+                        try{
+                            //vai salvar o objeto
+                            if($medExe->save()){
+                                
+                            }
+                            //erro ao salvar
+                            else{
+                                $erro=new MessageWebService();
+                                $erro->setMessage("o procedimento executado pelo médico $ser->nome está incorreto!");
+                                //$medExe->geter
+                                //adiciona o erro ao vetor
+                                $msg[]=$erro;
+                            }
+                        }catch(Exception $ex){
+                            $tmp=$ex->getMessage();
+                            $erro=new MessageWebService();
+                            $erro->setMessage("Erro ao salvar o procedimento executado pelo médico: $ser->nome! $tmp");
+                            //adiciona o erro ao vetor
+                            $msg[]=$erro;
+                        }
+                        
+                    }
+                }
+                //não foi um array de procedimentos executados por medicos
+                else{
+                    $erro=new MessageWebService();
+                    $erro->setMessage("Você deve uma lista de procedimentos executados!");
+                    //adiciona o erro ao vetor
+                    $msg[]=$erro;
+                    
+                }
+            }
+            //não está logado
+            else{
+                $erro=new MessageWebService();
+                $erro->setMessage("Você deve fazer login para poder enviar dados!");
+                //adiciona o erro ao vetor
+                $msg[]=$erro;
+            }
+        return $msg;
     }
     
     /**
@@ -216,6 +268,34 @@ class ProcedimentoController extends Controller
         return array($m);
     }
   
+   //métodos privados
+    
+   private function validarCompetencia($competencia){
+       
+       return true;
+   }
+   
+   private function validarEquipe($equipe){
+       return true;
+   }
+   
+   private function usuarioEstaLogado($usuarioDesktop){
+       return true;
+   }
+   
+   private function logarUsuario($usuarioDesktop){
+       return true;
+   }
+   
+   private function deslogarUsuario($usuarioDesktop){
+       return true;
+   }
+   
+   private function loadServidor($cpf){
+       return Servidor::model()->findByPk($cpf);
+   }
+
+
    
     
 //

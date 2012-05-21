@@ -127,4 +127,46 @@ class Medico extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+        
+        public function getUnidade_cnes() {
+            return $this->unidade_cnes;
+        }
+
+        public function getServidor_cpf() {
+            return $this->servidor_cpf;
+        }
+
+        public function getAtivo() {
+            return $this->ativo;
+        }
+
+        public function getData_cadastro() {
+            return $this->data_cadastro;
+        }
+
+        public function getData_desativacao() {
+            return $this->data_desativacao;
+        }
+
+        public function setUnidade_cnes($unidade_cnes) {
+            $this->unidade_cnes = $unidade_cnes;
+        }
+
+        public function setServidor_cpf($servidor_cpf) {
+            $this->servidor_cpf = $servidor_cpf;
+        }
+
+        public function setAtivo($ativo) {
+            $this->ativo = $ativo;
+        }
+
+        public function setData_cadastro($data_cadastro) {
+            $this->data_cadastro = $data_cadastro;
+        }
+
+        public function setData_desativacao($data_desativacao) {
+            $this->data_desativacao = $data_desativacao;
+        }
+
+
 }

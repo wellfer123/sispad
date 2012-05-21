@@ -29,6 +29,31 @@ class MessageWebService {
      */
      public $tipo;
     
+     public function getCodigo() {
+         return $this->codigo;
+     }
+
+     public function getMessage() {
+         return $this->message;
+     }
+
+     public function getTipo() {
+         return $this->tipo;
+     }
+
+     public function setCodigo($codigo) {
+         $this->codigo = $codigo;
+     }
+
+     public function setMessage($message) {
+         $this->message = $message;
+     }
+
+     public function setTipo($tipo) {
+         $this->tipo = $tipo;
+     }
+
+
 }
 
 ?>
