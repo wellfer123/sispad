@@ -18,6 +18,7 @@ class ProcedimentoController extends Controller
                 'class'=>'CWebServiceAction',
                 'classMap'=>array(
                     'Procedimento'=>'Procedimento',
+                    'Unidade'=>'Unidade',
                     'Odontologo'=>'Odontologo',
                     'Medico'=>'Medico',
                     'Enfermeiro'=>'Enfermeiro',
