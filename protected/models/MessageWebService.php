@@ -12,6 +12,9 @@
  */
 class MessageWebService {
     //put your code here
+    public static $ERRO=0;
+    public static $SUCESSO=1;
+    
     /**
      *@var string
      *@soap

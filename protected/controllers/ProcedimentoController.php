@@ -84,6 +84,50 @@ class ProcedimentoController extends Controller
     }
     
     /**
+     * @param UsuarioDesktop usuario da aplicao desktop
+     * @return Procedimento[]
+     * @soap
+     */
+    public function getProcedimentosAEnviarSIAB($usuarioDesktop){
+       
+       
+        return Procedimento::model()->findAll();
+    }
+    
+    /**
+     * @param UsuarioDesktop usuario da aplicao desktop
+     * @return Procedimento[]
+     * @soap
+     */
+    public function getProcedimentosAEnviarSIA($usuarioDesktop){
+       
+       
+        return Procedimento::model()->findAll();
+    }
+    
+    /**
+     * @param UsuarioDesktop usuario da aplicao desktop
+     * @return Unidade[]
+     * @soap
+     */
+    public function getUnidades($usuarioDesktop){
+       
+       
+        return Procedimento::model()->findAll();
+    }
+    
+    /**
+     * @param UsuarioDesktop usuario da aplicao desktop
+     * @param Unidade[]
+     * @return MessageWebService[]
+     * @soap
+     */
+    public function validarUnidades($usuarioDesktop,$unidades){
+       
+       
+        return array();
+    }
+    /**
      * @param string codigo da unidade
      * @param UsuarioDesktop usuario da aplicao desktop
      * @return AgenteSaude[]
@@ -175,39 +219,98 @@ class ProcedimentoController extends Controller
      * @soap
      */
     public function sendExecutadosPorMedico($procedimentosExecutados,$usuarioDesktop){
+        try{
+            //arreio de mensagens
             $msg=array();
             // verifica se o usuário está logado
             if($this->usuarioEstaLogado($usuarioDesktop)){
                 //verifica se é um vetor de procedimentos executados por medicos
                 if(is_array($procedimentosExecutados)){
+                    //variável temporária para competencia;
+                    $competencia=0;
+                    //variavel temporária para o servidor é válido para a equipe
+                    $servidorEquipe= new ServidorEquipe;
                     foreach($procedimentosExecutados as $proc){
-                        $medExe= new MedicoExecutaProcedimento();
                         
+                        $medExe= new MedicoExecutaProcedimento();
                         //vai preencher os dados
                         $medExe->setCompetencia($proc->competencia);
                         $medExe->setMedico_cpf($proc->medico_cpf);
                         $medExe->setMedico_unidade_cnes($proc->medico_unidade_cnes);
                         $medExe->setProcedimento_codigo($proc->procedimento_codigo);
                         $medExe->setQuantidade($proc->quantidade);
+                        //carrega as entidades para usar nas mensagens
                         $ser= $this->loadServidor($proc->medico_cpf);
-                        try{
-                            //vai salvar o objeto
-                            if($medExe->save()){
-                                
+                        $procedi=$this->loadProcedimento($proc->procedimento_codigo);
+                        
+                        //verifica se a competencia do procedimento executado é válida
+                        if($this->validarCompetencia($medExe->getCompetencia(), $competencia)){
+                            //é válida, então deve verificar se o servidor pertence mesmo a equipe
+                            $equipeAtual= new ServidorEquipe;
+                            //preenchendo so valores
+                            $equipeAtual->setServidorCPF($medExe->getMedico_cpf());
+                            $equipeAtual->setEquipeUnidadeCNES($medExe->getMedico_unidade_cnes());
+                            if($this->validarEquipe($equipeAtual, $servidorEquipe)){
+                                //agora verifica se o registro já existe, senão existir, vai cadastrar
+                                $existe=$medExe->exists("medico_cpf=:medico AND procedimento_codigo=:procedimento
+                                                    AND medico_unidade_cnes=:unidade AND competencia=:competencia",
+                                                    array(':medico'=>$medExe->getMedico_cpf(),
+                                                          ':procedimento'=>$medExe->getProcedimento_codigo(),
+                                                          ':unidade'=>$medExe->getMedico_unidade_cnes(),
+                                                          ':competencia'=>$medExe->getCompetencia()
+                                                            )
+                                                   );
+                                //termina a verificação
+                                if(!$existe){
+                                   //vai salvar o registro
+                                    try{
+                                        //vai salvar o objeto
+                                        if($medExe->save()){
+                                               $sucesso=new MessageWebService();
+                                               $sucesso->setCodigo(MessageWebService::$SUCESSO);
+                                               $sucesso->setMessage("PROCEDIMENTO: $procedi->nome \nMÉDICO: $ser->nome \nSUCESSO: PROCEDIMENTO EXECUTADO PELO MÉDICO REGISTRADO COM SUCESSO");
+                                               $msg[]=$sucesso;
+                                        }
+                                        //erro ao salvar
+                                        else{
+                                            $erro=new MessageWebService();
+                                            $erro->setCodigo(MessageWebService::$ERRO);
+                                            $erro->setMessage("PROCEDIMENTO: $procedi->nome \nMÉDICO: $ser->nome \nERRO: NÃO FOI POSSÍVEL REGISTRAR O PROCEDIMENTO EXECUTADO PELO MÉDICO");
+                                            //$medExe->geter
+                                            //adiciona o erro ao vetor
+                                            $msg[]=$erro;
+                                        }
+                                    }catch(Exception $ex){
+                                        $tmp=$ex->getMessage();
+                                        $erro=new MessageWebService();
+                                        $erro->setCodigo(MessageWebService::$ERRO);
+                                        $erro->setMessage("PROCEDIMENTO: $procedi->nome \nMÉDICO: $ser->nome \nERRO INESPERADO AO TENTAR SALVAR O PROCEDIMENTO EXECUTADO PELO MÉDICO! $tmp");
+                                        //adiciona o erro ao vetor
+                                        $msg[]=$erro;
+                                    } 
+                                    //terminou o try
+                                }
+                                //já foi enviado
+                                else{
+                                   $erro=new MessageWebService();
+                                   $erro->setCodigo(MessageWebService::$ERRO);
+                                   $erro->setMessage("PROCEDIMENTO: $procedi->nome \nMÉDICO: $ser->nome \nERRO: JÁ FOI ENVIADO PARA A COMPETÊNCIA $medExe->competencia");
+                                   $msg[]=$erro; 
+                                }
                             }
-                            //erro ao salvar
+                            //médico não faz parte da equipe
                             else{
-                                $erro=new MessageWebService();
-                                $erro->setMessage("o procedimento executado pelo médico $ser->nome está incorreto!");
-                                //$medExe->geter
-                                //adiciona o erro ao vetor
-                                $msg[]=$erro;
+                               $erro=new MessageWebService();
+                               $erro->setCodigo(MessageWebService::$ERRO);
+                               $erro->setMessage("MÉDICO: $ser->nome \nERRO: NÃO ESTÁ CADASTRADO EM NENHUMA EQUIPE");
+                               $msg[]=$erro; 
                             }
-                        }catch(Exception $ex){
-                            $tmp=$ex->getMessage();
+                        }
+                        //competência inválida
+                        else{
                             $erro=new MessageWebService();
-                            $erro->setMessage("Erro ao salvar o procedimento executado pelo médico: $ser->nome! $tmp");
-                            //adiciona o erro ao vetor
+                            $erro->setCodigo(MessageWebService::$ERRO);
+                            $erro->setMessage("ERRO: COMPETÊNCIA INVÁLIDA, $medExe->competencia");
                             $msg[]=$erro;
                         }
                         
@@ -216,7 +319,8 @@ class ProcedimentoController extends Controller
                 //não foi um array de procedimentos executados por medicos
                 else{
                     $erro=new MessageWebService();
-                    $erro->setMessage("Você deve uma lista de procedimentos executados!");
+                    $erro->setCodigo(MessageWebService::$ERRO);
+                    $erro->setMessage("ERRO: DEVE-SE ENVIAR UMA LISTA DE PROCEDIMENTOS EXECUTADOS POR UM MÉDICO!");
                     //adiciona o erro ao vetor
                     $msg[]=$erro;
                     
@@ -225,10 +329,19 @@ class ProcedimentoController extends Controller
             //não está logado
             else{
                 $erro=new MessageWebService();
-                $erro->setMessage("Você deve fazer login para poder enviar dados!");
+                $erro->setCodigo(MessageWebService::$ERRO);
+                $erro->setMessage("ERRO: DEVE-SE FAZER LOGIN NO WEB SERVICE!");
                 //adiciona o erro ao vetor
                 $msg[]=$erro;
             }
+        }catch(Exception $ex){
+            $tmp=$ex->getMessage();
+            $erro=new MessageWebService();
+            $erro->setCodigo(MessageWebService::$ERRO);
+            $erro->setMessage("ERRO INESPERADO A CHAMADA DO MÉTODO! $tmp");
+            //adiciona o erro ao vetor
+            $msg[]=$erro;
+        }
         return $msg;
     }
     
@@ -270,12 +383,13 @@ class ProcedimentoController extends Controller
   
    //métodos privados
     
-   private function validarCompetencia($competencia){
+   private function validarCompetencia($competenciaAtual, $competenciaOld){
+       
        
        return true;
    }
    
-   private function validarEquipe($equipe){
+   private function validarEquipe($equipeAtual, $equipeOld){
        return true;
    }
    
@@ -294,6 +408,11 @@ class ProcedimentoController extends Controller
    private function loadServidor($cpf){
        return Servidor::model()->findByPk($cpf);
    }
+   
+   private function loadProcedimento($codigo_procedi){
+       return Procedimento::model()->findByPk($codigo_procedi);
+   }
+
 
 
    

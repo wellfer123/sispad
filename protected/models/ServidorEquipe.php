@@ -181,5 +181,28 @@ class ServidorEquipe extends CActiveRecord
 		));
 
     }
-
+    
+    public function getEquipeCodigoArea(){
+        return $this->equipe_codigo_area;
+    }
+    
+    public function setEquipeCodigoArea($equipe_codigo_area){
+        $this->equipe_codigo_area=$equipe_codigo_area;
+    }
+    
+    public function getEquipeUnidadeCNES(){
+        return $this->equipe_unidade_cnes;
+    }
+    
+    public function setEquipeUnidadeCNES($equipe_unidade_cnes){
+        $this->equipe_unidade_cnes=$equipe_unidade_cnes;
+    }
+    
+    public function getServidorCPF(){
+        return $this->servidor_cpf;
+    }
+    
+    public function setServidorCPF($servidor_cpf){
+        $this->servidor_cpf=$servidor_cpf;
+    }
 }

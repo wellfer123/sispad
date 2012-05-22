@@ -12,6 +12,16 @@
  */
 class Unidade extends CActiveRecord
 {
+     /**
+     *@var string
+     *@soap
+     */
+     public $cnes;
+     /**
+     *@var string
+     *@soap   
+     */
+     public $nome;
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return Unidade the static model class
