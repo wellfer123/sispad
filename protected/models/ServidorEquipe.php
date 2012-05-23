@@ -7,6 +7,8 @@
  * @property integer $equipe_codigo_area
  * @property string $equipe_unidade_cnes
  * @property string $servidor_cpf
+ * @property int $ativo
+ * @property string $funcao
  */
 class ServidorEquipe extends CActiveRecord
 {
@@ -181,6 +183,21 @@ class ServidorEquipe extends CActiveRecord
 		));
 
     }
+    public function equals($record) {
+        if($record!=null){
+          if($record instanceof ServidorEquipe){
+            if($this->equipe_unidade_cnes==$record->equipe_unidade_cnes){
+                if($this->servidor_cpf==$record->servidor_cpf){
+                    if($this->funcao==$record->funcao){
+                        return true;
+                    }
+                }
+            }
+          }
+        }
+        return false;
+    }
+
     
     public function getEquipeCodigoArea(){
         return $this->equipe_codigo_area;
@@ -204,5 +221,13 @@ class ServidorEquipe extends CActiveRecord
     
     public function setServidorCPF($servidor_cpf){
         $this->servidor_cpf=$servidor_cpf;
+    }
+    
+    public function getFuncao(){
+        return $this->funcao;
+    }
+    
+    public function setFuncao($funcao){
+        $this->funcao=$funcao;
     }
 }
