@@ -1,7 +1,7 @@
 <?php
 $this->breadcrumbs=array(
-	'Faltas'=>array('index'),
-	'Create',
+        'Faltas Mensais'=>array('Falta/preparedViewMonth'),
+	'Relatorio Geral',
 );
 
 $this->menu=array(

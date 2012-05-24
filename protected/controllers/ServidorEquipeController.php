@@ -26,7 +26,8 @@ class ServidorEquipeController extends SISPADBaseController
 
 	public function actionIndex()
 	{
-		$this->render('index');
+                $model = new ServidorEquipe;
+		$this->render('admin_members',array('model'=>$model));
 	}
 
         protected function getModelName() {

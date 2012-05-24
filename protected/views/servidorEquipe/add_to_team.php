@@ -1,6 +1,8 @@
 <?php
 $this->breadcrumbs=array(
-	'Servidor'=>array('index'),
+        'Equipes'=>array('equipe/index'),
+        'Equipe '.$model->equipe_codigo_area=>array("equipe/view","area"=>$model->equipe_codigo_area,
+                        "cnes"=>$model->equipe_unidade_cnes),
 	'Adicionar à Equipe',
 );
 

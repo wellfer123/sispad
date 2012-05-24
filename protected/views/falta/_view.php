@@ -5,6 +5,7 @@
 
 $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'falta-grid',
+        'summaryText'=>'Servidores sem envio de relatórios ainda',
 	'dataProvider'=>$model->searchPorServidor($servidorCpf,$mes,$ano),
 	'columns'=>array(
 		'dia',

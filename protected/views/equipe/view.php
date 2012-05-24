@@ -1,7 +1,7 @@
 <?php
 $this->breadcrumbs=array(
 	'Equipes'=>array('index'),
-	$model->codigo_area,
+	"Equipe ".$model->codigo_area,
 );
 
 $this->menu=array(
