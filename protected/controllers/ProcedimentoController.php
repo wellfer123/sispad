@@ -93,7 +93,7 @@ class ProcedimentoController extends Controller
     public function getMedicos($codigoUnidade,$usuarioDesktop){
        
        
-        return Medico::model()->findAll();
+        return Medico::model()->findAll('unidade_cnes=:unidade', array(':unidade'=>$codigoUnidade));
     }
     
     /**
@@ -103,8 +103,7 @@ class ProcedimentoController extends Controller
      */
     public function getProcedimentosAEnviarSIAB($usuarioDesktop){
        
-       
-        return Procedimento::model()->findAll();
+        return Procedimento::model()->findAll($this->getCDBcriteriaProcedimento(Procedimento::ORIGEM_SIAB));
     }
     
     /**
@@ -115,7 +114,7 @@ class ProcedimentoController extends Controller
     public function getProcedimentosAEnviarSIA($usuarioDesktop){
        
        
-        return Procedimento::model()->findAll();
+        return Procedimento::model()->findAll($this->getCDBcriteriaProcedimento(Procedimento::ORIGEM_SIA));;
     }
     
     /**
@@ -126,7 +125,7 @@ class ProcedimentoController extends Controller
     public function getUnidades($usuarioDesktop){
        
        
-        return Procedimento::model()->findAll();
+        return Unidade::model()->findAll();
     }
     
     /**
@@ -137,7 +136,9 @@ class ProcedimentoController extends Controller
      */
     public function validarUnidades($usuarioDesktop,$unidades){
        
-       
+        if(is_array($unidades)){
+            //monta a consulta
+        }
         return array();
     }
     /**
@@ -149,7 +150,7 @@ class ProcedimentoController extends Controller
     public function getAgenteSaude($codigoUnidade,$usuarioDesktop){
        
        
-        return AgenteSaude::model()->findAll();
+        return AgenteSaude::model()->findAll('unidade_cnes=:unidade', array(':unidade'=>$codigoUnidade));;
     }
     
     /**
@@ -161,7 +162,7 @@ class ProcedimentoController extends Controller
     public function getOdontologos($codigoUnidade,$usuarioDesktop){
        
        
-        return Odontologo::model()->findAll();
+        return Odontologo::model()->findAll('unidade_cnes=:unidade', array(':unidade'=>$codigoUnidade));
     }
     
     /**
@@ -173,7 +174,7 @@ class ProcedimentoController extends Controller
     public function getEnfermeiros($codigoUnidade,$usuarioDesktop){
        
        
-        return Enfermeiro::model()->findAll();
+        return Enfermeiro::model()->findAll('unidade_cnes=:unidade', array(':unidade'=>$codigoUnidade));;
     }
     
     /**
@@ -271,81 +272,51 @@ class ProcedimentoController extends Controller
                                     try{
                                         //vai salvar o objeto
                                         if($medExe->save()){
-                                               $sucesso=new MessageWebService();
-                                               $sucesso->setCodigo(MessageWebService::$SUCESSO);
-                                               $sucesso->setMessage("PROCEDIMENTO: $procedi->nome \nMÉDICO: $ser->nome \nSUCESSO: PROCEDIMENTO EXECUTADO PELO MÉDICO REGISTRADO COM SUCESSO");
-                                               $msg[]=$sucesso;
+                                               $msg[]=$this->getMessageWebService("PROCEDIMENTO: $procedi->nome \nMÉDICO: $ser->nome \nSUCESSO: PROCEDIMENTO EXECUTADO PELO MÉDICO REGISTRADO COM SUCESSO", MessageWebService::$SUCESSO); 
                                         }
                                         //erro ao salvar
                                         else{
-                                            $erro=new MessageWebService();
-                                            $erro->setCodigo(MessageWebService::$ERRO);
-                                            $erro->setMessage("PROCEDIMENTO: $procedi->nome \nMÉDICO: $ser->nome \nERRO: NÃO FOI POSSÍVEL REGISTRAR O PROCEDIMENTO EXECUTADO PELO MÉDICO");
-                                            //$medExe->geter
                                             //adiciona o erro ao vetor
-                                            $msg[]=$erro;
+                                            $msg[]=$this->getMessageWebService("PROCEDIMENTO: $procedi->nome \nMÉDICO: $ser->nome \nERRO: NÃO FOI POSSÍVEL REGISTRAR O PROCEDIMENTO EXECUTADO PELO MÉDICO", MessageWebService::$ERRO);
                                         }
                                     }catch(Exception $ex){
                                         $tmp=$ex->getMessage();
-                                        $erro=new MessageWebService();
-                                        $erro->setCodigo(MessageWebService::$ERRO);
-                                        $erro->setMessage("PROCEDIMENTO: $procedi->nome \nMÉDICO: $ser->nome \nERRO INESPERADO AO TENTAR SALVAR O PROCEDIMENTO EXECUTADO PELO MÉDICO! $tmp");
                                         //adiciona o erro ao vetor
-                                        $msg[]=$erro;
+                                        $msg[]=$this->getMessageWebService("PROCEDIMENTO: $procedi->nome \nMÉDICO: $ser->nome \nERRO INESPERADO AO TENTAR SALVAR O PROCEDIMENTO EXECUTADO PELO MÉDICO! $tmp", MessageWebService::$ERRO); 
                                     } 
                                     //terminou o try
                                 }
                                 //já foi enviado
                                 else{
-                                   $erro=new MessageWebService();
-                                   $erro->setCodigo(MessageWebService::$ERRO);
-                                   $erro->setMessage("PROCEDIMENTO: $procedi->nome \nMÉDICO: $ser->nome \nERRO: JÁ FOI ENVIADO PARA A COMPETÊNCIA $medExe->competencia");
-                                   $msg[]=$erro; 
+                                   $msg[]=$this->getMessageWebService("PROCEDIMENTO: $procedi->nome \nMÉDICO: $ser->nome \nERRO: JÁ FOI ENVIADO PARA A COMPETÊNCIA $medExe->competencia", MessageWebService::$ERRO); 
                                 }
                             }
                             //médico não faz parte da equipe
                             else{
-                               $erro=new MessageWebService();
-                               $erro->setCodigo(MessageWebService::$ERRO);
-                               $erro->setMessage("MÉDICO: $ser->nome \nERRO: NÃO ESTÁ CADASTRADO EM NENHUMA EQUIPE");
-                               $msg[]=$erro; 
+                               $msg[]=$this->getMessageWebService("MÉDICO: $ser->nome \nERRO: NÃO ESTÁ CADASTRADO EM NENHUMA EQUIPE", MessageWebService::$ERRO); 
                             }
                         }
                         //competência inválida
                         else{
-                            $erro=new MessageWebService();
-                            $erro->setCodigo(MessageWebService::$ERRO);
-                            $erro->setMessage("ERRO: COMPETÊNCIA INVÁLIDA, $medExe->competencia");
-                            $msg[]=$erro;
+                            $msg[]=$this->getMessageWebService("ERRO: COMPETÊNCIA INVÁLIDA, $medExe->competencia", MessageWebService::$ERRO);
                         }
                         
                     }
                 }
                 //não foi um array de procedimentos executados por medicos
                 else{
-                    $erro=new MessageWebService();
-                    $erro->setCodigo(MessageWebService::$ERRO);
-                    $erro->setMessage("ERRO: DEVE-SE ENVIAR UMA LISTA DE PROCEDIMENTOS EXECUTADOS POR UM MÉDICO!");
                     //adiciona o erro ao vetor
-                    $msg[]=$erro;
+                    $msg[]=$this->getMessageWebService("ERRO: DEVE-SE ENVIAR UMA LISTA DE PROCEDIMENTOS EXECUTADOS POR UM MÉDICO!", MessageWebService::$ERRO);
                     
                 }
             }
             //não está logado
             else{
-                $erro=new MessageWebService();
-                $erro->setCodigo(MessageWebService::$ERRO);
-                $erro->setMessage("ERRO: DEVE-SE FAZER LOGIN NO WEB SERVICE!");
-                //adiciona o erro ao vetor
-                $msg[]=$erro;
+                $msg[]=$this->getMessageWebService("ERRO: DEVE-SE FAZER LOGIN NO WEB SERVICE!", MessageWebService::$ERRO);
             }
         }catch(Exception $ex){
             $tmp=$ex->getMessage();
-            $erro=new MessageWebService();
-            $erro->setCodigo(MessageWebService::$ERRO);
-            $erro->setMessage("ERRO INESPERADO A CHAMADA DO MÉTODO! $tmp");
-            //adiciona o erro ao vetor
-            $msg[]=$erro;
+            $msg[]=$this->getMessageWebService("ERRO INESPERADO A CHAMADA DO MÉTODO! $tmp",MessageWebService::$ERRO);
         }
         return $msg;
     }
@@ -394,8 +365,38 @@ class ProcedimentoController extends Controller
        $this->servidor_equipe_boolean=false;
        $this->servidor_equipe_old=null;
    }
+   //devolve uma CDBcriteria para consultar os procedimentos que fazem da parte de alguma meta  e
+   private function getCDBcriteriaProcedimento($origemProcedimento){
+        $criteria= new CDbCriteria();
+        $criteria->select="codigo, nome";
+        $criteria->distinct=true;
+        $criteria->join="INNER JOIN meta_procedimento ON codigo=procedimento_codigo";
+        $criteria->condition="origem=:origem";
+        $criteria->params=array(':origem'=>$origemProcedimento);
+       return $criteria;
+   }
+   
+   /**
+    * @param string $message
+    * @param string $tipo
+    * @param string $codigo 
+    * @return MessageWebService
+    */
+   private function getMessageWebService($message, $tipo,$codigo=null){
+       $m= new MessageWebService();
+       $m->setCodigo($codigo);
+       $m->setTipo($tipo);
+       $m->setMessage($message);
+       return $m;
+   }
+   
+   /**
+    *verifica se a competência pode ser enviada, se sim, devolve true, senão devolve não
+    * @param Competencia $competencia
+    * @return boolean 
+    */
    private function validarCompetencia($competencia){
-       /*if($competencia->equals($competencia)){
+       if($competencia->equals($competencia)){
            if($this->competencia_boolean){
                return true;
            }
@@ -406,10 +407,14 @@ class ProcedimentoController extends Controller
                                                                     ':valor'=>$competencia->mes_ano,
                                                                     ':ativo'=>  Competencia::ABERTA
                                                                 ));
-       return $this->competencia_boolean;*/
-    return true;
+       return $this->competencia_boolean;
    }
    
+   /**
+    *Verifica se o servidor faz parte da equipe, se fizer, devolve true, senão devolve false
+    * @param ServidorEquipe $servidor_equipe
+    * @return boolean
+    */
    private function IsServidorEquipe($servidor_equipe){
        if($servidor_equipe->equals($this->servidor_equipe_old)){
            if($this->servidor_equipe_boolean){
@@ -427,7 +432,12 @@ class ProcedimentoController extends Controller
                                                 ));
        return $this->servidor_equipe_boolean;
    }
-   
+   /**
+    *verifica se o medico se já tem o registro do procedimento executado na competencia já foi registrado
+    * Se sim, devolve false, senão foi, devolve true
+    * @param MedicoExecutaProcedimento $medicoExecutaProcedimento
+    * @return type 
+    */
    private function validarProcedimentoExecutadomedico($medicoExecutaProcedimento){
        //se existir vai retornar falso
        return !$medicoExecutaProcedimento->exists("medico_cpf=:medico AND procedimento_codigo=:procedimento
@@ -442,7 +452,10 @@ class ProcedimentoController extends Controller
 
 
    private function existeProcedimento($metaProcedimento){
-       return true;//Procedimento::model()->exists("codigo=:codigo",array(':codigo'=>));
+       return MetaProcedimento::model()->exists(" procedimento_codigo=:codigo",
+                                                array(
+                                                    ':codigo'=>$metaProcedimento->procedimento_codigo
+                                                    ));
    }
 
 

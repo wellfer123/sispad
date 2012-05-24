@@ -50,8 +50,8 @@ class MetaProcedimento extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-                    'procedimento'=>array(self::BELONGS_TO,'Procedimento','procedimento_codigo'),
-                    'meta'=>array(self::BELONGS_TO,'Meta','meta_id')
+                    'procedimentos'=>array(self::BELONGS_TO,'Procedimento','procedimento_codigo'),
+                    'metas'=>array(self::BELONGS_TO,'Meta','meta_id')
 		);
 	}
 

@@ -23,6 +23,9 @@
 class Procedimento extends CActiveRecord
 {
     
+        const ORIGEM_SIAB="SIAB";
+        const ORIGEM_SIA="SIA";
+    
         /**
          * @var string nome do procedimento
          * @soap
