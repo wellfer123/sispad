@@ -1,6 +1,8 @@
 <?php
 $this->breadcrumbs=array(
-	'Equipe'=>array('index'),
+        'Equipes'=>array('equipe/index'),
+	'Equipe '.$model->equipe_codigo_area=>array("equipe/view","area"=>$model->equipe_codigo_area,
+                        "cnes"=>$model->equipe_unidade_cnes),
 	'Gerenciamento Membros',
 );
 

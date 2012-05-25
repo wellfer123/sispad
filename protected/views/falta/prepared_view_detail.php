@@ -1,7 +1,6 @@
 <?php
 $this->breadcrumbs=array(
-	'Faltas'=>array('index'),
-	'Faltas Detalhadas',
+	'Faltas'
 );
 
 

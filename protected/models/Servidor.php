@@ -129,7 +129,7 @@ class Servidor extends CActiveRecord
 		// Warning: Please modify the following code to remove attributes that
 		// should not be searched.
 
-                $dados=Yii::app()->db->createCommand('SELECT serv.nome, serv.cpf FROM servidor serv
+                $dados=Yii::app()->db->createCommand('SELECT serv.nome, serv.cpf as id FROM servidor serv
                                                        WHERE (SELECT r.servidor_cpf FROM total_relatorio r 
                                                        WHERE r.servidor_cpf=serv.cpf AND 
                                                        r.ano='.$ano.' AND r.mes='.$mes.') IS NULL')->queryAll();

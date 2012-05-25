@@ -1,7 +1,7 @@
 <?php
 $this->breadcrumbs=array(
-	'Faltas'=>array('index'),
-	'Prepared Create',
+	'Faltas'=>array('Falta/preparedViewDetail'),
+	'Enviar Faltas',
 );
 
 
