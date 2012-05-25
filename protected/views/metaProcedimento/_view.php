@@ -6,6 +6,7 @@ else
 $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'metaProcedimento-grid',
 	'dataProvider'=>$model->searchMetaId($metaId),
+        'summaryText'=>'Procedimentos adicionados a esta meta',
 	'columns'=>array(
                 'procedimentos.codigo',
 		'procedimentos.nome'
