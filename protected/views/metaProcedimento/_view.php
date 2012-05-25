@@ -7,8 +7,8 @@ $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'metaProcedimento-grid',
 	'dataProvider'=>$model->searchMetaId($metaId),
 	'columns'=>array(
-                'procedimento.codigo',
-		'procedimento.nome'
+                'procedimentos.codigo',
+		'procedimentos.nome'
 		
 	),
        

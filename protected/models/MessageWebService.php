@@ -12,8 +12,10 @@
  */
 class MessageWebService {
     //put your code here
-    public static $ERRO=0;
-    public static $SUCESSO=1;
+    const ERRO=0;
+    const SUCESSO=1;
+    
+    const WARNING=2;
     
     /**
      *@var string

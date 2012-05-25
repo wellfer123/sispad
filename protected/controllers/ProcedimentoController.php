@@ -111,12 +111,92 @@ class ProcedimentoController extends Controller
      * @return Procedimento[]
      * @soap
      */
+    public function getProcedimentosDeMedicoAEnviarSIAB($usuarioDesktop){
+       
+        return Procedimento::model()->findAll($this->getCDBcriteriaProcedimento(Procedimento::ORIGEM_SIAB));
+    }
+    
+    /**
+     * @param UsuarioDesktop usuario da aplicao desktop
+     * @return Procedimento[]
+     * @soap
+     */
+    public function getProcedimentosDeEnfermeiroAEnviarSIAB($usuarioDesktop){
+       
+        return Procedimento::model()->findAll($this->getCDBcriteriaProcedimento(Procedimento::ORIGEM_SIAB));
+    }
+    
+    /**
+     * @param UsuarioDesktop usuario da aplicao desktop
+     * @return Procedimento[]
+     * @soap
+     */
+    public function getProcedimentosDeOdontologoAEnviarSIAB($usuarioDesktop){
+       
+        return Procedimento::model()->findAll($this->getCDBcriteriaProcedimento(Procedimento::ORIGEM_SIAB));
+    }
+    
+    /**
+     * @param UsuarioDesktop usuario da aplicao desktop
+     * @return Procedimento[]
+     * @soap
+     */
+    public function getProcedimentosDeAgenteSaudeAEnviarSIAB($usuarioDesktop){
+       
+        return Procedimento::model()->findAll($this->getCDBcriteriaProcedimento(Procedimento::ORIGEM_SIAB));
+    }
+    
+    /**
+     * @param UsuarioDesktop usuario da aplicao desktop
+     * @return Procedimento[]
+     * @soap
+     */
     public function getProcedimentosAEnviarSIA($usuarioDesktop){
        
        
         return Procedimento::model()->findAll($this->getCDBcriteriaProcedimento(Procedimento::ORIGEM_SIA));;
     }
     
+    
+    /**
+     * @param UsuarioDesktop usuario da aplicao desktop
+     * @return Procedimento[]
+     * @soap
+     */
+    public function getProcedimentosDeMedicoAEnviarSIA($usuarioDesktop){
+       
+        return Procedimento::model()->findAll($this->getCDBcriteriaProcedimento(Procedimento::ORIGEM_SIAB));
+    }
+    
+    /**
+     * @param UsuarioDesktop usuario da aplicao desktop
+     * @return Procedimento[]
+     * @soap
+     */
+    public function getProcedimentosDeEnfermeiroAEnviarSIA($usuarioDesktop){
+       
+        return Procedimento::model()->findAll($this->getCDBcriteriaProcedimento(Procedimento::ORIGEM_SIAB));
+    }
+    
+    /**
+     * @param UsuarioDesktop usuario da aplicao desktop
+     * @return Procedimento[]
+     * @soap
+     */
+    public function getProcedimentosDeOdontologoAEnviarSIA($usuarioDesktop){
+       
+        return Procedimento::model()->findAll($this->getCDBcriteriaProcedimento(Procedimento::ORIGEM_SIAB));
+    }
+    
+    /**
+     * @param UsuarioDesktop usuario da aplicao desktop
+     * @return Procedimento[]
+     * @soap
+     */
+    public function getProcedimentosDeAgenteSaudeAEnviarSIA($usuarioDesktop){
+       
+        return Procedimento::model()->findAll($this->getCDBcriteriaProcedimento(Procedimento::ORIGEM_SIAB));
+    }
     /**
      * @param UsuarioDesktop usuario da aplicao desktop
      * @return Unidade[]
@@ -265,40 +345,45 @@ class ProcedimentoController extends Controller
                             $servidor_equipe->setEquipeUnidadeCNES($medExe->getMedico_unidade_cnes());
                             $servidor_equipe->setFuncao("Medico");
                             if($this->IsServidorEquipe($servidor_equipe)){
-                                //agora verifica se o registro já existe, senão existir, vai cadastrar
-                               
-                                if($this->validarProcedimentoExecutadomedico($medExe)){
-                                   //vai salvar o registro
-                                    try{
-                                        //vai salvar o objeto
-                                        if($medExe->save()){
-                                               $msg[]=$this->getMessageWebService("PROCEDIMENTO: $procedi->nome \nMÉDICO: $ser->nome \nSUCESSO: PROCEDIMENTO EXECUTADO PELO MÉDICO REGISTRADO COM SUCESSO", MessageWebService::$SUCESSO); 
-                                        }
-                                        //erro ao salvar
-                                        else{
+                                if($this->existeProcedimento($medExe->getProcedimento_codigo())){
+                                    //agora verifica se o registro já existe, senão existir, vai cadastrar
+                                    if($this->validarProcedimentoExecutadomedico($medExe)){
+                                        //vai salvar o registro
+                                        try{
+                                            //vai salvar o objeto
+                                            if($medExe->save()){
+                                                $msg[]=$this->getMessageWebService("PROCEDIMENTO: $procedi->nome \nMÉDICO: $ser->nome \nSUCESSO: PROCEDIMENTO EXECUTADO PELO MÉDICO REGISTRADO COM SUCESSO", MessageWebService::SUCESSO); 
+                                            }
+                                            //erro ao salvar
+                                            else{
+                                                //adiciona o erro ao vetor
+                                                $msg[]=$this->getMessageWebService("PROCEDIMENTO: $procedi->nome \nMÉDICO: $ser->nome \nERRO: NÃO FOI POSSÍVEL REGISTRAR O PROCEDIMENTO EXECUTADO PELO MÉDICO", MessageWebService::ERRO);
+                                            }
+                                        }catch(Exception $ex){
+                                            $tmp=$ex->getMessage();
                                             //adiciona o erro ao vetor
-                                            $msg[]=$this->getMessageWebService("PROCEDIMENTO: $procedi->nome \nMÉDICO: $ser->nome \nERRO: NÃO FOI POSSÍVEL REGISTRAR O PROCEDIMENTO EXECUTADO PELO MÉDICO", MessageWebService::$ERRO);
-                                        }
-                                    }catch(Exception $ex){
-                                        $tmp=$ex->getMessage();
-                                        //adiciona o erro ao vetor
-                                        $msg[]=$this->getMessageWebService("PROCEDIMENTO: $procedi->nome \nMÉDICO: $ser->nome \nERRO INESPERADO AO TENTAR SALVAR O PROCEDIMENTO EXECUTADO PELO MÉDICO! $tmp", MessageWebService::$ERRO); 
-                                    } 
-                                    //terminou o try
+                                            $msg[]=$this->getMessageWebService("PROCEDIMENTO: $procedi->nome \nMÉDICO: $ser->nome \nERRO INESPERADO AO TENTAR SALVAR O PROCEDIMENTO EXECUTADO PELO MÉDICO! $tmp", MessageWebService::ERRO); 
+                                        } 
+                                        //terminou o try
+                                    }
+                                    //já foi enviado
+                                    else{
+                                        $msg[]=$this->getMessageWebService("PROCEDIMENTO: $procedi->nome \nMÉDICO: $ser->nome \nERRO: JÁ FOI ENVIADO PARA A COMPETÊNCIA $medExe->competencia", MessageWebService::ERRO); 
+                                    }
                                 }
-                                //já foi enviado
+                                //o rpocedimento não faz parte de nenhuma meta
                                 else{
-                                   $msg[]=$this->getMessageWebService("PROCEDIMENTO: $procedi->nome \nMÉDICO: $ser->nome \nERRO: JÁ FOI ENVIADO PARA A COMPETÊNCIA $medExe->competencia", MessageWebService::$ERRO); 
+                                   $msg[]=$this->getMessageWebService("PROCEDIMENTO: $procedi->nome\n WARNING: NÃO FAZ PARTE DE NHUMA META. ENTÃO FOI DESCARTADO!", MessageWebService::WARNING); 
                                 }
                             }
                             //médico não faz parte da equipe
                             else{
-                               $msg[]=$this->getMessageWebService("MÉDICO: $ser->nome \nERRO: NÃO ESTÁ CADASTRADO EM NENHUMA EQUIPE", MessageWebService::$ERRO); 
+                               $msg[]=$this->getMessageWebService("MÉDICO: $ser->nome \nERRO: NÃO ESTÁ CADASTRADO EM NENHUMA EQUIPE", MessageWebService::ERRO); 
                             }
                         }
                         //competência inválida
                         else{
-                            $msg[]=$this->getMessageWebService("ERRO: COMPETÊNCIA INVÁLIDA, $medExe->competencia", MessageWebService::$ERRO);
+                            $msg[]=$this->getMessageWebService("ERRO: COMPETÊNCIA INVÁLIDA, $medExe->competencia", MessageWebService::ERRO);
                         }
                         
                     }
@@ -306,17 +391,17 @@ class ProcedimentoController extends Controller
                 //não foi um array de procedimentos executados por medicos
                 else{
                     //adiciona o erro ao vetor
-                    $msg[]=$this->getMessageWebService("ERRO: DEVE-SE ENVIAR UMA LISTA DE PROCEDIMENTOS EXECUTADOS POR UM MÉDICO!", MessageWebService::$ERRO);
+                    $msg[]=$this->getMessageWebService("ERRO: DEVE-SE ENVIAR UMA LISTA DE PROCEDIMENTOS EXECUTADOS POR UM MÉDICO!", MessageWebService::ERRO);
                     
                 }
             }
             //não está logado
             else{
-                $msg[]=$this->getMessageWebService("ERRO: DEVE-SE FAZER LOGIN NO WEB SERVICE!", MessageWebService::$ERRO);
+                $msg[]=$this->getMessageWebService("ERRO: DEVE-SE FAZER LOGIN NO WEB SERVICE!", MessageWebService::ERRO);
             }
         }catch(Exception $ex){
             $tmp=$ex->getMessage();
-            $msg[]=$this->getMessageWebService("ERRO INESPERADO A CHAMADA DO MÉTODO! $tmp",MessageWebService::$ERRO);
+            $msg[]=$this->getMessageWebService("ERRO INESPERADO A CHAMADA DO MÉTODO! $tmp",MessageWebService::ERRO);
         }
         return $msg;
     }
@@ -451,10 +536,10 @@ class ProcedimentoController extends Controller
    }
 
 
-   private function existeProcedimento($metaProcedimento){
+   private function existeProcedimento($procedimento_codigo){
        return MetaProcedimento::model()->exists(" procedimento_codigo=:codigo",
                                                 array(
-                                                    ':codigo'=>$metaProcedimento->procedimento_codigo
+                                                    ':codigo'=>$procedimento_codigo
                                                     ));
    }
 
@@ -479,161 +564,6 @@ class ProcedimentoController extends Controller
        return Procedimento::model()->findByPk($codigo_procedi);
    }
 
-
-
-   
-    
-//
-//	/**
-//	 * @return array action filters
-//	 */
-//	public function filters()
-//	{
-//		return array(
-//			'accessControl', // perform access control for CRUD operations
-//		);
-//	}
-//
-//	/**
-//	 * Specifies the access control rules.
-//	 * This method is used by the 'accessControl' filter.
-//	 * @return array access control rules
-//	 */
-//	public function accessRules()
-//	{
-//		return array(
-//		);
-//	}
-//
-//	/**
-//	 * Displays a particular model.
-//	 */
-//	public function actionView()
-//	{
-//		$this->render('view',array(
-//			'model'=>$this->loadModel(),
-//		));
-//	}
-//
-//	/**
-//	 * Creates a new model.
-//	 * If creation is successful, the browser will be redirected to the 'view' page.
-//	 */
-//	public function actionCreate()
-//	{
-//		$model=new Procedimento;
-//
-//		// Uncomment the following line if AJAX validation is needed
-//		// $this->performAjaxValidation($model);
-//
-//		if(isset($_POST['Procedimento']))
-//		{
-//			$model->attributes=$_POST['Procedimento'];
-//			if($model->save())
-//				$this->redirect(array('view','id'=>$model->codigo));
-//		}
-//
-//		$this->render('create',array(
-//			'model'=>$model,
-//		));
-//	}
-//
-//	/**
-//	 * Updates a particular model.
-//	 * If update is successful, the browser will be redirected to the 'view' page.
-//	 */
-//	public function actionUpdate()
-//	{
-//		$model=$this->loadModel();
-//
-//		// Uncomment the following line if AJAX validation is needed
-//		// $this->performAjaxValidation($model);
-//
-//		if(isset($_POST['Procedimento']))
-//		{
-//			$model->attributes=$_POST['Procedimento'];
-//			if($model->save())
-//				$this->redirect(array('view','id'=>$model->codigo));
-//		}
-//
-//		$this->render('update',array(
-//			'model'=>$model,
-//		));
-//	}
-//
-//	/**
-//	 * Deletes a particular model.
-//	 * If deletion is successful, the browser will be redirected to the 'index' page.
-//	 */
-//	public function actionDelete()
-//	{
-//		if(Yii::app()->request->isPostRequest)
-//		{
-//			// we only allow deletion via POST request
-//			$this->loadModel()->delete();
-//
-//			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-//			if(!isset($_GET['ajax']))
-//				$this->redirect(array('index'));
-//		}
-//		else
-//			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
-//	}
-//
-//	/**
-//	 * Lists all models.
-//	 */
-//	public function actionIndex()
-//	{
-//		$dataProvider=new CActiveDataProvider('Procedimento');
-//		$this->render('index',array(
-//			'dataProvider'=>$dataProvider,
-//		));
-//	}
-//
-//	/**
-//	 * Manages all models.
-//	 */
-//	public function actionAdmin()
-//	{
-//		$model=new Procedimento('search');
-//		$model->unsetAttributes();  // clear any default values
-//		if(isset($_GET['Procedimento']))
-//			$model->attributes=$_GET['Procedimento'];
-//
-//		$this->render('admin',array(
-//			'model'=>$model,
-//		));
-//	}
-//
-//	/**
-//	 * Returns the data model based on the primary key given in the GET variable.
-//	 * If the data model is not found, an HTTP exception will be raised.
-//	 */
-//	public function loadModel()
-//	{
-//		if($this->_model===null)
-//		{
-//			if(isset($_GET['id']))
-//				$this->_model=Procedimento::model()->findbyPk($_GET['id']);
-//			if($this->_model===null)
-//				throw new CHttpException(404,'The requested page does not exist.');
-//		}
-//		return $this->_model;
-//	}
-//
-//	/**
-//	 * Performs the AJAX validation.
-//	 * @param CModel the model to be validated
-//	 */
-//	protected function performAjaxValidation($model)
-//	{
-//		if(isset($_POST['ajax']) && $_POST['ajax']==='procedimento-form')
-//		{
-//			echo CActiveForm::validate($model);
-//			Yii::app()->end();
-//		}
-//	}
 
      public function actionFindProcedimentos() {
 

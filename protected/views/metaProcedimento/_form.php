@@ -25,7 +25,7 @@
                                     // display size of the FK field.  only matters if not hidden.  defaults to 10
                                     'FKFieldSize'=>10,
                                     'htmlOptions'=>array('style'=>'text-transform:uppercase'),
-                                    'relName'=>'procedimento', // the relation name defined above
+                                    'relName'=>'procedimentos', // the relation name defined above
                                     'displayAttr'=>'nome',  // attribute or pseudo-attribute to display
                                     // length of the AutoComplete/display field, defaults to 50
                                     'autoCompleteLength'=>60,
