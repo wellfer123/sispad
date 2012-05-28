@@ -5,7 +5,6 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List Equipe', 'url'=>array('index')),
 	array('label'=>'Create Equipe', 'url'=>array('create')),
 );
 
@@ -48,7 +47,7 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		'unidade_cnes',
 		array(
 			'class'=>'CButtonColumn',
-                        'template'=>'{view}{update}{delete}',
+                        'template'=>'{view}{update}',
                         'buttons'=>array(
                             'view'=>array(
                                 'label'=>'visualizar',
@@ -60,11 +59,11 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
                                 'url'=>'Yii::app()->createUrl("/equipe/update",
                                         array("area"=>$data->codigo_area,"cnes"=>$data->unidade_cnes))',
                             ),
-                            'delete'=>array(
-                                'label'=>'deletar equipe',
-                                'url'=>'Yii::app()->createUrl("/equipe/delete",
-                                        array("area"=>$data->codigo_area,"cnes"=>$data->unidade_cnes))',
-                            ),
+//                            'delete'=>array(
+//                                'label'=>'deletar equipe',
+//                                'url'=>'Yii::app()->createUrl("/equipe/delete",
+//                                        array("area"=>$data->codigo_area,"cnes"=>$data->unidade_cnes))',
+//                            ),
                               
                         ),
 		),

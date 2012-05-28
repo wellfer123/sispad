@@ -91,7 +91,7 @@ class DadosTrabalhoController extends Controller
 		if($this->_model===null)
 		{
 			if(isset($_GET['id'])){
-				$this->_model=DadosTrabalho::model()->with('servidor','profissao')->findbyPk($_GET['id']);
+				$this->_model=DadosTrabalho::model()->with('profissao','servidor')->findbyPk($_GET['id']);
                                 if($this->_model===null){
                                     $this->redirect(array('create','id'=>$_GET['id'],'serv'=>$_GET['serv'])); 
                                 }

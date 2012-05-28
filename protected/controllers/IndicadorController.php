@@ -77,11 +77,11 @@ class IndicadorController extends SISPADBaseController{
 
         public function actionIndex() {
             $model = new Indicador();
-            $dadosTrabalho = DadosTrabalho::model()->findByPk(Yii::app()->user->cpfservidor);
-            $profissaoCodigo = $dadosTrabalho->profissao_codigo;
+//            $dadosTrabalho = DadosTrabalho::model()->findByPk(Yii::app()->user->cpfservidor);
+//            $profissaoCodigo = $dadosTrabalho->profissao_codigo;
             $this->render('view',array(
 			'model'=>$model,
-                        'profissaoCodigo'=>$profissaoCodigo,
+                       // 'profissaoCodigo'=>$profissaoCodigo,
 		));
         }
 

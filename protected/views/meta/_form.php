@@ -34,7 +34,8 @@
         </div>
         <div class="row">
 		<?php echo $form->labelEx($model,'tipo'); ?>
-		<?php echo $form->textField($model,'tipo'); ?>
+                <?php echo $form->dropDownList($model,'tipo',array("IT"=>'Itens',"PR"=>'Procedimento'));?>
+		
                 <?php echo $form->error($model,'tipo'); ?>
         </div>
          <div class="row">

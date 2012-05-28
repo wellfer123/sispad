@@ -7,6 +7,9 @@ $this->breadcrumbs=array(
 
 ?>
 <?php
+
+ $dadosTrabalho = DadosTrabalho::model()->findByPk(Yii::app()->user->cpfservidor);
+ $profissaoCodigo = $dadosTrabalho->profissao_codigo;
 $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'indicador-grid',
 	'dataProvider'=>$model->searchPorProfissao($profissaoCodigo),
