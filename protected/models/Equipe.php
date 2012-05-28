@@ -8,10 +8,21 @@
  * @property integer $codigo_area
  * @property integer $tipo
  * @property string $unidade_cnes
- * @property integer $codigo_microarea
  */
 class Equipe extends CActiveRecord
 {
+        //chave=>valor
+         public static $tipos_equipe=array('01'=>'EQUIPE DE SF (SEM BUCAL)','02'=>'ESFSB MODALIDADE I (ESF COM SB MODALIDADE 1)',
+                                 '03'=>'ESFSB MODALIDADE II (ESF COM SB MODALIDADE 2)',
+                                 '04'=>'EQUIPE DE SF SEM O MÉDICO (INCOMPLETA)',
+                                 '05'=>'EQUIPE PENITENCIÁRIA', '06'=>'EQUIPE NASF I', '07'=>'EQUIPE NASF II',
+                                 '08'=>'EQUIPE MULTIDISCIPLINAR S. INDIGENA',
+                                 '09'=>'EQUIPE MULTIDISCIPLINAR S. INDIGENA NA AMAZÔNIA LEGAL',
+                                 '10'=>'EACS COM SB MODALIDADE 1',
+                                 '11'=>'EACS COM SB MODALIDADE 2');
+        //chave=>valor
+        public static  $tipo_segmentos=array('10'=>'10','21'=>'21','22'=>'22','31'=>'31','32'=>'32',
+                                    '33'=>'33','40'=>'40','51'=>'51','52'=>'52','53'=>'53');
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return Equipe the static model class
@@ -38,8 +49,8 @@ class Equipe extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('codigo_area, tipo, unidade_cnes, codigo_microarea', 'required'),
-			array('codigo_segmento, codigo_area, tipo, codigo_microarea', 'numerical', 'integerOnly'=>true),
+			array('codigo_area, tipo, unidade_cnes', 'required'),
+			array('codigo_segmento, codigo_area, tipo', 'numerical', 'integerOnly'=>true),
 			array('unidade_cnes', 'length', 'max'=>10),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
@@ -70,7 +81,6 @@ class Equipe extends CActiveRecord
 			'codigo_area' => 'Codigo Area',
 			'tipo' => 'Tipo',
 			'unidade_cnes' => 'Unidade Cnes',
-			'codigo_microarea' => 'Codigo Microarea',
 		);
 	}
 
@@ -97,5 +107,14 @@ class Equipe extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+        
+        public static function getListCodigoArea(){
+            $tmp=array();
+            //valores
+            for($i=0;$i<100;$i++){
+                $tmp[$i]=$i;
+            }
+            return $tmp;
+        }
 
 }

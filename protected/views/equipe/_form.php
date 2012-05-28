@@ -11,19 +11,19 @@
 
         <div class="row">
 		<?php echo $form->labelEx($model,'codigo_segmento'); ?>
-		<?php echo $form->textField($model,'codigo_segmento'); ?>
+		<?php echo CHtml::activeDropDownList($model, 'codigo_segmento', Equipe::$tipo_segmentos, array('maxlength'=>2)) ?>
 		<?php echo $form->error($model,'codigo_segmento'); ?>
         </div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'tipo'); ?>
-		<?php echo $form->textField($model,'tipo'); ?>
+		<?php echo CHtml::activeDropDownList($model, 'tipo', Equipe::$tipos_equipe, array('maxlength'=>2)) ?>
 		<?php echo $form->error($model,'tipo'); ?>
 	</div>
 
         <div class="row">
 		<?php echo $form->labelEx($model,'codigo_area'); ?>
-		<?php echo $form->textField($model,'codigo_area'); ?>
+		<?php echo CHtml::activeDropDownList($model, 'codigo_area', Equipe::getListCodigoArea(), array('maxlength'=>2)) ?>
 		<?php echo $form->error($model,'codigo_area'); ?>
 	</div>
 
@@ -48,7 +48,7 @@
                                     'options'=>array(
                                         // number of characters that must be typed before
                                             // autoCompleter returns a value, defaults to 2
-                                        'minLength'=>6,
+                                        'minLength'=>3,
                                         ),
                                 ));?>
                         <?php echo $form->error($model,'unidade_cnes'); ?>

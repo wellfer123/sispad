@@ -91,7 +91,9 @@ class ProcedimentoController extends Controller
      * @soap
      */
     public function getMedicos($codigoUnidade,$usuarioDesktop){
-       
+        if($codigoUnidade==null){
+            return Medico::model()->findAll();
+        }
        
         return Medico::model()->findAll('unidade_cnes=:unidade', array(':unidade'=>$codigoUnidade));
     }
