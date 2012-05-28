@@ -70,10 +70,11 @@ class ServidorEquipe extends CActiveRecord
 
         public function  verificaServidorExistente($attribute,$params){
              $servidor = ServidorEquipe::model()->find('servidor_cpf= :servidor_cpf',array(':servidor_cpf'=>$this->servidor_cpf));
-             if(($servidor)==null){
+             $servidor_count = ServidorEquipe::model()->count('servidor_cpf= :servidor_cpf',array(':servidor_cpf'=>$this->servidor_cpf));
+             if(($servidor)==null || ($servidor->funcao=='Medico' && $servidor_count<=1) ){
                  return true;
              }else if($servidor->ativo==1){
-                  $this->addError('servidor_cpf','Este servidor já existe');
+                  $this->addError('servidor_cpf','Este servidor já existe nessa ou em outra equipe');
 
              }  else {
                    $this->addError('servidor_cpf','Este servidor já existe mas está inativo, vá no menu "Gerenciar Membros" e o ative');
@@ -84,7 +85,9 @@ class ServidorEquipe extends CActiveRecord
 
         public function  verificaFuncaoExistente($attribute,$params){
 
-             $quantFuncao = count(ServidorEquipe::model()->findAll('funcao= :funcao AND ativo=1',array(':funcao'=>$this->funcao)));
+             $quantFuncao = count(ServidorEquipe::model()->findAll('funcao= :funcao AND ativo=1 AND equipe_codigo_area= :codigo_area
+                  AND equipe_unidade_cnes= :unidade_cnes',array(':funcao'=>$this->funcao,
+                      ':codigo_area'=>$this->equipe_codigo_area,':unidade_cnes'=>$this->equipe_unidade_cnes)));
 
 
              if($this->funcao=='Odontologo' || $this->funcao=='Medico' || $this->funcao=='Enfermeiro'){

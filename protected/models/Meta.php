@@ -15,6 +15,9 @@
  */
 class Meta extends CActiveRecord
 {
+    
+        const PROCEDIMENTO = "PR";
+        const ITENS = "IT";
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return Meta the static model class

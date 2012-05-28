@@ -31,6 +31,10 @@ class MetaProcedimentoController extends SISPADBaseController
 		$this->render('index');
 	}
 
+        public function actionView() {
+            $model = new MetaProcedimento();
+            $this->render('view',array('model'=>$model));
+        }
 
          public function actionAdd()
 	{

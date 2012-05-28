@@ -25,7 +25,7 @@ $this->menu=array(
 		'salario',
                 array(
                     'label'=>'Profissão',
-                    'value'=>$model->profissao->nome,
+                    'value'=>Profissao::model()->findByPk($model->profissao_codigo)->nome,
                 ),
                 array(
                     'label'=>'Vínculo',
