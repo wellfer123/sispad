@@ -115,7 +115,7 @@ class ProcedimentoController extends Controller
      */
     public function getProcedimentosDeMedicoAEnviarSIAB($usuarioDesktop){
        
-        return Procedimento::model()->findAll($this->getCDBcriteriaProcedimento(Procedimento::ORIGEM_SIAB));
+        return Procedimento::model()->findAll($this->getCDBcriteriaProcedimentoPorprofissional('690', Procedimento::ORIGEM_SIAB));
     }
     
     /**
@@ -125,7 +125,7 @@ class ProcedimentoController extends Controller
      */
     public function getProcedimentosDeEnfermeiroAEnviarSIAB($usuarioDesktop){
        
-        return Procedimento::model()->findAll($this->getCDBcriteriaProcedimento(Procedimento::ORIGEM_SIAB));
+        return Procedimento::model()->findAll($this->getCDBcriteriaProcedimentoPorprofissional('532', Procedimento::ORIGEM_SIAB));
     }
     
     /**
@@ -135,7 +135,7 @@ class ProcedimentoController extends Controller
      */
     public function getProcedimentosDeOdontologoAEnviarSIAB($usuarioDesktop){
        
-        return Procedimento::model()->findAll($this->getCDBcriteriaProcedimento(Procedimento::ORIGEM_SIAB));
+        return Procedimento::model()->findAll($this->getCDBcriteriaProcedimentoPorprofissional('717', Procedimento::ORIGEM_SIAB));
     }
     
     /**
@@ -145,7 +145,7 @@ class ProcedimentoController extends Controller
      */
     public function getProcedimentosDeAgenteSaudeAEnviarSIAB($usuarioDesktop){
        
-        return Procedimento::model()->findAll($this->getCDBcriteriaProcedimento(Procedimento::ORIGEM_SIAB));
+        return Procedimento::model()->findAll($this->getCDBcriteriaProcedimentoPorprofissional('106', Procedimento::ORIGEM_SIAB));
     }
     
     /**
@@ -167,7 +167,7 @@ class ProcedimentoController extends Controller
      */
     public function getProcedimentosDeMedicoAEnviarSIA($usuarioDesktop){
        
-        return Procedimento::model()->findAll($this->getCDBcriteriaProcedimento(Procedimento::ORIGEM_SIAB));
+        return Procedimento::model()->findAll($this->getCDBcriteriaProcedimentoPorprofissional('690', Procedimento::ORIGEM_SIA));
     }
     
     /**
@@ -177,7 +177,7 @@ class ProcedimentoController extends Controller
      */
     public function getProcedimentosDeEnfermeiroAEnviarSIA($usuarioDesktop){
        
-        return Procedimento::model()->findAll($this->getCDBcriteriaProcedimento(Procedimento::ORIGEM_SIAB));
+        return Procedimento::model()->findAll($this->getCDBcriteriaProcedimentoPorprofissional('532', Procedimento::ORIGEM_SIA));
     }
     
     /**
@@ -187,7 +187,7 @@ class ProcedimentoController extends Controller
      */
     public function getProcedimentosDeOdontologoAEnviarSIA($usuarioDesktop){
        
-        return Procedimento::model()->findAll($this->getCDBcriteriaProcedimento(Procedimento::ORIGEM_SIAB));
+        return Procedimento::model()->findAll($this->getCDBcriteriaProcedimentoPorprofissional('717', Procedimento::ORIGEM_SIA));
     }
     
     /**
@@ -197,7 +197,7 @@ class ProcedimentoController extends Controller
      */
     public function getProcedimentosDeAgenteSaudeAEnviarSIA($usuarioDesktop){
        
-        return Procedimento::model()->findAll($this->getCDBcriteriaProcedimento(Procedimento::ORIGEM_SIAB));
+        return Procedimento::model()->findAll($this->getCDBcriteriaProcedimentoPorprofissional('106', Procedimento::ORIGEM_SIA));
     }
     /**
      * @param UsuarioDesktop usuario da aplicao desktop
@@ -463,6 +463,20 @@ class ProcedimentoController extends Controller
        return $criteria;
    }
    
+   //devolve uma CDBcriteria para consultar os procedimentos que fazem da parte de alguma meta  e
+   private function getCDBcriteriaProcedimentoPorprofissional($codigoFuncao, $origemProcedimento){
+        $criteria= new CDbCriteria();
+        $criteria->select=" pro.codigo, pro.nome";
+        $criteria->distinct=true;
+        $criteria->alias="pro";
+        $join="INNER JOIN meta_procedimento mt ON pro.codigo=mt.procedimento_codigo";
+        $join=$join." INNER JOIN meta m ON m.id=mt.meta_id INNER JOIN indicador ind ON ind.id=m.indicador_id";
+        $criteria->join=$join;
+        $criteria->condition="pro.origem=:origem AND ind.status=:status AND ind.profissao_codigo=:codigoProfissao ";
+        $criteria->params=array(':origem'=>$origemProcedimento, ':status'=>Indicador::ATIVO, ':codigoProfissao'=>$codigoFuncao);
+       return $criteria;
+   }
+   
    /**
     * @param string $message
     * @param string $tipo
@@ -547,6 +561,7 @@ class ProcedimentoController extends Controller
 
 
    private function usuarioEstaLogado($usuarioDesktop){
+       
        return true;
    }
    

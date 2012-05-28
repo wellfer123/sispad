@@ -77,6 +77,7 @@ class UsuarioDesktop extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+                    'servidor'=>array(self::BELONGS_TO,'Servidor','servidor_cpf'),
 		);
 	}
 
@@ -113,4 +114,13 @@ class UsuarioDesktop extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+        
+        public function gerarToken(){
+            $this->token=sha1($this->serial_aplicacao.$this->servidor_cpf.$this->usuario_sistema);
+        }
+        protected function beforeSave() {
+            $this->gerarToken();
+            return parent::beforeSave();
+        }
+        
 }
