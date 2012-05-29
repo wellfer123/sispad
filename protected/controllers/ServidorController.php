@@ -172,6 +172,36 @@ class ServidorController extends SISPADBaseController
        }
    }
    
+    public function actionFindServidoresUsuarios() {
+            
+             $this->_RBAC->checkAccess('registered',true);
+            $q = $_GET['term'];
+            if(isset($q)) {
+                $criteria= new CDbCriteria();
+                $criteria->distinct=true;
+                $criteria->alias="ser";
+                $criteria->join=" INNER JOIN user us ON us.servidor_cpf=ser.cpf ";
+                $criteria->condition='nome like :nome';
+                $criteria->params=array(':nome'=> strtoupper(trim($q)).'%');
+                 $servidores = Servidor::model()->findAll($criteria);
+                //$servidores = Servidor::model()->findAllByAttributes(array('nome','cpf'),
+                                             // 'where nome like :nome',array(':nome'=> strtoupper(trim($q)).'%'));
+ 
+                if (!empty($servidores)) {
+                    $out = array();
+                    foreach ($servidores as $s) {
+                            $out[] = array(
+                            // expression to give the string for the autoComplete drop-down
+                            'label' => $s->nome,  
+                            'value' => $s->nome,
+                            'id' => $s->cpf, // return value from autocomplete
+                     );
+                    }
+                echo CJSON::encode($out);
+                Yii::app()->end();
+           }
+       }
+   }
    /*public function actiontestepost(){
         sleep(2);
         if(isset($_POST)){
