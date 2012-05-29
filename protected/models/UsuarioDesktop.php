@@ -62,6 +62,7 @@ class UsuarioDesktop extends CActiveRecord
 		return array(
 			array('servidor_cpf, token, serial_aplicacao', 'required'),
 			array('servidor_cpf', 'length', 'max'=>11),
+                        array('servidor_cpf','servidorExisteAplicacao', 'on'=>'create'),
 			array('token, serial_aplicacao', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
@@ -87,9 +88,9 @@ class UsuarioDesktop extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'servidor_cpf' => 'Servidor Cpf',
+			'servidor_cpf' => 'CPF do Usuário (servidor)',
 			'token' => 'Token',
-			'serial_aplicacao' => 'Serial Aplicacao',
+			'serial_aplicacao' => 'Serial da Aplicação',
 		);
 	}
 
@@ -110,17 +111,61 @@ class UsuarioDesktop extends CActiveRecord
 
 		$criteria->compare('serial_aplicacao',$this->serial_aplicacao,true);
 
-		return new CActiveDataProvider('Usuario_desktop', array(
+		return new CActiveDataProvider('UsuarioDesktop', array(
 			'criteria'=>$criteria,
 		));
 	}
         
+        public function servidorExisteAplicacao($attribute, $params) {
+         
+         if($servid= UsuarioDesktop::model()->exists('servidor_cpf=:cpf AND serial_aplicacao=:serial', array(':cpf'=>$this->servidor_cpf,':serial'=>$this->serial_aplicacao))){
+             $this->addError('servidor_cpf',"Servidor Já está cadastrado para usar a aplicação!");
+             return false;
+             }
+         return true;
+        }
+        
         public function gerarToken(){
             $this->token=sha1($this->serial_aplicacao.$this->servidor_cpf.$this->usuario_sistema);
         }
+        
+        
         protected function beforeSave() {
             $this->gerarToken();
             return parent::beforeSave();
         }
         
+        public function getServidor_cpf() {
+            return $this->servidor_cpf;
+        }
+
+        public function getToken() {
+            return $this->token;
+        }
+
+        public function getUsuario_sistema() {
+            return $this->usuario_sistema;
+        }
+
+        public function getSerial_aplicacao() {
+            return $this->serial_aplicacao;
+        }
+
+        public function setServidor_cpf($servidor_cpf) {
+            $this->servidor_cpf = $servidor_cpf;
+        }
+
+        public function setToken($token) {
+            $this->token = $token;
+        }
+
+        public function setUsuario_sistema($usuario_sistema) {
+            $this->usuario_sistema = $usuario_sistema;
+        }
+
+        public function setSerial_aplicacao($serial_aplicacao) {
+            $this->serial_aplicacao = $serial_aplicacao;
+        }
+
+
 }
