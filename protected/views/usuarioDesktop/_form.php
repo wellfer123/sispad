@@ -1,22 +1,25 @@
 <div class="form">
 
-<?php $form=$this->beginWidget('CActiveForm', array(
+<?php $form=$this->beginWidget('SISPADActiveForm', array(
 	'id'=>'usuario-desktop-form',
         'enableClientValidation'=>true,
 	'enableAjaxValidation'=>false,
 )); ?>
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
+	<p class="note">Todos os campos com <span class="required">*</span> são de preenchimento obrigatório.</p>
 
 	<?php echo $form->errorSummary($model); ?>
 
-	<div class="row">
+<table>
+    <tbody>
+           <tr>
+             <td>
 		<?php echo $form->labelEx($model,'servidor_cpf'); ?>
                 <?php $this->widget('EJuiAutoCompleteFkField', array(
                                     'model'=>$model,
                                     'attribute'=>'servidor_cpf', //the FK field (from CJuiInputWidget)
                                      // controller method to return the autoComplete data (from CJuiAutoComplete)
-                                    'sourceUrl'=>Yii::app()->createUrl('Servidor/findServidores'),
+                                    'sourceUrl'=>Yii::app()->createUrl('Servidor/findServidoresUsuarios'),
                                     // defaults to false.  set 'true' to display the FK field with 'readonly' attribute.
                                     'showFKField'=>true,
                                     // display size of the FK field.  only matters if not hidden.  defaults to 10
@@ -25,6 +28,7 @@
                                     'displayAttr'=>'nome',  // attribute or pseudo-attribute to display
                                     // length of the AutoComplete/display field, defaults to 50
                                     'autoCompleteLength'=>60,
+                                    'htmlOptions'=>array('disabled'=>!$model->isNewRecord),
                                      // any attributes of CJuiAutoComplete and jQuery JUI AutoComplete widget may
                                      // also be defined.  read the code and docs for all options
                                     'options'=>array(
@@ -34,18 +38,27 @@
                                         ),
                                 ));?>
 		<?php echo $form->error($model,'servidor_cpf'); ?>
-	</div>
+             </td>
+           </tr>
 
-	<div class="row">
+	<tr>
+            <td>
 		<?php echo $form->labelEx($model,'serial_aplicacao'); ?>
 		<?php echo $form->textField($model,'serial_aplicacao',array('size'=>60,'maxlength'=>255)); ?>
 		<?php echo $form->error($model,'serial_aplicacao'); ?>
-	</div>
-
-	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Cadastrar' : 'Atualizar'); ?>
-	</div>
-
+            </td>
+        </tr>
+        
+    <tr>
+       <td>
+                <div class="row buttons">
+                    <?php echo CHtml::submitButton($model->isNewRecord ? 'Cadastrar' : 'Atualizar'); ?>
+                </div>
+       </td>
+     </tr>
+</tbody>
+</table>
+        
 <?php $this->endWidget(); ?>
 
 </div><!-- form -->

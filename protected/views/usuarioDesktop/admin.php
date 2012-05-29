@@ -1,12 +1,11 @@
 <?php
 $this->breadcrumbs=array(
-	'Usuario Desktops'=>array('index'),
-	'Manage',
+	'Usuários Desktop',
+	'Gerenciamento',
 );
 
 $this->menu=array(
-	array('label'=>'List usuario_desktop', 'url'=>array('index')),
-	array('label'=>'Create usuario_desktop', 'url'=>array('create')),
+	array('label'=>'Cadastrar usuário desktop', 'url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -23,14 +22,15 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Manage Usuario Desktops</h1>
+<h1>Gerenciamento de Usuários Desktop</h1>
 
 <p>
-You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
-or <b>=</b>) at the beginning of each of your search values to specify how the comparison should be done.
+Você pode opcionalmente entrar com um operador de comparação(<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
+ou <b>=</b>) iniciar cada uma de suas pesquisa com valores específicos de como a comparação deve ser feita.
 </p>
 
-<?php echo CHtml::link('Advanced Search','#',array('class'=>'search-button')); ?>
+
+<?php echo CHtml::link('Pesquisa avançada','#',array('class'=>'search-button')); ?>
 <div class="search-form" style="display:none">
 <?php $this->renderPartial('_search',array(
 	'model'=>$model,
@@ -40,13 +40,27 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'usuario-desktop-grid',
 	'dataProvider'=>$model->search(),
-	'filter'=>$model,
 	'columns'=>array(
-		'servidor_cpf',
+                array(
+                    'name'=>'Nome do usuario',
+                    'value'=>'$data->servidor->nome',
+                ),
 		'token',
 		'serial_aplicacao',
 		array(
 			'class'=>'CButtonColumn',
+                        'buttons'=>array(
+                                    'delete'=>array(
+                                            'visible'=>'false',
+                                    ),
+                                    'update'=>array(
+                                            'url'=> 'Yii::app()->createUrl("/usuarioDesktop/update",array("serial"=>$data->serial_aplicacao,"id"=>$data->servidor_cpf))',
+                                    ),
+                                    'view'=>array(
+                                            'url'=> 'Yii::app()->createUrl("/usuarioDesktop/view",array("serial"=>$data->serial_aplicacao,"id"=>$data->servidor_cpf))',
+                                    )
+                                    
+                        )
 		),
 	),
 )); ?>

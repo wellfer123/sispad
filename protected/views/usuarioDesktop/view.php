@@ -1,19 +1,19 @@
 <?php
 $this->breadcrumbs=array(
-	'Usuario Desktops'=>array('index'),
+	'Usuarios Desktop'=>array('index'),
 	$model->servidor_cpf,
 );
 
 $this->menu=array(
-	array('label'=>'List usuario_desktop', 'url'=>array('index')),
-	array('label'=>'Create usuario_desktop', 'url'=>array('create')),
-	array('label'=>'Update usuario_desktop', 'url'=>array('update', 'id'=>$model->servidor_cpf)),
-	array('label'=>'Delete usuario_desktop', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->servidor_cpf),'confirm'=>'Are you sure you want to delete this item?')),
-	array('label'=>'Manage usuario_desktop', 'url'=>array('admin')),
+	array('label'=>'Cadastrar usuário desktop', 'url'=>array('create')),
+	array('label'=>'Atualizar usuário desktop', 'url'=>array('update','serial'=>$model->serial_aplicacao, 'id'=>$model->servidor_cpf)),
+	array('label'=>'Gerenciamento dos usuários desktop', 'url'=>array('admin')),
 );
 ?>
 
-<h1>View usuario_desktop #<?php echo $model->servidor_cpf; ?></h1>
+<div class="update">
+<h1>Usuário Desktop <?php echo $model->servidor->nome; ?></h1>
+</div>
 
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
