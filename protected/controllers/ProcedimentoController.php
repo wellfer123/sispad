@@ -67,9 +67,44 @@ class ProcedimentoController extends Controller
      * @soap
      */
     public function login($usuarioDesktop){
-       
-       
-        return array();
+        $msg=array();
+       if($usuarioDesktop!=null){
+           $user=  User::model()->find('servidor_cpf=:cpf AND username=:user', 
+                                        array(':cpf'=>$usuarioDesktop->servidor_cpf,':user'=>$usuarioDesktop->usuario_sistema));
+           $userDesk= UsuarioDesktop::model()->find('servidor_cpf=:cpf AND token=:token AND serial_aplicacao=:serial',
+                                                array(':cpf'=>$usuarioDesktop->servidor_cpf,':token'=>$usuarioDesktop->token,':serial'=>$usuarioDesktop->serial_aplicacao));
+           if($user===null){
+               //não existe um usuário para o sistema
+               $msg[]=$this->getMessageWebService("NÃO EXISTE O USUÁRIO $usuarioDesktop->usuario_sistema COM CPF: $usuarioDesktop->servidor_cpf CADASTRADO EM NOSSO SSITEMA", MessageWebService::ERRO);
+           }
+           //tem o usuário para o sistema, mas não tem acesso a aplicações
+           elseif($userDesk===null){
+               $msg[]=$this->getMessageWebService("O USUÁRIO $usuarioDesktop->usuario_sistema NÃO TEM ACESSO ÀS APLICAÇÕES DESKTOPS", MessageWebService::ERRO);
+           }
+           elseif($userDesk->serial_aplicacao!==$usuarioDesktop->serial_aplicacao){
+               $msg[]=$this->getMessageWebService("O USUÁRIO $usuarioDesktop->usuario_sistema NÃO TEM ACESSO À APLICAÇÃO COM SERIAL $usuarioDesktop->serial_aplicacao.", MessageWebService::ERRO);
+           }
+           elseif($userDesk->token!==$usuarioDesktop->token){
+               $msg[]=$this->getMessageWebService("O USUÁRIO $usuarioDesktop->usuario_sistema NÃO TEM TOKEN VÁLIDO PARA A APLICAÇÃO COM SERIAL $usuarioDesktop->serial_aplicacao.", MessageWebService::ERRO);
+           }
+           else{
+               $usuario= new UsuarioDesktopLogado;
+               $usuario->usuario_aplicacao=$userDesk->serial_aplicacao;
+               $usuario->usuario_desktop_cpf=$userDesk->servidor_cpf;
+               $usuario->usuario_token=$userDesk->token;
+               if($usuario->save()){
+                  $msg[]=$this->getMessageWebService("O USUÁRIO $usuarioDesktop->usuario_sistema LOGADO COM SUCESSO NO SISPAD", MessageWebService::SUCESSO); 
+               }
+               else{
+                  $msg[]=$this->getMessageWebService("NÃO FOI POSSÍVEL LOGAR O USUÁRIO $usuarioDesktop->usuario_sistema NO SISPAD", MessageWebService::ERRO); 
+               }
+           }
+
+       }
+       else{
+           $msg=$this->getMessageWebService("USUÁRIO DESKTOP INVÁLIDO", MessageWebService::ERRO);
+       }
+        return $msg;
     
     }
     
@@ -561,8 +596,11 @@ class ProcedimentoController extends Controller
 
 
    private function usuarioEstaLogado($usuarioDesktop){
-       
-       return true;
+       if($usuarioDesktop!==null){
+           return UsuarioDesktopLogado::model()->exists('usuario_desktop_cpf=:cpf AND usuario_token=:token AND usuario_aplicacao=:serial',
+                                                array(':cpf'=>$usuarioDesktop->servidor_cpf,':token'=>$usuarioDesktop->token,':serial'=>$usuarioDesktop->serial_aplicacao));
+       }
+       return false;
    }
    
    private function logarUsuario($usuarioDesktop){
