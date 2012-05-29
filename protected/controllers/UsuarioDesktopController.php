@@ -48,7 +48,7 @@ class UsuarioDesktopController extends SISPADBaseController
 	 */
 	public function actionCreate()
 	{
-		$model=new UsuarioDesktop;
+		$model=new UsuarioDesktop('create');
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
@@ -58,15 +58,15 @@ class UsuarioDesktopController extends SISPADBaseController
 			$model->attributes=$_POST['UsuarioDesktop'];
                         $model->gerarToken();
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->servidor_cpf));
+				$this->redirect(array('view','serial'=>$model->serial_aplicacao,'id'=>$model->servidor_cpf));
                            
 		}
 		$this->render('create',array(
 			'model'=>$model,
 		));
 	}
-
-	/**
+        
+        /**
 	 * Updates a particular model.
 	 * If update is successful, the browser will be redirected to the 'view' page.
 	 */
@@ -81,7 +81,7 @@ class UsuarioDesktopController extends SISPADBaseController
 		{
 			$model->attributes=$_POST['UsuarioDesktop'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->servidor_cpf,'se'=>$model->serial_aplicacao, 't'=>$model->token));
+				$this->redirect(array('view','serial'=>$model->serial_aplicacao,'id'=>$model->servidor_cpf));
 		}
 
 		$this->render('update',array(
@@ -90,44 +90,14 @@ class UsuarioDesktopController extends SISPADBaseController
 	}
 
 	/**
-	 * Deletes a particular model.
-	 * If deletion is successful, the browser will be redirected to the 'index' page.
-	 */
-	public function actionDelete()
-	{
-		if(Yii::app()->request->isPostRequest)
-		{
-			// we only allow deletion via POST request
-			$this->loadModel()->delete();
-
-			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-			if(!isset($_GET['ajax']))
-				$this->redirect(array('index'));
-		}
-		else
-			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
-	}
-
-	/**
-	 * Lists all models.
-	 */
-	public function actionIndex()
-	{
-		$dataProvider=new CActiveDataProvider('UsuarioDesktop');
-		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
-		));
-	}
-
-	/**
 	 * Manages all models.
 	 */
 	public function actionAdmin()
 	{
-		$model=new usuario_desktop('search');
+		$model=new UsuarioDesktop('search');
 		$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['UsuarioDesktop']))
-			$model->attributes=$_GET['usuario_desktop'];
+			$model->attributes=$_GET['UsuarioDesktop'];
 
 		$this->render('admin',array(
 			'model'=>$model,
@@ -143,7 +113,7 @@ class UsuarioDesktopController extends SISPADBaseController
 		if($this->_model===null)
 		{
 			if(isset($_GET['id']))
-				$this->_model=UsuarioDesktop::model()->find('servidor_cpf=:serv', array(':serv'=>$_GET['id']));
+				$this->_model=UsuarioDesktop::model()->with('servidor')->find('servidor_cpf=:serv AND serial_aplicacao=:serial', array('serial'=>$_GET['serial'],':serv'=>$_GET['id']));
 			if($this->_model===null)
 				throw new CHttpException(404,'The requested page does not exist.');
 		}
