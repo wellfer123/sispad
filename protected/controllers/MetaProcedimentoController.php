@@ -91,4 +91,13 @@ class MetaProcedimentoController extends SISPADBaseController
 		);
 	}
 	*/
+        
+         protected function performAjaxValidation($model)
+	{
+		if(isset($_POST['ajax']) && $_POST['ajax']==='metaProcedimento-form')
+		{
+			echo CActiveForm::validate($model);
+			Yii::app()->end();
+		}
+	}
 }
