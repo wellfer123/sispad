@@ -5630,79 +5630,19 @@ CREATE TABLE `endereco` (
   `numero` int(5) NOT NULL,
   `complemento` varchar(20) DEFAULT NULL,
   `bairro` varchar(30) NOT NULL,
-  `cidade_id` int(11) DEFAULT NULL,
+  `cidade_id` int(10) DEFAULT NULL,
   `telefone` varchar(11) DEFAULT NULL,
   `email` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_endereco_1` (`cidade_id`),
   CONSTRAINT `FK_endereco_1` FOREIGN KEY (`cidade_id`) REFERENCES `cidades` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `endereco`
 --
 
 /*!40000 ALTER TABLE `endereco` DISABLE KEYS */;
-INSERT INTO `endereco` (`id`,`logradouro`,`numero`,`complemento`,`bairro`,`cidade_id`,`telefone`,`email`) VALUES 
- (1,'Rua Dom Severino',108,'apt2 ','São Francisco',1523,'9999999','J@gmail.com'),
- (2,'RuaDom',108,'apt3','São Franscisco',1523,'99999999','J@gmail.com'),
- (3,'RuaDom',108,'apt3','São Franscisco',NULL,'99999999','J@gmail.com'),
- (4,'q',1,'q','q',1523,'22','dd@ff'),
- (5,'q',1,'q','q',NULL,'22','dd@ff'),
- (6,'q',1,'q','q',NULL,'22','dd@ff'),
- (7,'q',1,'q','q',NULL,'22','dd@ff'),
- (8,'q',1,'q','q',NULL,'22','dd@ff'),
- (9,'q',1,'q','q',NULL,'22','dd@ff'),
- (10,'q',1,'q','q',NULL,'22','dd@ff'),
- (11,'q',1,'q','q',NULL,'22','dd@ff'),
- (12,'q\'',8,'j','j',NULL,'8','J@gmail.com'),
- (13,'s',0,'k','k',NULL,'k','J@gmail.com'),
- (14,'qq',888,'k','o',NULL,'0','J@gmail.com'),
- (15,'Rua Dom Severino',108,'apt2 ','São Franscisco',1523,'99999999','J@gmail.com'),
- (16,'Rua Dom Severino',108,'apt2 ','São Franscisco',NULL,'99999999','J@gmail.com'),
- (17,'Rua Dom Severino',108,'apt2 ','São Franscisco',1523,'99999999','J@gmail.com'),
- (18,'w\'',0,'l','k',NULL,'0','J@gmail.com'),
- (19,'Rua Dom Severino',3,'d','ee',1523,'44556789090','J@gmail.com'),
- (20,'Rua Dom Severino',3,'d','ee',NULL,'44556789090','J@gmail.com'),
- (21,'Rua Dom Severino',3,'d','ee',NULL,'44556789090','J@gmail.com'),
- (22,'Rua Dom Severino',3,'d','ee',NULL,'44556789090','J@gmail.com'),
- (23,'Rua Dom Severino',3,'d','ee',NULL,'44556789090','J@gmail.com'),
- (24,'Rua Dom Severino',3,'d','ee',NULL,'44556789090','J@gmail.com'),
- (25,'Rua Dom Severino',1,'w','s',1523,'22','J@gmail.com'),
- (26,'Rua Dom Severino',1,'w','s',NULL,'22','J@gmail.com'),
- (27,'Rua Dom Severino',1,'w','s',NULL,'22','J@gmail.com'),
- (28,'Rua Dom Severino',1,'w','s',NULL,'22','J@gmail.com'),
- (29,'Rua Dom Severino',1,'w','s',NULL,'22','J@gmail.com'),
- (30,'Rua Dom Severino',1,'w','s',NULL,'22','J@gmail.com'),
- (31,'Rua Dom Severino',1,'w','s',NULL,'22','J@gmail.com'),
- (32,'Rua Dom Severino',1,'w','s',NULL,'22','J@gmail.com'),
- (33,'Rua Dom Severino',108,'apt2 ','São Franscisco',1523,'99999999','J@gmail.com'),
- (34,'Rua Dom Severino',108,'apt2 ','São Franscisco',NULL,'99999999','J@gmail.com'),
- (35,'Rua Dom Severino',108,'q','São Franscisco',1523,'22','J@gmail.com'),
- (36,'Rua Dom Severino',108,'q','q',1523,'22','J@gmail.com'),
- (37,'Rua Dom Severino',0,'q','q',1523,'3','J@gmail.com'),
- (38,'Rua Dom Severino',0,'q','q',1523,'3','J@gmail.com'),
- (39,'Rua Dom Severino',0,'q','q',NULL,'',''),
- (40,'Rua Dom Severino',0,'q','q',NULL,'',''),
- (41,'Rua Dom Severino',0,'q','q',NULL,'22','J@gmail.com'),
- (42,'Rua Dom Severino',0,'q','q',NULL,'','J@gmail.com'),
- (43,'Rua Dom Severino',0,'q','q',NULL,'','J@gmail.com'),
- (44,'Rua Dom Severino',0,'q','q',NULL,'','J@gmail.com'),
- (45,'Rua Dom Severino',0,'q','q',NULL,'22','J@gmail.com'),
- (46,'Rua Dom Severino',0,'q','q',NULL,'22','J@gmail.com'),
- (47,'Rua Dom Severino',0,'q','q',NULL,'22','J@gmail.com'),
- (48,'Rua Dom Severino',0,'q','q',NULL,'22','J@gmail.com'),
- (49,'Rua Dom Severino',0,'q','q',NULL,'22','J@gmail.com'),
- (50,'Rua Dom Severino',0,'q','q',NULL,'','J@gmail.com'),
- (51,'Rua Dom Severino',0,'q','q',NULL,'','J@gmail.com'),
- (52,'Rua Dom Severino',0,'q','q',NULL,'','J@gmail.com'),
- (53,'Rua Dom Severino',0,'q','q',NULL,'','J@gmail.com'),
- (54,'Rua Dom Severino',0,'q','q',NULL,'22','J@gmail.com'),
- (55,'Rua Dom Severino',0,'q','s',NULL,'22','J@gmail.com'),
- (56,'Rua Dom Severino',0,'q','s',NULL,'22','J@gmail.com'),
- (57,'Rua Dom severino vieira de Mel',0,'apt 2','São francisco',1523,'97369227','juniorpiresupe@gmail.com'),
- (58,'Rua Dom severino vieira de Mel',0,'apt 2','São francisco',1523,'97369227','juniorpiresupe@gmail.com'),
- (59,'Rua Dom severino vieira de Mel',0,'apt 2','São francisco',1523,'97369227','juniorpiresupe@gmail.com');
 /*!40000 ALTER TABLE `endereco` ENABLE KEYS */;
 
 
@@ -5779,6 +5719,13 @@ CREATE TABLE `equipe` (
 
 /*!40000 ALTER TABLE `equipe` DISABLE KEYS */;
 INSERT INTO `equipe` (`codigo_segmento`,`codigo_area`,`tipo`,`unidade_cnes`) VALUES 
+ (1,1,1,'5481287'),
+ (10,3,2,'2345870'),
+ (21,9,1,'2345544'),
+ (51,12,1,'2345633'),
+ (32,14,2,'2345625'),
+ (22,15,3,'2345641'),
+ (33,17,1,'2345668'),
  (1,24,1,'2345676');
 /*!40000 ALTER TABLE `equipe` ENABLE KEYS */;
 
@@ -5946,11 +5893,15 @@ CREATE TABLE `identidade` (
   `orgao_expedidor` varchar(10) NOT NULL,
   `uf` char(2) NOT NULL,
   `sexo` char(1) NOT NULL,
-  `estado_naturalidade_id` int(11) DEFAULT NULL,
-  `cidade_naturalidade_id` int(11) DEFAULT NULL,
+  `estado_naturalidade_id` int(10) unsigned DEFAULT NULL,
+  `cidade_naturalidade_id` int(10) DEFAULT NULL,
   `nome_pai` varchar(60) DEFAULT NULL,
   `nome_mae` varchar(60) DEFAULT NULL,
   PRIMARY KEY (`servidor_cpf`),
+  KEY `FK_identidade_2` (`cidade_naturalidade_id`),
+  KEY `FK_identidade_3` (`estado_naturalidade_id`),
+  CONSTRAINT `FK_identidade_3` FOREIGN KEY (`estado_naturalidade_id`) REFERENCES `estados` (`id`),
+  CONSTRAINT `FK_identidade_2` FOREIGN KEY (`cidade_naturalidade_id`) REFERENCES `cidades` (`id`),
   CONSTRAINT `identidade_ibfk_1` FOREIGN KEY (`servidor_cpf`) REFERENCES `servidor` (`cpf`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -6046,7 +5997,11 @@ CREATE TABLE `medico` (
 
 /*!40000 ALTER TABLE `medico` DISABLE KEYS */;
 INSERT INTO `medico` (`servidor_cpf`,`unidade_cnes`,`data_desativacao`,`data_cadastro`,`ativo`) VALUES 
- ('09886798805','2345676',NULL,'2012-05-15 10:20:29',NULL);
+ ('09886798805','2345676',NULL,'2012-05-15 10:20:29',NULL),
+ ('43243243242','2345544',NULL,'2012-05-28 10:13:01',NULL),
+ ('45645645645','2345633',NULL,'2012-05-28 10:13:01',NULL),
+ ('45645645646','5481287',NULL,'2012-05-28 10:13:01',NULL),
+ ('45645645656','2345870',NULL,'2012-05-28 10:13:01',NULL);
 /*!40000 ALTER TABLE `medico` ENABLE KEYS */;
 
 
@@ -6074,9 +6029,6 @@ CREATE TABLE `medico_executa_procedimento` (
 --
 
 /*!40000 ALTER TABLE `medico_executa_procedimento` DISABLE KEYS */;
-INSERT INTO `medico_executa_procedimento` (`medico_cpf`,`procedimento_codigo`,`medico_unidade_cnes`,`quantidade`,`competencia`) VALUES 
- ('09886798805','0101020015','2345676',9,22012),
- ('09886798805','AP_PREN','2345676',32,22012);
 /*!40000 ALTER TABLE `medico_executa_procedimento` ENABLE KEYS */;
 
 
@@ -6130,7 +6082,7 @@ CREATE TABLE `meta` (
   KEY `foreign_key_indicador_id` (`indicador_id`),
   CONSTRAINT `meta_ibfk_1` FOREIGN KEY (`periodicidade_id`) REFERENCES `periodicidade` (`id`),
   CONSTRAINT `meta_ibfk_3` FOREIGN KEY (`indicador_id`) REFERENCES `indicador` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `meta`
@@ -6138,7 +6090,8 @@ CREATE TABLE `meta` (
 
 /*!40000 ALTER TABLE `meta` DISABLE KEYS */;
 INSERT INTO `meta` (`id`,`nome`,`periodicidade_id`,`tipo`,`indicador_id`,`valor`,`percentagem`) VALUES 
- (1,'Meta8',4,'cs',5,34,100);
+ (1,'Meta8',4,'cs',5,34,100),
+ (2,'meta de teste',4,'1',5,50,100);
 /*!40000 ALTER TABLE `meta` ENABLE KEYS */;
 
 
@@ -6162,7 +6115,12 @@ CREATE TABLE `meta_procedimento` (
 
 /*!40000 ALTER TABLE `meta_procedimento` DISABLE KEYS */;
 INSERT INTO `meta_procedimento` (`meta_id`,`procedimento_codigo`) VALUES 
- (1,'0101020015');
+ (1,'0101020015'),
+ (1,'AP_AIDS'),
+ (2,'AP_AIDS'),
+ (1,'AP_CURA'),
+ (1,'AP_DIAB'),
+ (1,'AP_HIPE');
 /*!40000 ALTER TABLE `meta_procedimento` ENABLE KEYS */;
 
 
@@ -7447,14 +7405,14 @@ CREATE TABLE `servidor` (
 /*!40000 ALTER TABLE `servidor` DISABLE KEYS */;
 INSERT INTO `servidor` (`cpf`,`matricula`,`nome`,`estado_civil`,`endereco_id`,`unidade_cnes`) VALUES 
  ('0912909880','0348323333','CÉSAR HENRIQUE','S',NULL,'2345676'),
- ('09809809809','3244232432','CéSAR HENRIQUE LEITE','S',43,'2345676'),
+ ('09809809809','3244232432','CéSAR HENRIQUE LEITE','S',NULL,'2345676'),
  ('0988069880','0348328MER','JÚNIOR PIRES','S',NULL,'2345676'),
  ('0988139880','0348322222','ALEXANDRE','C',NULL,'2345676'),
- ('09886798805','0348328000','ARI LUIZ','C',44,'2345676'),
+ ('09886798805','0348328000','ARI LUIZ','C',NULL,'2345676'),
  ('0988909880','0348328432','JOSÉ BARBOSA',NULL,NULL,'2345676'),
- ('43243243242','324','JOAO BOSQUINHO TESTE','S',48,'2345676'),
- ('45645645645','3243','JOÃO TESTE','S',49,'2345676'),
- ('45645645646','3242222222','MARIA FELIZADA','C',59,'2345676'),
+ ('43243243242','324','JOAO BOSQUINHO TESTE','S',NULL,'2345676'),
+ ('45645645645','3243','JOÃO TESTE','S',NULL,'2345676'),
+ ('45645645646','3242222222','MARIA FELIZADA','C',NULL,'2345676'),
  ('45645645656','3243mmm','JOÃO BOQUINHO','S',NULL,'2345676');
 /*!40000 ALTER TABLE `servidor` ENABLE KEYS */;
 
@@ -7484,10 +7442,14 @@ CREATE TABLE `servidor_equipe` (
 
 /*!40000 ALTER TABLE `servidor_equipe` DISABLE KEYS */;
 INSERT INTO `servidor_equipe` (`equipe_codigo_area`,`equipe_unidade_cnes`,`servidor_cpf`,`funcao`,`ativo`) VALUES 
- (24,'2345676','0912909880','Medico',1),
+ (24,'2345676','0912909880','Medico',0),
  (24,'2345676','09809809809','Odontologo',NULL),
  (24,'2345676','0988069880','AgenteSaude',1),
- (24,'2345676','09886798805','Medico',0);
+ (24,'2345676','09886798805','Medico',1),
+ (24,'2345544','43243243242','Medico',1),
+ (24,'2345633','45645645645','Medico',1),
+ (24,'5481287','45645645646','Medico',1),
+ (24,'2345870','45645645656','Medico',1);
 /*!40000 ALTER TABLE `servidor_equipe` ENABLE KEYS */;
 
 
@@ -7814,7 +7776,8 @@ CREATE TABLE `usuario_desktop` (
   `servidor_cpf` varchar(11) NOT NULL,
   `token` varchar(255) NOT NULL,
   `serial_aplicacao` varchar(255) NOT NULL,
-  PRIMARY KEY (`servidor_cpf`,`token`,`serial_aplicacao`),
+  `ativo` int(1) unsigned NOT NULL,
+  PRIMARY KEY (`servidor_cpf`,`serial_aplicacao`) USING BTREE,
   CONSTRAINT `usuario_desktop_ibfk_1` FOREIGN KEY (`servidor_cpf`) REFERENCES `servidor` (`cpf`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -7823,6 +7786,10 @@ CREATE TABLE `usuario_desktop` (
 --
 
 /*!40000 ALTER TABLE `usuario_desktop` DISABLE KEYS */;
+INSERT INTO `usuario_desktop` (`servidor_cpf`,`token`,`serial_aplicacao`,`ativo`) VALUES 
+ ('0912909880','aea4c993c4472db30d461a146d8ee46fdfd251e3','testando',0),
+ ('09809809809','c425a748fe7269fa6c4202a77569df66b3609026','0987890',0),
+ ('09809809809','744caa719a36dba1becbd0fcd71e3909b60b4e2a','testando',0);
 /*!40000 ALTER TABLE `usuario_desktop` ENABLE KEYS */;
 
 
@@ -7836,7 +7803,7 @@ CREATE TABLE `usuario_desktop_logado` (
   `usuario_token` varchar(255) NOT NULL DEFAULT '',
   `usuario_aplicacao` varchar(255) NOT NULL DEFAULT '',
   `data_hora` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`usuario_desktop_cpf`,`usuario_token`,`usuario_aplicacao`),
+  PRIMARY KEY (`usuario_desktop_cpf`,`usuario_aplicacao`) USING BTREE,
   CONSTRAINT `FK_usuario_desktop_logado_1` FOREIGN KEY (`usuario_desktop_cpf`) REFERENCES `usuario_desktop` (`servidor_cpf`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 

@@ -63,7 +63,7 @@ class AgenteSaude extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'Agente_saude';
+		return 'agente_saude';
 	}
 
 	/**

@@ -25,7 +25,7 @@ class Setor extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'Setor';
+		return 'setor';
 	}
 
 	/**

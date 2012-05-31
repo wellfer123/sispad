@@ -32,7 +32,7 @@ class Meta extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'Meta';
+		return 'meta';
 	}
 
 	/**

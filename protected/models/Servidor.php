@@ -30,7 +30,7 @@ class Servidor extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'Servidor';
+		return 'servidor';
 	}
 
 	/**

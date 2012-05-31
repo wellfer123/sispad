@@ -59,7 +59,7 @@ class Odontologo extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'Odontologo';
+		return 'odontologo';
 	}
 
 	/**

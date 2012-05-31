@@ -32,7 +32,7 @@ class ServidorEquipe extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'Servidor_Equipe';
+		return 'servidor_equipe';
 	}
 
 	/**

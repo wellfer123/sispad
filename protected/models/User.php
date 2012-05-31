@@ -35,7 +35,8 @@ class User extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'user';
+            //deve ficar assim, com letra maiuscula, pois o modulo rbac o utiliza assim
+		return 'User';
 	}
 
 	/**

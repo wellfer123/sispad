@@ -36,7 +36,6 @@ class UsuarioDesktopLogado extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('data_hora', 'required'),
 			array('usuario_desktop_cpf', 'length', 'max'=>11),
 			array('usuario_token, usuario_aplicacao', 'length', 'max'=>255),
 			// The following rule is used by search().

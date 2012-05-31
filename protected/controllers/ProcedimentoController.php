@@ -68,6 +68,10 @@ class ProcedimentoController extends Controller
      */
     public function login($usuarioDesktop){
         $msg=array();
+        if($this->usuarioEstaLogado($usuarioDesktop)){
+            $msg[]=$this->getMessageWebService("O USUÁRIO $usuarioDesktop->usuario_sistema ESTÁ LOGADO COM SUCESSO NO SISPAD", MessageWebService::SUCESSO); 
+            return $msg;
+        }
        if($usuarioDesktop!=null){
            $user=  User::model()->find('servidor_cpf=:cpf AND username=:user', 
                                         array(':cpf'=>$usuarioDesktop->servidor_cpf,':user'=>$usuarioDesktop->usuario_sistema));
@@ -92,6 +96,8 @@ class ProcedimentoController extends Controller
                $usuario->usuario_aplicacao=$userDesk->serial_aplicacao;
                $usuario->usuario_desktop_cpf=$userDesk->servidor_cpf;
                $usuario->usuario_token=$userDesk->token;
+               //vai apagar todas as seções anteriores do usuário, caso ele não tenha feito o login.
+               $this->logout($usuarioDesktop);
                if($usuario->save()){
                   $msg[]=$this->getMessageWebService("O USUÁRIO $usuarioDesktop->usuario_sistema LOGADO COM SUCESSO NO SISPAD", MessageWebService::SUCESSO); 
                }
@@ -114,9 +120,22 @@ class ProcedimentoController extends Controller
      * @soap
      */
     public function logout($usuarioDesktop){
-       
-       
-        return array();
+        $msg=array();
+        if($usuarioDesktop!==null){
+            if(UsuarioDesktopLogado::model()->deleteAll('usuario_desktop_cpf=:cpf AND  usuario_aplicacao=:serial',
+                                                array(':cpf'=>$usuarioDesktop->servidor_cpf,':serial'=>$usuarioDesktop->serial_aplicacao))){
+            
+                $msg[]=$this->getMessageWebService("SUCESSO: USUÁRIO $usuarioDesktop->usuario_sistema ESTÁ DESCONECTADO DO SISTEMA", MessageWebService::SUCESSO);
+             }
+            else{
+                $msg[]=$this->getMessageWebService("ERRO: USUÁRIO $usuarioDesktop->usuario_sistema NÃO ESTÁ CONECTADO AO SISTEMA", MessageWebService::SUCESSO);
+            }
+            
+        }
+        else{
+            $msg[]=$this->getMessageWebService("WARNING: USUÁRIO INVÁLIDO", MessageWebService::WARNING);
+        }
+        return $msg;
     
     }
     /**
@@ -597,19 +616,18 @@ class ProcedimentoController extends Controller
 
    private function usuarioEstaLogado($usuarioDesktop){
        if($usuarioDesktop!==null){
-           return UsuarioDesktopLogado::model()->exists('usuario_desktop_cpf=:cpf AND usuario_token=:token AND usuario_aplicacao=:serial',
-                                                array(':cpf'=>$usuarioDesktop->servidor_cpf,':token'=>$usuarioDesktop->token,':serial'=>$usuarioDesktop->serial_aplicacao));
+           $user=UsuarioDesktopLogado::model()->find('usuario_desktop_cpf=:cpf AND  usuario_aplicacao=:serial',
+                                                array(':cpf'=>$usuarioDesktop->servidor_cpf,':serial'=>$usuarioDesktop->serial_aplicacao));
+           //calcula a diferença entre as data
+           //depois divide por 3600 (segundos de uma hora), se for maior que um, então a sessão está inválida
+           if($user!==null){
+                $time= new DateTime($user->data_hora);
+                return (time() - $time->getTimestamp())/3600>1 ? false:true;
+           }
        }
        return false;
    }
    
-   private function logarUsuario($usuarioDesktop){
-       return true;
-   }
-   
-   private function deslogarUsuario($usuarioDesktop){
-       return true;
-   }
    
    private function loadServidor($cpf){
        return Servidor::model()->findByPk($cpf);

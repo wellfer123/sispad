@@ -23,7 +23,7 @@ class Item extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'Item';
+		return 'item';
 	}
 
 	/**

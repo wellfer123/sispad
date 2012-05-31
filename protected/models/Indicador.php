@@ -31,7 +31,7 @@ class Indicador extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'Indicador';
+		return 'indicador';
 	}
 
 	/**
