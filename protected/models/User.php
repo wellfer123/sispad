@@ -63,7 +63,7 @@ class User extends CActiveRecord
                         array('servidor_cpf','servidorExiste', 'on'=>'register'),
 			array('servidor_cpf', 'servidorIsUser', 'on'=>'register'),
                         array('username', 'usernameExiste', 'on'=>'register'),
-                        array('username', 'usernameNaoExiste', 'on'=>'register'),
+                        //array('username', 'usernameNaoExiste', 'on'=>'register'),
 			array('email', 'emailExiste', 'on'=>'register'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
@@ -81,7 +81,7 @@ class User extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'servidor' => array(self::BELONGS_TO, 'Servidor', 'servidor_cpf'),
+                         'servidor'=>array(self::BELONGS_TO,'Servidor','servidor_cpf'),
 		);
 	}
 

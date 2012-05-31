@@ -618,6 +618,8 @@ class ProcedimentoController extends Controller
        if($usuarioDesktop!==null){
            $user=UsuarioDesktopLogado::model()->find('usuario_desktop_cpf=:cpf AND  usuario_aplicacao=:serial',
                                                 array(':cpf'=>$usuarioDesktop->servidor_cpf,':serial'=>$usuarioDesktop->serial_aplicacao));
+           //RETORNO ADICIONADO ENQUANTO NAO A IMPLEMENTACAO DE VERIFICACAO DE TEMPO LOGADO NÃO É FINALIZADA 
+           return true;
            //calcula a diferença entre as data
            //depois divide por 3600 (segundos de uma hora), se for maior que um, então a sessão está inválida
            if($user!==null){

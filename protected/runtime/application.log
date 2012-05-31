@@ -6776,3 +6776,145 @@ Stack trace:
 REQUEST_URI=/sispad/index.php?r=user/register
 HTTP_REFERER=http://localhost/sispad/index.php?r=user/admin
 ---
+2012/05/31 16:44:49 [error] [exception.CException] exception 'CException' with message 'UserController não pôde encontrar a visualização "_form" solicitada.' in C:\wamp\www\yii\framework\web\CController.php:879
+Stack trace:
+#0 C:\wamp\www\sispad\protected\views\user\register.php(12): CController->renderPartial('_form', Array)
+#1 C:\wamp\www\yii\framework\web\CBaseController.php(127): require('C:\wamp\www\sis...')
+#2 C:\wamp\www\yii\framework\web\CBaseController.php(96): CBaseController->renderInternal('C:\wamp\www\sis...', Array, true)
+#3 C:\wamp\www\yii\framework\web\CController.php(870): CBaseController->renderFile('C:\wamp\www\sis...', Array, true)
+#4 C:\wamp\www\yii\framework\web\CController.php(783): CController->renderPartial('register', Array, true)
+#5 C:\wamp\www\sispad\protected\controllers\UserController.php(140): CController->render('register', Array)
+#6 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(50): UserController->actionRegister()
+#7 C:\wamp\www\yii\framework\web\CController.php(309): CInlineAction->runWithParams(Array)
+#8 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#9 C:\wamp\www\yii\framework\web\filters\CFilter.php(41): CFilterChain->run()
+#10 C:\wamp\www\yii\framework\web\CController.php(1146): CFilter->filter(Object(CFilterChain))
+#11 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#12 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#13 C:\wamp\www\yii\framework\web\CController.php(292): CFilterChain->run()
+#14 C:\wamp\www\yii\framework\web\CController.php(266): CController->runActionWithFilters(Object(CInlineAction), Array)
+#15 C:\wamp\www\yii\framework\web\CWebApplication.php(276): CController->run('register')
+#16 C:\wamp\www\yii\framework\web\CWebApplication.php(135): CWebApplication->runController('user/register')
+#17 C:\wamp\www\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#18 C:\wamp\www\sispad\index.php(13): CApplication->run()
+#19 {main}
+REQUEST_URI=/sispad/index.php?r=user/register
+HTTP_REFERER=http://localhost/sispad/index.php?r=user/admin
+---
+2012/05/31 17:02:25 [error] [exception.CException] exception 'CException' with message 'CActiveForm and its behaviors do not have a method or closure named "textPasswd".' in C:\wamp\www\yii\framework\base\CComponent.php:266
+Stack trace:
+#0 C:\wamp\www\sispad\protected\views\user\_form.php(47): CComponent->__call('textPasswd', Array)
+#1 C:\wamp\www\sispad\protected\views\user\_form.php(47): CActiveForm->textPasswd(Object(User), 'username')
+#2 C:\wamp\www\yii\framework\web\CBaseController.php(127): require('C:\wamp\www\sis...')
+#3 C:\wamp\www\yii\framework\web\CBaseController.php(96): CBaseController->renderInternal('C:\wamp\www\sis...', Array, true)
+#4 C:\wamp\www\yii\framework\web\CController.php(870): CBaseController->renderFile('C:\wamp\www\sis...', Array, true)
+#5 C:\wamp\www\sispad\protected\views\user\register.php(12): CController->renderPartial('_form', Array)
+#6 C:\wamp\www\yii\framework\web\CBaseController.php(127): require('C:\wamp\www\sis...')
+#7 C:\wamp\www\yii\framework\web\CBaseController.php(96): CBaseController->renderInternal('C:\wamp\www\sis...', Array, true)
+#8 C:\wamp\www\yii\framework\web\CController.php(870): CBaseController->renderFile('C:\wamp\www\sis...', Array, true)
+#9 C:\wamp\www\yii\framework\web\CController.php(783): CController->renderPartial('register', Array, true)
+#10 C:\wamp\www\sispad\protected\controllers\UserController.php(140): CController->render('register', Array)
+#11 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(50): UserController->actionRegister()
+#12 C:\wamp\www\yii\framework\web\CController.php(309): CInlineAction->runWithParams(Array)
+#13 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#14 C:\wamp\www\yii\framework\web\filters\CFilter.php(41): CFilterChain->run()
+#15 C:\wamp\www\yii\framework\web\CController.php(1146): CFilter->filter(Object(CFilterChain))
+#16 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#17 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#18 C:\wamp\www\yii\framework\web\CController.php(292): CFilterChain->run()
+#19 C:\wamp\www\yii\framework\web\CController.php(266): CController->runActionWithFilters(Object(CInlineAction), Array)
+#20 C:\wamp\www\yii\framework\web\CWebApplication.php(276): CController->run('register')
+#21 C:\wamp\www\yii\framework\web\CWebApplication.php(135): CWebApplication->runController('user/register')
+#22 C:\wamp\www\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#23 C:\wamp\www\sispad\index.php(13): CApplication->run()
+#24 {main}
+REQUEST_URI=/sispad/index.php?r=user/register
+HTTP_REFERER=http://localhost/sispad/index.php?r=user/login
+---
+2012/05/31 17:40:05 [warning] [application] Failed to set unsafe attribute "verifyCode" of "User".
+in C:\wamp\www\sispad\protected\controllers\UserController.php (262)
+in C:\wamp\www\sispad\protected\controllers\UserController.php (127)
+in C:\wamp\www\sispad\index.php (13)
+2012/05/31 17:40:10 [warning] [application] Failed to set unsafe attribute "verifyCode" of "User".
+in C:\wamp\www\sispad\protected\controllers\UserController.php (262)
+in C:\wamp\www\sispad\protected\controllers\UserController.php (127)
+in C:\wamp\www\sispad\index.php (13)
+2012/05/31 17:40:19 [warning] [application] Failed to set unsafe attribute "verifyCode" of "User".
+in C:\wamp\www\sispad\protected\controllers\UserController.php (262)
+in C:\wamp\www\sispad\protected\controllers\UserController.php (127)
+in C:\wamp\www\sispad\index.php (13)
+2012/05/31 17:40:22 [warning] [application] Failed to set unsafe attribute "verifyCode" of "User".
+in C:\wamp\www\sispad\protected\controllers\UserController.php (262)
+in C:\wamp\www\sispad\protected\controllers\UserController.php (127)
+in C:\wamp\www\sispad\index.php (13)
+2012/05/31 17:40:31 [warning] [application] Failed to set unsafe attribute "verifyCode" of "User".
+in C:\wamp\www\sispad\protected\controllers\UserController.php (262)
+in C:\wamp\www\sispad\protected\controllers\UserController.php (127)
+in C:\wamp\www\sispad\index.php (13)
+2012/05/31 17:40:46 [warning] [application] Failed to set unsafe attribute "verifyCode" of "User".
+in C:\wamp\www\sispad\protected\controllers\UserController.php (131)
+in C:\wamp\www\sispad\index.php (13)
+2012/05/31 17:41:06 [warning] [application] Failed to set unsafe attribute "verifyCode" of "User".
+in C:\wamp\www\sispad\protected\controllers\UserController.php (262)
+in C:\wamp\www\sispad\protected\controllers\UserController.php (127)
+in C:\wamp\www\sispad\index.php (13)
+2012/05/31 17:41:10 [warning] [application] Failed to set unsafe attribute "verifyCode" of "User".
+in C:\wamp\www\sispad\protected\controllers\UserController.php (262)
+in C:\wamp\www\sispad\protected\controllers\UserController.php (127)
+in C:\wamp\www\sispad\index.php (13)
+2012/05/31 17:43:31 [warning] [application] Failed to set unsafe attribute "verifyCode" of "User".
+in C:\wamp\www\sispad\protected\controllers\UserController.php (262)
+in C:\wamp\www\sispad\protected\controllers\UserController.php (127)
+in C:\wamp\www\sispad\index.php (13)
+2012/05/31 17:43:53 [warning] [application] Failed to set unsafe attribute "verifyCode" of "User".
+in C:\wamp\www\sispad\protected\controllers\UserController.php (131)
+in C:\wamp\www\sispad\index.php (13)
+2012/05/31 17:43:53 [warning] [application] Failed to set unsafe attribute "verifyCode" of "User".
+in C:\wamp\www\sispad\protected\controllers\UserController.php (262)
+in C:\wamp\www\sispad\protected\controllers\UserController.php (127)
+in C:\wamp\www\sispad\index.php (13)
+2012/05/31 18:41:37 [error] [php] include(FormataData.php) [<a href='function.include'>function.include</a>]: failed to open stream: No such file or directory (C:\wamp\www\yii\framework\YiiBase.php:418)
+Stack trace:
+#0 C:\wamp\www\sispad\protected\controllers\ProcedimentoController.php(626): spl_autoload_call()
+#1 C:\wamp\www\sispad\protected\controllers\ProcedimentoController.php(71): ProcedimentoController->usuarioEstaLogado()
+#2 unknown(0): ProcedimentoController->login()
+#3 C:\wamp\www\yii\framework\web\services\CWebService.php(181): SoapServer->handle()
+#4 C:\wamp\www\yii\framework\web\services\CWebServiceAction.php(104): CWebService->run()
+#5 C:\wamp\www\yii\framework\web\actions\CAction.php(75): CWebServiceAction->run()
+#6 C:\wamp\www\yii\framework\web\CController.php(309): CWebServiceAction->runWithParams()
+#7 C:\wamp\www\yii\framework\web\CController.php(287): ProcedimentoController->runAction()
+#8 C:\wamp\www\yii\framework\web\CController.php(266): ProcedimentoController->runActionWithFilters()
+#9 C:\wamp\www\yii\framework\web\CWebApplication.php(276): ProcedimentoController->run()
+#10 C:\wamp\www\yii\framework\web\CWebApplication.php(135): CWebApplication->runController()
+#11 C:\wamp\www\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#12 C:\wamp\www\sispad\index.php(13): CWebApplication->run()
+REQUEST_URI=/sispad/index.php?r=procedimento/service&ws=1
+in C:\wamp\www\sispad\protected\controllers\ProcedimentoController.php (626)
+in C:\wamp\www\sispad\protected\controllers\ProcedimentoController.php (71)
+in C:\wamp\www\sispad\index.php (13)
+2012/05/31 19:35:47 [error] [php] range() [<a href='function.range'>function.range</a>]: step exceeds the specified range (C:\wamp\www\yii\framework\web\helpers\CJavaScript.php:83)
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CBaseController.php(207): CActiveForm->run()
+#1 C:\wamp\www\sispad\protected\views\user\login.php(49): UserController->endWidget()
+#2 C:\wamp\www\yii\framework\web\CBaseController.php(127): require()
+#3 C:\wamp\www\yii\framework\web\CBaseController.php(96): UserController->renderInternal()
+#4 C:\wamp\www\yii\framework\web\CController.php(870): UserController->renderFile()
+#5 C:\wamp\www\yii\framework\web\CController.php(783): UserController->renderPartial()
+#6 C:\wamp\www\sispad\protected\controllers\UserController.php(102): UserController->render()
+#7 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(50): UserController->actionLogin()
+#8 C:\wamp\www\yii\framework\web\CController.php(309): CInlineAction->runWithParams()
+#9 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(134): UserController->runAction()
+#10 C:\wamp\www\yii\framework\web\filters\CFilter.php(41): CFilterChain->run()
+#11 C:\wamp\www\yii\framework\web\CController.php(1146): CAccessControlFilter->filter()
+#12 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(59): UserController->filterAccessControl()
+#13 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter()
+#14 C:\wamp\www\yii\framework\web\CController.php(292): CFilterChain->run()
+#15 C:\wamp\www\yii\framework\web\CController.php(266): UserController->runActionWithFilters()
+#16 C:\wamp\www\yii\framework\web\CWebApplication.php(276): UserController->run()
+#17 C:\wamp\www\yii\framework\web\CWebApplication.php(135): CWebApplication->runController()
+#18 C:\wamp\www\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#19 C:\wamp\www\sispad\index.php(13): CWebApplication->run()
+REQUEST_URI=/sispad/index.php?r=user/login
+in C:\wamp\www\sispad\protected\views\user\login.php (49)
+in C:\wamp\www\sispad\protected\controllers\UserController.php (102)
+in C:\wamp\www\sispad\index.php (13)

@@ -39,6 +39,7 @@ class PerfilController extends SISPADBaseController{
         public function loadModel($model,$relation=null,$id)
 	{
             if($relation!=null){
+           
             $_model=$model::model()->with($relation)->findbyPk($id);
             }else{
                  $_model=$model::model()->findbyPk($id);
