@@ -25,7 +25,7 @@ class Regionais extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'Regionais';
+		return 'regionais';
 	}
 
 	/**

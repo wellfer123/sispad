@@ -35,7 +35,7 @@ class Estados extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'Estados';
+		return 'estados';
 	}
 
 	/**

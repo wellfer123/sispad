@@ -36,7 +36,7 @@ class Unidade extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'Unidade';
+		return 'unidade';
 	}
         
         	/**

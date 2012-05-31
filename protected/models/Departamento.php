@@ -25,7 +25,7 @@ class Departamento extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'Departamento';
+		return 'departamento';
 	}
 
 	/**

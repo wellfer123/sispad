@@ -29,7 +29,7 @@ class Endereco extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'Endereco';
+		return 'endereco';
 	}
 
 	/**

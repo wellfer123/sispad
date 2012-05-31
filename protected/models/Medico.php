@@ -58,7 +58,7 @@ class Medico extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'Medico';
+		return 'medico';
 	}
 
 	/**

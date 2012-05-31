@@ -24,7 +24,7 @@ class Periodicidade extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'Periodicidade';
+		return 'periodicidade';
 	}
 
 	/**

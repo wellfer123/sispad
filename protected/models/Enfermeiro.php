@@ -58,7 +58,7 @@ class Enfermeiro extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'Enfermeiro';
+		return 'enfermeiro';
 	}
 
 	/**

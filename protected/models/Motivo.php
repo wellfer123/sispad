@@ -23,7 +23,7 @@ class Motivo extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'Motivo';
+		return 'motivo';
 	}
 
 	/**

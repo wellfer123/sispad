@@ -26,7 +26,7 @@ class Arquivo extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'Arquivo';
+		return 'arquivo';
 	}
 
 	/**
