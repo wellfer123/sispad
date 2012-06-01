@@ -1,7 +1,9 @@
 <?php
+$nomeServidor = $_GET['serv'];
 $this->breadcrumbs=array(
-	'Enderecos'=>array('index'),
-	$model->id,
+        'Servidor'=>array('Servidor/view','id'=>$_GET['cpf']),
+	'Endereco de '.$nomeServidor,
+
 );
 
 $this->menu=array(
@@ -13,7 +15,7 @@ $this->menu=array(
 );
 ?>
 
-<h1>View Endereco #<?php echo $model->id; ?></h1>
+<h1>Endereco de <?php echo $nomeServidor; ?></h1>
 
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,

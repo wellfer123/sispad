@@ -7241,3 +7241,97 @@ REQUEST_URI=/sispad/index.php?r=tituloEleitor/index
 in C:\wamp\www\sispad\protected\controllers\TituloEleitorController.php (125)
 in C:\wamp\www\sispad\protected\controllers\TituloEleitorController.php (58)
 in C:\wamp\www\sispad\index.php (13)
+2012/06/01 18:40:43 [error] [exception.CException] exception 'CException' with message 'A propriedade "Endereco.servidor_cpf" não está definida.' in C:\wamp\www\yii\framework\base\CComponent.php:131
+Stack trace:
+#0 C:\wamp\www\yii\framework\db\ar\CActiveRecord.php(144): CComponent->__get('servidor_cpf')
+#1 C:\wamp\www\sispad\protected\views\endereco\view.php(3): CActiveRecord->__get('servidor_cpf')
+#2 C:\wamp\www\yii\framework\web\CBaseController.php(127): require('C:\wamp\www\sis...')
+#3 C:\wamp\www\yii\framework\web\CBaseController.php(96): CBaseController->renderInternal('C:\wamp\www\sis...', Array, true)
+#4 C:\wamp\www\yii\framework\web\CController.php(870): CBaseController->renderFile('C:\wamp\www\sis...', Array, true)
+#5 C:\wamp\www\yii\framework\web\CController.php(783): CController->renderPartial('view', Array, true)
+#6 C:\wamp\www\sispad\protected\controllers\EnderecoController.php(113): CController->render('view', Array)
+#7 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(50): EnderecoController->actionView()
+#8 C:\wamp\www\yii\framework\web\CController.php(309): CInlineAction->runWithParams(Array)
+#9 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#10 C:\wamp\www\yii\framework\web\filters\CFilter.php(41): CFilterChain->run()
+#11 C:\wamp\www\yii\framework\web\CController.php(1146): CFilter->filter(Object(CFilterChain))
+#12 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#13 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#14 C:\wamp\www\yii\framework\web\CController.php(292): CFilterChain->run()
+#15 C:\wamp\www\yii\framework\web\CController.php(266): CController->runActionWithFilters(Object(CInlineAction), Array)
+#16 C:\wamp\www\yii\framework\web\CWebApplication.php(276): CController->run('view')
+#17 C:\wamp\www\yii\framework\web\CWebApplication.php(135): CWebApplication->runController('endereco/view')
+#18 C:\wamp\www\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#19 C:\wamp\www\sispad\index.php(13): CApplication->run()
+#20 {main}
+REQUEST_URI=/sispad/index.php?r=endereco/view&id=2&model=servidor&cpf=09809809809
+HTTP_REFERER=http://localhost/sispad/index.php?r=servidor/view&id=09809809809
+---
+2012/06/01 18:50:23 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Você acessou indevidamente uma página! Não repita a operção!' in C:\wamp\www\sispad\protected\controllers\EnderecoController.php:105
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(50): EnderecoController->actionUpdate()
+#1 C:\wamp\www\yii\framework\web\CController.php(309): CInlineAction->runWithParams(Array)
+#2 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#3 C:\wamp\www\yii\framework\web\filters\CFilter.php(41): CFilterChain->run()
+#4 C:\wamp\www\yii\framework\web\CController.php(1146): CFilter->filter(Object(CFilterChain))
+#5 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#6 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#7 C:\wamp\www\yii\framework\web\CController.php(292): CFilterChain->run()
+#8 C:\wamp\www\yii\framework\web\CController.php(266): CController->runActionWithFilters(Object(CInlineAction), Array)
+#9 C:\wamp\www\yii\framework\web\CWebApplication.php(276): CController->run('update')
+#10 C:\wamp\www\yii\framework\web\CWebApplication.php(135): CWebApplication->runController('endereco/update')
+#11 C:\wamp\www\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#12 C:\wamp\www\sispad\index.php(13): CApplication->run()
+#13 {main}
+REQUEST_URI=/sispad/index.php?r=endereco/update&id=2
+HTTP_REFERER=http://localhost/sispad/index.php?r=endereco/view&id=2&model=servidor&cpf=09809809809&serv=C%C3%A9SAR+HENRIQUE+LEITE
+---
+2012/06/01 18:50:29 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'O sistema não foi capaz de encontrar a ação "admin" solicitada.' in C:\wamp\www\yii\framework\web\CController.php:484
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(271): CController->missingAction('admin')
+#1 C:\wamp\www\yii\framework\web\CWebApplication.php(276): CController->run('admin')
+#2 C:\wamp\www\yii\framework\web\CWebApplication.php(135): CWebApplication->runController('endereco/admin')
+#3 C:\wamp\www\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 C:\wamp\www\sispad\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/sispad/index.php?r=endereco/admin
+HTTP_REFERER=http://localhost/sispad/index.php?r=endereco/view&id=2&model=servidor&cpf=09809809809&serv=C%C3%A9SAR+HENRIQUE+LEITE
+---
+2012/06/01 18:50:33 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Você acessou indevidamente uma página! Não repita a operção!' in C:\wamp\www\sispad\protected\controllers\EnderecoController.php:105
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(50): EnderecoController->actionUpdate()
+#1 C:\wamp\www\yii\framework\web\CController.php(309): CInlineAction->runWithParams(Array)
+#2 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#3 C:\wamp\www\yii\framework\web\filters\CFilter.php(41): CFilterChain->run()
+#4 C:\wamp\www\yii\framework\web\CController.php(1146): CFilter->filter(Object(CFilterChain))
+#5 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#6 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#7 C:\wamp\www\yii\framework\web\CController.php(292): CFilterChain->run()
+#8 C:\wamp\www\yii\framework\web\CController.php(266): CController->runActionWithFilters(Object(CInlineAction), Array)
+#9 C:\wamp\www\yii\framework\web\CWebApplication.php(276): CController->run('update')
+#10 C:\wamp\www\yii\framework\web\CWebApplication.php(135): CWebApplication->runController('endereco/update')
+#11 C:\wamp\www\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#12 C:\wamp\www\sispad\index.php(13): CApplication->run()
+#13 {main}
+REQUEST_URI=/sispad/index.php?r=endereco/update&id=2
+HTTP_REFERER=http://localhost/sispad/index.php?r=endereco/view&id=2&model=servidor&cpf=09809809809&serv=C%C3%A9SAR+HENRIQUE+LEITE
+---
+2012/06/01 18:50:40 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Você acessou indevidamente uma página! Não repita a operção!' in C:\wamp\www\sispad\protected\controllers\EnderecoController.php:105
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(50): EnderecoController->actionUpdate()
+#1 C:\wamp\www\yii\framework\web\CController.php(309): CInlineAction->runWithParams(Array)
+#2 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#3 C:\wamp\www\yii\framework\web\filters\CFilter.php(41): CFilterChain->run()
+#4 C:\wamp\www\yii\framework\web\CController.php(1146): CFilter->filter(Object(CFilterChain))
+#5 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#6 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#7 C:\wamp\www\yii\framework\web\CController.php(292): CFilterChain->run()
+#8 C:\wamp\www\yii\framework\web\CController.php(266): CController->runActionWithFilters(Object(CInlineAction), Array)
+#9 C:\wamp\www\yii\framework\web\CWebApplication.php(276): CController->run('update')
+#10 C:\wamp\www\yii\framework\web\CWebApplication.php(135): CWebApplication->runController('endereco/update')
+#11 C:\wamp\www\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#12 C:\wamp\www\sispad\index.php(13): CApplication->run()
+#13 {main}
+REQUEST_URI=/sispad/index.php?r=endereco/update&id=2
+HTTP_REFERER=http://localhost/sispad/index.php?r=endereco/view&id=2&model=servidor&cpf=09809809809&serv=C%C3%A9SAR+HENRIQUE+LEITE
+---
