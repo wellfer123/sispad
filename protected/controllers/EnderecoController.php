@@ -124,7 +124,7 @@ class EnderecoController  extends SISPADBaseController
 			if(isset($_GET['id']))
 				$this->_model=Endereco::model()->findbyPk($_GET['id']);
 			if($this->_model===null)
-                                 $this->redirect(array('create','cpf'=>$_GET['cpf'],'id'=>$_GET['id'],'serv'=>$_GET['serv']));
+                                 $this->redirect(array('create','cpf'=>$_GET['cpf']));
 				//throw new CHttpException(404,'The requested page does not exist.');
 		}
 		return $this->_model;

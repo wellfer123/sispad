@@ -7157,3 +7157,87 @@ REQUEST_URI=/sispad/index.php?r=indicador/index
 in C:\wamp\www\sispad\protected\views\indicador\view.php (12)
 in C:\wamp\www\sispad\protected\controllers\IndicadorController.php (85)
 in C:\wamp\www\sispad\index.php (13)
+2012/06/01 18:20:00 [error] [exception.CException] exception 'CException' with message 'A propriedade "Endereco.cidade" não está definida.' in C:\wamp\www\yii\framework\base\CComponent.php:131
+Stack trace:
+#0 C:\wamp\www\yii\framework\db\ar\CActiveRecord.php(144): CComponent->__get('cidade')
+#1 C:\wamp\www\sispad\protected\extensions\EJuiAutoCompleteFkField.php(187): CActiveRecord->__get('cidade')
+#2 C:\wamp\www\yii\framework\web\CBaseController.php(148): EJuiAutoCompleteFkField->init()
+#3 C:\wamp\www\yii\framework\web\CBaseController.php(173): CBaseController->createWidget('EJuiAutoComplet...', Array)
+#4 C:\wamp\www\sispad\protected\views\endereco\_form.php(60): CBaseController->widget('EJuiAutoComplet...', Array)
+#5 C:\wamp\www\yii\framework\web\CBaseController.php(127): require('C:\wamp\www\sis...')
+#6 C:\wamp\www\yii\framework\web\CBaseController.php(96): CBaseController->renderInternal('C:\wamp\www\sis...', Array, true)
+#7 C:\wamp\www\yii\framework\web\CController.php(870): CBaseController->renderFile('C:\wamp\www\sis...', Array, true)
+#8 C:\wamp\www\sispad\protected\views\endereco\create.php(15): CController->renderPartial('_form', Array)
+#9 C:\wamp\www\yii\framework\web\CBaseController.php(127): require('C:\wamp\www\sis...')
+#10 C:\wamp\www\yii\framework\web\CBaseController.php(96): CBaseController->renderInternal('C:\wamp\www\sis...', Array, true)
+#11 C:\wamp\www\yii\framework\web\CController.php(870): CBaseController->renderFile('C:\wamp\www\sis...', Array, true)
+#12 C:\wamp\www\yii\framework\web\CController.php(783): CController->renderPartial('create', Array, true)
+#13 C:\wamp\www\sispad\protected\controllers\EnderecoController.php(66): CController->render('create', Array)
+#14 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(50): EnderecoController->actionCreate()
+#15 C:\wamp\www\yii\framework\web\CController.php(309): CInlineAction->runWithParams(Array)
+#16 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#17 C:\wamp\www\yii\framework\web\filters\CFilter.php(41): CFilterChain->run()
+#18 C:\wamp\www\yii\framework\web\CController.php(1146): CFilter->filter(Object(CFilterChain))
+#19 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#20 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#21 C:\wamp\www\yii\framework\web\CController.php(292): CFilterChain->run()
+#22 C:\wamp\www\yii\framework\web\CController.php(266): CController->runActionWithFilters(Object(CInlineAction), Array)
+#23 C:\wamp\www\yii\framework\web\CWebApplication.php(276): CController->run('create')
+#24 C:\wamp\www\yii\framework\web\CWebApplication.php(135): CWebApplication->runController('endereco/create')
+#25 C:\wamp\www\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#26 C:\wamp\www\sispad\index.php(13): CApplication->run()
+#27 {main}
+REQUEST_URI=/sispad/index.php?r=endereco/create&cpf=0912909880
+HTTP_REFERER=http://localhost/sispad/index.php?r=servidor/view&id=0912909880
+---
+2012/06/01 18:26:00 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'O sistema não foi capaz de encontrar a ação "index" solicitada.' in C:\wamp\www\yii\framework\web\CController.php:484
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(271): CController->missingAction('index')
+#1 C:\wamp\www\yii\framework\web\CWebApplication.php(276): CController->run('index')
+#2 C:\wamp\www\yii\framework\web\CWebApplication.php(135): CWebApplication->runController('endereco/index')
+#3 C:\wamp\www\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 C:\wamp\www\sispad\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/sispad/index.php?r=endereco/index
+HTTP_REFERER=http://localhost/sispad/index.php?r=endereco/view&id=2
+---
+2012/06/01 18:26:25 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'O sistema não foi capaz de encontrar a ação "index" solicitada.' in C:\wamp\www\yii\framework\web\CController.php:484
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(271): CController->missingAction('index')
+#1 C:\wamp\www\yii\framework\web\CWebApplication.php(276): CController->run('index')
+#2 C:\wamp\www\yii\framework\web\CWebApplication.php(135): CWebApplication->runController('endereco/index')
+#3 C:\wamp\www\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 C:\wamp\www\sispad\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/sispad/index.php?r=endereco/index
+HTTP_REFERER=http://localhost/sispad/index.php?r=endereco/view&id=2&model=servidor&cpf=09809809809
+---
+2012/06/01 18:33:09 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'O sistema não foi capaz de encontrar a ação "index" solicitada.' in C:\wamp\www\yii\framework\web\CController.php:484
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(271): CController->missingAction('index')
+#1 C:\wamp\www\yii\framework\web\CWebApplication.php(276): CController->run('index')
+#2 C:\wamp\www\yii\framework\web\CWebApplication.php(135): CWebApplication->runController('endereco/index')
+#3 C:\wamp\www\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#4 C:\wamp\www\sispad\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/sispad/index.php?r=endereco/index
+HTTP_REFERER=http://localhost/sispad/index.php?r=endereco/view&id=2&model=servidor&cpf=09809809809
+---
+2012/06/01 18:33:34 [error] [php] Undefined index: id (C:\wamp\www\sispad\protected\controllers\TituloEleitorController.php:125)
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(309): CInlineAction->runWithParams()
+#1 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(134): TituloEleitorController->runAction()
+#2 C:\wamp\www\yii\framework\web\filters\CFilter.php(41): CFilterChain->run()
+#3 C:\wamp\www\yii\framework\web\CController.php(1146): CAccessControlFilter->filter()
+#4 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(59): TituloEleitorController->filterAccessControl()
+#5 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter()
+#6 C:\wamp\www\yii\framework\web\CController.php(292): CFilterChain->run()
+#7 C:\wamp\www\yii\framework\web\CController.php(266): TituloEleitorController->runActionWithFilters()
+#8 C:\wamp\www\yii\framework\web\CWebApplication.php(276): TituloEleitorController->run()
+#9 C:\wamp\www\yii\framework\web\CWebApplication.php(135): CWebApplication->runController()
+#10 C:\wamp\www\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#11 C:\wamp\www\sispad\index.php(13): CWebApplication->run()
+REQUEST_URI=/sispad/index.php?r=tituloEleitor/index
+in C:\wamp\www\sispad\protected\controllers\TituloEleitorController.php (125)
+in C:\wamp\www\sispad\protected\controllers\TituloEleitorController.php (58)
+in C:\wamp\www\sispad\index.php (13)
