@@ -134,10 +134,16 @@ class UserController extends SISPADBaseController
 			if($model->save())
                                $this->redirect(array('view','id'=>$model->id));
 		}
-
-		$this->render('register',array(
-			'model'=>$model,
-		));
+                if(Yii::app()->user->isGuest){
+                    $this->render('register_frontend',array(
+                            'model'=>$model,
+                    ));
+                    
+                 }else{
+                     $this->render('register',array(
+                            'model'=>$model,
+                    ));
+                }
 	}
 
 	/**

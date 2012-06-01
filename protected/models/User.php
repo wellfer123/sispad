@@ -95,7 +95,7 @@ class User extends CActiveRecord
 			'password' => 'Senha',
 			'email' => 'E-mail',
 			'username' => 'Nome do usuário',
-			'servidor_cpf' => 'Servidor',
+			'servidor_cpf' => 'Servidor Cpf',
                         'ativo'=>'Ativo',
                         'verifyCode'=>'Código de verificação (Captcha)',
 		);
