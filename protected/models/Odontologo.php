@@ -13,6 +13,7 @@
 class Odontologo extends CActiveRecord
 {
         
+    const CODIGO_PROFISSAO='717';
     
         /**
          * @var string unidade que  faz parte

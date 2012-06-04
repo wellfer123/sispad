@@ -4040,7 +4040,7 @@ Stack trace:
 #9 C:\wamp\www\sispad\index.php(13): CWebApplication->run()
 REQUEST_URI=/sispad/index.php?r=procedimento/service&ws=1
 in C:\wamp\www\sispad\index.php (13)
-2012/05/24 16:45:28 [error] [php] PDO::__construct() [<a href='pdo.--construct'>pdo.--construct</a>]: [2002] Nenhuma conexão pôde ser feita porque a máquina de destino as re (trying to connect via tcp://169.254.18.175:3306) (C:\wamp\www\yii\framework\db\CDbConnection.php:422)
+2012/05/24 16:45:28 [error] [php] PDO::__construct() [<a href='pdo.--construct'>pdo.--construct</a>]: [2002] Nenhuma conexï¿½o pï¿½de ser feita porque a mï¿½quina de destino as re (trying to connect via tcp://169.254.18.175:3306) (C:\wamp\www\yii\framework\db\CDbConnection.php:422)
 Stack trace:
 #0 C:\wamp\www\yii\framework\db\CDbConnection.php(331): CDbConnection->open()
 #1 C:\wamp\www\yii\framework\db\CDbConnection.php(309): CDbConnection->setActive()
@@ -4070,7 +4070,7 @@ REQUEST_URI=/sispad/index.php?r=relatorio/create
 in C:\wamp\www\sispad\protected\modules\rbac\components\RBACAccessVerifier.php (163)
 in C:\wamp\www\sispad\protected\components\SISPADBaseController.php (84)
 in C:\wamp\www\sispad\protected\controllers\RelatorioController.php (78)
-2012/05/24 16:45:57 [error] [php] PDO::__construct() [<a href='pdo.--construct'>pdo.--construct</a>]: [2002] Nenhuma conexão pôde ser feita porque a máquina de destino as re (trying to connect via tcp://169.254.18.175:3306) (C:\wamp\www\yii\framework\db\CDbConnection.php:422)
+2012/05/24 16:45:57 [error] [php] PDO::__construct() [<a href='pdo.--construct'>pdo.--construct</a>]: [2002] Nenhuma conexï¿½o pï¿½de ser feita porque a mï¿½quina de destino as re (trying to connect via tcp://169.254.18.175:3306) (C:\wamp\www\yii\framework\db\CDbConnection.php:422)
 Stack trace:
 #0 C:\wamp\www\yii\framework\db\CDbConnection.php(331): CDbConnection->open()
 #1 C:\wamp\www\yii\framework\db\CDbConnection.php(309): CDbConnection->setActive()
@@ -4100,7 +4100,7 @@ REQUEST_URI=/sispad/index.php?r=relatorio/create
 in C:\wamp\www\sispad\protected\modules\rbac\components\RBACAccessVerifier.php (163)
 in C:\wamp\www\sispad\protected\components\SISPADBaseController.php (84)
 in C:\wamp\www\sispad\protected\controllers\RelatorioController.php (78)
-2012/05/24 16:47:52 [error] [php] PDO::__construct() [<a href='pdo.--construct'>pdo.--construct</a>]: [2002] Uma tentativa de conexão falhou porque o componente conectado nã (trying to connect via tcp://169.254.18.175:3306) (C:\wamp\www\yii\framework\db\CDbConnection.php:422)
+2012/05/24 16:47:52 [error] [php] PDO::__construct() [<a href='pdo.--construct'>pdo.--construct</a>]: [2002] Uma tentativa de conexï¿½o falhou porque o componente conectado nï¿½ (trying to connect via tcp://169.254.18.175:3306) (C:\wamp\www\yii\framework\db\CDbConnection.php:422)
 Stack trace:
 #0 C:\wamp\www\yii\framework\db\CDbConnection.php(331): CDbConnection->open()
 #1 C:\wamp\www\yii\framework\db\CDbConnection.php(309): CDbConnection->setActive()
@@ -4130,7 +4130,7 @@ REQUEST_URI=/sispad/index.php?r=relatorio/create
 in C:\wamp\www\sispad\protected\modules\rbac\components\RBACAccessVerifier.php (163)
 in C:\wamp\www\sispad\protected\components\SISPADBaseController.php (84)
 in C:\wamp\www\sispad\protected\controllers\RelatorioController.php (78)
-2012/05/24 16:48:32 [error] [php] PDO::__construct() [<a href='pdo.--construct'>pdo.--construct</a>]: [2002] Uma tentativa de conexão falhou porque o componente conectado nã (trying to connect via tcp://169.254.18.175:3306) (C:\wamp\www\yii\framework\db\CDbConnection.php:422)
+2012/05/24 16:48:32 [error] [php] PDO::__construct() [<a href='pdo.--construct'>pdo.--construct</a>]: [2002] Uma tentativa de conexï¿½o falhou porque o componente conectado nï¿½ (trying to connect via tcp://169.254.18.175:3306) (C:\wamp\www\yii\framework\db\CDbConnection.php:422)
 Stack trace:
 #0 C:\wamp\www\yii\framework\db\CDbConnection.php(331): CDbConnection->open()
 #1 C:\wamp\www\yii\framework\db\CDbConnection.php(309): CDbConnection->setActive()
@@ -4183,7 +4183,7 @@ Stack trace:
 #9 C:\wamp\www\sispad\index.php(13): CWebApplication->run()
 REQUEST_URI=/sispad/index.php?r=procedimento/service&ws=1
 in C:\wamp\www\sispad\index.php (13)
-2012/05/24 17:00:15 [error] [php] PDO::__construct() [<a href='pdo.--construct'>pdo.--construct</a>]: [2002] Uma tentativa de conexão falhou porque o componente conectado nã (trying to connect via tcp://169.254.18.175:3306) (C:\wamp\www\yii\framework\db\CDbConnection.php:422)
+2012/05/24 17:00:15 [error] [php] PDO::__construct() [<a href='pdo.--construct'>pdo.--construct</a>]: [2002] Uma tentativa de conexï¿½o falhou porque o componente conectado nï¿½ (trying to connect via tcp://169.254.18.175:3306) (C:\wamp\www\yii\framework\db\CDbConnection.php:422)
 Stack trace:
 #0 C:\wamp\www\yii\framework\db\CDbConnection.php(331): CDbConnection->open()
 #1 C:\wamp\www\yii\framework\db\CDbConnection.php(309): CDbConnection->setActive()
@@ -4223,7 +4223,7 @@ Stack trace:
 #10 {main}
 REQUEST_URI=/sispad/index.php?r=perfil/home
 ---
-2012/05/24 17:01:56 [error] [php] PDO::__construct() [<a href='pdo.--construct'>pdo.--construct</a>]: [2002] Uma tentativa de conexão falhou porque o componente conectado nã (trying to connect via tcp://169.254.18.175:3306) (C:\wamp\www\yii\framework\db\CDbConnection.php:422)
+2012/05/24 17:01:56 [error] [php] PDO::__construct() [<a href='pdo.--construct'>pdo.--construct</a>]: [2002] Uma tentativa de conexï¿½o falhou porque o componente conectado nï¿½ (trying to connect via tcp://169.254.18.175:3306) (C:\wamp\www\yii\framework\db\CDbConnection.php:422)
 Stack trace:
 #0 C:\wamp\www\yii\framework\db\CDbConnection.php(331): CDbConnection->open()
 #1 C:\wamp\www\yii\framework\db\CDbConnection.php(309): CDbConnection->setActive()
@@ -4248,7 +4248,7 @@ REQUEST_URI=/sispad/index.php?r=perfil/home
 in C:\wamp\www\sispad\protected\modules\rbac\components\RBACAccessVerifier.php (163)
 in C:\wamp\www\sispad\protected\components\SISPADBaseController.php (84)
 in C:\wamp\www\sispad\protected\controllers\PerfilController.php (26)
-2012/05/24 17:19:25 [error] [php] PDO::__construct() [<a href='pdo.--construct'>pdo.--construct</a>]: [2002] Uma tentativa de conexão falhou porque o componente conectado nã (trying to connect via tcp://169.254.18.175:3306) (C:\wamp\www\yii\framework\db\CDbConnection.php:422)
+2012/05/24 17:19:25 [error] [php] PDO::__construct() [<a href='pdo.--construct'>pdo.--construct</a>]: [2002] Uma tentativa de conexï¿½o falhou porque o componente conectado nï¿½ (trying to connect via tcp://169.254.18.175:3306) (C:\wamp\www\yii\framework\db\CDbConnection.php:422)
 Stack trace:
 #0 C:\wamp\www\yii\framework\db\CDbConnection.php(331): CDbConnection->open()
 #1 C:\wamp\www\yii\framework\db\CDbConnection.php(309): CDbConnection->setActive()
