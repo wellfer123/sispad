@@ -1,7 +1,8 @@
 <?php
+$nomeServidor = $_GET['serv'];
 $this->breadcrumbs=array(
-	'Titulo Eleitors'=>array('index'),
-	$model->servidor_cpf,
+        'Servidor'=>array('Servidor/view','id'=>$model->servidor_cpf),
+	'Titulo de Eleitor de '.$nomeServidor,
 );
 
 $this->menu=array(
@@ -9,7 +10,7 @@ $this->menu=array(
 );
 ?>
 
-<h1>View TituloEleitor #<?php echo $model->servidor_cpf; ?></h1>
+<h1>Titulo de Eleitor de <?php echo $nomeServidor ?></h1>
 
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,

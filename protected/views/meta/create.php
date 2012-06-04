@@ -1,6 +1,7 @@
 <?php
 $this->breadcrumbs=array(
-	'Meta'=>array('index'),
+        'Indicador'=>array('indicador/admin'),
+	'Meta',
 	'Create',
 );
 

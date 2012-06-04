@@ -42,7 +42,20 @@
                 return $result;
 
         }
+  public static function calculaDiferencaDatasEmHoras($data1,$data2,$formato,$delim){
 
+            if($formato=="br"){
+                $data1=self::inverteData($data1, $delim);
+                $data2=self::inverteData($data2, $delim);
+
+            }
+                $data1Obj= new DateTime($data1);
+                $data2Obj= new DateTime($data2);
+
+                $result= ($data1Obj->getTimestamp()-$data2Obj->getTimestamp())/(60*60);
+                return $result;
+
+        }
          public static function geraArrayAnos($ano_inic,$ano_fim) {
                 ++$ano_fim;
                 $anos = array();

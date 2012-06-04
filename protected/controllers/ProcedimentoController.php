@@ -13,15 +13,15 @@ class ProcedimentoController extends Controller
 	//private $_model;
     
         //vai guardar o valor da competencia anterior
-        private $competencia_old;
+        private $_competencia_old;
         //vai guardar um true ou false se a competencia anterior é válida
-        private $competencia_boolean;
+        private $_competencia_boolean;
         
         //vai guardar o valor da competencia anterior
-        private $servidor_equipe_old;
+        private $_servidor_equipe_old;
         //vai guardar um true ou false se a competencia anterior é válida
-        private $servidor_equipe_boolean;
-        
+        private $_servidor_equipe_boolean;
+        private $_procedimentos=null;
         
         public function actions()
         {
@@ -158,6 +158,9 @@ class ProcedimentoController extends Controller
      * @soap
      */
     public function getProcedimentosAEnviarSIAB($usuarioDesktop){
+        if(!$this->usuarioEstaLogado($usuarioDesktop)){
+            return array();
+        }
        
         return Procedimento::model()->findAll($this->getCDBcriteriaProcedimento(Procedimento::ORIGEM_SIAB));
     }
@@ -168,8 +171,11 @@ class ProcedimentoController extends Controller
      * @soap
      */
     public function getProcedimentosDeMedicoAEnviarSIAB($usuarioDesktop){
+        if(!$this->usuarioEstaLogado($usuarioDesktop)){
+            return array();
+        }
        
-        return Procedimento::model()->findAll($this->getCDBcriteriaProcedimentoPorprofissional('690', Procedimento::ORIGEM_SIAB));
+        return Procedimento::model()->findAll($this->getCDBcriteriaProcedimentoPorprofissional(Medico::CODIGO_PROFISSAO, Procedimento::ORIGEM_SIAB));
     }
     
     /**
@@ -178,8 +184,11 @@ class ProcedimentoController extends Controller
      * @soap
      */
     public function getProcedimentosDeEnfermeiroAEnviarSIAB($usuarioDesktop){
+        if(!$this->usuarioEstaLogado($usuarioDesktop)){
+            return array();
+        }
        
-        return Procedimento::model()->findAll($this->getCDBcriteriaProcedimentoPorprofissional('532', Procedimento::ORIGEM_SIAB));
+        return Procedimento::model()->findAll($this->getCDBcriteriaProcedimentoPorprofissional(Enfermeiro::CODIGO_PROFISSAO, Procedimento::ORIGEM_SIAB));
     }
     
     /**
@@ -188,8 +197,11 @@ class ProcedimentoController extends Controller
      * @soap
      */
     public function getProcedimentosDeOdontologoAEnviarSIAB($usuarioDesktop){
+        if(!$this->usuarioEstaLogado($usuarioDesktop)){
+            return array();
+        }
        
-        return Procedimento::model()->findAll($this->getCDBcriteriaProcedimentoPorprofissional('717', Procedimento::ORIGEM_SIAB));
+        return Procedimento::model()->findAll($this->getCDBcriteriaProcedimentoPorprofissional(Odontologo::CODIGO_PROFISSAO, Procedimento::ORIGEM_SIAB));
     }
     
     /**
@@ -198,8 +210,11 @@ class ProcedimentoController extends Controller
      * @soap
      */
     public function getProcedimentosDeAgenteSaudeAEnviarSIAB($usuarioDesktop){
+        if(!$this->usuarioEstaLogado($usuarioDesktop)){
+            return array();
+        }
        
-        return Procedimento::model()->findAll($this->getCDBcriteriaProcedimentoPorprofissional('106', Procedimento::ORIGEM_SIAB));
+        return Procedimento::model()->findAll($this->getCDBcriteriaProcedimentoPorprofissional(AgenteSaude::CODIGO_PROFISSAO, Procedimento::ORIGEM_SIAB));
     }
     
     /**
@@ -208,7 +223,9 @@ class ProcedimentoController extends Controller
      * @soap
      */
     public function getProcedimentosAEnviarSIA($usuarioDesktop){
-       
+       if(!$this->usuarioEstaLogado($usuarioDesktop)){
+            return array();
+        }
        
         return Procedimento::model()->findAll($this->getCDBcriteriaProcedimento(Procedimento::ORIGEM_SIA));;
     }
@@ -220,8 +237,11 @@ class ProcedimentoController extends Controller
      * @soap
      */
     public function getProcedimentosDeMedicoAEnviarSIA($usuarioDesktop){
+        if(!$this->usuarioEstaLogado($usuarioDesktop)){
+            return array();
+        }
        
-        return Procedimento::model()->findAll($this->getCDBcriteriaProcedimentoPorprofissional('690', Procedimento::ORIGEM_SIA));
+        return Procedimento::model()->findAll($this->getCDBcriteriaProcedimentoPorprofissional(Medico::CODIGO_PROFISSAO, Procedimento::ORIGEM_SIA));
     }
     
     /**
@@ -230,8 +250,11 @@ class ProcedimentoController extends Controller
      * @soap
      */
     public function getProcedimentosDeEnfermeiroAEnviarSIA($usuarioDesktop){
+        if(!$this->usuarioEstaLogado($usuarioDesktop)){
+            return array();
+        }
        
-        return Procedimento::model()->findAll($this->getCDBcriteriaProcedimentoPorprofissional('532', Procedimento::ORIGEM_SIA));
+        return Procedimento::model()->findAll($this->getCDBcriteriaProcedimentoPorprofissional(Enfermeiro::CODIGO_PROFISSAO, Procedimento::ORIGEM_SIA));
     }
     
     /**
@@ -240,8 +263,11 @@ class ProcedimentoController extends Controller
      * @soap
      */
     public function getProcedimentosDeOdontologoAEnviarSIA($usuarioDesktop){
+        if(!$this->usuarioEstaLogado($usuarioDesktop)){
+            return array();
+        }
        
-        return Procedimento::model()->findAll($this->getCDBcriteriaProcedimentoPorprofissional('717', Procedimento::ORIGEM_SIA));
+        return Procedimento::model()->findAll($this->getCDBcriteriaProcedimentoPorprofissional(Odontologo::CODIGO_PROFISSAO, Procedimento::ORIGEM_SIA));
     }
     
     /**
@@ -250,8 +276,11 @@ class ProcedimentoController extends Controller
      * @soap
      */
     public function getProcedimentosDeAgenteSaudeAEnviarSIA($usuarioDesktop){
+        if(!$this->usuarioEstaLogado($usuarioDesktop)){
+            return array();
+        }
        
-        return Procedimento::model()->findAll($this->getCDBcriteriaProcedimentoPorprofissional('106', Procedimento::ORIGEM_SIA));
+        return Procedimento::model()->findAll($this->getCDBcriteriaProcedimentoPorprofissional(AgenteSaude::CODIGO_PROFISSAO, Procedimento::ORIGEM_SIA));
     }
     /**
      * @param UsuarioDesktop usuario da aplicao desktop
@@ -259,6 +288,9 @@ class ProcedimentoController extends Controller
      * @soap
      */
     public function getUnidades($usuarioDesktop){
+        if(!$this->usuarioEstaLogado($usuarioDesktop)){
+            return array();
+        }
        
        
         return Unidade::model()->findAll();
@@ -284,7 +316,9 @@ class ProcedimentoController extends Controller
      * @soap
      */
     public function getAgenteSaude($codigoUnidade,$usuarioDesktop){
-       
+       if(!$this->usuarioEstaLogado($usuarioDesktop)){
+            return array();
+        }
        
         return AgenteSaude::model()->findAll('unidade_cnes=:unidade', array(':unidade'=>$codigoUnidade));;
     }
@@ -296,7 +330,9 @@ class ProcedimentoController extends Controller
      * @soap
      */
     public function getOdontologos($codigoUnidade,$usuarioDesktop){
-       
+       if(!$this->usuarioEstaLogado($usuarioDesktop)){
+            return array();
+        }
        
         return Odontologo::model()->findAll('unidade_cnes=:unidade', array(':unidade'=>$codigoUnidade));
     }
@@ -308,7 +344,9 @@ class ProcedimentoController extends Controller
      * @soap
      */
     public function getEnfermeiros($codigoUnidade,$usuarioDesktop){
-       
+       if(!$this->usuarioEstaLogado($usuarioDesktop)){
+            return array();
+        }
        
         return Enfermeiro::model()->findAll('unidade_cnes=:unidade', array(':unidade'=>$codigoUnidade));;
     }
@@ -401,7 +439,7 @@ class ProcedimentoController extends Controller
                             $servidor_equipe->setEquipeUnidadeCNES($medExe->getMedico_unidade_cnes());
                             $servidor_equipe->setFuncao("Medico");
                             if($this->IsServidorEquipe($servidor_equipe)){
-                                if($this->existeProcedimento($medExe->getProcedimento_codigo())){
+                                if($this->existeProcedimento($medExe->getProcedimento_codigo(),  Medico::CODIGO_PROFISSAO)){
                                     //agora verifica se o registro já existe, senão existir, vai cadastrar
                                     if($this->validarProcedimentoExecutadomedico($medExe)){
                                         //vai salvar o registro
@@ -429,7 +467,7 @@ class ProcedimentoController extends Controller
                                 }
                                 //o rpocedimento não faz parte de nenhuma meta
                                 else{
-                                   $msg[]=$this->getMessageWebService("PROCEDIMENTO: $procedi->nome\n WARNING: NÃO FAZ PARTE DE NHUMA META. ENTÃO FOI DESCARTADO!", MessageWebService::WARNING); 
+                                   $msg[]=$this->getMessageWebService("PROCEDIMENTO: $procedi->nome\n WARNING: NÃO FAZ PARTE DE NENHUMA META PARA MÉDICO. ENTÃO FOI DESCARTADO!", MessageWebService::WARNING); 
                                 }
                             }
                             //médico não faz parte da equipe
@@ -501,10 +539,10 @@ class ProcedimentoController extends Controller
    //métodos privados
     
    private function iniciarVariaveisGlobais(){
-       $this->competencia_boolean=false;
-       $this->competencia_old=-9999999;
-       $this->servidor_equipe_boolean=false;
-       $this->servidor_equipe_old=null;
+       $this->_competencia_boolean=false;
+       $this->_competencia_old=-9999999;
+       $this->_servidor_equipe_boolean=false;
+       $this->_servidor_equipe_old=null;
    }
    //devolve uma CDBcriteria para consultar os procedimentos que fazem da parte de alguma meta  e
    private function getCDBcriteriaProcedimento($origemProcedimento){
@@ -518,7 +556,7 @@ class ProcedimentoController extends Controller
    }
    
    //devolve uma CDBcriteria para consultar os procedimentos que fazem da parte de alguma meta  e
-   private function getCDBcriteriaProcedimentoPorprofissional($codigoFuncao, $origemProcedimento){
+   private function getCDBcriteriaProcedimentoPorprofissional($codigoFuncao, $origemProcedimento=null){
         $criteria= new CDbCriteria();
         $criteria->select=" pro.codigo, pro.nome";
         $criteria->distinct=true;
@@ -526,8 +564,14 @@ class ProcedimentoController extends Controller
         $join="INNER JOIN meta_procedimento mt ON pro.codigo=mt.procedimento_codigo";
         $join=$join." INNER JOIN meta m ON m.id=mt.meta_id INNER JOIN indicador ind ON ind.id=m.indicador_id";
         $criteria->join=$join;
-        $criteria->condition="pro.origem=:origem AND ind.status=:status AND ind.profissao_codigo=:codigoProfissao ";
-        $criteria->params=array(':origem'=>$origemProcedimento, ':status'=>Indicador::ATIVO, ':codigoProfissao'=>$codigoFuncao);
+        if($origemProcedimento===null){
+            $criteria->condition="pro.origem=:origem AND ind.status=:status AND ind.profissao_codigo=:codigoProfissao ";
+            $criteria->params=array(':origem'=>$origemProcedimento, ':status'=>Indicador::ATIVO, ':codigoProfissao'=>$codigoFuncao);
+        }
+        else{
+            $criteria->condition=" ind.status=:status AND ind.profissao_codigo=:codigoProfissao ";
+            $criteria->params=array(':status'=>Indicador::ATIVO, ':codigoProfissao'=>$codigoFuncao);
+        }
        return $criteria;
    }
    
@@ -552,17 +596,17 @@ class ProcedimentoController extends Controller
     */
    private function validarCompetencia($competencia){
        if($competencia->equals($competencia)){
-           if($this->competencia_boolean){
+           if($this->_competencia_boolean){
                return true;
            }
        }
-       $this->competencia_old=$competencia;
-       $this->competencia_boolean=Competencia::model()->exists("mes_ano=:valor AND ativo=:ativo",
+       $this->_competencia_old=$competencia;
+       $this->_competencia_boolean=Competencia::model()->exists("mes_ano=:valor AND ativo=:ativo",
                                                                 array(
                                                                     ':valor'=>$competencia->mes_ano,
                                                                     ':ativo'=>  Competencia::ABERTA
                                                                 ));
-       return $this->competencia_boolean;
+       return $this->_competencia_boolean;
    }
    
    /**
@@ -571,21 +615,21 @@ class ProcedimentoController extends Controller
     * @return boolean
     */
    private function IsServidorEquipe($servidor_equipe){
-       if($servidor_equipe->equals($this->servidor_equipe_old)){
-           if($this->servidor_equipe_boolean){
+       if($servidor_equipe->equals($this->_servidor_equipe_old)){
+           if($this->_servidor_equipe_boolean){
                return true;
            }
        }
        //o servidorEquipe e diferente ou não foi válido o anterior
-       $this->servidor_equipe_old=$servidor_equipe;
-       $this->servidor_equipe_boolean=ServidorEquipe::model()->exists(" servidor_cpf=:servidor AND equipe_unidade_cnes=:cnes AND funcao=:funcao AND ativo=:ativo",
+       $this->_servidor_equipe_old=$servidor_equipe;
+       $this->_servidor_equipe_boolean=ServidorEquipe::model()->exists(" servidor_cpf=:servidor AND equipe_unidade_cnes=:cnes AND funcao=:funcao AND ativo=:ativo",
                                                 array(
                                                         ':servidor'=>$servidor_equipe->servidor_cpf,
                                                         ':cnes'=>$servidor_equipe->equipe_unidade_cnes,
                                                         ':funcao'=>$servidor_equipe->funcao,
                                                         ':ativo'=>ServidorEquipe::ATIVO
                                                 ));
-       return $this->servidor_equipe_boolean;
+       return $this->_servidor_equipe_boolean;
    }
    /**
     *verifica se o medico se já tem o registro do procedimento executado na competencia já foi registrado
@@ -606,11 +650,16 @@ class ProcedimentoController extends Controller
    }
 
 
-   private function existeProcedimento($procedimento_codigo){
-       return MetaProcedimento::model()->exists(" procedimento_codigo=:codigo",
-                                                array(
-                                                    ':codigo'=>$procedimento_codigo
-                                                    ));
+   private function existeProcedimento($procedimento_codigo, $codigoProfisao){
+       if($this->_procedimentos===null){
+          $this->_procedimentos=Procedimento::model()->findAll($this->getCDBcriteriaProcedimentoPorprofissional($codigoProfisao));
+       }
+       foreach($this->_procedimentos as $proc){
+           if($proc->codigo===$procedimento_codigo){
+               return true;
+           }
+       }
+       return false;
    }
 
 
@@ -618,6 +667,8 @@ class ProcedimentoController extends Controller
        if($usuarioDesktop!==null){
            $user=UsuarioDesktopLogado::model()->find('usuario_desktop_cpf=:cpf AND  usuario_aplicacao=:serial',
                                                 array(':cpf'=>$usuarioDesktop->servidor_cpf,':serial'=>$usuarioDesktop->serial_aplicacao));
+           //RETORNO ADICIONADO ENQUANTO NAO A IMPLEMENTACAO DE VERIFICACAO DE TEMPO LOGADO NÃO É FINALIZADA 
+           return true;
            //calcula a diferença entre as data
            //depois divide por 3600 (segundos de uma hora), se for maior que um, então a sessão está inválida
            if($user!==null){
@@ -637,8 +688,8 @@ class ProcedimentoController extends Controller
        return Procedimento::model()->findByPk($codigo_procedi);
    }
 
-
-     public function actionFindProcedimentos() {
+   
+   public function actionFindProcedimentos() {
 
             //$this->_RBAC->checkAccess('registered',true);
             $q = $_GET['term'];

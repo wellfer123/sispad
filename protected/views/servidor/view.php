@@ -35,7 +35,7 @@ $this->menu=array(
                     'label'=>'Outros Dados',
                     'type'=>'raw',
                     'value'=>CHtml::link('Endereço',
-                                 array('endereco/view','id'=>$model->endereco_id,'model'=>'servidor','idModel'=>$model->cpf)).'/ '.
+                                 array('endereco/view','id'=>$model->endereco_id,'model'=>'servidor','cpf'=>$model->cpf,'serv'=>$model->nome)).'/ '.
                             CHtml::link('Dados do Trabalho',
                                  array('DadosTrabalho/view','id'=>$model->cpf,'serv'=>$model->nome)).' / '.
                             CHtml::link('Identidade',

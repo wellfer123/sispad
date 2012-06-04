@@ -13,6 +13,7 @@
  */
 class AgenteSaude extends CActiveRecord
 {
+        const CODIGO_PROFISSAO='103';
     
         /**
          * @var string unidade que  faz parte

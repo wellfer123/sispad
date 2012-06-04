@@ -1,6 +1,8 @@
 <?php
 $this->breadcrumbs=array(
-	'Item'=>array('index'),
+        'Indicador'=>array('indicador/admin'),
+	'Metas'=>array('meta/view',"indicador_id"=>$_GET['indicador_id']),
+	'Itens',
 	'Create',
 );
 

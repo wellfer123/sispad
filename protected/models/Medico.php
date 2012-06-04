@@ -12,7 +12,7 @@
 class Medico extends CActiveRecord
 {
         
-    
+    const CODIGO_PROFISSAO='690';
         /**
          * @var string unidade que  faz parte
          * @soap
