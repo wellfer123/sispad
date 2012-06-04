@@ -61,8 +61,8 @@ class Indicador extends CActiveRecord
 	{
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
-		return array('profissao'=>array(self::BELONGS_TO,'profissao','profissao_codigo'),
-                            'meta'=>array(self::HAS_MANY,'meta','indicador_id')
+		return array('profissao'=>array(self::BELONGS_TO,'Profissao','profissao_codigo'),
+                            'meta'=>array(self::HAS_MANY,'Meta','indicador_id')
 		);
 	}
 

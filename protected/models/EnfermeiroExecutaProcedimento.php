@@ -129,4 +129,45 @@ class EnfermeiroExecutaProcedimento extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+        public function getEnfermeiro_unidade_cnes() {
+            return $this->enfermeiro_unidade_cnes;
+        }
+
+        public function getEnfermeiro_cpf() {
+            return $this->enfermeiro_cpf;
+        }
+
+        public function getCompetencia() {
+            return $this->competencia;
+        }
+
+        public function getQuantidade() {
+            return $this->quantidade;
+        }
+
+        public function getProcedimento_codigo() {
+            return $this->procedimento_codigo;
+        }
+        public function setEnfermeiro_unidade_cnes($enfermeiro_unidade_cnes) {
+            $this->enfermeiro_unidade_cnes = $enfermeiro_unidade_cnes;
+        }
+
+        public function setEnfermeiro_cpf($enfermeiro_cpf) {
+            $this->enfermeiro_cpf = $enfermeiro_cpf;
+        }
+
+        public function setCompetencia($competencia) {
+            $this->competencia = $competencia;
+        }
+
+        public function setQuantidade($quantidade) {
+            $this->quantidade = $quantidade;
+        }
+
+        public function setProcedimento_codigo($procedimento_codigo) {
+            $this->procedimento_codigo = $procedimento_codigo;
+        }
+
+
+
 }

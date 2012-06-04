@@ -7,11 +7,11 @@
  * @property integer $id
  * @property string $nome
  */
-class meses extends CActiveRecord
+class Meses extends CActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
-	 * @return meses the static model class
+	 * @return Meses the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
