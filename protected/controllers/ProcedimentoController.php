@@ -564,7 +564,7 @@ class ProcedimentoController extends Controller
         $join="INNER JOIN meta_procedimento mt ON pro.codigo=mt.procedimento_codigo";
         $join=$join." INNER JOIN meta m ON m.id=mt.meta_id INNER JOIN indicador ind ON ind.id=m.indicador_id";
         $criteria->join=$join;
-        if($origemProcedimento===null){
+        if($origemProcedimento!==null){
             $criteria->condition="pro.origem=:origem AND ind.status=:status AND ind.profissao_codigo=:codigoProfissao ";
             $criteria->params=array(':origem'=>$origemProcedimento, ':status'=>Indicador::ATIVO, ':codigoProfissao'=>$codigoFuncao);
         }
