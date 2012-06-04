@@ -24,7 +24,7 @@ class PerfilController extends SISPADBaseController{
         
     public function actionHome(){
             $this->CheckAcessAction();
-            $this->model=$this->loadModel("Servidor","user",Yii::app()->user->cpfservidor);
+            $this->model=$this->loadModel("user",Yii::app()->user->cpfservidor);
 
             $this->render('home');
         }
@@ -36,13 +36,13 @@ class PerfilController extends SISPADBaseController{
         }
 
 
-        public function loadModel($model,$relation=null,$id)
+        public function loadModel($relation,$id)
 	{
             if($relation!=null){
            
-            $_model=$model::model()->with($relation)->findbyPk($id);
+            $_model=Servidor::model()->with($relation)->findbyPk($id);
             }else{
-                 $_model=$model::model()->findbyPk($id);
+                 $_model=Servidor::model()->findbyPk($id);
             }
 			if($_model===null)
 				throw new CHttpException(404,'The requested page does not exist.');
