@@ -507,9 +507,97 @@ class ProcedimentoController extends Controller
      * @soap
      */
     public function sendExecutadosPorEnfermeiro($procedimentosExecutados,$usuarioDesktop){
-         
-            $m= new MessageWebService;
-        return array($m);
+       try{
+            //arreio de mensagens
+            $msg=array();
+            $this->iniciarVariaveisGlobais();
+            // verifica se o usuário está logado
+            if($this->usuarioEstaLogado($usuarioDesktop)){
+                //verifica se é um vetor de procedimentos executados por medicos
+                if(is_array($procedimentosExecutados)){
+                    foreach($procedimentosExecutados as $proc){
+                        
+                        $enfExe= new EnfermeiroExecutaProcedimento();
+                        $compet= new Competencia();
+                        //vai preencher os dados
+                        $enfExe->setCompetencia($proc->competencia);
+                        $enfExe->setMedico_cpf($proc->enfermeiro_cpf);
+                        $enfExe->setMedico_unidade_cnes($proc->enfermeiro_unidade_cnes);
+                        $enfExe->setProcedimento_codigo($proc->procedimento_codigo);
+                        $enfExe->setQuantidade($proc->quantidade);
+                        //carrega as entidades para usar nas mensagens
+                        $ser= $this->loadServidor($proc->enfermeiro_cpf);
+                        $procedi=$this->loadProcedimento($proc->procedimento_codigo);
+                        
+                        $compet->setMesAno($enfExe->getCompetencia());
+                        //verifica se a competencia do procedimento executado é válida
+                        if($this->validarCompetencia($compet)){
+                            //é válida, então deve verificar se o servidor pertence mesmo a equipe
+                            $servidor_equipe= new ServidorEquipe;
+                            //preenchendo so valores
+                            $servidor_equipe->setServidorCPF($enfExe->getEnfermeiro_cpf());
+                            $servidor_equipe->setEquipeUnidadeCNES($enfExe->getEnfermeiro_unidade_cnes());
+                            $servidor_equipe->setFuncao("Enfermeiro");
+                            if($this->IsServidorEquipe($servidor_equipe)){
+                                if($this->existeProcedimento($enfExe->getProcedimento_codigo(), Enfermeiro::CODIGO_PROFISSAO)){
+                                    //agora verifica se o registro já existe, senão existir, vai cadastrar
+                                    if($this->validarProcedimentoExecutadoEnfermeiro($enfExe)){
+                                        //vai salvar o registro
+                                        try{
+                                            //vai salvar o objeto
+                                            if($enfExe->save()){
+                                                $msg[]=$this->getMessageWebService("PROCEDIMENTO: $procedi->nome \nENFERMEIRO: $ser->nome \nSUCESSO: PROCEDIMENTO EXECUTADO PELO ENFERMEIRO REGISTRADO COM SUCESSO", MessageWebService::SUCESSO); 
+                                            }
+                                            //erro ao salvar
+                                            else{
+                                                //adiciona o erro ao vetor
+                                                $msg[]=$this->getMessageWebService("PROCEDIMENTO: $procedi->nome \nENFERMEIRO: $ser->nome \nERRO: NÃO FOI POSSÍVEL REGISTRAR O PROCEDIMENTO EXECUTADO PELO ENFERMEIRO", MessageWebService::ERRO);
+                                            }
+                                        }catch(Exception $ex){
+                                            $tmp=$ex->getMessage();
+                                            //adiciona o erro ao vetor
+                                            $msg[]=$this->getMessageWebService("PROCEDIMENTO: $procedi->nome \nENFERMEIRO: $ser->nome \nERRO INESPERADO AO TENTAR SALVAR O PROCEDIMENTO EXECUTADO PELO ENFERMEIRO! $tmp", MessageWebService::ERRO); 
+                                        } 
+                                        //terminou o try
+                                    }
+                                    //já foi enviado
+                                    else{
+                                        $msg[]=$this->getMessageWebService("PROCEDIMENTO: $procedi->nome \nENFERMEIRO: $ser->nome \nERRO: JÁ FOI ENVIADO PARA A COMPETÊNCIA $enfExe->competencia", MessageWebService::ERRO); 
+                                    }
+                                }
+                                //o rpocedimento não faz parte de nenhuma meta
+                                else{
+                                   $msg[]=$this->getMessageWebService("PROCEDIMENTO: $procedi->nome\n WARNING: NÃO FAZ PARTE DE NENHUMA META PARA ENFERMEIRO. ENTÃO FOI DESCARTADO!", MessageWebService::WARNING); 
+                                }
+                            }
+                            //médico não faz parte da equipe
+                            else{
+                               $msg[]=$this->getMessageWebService("ENFERMEIRO: $ser->nome \nERRO: NÃO ESTÁ CADASTRADO EM NENHUMA EQUIPE", MessageWebService::ERRO); 
+                            }
+                        }
+                        //competência inválida
+                        else{
+                            $msg[]=$this->getMessageWebService("ERRO: COMPETÊNCIA INVÁLIDA, $enfExe->competencia", MessageWebService::ERRO);
+                        }
+                        
+                    }
+                }
+                //não foi um array de procedimentos executados por medicos
+                else{
+                    //adiciona o erro ao vetor
+                    $msg[]=$this->getMessageWebService("ERRO: DEVE-SE ENVIAR UMA LISTA DE PROCEDIMENTOS EXECUTADOS POR UM ENFERMEIRO!", MessageWebService::ERRO);
+                    
+                }
+            }
+            //não está logado
+            else{
+                $msg[]=$this->getMessageWebService("ERRO: DEVE-SE FAZER LOGIN NO WEB SERVICE!", MessageWebService::ERRO);
+            }
+        }catch(Exception $ex){
+            $tmp=$ex->getMessage();
+            $msg[]=$this->getMessageWebService("ERRO INESPERADO A CHAMADA DO MÉTODO! $tmp",MessageWebService::ERRO);
+        }
+        return $msg;
     }
     
     /**
@@ -564,7 +652,7 @@ class ProcedimentoController extends Controller
         $join="INNER JOIN meta_procedimento mt ON pro.codigo=mt.procedimento_codigo";
         $join=$join." INNER JOIN meta m ON m.id=mt.meta_id INNER JOIN indicador ind ON ind.id=m.indicador_id";
         $criteria->join=$join;
-        if($origemProcedimento===null){
+        if($origemProcedimento!==null){
             $criteria->condition="pro.origem=:origem AND ind.status=:status AND ind.profissao_codigo=:codigoProfissao ";
             $criteria->params=array(':origem'=>$origemProcedimento, ':status'=>Indicador::ATIVO, ':codigoProfissao'=>$codigoFuncao);
         }
@@ -648,7 +736,18 @@ class ProcedimentoController extends Controller
                                     )
                                );
    }
-
+   
+   private function validarProcedimentoExecutadoEnfermeiro($enfermeiroExecutaProcedimento){
+       //se existir vai retornar falso
+       return !$enfermeiroExecutaProcedimento->exists("enfermeiro_cpf=:enfermeiro AND procedimento_codigo=:procedimento
+                               AND enfermeiro_unidade_cnes=:unidade AND competencia=:competencia",
+                               array(':enfermeiro'=>$enfermeiroExecutaProcedimento->getEnfermeiro_cpf(),
+                                    ':procedimento'=>$enfermeiroExecutaProcedimento->getProcedimento_codigo(),
+                                    ':unidade'=>$enfermeiroExecutaProcedimento->getEnfermeiro_unidade_cnes(),
+                                    ':competencia'=>$enfermeiroExecutaProcedimento->getCompetencia()
+                                    )
+                               );
+   }
 
    private function existeProcedimento($procedimento_codigo, $codigoProfisao){
        if($this->_procedimentos===null){
@@ -672,7 +771,7 @@ class ProcedimentoController extends Controller
            //calcula a diferença entre as data
            //depois divide por 3600 (segundos de uma hora), se for maior que um, então a sessão está inválida
            if($user!==null){
-                $time= new DateTime($user->data_hora);
+                $time= new DateTime( $user->data_hora);
                 return (time() - $time->getTimestamp())/3600>1 ? false:true;
            }
        }
