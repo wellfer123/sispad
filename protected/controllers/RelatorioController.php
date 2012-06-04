@@ -76,7 +76,7 @@ class RelatorioController extends SISPADBaseController
 	public function actionCreate()
 	{
                 $this->CheckAcessAction();
-                $model=new relatorio;
+                $model=new Relatorio;
                 $model->arquivo=new Arquivo();
                 $model->servidor_cpf=Yii::app()->user->cpfservidor;
                 //configura um cenario para o modelo, desse modo pode-se validar apenas essa actions 
@@ -98,7 +98,7 @@ class RelatorioController extends SISPADBaseController
                                 $model->arquivo->relatorio_id=$model->id;
                                if($model->arquivo->save()){
                                   $this->addMessageSuccess("Relatorio Cadastrado com sucesso");
-                                  $model=new relatorio;
+                                  $model=new Relatorio;
                                   $model->arquivo=new Arquivo();
                                   $model->servidor_cpf=Yii::app()->user->cpfservidor;
                               }
@@ -199,7 +199,7 @@ class RelatorioController extends SISPADBaseController
 
 	{
             $this->CheckAcessAction();
-            $model=new relatorio('search');
+            $model=new Relatorio('search');
 		$dataProvider=new CActiveDataProvider('relatorio');
 		$this->render('index',array(
 			'model'=>$model,
@@ -212,7 +212,7 @@ class RelatorioController extends SISPADBaseController
 	public function actionAdmin()
 	{
                 $this->CheckAcessAction();
-		$model=new relatorio('search');
+		$model=new Relatorio('search');
 		$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['relatorio']))
 			$model->attributes=$_GET['relatorio'];
@@ -231,7 +231,7 @@ class RelatorioController extends SISPADBaseController
 		if($this->_model===null)
 		{
 			if(isset($_GET['id']))
-				$this->_model=relatorio::model()->with('temp_arquivo')->findbyPk($_GET['id']);
+				$this->_model=Relatorio::model()->with('temp_arquivo')->findbyPk($_GET['id']);
 			if($this->_model===null)
 				throw new CHttpException(404,'The requested page does not exist.');
 		}

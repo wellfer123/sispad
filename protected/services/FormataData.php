@@ -35,11 +35,20 @@
                 $data2=self::inverteData($data2, $delim);
 
             }
-                $data1Obj= new DateTime($data1);
-                $data2Obj= new DateTime($data2);
+            // Usa a função strtotime() e pega o timestamp das duas datas:
 
-                $result= ($data1Obj->getTimestamp()-$data2Obj->getTimestamp())/(60*60*24);
-                return $result;
+            $time_inicial = strtotime($data1);
+            $time_final = strtotime($data2);
+
+            $diferenca = $time_final - $time_inicial; // 19522800 segundos
+            $dias = (int)floor( $diferenca / (60 * 60 * 24)); // 225 dias
+            return $dias;
+//
+//                $data1Obj= new DateTime($data1);
+//                $data2Obj= new DateTime($data2);
+//
+//                $result= ($data1Obj->getTimestamp()-$data2Obj->getTimestamp())/(60*60*24);
+//                return $result;
 
         }
   public static function calculaDiferencaDatasEmHoras($data1,$data2,$formato,$delim){

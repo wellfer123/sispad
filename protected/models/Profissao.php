@@ -49,7 +49,7 @@ class Profissao extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-                    'indicador'=>array(self::HAS_MANY,'indicador','profissao_codigo'),
+                    'indicador'=>array(self::HAS_MANY,'Indicador','profissao_codigo'),
                     'dadosTrabalho'=>array(self::HAS_MANY,'DadosTrabalho','profissao_codigo'),
 		);
 	}

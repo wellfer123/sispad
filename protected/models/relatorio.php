@@ -11,7 +11,7 @@
  * @property string $data_trabalho
  * @property integer $servidor_cpf
  */
-class relatorio extends CActiveRecord
+class Relatorio extends CActiveRecord
 
 
 {
@@ -19,7 +19,7 @@ class relatorio extends CActiveRecord
         
 	/**
 	 * Returns the static model of the specified AR class.
-	 * @return relatorio the static model class
+	 * @return Relatorio the static model class
 	 */
         
 	public static function model($className=__CLASS__)
@@ -83,7 +83,7 @@ class relatorio extends CActiveRecord
 
          public function  validaRelatorioExistente($attribute,$params){
 
-             if((relatorio::model()->find('data_trabalho= :data_trabalho',array(':data_trabalho'=>$this->data_trabalho)))==null){
+             if((Relatorio::model()->find('data_trabalho= :data_trabalho',array(':data_trabalho'=>$this->data_trabalho)))==null){
                  return true;
              }
              $this->addError('data_trabalho','relatorio ja existe');

@@ -14,7 +14,7 @@
 	<div class="row">
 		<?php echo $form->labelEx($model,'mes'); ?>
                 <?php echo Chtml::activeDropDownList($model, 'mes', 
-                                                    Chtml::listData(meses::model()->findAll(), 'id','nome'),
+                                                    Chtml::listData(Meses::model()->findAll(), 'id','nome'),
                                                     array('empty'=>'Escolha um mês')); ?>
 		<?php echo $form->error($model,'mes'); ?>
 	</div>

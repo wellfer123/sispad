@@ -50,7 +50,7 @@ class Periodicidade extends CActiveRecord
 	{
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
-		return array('meta'=>array(self::HAS_MANY,'meta','periodicidade_id')
+		return array('meta'=>array(self::HAS_MANY,'Meta','periodicidade_id')
 		);
 	}
 
