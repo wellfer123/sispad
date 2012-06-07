@@ -128,4 +128,45 @@ class OdontologoExecutaProcedimento extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+        public function getOdontologo_unidade_cnes() {
+            return $this->odontologo_unidade_cnes;
+        }
+
+        public function getOdontologo_cpf() {
+            return $this->odontologo_cpf;
+        }
+
+        public function getCompetencia() {
+            return $this->competencia;
+        }
+
+        public function getQuantidade() {
+            return $this->quantidade;
+        }
+
+        public function getProcedimento_codigo() {
+            return $this->procedimento_codigo;
+        }
+
+        public function setOdontologo_unidade_cnes($odontologo_unidade_cnes) {
+            $this->odontologo_unidade_cnes = $odontologo_unidade_cnes;
+        }
+
+        public function setOdontologo_cpf($odontologo_cpf) {
+            $this->odontologo_cpf = $odontologo_cpf;
+        }
+
+        public function setCompetencia($competencia) {
+            $this->competencia = $competencia;
+        }
+
+        public function setQuantidade($quantidade) {
+            $this->quantidade = $quantidade;
+        }
+
+        public function setProcedimento_codigo($procedimento_codigo) {
+            $this->procedimento_codigo = $procedimento_codigo;
+        }
+
+
 }
