@@ -145,6 +145,9 @@ class ProcedimentoController extends Controller
      * @soap
      */
     public function getMedicos($codigoUnidade,$usuarioDesktop){
+        if(!$this->usuarioEstaLogado($usuarioDesktop)){
+            return array();
+        }
         if($codigoUnidade==null){
             return Medico::model()->findAll();
         }
@@ -319,7 +322,9 @@ class ProcedimentoController extends Controller
        if(!$this->usuarioEstaLogado($usuarioDesktop)){
             return array();
         }
-       
+       if($codigoUnidade===null){
+           return AgenteSaude::model()->findAll();
+       }
         return AgenteSaude::model()->findAll('unidade_cnes=:unidade', array(':unidade'=>$codigoUnidade));;
     }
     
@@ -333,7 +338,9 @@ class ProcedimentoController extends Controller
        if(!$this->usuarioEstaLogado($usuarioDesktop)){
             return array();
         }
-       
+       if($codigoUnidade===null){
+           return Odontologo::model()->findAll();
+       }
         return Odontologo::model()->findAll('unidade_cnes=:unidade', array(':unidade'=>$codigoUnidade));
     }
     
@@ -347,7 +354,9 @@ class ProcedimentoController extends Controller
        if(!$this->usuarioEstaLogado($usuarioDesktop)){
             return array();
         }
-       
+        if($codigoUnidade===null){
+            return Enfermeiro::model()->findAll();
+        }
         return Enfermeiro::model()->findAll('unidade_cnes=:unidade', array(':unidade'=>$codigoUnidade));;
     }
     
@@ -507,7 +516,7 @@ class ProcedimentoController extends Controller
      * @soap
      */
     public function sendExecutadosPorEnfermeiro($procedimentosExecutados,$usuarioDesktop){
-       $msg=array();
+       $msg2=array();
        try{
             $this->iniciarVariaveisGlobais();
             // verifica se o usuário está logado
@@ -545,38 +554,38 @@ class ProcedimentoController extends Controller
                                         try{
                                             //vai salvar o objeto
                                             if($enfExe->save()){
-                                                $msg[]=$this->getMessageWebService("PROCEDIMENTO: $procedi->nome \nENFERMEIRO: $ser->nome \nSUCESSO: PROCEDIMENTO EXECUTADO PELO ENFERMEIRO REGISTRADO COM SUCESSO", MessageWebService::SUCESSO); 
+                                                $msg2[]=$this->getMessageWebService("PROCEDIMENTO: $procedi->nome \nENFERMEIRO: $ser->nome \nSUCESSO: PROCEDIMENTO EXECUTADO PELO ENFERMEIRO REGISTRADO COM SUCESSO", MessageWebService::SUCESSO); 
                                             }
                                             //erro ao salvar
                                             else{
                                                 //adiciona o erro ao vetor
-                                                $msg[]=$this->getMessageWebService("PROCEDIMENTO: $procedi->nome \nENFERMEIRO: $ser->nome \nERRO: NÃO FOI POSSÍVEL REGISTRAR O PROCEDIMENTO EXECUTADO PELO ENFERMEIRO", MessageWebService::ERRO);
+                                                $msg2[]=$this->getMessageWebService("PROCEDIMENTO: $procedi->nome \nENFERMEIRO: $ser->nome \nERRO: NÃO FOI POSSÍVEL REGISTRAR O PROCEDIMENTO EXECUTADO PELO ENFERMEIRO", MessageWebService::ERRO);
                                             }
                                         }catch(Exception $ex){
                                             $tmp=$ex->getMessage();
                                             //adiciona o erro ao vetor
-                                            $msg[]=$this->getMessageWebService("PROCEDIMENTO: $procedi->nome \nENFERMEIRO: $ser->nome \nERRO INESPERADO AO TENTAR SALVAR O PROCEDIMENTO EXECUTADO PELO ENFERMEIRO! $tmp", MessageWebService::ERRO); 
+                                            $msg2[]=$this->getMessageWebService("PROCEDIMENTO: $procedi->nome \nENFERMEIRO: $ser->nome \nERRO INESPERADO AO TENTAR SALVAR O PROCEDIMENTO EXECUTADO PELO ENFERMEIRO! $tmp", MessageWebService::ERRO); 
                                         } 
                                         //terminou o try
                                     }
                                     //já foi enviado
                                     else{
-                                        $msg[]=$this->getMessageWebService("PROCEDIMENTO: $procedi->nome \nENFERMEIRO: $ser->nome \nERRO: JÁ FOI ENVIADO PARA A COMPETÊNCIA $enfExe->competencia", MessageWebService::ERRO); 
+                                        $msg2[]=$this->getMessageWebService("PROCEDIMENTO: $procedi->nome \nENFERMEIRO: $ser->nome \nERRO: JÁ FOI ENVIADO PARA A COMPETÊNCIA $enfExe->competencia", MessageWebService::ERRO); 
                                     }
                                 }
                                 //o rpocedimento não faz parte de nenhuma meta
                                 else{
-                                   $msg[]=$this->getMessageWebService("PROCEDIMENTO: $procedi->nome\n WARNING: NÃO FAZ PARTE DE NENHUMA META PARA ENFERMEIRO. ENTÃO FOI DESCARTADO!", MessageWebService::WARNING); 
+                                   $msg2[]=$this->getMessageWebService("PROCEDIMENTO: $procedi->nome\n WARNING: NÃO FAZ PARTE DE NENHUMA META PARA ENFERMEIRO. ENTÃO FOI DESCARTADO!", MessageWebService::WARNING); 
                                 }
                             }
                             //médico não faz parte da equipe
                             else{
-                               $msg[]=$this->getMessageWebService("ENFERMEIRO: $ser->nome \nERRO: NÃO ESTÁ CADASTRADO EM NENHUMA EQUIPE", MessageWebService::ERRO); 
+                               $msg2[]=$this->getMessageWebService("ENFERMEIRO: $ser->nome \nERRO: NÃO ESTÁ CADASTRADO EM NENHUMA EQUIPE", MessageWebService::ERRO); 
                             }
                         }
                         //competência inválida
                         else{
-                            $msg[]=$this->getMessageWebService("ERRO: COMPETÊNCIA INVÁLIDA, $enfExe->competencia", MessageWebService::ERRO);
+                            $msg2[]=$this->getMessageWebService("ERRO: COMPETÊNCIA INVÁLIDA, $enfExe->competencia", MessageWebService::ERRO);
                         }
                         
                     }
@@ -584,19 +593,19 @@ class ProcedimentoController extends Controller
                 //não foi um array de procedimentos executados por medicos
                 else{
                     //adiciona o erro ao vetor
-                    $msg[]=$this->getMessageWebService("ERRO: DEVE-SE ENVIAR UMA LISTA DE PROCEDIMENTOS EXECUTADOS POR UM ENFERMEIRO!", MessageWebService::ERRO);
+                    $msg2[]=$this->getMessageWebService("ERRO: DEVE-SE ENVIAR UMA LISTA DE PROCEDIMENTOS EXECUTADOS POR UM ENFERMEIRO!", MessageWebService::ERRO);
                     
                 }
             }
             //não está logado
             else{
-                $msg[]=$this->getMessageWebService("ERRO: DEVE-SE FAZER LOGIN NO WEB SERVICE!", MessageWebService::ERRO);
+                $msg2[]=$this->getMessageWebService("ERRO: DEVE-SE FAZER LOGIN NO WEB SERVICE!", MessageWebService::ERRO);
             }
         }catch(Exception $ex){
             $tmp=$ex->getMessage();
-            $msg[]=$this->getMessageWebService("ERRO INESPERADO A CHAMADA DO MÉTODO! $tmp",MessageWebService::ERRO);
+            $msg2[]=$this->getMessageWebService("ERRO INESPERADO A CHAMADA DO MÉTODO! $tmp",MessageWebService::ERRO);
         }
-        return $msg;
+        return $msg2;
     }
     
     /**
