@@ -71,7 +71,7 @@ class ServidorEquipe extends CActiveRecord
         public function  verificaServidorExistente($attribute,$params){
              $servidor = ServidorEquipe::model()->find('servidor_cpf= :servidor_cpf',array(':servidor_cpf'=>$this->servidor_cpf));
              $servidor_count = ServidorEquipe::model()->count('servidor_cpf= :servidor_cpf',array(':servidor_cpf'=>$this->servidor_cpf));
-             if(($servidor)==null || ($servidor->funcao=='Medico' && $servidor_count<=1) ){
+             if(($servidor)==null || ($servidor->funcao=='Medico' && $servidor_count<=1) || ($servidor->funcao=='Odontologo' && $servidor_count<=1)  ){
                  return true;
              }else if($servidor->ativo==1){
                   $this->addError('servidor_cpf','Este servidor já existe nessa ou em outra equipe');
