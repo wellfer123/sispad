@@ -407,9 +407,9 @@ class ProcedimentoController extends Controller
      * @soap
      */
     public function sendExecutadosPorMedico($procedimentosExecutados,$usuarioDesktop){
+        $msg=array();
         try{
             //arreio de mensagens
-            $msg=array();
             $this->iniciarVariaveisGlobais();
             // verifica se o usuário está logado
             if($this->usuarioEstaLogado($usuarioDesktop)){
@@ -507,9 +507,8 @@ class ProcedimentoController extends Controller
      * @soap
      */
     public function sendExecutadosPorEnfermeiro($procedimentosExecutados,$usuarioDesktop){
+       $msg=array();
        try{
-            //arreio de mensagens
-            $msg=array();
             $this->iniciarVariaveisGlobais();
             // verifica se o usuário está logado
             if($this->usuarioEstaLogado($usuarioDesktop)){
@@ -607,9 +606,9 @@ class ProcedimentoController extends Controller
      * @soap
      */
     public function sendExecutadosPorOdontologo($procedimentosExecutados,$usuarioDesktop){
+        $msg=array();
          try{
             //arreio de mensagens
-            $msg=array();
             $this->iniciarVariaveisGlobais();
             // verifica se o usuário está logado
             if($this->usuarioEstaLogado($usuarioDesktop)){
@@ -707,9 +706,8 @@ class ProcedimentoController extends Controller
      * @soap
      */
     public function sendExecutadosPorAgenteSaude($procedimentosExecutados,$usuarioDesktop){
+        $msg=array();
          try{
-            //arreio de mensagens
-            $msg=array();
             $this->iniciarVariaveisGlobais();
             // verifica se o usuário está logado
             if($this->usuarioEstaLogado($usuarioDesktop)){
@@ -720,7 +718,8 @@ class ProcedimentoController extends Controller
                         $agentExe= new AgenteSaudeExecutaProcedimento();
                         $compet= new Competencia();
                         //vai preencher os dados
-                        $agentExe->setCompetencia($proc->competencia);
+                        $agentExe->setCompetencia($proc->competencia); 
+                        $agentExe->setAgente_saude_micro_area($proc->agente_saude_micro_area);
                         $agentExe->setAgente_saude_cpf($proc->agente_saude_cpf);
                         $agentExe->setAgente_saude_unidade_cnes($proc->agente_saude_unidade_cnes);
                         $agentExe->setProcedimento_codigo($proc->procedimento_codigo);
