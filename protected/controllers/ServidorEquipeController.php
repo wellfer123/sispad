@@ -57,8 +57,10 @@ class ServidorEquipeController extends SISPADBaseController
                         $model2->ativo=1;
                        
                         if(($model->save())){
-                            $model = new ServidorEquipe('create');
-                            $model2=null;
+                            if($model2->save()){
+                                $model = new ServidorEquipe('create');
+                                $model2=null;
+                            }
                             
                         }
 
