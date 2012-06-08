@@ -69,7 +69,8 @@ class EnfermeiroExecutaProcedimento extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('quantidade, competencia', 'numerical', 'integerOnly'=>true),
-			array('enfermeiro_cpf, procedimento_codigo, enfermeiro_unidade_cnes', 'length', 'max'=>10),
+			array('procedimento_codigo, enfermeiro_unidade_cnes', 'length', 'max'=>10),
+                        array('enfermeiro_cpf', 'length', 'max'=>11),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('enfermeiro_cpf, procedimento_codigo, enfermeiro_unidade_cnes, quantidade, competencia', 'safe', 'on'=>'search'),

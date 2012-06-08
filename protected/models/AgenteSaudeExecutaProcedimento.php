@@ -77,7 +77,8 @@ class AgenteSaudeExecutaProcedimento extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('quantidade, competencia, agente_saude_micro_area', 'numerical', 'integerOnly'=>true),
-			array('agente_saude_cpf, procedimento_codigo, agente_saude_unidade_cnes', 'length', 'max'=>10),
+			array('procedimento_codigo, agente_saude_unidade_cnes', 'length', 'max'=>10),
+                        array('agente_saude_cpf', 'length', 'max'=>11),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('agente_saude_cpf, procedimento_codigo, agente_saude_unidade_cnes, quantidade, competencia, agente_saude_micro_area', 'safe', 'on'=>'search'),

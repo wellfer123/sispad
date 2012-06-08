@@ -68,7 +68,8 @@ class OdontologoExecutaProcedimento extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('quantidade, competencia', 'numerical', 'integerOnly'=>true),
-			array('odontologo_cpf, procedimento_codigo, odontologo_unidade_cnes', 'length', 'max'=>10),
+			array(' procedimento_codigo, odontologo_unidade_cnes', 'length', 'max'=>10),
+                        array('odontologo_cpf', 'length', 'max'=>11),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('odontologo_cpf, procedimento_codigo, odontologo_unidade_cnes, quantidade, competencia', 'safe', 'on'=>'search'),

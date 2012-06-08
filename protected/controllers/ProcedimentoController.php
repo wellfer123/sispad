@@ -643,7 +643,7 @@ class ProcedimentoController extends Controller
                             //é válida, então deve verificar se o servidor pertence mesmo a equipe
                             $servidor_equipe= new ServidorEquipe;
                             //preenchendo so valores
-                            $servidor_equipe->setServidorCPF($odonExe->getOdontologoo_cpf());
+                            $servidor_equipe->setServidorCPF($odonExe->getOdontologo_cpf());
                             $servidor_equipe->setEquipeUnidadeCNES($odonExe->getOdontologo_unidade_cnes());
                             $servidor_equipe->setFuncao("Odontologo");
                             if($this->IsServidorEquipe($servidor_equipe)){
