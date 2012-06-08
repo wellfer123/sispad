@@ -175,7 +175,7 @@ class ProcedimentoController extends Controller
             return array();
         }
        
-        return Procedimento::model()->findAll($this->getCDBcriteriaProcedimentoPorprofissional(Medico::CODIGO_PROFISSAO, Procedimento::ORIGEM_SIAB));
+        return Procedimento::model()->findAll($this->getCDBcriteriaProcedimentoPorProfissional(Medico::CODIGO_PROFISSAO, Procedimento::ORIGEM_SIAB));
     }
     
     /**
@@ -188,7 +188,7 @@ class ProcedimentoController extends Controller
             return array();
         }
        
-        return Procedimento::model()->findAll($this->getCDBcriteriaProcedimentoPorprofissional(Enfermeiro::CODIGO_PROFISSAO, Procedimento::ORIGEM_SIAB));
+        return Procedimento::model()->findAll($this->getCDBcriteriaProcedimentoPorProfissional(Enfermeiro::CODIGO_PROFISSAO, Procedimento::ORIGEM_SIAB));
     }
     
     /**
@@ -201,7 +201,7 @@ class ProcedimentoController extends Controller
             return array();
         }
        
-        return Procedimento::model()->findAll($this->getCDBcriteriaProcedimentoPorprofissional(Odontologo::CODIGO_PROFISSAO, Procedimento::ORIGEM_SIAB));
+        return Procedimento::model()->findAll($this->getCDBcriteriaProcedimentoPorProfissional(Odontologo::CODIGO_PROFISSAO, Procedimento::ORIGEM_SIAB));
     }
     
     /**
@@ -214,7 +214,7 @@ class ProcedimentoController extends Controller
             return array();
         }
        
-        return Procedimento::model()->findAll($this->getCDBcriteriaProcedimentoPorprofissional(AgenteSaude::CODIGO_PROFISSAO, Procedimento::ORIGEM_SIAB));
+        return Procedimento::model()->findAll($this->getCDBcriteriaProcedimentoPorProfissional(AgenteSaude::CODIGO_PROFISSAO, Procedimento::ORIGEM_SIAB));
     }
     
     /**
@@ -241,7 +241,7 @@ class ProcedimentoController extends Controller
             return array();
         }
        
-        return Procedimento::model()->findAll($this->getCDBcriteriaProcedimentoPorprofissional(Medico::CODIGO_PROFISSAO, Procedimento::ORIGEM_SIA));
+        return Procedimento::model()->findAll($this->getCDBcriteriaProcedimentoPorProfissional(Medico::CODIGO_PROFISSAO, Procedimento::ORIGEM_SIA));
     }
     
     /**
@@ -254,7 +254,7 @@ class ProcedimentoController extends Controller
             return array();
         }
        
-        return Procedimento::model()->findAll($this->getCDBcriteriaProcedimentoPorprofissional(Enfermeiro::CODIGO_PROFISSAO, Procedimento::ORIGEM_SIA));
+        return Procedimento::model()->findAll($this->getCDBcriteriaProcedimentoPorProfissional(Enfermeiro::CODIGO_PROFISSAO, Procedimento::ORIGEM_SIA));
     }
     
     /**
@@ -267,7 +267,7 @@ class ProcedimentoController extends Controller
             return array();
         }
        
-        return Procedimento::model()->findAll($this->getCDBcriteriaProcedimentoPorprofissional(Odontologo::CODIGO_PROFISSAO, Procedimento::ORIGEM_SIA));
+        return Procedimento::model()->findAll($this->getCDBcriteriaProcedimentoPorProfissional(Odontologo::CODIGO_PROFISSAO, Procedimento::ORIGEM_SIA));
     }
     
     /**
@@ -280,7 +280,7 @@ class ProcedimentoController extends Controller
             return array();
         }
        
-        return Procedimento::model()->findAll($this->getCDBcriteriaProcedimentoPorprofissional(AgenteSaude::CODIGO_PROFISSAO, Procedimento::ORIGEM_SIA));
+        return Procedimento::model()->findAll($this->getCDBcriteriaProcedimentoPorProfissional(AgenteSaude::CODIGO_PROFISSAO, Procedimento::ORIGEM_SIA));
     }
     /**
      * @param UsuarioDesktop usuario da aplicao desktop
@@ -407,9 +407,9 @@ class ProcedimentoController extends Controller
      * @soap
      */
     public function sendExecutadosPorMedico($procedimentosExecutados,$usuarioDesktop){
+        $msg=array();
         try{
             //arreio de mensagens
-            $msg=array();
             $this->iniciarVariaveisGlobais();
             // verifica se o usuário está logado
             if($this->usuarioEstaLogado($usuarioDesktop)){
@@ -439,7 +439,7 @@ class ProcedimentoController extends Controller
                             $servidor_equipe->setEquipeUnidadeCNES($medExe->getMedico_unidade_cnes());
                             $servidor_equipe->setFuncao("Medico");
                             if($this->IsServidorEquipe($servidor_equipe)){
-                                if($this->existeProcedimento($medExe->getProcedimento_codigo(),  Medico::CODIGO_PROFISSAO)){
+                                if($this->existProcedimentoEmMetaProfissional($medExe->getProcedimento_codigo(),  Medico::CODIGO_PROFISSAO)){
                                     //agora verifica se o registro já existe, senão existir, vai cadastrar
                                     if($this->validarProcedimentoExecutadomedico($medExe)){
                                         //vai salvar o registro
@@ -507,9 +507,8 @@ class ProcedimentoController extends Controller
      * @soap
      */
     public function sendExecutadosPorEnfermeiro($procedimentosExecutados,$usuarioDesktop){
+       $msg=array();
        try{
-            //arreio de mensagens
-            $msg=array();
             $this->iniciarVariaveisGlobais();
             // verifica se o usuário está logado
             if($this->usuarioEstaLogado($usuarioDesktop)){
@@ -521,8 +520,8 @@ class ProcedimentoController extends Controller
                         $compet= new Competencia();
                         //vai preencher os dados
                         $enfExe->setCompetencia($proc->competencia);
-                        $enfExe->setMedico_cpf($proc->enfermeiro_cpf);
-                        $enfExe->setMedico_unidade_cnes($proc->enfermeiro_unidade_cnes);
+                        $enfExe->setEnfermeiro_cpf($proc->enfermeiro_cpf);
+                        $enfExe->setEnfermeiro_unidade_cnes($proc->enfermeiro_unidade_cnes);
                         $enfExe->setProcedimento_codigo($proc->procedimento_codigo);
                         $enfExe->setQuantidade($proc->quantidade);
                         //carrega as entidades para usar nas mensagens
@@ -539,7 +538,7 @@ class ProcedimentoController extends Controller
                             $servidor_equipe->setEquipeUnidadeCNES($enfExe->getEnfermeiro_unidade_cnes());
                             $servidor_equipe->setFuncao("Enfermeiro");
                             if($this->IsServidorEquipe($servidor_equipe)){
-                                if($this->existeProcedimento($enfExe->getProcedimento_codigo(), Enfermeiro::CODIGO_PROFISSAO)){
+                                if($this->existProcedimentoEmMetaProfissional($enfExe->getProcedimento_codigo(), Enfermeiro::CODIGO_PROFISSAO)){
                                     //agora verifica se o registro já existe, senão existir, vai cadastrar
                                     if($this->validarProcedimentoExecutadoEnfermeiro($enfExe)){
                                         //vai salvar o registro
@@ -607,9 +606,97 @@ class ProcedimentoController extends Controller
      * @soap
      */
     public function sendExecutadosPorOdontologo($procedimentosExecutados,$usuarioDesktop){
-         
-            $m= new MessageWebService;
-        return array($m);
+        $msg=array();
+         try{
+            //arreio de mensagens
+            $this->iniciarVariaveisGlobais();
+            // verifica se o usuário está logado
+            if($this->usuarioEstaLogado($usuarioDesktop)){
+                //verifica se é um vetor de procedimentos executados por medicos
+                if(is_array($procedimentosExecutados)){
+                    foreach($procedimentosExecutados as $proc){
+                        
+                        $odonExe= new OdontologoExecutaProcedimento();
+                        $compet= new Competencia();
+                        //vai preencher os dados
+                        $odonExe->setCompetencia($proc->competencia);
+                        $odonExe->setOdontologo_cpf($proc->odontologo_cpf);
+                        $odonExe->setOdontologo_unidade_cnes($proc->odontologo_unidade_cnes);
+                        $odonExe->setProcedimento_codigo($proc->procedimento_codigo);
+                        $odonExe->setQuantidade($proc->quantidade);
+                        //carrega as entidades para usar nas mensagens
+                        $ser= $this->loadServidor($proc->odontologo_cpf);
+                        $procedi=$this->loadProcedimento($proc->procedimento_codigo);
+                        
+                        $compet->setMesAno($odonExe->getCompetencia());
+                        //verifica se a competencia do procedimento executado é válida
+                        if($this->validarCompetencia($compet)){
+                            //é válida, então deve verificar se o servidor pertence mesmo a equipe
+                            $servidor_equipe= new ServidorEquipe;
+                            //preenchendo so valores
+                            $servidor_equipe->setServidorCPF($odonExe->getOdontologoo_cpf());
+                            $servidor_equipe->setEquipeUnidadeCNES($odonExe->getOdontologo_unidade_cnes());
+                            $servidor_equipe->setFuncao("Odontologo");
+                            if($this->IsServidorEquipe($servidor_equipe)){
+                                if($this->existProcedimentoEmMetaProfissional($odonExe->getProcedimento_codigo(), Odontologo::CODIGO_PROFISSAO)){
+                                    //agora verifica se o registro já existe, senão existir, vai cadastrar
+                                    if($this->validarProcedimentoExecutadoOdontologo($odonExe)){
+                                        //vai salvar o registro
+                                        try{
+                                            //vai salvar o objeto
+                                            if($odonExe->save()){
+                                                $msg[]=$this->getMessageWebService("PROCEDIMENTO: $procedi->nome \nODONTÓLOGO: $ser->nome \nSUCESSO: PROCEDIMENTO EXECUTADO PELO ODONTÓLOGO REGISTRADO COM SUCESSO", MessageWebService::SUCESSO); 
+                                            }
+                                            //erro ao salvar
+                                            else{
+                                                //adiciona o erro ao vetor
+                                                $msg[]=$this->getMessageWebService("PROCEDIMENTO: $procedi->nome \nODONTÓLOGO: $ser->nome \nERRO: NÃO FOI POSSÍVEL REGISTRAR O PROCEDIMENTO EXECUTADO PELO ODONTÓLOGO", MessageWebService::ERRO);
+                                            }
+                                        }catch(Exception $ex){
+                                            $tmp=$ex->getMessage();
+                                            //adiciona o erro ao vetor
+                                            $msg[]=$this->getMessageWebService("PROCEDIMENTO: $procedi->nome \nODONTÓLOGO: $ser->nome \nERRO INESPERADO AO TENTAR SALVAR O PROCEDIMENTO EXECUTADO PELO ODONTÓLOGO! $tmp", MessageWebService::ERRO); 
+                                        } 
+                                        //terminou o try
+                                    }
+                                    //já foi enviado
+                                    else{
+                                        $msg[]=$this->getMessageWebService("PROCEDIMENTO: $procedi->nome \nODONTÓLOGO: $ser->nome \nERRO: JÁ FOI ENVIADO PARA A COMPETÊNCIA $odonExe->competencia", MessageWebService::ERRO); 
+                                    }
+                                }
+                                //o rpocedimento não faz parte de nenhuma meta
+                                else{
+                                   $msg[]=$this->getMessageWebService("PROCEDIMENTO: $procedi->nome\n WARNING: NÃO FAZ PARTE DE NENHUMA META PARA ODONTÓLOGO. ENTÃO FOI DESCARTADO!", MessageWebService::WARNING); 
+                                }
+                            }
+                            //médico não faz parte da equipe
+                            else{
+                               $msg[]=$this->getMessageWebService("ODONTÓLOGO: $ser->nome \nERRO: NÃO ESTÁ CADASTRADO EM NENHUMA EQUIPE", MessageWebService::ERRO); 
+                            }
+                        }
+                        //competência inválida
+                        else{
+                            $msg[]=$this->getMessageWebService("ERRO: COMPETÊNCIA INVÁLIDA, $odonExe->competencia", MessageWebService::ERRO);
+                        }
+                        
+                    }
+                }
+                //não foi um array de procedimentos executados por medicos
+                else{
+                    //adiciona o erro ao vetor
+                    $msg[]=$this->getMessageWebService("ERRO: DEVE-SE ENVIAR UMA LISTA DE PROCEDIMENTOS EXECUTADOS POR UM ODONTÓLOGO!", MessageWebService::ERRO);
+                    
+                }
+            }
+            //não está logado
+            else{
+                $msg[]=$this->getMessageWebService("ERRO: DEVE-SE FAZER LOGIN NO WEB SERVICE!", MessageWebService::ERRO);
+            }
+        }catch(Exception $ex){
+            $tmp=$ex->getMessage();
+            $msg[]=$this->getMessageWebService("ERRO INESPERADO A CHAMADA DO MÉTODO! $tmp",MessageWebService::ERRO);
+        }
+        return $msg;
     }
     
     /**
@@ -619,9 +706,97 @@ class ProcedimentoController extends Controller
      * @soap
      */
     public function sendExecutadosPorAgenteSaude($procedimentosExecutados,$usuarioDesktop){
-         
-            $m= new MessageWebService;
-        return array($m);
+        $msg=array();
+         try{
+            $this->iniciarVariaveisGlobais();
+            // verifica se o usuário está logado
+            if($this->usuarioEstaLogado($usuarioDesktop)){
+                //verifica se é um vetor de procedimentos executados por medicos
+                if(is_array($procedimentosExecutados)){
+                    foreach($procedimentosExecutados as $proc){
+                        
+                        $agentExe= new AgenteSaudeExecutaProcedimento();
+                        $compet= new Competencia();
+                        //vai preencher os dados
+                        $agentExe->setCompetencia($proc->competencia); 
+                        $agentExe->setAgente_saude_micro_area($proc->agente_saude_micro_area);
+                        $agentExe->setAgente_saude_cpf($proc->agente_saude_cpf);
+                        $agentExe->setAgente_saude_unidade_cnes($proc->agente_saude_unidade_cnes);
+                        $agentExe->setProcedimento_codigo($proc->procedimento_codigo);
+                        $agentExe->setQuantidade($proc->quantidade);
+                        //carrega as entidades para usar nas mensagens
+                        $ser= $this->loadServidor($proc->agente_saude_cpf);
+                        $procedi=$this->loadProcedimento($proc->procedimento_codigo);
+                        
+                        $compet->setMesAno($agentExe->getCompetencia());
+                        //verifica se a competencia do procedimento executado é válida
+                        if($this->validarCompetencia($compet)){
+                            //é válida, então deve verificar se o servidor pertence mesmo a equipe
+                            $servidor_equipe= new ServidorEquipe;
+                            //preenchendo so valores
+                            $servidor_equipe->setServidorCPF($agentExe->getAgente_saudeo_cpf());
+                            $servidor_equipe->setEquipeUnidadeCNES($agentExe->getAgente_saude_unidade_cnes());
+                            $servidor_equipe->setFuncao("AgenteSaude");
+                            if($this->IsServidorEquipe($servidor_equipe)){
+                                if($this->existProcedimentoEmMetaProfissional($agentExe->getProcedimento_codigo(), AgenteSaude::CODIGO_PROFISSAO)){
+                                    //agora verifica se o registro já existe, senão existir, vai cadastrar
+                                    if($this->validarProcedimentoExecutadoAgenteSaude($agentExe)){
+                                        //vai salvar o registro
+                                        try{
+                                            //vai salvar o objeto
+                                            if($agentExe->save()){
+                                                $msg[]=$this->getMessageWebService("PROCEDIMENTO: $procedi->nome \nAGENTE DE SAÚDE: $ser->nome \nSUCESSO: PROCEDIMENTO EXECUTADO PELO AGENTE DE SAÚDE REGISTRADO COM SUCESSO", MessageWebService::SUCESSO); 
+                                            }
+                                            //erro ao salvar
+                                            else{
+                                                //adiciona o erro ao vetor
+                                                $msg[]=$this->getMessageWebService("PROCEDIMENTO: $procedi->nome \nAGENTE DE SAÚDE: $ser->nome \nERRO: NÃO FOI POSSÍVEL REGISTRAR O PROCEDIMENTO EXECUTADO PELO AGENTE DE SAÚDE", MessageWebService::ERRO);
+                                            }
+                                        }catch(Exception $ex){
+                                            $tmp=$ex->getMessage();
+                                            //adiciona o erro ao vetor
+                                            $msg[]=$this->getMessageWebService("PROCEDIMENTO: $procedi->nome \nAGENTE DE SAÚDE: $ser->nome \nERRO INESPERADO AO TENTAR SALVAR O PROCEDIMENTO EXECUTADO PELO AGENTE DE SAÚDE! $tmp", MessageWebService::ERRO); 
+                                        } 
+                                        //terminou o try
+                                    }
+                                    //já foi enviado
+                                    else{
+                                        $msg[]=$this->getMessageWebService("PROCEDIMENTO: $procedi->nome \nAGENTE DE SAÚDE: $ser->nome \nERRO: JÁ FOI ENVIADO PARA A COMPETÊNCIA $agentExe->competencia", MessageWebService::ERRO); 
+                                    }
+                                }
+                                //o rpocedimento não faz parte de nenhuma meta
+                                else{
+                                   $msg[]=$this->getMessageWebService("PROCEDIMENTO: $procedi->nome\n WARNING: NÃO FAZ PARTE DE NENHUMA META PARA AGENTE DE SAÚDE. ENTÃO FOI DESCARTADO!", MessageWebService::WARNING); 
+                                }
+                            }
+                            //médico não faz parte da equipe
+                            else{
+                               $msg[]=$this->getMessageWebService("AGENTE DE SAÚDE: $ser->nome \nERRO: NÃO ESTÁ CADASTRADO EM NENHUMA EQUIPE", MessageWebService::ERRO); 
+                            }
+                        }
+                        //competência inválida
+                        else{
+                            $msg[]=$this->getMessageWebService("ERRO: COMPETÊNCIA INVÁLIDA, $agentExe->competencia", MessageWebService::ERRO);
+                        }
+                        
+                    }
+                }
+                //não foi um array de procedimentos executados por medicos
+                else{
+                    //adiciona o erro ao vetor
+                    $msg[]=$this->getMessageWebService("ERRO: DEVE-SE ENVIAR UMA LISTA DE PROCEDIMENTOS EXECUTADOS POR UM AGENTE DE SAÚDE!", MessageWebService::ERRO);
+                    
+                }
+            }
+            //não está logado
+            else{
+                $msg[]=$this->getMessageWebService("ERRO: DEVE-SE FAZER LOGIN NO WEB SERVICE!", MessageWebService::ERRO);
+            }
+        }catch(Exception $ex){
+            $tmp=$ex->getMessage();
+            $msg[]=$this->getMessageWebService("ERRO INESPERADO A CHAMADA DO MÉTODO! $tmp",MessageWebService::ERRO);
+        }
+        return $msg;
     }
   
    //métodos privados
@@ -631,6 +806,7 @@ class ProcedimentoController extends Controller
        $this->_competencia_old=-9999999;
        $this->_servidor_equipe_boolean=false;
        $this->_servidor_equipe_old=null;
+       $this->_procedimentos=null;
    }
    //devolve uma CDBcriteria para consultar os procedimentos que fazem da parte de alguma meta  e
    private function getCDBcriteriaProcedimento($origemProcedimento){
@@ -644,7 +820,7 @@ class ProcedimentoController extends Controller
    }
    
    //devolve uma CDBcriteria para consultar os procedimentos que fazem da parte de alguma meta  e
-   private function getCDBcriteriaProcedimentoPorprofissional($codigoFuncao, $origemProcedimento=null){
+   private function getCDBcriteriaProcedimentoPorProfissional($codigoFuncao, $origemProcedimento=null){
         $criteria= new CDbCriteria();
         $criteria->select=" pro.codigo, pro.nome";
         $criteria->distinct=true;
@@ -737,6 +913,31 @@ class ProcedimentoController extends Controller
                                );
    }
    
+   private function validarProcedimentoExecutadoOdontologo($odontologoExecutaProcedimento){
+       //se existir vai retornar falso
+       return !$odontologoExecutaProcedimento->exists("odontologo_cpf=:odontologo AND procedimento_codigo=:procedimento
+                               AND odontologo_unidade_cnes=:unidade AND competencia=:competencia",
+                               array(':odontologo'=>$odontologoExecutaProcedimento->getOdontologo_cpf(),
+                                    ':procedimento'=>$odontologoExecutaProcedimento->getProcedimento_codigo(),
+                                    ':unidade'=>$odontologoExecutaProcedimento->getOdontologo_unidade_cnes(),
+                                    ':competencia'=>$odontologoExecutaProcedimento->getCompetencia()
+                                    )
+                               );
+   }
+   
+   private function validarProcedimentoExecutadoAgenteSaude($agenteSaudeExecutaProcedimento){
+       //se existir vai retornar falso
+       return !$agenteSaudeExecutaProcedimento->exists("agente_saude_cpf=:agenteSaude AND procedimento_codigo=:procedimento
+                               AND agente_saude_micro_area=:microArea AND agente_saude_unidade_cnes=:unidade AND competencia=:competencia",
+                               array(':agenteSaude'=>$agenteSaudeExecutaProcedimento->getAgente_saude_cpf(),
+                                    ':procedimento'=>$agenteSaudeExecutaProcedimento->getProcedimento_codigo(),
+                                    ':unidade'=>$agenteSaudeExecutaProcedimento->getAgente_saude_unidade_cnes(),
+                                    ':microArea'=>$agenteSaudeExecutaProcedimento->getAgente_saude_microArea(),
+                                    ':competencia'=>$agenteSaudeExecutaProcedimento->getCompetencia()
+                                    )
+                               );
+   }
+   
    private function validarProcedimentoExecutadoEnfermeiro($enfermeiroExecutaProcedimento){
        //se existir vai retornar falso
        return !$enfermeiroExecutaProcedimento->exists("enfermeiro_cpf=:enfermeiro AND procedimento_codigo=:procedimento
@@ -749,9 +950,9 @@ class ProcedimentoController extends Controller
                                );
    }
 
-   private function existeProcedimento($procedimento_codigo, $codigoProfisao){
+   private function existProcedimentoEmMetaProfissional($procedimento_codigo, $codigoProfisao){
        if($this->_procedimentos===null){
-          $this->_procedimentos=Procedimento::model()->findAll($this->getCDBcriteriaProcedimentoPorprofissional($codigoProfisao));
+          $this->_procedimentos=Procedimento::model()->findAll($this->getCDBcriteriaProcedimentoPorProfissional($codigoProfisao));
        }
        foreach($this->_procedimentos as $proc){
            if($proc->codigo===$procedimento_codigo){

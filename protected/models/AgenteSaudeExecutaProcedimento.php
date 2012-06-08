@@ -140,4 +140,53 @@ class AgenteSaudeExecutaProcedimento extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+        public function getAgente_saude_unidade_cnes() {
+            return $this->agente_saude_unidade_cnes;
+        }
+
+        public function getAgente_saude_cpf() {
+            return $this->agente_saude_cpf;
+        }
+
+        public function getCompetencia() {
+            return $this->competencia;
+        }
+
+        public function getQuantidade() {
+            return $this->quantidade;
+        }
+
+        public function getProcedimento_codigo() {
+            return $this->procedimento_codigo;
+        }
+
+        public function getAgente_saude_micro_area() {
+            return $this->agente_saude_micro_area;
+        }
+
+        public function setAgente_saude_unidade_cnes($agente_saude_unidade_cnes) {
+            $this->agente_saude_unidade_cnes = $agente_saude_unidade_cnes;
+        }
+
+        public function setAgente_saude_cpf($agente_saude_cpf) {
+            $this->agente_saude_cpf = $agente_saude_cpf;
+        }
+
+        public function setCompetencia($competencia) {
+            $this->competencia = $competencia;
+        }
+
+        public function setQuantidade($quantidade) {
+            $this->quantidade = $quantidade;
+        }
+
+        public function setProcedimento_codigo($procedimento_codigo) {
+            $this->procedimento_codigo = $procedimento_codigo;
+        }
+
+        public function setAgente_saude_micro_area($agente_saude_micro_area) {
+            $this->agente_saude_micro_area = $agente_saude_micro_area;
+        }
+
+
 }
