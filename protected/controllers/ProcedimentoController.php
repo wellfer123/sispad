@@ -743,7 +743,7 @@ class ProcedimentoController extends Controller
                             //é válida, então deve verificar se o servidor pertence mesmo a equipe
                             $servidor_equipe= new ServidorEquipe;
                             //preenchendo so valores
-                            $servidor_equipe->setServidorCPF($agentExe->getAgente_saudeo_cpf());
+                            $servidor_equipe->setServidorCPF($agentExe->getAgente_saude_cpf());
                             $servidor_equipe->setEquipeUnidadeCNES($agentExe->getAgente_saude_unidade_cnes());
                             $servidor_equipe->setFuncao("AgenteSaude");
                             if($this->IsServidorEquipe($servidor_equipe)){
@@ -785,7 +785,7 @@ class ProcedimentoController extends Controller
                         }
                         //competência inválida
                         else{
-                            $msg[]=$this->getMessageWebService("ERRO: COMPETÊNCIA INVÁLIDA, $agentExe->competencia", MessageWebService::ERRO);
+                            $msg[]=$this->getMessageWebService("ERRO: COMPETÊNCIA INVÁLIDA, $agentExe->competencia ", MessageWebService::ERRO);
                         }
                         
                     }
