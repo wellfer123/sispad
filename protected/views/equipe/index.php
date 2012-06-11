@@ -4,8 +4,8 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Create Equipe', 'url'=>array('create')),
-	array('label'=>'Manage Equipe', 'url'=>array('admin')),
+	array('label'=>'Criar Equipe', 'url'=>array('create')),
+	array('label'=>'Gerenciar Equipes', 'url'=>array('admin')),
 );
 ?>
 

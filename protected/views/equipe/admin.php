@@ -5,7 +5,7 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Create Equipe', 'url'=>array('create')),
+	array('label'=>'Criar Equipe', 'url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "

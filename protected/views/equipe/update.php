@@ -1,7 +1,8 @@
 <?php
 $this->breadcrumbs=array(
 	'Equipes'=>array('index'),
-	$model->codigo_area=>array('view','id'=>$model->codigo_area),
+        'Equipe '.$model->codigo_area=>array("equipe/view","area"=>$model->codigo_area,
+                        "cnes"=>$model->unidade_cnes),
 	'Update',
 );
 
