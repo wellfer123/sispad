@@ -941,7 +941,7 @@ class ProcedimentoController extends Controller
                                array(':agenteSaude'=>$agenteSaudeExecutaProcedimento->getAgente_saude_cpf(),
                                     ':procedimento'=>$agenteSaudeExecutaProcedimento->getProcedimento_codigo(),
                                     ':unidade'=>$agenteSaudeExecutaProcedimento->getAgente_saude_unidade_cnes(),
-                                    ':microArea'=>$agenteSaudeExecutaProcedimento->getAgente_saude_microArea(),
+                                    ':microArea'=>$agenteSaudeExecutaProcedimento->getAgente_saude_micro_area(),
                                     ':competencia'=>$agenteSaudeExecutaProcedimento->getCompetencia()
                                     )
                                );
