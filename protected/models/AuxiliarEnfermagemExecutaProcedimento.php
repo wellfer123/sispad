@@ -12,6 +12,36 @@
  */
 class AuxiliarEnfermagemExecutaProcedimento extends CActiveRecord
 {
+        /**
+         * @var string unidade que  faz parte
+         * @soap
+         */
+        public $auxiliar_enfermagem_unidade_cnes;
+        
+        /**
+         * @var string cpf do servidor
+         * @soap
+         */
+        public $auxiliar_enfermagem_cpf;
+        
+        /**
+         * @var int numero da competencia 
+         * @soap
+         */
+        public $competencia;
+        
+        /**
+         * @var int quantidade de execução do procedimento
+         * @soap
+         */
+        public $quantidade;
+        
+        /**
+         * @var string codigo do procedimento executado
+         * @soap
+         */
+        public $procedimento_codigo;
+        
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return AuxiliarEnfermagemExecutaProcedimento the static model class
