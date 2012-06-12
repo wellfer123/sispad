@@ -1,5 +1,23 @@
 <div class="form">
 
+<?php
+$ourscript = "$(document).ready(function(){
+    $('#microarea').hide();
+    $('#ServidorEquipe_funcao').change(function(){
+        var funcao = $('#ServidorEquipe_funcao').val();
+        if(funcao=='AgenteSaude')
+        $('#microarea').show('slow');
+        else
+        $('#microarea').hide('slow');
+});
+
+
+
+});";
+    Yii::app()->clientScript->registerScript('helloscript',$ourscript,CClientScript::POS_READY);
+?>
+
+
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'servidorEquipe-form',
 	'enableAjaxValidation'=>true,
@@ -41,6 +59,11 @@
              <?php echo $form->labelEx($model,'funcao'); ?>
              <?php echo $form->dropDownList($model,'funcao',array('Odontologo'=>'Odontólogo','Medico'=>'Médico',
                  'Enfermeiro'=>'Enfermeiro','AgenteSaude'=>'Agente de Saúde'));?>
+
+        </div>
+         <div class="row" id="microarea">
+             <?php echo CHtml::label('Microarea',false); ?>
+             <?php echo CHtml::textField('codigo_microarea');?>
 
         </div>
         <div class="row buttons">
