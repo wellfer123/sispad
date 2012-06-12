@@ -24,11 +24,6 @@ class EquipeExecutaProcedimento extends CActiveRecord
          */
          public $equipe_codigo_area;
          
-         /**
-         *@var int
-         *@soap   
-         */
-         public $equipe_codigo_micro_area;
          
          /**
          *@var string
@@ -92,7 +87,6 @@ class EquipeExecutaProcedimento extends CActiveRecord
 	{
 		return array(
 			'equipe_codigo_area' => 'Equipe Codigo Area',
-			'equipe_codigo_microarea' => 'Equipe Codigo Microarea',
 			'unidade_cnes' => 'Unidade Cnes',
 			'procedimento_codigo' => 'Procedimento Codigo',
 			'quantidade' => 'Quantidade',
@@ -113,7 +107,6 @@ class EquipeExecutaProcedimento extends CActiveRecord
 
 		$criteria->compare('equipe_codigo_area',$this->equipe_codigo_area);
 
-		$criteria->compare('equipe_codigo_microarea',$this->equipe_codigo_microarea);
 
 		$criteria->compare('unidade_cnes',$this->unidade_cnes,true);
 
