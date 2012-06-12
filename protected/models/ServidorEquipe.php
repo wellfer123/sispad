@@ -21,6 +21,30 @@ class ServidorEquipe extends CActiveRecord
         const DESATIVO=0;
 
         public $erro;
+        
+        /**
+         * @var string unidade que  faz parte a equipe
+         * @soap
+         */
+        public $equipe_unidade_cnes;
+        
+        /**
+         * @var string cpf do servidor
+         * @soap
+         */
+        public $servidor_cpf;
+        
+        /**
+         * @var int código da área da unidade 
+         * @soap
+         */
+        public $equipe_codigo_area;
+        
+        /**
+         * @var string função do servidor na equipe
+         * @soap
+         */
+        public $funcao;
 
 	public static function model($className=__CLASS__)
 	{

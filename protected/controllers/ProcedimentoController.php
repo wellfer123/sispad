@@ -31,17 +31,22 @@ class ProcedimentoController extends Controller
                 'classMap'=>array(
                     'Procedimento'=>'Procedimento',
                     'Unidade'=>'Unidade',
+                    'ServidorEquipe'=>'ServidorEquipe',
                     'Odontologo'=>'Odontologo',
                     'Medico'=>'Medico',
                     'Enfermeiro'=>'Enfermeiro',
                     'AgenteSaude'=>'AgenteSaude',
                     'UsuarioDesktop'=>'UsuarioDesktop',
+                    'TecnicoEnfermagem'=>'TecnicoEnfermagem',
+                    'AuxiliarEnfermagem'=>'AuxiliarEnfermagem',
                     'ServidorExecutaProcedimento'=>'ServidorExecutaProcedimento',
                     'EquipeExecutaProcedimento'=>'EquipeExecutaProcedimento',
                     'MedicoExecutaProcedimento'=>'MedicoExecutaProcedimento',
                     'EnfermeiroExecutaProcedimento'=>'EnfermeiroExecutaProcedimento',
                     'AgenteSaudeExecutaProcedimento'=>'AgenteSaudeExecutaProcedimento',
                     'OdontologoExecutaProcedimento'=>'OdontologoExecutaProcedimento',
+                    'TecnicoEnfermagemExecutaProcedimento'=>'TecnicoEnfermagemExecutaProcedimento',
+                    'AuxiliarEnfermagemExecutaProcedimento'=>'AuxiliarEnfermagemExecutaProcedimento',
                     'MessageWebService'=>'MessageWebService',
                 ),
             ),
@@ -225,6 +230,32 @@ class ProcedimentoController extends Controller
      * @return Procedimento[]
      * @soap
      */
+    public function getProcedimentosDeAuxiliarEnfermagemAEnviarSIAB($usuarioDesktop){
+        if(!$this->usuarioEstaLogado($usuarioDesktop)){
+            return array();
+        }
+       
+        return Procedimento::model()->findAll($this->getCDBcriteriaProcedimentoPorProfissional(AuxiliarEnfermagem::CODIGO_PROFISSAO, Procedimento::ORIGEM_SIAB));
+    }
+    
+    /**
+     * @param UsuarioDesktop usuario da aplicao desktop
+     * @return Procedimento[]
+     * @soap
+     */
+    public function getProcedimentosDeTecnicoEnfermagemAEnviarSIAB($usuarioDesktop){
+        if(!$this->usuarioEstaLogado($usuarioDesktop)){
+            return array();
+        }
+       
+        return Procedimento::model()->findAll($this->getCDBcriteriaProcedimentoPorProfissional(TecnicoEnfermagem::CODIGO_PROFISSAO, Procedimento::ORIGEM_SIAB));
+    }
+    
+    /**
+     * @param UsuarioDesktop usuario da aplicao desktop
+     * @return Procedimento[]
+     * @soap
+     */
     public function getProcedimentosAEnviarSIA($usuarioDesktop){
        if(!$this->usuarioEstaLogado($usuarioDesktop)){
             return array();
@@ -287,6 +318,32 @@ class ProcedimentoController extends Controller
     }
     /**
      * @param UsuarioDesktop usuario da aplicao desktop
+     * @return Procedimento[]
+     * @soap
+     */
+    public function getProcedimentosDeAuxiliarEnfermagemAEnviarSIA($usuarioDesktop){
+        if(!$this->usuarioEstaLogado($usuarioDesktop)){
+            return array();
+        }
+       
+        return Procedimento::model()->findAll($this->getCDBcriteriaProcedimentoPorProfissional(AuxiliarEnfermagem::CODIGO_PROFISSAO, Procedimento::ORIGEM_SIA));
+    }
+    
+    /**
+     * @param UsuarioDesktop usuario da aplicao desktop
+     * @return Procedimento[]
+     * @soap
+     */
+    public function getProcedimentosDeTecnicoEnfermagemAEnviarSIA($usuarioDesktop){
+        if(!$this->usuarioEstaLogado($usuarioDesktop)){
+            return array();
+        }
+       
+        return Procedimento::model()->findAll($this->getCDBcriteriaProcedimentoPorProfissional(TecnicoEnfermagem::CODIGO_PROFISSAO, Procedimento::ORIGEM_SIA));
+    }
+    
+    /**
+     * @param UsuarioDesktop usuario da aplicao desktop
      * @return Unidade[]
      * @soap
      */
@@ -331,6 +388,54 @@ class ProcedimentoController extends Controller
     /**
      * @param string codigo da unidade
      * @param UsuarioDesktop usuario da aplicao desktop
+     * @return AuxiliarEnfermagem[]
+     * @soap
+     */
+    public function getAuxiliarEnfermagem($codigoUnidade,$usuarioDesktop){
+       if(!$this->usuarioEstaLogado($usuarioDesktop)){
+            return array();
+        }
+       if($codigoUnidade===null){
+           return AuxiliarEnfermagem::model()->findAll();
+       }
+        return AuxiliarEnfermagem::model()->findAll('unidade_cnes=:unidade', array(':unidade'=>$codigoUnidade));;
+    }
+    
+    /**
+     * @param string codigo da unidade
+     * @param UsuarioDesktop usuario da aplicao desktop
+     * @return TecnicoEnfermagem[]
+     * @soap
+     */
+    public function getTecnicoEnfermagem($codigoUnidade,$usuarioDesktop){
+       if(!$this->usuarioEstaLogado($usuarioDesktop)){
+            return array();
+        }
+       if($codigoUnidade===null){
+           return TecnicoEnfermagem::model()->findAll();
+       }
+        return TecnicoEnfermagem::model()->findAll('unidade_cnes=:unidade', array(':unidade'=>$codigoUnidade));;
+    }
+    
+    /**
+     * @param string codigo da unidade
+     * @param UsuarioDesktop usuario da aplicao desktop
+     * @return ServidorEquipe[]
+     * @soap
+     */
+    public function getServidorPorEquipe($codigoUnidade,$usuarioDesktop){
+       if(!$this->usuarioEstaLogado($usuarioDesktop)){
+            return array();
+        }
+       if($codigoUnidade===null){
+           return ServidorEquipe::model()->findAll();
+       }
+        return ServidorEquipe::model()->findAll('equipe_unidade_cnes=:unidade', array(':unidade'=>$codigoUnidade));;
+    }
+    
+    /**
+     * @param string codigo da unidade
+     * @param UsuarioDesktop usuario da aplicao desktop
      * @return Odontologo[]
      * @soap
      */
@@ -359,54 +464,101 @@ class ProcedimentoController extends Controller
         }
         return Enfermeiro::model()->findAll('unidade_cnes=:unidade', array(':unidade'=>$codigoUnidade));;
     }
-    
-    /**
-     * @param ServidorExecutaProcedimento[]
-     * @param UsuarioDesktop usuario da aplicao desktop
-     * @return MessageWebService[]
-     * @soap
-     */
+
+
     public function sendExecutadosPorServidor($procedimentosExecutados,$usuarioDesktop){
-       
-       
-        return array();
-    }
-
-   
-
-
-    
-    /**
-     * @param EquipeExecutaProcedimento[]
-     * @param UsuarioDesktop usuario da aplicao desktop
-     * @return MessageWebService[]
-     * @soap
-     */
-    public function sendExecutadosPorEquipe($procedimentosExecutados,$usuarioDesktop){
-         
-            $m= new MessageWebService;
-        if(is_array($procedimentosExecutados)){
-            foreach ($procedimentosExecutados as $proced) {
-                try{
-                $procedimento= new EquipeExecutaProcedimento;
-                $procedimento->competencia=$proced->competencia;
-                $procedimento->equipe_codigo_area=$proced->equipe_codigo_area;
-                $procedimento->equipe_codigo_micro_area=$proced->equipe_codigo_micro_area;
-                $procedimento->procedimento_codigo=$proced->procedimento_codigo;
-                $procedimento->quantidade=$proced->quantidade;
-                $procedimento->unidade_cnes=$proced->unidade_cnes;
-                $procedimento->save();
-                }  catch (Exception $e){
-                    $m->valor="Falha no recebimento da competencia dados errdos".$e->getMessage();
-                    return array($m);
-                }
-                
-            }
-            $m->valor="Recebida com sucesso";
-            return array($m);
-        }
-        $m->valor="Falha no recebimento da competencia";
-        return array($m);
+//        //não implementado ainda
+//         $msg=array();
+//        try{
+//            //arreio de mensagens
+//            $this->iniciarVariaveisGlobais();
+//            // verifica se o usuário está logado
+//            if($this->usuarioEstaLogado($usuarioDesktop)){
+//                //verifica se é um vetor de procedimentos executados por medicos
+//                if(is_array($procedimentosExecutados)){
+//                    foreach($procedimentosExecutados as $proc){
+//                        
+//                        $servExe= new ServidorExecutaProcedimento();
+//                        $compet= new Competencia();
+//                        //vai preencher os dados
+//                        $servExe->setCompetencia($proc->competencia);
+//                        $servExe->setMedico_cpf($proc->servidor_cpf);
+//                        $servExe->setMedico_unidade_cnes($proc->unidade_cnes);
+//                        $servExe->setProcedimento_codigo($proc->procedimento_codigo);
+//                        $servExe->setQuantidade($proc->quantidade);
+//                        //carrega as entidades para usar nas mensagens
+//                        $ser= $this->loadServidor($proc->servidor_cpf);
+//                        $procedi=$this->loadProcedimento($proc->procedimento_codigo);
+//                        
+//                        $compet->setMesAno($servExe->getCompetencia());
+//                        //verifica se a competencia do procedimento executado é válida
+//                        if($this->validarCompetencia($compet)){
+//                            //é válida, então deve verificar se o servidor pertence mesmo a equipe
+//                            $servidor_equipe= new ServidorEquipe;
+//                            //preenchendo so valores
+//                            $servidor_equipe->setServidorCPF($servExe->getServidor_cpf());
+//                            $servidor_equipe->setEquipeUnidadeCNES($servExe->getUnidade_cnes());
+//                            $servidor_equipe->setFuncao(null);
+//                            if($this->IsServidorEquipe($servidor_equipe)){
+//                                if($this->existProcedimentoEmMetaProfissional($servExe->getProcedimento_codigo(),  Medico::CODIGO_PROFISSAO)){
+//                                    //agora verifica se o registro já existe, senão existir, vai cadastrar
+//                                    if($this->validarProcedimentoExecutadomedico($servExe)){
+//                                        //vai salvar o registro
+//                                        try{
+//                                            //vai salvar o objeto
+//                                            if($servExe->save()){
+//                                                $msg[]=$this->getMessageWebService("PROCEDIMENTO: $procedi->nome \nTÉCNICO EM ENFERMAGEM: $ser->nome \nSUCESSO: PROCEDIMENTO EXECUTADO PELO TÉCNICO EM ENFERMAGEM REGISTRADO COM SUCESSO", MessageWebService::SUCESSO); 
+//                                            }
+//                                            //erro ao salvar
+//                                            else{
+//                                                //adiciona o erro ao vetor
+//                                                $msg[]=$this->getMessageWebService("PROCEDIMENTO: $procedi->nome \nTÉCNICO EM ENFERMAGEM: $ser->nome \nERRO: NÃO FOI POSSÍVEL REGISTRAR O PROCEDIMENTO EXECUTADO PELO TÉCNICO EM ENFERMAGEM", MessageWebService::ERRO);
+//                                            }
+//                                        }catch(Exception $ex){
+//                                            $tmp=$ex->getMessage();
+//                                            //adiciona o erro ao vetor
+//                                            $msg[]=$this->getMessageWebService("PROCEDIMENTO: $procedi->nome \nTÉCNICO EM ENFERMAGEM: $ser->nome \nERRO INESPERADO AO TENTAR SALVAR O PROCEDIMENTO EXECUTADO PELO TÉCNICO EM ENFERMAGEM! $tmp", MessageWebService::ERRO); 
+//                                        } 
+//                                        //terminou o try
+//                                    }
+//                                    //já foi enviado
+//                                    else{
+//                                        $msg[]=$this->getMessageWebService("PROCEDIMENTO: $procedi->nome \nTÉCNICO EM ENFERMAGEM: $ser->nome \nERRO: JÁ FOI ENVIADO PARA A COMPETÊNCIA $servExe->competencia", MessageWebService::ERRO); 
+//                                    }
+//                                }
+//                                //o rpocedimento não faz parte de nenhuma meta
+//                                else{
+//                                   $msg[]=$this->getMessageWebService("PROCEDIMENTO: $procedi->nome\n WARNING: NÃO FAZ PARTE DE NENHUMA META PARA TÉCNICO EM ENFERMAGEM. ENTÃO FOI DESCARTADO!", MessageWebService::WARNING); 
+//                                }
+//                            }
+//                            //TÉCNICO EM ENFERMAGEM não faz parte da equipe
+//                            else{
+//                               $msg[]=$this->getMessageWebService("TÉCNICO EM ENFERMAGEM: $ser->nome \nERRO: NÃO ESTÁ CADASTRADO EM NENHUMA EQUIPE", MessageWebService::ERRO); 
+//                            }
+//                        }
+//                        //competência inválida
+//                        else{
+//                            $msg[]=$this->getMessageWebService("ERRO: COMPETÊNCIA INVÁLIDA, $servExe->competencia", MessageWebService::ERRO);
+//                        }
+//                        
+//                    }
+//                }
+//                //não foi um array de procedimentos executados por medicos
+//                else{
+//                    //adiciona o erro ao vetor
+//                    $msg[]=$this->getMessageWebService("ERRO: DEVE-SE ENVIAR UMA LISTA DE PROCEDIMENTOS EXECUTADOS POR UM TÉCNICO EM ENFERMAGEM!", MessageWebService::ERRO);
+//                    
+//                }
+//            }
+//            //não está logado
+//            else{
+//                $msg[]=$this->getMessageWebService("ERRO: DEVE-SE FAZER LOGIN NO WEB SERVICE!", MessageWebService::ERRO);
+//            }
+//        }catch(Exception $ex){
+//            $tmp=$ex->getMessage();
+//            $msg[]=$this->getMessageWebService("ERRO INESPERADO A CHAMADA DO MÉTODO! $tmp",MessageWebService::ERRO);
+//        }
+//        return $msg;
     }
     
     /**
@@ -479,7 +631,7 @@ class ProcedimentoController extends Controller
                                    $msg[]=$this->getMessageWebService("PROCEDIMENTO: $procedi->nome\n WARNING: NÃO FAZ PARTE DE NENHUMA META PARA MÉDICO. ENTÃO FOI DESCARTADO!", MessageWebService::WARNING); 
                                 }
                             }
-                            //médico não faz parte da equipe
+                            //MÉDICO não faz parte da equipe
                             else{
                                $msg[]=$this->getMessageWebService("MÉDICO: $ser->nome \nERRO: NÃO ESTÁ CADASTRADO EM NENHUMA EQUIPE", MessageWebService::ERRO); 
                             }
@@ -509,6 +661,205 @@ class ProcedimentoController extends Controller
         return $msg;
     }
     
+     /**
+     * @param TecnicoEnfermagemExecutaProcedimento[]
+     * @param UsuarioDesktop usuario da aplicao desktop
+     * @return MessageWebService[]
+     * @soap
+     */
+    public function sendExecutadosPorTecnicoEnfermagem($procedimentosExecutados,$usuarioDesktop){
+        $msg=array();
+        try{
+            //arreio de mensagens
+            $this->iniciarVariaveisGlobais();
+            // verifica se o usuário está logado
+            if($this->usuarioEstaLogado($usuarioDesktop)){
+                //verifica se é um vetor de procedimentos executados por medicos
+                if(is_array($procedimentosExecutados)){
+                    foreach($procedimentosExecutados as $proc){
+                        
+                        $tecnicoEnferExe= new TecnicoEnfermagemExecutaProcedimento();
+                        $compet= new Competencia();
+                        //vai preencher os dados
+                        $tecnicoEnferExe->setCompetencia($proc->competencia);
+                        $tecnicoEnferExe->setTecnico_enfermagem_cpf($proc->tecnico_enfermagem_cpf);
+                        $tecnicoEnferExe->setTecnico_enfermagem_unidade_cnes($proc->tecnico_enfermagem_unidade_cnes);
+                        $tecnicoEnferExe->setProcedimento_codigo($proc->procedimento_codigo);
+                        $tecnicoEnferExe->setQuantidade($proc->quantidade);
+                        //carrega as entidades para usar nas mensagens
+                        $ser= $this->loadServidor($proc->tecnico_enfermagem_cpf);
+                        $procedi=$this->loadProcedimento($proc->procedimento_codigo);
+                        
+                        $compet->setMesAno($tecnicoEnferExe->getCompetencia());
+                        //verifica se a competencia do procedimento executado é válida
+                        if($this->validarCompetencia($compet)){
+                            //é válida, então deve verificar se o servidor pertence mesmo a equipe
+                            $servidor_equipe= new ServidorEquipe;
+                            //preenchendo so valores
+                            $servidor_equipe->setServidorCPF($tecnicoEnferExe->getTecnico_enfermagem_cpf());
+                            $servidor_equipe->setEquipeUnidadeCNES($tecnicoEnferExe->getTecnico_enfermagem_unidade_cnes());
+                            $servidor_equipe->setFuncao("TecnicoEnfermagem");
+                            if($this->IsServidorEquipe($servidor_equipe)){
+                                if($this->existProcedimentoEmMetaProfissional($tecnicoEnferExe->getProcedimento_codigo(),  TecnicoEnfermagem::CODIGO_PROFISSAO)){
+                                    //agora verifica se o registro já existe, senão existir, vai cadastrar
+                                    if($this->validarProcedimentoExecutadoTecnicoEnfermagem($tecnicoEnferExe)){
+                                        //vai salvar o registro
+                                        try{
+                                            //vai salvar o objeto
+                                            if($tecnicoEnferExe->save()){
+                                                $msg[]=$this->getMessageWebService("PROCEDIMENTO: $procedi->nome \nTÉCNICO EM ENFERMAGEM: $ser->nome \nSUCESSO: PROCEDIMENTO EXECUTADO PELO TÉCNICO EM ENFERMAGEM REGISTRADO COM SUCESSO", MessageWebService::SUCESSO); 
+                                            }
+                                            //erro ao salvar
+                                            else{
+                                                //adiciona o erro ao vetor
+                                                $msg[]=$this->getMessageWebService("PROCEDIMENTO: $procedi->nome \nTÉCNICO EM ENFERMAGEM: $ser->nome \nERRO: NÃO FOI POSSÍVEL REGISTRAR O PROCEDIMENTO EXECUTADO PELO TÉCNICO EM ENFERMAGEM", MessageWebService::ERRO);
+                                            }
+                                        }catch(Exception $ex){
+                                            $tmp=$ex->getMessage();
+                                            //adiciona o erro ao vetor
+                                            $msg[]=$this->getMessageWebService("PROCEDIMENTO: $procedi->nome \nTÉCNICO EM ENFERMAGEM: $ser->nome \nERRO INESPERADO AO TENTAR SALVAR O PROCEDIMENTO EXECUTADO PELO TÉCNICO EM ENFERMAGEM! $tmp", MessageWebService::ERRO); 
+                                        } 
+                                        //terminou o try
+                                    }
+                                    //já foi enviado
+                                    else{
+                                        $msg[]=$this->getMessageWebService("PROCEDIMENTO: $procedi->nome \nTÉCNICO EM ENFERMAGEM: $ser->nome \nERRO: JÁ FOI ENVIADO PARA A COMPETÊNCIA $tecnicoEnferExe->competencia", MessageWebService::ERRO); 
+                                    }
+                                }
+                                //o rpocedimento não faz parte de nenhuma meta
+                                else{
+                                   $msg[]=$this->getMessageWebService("PROCEDIMENTO: $procedi->nome\n WARNING: NÃO FAZ PARTE DE NENHUMA META PARA TÉCNICO EM ENFERMAGEM. ENTÃO FOI DESCARTADO!", MessageWebService::WARNING); 
+                                }
+                            }
+                            //TÉCNICO EM ENFERMAGEM não faz parte da equipe
+                            else{
+                               $msg[]=$this->getMessageWebService("TÉCNICO EM ENFERMAGEM: $ser->nome \nERRO: NÃO ESTÁ CADASTRADO EM NENHUMA EQUIPE", MessageWebService::ERRO); 
+                            }
+                        }
+                        //competência inválida
+                        else{
+                            $msg[]=$this->getMessageWebService("ERRO: COMPETÊNCIA INVÁLIDA, $tecnicoEnferExe->competencia", MessageWebService::ERRO);
+                        }
+                        
+                    }
+                }
+                //não foi um array de procedimentos executados por medicos
+                else{
+                    //adiciona o erro ao vetor
+                    $msg[]=$this->getMessageWebService("ERRO: DEVE-SE ENVIAR UMA LISTA DE PROCEDIMENTOS EXECUTADOS POR UM TÉCNICO EM ENFERMAGEM!", MessageWebService::ERRO);
+                    
+                }
+            }
+            //não está logado
+            else{
+                $msg[]=$this->getMessageWebService("ERRO: DEVE-SE FAZER LOGIN NO WEB SERVICE!", MessageWebService::ERRO);
+            }
+        }catch(Exception $ex){
+            $tmp=$ex->getMessage();
+            $msg[]=$this->getMessageWebService("ERRO INESPERADO A CHAMADA DO MÉTODO! $tmp",MessageWebService::ERRO);
+        }
+        return $msg;
+    }
+    
+    /**
+     * @param AuxiliarEnfermagemExecutaProcedimento[]
+     * @param UsuarioDesktop usuario da aplicao desktop
+     * @return MessageWebService[]
+     * @soap
+     */
+    public function sendExecutadosPorAuxiliarEnfermagem($procedimentosExecutados,$usuarioDesktop){
+        $msg=array();
+        try{
+            //arreio de mensagens
+            $this->iniciarVariaveisGlobais();
+            // verifica se o usuário está logado
+            if($this->usuarioEstaLogado($usuarioDesktop)){
+                //verifica se é um vetor de procedimentos executados por medicos
+                if(is_array($procedimentosExecutados)){
+                    foreach($procedimentosExecutados as $proc){
+                        
+                        $auxiliarEnferExe= new TecnicoEnfermagemExecutaProcedimento();
+                        $compet= new Competencia();
+                        //vai preencher os dados
+                        $auxiliarEnferExe->setCompetencia($proc->competencia);
+                        $auxiliarEnferExe->setAuxiliar_enfermagem_cpf($proc->auxiliar_enfermagem_cpf);
+                        $auxiliarEnferExe->setAuxiliar_enfermagem_unidade_cnes($proc->auxiliar_enfermagem_unidade_cnes);
+                        $auxiliarEnferExe->setProcedimento_codigo($proc->procedimento_codigo);
+                        $auxiliarEnferExe->setQuantidade($proc->quantidade);
+                        //carrega as entidades para usar nas mensagens
+                        $ser= $this->loadServidor($proc->auxiliar_enfermagem_cpf);
+                        $procedi=$this->loadProcedimento($proc->procedimento_codigo);
+                        
+                        $compet->setMesAno($auxiliarEnferExe->getCompetencia());
+                        //verifica se a competencia do procedimento executado é válida
+                        if($this->validarCompetencia($compet)){
+                            //é válida, então deve verificar se o servidor pertence mesmo a equipe
+                            $servidor_equipe= new ServidorEquipe;
+                            //preenchendo so valores
+                            $servidor_equipe->setServidorCPF($auxiliarEnferExe->getAuxiliar_enfermagem_cpf());
+                            $servidor_equipe->setEquipeUnidadeCNES($auxiliarEnferExe->getAuxiliar_enfermagem_unidade_cnes());
+                            $servidor_equipe->setFuncao("AuxiliarEnfermagem");
+                            if($this->IsServidorEquipe($servidor_equipe)){
+                                if($this->existProcedimentoEmMetaProfissional($auxiliarEnferExe->getProcedimento_codigo(), AuxiliarEnfermagem::CODIGO_PROFISSAO)){
+                                    //agora verifica se o registro já existe, senão existir, vai cadastrar
+                                    if($this->validarProcedimentoExecutadoAuxiliarEnfermagem($auxiliarEnferExe)){
+                                        //vai salvar o registro
+                                        try{
+                                            //vai salvar o objeto
+                                            if($auxiliarEnferExe->save()){
+                                                $msg[]=$this->getMessageWebService("PROCEDIMENTO: $procedi->nome \nAUXILIAR DE ENFERMAGEM: $ser->nome \nSUCESSO: PROCEDIMENTO EXECUTADO PELO AUXILIAR DE ENFERMAGEM REGISTRADO COM SUCESSO", MessageWebService::SUCESSO); 
+                                            }
+                                            //erro ao salvar
+                                            else{
+                                                //adiciona o erro ao vetor
+                                                $msg[]=$this->getMessageWebService("PROCEDIMENTO: $procedi->nome \nAUXILIAR DE ENFERMAGEM: $ser->nome \nERRO: NÃO FOI POSSÍVEL REGISTRAR O PROCEDIMENTO EXECUTADO PELO AUXILIAR DE ENFERMAGEM", MessageWebService::ERRO);
+                                            }
+                                        }catch(Exception $ex){
+                                            $tmp=$ex->getMessage();
+                                            //adiciona o erro ao vetor
+                                            $msg[]=$this->getMessageWebService("PROCEDIMENTO: $procedi->nome \nAUXILIAR DE ENFERMAGEM: $ser->nome \nERRO INESPERADO AO TENTAR SALVAR O PROCEDIMENTO EXECUTADO PELO AUXILIAR DE ENFERMAGEM! $tmp", MessageWebService::ERRO); 
+                                        } 
+                                        //terminou o try
+                                    }
+                                    //já foi enviado
+                                    else{
+                                        $msg[]=$this->getMessageWebService("PROCEDIMENTO: $procedi->nome \nAUXILIAR DE ENFERMAGEM: $ser->nome \nERRO: JÁ FOI ENVIADO PARA A COMPETÊNCIA $auxiliarEnferExe->competencia", MessageWebService::ERRO); 
+                                    }
+                                }
+                                //o rpocedimento não faz parte de nenhuma meta
+                                else{
+                                   $msg[]=$this->getMessageWebService("PROCEDIMENTO: $procedi->nome\n WARNING: NÃO FAZ PARTE DE NENHUMA META PARA AUXILIAR DE ENFERMAGEM. ENTÃO FOI DESCARTADO!", MessageWebService::WARNING); 
+                                }
+                            }
+                            //AUXILIAR DE ENFERMAGEM não faz parte da equipe
+                            else{
+                               $msg[]=$this->getMessageWebService("AUXILIAR DE ENFERMAGEM: $ser->nome \nERRO: NÃO ESTÁ CADASTRADO EM NENHUMA EQUIPE", MessageWebService::ERRO); 
+                            }
+                        }
+                        //competência inválida
+                        else{
+                            $msg[]=$this->getMessageWebService("ERRO: COMPETÊNCIA INVÁLIDA, $auxiliarEnferExe->competencia", MessageWebService::ERRO);
+                        }
+                        
+                    }
+                }
+                //não foi um array de procedimentos executados por medicos
+                else{
+                    //adiciona o erro ao vetor
+                    $msg[]=$this->getMessageWebService("ERRO: DEVE-SE ENVIAR UMA LISTA DE PROCEDIMENTOS EXECUTADOS POR UM AUXILIAR DE ENFERMAGEM!", MessageWebService::ERRO);
+                    
+                }
+            }
+            //não está logado
+            else{
+                $msg[]=$this->getMessageWebService("ERRO: DEVE-SE FAZER LOGIN NO WEB SERVICE!", MessageWebService::ERRO);
+            }
+        }catch(Exception $ex){
+            $tmp=$ex->getMessage();
+            $msg[]=$this->getMessageWebService("ERRO INESPERADO A CHAMADA DO MÉTODO! $tmp",MessageWebService::ERRO);
+        }
+        return $msg;
+    }
     /**
      * @param EnfermeiroExecutaProcedimento[]
      * @param UsuarioDesktop usuario da aplicao desktop
@@ -578,7 +929,7 @@ class ProcedimentoController extends Controller
                                    $msg2[]=$this->getMessageWebService("PROCEDIMENTO: $procedi->nome\n WARNING: NÃO FAZ PARTE DE NENHUMA META PARA ENFERMEIRO. ENTÃO FOI DESCARTADO!", MessageWebService::WARNING); 
                                 }
                             }
-                            //médico não faz parte da equipe
+                            //TÉCNICO EM ENFERMAGEM não faz parte da equipe
                             else{
                                $msg2[]=$this->getMessageWebService("ENFERMEIRO: $ser->nome \nERRO: NÃO ESTÁ CADASTRADO EM NENHUMA EQUIPE", MessageWebService::ERRO); 
                             }
@@ -678,7 +1029,7 @@ class ProcedimentoController extends Controller
                                    $msg[]=$this->getMessageWebService("PROCEDIMENTO: $procedi->nome\n WARNING: NÃO FAZ PARTE DE NENHUMA META PARA ODONTÓLOGO. ENTÃO FOI DESCARTADO!", MessageWebService::WARNING); 
                                 }
                             }
-                            //médico não faz parte da equipe
+                            //TÉCNICO EM ENFERMAGEM não faz parte da equipe
                             else{
                                $msg[]=$this->getMessageWebService("ODONTÓLOGO: $ser->nome \nERRO: NÃO ESTÁ CADASTRADO EM NENHUMA EQUIPE", MessageWebService::ERRO); 
                             }
@@ -778,7 +1129,7 @@ class ProcedimentoController extends Controller
                                    $msg[]=$this->getMessageWebService("PROCEDIMENTO: $procedi->nome\n WARNING: NÃO FAZ PARTE DE NENHUMA META PARA AGENTE DE SAÚDE. ENTÃO FOI DESCARTADO!", MessageWebService::WARNING); 
                                 }
                             }
-                            //médico não faz parte da equipe
+                            //TÉCNICO EM ENFERMAGEM não faz parte da equipe
                             else{
                                $msg[]=$this->getMessageWebService("AGENTE DE SAÚDE: $ser->nome \nERRO: NÃO ESTÁ CADASTRADO EM NENHUMA EQUIPE", MessageWebService::ERRO); 
                             }
@@ -955,6 +1306,30 @@ class ProcedimentoController extends Controller
                                     ':procedimento'=>$enfermeiroExecutaProcedimento->getProcedimento_codigo(),
                                     ':unidade'=>$enfermeiroExecutaProcedimento->getEnfermeiro_unidade_cnes(),
                                     ':competencia'=>$enfermeiroExecutaProcedimento->getCompetencia()
+                                    )
+                               );
+   }
+   
+   private function validarProcedimentoExecutadoTecnicoEnfermagem($TecnicoEnfermagemExecutaProcedimento){
+       //se existir vai retornar falso
+       return !$TecnicoEnfermagemExecutaProcedimento->exists("tecnico_enfermagem_cpf=:tecnico_enfermagem AND procedimento_codigo=:procedimento
+                               AND tecnico_enfermagem_unidade_cnes=:unidade AND competencia=:competencia",
+                               array(':tecnico_enfermagem'=>$TecnicoEnfermagemExecutaProcedimento->getTecnico_enfermagem_cpf(),
+                                    ':procedimento'=>$TecnicoEnfermagemExecutaProcedimento->getProcedimento_codigo(),
+                                    ':unidade'=>$TecnicoEnfermagemExecutaProcedimento->getTecnico_enfermagem_unidade_cnes(),
+                                    ':competencia'=>$TecnicoEnfermagemExecutaProcedimento->getCompetencia()
+                                    )
+                               );
+   }
+   
+   private function validarProcedimentoExecutadoAuxiliarEnfermagem($AuxiliarEnfermagemExecutaProcedimento){
+       //se existir vai retornar falso
+       return !$AuxiliarEnfermagemExecutaProcedimento->exists("auxiliar_enfermagem_cpf=:auxiliar_enfermagem AND procedimento_codigo=:procedimento
+                               AND auxiliar_enfermagem_unidade_cnes=:unidade AND competencia=:competencia",
+                               array(':auxiliar_enfermagem'=>$AuxiliarEnfermagemExecutaProcedimento->getEnfermeiro_cpf(),
+                                    ':procedimento'=>$AuxiliarEnfermagemExecutaProcedimento->getProcedimento_codigo(),
+                                    ':unidade'=>$AuxiliarEnfermagemExecutaProcedimento->getEnfermeiro_unidade_cnes(),
+                                    ':competencia'=>$AuxiliarEnfermagemExecutaProcedimento->getCompetencia()
                                     )
                                );
    }

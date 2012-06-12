@@ -32,6 +32,12 @@ class ServidorExecutaProcedimento extends CActiveRecord
          * @soap
          */
         public $competencia;
+        
+        /**
+         * @var string unidade que  faz parte
+         * @soap
+         */
+        public $unidade_cnes;
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return servidor_executa_procedimento the static model class
@@ -113,4 +119,45 @@ class ServidorExecutaProcedimento extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+        public function getServidor_cpf() {
+            return $this->servidor_cpf;
+        }
+
+        public function getProcedimento_codigo() {
+            return $this->procedimento_codigo;
+        }
+
+        public function getQuantidade() {
+            return $this->quantidade;
+        }
+
+        public function getCompetencia() {
+            return $this->competencia;
+        }
+
+        public function setServidor_cpf($servidor_cpf) {
+            $this->servidor_cpf = $servidor_cpf;
+        }
+
+        public function setProcedimento_codigo($procedimento_codigo) {
+            $this->procedimento_codigo = $procedimento_codigo;
+        }
+
+        public function setQuantidade($quantidade) {
+            $this->quantidade = $quantidade;
+        }
+
+        public function setCompetencia($competencia) {
+            $this->competencia = $competencia;
+        }
+
+        public function getUnidade_cnes() {
+            return $this->unidade_cnes;
+        }
+        public function setUnidade_cnes($unidade_cnes) {
+            $this->unidade_cnes = $unidade_cnes;
+        }
+
+
+
 }

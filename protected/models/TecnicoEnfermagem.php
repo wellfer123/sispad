@@ -1,21 +1,21 @@
 <?php
 
 /**
- * This is the model class for table "auxiliar_enfermagem".
+ * This is the model class for table "tecnico_enfermagem".
  *
- * The followings are the available columns in table 'auxiliar_enfermagem':
+ * The followings are the available columns in table 'tecnico_enfermagem':
  * @property string $servidor_cpf
  * @property string $unidade_cnes
  * @property string $data_desativacao
  * @property string $ativo
  * @property string $data_cadastro
  */
-class AuxiliarEnfermagem extends CActiveRecord
+class TecnicoEnfermagem extends CActiveRecord
 {
-        const CODIGO_PROFISSAO='338';
+        const CODIGO_PROFISSAO='865';
         const ATIVO=1;
         const DESATIVO=0;
-    
+        
         /**
          * @var string unidade que  faz parte
          * @soap
@@ -45,9 +45,10 @@ class AuxiliarEnfermagem extends CActiveRecord
          * @soap
          */
         public $data_desativacao;
+        
 	/**
 	 * Returns the static model of the specified AR class.
-	 * @return AuxiliarEnfermagem the static model class
+	 * @return TecnicoEnfermagem the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
@@ -59,7 +60,7 @@ class AuxiliarEnfermagem extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'auxiliar_enfermagem';
+		return 'tecnico_enfermagem';
 	}
 
 	/**
@@ -89,7 +90,8 @@ class AuxiliarEnfermagem extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'auxiliar_enfermagem_executa_procedimentos' => array(self::HAS_MANY, 'AuxiliarEnfermagemExecutaProcedimento', 'auxiliar_enfermagem_unidade_cnes'),
+			'tecnico_enfermagem_executa_metas' => array(self::HAS_MANY, 'TecnicoEnfermagemExecutaMeta', 'unidade_cnes'),
+			'tecnico_enfermagem_executa_procedimentos' => array(self::HAS_MANY, 'TecnicoEnfermagemExecutaProcedimento', 'tecnico_enfermagem_unidade_cnes'),
 		);
 	}
 
@@ -128,7 +130,7 @@ class AuxiliarEnfermagem extends CActiveRecord
 
 		$criteria->compare('data_cadastro',$this->data_cadastro,true);
 
-		return new CActiveDataProvider('auxiliar_enfermagem', array(
+		return new CActiveDataProvider('tecnico_enfermagem', array(
 			'criteria'=>$criteria,
 		));
 	}

@@ -12,7 +12,9 @@
  */
 class Enfermeiro extends CActiveRecord
 {
-    const CODIGO_PROFISSAO='532';
+        const CODIGO_PROFISSAO='532';
+        const ATIVO=1;
+        const DESATIVO=0;
         
         /**
          * @var string unidade que  faz parte
