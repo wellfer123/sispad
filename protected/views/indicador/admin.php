@@ -1,7 +1,6 @@
 <?php
 $this->breadcrumbs=array(
-	'Indicador'=>array('index'),
-	'Admin',
+	'Indicador',
 );
 
 $this->menu=array(
