@@ -9,6 +9,8 @@ $this->breadcrumbs=array(
 $this->menu=array(
 	array('label'=>'Adicionar Membros', 'url'=>array('servidorEquipe/addToTeam',"area"=>$model->equipe_codigo_area,
                                                             "cnes"=>$model->equipe_unidade_cnes)),
+        array('label'=>'Atualizar Equipe', 'url'=>array('equipe/update',"area"=>$model->equipe_codigo_area,
+                                                            "cnes"=>$model->equipe_unidade_cnes)),
 );
 
 Yii::app()->clientScript->registerScript('search', "
