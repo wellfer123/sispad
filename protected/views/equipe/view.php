@@ -9,6 +9,9 @@ $this->menu=array(
 	array('label'=>'Criar Equipes', 'url'=>array('create')),
 	array('label'=>'Atualizar Equipe', 'url'=>array('update','area'=>$model->codigo_area,'cnes'=>$model->unidade_cnes)),
 	array('label'=>'Administrar Equipes', 'url'=>array('admin')),
+        array('label'=>'Gerenciar Membros', 'url'=>array('servidorEquipe/adminMembers',
+              'codigo_area'=>$model->codigo_area,'unidade_cnes'=>$model->unidade_cnes
+        )),
 );
 ?>
 
