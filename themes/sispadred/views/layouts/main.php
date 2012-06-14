@@ -66,6 +66,7 @@ array(
                       array("url"=>array("route"=>"/rbac/assignment"), "label"=>"Permissões"),
                       array("url"=>array("route"=>"/indicador/admin"), "label"=>"Indicadores"),
                       array("url"=>array("route"=>"/equipe/admin"), "label"=>"Equipes"),
+                       array("url"=>array("route"=>"totalRelatorio/admin"), "label"=>"Relatórios"),
                       'visible'=>$RBAC2->checkAccess('SuperAdmin'),
                       
               ),
