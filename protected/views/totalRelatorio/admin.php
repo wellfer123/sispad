@@ -48,6 +48,7 @@ ou <b>=</b>) iniciar cada uma de suas pesquisa com valores específicos de como 
 		'quantidade',
 		'ano',
 		'data_envio',
+               
 		array(
 			'class'=>'CButtonColumn',
                         'viewButtonUrl'=>'Yii::app()->createUrl("TotalRelatorio/view", array("ano"=>$data->ano,"mes"=>$data->mes,"serv"=>$data->servidor_cpf  ))',
