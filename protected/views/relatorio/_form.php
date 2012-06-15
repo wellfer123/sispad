@@ -1,6 +1,6 @@
 <div class="form">
 
-<?php $form=$this->beginWidget('CActiveForm', array(
+<?php $form=$this->beginWidget('SISPADActiveForm', array(
 	'id'=>'relatorio-form',
         'enableClientValidation'=>true,
 	'enableAjaxValidation'=>true,

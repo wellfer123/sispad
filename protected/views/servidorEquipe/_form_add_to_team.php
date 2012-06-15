@@ -18,7 +18,7 @@ $ourscript = "$(document).ready(function(){
 ?>
 
 
-<?php $form=$this->beginWidget('CActiveForm', array(
+<?php $form=$this->beginWidget('SISPADActiveForm', array(
 	'id'=>'servidorEquipe-form',
 	'enableAjaxValidation'=>true,
         'enableClientValidation'=>true,
@@ -28,11 +28,12 @@ $ourscript = "$(document).ready(function(){
 
 	<?php echo $form->errorSummary($model); ?>
 
-
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'servidor_cpf'); ?>
-                <?php $this->widget('EJuiAutoCompleteFkField', array(
+        <table>
+            <tbody>
+                <tr>
+                    <td>
+                        <?php echo $form->labelEx($model,'servidor_cpf'); ?>
+                        <?php $this->widget('EJuiAutoCompleteFkField', array(
                                     'model'=>$model,
                                     'attribute'=>'servidor_cpf', //the FK field (from CJuiInputWidget)
                                      // controller method to return the autoComplete data (from CJuiAutoComplete)
@@ -53,19 +54,24 @@ $ourscript = "$(document).ready(function(){
                                         'minLength'=>6,
                                         ),
                                 ));?>
-		<?php echo $form->error($model,'servidor_cpf'); ?>
-	</div>
-        <div class="row">
-             <?php echo $form->labelEx($model,'funcao'); ?>
-             <?php echo $form->dropDownList($model,'funcao',array('Odontologo'=>'Odontólogo','Medico'=>'Médico',
+                        <?php echo $form->error($model,'servidor_cpf'); ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <?php echo $form->labelEx($model,'funcao'); ?>
+                        <?php echo $form->dropDownList($model,'funcao',array('Odontologo'=>'Odontólogo','Medico'=>'Médico',
                  'Enfermeiro'=>'Enfermeiro','AgenteSaude'=>'Agente de Saúde'));?>
-
-        </div>
-         <div class="row" id="microarea">
-             <?php echo CHtml::label('Microarea',false); ?>
-             <?php echo CHtml::textField('codigo_microarea');?>
-
-        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td id="microarea">
+                        <?php echo CHtml::label('Microarea',false); ?>
+                        <?php echo CHtml::textField('codigo_microarea');?>
+                    </td>
+                </tr>
+            </tbody>
+        </table>    
         <div class="row buttons">
 		<?php echo CHtml::submitButton('OK'); ?>
 	</div>
