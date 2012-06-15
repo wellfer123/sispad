@@ -23,7 +23,8 @@ div.uploader,
 div.uploader span.action,
 div.button,
 div.button span {
-	background-image: url(../images/sprite.png);
+        color: #fff;
+	background-image: url(../images/sprite2.png);
 	background-repeat: no-repeat;
 	-webkit-font-smoothing: antialiased;
 }
@@ -374,7 +375,7 @@ div.button:disabled span {
 /* Button */
 
 div.button {
-	height: 50px;
+	height: 30px;
 }
 
 div.button span {
