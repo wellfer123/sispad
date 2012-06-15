@@ -40,16 +40,26 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'medico-executa-meta-grid',
 	'dataProvider'=>$model->search(),
-	'filter'=>$model,
+	//'filter'=>$model,
 	'columns'=>array(
-		'medico_cpf',
-		'unidade_cnes',
-		'meta_id',
+		array(
+                        'name'=>'Médico',
+                        'value'=>'$data->medico->servidor->nome',
+                ),
+                'meta.nome',
 		'total',
-		'data_inicio',
-		'data_fim',
+                'meta.valor',
+                array(
+                        'name'=>'Status da Meta',
+                        'value'=>'$data->isMetaBatida()',
+                ),
 		array(
 			'class'=>'CButtonColumn',
+                        'buttons'=>array(
+                                'delete'=>array(
+                                                'visible'=>'false',
+                                )
+                        )
 		),
 	),
 )); ?>
