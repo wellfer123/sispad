@@ -42,7 +42,7 @@ class Indicador extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('nome, descricao', 'required'),
+			array('nome, descricao, profissao_codigo', 'required'),
 			array('profissao_codigo', 'numerical', 'integerOnly'=>true),
 			array('nome', 'length', 'max'=>30),
 			array('descricao', 'length', 'max'=>100),
