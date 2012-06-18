@@ -90,6 +90,8 @@ class Medico extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'medico_executa_procedimentos' => array(self::HAS_MANY, 'MedicoExecutaProcedimento', 'medico_unidade_cnes'),
+                        'servidor'=>array(self::BELONGS_TO,'Servidor','servidor_cpf'),
+                        'unidade'=>array(self::BELONGS_TO,'Unidade','unidade_cnes')
 		);
 	}
 
@@ -129,7 +131,14 @@ class Medico extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
-        
+        /**
+         *Somente deve ser usado se os objetos servidor e unidade forem trazidos do banco
+         * Devolve uma string formada pelo nome do medico com a unidade que ele pertence!
+         * @return string 
+         */
+        public function getServidorUnidade(){
+            return $this->servidor->nome.'/'.$this->unidade->nome;
+        }
         public function getUnidade_cnes() {
             return $this->unidade_cnes;
         }

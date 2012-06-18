@@ -83,5 +83,28 @@ class MetaController extends SISPADBaseController{
 			Yii::app()->end();
 		}
 	}
+       public function actionFindMetas() {
+            
+             $this->_RBAC->checkAccess('registered',true);
+            $q = $_GET['term'];
+            if(isset($q)) {
+                Meta::
+                 $metas = Meta::model()->findAll(Meta::getCDbCriteriaProfissao(Medico::CODIGO_PROFISSAO, strtoupper(trim($q)), Meta::ITENS));
+ 
+                if (!empty($metas)) {
+                    $out = array();
+                    foreach ($metas as $met) {
+                            $out[] = array(
+                            // expression to give the string for the autoComplete drop-down
+                            'label' => $met->nome,  
+                            'value' => $met->nome,
+                            'id' => $met->id, // return value from autocomplete
+                     );
+                    }
+                echo CJSON::encode($out);
+                Yii::app()->end();
+           }
+       }
+    }
 }
 ?>

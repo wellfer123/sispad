@@ -81,6 +81,7 @@ class FaltaController extends SISPADBaseController
                         $model->servidor_cpf= $_POST['Falta']['servidor_cpf'];
                         $model->mes= $_POST['Falta']['mes'];
                         $model->ano= $_POST['Falta']['ano'];
+                        
 
 			$this->redirect(array('create','cpf'=>$model->servidor_cpf,'mes'=>$model->mes,
                             'ano'=>$model->ano));
@@ -119,9 +120,11 @@ class FaltaController extends SISPADBaseController
                         
                         $model->mes= $_POST['Falta']['mes'];
                         $model->ano= $_POST['Falta']['ano'];
+                        $unidade = $_POST['Servidor']['unidade_cnes'];
+                        $nome_unidade = $_POST['Servidor_unidade_cnes_lookup'];
 
 			$this->redirect(array('viewMonth','mes'=>$model->mes,
-                            'ano'=>$model->ano));
+                            'ano'=>$model->ano,'unidade'=>$unidade,'nome_unidade'=>$nome_unidade));
 		}else
                     $this->render('prepared_view_month',array(
 			'model'=>$model,
@@ -148,6 +151,7 @@ class FaltaController extends SISPADBaseController
 			//$model->attributes=$_POST['Falta'];
                         $model->dia = $_POST['Falta']['dia'];
                         $model->motivo_id = $_POST['Falta']['motivo_id'];
+                        $model->obs_motivo= $_POST['Falta']['obs_motivo'];
 			if($model->save()){
                           $this->redirect(array('create','cpf'=>$model->servidor_cpf,'mes'=>$model->mes,
                             'ano'=>$model->ano));

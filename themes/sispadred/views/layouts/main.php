@@ -64,13 +64,12 @@ array(
                             "label"=>"Administração",
                       array("url"=>array("route"=>"/user/admin"), "label"=>"Usuário"),
                       array("url"=>array("route"=>"/rbac/assignment"), "label"=>"Permissões"),
+                      array("url"=>array("route"=>"/indicador/admin"), "label"=>"Indicadores"),
+                      array("url"=>array("route"=>"/equipe/admin"), "label"=>"Equipes"),
+                      array("url"=>array("route"=>"relatorio/admin"), "label"=>"Relatórios"),
+                      array("url"=>array("route"=>"totalRelatorio/admin"), "label"=>"Quantidade de Relatórios"),
                       'visible'=>$RBAC2->checkAccess('SuperAdmin'),
                       
-              ),
-          array("url"=>array(),
-                            "label"=>"Indicadores",
-                       
-                        array("url"=>array("route"=>"/indicador/index"), "label"=>"Ver Indicadores"),
               ),
           //menu raiz
           array("url"=>array(), "label"=>"Ajuda",

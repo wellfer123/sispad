@@ -131,4 +131,13 @@ class Meta extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+        
+        public static function getCDbCriteriaProfissao($codigoProfissao,$nome,$tipo){
+            $criteria=new CDbCriteria;
+            $criteria->alias="met";
+            $criteria->join=" INNER JOIN  indicador ind ON ind.id=met.indicador_id";
+            $criteria->condition=" ind.profissao_codigo=:profissao AND ind.status=:status AND met.tipo=:tipo AND nome like '%:nome%'";
+            $criteria->params=array(':profissao'=>$codigoProfissao,':status'=>Indicador::ATIVO,':tipo'=>$tipo,':nome'=>$nome);
+            return $criteria;
+        }
 }

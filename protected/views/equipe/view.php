@@ -5,11 +5,13 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List Equipe', 'url'=>array('index')),
-	array('label'=>'Create Equipe', 'url'=>array('create')),
-	array('label'=>'Update Equipe', 'url'=>array('update','area'=>$model->codigo_area,'cnes'=>$model->unidade_cnes)),
-	array('label'=>'Delete Equipe', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->codigo_area),'confirm'=>'Are you sure you want to delete this item?')),
-	array('label'=>'Manage Equipe', 'url'=>array('admin')),
+	array('label'=>'Listar Equipes', 'url'=>array('index')),
+	array('label'=>'Criar Equipes', 'url'=>array('create')),
+	array('label'=>'Atualizar Equipe', 'url'=>array('update','area'=>$model->codigo_area,'cnes'=>$model->unidade_cnes)),
+	array('label'=>'Administrar Equipes', 'url'=>array('admin')),
+        array('label'=>'Gerenciar Membros', 'url'=>array('servidorEquipe/adminMembers',
+              'codigo_area'=>$model->codigo_area,'unidade_cnes'=>$model->unidade_cnes
+        )),
 );
 ?>
 

@@ -153,8 +153,6 @@ class ServidorController extends SISPADBaseController
             $q = $_GET['term'];
             if(isset($q)) {
                  $servidores = Servidor::model()->findAll('nome like :nome',array(':nome'=> strtoupper(trim($q)).'%'));
-                //$servidores = Servidor::model()->findAllByAttributes(array('nome','cpf'),
-                                             // 'where nome like :nome',array(':nome'=> strtoupper(trim($q)).'%'));
  
                 if (!empty($servidores)) {
                     $out = array();
@@ -164,6 +162,31 @@ class ServidorController extends SISPADBaseController
                             'label' => $s->nome,  
                             'value' => $s->nome,
                             'id' => $s->cpf, // return value from autocomplete
+                     );
+                    }
+                echo CJSON::encode($out);
+                Yii::app()->end();
+           }
+       }
+    }
+    
+    public function actionFindMedicos() {
+            
+             //$this->_RBAC->checkAccess('registered',true);
+            $q = $_GET['term'];
+            if(isset($q)) {
+                 $medicos = Medico::model()->with(array('servidor','unidade'))->findAll('servidor.nome like :nome',array(':nome'=> strtoupper(trim($q)).'%'));
+                //$servidores = Servidor::model()->findAllByAttributes(array('nome','cpf'),
+                                             // 'where nome like :nome',array(':nome'=> strtoupper(trim($q)).'%'));
+ 
+                if (!empty($medicos)) {
+                    $out = array();
+                    foreach ($medicos as $med) {
+                            $out[] = array(
+                            // expression to give the string for the autoComplete drop-down
+                            'label' => $med->getServidorUnidade(),  
+                            'value' => $med->getServidorUnidade(),
+                            'id' => $med->servidor_cpf, // return value from autocomplete
                      );
                     }
                 echo CJSON::encode($out);

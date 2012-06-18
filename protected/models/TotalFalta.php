@@ -107,6 +107,21 @@ class TotalFalta extends CActiveRecord
             ),
         ));
     }
+    
+     public function searchMensalPorUnidade($mes, $ano,$unidade_cnes) {
+
+                $dados=Yii::app()->db->createCommand('select serv.nome as nome,serv.cpf as id,serv.unidade_cnes, tot.quantidade as quantidade
+                                                      from total_falta as tot INNER JOIN servidor as serv
+                                                      ON tot.servidor_cpf = serv.cpf where  tot.mes='.$mes.' AND tot.ano='.$ano.
+                                                     ' AND serv.unidade_cnes='.$unidade_cnes.' ORDER BY serv.nome')->queryAll();
+
+		return new CArrayDataProvider($dados, array(
+                                    'id'=>'totalfalta',
+                                    'pagination'=>false
+
+		));
+
+    }
 
      public function searchMensal2($mes, $ano) {
 

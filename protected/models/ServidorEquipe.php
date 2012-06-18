@@ -68,6 +68,7 @@ class ServidorEquipe extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('equipe_codigo_area', 'numerical', 'integerOnly'=>true),
+                        
 			array('equipe_unidade_cnes', 'length', 'max'=>10),
 			array('servidor_cpf', 'length', 'max'=>11),
                         array('servidor_cpf','verificaServidorExistente','on'=>'create'),

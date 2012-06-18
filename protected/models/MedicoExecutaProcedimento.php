@@ -172,5 +172,16 @@ class MedicoExecutaProcedimento extends CActiveRecord
             $this->procedimento_codigo = $procedimento_codigo;
         }
 
-
+        public static function getCDbCriteriaMeta($metaId, $competencia){
+            $criteria= new CDbCriteria();
+            $criteria->alias="med";
+            $sql="INNER JOIN  meta_procedimento mp ON mp.procedimento_codigo=med.procedimento_codigo";
+            $sql="$sql INNER JOIN meta m ON m.id=mp.meta_id";
+            $criteria->join=$sql;
+            $criteria->condition=" med.competencia=:competencia AND m.id=:meta";
+            $criteria->order="med.medico_cpf";
+            $criteria->params=array(':competencia'=>$competencia,':meta'=>$metaId);
+            return $criteria;
+        }
+        
 }

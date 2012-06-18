@@ -1,5 +1,5 @@
 <?php
-class ProcedimentoController extends Controller
+class ProcedimentoController extends SISPADBaseController
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -1219,7 +1219,7 @@ class ProcedimentoController extends Controller
     * @return boolean 
     */
    private function validarCompetencia($competencia){
-       if($competencia->equals($competencia)){
+       if($competencia->equals($this->_competencia_old)){
            if($this->_competencia_boolean){
                return true;
            }
@@ -1395,4 +1395,8 @@ class ProcedimentoController extends Controller
            }
        }
    }
+
+    protected function getModelName() {
+        return "Procedimento";
+    }
 }

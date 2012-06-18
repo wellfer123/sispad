@@ -23,6 +23,12 @@
 		<?php echo $form->dropDownList($model,'motivo_id',CHtml::listData(Motivo::model()->findAll(),'id','descricao'));?>
 		<?php echo $form->error($model,'motivo_id'); ?>
 	   </td>
+          <tr>
+              <td><?php echo $form->labelEx($model,'obs_motivo'); ?>
+		<?php echo $form->textField($model,'obs_motivo'); ?>
+		<?php echo $form->error($model,'obs_motivo'); ?>
+              </td>
+          </tr>
          </tr>
        </table>
 
