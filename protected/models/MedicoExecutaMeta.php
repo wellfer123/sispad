@@ -38,6 +38,7 @@ class MedicoExecutaMeta extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
+                        array('meta_id, total,medico_cpf,unidade_cnes,data_inicio,data_fim', 'required'),
 			array('meta_id, total', 'numerical', 'integerOnly'=>true),
 			array('medico_cpf', 'length', 'max'=>11),
 			array('unidade_cnes', 'length', 'max'=>10),
