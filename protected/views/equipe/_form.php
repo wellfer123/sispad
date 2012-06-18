@@ -1,6 +1,6 @@
 <div class="form">
 
-<?php $form=$this->beginWidget('CActiveForm', array(
+<?php $form=$this->beginWidget('SISPADActiveForm', array(
 	'id'=>'equipe-form',
 	'enableAjaxValidation'=>false,
 )); ?>
@@ -8,28 +8,33 @@
 	<p class="note">Fields with <span class="required">*</span> are required.</p>
 
 	<?php echo $form->errorSummary($model); ?>
-
-        <div class="row">
-		<?php echo $form->labelEx($model,'codigo_segmento'); ?>
-		<?php echo CHtml::activeDropDownList($model, 'codigo_segmento', Equipe::$tipo_segmentos, array('maxlength'=>2)) ?>
-		<?php echo $form->error($model,'codigo_segmento'); ?>
-        </div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'tipo'); ?>
-		<?php echo CHtml::activeDropDownList($model, 'tipo', Equipe::$tipos_equipe, array('maxlength'=>2)) ?>
-		<?php echo $form->error($model,'tipo'); ?>
-	</div>
-
-        <div class="row">
-		<?php echo $form->labelEx($model,'codigo_area'); ?>
-		<?php echo CHtml::activeDropDownList($model, 'codigo_area', Equipe::getListCodigoArea(), array('maxlength'=>2)) ?>
-		<?php echo $form->error($model,'codigo_area'); ?>
-	</div>
-
-	<div class="row">
-		  <?php echo $form->labelEx($model,'unidade_cnes'); ?>
-                        <?php $this->widget('EJuiAutoCompleteFkField', array(
+         <table>
+            <tbody>
+                <tr>
+                    <td>
+                        <?php echo $form->labelEx($model,'codigo_segmento'); ?>
+                        <?php echo CHtml::activeDropDownList($model, 'codigo_segmento', Equipe::$tipo_segmentos, array('maxlength'=>2)) ?>
+                        <?php echo $form->error($model,'codigo_segmento'); ?> 
+                    </td>
+                </tr>
+                 <tr>
+                    <td>
+                        <?php echo $form->labelEx($model,'tipo'); ?>
+                        <?php echo CHtml::activeDropDownList($model, 'tipo', Equipe::$tipos_equipe, array('maxlength'=>2)) ?>
+                        <?php echo $form->error($model,'tipo'); ?> 
+                    </td>
+                </tr>
+                 <tr>
+                    <td>
+                        <?php echo $form->labelEx($model,'codigo_area'); ?>
+                        <?php echo CHtml::activeDropDownList($model, 'codigo_area', Equipe::getListCodigoArea(), array('maxlength'=>2)) ?>
+                        <?php echo $form->error($model,'codigo_area'); ?>
+                    </td>
+                </tr>
+                 <tr>
+                    <td>
+                         <?php echo $form->labelEx($model,'unidade_cnes'); ?>
+                         <?php $this->widget('EJuiAutoCompleteFkField', array(
                                     'model'=>$model,
                                     'attribute'=>'unidade_cnes', //the FK field (from CJuiInputWidget)
                                      // controller method to return the autoComplete data (from CJuiAutoComplete)
@@ -51,12 +56,12 @@
                                         'minLength'=>3,
                                         ),
                                 ));?>
-                        <?php echo $form->error($model,'unidade_cnes'); ?>
-	</div>
-
-	
-
-	<div class="row buttons">
+                          <?php echo $form->error($model,'unidade_cnes'); ?>
+                    </td>
+                </tr>
+            </tbody>
+        </table> 
+       	<div class="row buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
 	</div>
 

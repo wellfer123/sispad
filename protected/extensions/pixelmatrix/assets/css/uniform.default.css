@@ -23,12 +23,14 @@ div.uploader,
 div.uploader span.action,
 div.button,
 div.button span {
-        color: #fff;
+       
 	background-image: url(../images/sprite2.png);
 	background-repeat: no-repeat;
 	-webkit-font-smoothing: antialiased;
 }
-
+div.button.button{
+     color: #fff;
+}
 .selector, 
 .radio, 
 .checker, 

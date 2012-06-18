@@ -1,6 +1,6 @@
 <div class="form">
 
-<?php $form=$this->beginWidget('CActiveForm', array(
+<?php $form=$this->beginWidget('SISPADActiveForm', array(
 	'id'=>'total-relatorio-form',
         'enableClientValidation'=>true,
 	'enableAjaxValidation'=>false,
@@ -10,32 +10,36 @@
 
         <?php echo $this->renderMessages() ?>
 	<?php echo $form->errorSummary($model); ?>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'mes'); ?>
-                <?php echo Chtml::activeDropDownList($model, 'mes', 
+         <table>
+            <tbody>
+                <tr>
+                    <td >
+                        <?php echo $form->labelEx($model,'mes'); ?>
+                        <?php echo Chtml::activeDropDownList($model, 'mes', 
                                                     Chtml::listData(Meses::model()->findAll(), 'id','nome'),
                                                     array('empty'=>'Escolha um mês')); ?>
-		<?php echo $form->error($model,'mes'); ?>
-	</div>
-        
-        <div class="row">
-		<?php echo $form->labelEx($model,'ano'); ?>
+                        <?php echo $form->error($model,'mes'); ?></td>
+                </tr>
+                <tr>
+                    <td>
+                        <?php echo $form->labelEx($model,'ano'); ?>
             
-		<?php echo Chtml::activeDropDownList($model, 'ano', array(date('Y')-1=>date('Y')-1,date('Y')=>date('Y'),date('Y')+1=>date('Y')+1),
+                        <?php echo Chtml::activeDropDownList($model, 'ano', array(date('Y')-1=>date('Y')-1,date('Y')=>date('Y'),date('Y')+1=>date('Y')+1),
                                                     array('empty'=>'Escolha um ano')); ?>
-		<?php echo $form->error($model,'ano'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'quantidade'); ?>
-		<?php echo $form->textField($model,'quantidade'); ?>
-		<?php echo $form->error($model,'quantidade'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'servidor_cpf'); ?>
-                <?php $this->widget('EJuiAutoCompleteFkField', array(
+                        <?php echo $form->error($model,'ano'); ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <?php echo $form->labelEx($model,'quantidade'); ?>
+                        <?php echo $form->textField($model,'quantidade'); ?>
+                        <?php echo $form->error($model,'quantidade'); ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <?php echo $form->labelEx($model,'servidor_cpf'); ?>
+                        <?php $this->widget('EJuiAutoCompleteFkField', array(
                                     'model'=>$model, 
                                     'attribute'=>'servidor_cpf', //the FK field (from CJuiInputWidget)
                                      // controller method to return the autoComplete data (from CJuiAutoComplete)
@@ -57,10 +61,12 @@
                                         'minLength'=>6, 
                                         ),
                                 ));?>
-                
-		<?php echo $form->error($model,'servidor_cpf'); ?>
-            
-	</div>
+                        
+                    <?php echo $form->error($model,'servidor_cpf'); ?>
+                  </td>
+                </tr>
+            </tbody>
+        </table> 
 
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Enviar' : 'Salvar'); ?>

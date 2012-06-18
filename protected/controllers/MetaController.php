@@ -1,6 +1,6 @@
 <?php
 class MetaController extends SISPADBaseController{
-    public $layout='//layouts/column1';
+    public $layout='//layouts/column2';
 
 	/**
 	 * @var CActiveRecord the currently loaded data model instance.
