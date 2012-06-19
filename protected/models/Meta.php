@@ -140,10 +140,16 @@ class Meta extends CActiveRecord
             $criteria->params=array(':profissao'=>$codigoProfissao,':status'=>Indicador::ATIVO,':tipo'=>$tipo);
             return $criteria;
         }
+        public function tipo($siglaTipo){
+            $tipo=array('PR'=>'Procedimentos','IT'=>'Itens');
+            return $tipo[$siglaTipo];
+        }
         
         public static function getSelectSqlProfissao($codigoProfissao,$nome,$tipo){
              $sql = "SELECT met.* FROM meta as met INNER JOIN  indicador as ind ON ind.id=met.indicador_id WHERE ind.profissao_codigo=$codigoProfissao AND ind.status=".Indicador::ATIVO." AND met.tipo='$tipo' AND met.nome like '%$nome%' ";
              return $sql;
              
         }
+        
+        
 }

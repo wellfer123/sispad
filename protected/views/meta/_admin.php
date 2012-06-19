@@ -13,8 +13,13 @@ $this->widget('zii.widgets.grid.CGridView', array(
                 'percentagem',
                  array(
 			'class'=>'CButtonColumn',
-                        'template'=>'{ver_itens}{ver_procedimento}{adicionar_item}{adicionar_procedimento}',
+                        'template'=>'{ver_meta}{ver_itens}{ver_procedimento}{adicionar_item}{adicionar_procedimento}',
                         'buttons'=>array(
+                                            'ver_meta'=>array(
+                                            'label'=>'Ver Meta',
+                                            'url'=>'Yii::app()->createUrl("/meta/details",array("id"=>$data->id))',
+                                            'imageUrl'=>  Yii::app()->request->baseUrl.'/images/view.png',
+                                            ),
                                             'ver_itens'=>array(
                                             'visible'=>'$data->tipo==Meta::ITENS',
                                             'label'=>'Ver Itens',

@@ -47,7 +47,12 @@ class MetaController extends SISPADBaseController{
 		));
 
         }
-
+        public function actionDetails() {
+            $model = $this->loadModel();
+            $this->render('details',array(
+			'model'=>$model,
+		));
+        }
         public function actionView() {
             $model = new Meta();
             $this->render('view',array(
