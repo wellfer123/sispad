@@ -92,8 +92,11 @@ class MedicoExecutaMetaController extends SISPADBaseController
         public function actionCalculeMetas(){
             try{
                 $metas=MedicoExecutaMeta::calculeMetasComProcedimentos(22012);
+                
                 foreach($metas as $meta){
+                     
                    if(!$meta->save()){
+                     
                        foreach($meta->getErrors() as $errors)
 			{
 				foreach($errors as $error)
@@ -106,12 +109,13 @@ class MedicoExecutaMetaController extends SISPADBaseController
 			}
                        echo $meta->getErrors()."deu merda! <br>";
                    }
+                    
                    echo $meta->medico_cpf."<br>";
                    
                 }
                 
             }  catch (Exception $ex){
-                
+                echo $ex->getMessage();
             }
         }
 
