@@ -186,6 +186,7 @@ class ServidorController extends SISPADBaseController
                             // expression to give the string for the autoComplete drop-down
                             'label' => $med->getServidorUnidade(),  
                             'value' => $med->getServidorUnidade(),
+                            'unidade_cnes' => $med->unidade_cnes,
                             'id' => $med->servidor_cpf, // return value from autocomplete
                      );
                     }

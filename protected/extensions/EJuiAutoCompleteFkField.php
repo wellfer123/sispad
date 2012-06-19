@@ -64,6 +64,7 @@
  *      'model'=>$model, //  e.g. the Contact model (from CJuiInputWidget)
  *      // attribute must have double-quotes if using form "[$i]FieldName" for child-rows
  *      'attribute'=>"PostCodeId",  // the FK field (from CJuiInputWidget)
+ *      'attributes'=>array(''), //caso a chave estrangeira seja composta, passar os restantes dos campos por um arreio
  *      'sourceUrl'=>'findPostCode', // name of the controller method to return the autoComplete data (see below)  (from CJuiAutoComplete)
  *      'showFKField'=>true, // defaults to false.  set 'true' to display the FK value in the form with 'readonly' attribute.
  *      'FKFieldSize=>15, // display size of the FK field.  only matters if not hidden.  defaults to 10
@@ -101,6 +102,7 @@
  *                   $out[] = array(
  *                       'label' => $p->PostCodeAndProvince,  // expression to give the string for the autoComplete drop-down
  *                       'value' => $p->PostCodeAndProvince, // probably the same expression as above
+ *                       'attribute'=> $p->attribute, //caso seja chave estrangeira seja composta, cada campo passar o nome do atributo no modelo e seu valor
  *                       'id' => $p->PostCodeId, // return value from autocomplete
  *                   );
  *               }
