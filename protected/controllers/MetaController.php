@@ -87,9 +87,10 @@ class MetaController extends SISPADBaseController{
             
              $this->_RBAC->checkAccess('registered',true);
             $q = $_GET['term'];
+          
             if(isset($q)) {
-                Meta::
-                 $metas = Meta::model()->findAll(Meta::getCDbCriteriaProfissao(Medico::CODIGO_PROFISSAO, strtoupper(trim($q)), Meta::ITENS));
+               // Meta::
+                 $metas = Meta::model()->findAllBySql(Meta::getSelectSqlProfissao(Medico::CODIGO_PROFISSAO, strtoupper(trim($q)), Meta::ITENS));//(Meta::getCDbCriteriaProfissao(Medico::CODIGO_PROFISSAO, strtoupper(trim($q)), Meta::ITENS));
  
                 if (!empty($metas)) {
                     $out = array();

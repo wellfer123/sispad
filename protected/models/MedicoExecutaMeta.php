@@ -156,8 +156,8 @@ class MedicoExecutaMeta extends CActiveRecord
                 $metExec->total=$m->total;
                 $metExec->meta_id=$m->meta;
                 $metExec->unidade_cnes=$m->cnes;
-                $metExec->data_fim=date("d/m/Y");
-                $metExec->data_inicio=date("d/m/Y");
+                $metExec->data_fim=date("Y/m/d");
+                $metExec->data_inicio=date("Y/m/d");
                 //coloca o objeto no vetor
                 $resul[]=$metExec;
             }

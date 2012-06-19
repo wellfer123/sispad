@@ -135,9 +135,15 @@ class Meta extends CActiveRecord
         public static function getCDbCriteriaProfissao($codigoProfissao,$nome,$tipo){
             $criteria=new CDbCriteria;
             $criteria->alias="met";
-            $criteria->join=" INNER JOIN  indicador ind ON ind.id=met.indicador_id";
-            $criteria->condition=" ind.profissao_codigo=:profissao AND ind.status=:status AND met.tipo=:tipo AND nome like '%:nome%'";
-            $criteria->params=array(':profissao'=>$codigoProfissao,':status'=>Indicador::ATIVO,':tipo'=>$tipo,':nome'=>$nome);
+            $criteria->join=" INNER JOIN  indicador as ind ON ind.id=met.indicador_id";
+            $criteria->condition=" ind.profissao_codigo=:profissao AND ind.status=:status AND met.tipo=:tipo";
+            $criteria->params=array(':profissao'=>$codigoProfissao,':status'=>Indicador::ATIVO,':tipo'=>$tipo);
             return $criteria;
+        }
+        
+        public static function getSelectSqlProfissao($codigoProfissao,$nome,$tipo){
+             $sql = "SELECT met.* FROM meta as met INNER JOIN  indicador as ind ON ind.id=met.indicador_id WHERE ind.profissao_codigo=$codigoProfissao AND ind.status=".Indicador::ATIVO." AND met.tipo='$tipo' AND met.nome like '%$nome%' ";
+             return $sql;
+             
         }
 }
