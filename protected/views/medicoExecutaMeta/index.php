@@ -1,28 +1,34 @@
 <?php
 $this->breadcrumbs=array(
-	'Medico Executa Metas',
+	'Metas executadas por médicos'=>array('admin'),
 );
 
 $this->menu=array(
-	array('label'=>'Enviar Nova Meta', 'url'=>array('create')),
+	array('label'=>'Enviar Nova Execução de Meta', 'url'=>array('create')),
 	array('label'=>'Gerenciar Metas Executads por Médicos', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Metas executadas por médicos.</h1>
+<h2>Metas executadas por médicos.</h2>
 
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'medico-executa-meta-grid',
-	'dataProvider'=>$model->search(),
+	'dataProvider'=>$model->search($medico),
 	//'filter'=>$model,
 	'columns'=>array(
-                array(
-                        'name'=>'Medico',
+		array(
+                        'name'=>'Médico',
                         'value'=>'$data->medico->servidor->nome',
                 ),
                 'meta.nome',
-		'total',
-                'meta.valor',
+                array(
+                        'name'=>'Valor da Meta',
+                        'value'=>'$data->meta->valor',
+                ),
+                array(
+                        'name'=>'Total de execuções',
+                        'value'=>'$data->total',
+                ),
                 array(
                         'name'=>'Status da Meta',
                         'value'=>'$data->isMetaBatida()',

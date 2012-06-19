@@ -1,27 +1,52 @@
 <?php
 $this->breadcrumbs=array(
-	'Medico Executa Metas'=>array('index'),
-	$model->medico_cpf,
+        'Metas executadas por médicos'=>array('admin'),
+	'Meta'=>array('admin'),
+	$model->medico->servidor->nome,
 );
 
 $this->menu=array(
-	array('label'=>'List medico_executa_meta', 'url'=>array('index')),
-	array('label'=>'Create medico_executa_meta', 'url'=>array('create')),
-	array('label'=>'Update medico_executa_meta', 'url'=>array('update', 'id'=>$model->medico_cpf)),
-	array('label'=>'Delete medico_executa_meta', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->medico_cpf),'confirm'=>'Are you sure you want to delete this item?')),
-	array('label'=>'Manage medico_executa_meta', 'url'=>array('admin')),
+        array('label'=>'Listar Metas executadas Pelo Médico', 'url'=>array('index','medico'=>$model->medico_cpf)),
+        array('label'=>'Enviar Nova Execução de Meta', 'url'=>array('create')),
+	array('label'=>'Gerenciar Metas Executads por Médicos', 'url'=>array('admin')),
 );
 ?>
 
-<h1>View medico_executa_meta #<?php echo $model->medico_cpf; ?></h1>
+<div class="update">
+<h3>Meta: <?php echo $model->meta->nome.' executada por '.$model->medico->servidor->nome; ?></h3>
+</div>
 
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
 	'attributes'=>array(
-		'medico_cpf',
-		'unidade_cnes',
-		'meta_id',
-		'total',
+                array(
+                        'label'=>'Indicador',
+                        'value'=>$model->meta->indicador->nome
+                ),
+                array(
+                        'label'=>'Meta',
+                        'value'=>$model->meta->nome
+                ),
+                array(
+                        'label'=>'Unidade',
+                        'value'=>$model->unidade_medico->nome
+                ),
+                array(
+                        'label'=>'Médico',
+                        'value'=>$model->medico->servidor->nome
+                ),
+                array(
+                        'label'=>'Valor da meta',
+                        'value'=>$model->meta->valor
+                ),
+                array(
+                        'label'=>'Total de execuções',
+                        'value'=>$model->total
+                ),
+                array(
+                        'label'=>'Status da Meta',
+                        'value'=>$model->isMetaBatida(),
+                ),
 		'data_inicio',
 		'data_fim',
 	),

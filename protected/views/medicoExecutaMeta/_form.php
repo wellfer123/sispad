@@ -5,7 +5,7 @@
 	'enableAjaxValidation'=>false,
 )); ?>
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
+	<p class="note">Todos os campos com <span class="required">*</span> têm preenchimento obrigatório.</p>
 
 	<?php echo $form->errorSummary($model); ?>
 
@@ -26,7 +26,7 @@
                                     // display size of the FK field.  only matters if not hidden.  defaults to 10
                                     'FKFieldSize'=>10,
                                     'htmlOptions'=>array('style'=>'text-transform:uppercase'),
-                                    'relName'=>'unidade', // the relation name defined above
+                                    'relName'=>'meta', // the relation name defined above
                                     'displayAttr'=>'NomeDescricao',  // attribute or pseudo-attribute to display
                                     // length of the AutoComplete/display field, defaults to 50
                                     'autoCompleteLength'=>60,
@@ -128,7 +128,7 @@
             </tbody>
         </table>
         <div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
+		<?php echo CHtml::submitButton($model->isNewRecord ? 'Enviar' : 'Atualizar'); ?>
 	</div>
 <?php $this->endWidget(); ?>
 

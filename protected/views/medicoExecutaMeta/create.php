@@ -1,15 +1,19 @@
 <?php
 $this->breadcrumbs=array(
-	'Medico Executa Metas'=>array('index'),
-	'Create',
+	'Metas executadas por médicos'=>array('admin'),
+	'Envio',
 );
 
 $this->menu=array(
-	array('label'=>'List medico_executa_meta', 'url'=>array('index')),
-	array('label'=>'Manage medico_executa_meta', 'url'=>array('admin')),
+	array('label'=>'Gerenciar Metas Executads por Médicos', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Create medico_executa_meta</h1>
+<?php $this->beginWidget('zii.widgets.CPortlet', array(
+			'title'=>'Envio de meta executada por médico',
+                        'htmlOptions'=>array('class'=>'portlet_form')
+		));?>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
+
+<?php $this->endWidget(); ?>
