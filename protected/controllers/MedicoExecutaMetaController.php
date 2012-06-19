@@ -70,24 +70,24 @@ class MedicoExecutaMetaController extends SISPADBaseController
 	 * Updates a particular model.
 	 * If update is successful, the browser will be redirected to the 'view' page.
 	 */
-	public function actionUpdate()
-	{
-		$model=$this->loadModel();
-
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
-
-		if(isset($_POST['MedicoExecutaMeta']))
-		{
-			$model->attributes=$_POST['MedicoExecutaMeta'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->medico_cpf));
-		}
-
-		$this->render('update',array(
-			'model'=>$model,
-		));
-	}
+//	public function actionUpdate()
+//	{
+//		$model=$this->loadModel();
+//
+//		// Uncomment the following line if AJAX validation is needed
+//		// $this->performAjaxValidation($model);
+//
+//		if(isset($_POST['MedicoExecutaMeta']))
+//		{
+//			$model->attributes=$_POST['MedicoExecutaMeta'];
+//			if($model->save())
+//				$this->redirect(array('view','id'=>$model->medico_cpf));
+//		}
+//
+//		$this->render('update',array(
+//			'model'=>$model,
+//		));
+//	}
         
         public function actionCalculeMetas(){
             try{
@@ -123,20 +123,20 @@ class MedicoExecutaMetaController extends SISPADBaseController
 	 * Deletes a particular model.
 	 * If deletion is successful, the browser will be redirected to the 'index' page.
 	 */
-	public function actionDelete()
-	{
-		if(Yii::app()->request->isPostRequest)
-		{
-			// we only allow deletion via POST request
-			$this->loadModel()->delete();
-
-			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-			if(!isset($_GET['ajax']))
-				$this->redirect(array('index'));
-		}
-		else
-			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
-	}
+//	public function actionDelete()
+//	{
+//		if(Yii::app()->request->isPostRequest)
+//		{
+//			// we only allow deletion via POST request
+//			$this->loadModel()->delete();
+//
+//			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+//			if(!isset($_GET['ajax']))
+//				$this->redirect(array('index'));
+//		}
+//		else
+//			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
+//	}
 
 	/**
 	 * Lists all models.
@@ -146,7 +146,7 @@ class MedicoExecutaMetaController extends SISPADBaseController
 		$model=new MedicoExecutaMeta('search');
 		$model->unsetAttributes();  // clear any default values
 		$this->render('index',array(
-			'model'=>$model,
+			'model'=>$model, 'medico'=>$_GET['medico']
 		));
 	}
 
@@ -174,7 +174,7 @@ class MedicoExecutaMetaController extends SISPADBaseController
 		if($this->_model===null)
 		{
 			if(isset($_GET['id']))
-				$this->_model=MedicoExecutaMeta::model()->findbyPk($_GET['id']);
+				$this->_model=MedicoExecutaMeta::model()->with('medico.servidor','unidade_medico','meta.indicador')->findbyPk($_GET['id']);
 			if($this->_model===null)
 				throw new CHttpException(404,'The requested page does not exist.');
 		}
