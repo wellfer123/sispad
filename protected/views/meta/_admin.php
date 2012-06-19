@@ -24,13 +24,13 @@ $this->widget('zii.widgets.grid.CGridView', array(
                                             'visible'=>'$data->tipo==Meta::ITENS',
                                             'label'=>'Ver Itens',
                                             'url'=>'Yii::app()->createUrl("/item/list",array("meta_id"=>$data->id,"indicador_id"=>$_GET["indicador_id"]))',
-                                            'imageUrl'=>  Yii::app()->request->baseUrl.'/images/view.png',
+                                            'imageUrl'=>  Yii::app()->request->baseUrl.'/images/view2.png',
                                         ),
                                             'ver_procedimento'=>array(
                                             'visible'=>'$data->tipo==Meta::PROCEDIMENTO',
                                             'label'=>'Ver Procedimento',
                                             'url'=>'Yii::app()->createUrl("/metaProcedimento/view",array("meta_id"=>$data->id,"indicador_id"=>$_GET["indicador_id"]))',
-                                            'imageUrl'=>  Yii::app()->request->baseUrl.'/images/view.png',
+                                            'imageUrl'=>  Yii::app()->request->baseUrl.'/images/view2.png',
                                         ),
 
                                         'adicionar_item'=>array(
