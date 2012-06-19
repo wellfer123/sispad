@@ -59,10 +59,10 @@ class MedicoExecutaMeta extends CActiveRecord
 			'meta' => array(self::BELONGS_TO, 'Meta', 'meta_id'),
                         //Esse faz referência ao medico presente na tabela medico,
                         //mas para buscar buscá-lo, aqui, referencia a tabela servidor
-			'medico' => array(self::BELONGS_TO, 'Medico', 'medico_cpf'),
+			'medico' => array(self::BELONGS_TO, 'Medico', 'medico_cpf,unidade_cnes'),
                         //essa unidade faz referência a unidade presente na tabela medico,
                         //mas para buscar a unidade, aqui, referencia a tabela unidade
-			'unidade' => array(self::BELONGS_TO, 'Medico', 'unidade_cnes'),
+			'unidade_medico' => array(self::BELONGS_TO, 'Unidade', 'unidade_cnes'),
 		);
 	}
 
@@ -105,16 +105,19 @@ class MedicoExecutaMeta extends CActiveRecord
 	 * Retrieves a list of models based on the current search/filter conditions.
 	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
 	 */
-	public function search()
+	public function search($medico=null)
 	{
 		// Warning: Please modify the following code to remove attributes that
 		// should not be searched.
+                $this->medico_cpf=$medico;
 
 		$criteria=new CDbCriteria;
+                
+                $criteria->alias="medExc";
 
 		$criteria->compare('medico_cpf',$this->medico_cpf,true);
 
-		$criteria->compare('unidade_cnes',$this->unidade_cnes,true);
+		$criteria->compare('medExc.unidade_cnes',$this->unidade_cnes,true);
 
 		$criteria->compare('meta_id',$this->meta_id);
 
@@ -164,4 +167,19 @@ class MedicoExecutaMeta extends CActiveRecord
             }
             return $resul;
         }
+        
+        protected function afterFind() {
+            $this->data_fim=ParserDate::inverteDataEnToPt($this->data_fim);
+            $this->data_inicio=ParserDate::inverteDataEnToPt($this->data_inicio);
+            parent::afterFind();
+        }
+
+        protected function beforeSave() {
+            $this->data_fim=ParserDate::inverteDataPtToEn($this->data_fim);
+            $this->data_inicio=ParserDate::inverteDataPtToEn($this->data_inicio);
+            return parent::beforeSave();
+        }
+        
+        
+
 }
