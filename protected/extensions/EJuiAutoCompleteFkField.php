@@ -64,6 +64,7 @@
  *      'model'=>$model, //  e.g. the Contact model (from CJuiInputWidget)
  *      // attribute must have double-quotes if using form "[$i]FieldName" for child-rows
  *      'attribute'=>"PostCodeId",  // the FK field (from CJuiInputWidget)
+ *      'attributes'=>array(''), //caso a chave estrangeira seja composta, passar os restantes dos campos por um arreio
  *      'sourceUrl'=>'findPostCode', // name of the controller method to return the autoComplete data (see below)  (from CJuiAutoComplete)
  *      'showFKField'=>true, // defaults to false.  set 'true' to display the FK value in the form with 'readonly' attribute.
  *      'FKFieldSize=>15, // display size of the FK field.  only matters if not hidden.  defaults to 10
@@ -101,6 +102,7 @@
  *                   $out[] = array(
  *                       'label' => $p->PostCodeAndProvince,  // expression to give the string for the autoComplete drop-down
  *                       'value' => $p->PostCodeAndProvince, // probably the same expression as above
+ *                       'attribute'=> $p->attribute, //caso seja chave estrangeira seja composta, cada campo passar o nome do atributo no modelo e seu valor
  *                       'id' => $p->PostCodeId, // return value from autocomplete
  *                   );
  *               }
@@ -130,6 +132,12 @@ class EJuiAutoCompleteFkField extends CJuiAutoComplete {
 	 * @var boolean whether to show the FK field.
 	 */
 	public $showFKField = false;
+        
+        /**
+	 * @var string the attribute associated with this widget.
+	 * The name can contain square brackets (e.g. 'name[1]') which is used to collect tabular data input.
+	 */
+	public $attributes;
 
 	/**
 	 * @var integer length of the FK field if visible
@@ -200,8 +208,18 @@ class EJuiAutoCompleteFkField extends CJuiAutoComplete {
         
         // setup javascript to do the work
         $this->options['create']="js:function(event, ui){\$(this).val('".addslashes($this->_display)."');}";  // show initial display value
+        //meu codigo
+        $script;
+        if(is_array($this->attributes)){
+            foreach ($this->attributes as $atr){
+                 $htmlOpt;
+                CHtml::resolveNameID($this->model, $atr, $htmlOpt);
+                $script=$script."\$('#".$htmlOpt['id']."').val(ui.item.".$atr.");";
+            }
+        }
+        //fim do meu codigo
         // after user picks from list, save the ID in model/attr field, and Value in _save field for redisplay
-        $this->options['select']="js:function(event, ui){\$('#".$this->_fieldID."').val(ui.item.id);\$('#".$this->_saveID."').val(ui.item.value);}";
+        $this->options['select']="js:function(event, ui){ $script \$('#".$this->_fieldID."').val(ui.item.id);\$('#".$this->_saveID."').val(ui.item.value);}";
         // when the autoComplete field loses focus, refresh the field with current value of _save
         // this is either the previous value if user didn't pick anything; or the new value if they did
         $this->htmlOptions['onblur']="$(this).val($('#".$this->_saveID."').val());";
@@ -214,9 +232,30 @@ class EJuiAutoCompleteFkField extends CJuiAutoComplete {
         } else {
             echo CHtml::activeHiddenField($this->model,$this->attribute);
         }
+        //codigo meu
+        if(is_array($this->attributes)){
+                foreach ($this->attributes as $atr){
+                    if ($this->showFKField) {
+                        echo CHtml::activeTextField($this->model, $atr, array('size'=>$this->FKFieldSize, 'readonly'=>'readonly'));
+                    } else {
+                        echo CHtml::activeHiddenField($this->model,$atr);
+                    }
+                }
+            
+        }
+        
+        //fim do meu codigo
         
         // second, the hidden field used to refresh the display value
         echo CHtml::hiddenField($this->_saveID,$this->_display, array('id'=>$this->_saveID)); 
+        
+        //meu codigo
+//        if(is_array($this->attributes)){
+//            foreach ($this->attributes as $atr){
+//                echo CHtml::hiddenField($atr."1234", $this->_display, array('id'=>$atr."1234"));
+//            }
+//        }
+        //fim do meu codigo
 
         // third, the autoComplete field itself
         $this->htmlOptions['id'] = $this->_lookupID;
@@ -226,12 +265,22 @@ class EJuiAutoCompleteFkField extends CJuiAutoComplete {
         // fouth, an image button to empty all three fields
         $label=Yii::t('DR','Limpar '). ucfirst($this->relName); // TODO: how to translate relname?
         $deleteImageURL = Yii::app()->request->baseUrl.'/images/clear.png'; 
+        //meu codigo
+        $script;
+        if(is_array($this->attributes)){
+            foreach ($this->attributes as $atr){
+                 $htmlOpt;
+                CHtml::resolveNameID($this->model, $atr, $htmlOpt);
+                $script=$script."$('#".$htmlOpt['id']."').val('');";
+            }
+        }
+        //fim do meu codigo
         echo CHtml::image($deleteImageURL, $label,
             array('title'=>$label,
                 //'name'=>'remove_'.$this->attribute,
                 'name' => 'remove'.$this->_fieldID,
                 'style'=>'margin-left:6px;',
-                'onclick'=>"$('#".$this->_fieldID."').val('');$('#".$this->_saveID."').val('');$('#".$this->_lookupID."').val('');",
+                'onclick'=>" $script $('#".$this->_fieldID."').val('');$('#".$this->_saveID."').val('');$('#".$this->_lookupID."').val('');",
             )
         );
     }

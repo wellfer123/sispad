@@ -47,6 +47,7 @@
                        <?php echo $form->labelEx($model,'medico_cpf'); ?>
                         <?php $this->widget('EJuiAutoCompleteFkField', array(
                                     'model'=>$model,
+                                    'attributes'=>array('unidade_cnes'),
                                     'attribute'=>'medico_cpf', //the FK field (from CJuiInputWidget)
                                      // controller method to return the autoComplete data (from CJuiAutoComplete)
                                     'sourceUrl'=>Yii::app()->createUrl('Servidor/findMedicos'),
