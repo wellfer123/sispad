@@ -209,7 +209,7 @@ class EJuiAutoCompleteFkField extends CJuiAutoComplete {
         // setup javascript to do the work
         $this->options['create']="js:function(event, ui){\$(this).val('".addslashes($this->_display)."');}";  // show initial display value
         //meu codigo
-        $script;
+        $script='';
         if(is_array($this->attributes)){
             foreach ($this->attributes as $atr){
                  $htmlOpt;
@@ -228,7 +228,7 @@ class EJuiAutoCompleteFkField extends CJuiAutoComplete {
     public function run() {
         // first render the FK field.  This is the actual data field, populated by autocomplete.select()
         if ($this->showFKField) {
-            echo CHtml::activeTextField($this->model, $this->attribute, array('size'=>$this->FKFieldSize, 'readonly'=>'readonly'));
+            echo CHtml::activeTextField($this->model, $this->attribute, array('size'=>$this->FKFieldSize, 'readonly'=>'true'));
         } else {
             echo CHtml::activeHiddenField($this->model,$this->attribute);
         }
@@ -236,7 +236,7 @@ class EJuiAutoCompleteFkField extends CJuiAutoComplete {
         if(is_array($this->attributes)){
                 foreach ($this->attributes as $atr){
                     if ($this->showFKField) {
-                        echo CHtml::activeTextField($this->model, $atr, array('size'=>$this->FKFieldSize, 'readonly'=>'readonly'));
+                        echo CHtml::activeTextField($this->model, $atr, array('size'=>$this->FKFieldSize, 'readonly'=>'true'));
                     } else {
                         echo CHtml::activeHiddenField($this->model,$atr);
                     }
@@ -266,7 +266,7 @@ class EJuiAutoCompleteFkField extends CJuiAutoComplete {
         $label=Yii::t('DR','Limpar '). ucfirst($this->relName); // TODO: how to translate relname?
         $deleteImageURL = Yii::app()->request->baseUrl.'/images/clear.png'; 
         //meu codigo
-        $script;
+        $script='';
         if(is_array($this->attributes)){
             foreach ($this->attributes as $atr){
                  $htmlOpt;
