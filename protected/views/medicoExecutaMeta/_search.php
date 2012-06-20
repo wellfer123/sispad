@@ -57,47 +57,11 @@
                                 ));?>
 	</div>
 
-	
-
-	<div class="row">
-		<?php echo $form->label($model,'data_inicio'); ?>
-		<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
-                                                //'name'=>'data_admisao',
-                                                'options'=>array(
-                                                    'changeMonth'=>'true', 
-                                                    'changeYear'=>'true',   
-                                                    'yearRange' => '-99:+0', 
-                                                    'showAnim'=>'fadeIn', // 'show' (the default), 'slideDown', 'fadeIn', 'fold'
-                                                    'showOn'=>'button',
-                                                    'buttonText'=>Yii::t('ui','Selecione a data'), 
-                                                    'buttonImage'=>Yii::app()->request->baseUrl.'/images/calendar.png', 
-                                                    'buttonImageOnly'=>true,
-                                                ),
-                                                'language'=>'pt',
-                                                'model'=>$model,
-                                                'attribute'=>'data_inicio'))?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->label($model,'data_fim'); ?>
-		<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
-                                                //'name'=>'data_afastamento',
-                                                'language'=>'pt',
-                                                'model'=>$model,
-                                                'options'=>array(
-                                                    'changeMonth'=>'true', 
-                                                    'changeYear'=>'true',   
-                                                    'yearRange' => '-99:+1', 
-                                                    'showAnim'=>'fadeIn', // 'show' (the default), 'slideDown', 'fadeIn', 'fold'
-                                                    'showOn'=>'button',
-                                                    'buttonText'=>Yii::t('ui','Selecione a data'), 
-                                                    'buttonImage'=>Yii::app()->request->baseUrl.'/images/calendar.png', 
-                                                    'buttonImageOnly'=>true,
-                                                ),
-                                                'attribute'=>'data_fim',
-                                                'htmlOptions'=>array()))?>
-	</div>
-
+        <div class="row">
+                            <?php echo $form->labelEx($model,'competencia'); ?>
+                            <?php echo Chtml::activeDropDownList($model, 'competencia', 
+                                                    CHtml::listData(Competencia::model()->findAll(), 'mes_ano', 'mes_ano'),array('size'=>1,'maxlength'=>6)) ?>
+        </div>
 	<div class="row buttons">
 		<?php echo CHtml::submitButton('Pesquisar'); ?>
 	</div>

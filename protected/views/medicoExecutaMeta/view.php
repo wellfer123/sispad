@@ -47,7 +47,6 @@ $this->menu=array(
                         'label'=>'Status da Meta',
                         'value'=>$model->isMetaBatida(),
                 ),
-		'data_inicio',
-		'data_fim',
+		'competencia',
 	),
 )); ?>
