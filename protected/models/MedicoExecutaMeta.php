@@ -8,8 +8,7 @@
  * @property string $unidade_cnes
  * @property integer $meta_id
  * @property integer $total
- * @property string $data_inicio
- * @property string $data_fim
+ * @property string $competencia
  */
 class MedicoExecutaMeta extends CActiveRecord
 {
@@ -38,13 +37,14 @@ class MedicoExecutaMeta extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-                        array('meta_id, total,medico_cpf,unidade_cnes,data_inicio,data_fim', 'required'),
-			array('meta_id, total', 'numerical', 'integerOnly'=>true),
+                        array('meta_id, total,medico_cpf,unidade_cnes,competencia', 'required'),
+                        array('total','safe','on'=>'send'),
+			array('meta_id, total,competencia', 'numerical', 'integerOnly'=>true),
 			array('medico_cpf', 'length', 'max'=>11),
 			array('unidade_cnes', 'length', 'max'=>10),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('medico_cpf, unidade_cnes, meta_id, total, data_inicio, data_fim', 'safe', 'on'=>'search'),
+			array('medico_cpf, unidade_cnes, meta_id, total, competencia', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -76,8 +76,7 @@ class MedicoExecutaMeta extends CActiveRecord
 			'unidade_cnes' => 'Unidade',
 			'meta_id' => 'Meta',
 			'total' => 'Total',
-			'data_inicio' => 'Data do Início',
-			'data_fim' => 'Data do Fim',
+			'competencia' => 'Competência'
 		);
 	}
         /**
@@ -123,9 +122,7 @@ class MedicoExecutaMeta extends CActiveRecord
 
 		$criteria->compare('total',$this->total);
 
-		$criteria->compare('data_inicio',$this->data_inicio,true);
-
-		$criteria->compare('data_fim',$this->data_fim,true);
+		$criteria->compare('competencia',$this->competencia,true);
                 
                 $criteria->with=array('meta','medico.servidor');
 
@@ -160,8 +157,7 @@ class MedicoExecutaMeta extends CActiveRecord
                 $metExec->total=$m->total;
                 $metExec->meta_id=$m->meta;
                 $metExec->unidade_cnes=$m->cnes;
-                $metExec->data_fim=date("Y/m/d");
-                $metExec->data_inicio=date("Y/m/d");
+                $metExec->competencia=date("mY");
                 //coloca o objeto no vetor
                 $resul[]=$metExec;
             }
@@ -169,14 +165,10 @@ class MedicoExecutaMeta extends CActiveRecord
         }
         
         protected function afterFind() {
-            $this->data_fim=ParserDate::inverteDataEnToPt($this->data_fim);
-            $this->data_inicio=ParserDate::inverteDataEnToPt($this->data_inicio);
             parent::afterFind();
         }
 
         protected function beforeSave() {
-            $this->data_fim=ParserDate::inverteDataPtToEn($this->data_fim);
-            $this->data_inicio=ParserDate::inverteDataPtToEn($this->data_inicio);
             return parent::beforeSave();
         }
         

@@ -116,6 +116,9 @@ class Meta extends CActiveRecord
 		));
 	}
 
+        public function getNomeDescricao(){
+            return $this->nome;
+        }
         public function searchIndicadorId($indicador_id)
 	{
 		// Warning: Please modify the following code to remove attributes that

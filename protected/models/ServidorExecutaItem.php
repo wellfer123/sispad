@@ -7,8 +7,7 @@
  * @property string $servidor_cpf
  * @property integer $item_id
  * @property integer $total
- * @property string $data_inicio
- * @property string $data_fim
+ * @property integer $competencia
  */
 class ServidorExecutaItem extends CActiveRecord
 {
@@ -37,8 +36,8 @@ class ServidorExecutaItem extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('servidor_cpf, item_id, total, data_inicio, data_fim', 'required'),
-			array('item_id, total', 'numerical', 'integerOnly'=>true),
+			array('servidor_cpf, item_id, total, competencia', 'required'),
+			array('item_id, total,competencia', 'numerical', 'integerOnly'=>true),
 			array('servidor_cpf', 'length', 'max'=>11),
                         array('servidor_cpf','existe','on'=>'send'),
 			// The following rule is used by search().
@@ -79,8 +78,7 @@ class ServidorExecutaItem extends CActiveRecord
          $servidor= $this->model()->findByPk(array(
                                                 'servidor_cpf'=>$this->servidor_cpf,
                                                 'item_id'=>$this->item_id,
-                                                'data_inicio'=>ParserDate::inverteDataPtToEn($this->data_inicio),
-                                                 'data_fim'=>ParserDate::inverteDataPtToEn($this->data_fim),
+                                                'competencia'=>  $this->competencia,
                                 ));
          if($servidor!=null){
              $this->addError('servidor_cpf',"Já existe uma lançamento desses dados para o servidor informado e o período!");
@@ -105,26 +103,12 @@ class ServidorExecutaItem extends CActiveRecord
 		$criteria->compare('item_id',$this->item_id);
 
 		$criteria->compare('total',$this->total);
+                
+                $criteria->compare('competencia',$this->competencia);
 
-		$criteria->compare('data_inicio',$this->data_inicio,true);
-
-		$criteria->compare('data_fim',$this->data_fim,true);
-
-		return new CActiveDataProvider('Servidor_Executa_Item', array(
+		return new CActiveDataProvider('ServidorExecutaItem', array(
 			'criteria'=>$criteria,
 		));
 	}
-        
-        protected function afterFind() {
-            $this->data_fim=ParserDate::inverteDataEnToPt($this->data_fim);
-            $this->data_inicio=ParserDate::inverteDataEnToPt($this->data_inicio);
-            parent::afterFind();
-        }
-
-        protected function beforeSave() {
-            $this->data_fim=ParserDate::inverteDataPtToEn($this->data_fim);
-            $this->data_inicio=ParserDate::inverteDataPtToEn($this->data_inicio);
-            return parent::beforeSave();
-        }
 
 }
