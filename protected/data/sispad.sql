@@ -52,6 +52,34 @@ INSERT INTO `agente_saude` (`servidor_cpf`,`unidade_cnes`,`micro_area`,`data_des
 
 
 --
+-- Definition of table `agente_saude_executa_item`
+--
+
+DROP TABLE IF EXISTS `agente_saude_executa_item`;
+CREATE TABLE `agente_saude_executa_item` (
+  `agente_saude_cpf` varchar(11) NOT NULL,
+  `item_id` int(11) NOT NULL,
+  `agente_saude_unidade_cnes` varchar(10) NOT NULL DEFAULT '',
+  `quantidade` int(11) DEFAULT NULL,
+  `competencia` int(6) NOT NULL,
+  PRIMARY KEY (`agente_saude_cpf`,`item_id`,`agente_saude_unidade_cnes`,`competencia`),
+  KEY `FK_agente_saude_executa_item_agente_saude_unidade` (`agente_saude_cpf`,`agente_saude_unidade_cnes`),
+  KEY `FK_agente_saude_executa_item_item_id` (`item_id`),
+  KEY `FK_agente_saude_item_competencia` (`competencia`),
+  CONSTRAINT `FK_agente_saude_executa_item_agente_saude_unidade` FOREIGN KEY (`agente_saude_cpf`, `agente_saude_unidade_cnes`) REFERENCES `agente_saude` (`servidor_cpf`, `unidade_cnes`),
+  CONSTRAINT `FK_agente_saude_executa_item_item_id` FOREIGN KEY (`item_id`) REFERENCES `item` (`id`),
+  CONSTRAINT `FK_agente_saude_item_competencia` FOREIGN KEY (`competencia`) REFERENCES `competencia` (`mes_ano`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `agente_saude_executa_item`
+--
+
+/*!40000 ALTER TABLE `agente_saude_executa_item` DISABLE KEYS */;
+/*!40000 ALTER TABLE `agente_saude_executa_item` ENABLE KEYS */;
+
+
+--
 -- Definition of table `agente_saude_executa_meta`
 --
 
@@ -290,6 +318,118 @@ INSERT INTO `authitemchild` (`parent`,`child`) VALUES
  ('SuperAdmin','manageUser'),
  ('SuperAdmin','RbacAdmin');
 /*!40000 ALTER TABLE `authitemchild` ENABLE KEYS */;
+
+
+--
+-- Definition of table `auxiliar_enfermagem`
+--
+
+DROP TABLE IF EXISTS `auxiliar_enfermagem`;
+CREATE TABLE `auxiliar_enfermagem` (
+  `servidor_cpf` varchar(11) NOT NULL,
+  `unidade_cnes` varchar(10) NOT NULL DEFAULT '',
+  `data_desativacao` date DEFAULT NULL,
+  `ativo` char(1) DEFAULT NULL,
+  `data_cadastro` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`servidor_cpf`,`unidade_cnes`) USING BTREE,
+  KEY `foreign_key_unidade_cnes` (`unidade_cnes`),
+  KEY `Index_3` (`servidor_cpf`) USING BTREE,
+  CONSTRAINT `auxiliar_enfermagem_ibfk_1` FOREIGN KEY (`servidor_cpf`) REFERENCES `servidor` (`cpf`),
+  CONSTRAINT `auxiliar_enfermagem_ibfk_2` FOREIGN KEY (`unidade_cnes`) REFERENCES `unidade` (`cnes`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `auxiliar_enfermagem`
+--
+
+/*!40000 ALTER TABLE `auxiliar_enfermagem` DISABLE KEYS */;
+/*!40000 ALTER TABLE `auxiliar_enfermagem` ENABLE KEYS */;
+
+
+--
+-- Definition of table `auxiliar_enfermagem_executa_item`
+--
+
+DROP TABLE IF EXISTS `auxiliar_enfermagem_executa_item`;
+CREATE TABLE `auxiliar_enfermagem_executa_item` (
+  `auxiliar_enfermagem_cpf` varchar(11) NOT NULL,
+  `item_id` int(11) NOT NULL,
+  `auxiliar_enfermagem_unidade_cnes` varchar(10) NOT NULL DEFAULT '',
+  `quantidade` int(11) DEFAULT NULL,
+  `competencia` int(6) NOT NULL,
+  PRIMARY KEY (`auxiliar_enfermagem_cpf`,`item_id`,`auxiliar_enfermagem_unidade_cnes`,`competencia`),
+  KEY `FK_auxiliar_enfermagem_executa_item_auxiliar_enfermagem_unidade` (`auxiliar_enfermagem_cpf`,`auxiliar_enfermagem_unidade_cnes`),
+  KEY `FK_auxiliar_enfermagem_executa_item_item_id` (`item_id`),
+  KEY `FK_auxiliar_enfermagem_item_competencia` (`competencia`),
+  CONSTRAINT `FK_auxiliar_enfermagem_executa_item_auxiliar_enfermagem_unidade` FOREIGN KEY (`auxiliar_enfermagem_cpf`, `auxiliar_enfermagem_unidade_cnes`) REFERENCES `auxiliar_enfermagem` (`servidor_cpf`, `unidade_cnes`),
+  CONSTRAINT `FK_auxiliar_enfermagem_executa_item_item_id` FOREIGN KEY (`item_id`) REFERENCES `item` (`id`),
+  CONSTRAINT `FK_auxiliar_enfermagem_item_competencia` FOREIGN KEY (`competencia`) REFERENCES `competencia` (`mes_ano`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `auxiliar_enfermagem_executa_item`
+--
+
+/*!40000 ALTER TABLE `auxiliar_enfermagem_executa_item` DISABLE KEYS */;
+/*!40000 ALTER TABLE `auxiliar_enfermagem_executa_item` ENABLE KEYS */;
+
+
+--
+-- Definition of table `auxiliar_enfermagem_executa_meta`
+--
+
+DROP TABLE IF EXISTS `auxiliar_enfermagem_executa_meta`;
+CREATE TABLE `auxiliar_enfermagem_executa_meta` (
+  `auxiliar_enfermagem_cpf` varchar(11) NOT NULL DEFAULT '',
+  `unidade_cnes` varchar(10) NOT NULL DEFAULT '',
+  `meta_id` int(11) NOT NULL DEFAULT '0',
+  `total` int(11) DEFAULT NULL,
+  `data_inicio` date NOT NULL DEFAULT '0000-00-00',
+  `data_fim` date NOT NULL DEFAULT '0000-00-00',
+  PRIMARY KEY (`auxiliar_enfermagem_cpf`,`meta_id`,`data_inicio`,`data_fim`,`unidade_cnes`) USING BTREE,
+  KEY `auxiliar_enfermagem_cpf` (`auxiliar_enfermagem_cpf`) USING BTREE,
+  KEY `Index_4` (`unidade_cnes`) USING BTREE,
+  KEY `Index_5` (`meta_id`) USING BTREE,
+  KEY `FK_auxiliar_enfermagem_executa_meta_2` (`auxiliar_enfermagem_cpf`,`unidade_cnes`),
+  CONSTRAINT `FK_auxiliar_enfermagem_executa_meta_1` FOREIGN KEY (`meta_id`) REFERENCES `meta` (`id`),
+  CONSTRAINT `FK_auxiliar_enfermagem_executa_meta_2` FOREIGN KEY (`auxiliar_enfermagem_cpf`, `unidade_cnes`) REFERENCES `auxiliar_enfermagem` (`servidor_cpf`, `unidade_cnes`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `auxiliar_enfermagem_executa_meta`
+--
+
+/*!40000 ALTER TABLE `auxiliar_enfermagem_executa_meta` DISABLE KEYS */;
+/*!40000 ALTER TABLE `auxiliar_enfermagem_executa_meta` ENABLE KEYS */;
+
+
+--
+-- Definition of table `auxiliar_enfermagem_executa_procedimento`
+--
+
+DROP TABLE IF EXISTS `auxiliar_enfermagem_executa_procedimento`;
+CREATE TABLE `auxiliar_enfermagem_executa_procedimento` (
+  `auxiliar_enfermagem_cpf` varchar(11) NOT NULL,
+  `procedimento_codigo` varchar(10) NOT NULL DEFAULT '',
+  `auxiliar_enfermagem_unidade_cnes` varchar(10) NOT NULL DEFAULT '',
+  `quantidade` int(11) DEFAULT NULL,
+  `competencia` int(6) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`auxiliar_enfermagem_cpf`,`procedimento_codigo`,`auxiliar_enfermagem_unidade_cnes`,`competencia`),
+  KEY `foreign_key_auxiliar_enfermagem_unidade_cnes` (`auxiliar_enfermagem_unidade_cnes`),
+  KEY `foreign_key_procedimento_codigo` (`procedimento_codigo`),
+  KEY `Index_5` (`competencia`) USING BTREE,
+  KEY `Index_6` (`auxiliar_enfermagem_cpf`) USING BTREE,
+  CONSTRAINT `auxiliar_enfermagem_executa_procedimento_ibfk_1` FOREIGN KEY (`auxiliar_enfermagem_cpf`) REFERENCES `auxiliar_enfermagem` (`servidor_cpf`),
+  CONSTRAINT `auxiliar_enfermagem_executa_procedimento_ibfk_2` FOREIGN KEY (`auxiliar_enfermagem_unidade_cnes`) REFERENCES `auxiliar_enfermagem` (`unidade_cnes`),
+  CONSTRAINT `auxiliar_enfermagem_executa_procedimento_ibfk_3` FOREIGN KEY (`procedimento_codigo`) REFERENCES `procedimento` (`codigo`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `auxiliar_enfermagem_executa_procedimento`
+--
+
+/*!40000 ALTER TABLE `auxiliar_enfermagem_executa_procedimento` DISABLE KEYS */;
+/*!40000 ALTER TABLE `auxiliar_enfermagem_executa_procedimento` ENABLE KEYS */;
 
 
 --
@@ -5588,7 +5728,8 @@ CREATE TABLE `competencia` (
 
 /*!40000 ALTER TABLE `competencia` DISABLE KEYS */;
 INSERT INTO `competencia` (`mes_ano`,`ativo`) VALUES 
- (22012,1);
+ (12012,0),
+ (22012,0);
 /*!40000 ALTER TABLE `competencia` ENABLE KEYS */;
 
 
@@ -5705,6 +5846,34 @@ INSERT INTO `enfermeiro` (`servidor_cpf`,`unidade_cnes`,`ativo`,`data_cadastro`,
 
 
 --
+-- Definition of table `enfermeiro_executa_item`
+--
+
+DROP TABLE IF EXISTS `enfermeiro_executa_item`;
+CREATE TABLE `enfermeiro_executa_item` (
+  `enfermeiro_cpf` varchar(11) NOT NULL,
+  `item_id` int(11) NOT NULL,
+  `enfermeiro_unidade_cnes` varchar(10) NOT NULL DEFAULT '',
+  `quantidade` int(11) DEFAULT NULL,
+  `competencia` int(6) NOT NULL,
+  PRIMARY KEY (`enfermeiro_cpf`,`item_id`,`enfermeiro_unidade_cnes`,`competencia`),
+  KEY `FK_enfermeiro_executa_item_enfermeiro_unidade` (`enfermeiro_cpf`,`enfermeiro_unidade_cnes`),
+  KEY `FK_enfermeiro_executa_item_item_id` (`item_id`),
+  KEY `FK_enfermeiro_item_competencia` (`competencia`),
+  CONSTRAINT `FK_enfermeiro_executa_item_enfermeiro_unidade` FOREIGN KEY (`enfermeiro_cpf`, `enfermeiro_unidade_cnes`) REFERENCES `enfermeiro` (`servidor_cpf`, `unidade_cnes`),
+  CONSTRAINT `FK_enfermeiro_executa_item_item_id` FOREIGN KEY (`item_id`) REFERENCES `item` (`id`),
+  CONSTRAINT `FK_enfermeiro_item_competencia` FOREIGN KEY (`competencia`) REFERENCES `competencia` (`mes_ano`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `enfermeiro_executa_item`
+--
+
+/*!40000 ALTER TABLE `enfermeiro_executa_item` DISABLE KEYS */;
+/*!40000 ALTER TABLE `enfermeiro_executa_item` ENABLE KEYS */;
+
+
+--
 -- Definition of table `enfermeiro_executa_meta`
 --
 
@@ -5721,8 +5890,8 @@ CREATE TABLE `enfermeiro_executa_meta` (
   KEY `meta_id` (`meta_id`),
   KEY `unidade_cnes` (`unidade_cnes`),
   KEY `FK_enfermeiro_saude_executa_meta_enfermeiro_cpf` (`enfermeiro_cpf`,`unidade_cnes`),
-  CONSTRAINT `FK_enfermeiro_saude_executa_meta_meta_id` FOREIGN KEY (`meta_id`) REFERENCES `meta` (`id`),
-  CONSTRAINT `FK_enfermeiro_saude_executa_meta_enfermeiro_cpf` FOREIGN KEY (`enfermeiro_cpf`, `unidade_cnes`) REFERENCES `enfermeiro` (`servidor_cpf`, `unidade_cnes`)
+  CONSTRAINT `FK_enfermeiro_saude_executa_meta_enfermeiro_cpf` FOREIGN KEY (`enfermeiro_cpf`, `unidade_cnes`) REFERENCES `enfermeiro` (`servidor_cpf`, `unidade_cnes`),
+  CONSTRAINT `FK_enfermeiro_saude_executa_meta_meta_id` FOREIGN KEY (`meta_id`) REFERENCES `meta` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
 
 --
@@ -5760,8 +5929,11 @@ CREATE TABLE `enfermeiro_executa_procedimento` (
 
 /*!40000 ALTER TABLE `enfermeiro_executa_procedimento` DISABLE KEYS */;
 INSERT INTO `enfermeiro_executa_procedimento` (`enfermeiro_cpf`,`procedimento_codigo`,`enfermeiro_unidade_cnes`,`quantidade`,`competencia`) VALUES 
+ ('09886798805','AP_AIDS','2345668',0,12012),
  ('09886798805','AP_AIDS','2345668',0,22012),
+ ('09886798805','AP_DIAB','2345668',0,12012),
  ('09886798805','AP_DIAB','2345668',0,22012),
+ ('09886798805','AP_HANS','2345668',1,12012),
  ('09886798805','AP_HANS','2345668',0,22012);
 /*!40000 ALTER TABLE `enfermeiro_executa_procedimento` ENABLE KEYS */;
 
@@ -6030,6 +6202,9 @@ CREATE TABLE `item` (
 --
 
 /*!40000 ALTER TABLE `item` DISABLE KEYS */;
+INSERT INTO `item` (`id`,`nome`,`meta_id`) VALUES 
+ (12,'item de teste',7),
+ (23,'item cagado',7);
 /*!40000 ALTER TABLE `item` ENABLE KEYS */;
 
 
@@ -6067,25 +6242,52 @@ INSERT INTO `medico` (`servidor_cpf`,`unidade_cnes`,`data_desativacao`,`data_cad
 
 
 --
+-- Definition of table `medico_executa_item`
+--
+
+DROP TABLE IF EXISTS `medico_executa_item`;
+CREATE TABLE `medico_executa_item` (
+  `medico_cpf` varchar(11) NOT NULL,
+  `item_id` int(11) NOT NULL,
+  `medico_unidade_cnes` varchar(10) NOT NULL DEFAULT '',
+  `quantidade` int(11) DEFAULT NULL,
+  `competencia` int(6) NOT NULL,
+  PRIMARY KEY (`medico_cpf`,`item_id`,`medico_unidade_cnes`,`competencia`),
+  KEY `FK_medico_executa_item_medico_unidade` (`medico_cpf`,`medico_unidade_cnes`),
+  KEY `FK_medico_executa_item_item_id` (`item_id`),
+  KEY `FK_medico_executa_item_competencia` (`competencia`),
+  CONSTRAINT `FK_medico_executa_item_competencia` FOREIGN KEY (`competencia`) REFERENCES `competencia` (`mes_ano`),
+  CONSTRAINT `FK_medico_executa_item_item_id` FOREIGN KEY (`item_id`) REFERENCES `item` (`id`),
+  CONSTRAINT `FK_medico_executa_item_medico_unidade` FOREIGN KEY (`medico_cpf`, `medico_unidade_cnes`) REFERENCES `medico` (`servidor_cpf`, `unidade_cnes`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `medico_executa_item`
+--
+
+/*!40000 ALTER TABLE `medico_executa_item` DISABLE KEYS */;
+/*!40000 ALTER TABLE `medico_executa_item` ENABLE KEYS */;
+
+
+--
 -- Definition of table `medico_executa_meta`
 --
 
 DROP TABLE IF EXISTS `medico_executa_meta`;
 CREATE TABLE `medico_executa_meta` (
   `medico_cpf` varchar(11) NOT NULL DEFAULT '',
-  `unidade_cnes` varchar(10) DEFAULT NULL,
-  `meta_id` int(11) NOT NULL DEFAULT '0',
-  `total` int(11) DEFAULT NULL,
-  `data_inicio` date NOT NULL DEFAULT '0000-00-00',
-  `data_fim` date NOT NULL DEFAULT '0000-00-00',
-  PRIMARY KEY (`medico_cpf`,`meta_id`,`data_inicio`,`data_fim`),
-  KEY `medico_cpf` (`medico_cpf`),
-  KEY `meta_id` (`meta_id`),
-  KEY `unidade_cnes` (`unidade_cnes`),
-  KEY `FK_medico_saude_executa_meta_medico_cpf` (`medico_cpf`,`unidade_cnes`),
-  CONSTRAINT `FK_medico_saude_executa_meta_meta_id` FOREIGN KEY (`meta_id`) REFERENCES `meta` (`id`),
-  CONSTRAINT `FK_medico_saude_executa_meta_medico_cpf` FOREIGN KEY (`medico_cpf`, `unidade_cnes`) REFERENCES `medico` (`servidor_cpf`, `unidade_cnes`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+  `unidade_cnes` varchar(10) NOT NULL,
+  `meta_id` int(11) NOT NULL,
+  `total` int(11) DEFAULT '0',
+  `competencia` int(6) NOT NULL,
+  PRIMARY KEY (`medico_cpf`,`meta_id`,`competencia`),
+  KEY `FK_medico_executa_meta_medico_unidade` (`medico_cpf`,`unidade_cnes`),
+  KEY `FK_medico_executa_meta_meta` (`meta_id`),
+  KEY `FK_medico_executa_meta_competencia` (`competencia`),
+  CONSTRAINT `FK_medico_executa_meta_competencia` FOREIGN KEY (`competencia`) REFERENCES `competencia` (`mes_ano`),
+  CONSTRAINT `FK_medico_executa_meta_medico_unidade` FOREIGN KEY (`medico_cpf`, `unidade_cnes`) REFERENCES `medico` (`servidor_cpf`, `unidade_cnes`),
+  CONSTRAINT `FK_medico_executa_meta_meta` FOREIGN KEY (`meta_id`) REFERENCES `meta` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `medico_executa_meta`
@@ -6125,18 +6327,62 @@ INSERT INTO `medico_executa_procedimento` (`medico_cpf`,`procedimento_codigo`,`m
  ('09886798805','AP_CITO','2345676',2,22012),
  ('09886798805','CONMED1','2345676',2,22012),
  ('09886798805','CONMED3','2345676',5,22012),
+ ('43243243242','AP_CITO','2345544',0,12012),
  ('43243243242','AP_CITO','2345544',0,22012),
+ ('43243243242','CONMED1','2345544',0,12012),
  ('43243243242','CONMED1','2345544',0,22012),
+ ('43243243242','CONMED3','2345544',8,12012),
  ('43243243242','CONMED3','2345544',5,22012),
+ ('43243243242','CONMED4','2345544',9,12012),
+ ('43243243242','CONMED4','2345544',13,22012),
+ ('43243243242','CONMED5','2345544',13,12012),
+ ('43243243242','CONMED5','2345544',2,22012),
+ ('43243243242','CONMED6','2345544',64,12012),
+ ('43243243242','CONMED6','2345544',38,22012),
+ ('43243243242','CONMED7','2345544',49,12012),
+ ('43243243242','CONMED7','2345544',31,22012),
+ ('45645645645','AP_CITO','2345633',0,12012),
  ('45645645645','AP_CITO','2345633',0,22012),
+ ('45645645645','AP_CITO','2345870',1,12012),
  ('45645645645','AP_CITO','2345870',0,22012),
+ ('45645645645','CONMED1','2345633',0,12012),
  ('45645645645','CONMED1','2345633',4,22012),
+ ('45645645645','CONMED1','2345870',0,12012),
  ('45645645645','CONMED1','2345870',0,22012),
+ ('45645645645','CONMED3','2345633',0,12012),
  ('45645645645','CONMED3','2345633',20,22012),
+ ('45645645645','CONMED3','2345870',8,12012),
  ('45645645645','CONMED3','2345870',4,22012),
+ ('45645645645','CONMED4','2345633',0,12012),
+ ('45645645645','CONMED4','2345633',20,22012),
+ ('45645645645','CONMED4','2345870',4,12012),
+ ('45645645645','CONMED4','2345870',5,22012),
+ ('45645645645','CONMED5','2345633',0,12012),
+ ('45645645645','CONMED5','2345633',10,22012),
+ ('45645645645','CONMED5','2345870',3,12012),
+ ('45645645645','CONMED5','2345870',5,22012),
+ ('45645645645','CONMED6','2345633',0,12012),
+ ('45645645645','CONMED6','2345633',70,22012),
+ ('45645645645','CONMED6','2345870',26,12012),
+ ('45645645645','CONMED6','2345870',16,22012),
+ ('45645645645','CONMED7','2345633',0,12012),
+ ('45645645645','CONMED7','2345633',39,22012),
+ ('45645645645','CONMED7','2345870',9,12012),
+ ('45645645645','CONMED7','2345870',14,22012),
+ ('45645645646','AP_CITO','5481287',0,12012),
  ('45645645646','AP_CITO','5481287',0,22012),
+ ('45645645646','CONMED1','5481287',0,12012),
  ('45645645646','CONMED1','5481287',0,22012),
- ('45645645646','CONMED3','5481287',0,22012);
+ ('45645645646','CONMED3','5481287',0,12012),
+ ('45645645646','CONMED3','5481287',0,22012),
+ ('45645645646','CONMED4','5481287',0,12012),
+ ('45645645646','CONMED4','5481287',0,22012),
+ ('45645645646','CONMED5','5481287',0,12012),
+ ('45645645646','CONMED5','5481287',0,22012),
+ ('45645645646','CONMED6','5481287',0,12012),
+ ('45645645646','CONMED6','5481287',0,22012),
+ ('45645645646','CONMED7','5481287',0,12012),
+ ('45645645646','CONMED7','5481287',0,22012);
 /*!40000 ALTER TABLE `medico_executa_procedimento` ENABLE KEYS */;
 
 
@@ -6190,7 +6436,7 @@ CREATE TABLE `meta` (
   KEY `foreign_key_indicador_id` (`indicador_id`),
   CONSTRAINT `meta_ibfk_1` FOREIGN KEY (`periodicidade_id`) REFERENCES `periodicidade` (`id`),
   CONSTRAINT `meta_ibfk_3` FOREIGN KEY (`indicador_id`) REFERENCES `indicador` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `meta`
@@ -6201,7 +6447,10 @@ INSERT INTO `meta` (`id`,`nome`,`periodicidade_id`,`tipo`,`indicador_id`,`valor`
  (1,'META DE TESTE',4,'PR',1,1344,100),
  (2,'META DE TESTE',4,'PR',2,23,100),
  (3,'META DE TESTE',1,'PR',3,23,100),
- (4,'META DE TESTE',4,'PR',4,32432,100);
+ (4,'META DE TESTE',4,'PR',4,32432,100),
+ (5,'segunda meta de medico',4,'PR',1,234,100),
+ (6,'meta de itens pow',1,'IT',2,45,100),
+ (7,'meta de itens pow',4,'IT',1,12,100);
 /*!40000 ALTER TABLE `meta` ENABLE KEYS */;
 
 
@@ -6231,6 +6480,10 @@ INSERT INTO `meta_procedimento` (`meta_id`,`procedimento_codigo`) VALUES
  (2,'AP_HANS'),
  (1,'CONMED1'),
  (1,'CONMED3'),
+ (5,'CONMED4'),
+ (5,'CONMED5'),
+ (5,'CONMED6'),
+ (5,'CONMED7'),
  (4,'NFAMICAD'),
  (4,'NVISITAS'),
  (4,'OBITOOUT'),
@@ -6291,6 +6544,34 @@ INSERT INTO `odontologo` (`servidor_cpf`,`unidade_cnes`,`ativo`,`data_cadastro`,
 
 
 --
+-- Definition of table `odontologo_executa_item`
+--
+
+DROP TABLE IF EXISTS `odontologo_executa_item`;
+CREATE TABLE `odontologo_executa_item` (
+  `odontologo_cpf` varchar(11) NOT NULL,
+  `item_id` int(11) NOT NULL,
+  `odontologo_unidade_cnes` varchar(10) NOT NULL DEFAULT '',
+  `quantidade` int(11) DEFAULT NULL,
+  `competencia` int(6) NOT NULL,
+  PRIMARY KEY (`odontologo_cpf`,`item_id`,`odontologo_unidade_cnes`,`competencia`),
+  KEY `FK_odontologo_executa_item_odontologo_unidade` (`odontologo_cpf`,`odontologo_unidade_cnes`),
+  KEY `FK_odontologo_executa_item_item_id` (`item_id`),
+  KEY `FK_odontologo_item_competencia` (`competencia`),
+  CONSTRAINT `FK_odontologo_executa_item_item_id` FOREIGN KEY (`item_id`) REFERENCES `item` (`id`),
+  CONSTRAINT `FK_odontologo_executa_item_odontologo_unidade` FOREIGN KEY (`odontologo_cpf`, `odontologo_unidade_cnes`) REFERENCES `odontologo` (`servidor_cpf`, `unidade_cnes`),
+  CONSTRAINT `FK_odontologo_item_competencia` FOREIGN KEY (`competencia`) REFERENCES `competencia` (`mes_ano`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `odontologo_executa_item`
+--
+
+/*!40000 ALTER TABLE `odontologo_executa_item` DISABLE KEYS */;
+/*!40000 ALTER TABLE `odontologo_executa_item` ENABLE KEYS */;
+
+
+--
 -- Definition of table `odontologo_executa_meta`
 --
 
@@ -6344,6 +6625,7 @@ CREATE TABLE `odontologo_executa_procedimento` (
 
 /*!40000 ALTER TABLE `odontologo_executa_procedimento` DISABLE KEYS */;
 INSERT INTO `odontologo_executa_procedimento` (`odontologo_cpf`,`procedimento_codigo`,`odontologo_unidade_cnes`,`quantidade`,`competencia`) VALUES 
+ ('45645645646','V_PRONS','2345668',10,12012),
  ('45645645646','V_PRONS','2345668',20,22012);
 /*!40000 ALTER TABLE `odontologo_executa_procedimento` ENABLE KEYS */;
 
@@ -7595,9 +7877,9 @@ INSERT INTO `servidor_equipe` (`equipe_codigo_area`,`equipe_unidade_cnes`,`servi
  (14,'2345625','0988139880','AgenteSaude',1),
  (17,'2345668','09886798805','Enfermeiro',1),
  (17,'2345668','45645645646','Odontologo',1),
- (24,'2345676','0912909880','Medico',0),
- (24,'2345676','09809809809','Odontologo',NULL),
- (24,'2345676','09886798805','Medico',1),
+ (24,'2345676','0912909880','Medico',1),
+ (24,'2345676','09809809809','Odontologo',1),
+ (24,'2345676','09886798805','Medico',0),
  (24,'2345544','43243243242','Medico',1),
  (24,'2345633','45645645645','Medico',1),
  (24,'5481287','45645645646','Medico',1),
@@ -7611,15 +7893,17 @@ INSERT INTO `servidor_equipe` (`equipe_codigo_area`,`equipe_unidade_cnes`,`servi
 
 DROP TABLE IF EXISTS `servidor_executa_item`;
 CREATE TABLE `servidor_executa_item` (
-  `servidor_cpf` varchar(11) NOT NULL DEFAULT '',
-  `item_id` int(11) NOT NULL DEFAULT '0',
-  `total` int(11) NOT NULL,
-  `data_inicio` date NOT NULL DEFAULT '0000-00-00',
-  `data_fim` date NOT NULL DEFAULT '0000-00-00',
-  PRIMARY KEY (`servidor_cpf`,`item_id`,`data_inicio`,`data_fim`),
-  KEY `foreign_key_item_id` (`item_id`),
-  CONSTRAINT `servidor_executa_item_ibfk_1` FOREIGN KEY (`item_id`) REFERENCES `item` (`id`),
-  CONSTRAINT `servidor_executa_item_ibfk_2` FOREIGN KEY (`servidor_cpf`) REFERENCES `servidor` (`cpf`)
+  `servidor_cpf` varchar(11) NOT NULL,
+  `item_id` int(11) NOT NULL,
+  `quantidade` int(11) DEFAULT NULL,
+  `competencia` int(6) NOT NULL,
+  PRIMARY KEY (`servidor_cpf`,`item_id`,`competencia`),
+  KEY `FK_servidor_executa_item_servidor` (`servidor_cpf`),
+  KEY `FK_servidor_executa_item_item_id` (`item_id`),
+  KEY `FK_servidor_item_competencia` (`competencia`),
+  CONSTRAINT `FK_servidor_executa_item_item_id` FOREIGN KEY (`item_id`) REFERENCES `item` (`id`),
+  CONSTRAINT `FK_servidor_executa_item_servidor` FOREIGN KEY (`servidor_cpf`) REFERENCES `servidor` (`cpf`),
+  CONSTRAINT `FK_servidor_item_competencia` FOREIGN KEY (`competencia`) REFERENCES `competencia` (`mes_ano`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -7665,8 +7949,14 @@ CREATE TABLE `servidor_executa_procedimento` (
   `procedimento_codigo` varchar(10) NOT NULL DEFAULT '',
   `quantidade` int(11) DEFAULT NULL,
   `competencia` int(6) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`servidor_cpf`,`procedimento_codigo`,`competencia`),
-  KEY `foreign_key_procedimento_codigo` (`procedimento_codigo`)
+  `unidade_cnes` varchar(10) NOT NULL,
+  PRIMARY KEY (`servidor_cpf`,`procedimento_codigo`,`competencia`,`unidade_cnes`) USING BTREE,
+  KEY `foreign_key_procedimento_codigo` (`procedimento_codigo`),
+  KEY `FK_servidor_executa_procedimento_3` (`competencia`),
+  KEY `FK_servidor_executa_procedimento_4` (`unidade_cnes`),
+  CONSTRAINT `FK_servidor_executa_procedimento_2` FOREIGN KEY (`procedimento_codigo`) REFERENCES `procedimento` (`codigo`),
+  CONSTRAINT `FK_servidor_executa_procedimento_3` FOREIGN KEY (`competencia`) REFERENCES `competencia` (`mes_ano`),
+  CONSTRAINT `FK_servidor_executa_procedimento_4` FOREIGN KEY (`unidade_cnes`) REFERENCES `servidor_equipe` (`equipe_unidade_cnes`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -7699,6 +7989,118 @@ CREATE TABLE `setor` (
 INSERT INTO `setor` (`id`,`nome`,`descricao`,`departamento_id`) VALUES 
  ('','teste','So testando rapaz',1);
 /*!40000 ALTER TABLE `setor` ENABLE KEYS */;
+
+
+--
+-- Definition of table `tecnico_enfermagem`
+--
+
+DROP TABLE IF EXISTS `tecnico_enfermagem`;
+CREATE TABLE `tecnico_enfermagem` (
+  `servidor_cpf` varchar(11) NOT NULL,
+  `unidade_cnes` varchar(10) NOT NULL DEFAULT '',
+  `data_desativacao` date DEFAULT NULL,
+  `ativo` char(1) DEFAULT NULL,
+  `data_cadastro` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`servidor_cpf`,`unidade_cnes`) USING BTREE,
+  KEY `foreign_key_unidade_cnes` (`unidade_cnes`),
+  KEY `Index_3` (`servidor_cpf`) USING BTREE,
+  CONSTRAINT `tecnico_enfermagem_ibfk_1` FOREIGN KEY (`servidor_cpf`) REFERENCES `servidor` (`cpf`),
+  CONSTRAINT `tecnico_enfermagem_ibfk_2` FOREIGN KEY (`unidade_cnes`) REFERENCES `unidade` (`cnes`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `tecnico_enfermagem`
+--
+
+/*!40000 ALTER TABLE `tecnico_enfermagem` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tecnico_enfermagem` ENABLE KEYS */;
+
+
+--
+-- Definition of table `tecnico_enfermagem_executa_item`
+--
+
+DROP TABLE IF EXISTS `tecnico_enfermagem_executa_item`;
+CREATE TABLE `tecnico_enfermagem_executa_item` (
+  `tecnico_enfermagem_cpf` varchar(11) NOT NULL,
+  `item_id` int(11) NOT NULL,
+  `tecnico_enfermagem_unidade_cnes` varchar(10) NOT NULL DEFAULT '',
+  `quantidade` int(11) DEFAULT NULL,
+  `competencia` int(6) NOT NULL,
+  PRIMARY KEY (`tecnico_enfermagem_cpf`),
+  KEY `FK_tecnico_enfermagem_executa_item_tecnico_enfermagem_unidade` (`tecnico_enfermagem_cpf`,`tecnico_enfermagem_unidade_cnes`),
+  KEY `FK_tecnico_enfermagem_executa_item_item_id` (`item_id`),
+  KEY `FK_tecnico_enfermagem_item_competencia` (`competencia`),
+  CONSTRAINT `FK_tecnico_enfermagem_executa_item_item_id` FOREIGN KEY (`item_id`) REFERENCES `item` (`id`),
+  CONSTRAINT `FK_tecnico_enfermagem_executa_item_tecnico_enfermagem_unidade` FOREIGN KEY (`tecnico_enfermagem_cpf`, `tecnico_enfermagem_unidade_cnes`) REFERENCES `tecnico_enfermagem` (`servidor_cpf`, `unidade_cnes`),
+  CONSTRAINT `FK_tecnico_enfermagem_item_competencia` FOREIGN KEY (`competencia`) REFERENCES `competencia` (`mes_ano`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tecnico_enfermagem_executa_item`
+--
+
+/*!40000 ALTER TABLE `tecnico_enfermagem_executa_item` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tecnico_enfermagem_executa_item` ENABLE KEYS */;
+
+
+--
+-- Definition of table `tecnico_enfermagem_executa_meta`
+--
+
+DROP TABLE IF EXISTS `tecnico_enfermagem_executa_meta`;
+CREATE TABLE `tecnico_enfermagem_executa_meta` (
+  `tecnico_enfermagem_cpf` varchar(11) NOT NULL DEFAULT '',
+  `unidade_cnes` varchar(10) NOT NULL DEFAULT '',
+  `meta_id` int(11) NOT NULL DEFAULT '0',
+  `total` int(11) DEFAULT NULL,
+  `data_inicio` date NOT NULL DEFAULT '0000-00-00',
+  `data_fim` date NOT NULL DEFAULT '0000-00-00',
+  PRIMARY KEY (`tecnico_enfermagem_cpf`,`meta_id`,`data_inicio`,`data_fim`,`unidade_cnes`) USING BTREE,
+  KEY `tecnico_enfermagem_cpf` (`tecnico_enfermagem_cpf`) USING BTREE,
+  KEY `Index_4` (`unidade_cnes`) USING BTREE,
+  KEY `Index_5` (`meta_id`) USING BTREE,
+  KEY `FK_tecnico_enfermagem_executa_meta_2` (`tecnico_enfermagem_cpf`,`unidade_cnes`),
+  CONSTRAINT `FK_tecnico_enfermagem_executa_meta_1` FOREIGN KEY (`meta_id`) REFERENCES `meta` (`id`),
+  CONSTRAINT `FK_tecnico_enfermagem_executa_meta_2` FOREIGN KEY (`tecnico_enfermagem_cpf`, `unidade_cnes`) REFERENCES `tecnico_enfermagem` (`servidor_cpf`, `unidade_cnes`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `tecnico_enfermagem_executa_meta`
+--
+
+/*!40000 ALTER TABLE `tecnico_enfermagem_executa_meta` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tecnico_enfermagem_executa_meta` ENABLE KEYS */;
+
+
+--
+-- Definition of table `tecnico_enfermagem_executa_procedimento`
+--
+
+DROP TABLE IF EXISTS `tecnico_enfermagem_executa_procedimento`;
+CREATE TABLE `tecnico_enfermagem_executa_procedimento` (
+  `tecnico_enfermagem_cpf` varchar(11) NOT NULL,
+  `procedimento_codigo` varchar(10) NOT NULL DEFAULT '',
+  `tecnico_enfermagem_unidade_cnes` varchar(10) NOT NULL DEFAULT '',
+  `quantidade` int(11) DEFAULT NULL,
+  `competencia` int(6) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`tecnico_enfermagem_cpf`,`procedimento_codigo`,`tecnico_enfermagem_unidade_cnes`,`competencia`),
+  KEY `foreign_key_tecnico_enfermagem_unidade_cnes` (`tecnico_enfermagem_unidade_cnes`),
+  KEY `foreign_key_procedimento_codigo` (`procedimento_codigo`),
+  KEY `Index_5` (`competencia`) USING BTREE,
+  KEY `Index_6` (`tecnico_enfermagem_cpf`) USING BTREE,
+  CONSTRAINT `tecnico_enfermagem_executa_procedimento_ibfk_1` FOREIGN KEY (`tecnico_enfermagem_cpf`) REFERENCES `tecnico_enfermagem` (`servidor_cpf`),
+  CONSTRAINT `tecnico_enfermagem_executa_procedimento_ibfk_2` FOREIGN KEY (`tecnico_enfermagem_unidade_cnes`) REFERENCES `tecnico_enfermagem` (`unidade_cnes`),
+  CONSTRAINT `tecnico_enfermagem_executa_procedimento_ibfk_3` FOREIGN KEY (`procedimento_codigo`) REFERENCES `procedimento` (`codigo`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tecnico_enfermagem_executa_procedimento`
+--
+
+/*!40000 ALTER TABLE `tecnico_enfermagem_executa_procedimento` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tecnico_enfermagem_executa_procedimento` ENABLE KEYS */;
 
 
 --
