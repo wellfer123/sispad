@@ -44,5 +44,6 @@ $this->menu=array(
                                 )
                         )
 		),
+                'competencia',
 	),
 )); ?>

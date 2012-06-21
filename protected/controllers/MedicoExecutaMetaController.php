@@ -57,12 +57,41 @@ class MedicoExecutaMetaController extends SISPADBaseController
 		if(isset($_POST['MedicoExecutaMeta']))
 		{
 			$model->attributes=$_POST['MedicoExecutaMeta'];
-			if($model->save())
+			if($model->save()){
+                            //$this->redirect(array('MedicoExecutaItem/Create','competencia'=>$model->competencia,'servidor'=>$model->medico_cpf,'cnes'=>$model->unidade_cnes,'meta'=>$model->meta_id));
 				$this->redirect(array('view','id'=>$model->medico_cpf));
+                        }
 		}
 
 		$this->render('create',array(
 			'model'=>$model,
+		));
+	}
+        
+        /**
+	 * Creates a new model.
+	 * If creation is successful, the browser will be redirected to the 'view' page.
+	 */
+	public function actionSend()
+	{
+		$model=new MedicoExecutaMeta('send');
+
+		// Uncomment the following line if AJAX validation is needed
+		// $this->performAjaxValidation($model);
+
+		if(isset($_POST['MedicoExecutaMeta']))
+		{
+			$model->attributes=$_POST['MedicoExecutaMeta'];
+			if($model->validate()){
+                            $this->redirect(array('MedicoExecutaItem/Create','competencia'=>$model->competencia,'servidor'=>$model->medico_cpf,'cnes'=>$model->unidade_cnes,'meta'=>$model->meta_id));
+				//$this->redirect(array('view','id'=>$model->medico_cpf));
+                        }
+		}
+                $competencias=array();
+                
+                $comp=Competencia::model()->findAll();
+		$this->render('send',array(
+			'model'=>$model, 'competencias'=> CHtml::listData(Competencia::model()->findAll(), 'mes_ano', 'mes_ano'),
 		));
 	}
 

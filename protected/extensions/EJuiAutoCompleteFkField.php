@@ -228,7 +228,7 @@ class EJuiAutoCompleteFkField extends CJuiAutoComplete {
     public function run() {
         // first render the FK field.  This is the actual data field, populated by autocomplete.select()
         if ($this->showFKField) {
-            echo CHtml::activeTextField($this->model, $this->attribute, array('size'=>$this->FKFieldSize, 'readonly'=>'readonly'));
+            echo CHtml::activeTextField($this->model, $this->attribute, array('size'=>$this->FKFieldSize, 'readonly'=>'true'));
         } else {
             echo CHtml::activeHiddenField($this->model,$this->attribute);
         }
@@ -236,7 +236,7 @@ class EJuiAutoCompleteFkField extends CJuiAutoComplete {
         if(is_array($this->attributes)){
                 foreach ($this->attributes as $atr){
                     if ($this->showFKField) {
-                        echo CHtml::activeTextField($this->model, $atr, array('size'=>$this->FKFieldSize, 'readonly'=>'readonly'));
+                        echo CHtml::activeTextField($this->model, $atr, array('size'=>$this->FKFieldSize, 'readonly'=>'true'));
                     } else {
                         echo CHtml::activeHiddenField($this->model,$atr);
                     }

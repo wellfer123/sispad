@@ -13,43 +13,15 @@ $this->menu=array(
 );
 ?>
 
-
-
-<div class="update">
-<h3>Meta: <?php echo $model->meta->nome.' executada por '.$model->enfermeiro->servidor->nome; ?></h3>
-</div>
+<h1>View enfermeiro_executa_meta #<?php echo $model->enfermeiro_cpf; ?></h1>
 
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
 	'attributes'=>array(
-		 array(
-                        'label'=>'Indicador',
-                        'value'=>$model->meta->indicador->nome
-                ),
-                array(
-                        'label'=>'Meta',
-                        'value'=>$model->meta->nome
-                ),
-                array(
-                        'label'=>'Unidade',
-                        'value'=>$model->enfermeiro->unidade->nome
-                ),
-                array(
-                        'label'=>'Médico',
-                        'value'=>$model->enfermeiro->servidor->nome
-                ),
-                array(
-                        'label'=>'Valor da meta',
-                        'value'=>$model->meta->valor
-                ),
-                array(
-                        'label'=>'Total de execuções',
-                        'value'=>$model->total
-                ),
-                array(
-                        'label'=>'Status da Meta',
-                        'value'=>$model->isMetaBatida(),
-                ),
+		'enfermeiro_cpf',
+		'unidade_cnes',
+		'meta_id',
+		'total',
 		'data_inicio',
 		'data_fim',
 	),
