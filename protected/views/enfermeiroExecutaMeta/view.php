@@ -1,25 +1,28 @@
 <?php
 $this->breadcrumbs=array(
-        'Metas executadas por médicos'=>array('admin'),
-	'Meta'=>array('admin'),
-//	$model->medico->servidor->nome,
+	'Enfermeiro Executa Metas'=>array('index'),
+	$model->enfermeiro_cpf,
 );
 
 $this->menu=array(
-        array('label'=>'Listar Metas executadas Pelo Médico', 'url'=>array('index','medico'=>$model->medico_cpf)),
-        array('label'=>'Enviar Nova Execução de Meta', 'url'=>array('create')),
-	array('label'=>'Gerenciar Metas Executads por Médicos', 'url'=>array('admin')),
+	array('label'=>'List enfermeiro_executa_meta', 'url'=>array('index')),
+	array('label'=>'Create enfermeiro_executa_meta', 'url'=>array('create')),
+	array('label'=>'Update enfermeiro_executa_meta', 'url'=>array('update', 'id'=>$model->enfermeiro_cpf)),
+	array('label'=>'Delete enfermeiro_executa_meta', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->enfermeiro_cpf),'confirm'=>'Are you sure you want to delete this item?')),
+	array('label'=>'Manage enfermeiro_executa_meta', 'url'=>array('admin')),
 );
 ?>
 
+
+
 <div class="update">
-<h3>Meta: <?php  echo $model->meta->nome.' executada por '.$model->medico->servidor->nome; ?></h3>
+<h3>Meta: <?php echo $model->meta->nome.' executada por '.$model->enfermeiro->servidor->nome; ?></h3>
 </div>
 
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
 	'attributes'=>array(
-                array(
+		 array(
                         'label'=>'Indicador',
                         'value'=>$model->meta->indicador->nome
                 ),
@@ -29,11 +32,11 @@ $this->menu=array(
                 ),
                 array(
                         'label'=>'Unidade',
-                        'value'=>$model->unidade_medico->nome
+                        'value'=>$model->enfermeiro->unidade->nome
                 ),
                 array(
                         'label'=>'Médico',
-                        'value'=>$model->medico->servidor->nome
+                        'value'=>$model->enfermeiro->servidor->nome
                 ),
                 array(
                         'label'=>'Valor da meta',

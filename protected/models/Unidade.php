@@ -73,6 +73,7 @@ class Unidade extends CActiveRecord
                     'regional'=>array(self::BELONGS_TO,'Regionais','regional_id'),
                     'departamentos'=>array(self::HAS_MANY,'Departamento','unidade_cnes'),
                     'servidor'=>array(self::HAS_MANY,'Servidor','unidade_cnes'),
+                    'enfermeiro_executa_meta'=>array(self::HAS_MANY,'EnfermeiroExecutaMeta','unidade_cnes'),
 		);
 	}
 

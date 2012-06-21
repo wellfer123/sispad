@@ -40,10 +40,10 @@ ou <b>=</b>) iniciar cada uma de suas pesquisa com valores específicos de como 
 	'dataProvider'=>$model->search(),
 	//'filter'=>$model,
 	'columns'=>array(
-		array(
-                        'name'=>'Médico',
-                        'value'=>'$data->medico->servidor->nome',
-                ),
+//		array(
+//                        'name'=>'Médico',
+//                        'value'=>'$data->medico->servidor->nome',
+//                ),
                 'meta.nome',
                 array(
                         'name'=>'Valor da Meta',

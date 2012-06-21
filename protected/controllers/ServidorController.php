@@ -196,6 +196,32 @@ class ServidorController extends SISPADBaseController
        }
    }
    
+   public function actionFindEnfermeiros() {
+            
+             //$this->_RBAC->checkAccess('registered',true);
+            $q = $_GET['term'];
+            if(isset($q)) {
+                 $enfermeiros = Enfermeiro::model()->with(array('servidor','unidade'))->findAll('servidor.nome like :nome',array(':nome'=> strtoupper(trim($q)).'%'));
+                //$servidores = Servidor::model()->findAllByAttributes(array('nome','cpf'),
+                                             // 'where nome like :nome',array(':nome'=> strtoupper(trim($q)).'%'));
+ 
+                if (!empty($enfermeiros)) {
+                    $out = array();
+                    foreach ($enfermeiros as $enf) {
+                            $out[] = array(
+                            // expression to give the string for the autoComplete drop-down
+                            'label' => $enf->getServidorUnidade(),  
+                            'value' => $enf->getServidorUnidade(),
+                            'unidade_cnes' => $enf->unidade_cnes,
+                            'id' => $enf->servidor_cpf, // return value from autocomplete
+                     );
+                    }
+                echo CJSON::encode($out);
+                Yii::app()->end();
+           }
+       }
+   }
+   
     public function actionFindServidoresUsuarios() {
             
              $this->_RBAC->checkAccess('registered',true);

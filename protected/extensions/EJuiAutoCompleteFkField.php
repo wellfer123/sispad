@@ -209,7 +209,7 @@ class EJuiAutoCompleteFkField extends CJuiAutoComplete {
         // setup javascript to do the work
         $this->options['create']="js:function(event, ui){\$(this).val('".addslashes($this->_display)."');}";  // show initial display value
         //meu codigo
-        $script;
+        $script='';
         if(is_array($this->attributes)){
             foreach ($this->attributes as $atr){
                  $htmlOpt;
@@ -266,7 +266,7 @@ class EJuiAutoCompleteFkField extends CJuiAutoComplete {
         $label=Yii::t('DR','Limpar '). ucfirst($this->relName); // TODO: how to translate relname?
         $deleteImageURL = Yii::app()->request->baseUrl.'/images/clear.png'; 
         //meu codigo
-        $script;
+        $script='';
         if(is_array($this->attributes)){
             foreach ($this->attributes as $atr){
                  $htmlOpt;

@@ -111,10 +111,11 @@ class EnfermeiroExecutaMeta extends CActiveRecord
 		// should not be searched.
 
 		$criteria=new CDbCriteria;
-
+                
+                $criteria->alias="enferExec";
 		$criteria->compare('enfermeiro_cpf',$this->enfermeiro_cpf,true);
 
-		$criteria->compare('unidade_cnes',$this->unidade_cnes,true);
+		$criteria->compare('enferExec.unidade_cnes',$this->unidade_cnes,true);
 
 		$criteria->compare('meta_id',$this->meta_id);
 
@@ -123,8 +124,9 @@ class EnfermeiroExecutaMeta extends CActiveRecord
 		$criteria->compare('data_inicio',$this->data_inicio,true);
 
 		$criteria->compare('data_fim',$this->data_fim,true);
-
-		return new CActiveDataProvider('enfermeiro_executa_meta', array(
+                 
+                $criteria->with=array('meta','enfermeiro.servidor');
+		return new CActiveDataProvider('enfermeiroExecutaMeta', array(
 			'criteria'=>$criteria,
 		));
 	}

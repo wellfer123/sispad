@@ -6,18 +6,18 @@
 )); ?>
 
 	<div class="row">
-		<?php echo $form->label($model,'medico_cpf'); ?>
+		<?php echo $form->label($model,'enfermeiro_cpf'); ?>
 		<?php $this->widget('EJuiAutoCompleteFkField', array(
                                     'model'=>$model,
                                     'attributes'=>array('unidade_cnes'),
-                                    'attribute'=>'medico_cpf', //the FK field (from CJuiInputWidget)
+                                    'attribute'=>'enfermeiro_cpf', //the FK field (from CJuiInputWidget)
                                      // controller method to return the autoComplete data (from CJuiAutoComplete)
-                                    'sourceUrl'=>Yii::app()->createUrl('Servidor/findMedicos'),
+                                    'sourceUrl'=>Yii::app()->createUrl('Servidor/findEnfermeiros'),
                                     // defaults to false.  set 'true' to display the FK field with 'readonly' attribute.
                                     'showFKField'=>true,
                                     // display size of the FK field.  only matters if not hidden.  defaults to 10
                                     'FKFieldSize'=>11,
-                                    'relName'=>'medico', // the relation name defined above
+                                    'relName'=>'enfermeiro', // the relation name defined above
                                     'displayAttr'=>'ServidorUnidade',  // attribute or pseudo-attribute to display
                                     // length of the AutoComplete/display field, defaults to 50
                                     'autoCompleteLength'=>60,
@@ -30,14 +30,14 @@
                                         ),
                                 ));?>
 	</div>
-
+    
 	<div class="row">
 		<?php echo $form->label($model,'meta_id'); ?>
 		<?php $this->widget('EJuiAutoCompleteFkField', array(
                                     'model'=>$model, 
                                     'attribute'=>'meta_id', //the FK field (from CJuiInputWidget)
                                      // controller method to return the autoComplete data (from CJuiAutoComplete)
-                                    'sourceUrl'=>Yii::app()->createUrl('Meta/findMetas',array('profissao'=>'Medico')), 
+                                    'sourceUrl'=>Yii::app()->createUrl('Meta/findMetas',array('profissao'=>'Enfermeiro')), 
                                     // defaults to false.  set 'true' to display the FK field with 'readonly' attribute.
                                     'showFKField'=>false,
                                     // display size of the FK field.  only matters if not hidden.  defaults to 10
@@ -57,49 +57,23 @@
                                 ));?>
 	</div>
 
-	
+	<div class="row">
+		<?php echo $form->label($model,'total'); ?>
+		<?php echo $form->textField($model,'total'); ?>
+	</div>
 
 	<div class="row">
 		<?php echo $form->label($model,'data_inicio'); ?>
-		<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
-                                                //'name'=>'data_admisao',
-                                                'options'=>array(
-                                                    'changeMonth'=>'true', 
-                                                    'changeYear'=>'true',   
-                                                    'yearRange' => '-99:+0', 
-                                                    'showAnim'=>'fadeIn', // 'show' (the default), 'slideDown', 'fadeIn', 'fold'
-                                                    'showOn'=>'button',
-                                                    'buttonText'=>Yii::t('ui','Selecione a data'), 
-                                                    'buttonImage'=>Yii::app()->request->baseUrl.'/images/calendar.png', 
-                                                    'buttonImageOnly'=>true,
-                                                ),
-                                                'language'=>'pt',
-                                                'model'=>$model,
-                                                'attribute'=>'data_inicio'))?>
+		<?php echo $form->textField($model,'data_inicio'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->label($model,'data_fim'); ?>
-		<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
-                                                //'name'=>'data_afastamento',
-                                                'language'=>'pt',
-                                                'model'=>$model,
-                                                'options'=>array(
-                                                    'changeMonth'=>'true', 
-                                                    'changeYear'=>'true',   
-                                                    'yearRange' => '-99:+1', 
-                                                    'showAnim'=>'fadeIn', // 'show' (the default), 'slideDown', 'fadeIn', 'fold'
-                                                    'showOn'=>'button',
-                                                    'buttonText'=>Yii::t('ui','Selecione a data'), 
-                                                    'buttonImage'=>Yii::app()->request->baseUrl.'/images/calendar.png', 
-                                                    'buttonImageOnly'=>true,
-                                                ),
-                                                'attribute'=>'data_fim',
-                                                'htmlOptions'=>array()))?>
+		<?php echo $form->textField($model,'data_fim'); ?>
 	</div>
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton('Pesquisar'); ?>
+		<?php echo CHtml::submitButton('Search'); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

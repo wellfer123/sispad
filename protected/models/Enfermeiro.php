@@ -92,6 +92,8 @@ class Enfermeiro extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'enfermeiro_executa_procedimentos' => array(self::HAS_MANY, 'EnfermeiroExecutaProcedimento', 'enfermeiro_unidade_cnes'),
+                        'servidor'=>array(self::BELONGS_TO,'Servidor','servidor_cpf'),
+                        'unidade'=>array(self::BELONGS_TO,'Unidade','unidade_cnes')
 		);
 	}
 
@@ -134,6 +136,11 @@ class Enfermeiro extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+        
+        public function getServidorUnidade(){
+            return $this->servidor->nome.'/'.$this->unidade->nome;
+        }
+        
         public function getUnidade_cnes() {
             return $this->unidade_cnes;
         }

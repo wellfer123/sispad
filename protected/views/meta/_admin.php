@@ -17,7 +17,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
                         'buttons'=>array(
                                             'ver_meta'=>array(
                                             'label'=>'Ver Meta',
-                                            'url'=>'Yii::app()->createUrl("/meta/details",array("id"=>$data->id))',
+                                            'url'=>'Yii::app()->createUrl("/meta/details",array("id"=>$data->id,"indicador_id"=>$_GET["indicador_id"]))',
                                             'imageUrl'=>  Yii::app()->request->baseUrl.'/images/view.png',
                                             ),
                                             'ver_itens'=>array(
