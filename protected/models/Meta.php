@@ -44,6 +44,7 @@ class Meta extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('nome, periodicidade_id, tipo, valor', 'required'),
+                        array('percentagem,valor', 'numerical','min'=>1),
 			array('periodicidade_id, valor, percentagem,indicador_id', 'numerical', 'integerOnly'=>true),
 			array('nome', 'length', 'max'=>40),
 			array('tipo', 'length', 'max'=>2),
