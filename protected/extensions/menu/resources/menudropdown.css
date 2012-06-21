@@ -4,23 +4,27 @@ ul.menu {
   list-style:none;
   margin:0;
   padding:0;
+  padding-top: 20px;
   position: absolute;
   width: 950px;
   display: block;
-  background: #CE0500;
+  background: #63812a;
+  height:45px;
+  font-size: 105%;
   
 
 }
 ul.menu * {
   margin:0;
   padding:0;
-  background: #CE0500;
+  background: #63812a;
   font-family: Arial, Helvetica, sans-serif;
+  
   
 }
 ul.menu a {
   display:block;
-  color:#000;
+  color:#fff;
   text-decoration:none;
 
 }
@@ -29,6 +33,7 @@ ul.menu li {
   float:left;
 
 }
+
 ul.menu ul {
   position:absolute;
   top:26px;
@@ -43,14 +48,16 @@ ul.menu ul li {
   /*border:/*1px solid #aaa*/
   border-top:none;
   width:148px;
-  margin:0
+  margin:0;
+  height: 37px;
 }
 ul.menu ul li a {
   display:block;
   padding:3px 7px 5px;
 }
 ul.menu ul li a:hover {
-  background:#6F0300;
+  background:#b4ea4d;
+  color:#63812a;
 }
 ul.menu ul ul {
   left:148px;
@@ -78,10 +85,10 @@ ul.menu .disabled:hover {
   color: #fff;
 }
 ul.menu .menulink:hover, ul.menu .menuhover {
-  background:#6F0300/*url(images/header_over.gif)*/;
+  background:#b4ea4d/*url(images/header_over.gif)*/;
 }
 ul.menu .sub{
-  background: #CE0500;/*url(images/header.gif);*/
+  background: #63812a;/*url(images/header.gif);*/
   /*background: url(images/arrow.gif) 136px 8px no-repeat;*/
   height: 13px;
 
@@ -105,7 +112,7 @@ ul.menu .topline {
   border-top-color: #333;
   border-right-style: none;
   border-left-style: none;
-  border-bottom-style: solid;
+  border-bottom-style: none;
   border-right-width: 2px;
   border-left-width: 2px;
   border-bottom-width: 1px;
