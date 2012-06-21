@@ -224,6 +224,6 @@ class MedicoExecutaMetaController extends SISPADBaseController
 	}
 
     protected function getModelName() {
-        return "MedicoExecutaController";
+        return "MedicoExecutaMetaController";
     }
 }

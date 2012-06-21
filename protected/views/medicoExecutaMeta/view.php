@@ -6,7 +6,7 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-        array('label'=>'Listar Metas executadas Pelo Médico', 'url'=>array('index','medico'=>$model->medico_cpf)),
+        array('label'=>'Listar Metas executadas Por Médico', 'url'=>array('index','medico'=>$model->medico_cpf)),
         array('label'=>'Enviar Nova Execução de Meta', 'url'=>array('create')),
 	array('label'=>'Gerenciar Metas Executads por Médicos', 'url'=>array('admin')),
 );
@@ -47,6 +47,6 @@ $this->menu=array(
                         'label'=>'Status da Meta',
                         'value'=>$model->isMetaBatida(),
                 ),
-		'competencia',
+		//'competencia',
 	),
 )); ?>

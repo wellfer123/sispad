@@ -5,8 +5,8 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-array('label'=>'List enfermeiro_executa_meta', 'url'=>array('index')),
-array('label'=>'Create enfermeiro_executa_meta', 'url'=>array('create')),
+array('label'=>'Listar Metas Executadas Por Enfermeiro', 'url'=>array('index')),
+array('label'=>'Enviar Nova Execução de Meta', 'url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -41,7 +41,7 @@ suas pesquisa com valores específicos de como a comparação deve ser feita.
 'id'=>'enfermeiro-executa-meta-grid',
 'dataProvider'=>$model->search(),
 'columns'=>array(
-array(
+                array(
                         'name'=>'Enfermeiro',
                         'value'=>'$data->enfermeiro->servidor->nome',
                 ),
@@ -58,9 +58,9 @@ array(
                         'name'=>'Status da Meta',
                         'value'=>'$data->isMetaBatida()',
                 ),
-array(
-'class'=>'CButtonColumn',
-                        'template'=>'{view}',
-),
-),
+                array(
+                        'class'=>'CButtonColumn',
+                                                'template'=>'{view}',
+                ),
+        ),
 )); ?>

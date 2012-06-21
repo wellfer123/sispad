@@ -124,7 +124,7 @@ class OdontologoExecutaMeta extends CActiveRecord
 
 		$criteria->compare('data_fim',$this->data_fim,true);
 
-		return new CActiveDataProvider('odontologo_executa_meta', array(
+		return new CActiveDataProvider('odontologoExecutaMeta', array(
 			'criteria'=>$criteria,
 		));
 	}

@@ -97,6 +97,8 @@ class AgenteSaude extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+                     'servidor'=>array(self::BELONGS_TO,'Servidor','servidor_cpf'),
+                     'unidade'=>array(self::BELONGS_TO,'Unidade','unidade_cnes')
 		);
 	}
 
@@ -142,4 +144,8 @@ class AgenteSaude extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+        
+         public function getServidorUnidade(){
+            return $this->servidor->nome.'/'.$this->unidade->nome;
+        }
 }

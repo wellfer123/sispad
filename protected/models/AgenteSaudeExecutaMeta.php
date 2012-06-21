@@ -127,7 +127,7 @@ class AgenteSaudeExecutaMeta extends CActiveRecord
 
 		$criteria->compare('data_fim',$this->data_fim,true);
 
-		return new CActiveDataProvider('agente_saude_executa_meta', array(
+		return new CActiveDataProvider('agenteSaudeExecutaMeta', array(
 			'criteria'=>$criteria,
 		));
 	}

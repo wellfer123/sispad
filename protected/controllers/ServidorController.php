@@ -222,6 +222,58 @@ class ServidorController extends SISPADBaseController
        }
    }
    
+   public function actionFindOdontologos() {
+            
+             //$this->_RBAC->checkAccess('registered',true);
+            $q = $_GET['term'];
+            if(isset($q)) {
+                 $odontologos =  Odontologo::model()->with(array('servidor','unidade'))->findAll('servidor.nome like :nome',array(':nome'=> strtoupper(trim($q)).'%'));
+                //$servidores = Servidor::model()->findAllByAttributes(array('nome','cpf'),
+                                             // 'where nome like :nome',array(':nome'=> strtoupper(trim($q)).'%'));
+ 
+                if (!empty($odontologos)) {
+                    $out = array();
+                    foreach ($odontologos as $odont) {
+                            $out[] = array(
+                            // expression to give the string for the autoComplete drop-down
+                            'label' => $odont->getServidorUnidade(),  
+                            'value' => $odont->getServidorUnidade(),
+                            'unidade_cnes' => $odont->unidade_cnes,
+                            'id' => $odont->servidor_cpf, // return value from autocomplete
+                     );
+                    }
+                echo CJSON::encode($out);
+                Yii::app()->end();
+           }
+       }
+   }
+   
+    public function actionFindAgentesDeSaude() {
+            
+             //$this->_RBAC->checkAccess('registered',true);
+            $q = $_GET['term'];
+            if(isset($q)) {
+                 $agentes = AgenteSaude::model()->with(array('servidor','unidade'))->findAll('servidor.nome like :nome',array(':nome'=> strtoupper(trim($q)).'%'));
+                //$servidores = Servidor::model()->findAllByAttributes(array('nome','cpf'),
+                                             // 'where nome like :nome',array(':nome'=> strtoupper(trim($q)).'%'));
+ 
+                if (!empty($agentes)) {
+                    $out = array();
+                    foreach ($agentes as $agen) {
+                            $out[] = array(
+                            // expression to give the string for the autoComplete drop-down
+                            'label' => $agen->getServidorUnidade(),  
+                            'value' => $agen->getServidorUnidade(),
+                            'unidade_cnes' => $agen->unidade_cnes,
+                            'id' => $agen->servidor_cpf, // return value from autocomplete
+                     );
+                    }
+                echo CJSON::encode($out);
+                Yii::app()->end();
+           }
+       }
+   }
+   
     public function actionFindServidoresUsuarios() {
             
              $this->_RBAC->checkAccess('registered',true);

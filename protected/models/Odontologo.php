@@ -93,7 +93,9 @@ class Odontologo extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'odontologo_executa_procedimentos' => array(self::HAS_MANY, 'OdontologoExecutaProcedimento', 'odontologo_unidade_cnes'),
-		);
+                        'servidor'=>array(self::BELONGS_TO,'Servidor','servidor_cpf'),
+                        'unidade'=>array(self::BELONGS_TO,'Unidade','unidade_cnes')
+                    );
 	}
 
 	/**
@@ -135,4 +137,9 @@ class Odontologo extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+        
+        
+        public function getServidorUnidade(){
+            return $this->servidor->nome.'/'.$this->unidade->nome;
+        }
 }
