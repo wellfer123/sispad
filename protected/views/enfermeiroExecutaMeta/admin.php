@@ -35,8 +35,10 @@ suas pesquisa com valores específicos de como a comparação deve ser feita.
 <?php $this->renderPartial('_search',array(
 'model'=>$model,
 )); ?>
+   
 </div><!-- search-form -->
-
+<?php echo '</br></br>'; 
+      echo CHtml::link("Gerar Relatório",array('relatorioMetas','competencia'=>'12012'));?>
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 'id'=>'enfermeiro-executa-meta-grid',
 'dataProvider'=>$model->search(),

@@ -62,14 +62,10 @@
 </div>
 
 <div class="row">
-<?php echo $form->label($model,'data_inicio'); ?>
-<?php echo $form->textField($model,'data_inicio'); ?>
-</div>
-
-<div class="row">
-<?php echo $form->label($model,'data_fim'); ?>
-<?php echo $form->textField($model,'data_fim'); ?>
-</div>
+                <?php echo $form->labelEx($model,'competencia'); ?>
+                <?php echo Chtml::activeDropDownList($model, 'competencia', 
+                                                    CHtml::listData(Competencia::model()->findAll(), 'mes_ano', 'mes_ano'),array('size'=>1,'maxlength'=>6)) ?>
+        </div>
 
 <div class="row buttons">
 <?php echo CHtml::submitButton('Search'); ?>
