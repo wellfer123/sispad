@@ -5,11 +5,18 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List medico_executa_item', 'url'=>array('index')),
-	array('label'=>'Manage medico_executa_item', 'url'=>array('admin')),
+	array('label'=>'Escolher novo médico, meta ou competência', 'url'=>array('MedicoExecutaMeta/send')),
+	array('label'=>'Gerenciamento de itens executados por médico', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Create medico_executa_item</h1>
 
-<?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php $this->beginWidget('zii.widgets.CPortlet', array(
+			'title'=>'Envio de Itens executados',
+                        'htmlOptions'=>array('class'=>'portlet_form')
+		));?>
+
+<?php echo $this->renderPartial('_form', 
+                                array('model'=>$model,'modelos'=>$modelos,'itens'=>$itens,'competencia'=>$competencia,'medico'=>$medico)); ?>
+
+<?php $this->endWidget(); ?>
