@@ -72,7 +72,7 @@ class MedicoExecutaMeta extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'medico_cpf' => 'CPF do médico',
+			'medico_cpf' => 'Médico',
 			'unidade_cnes' => 'Unidade',
 			'meta_id' => 'Meta',
 			'total' => 'Total',
@@ -143,6 +143,39 @@ class MedicoExecutaMeta extends CActiveRecord
             $sql="SELECT med.medico_unidade_cnes AS cnes,SUM(med.quantidade) AS total, med.competencia,med.medico_cpf AS medico, m.id AS meta";
             $sql=" $sql FROM medico_executa_procedimento med INNER JOIN  meta_procedimento mp ON mp.procedimento_codigo=med.procedimento_codigo";
             $sql=" $sql INNER JOIN meta m ON m.id=mp.meta_id";
+            $sql=" $sql GROUP BY med.competencia,m.id,med.medico_cpf HAVING med.competencia=:competencia; ";
+            //
+            $dbC=Yii::app()->db->createCommand($sql);
+            $dbC->setFetchMode(PDO::FETCH_OBJ);
+            $dbC->bindParam(':competencia', $competencia, PDO::PARAM_STR);
+            $resul=array();
+            foreach($dbC->queryAll() as $m){
+                $metExec= new MedicoExecutaMeta();
+                
+                //popula
+                $metExec->medico_cpf= $m->medico;
+                $metExec->total=$m->total;
+                $metExec->meta_id=$m->meta;
+                $metExec->unidade_cnes=$m->cnes;
+                $metExec->competencia=date("mY");
+                //coloca o objeto no vetor
+                $resul[]=$metExec;
+            }
+            return $resul;
+        }
+        
+        /**
+         * Calcula o valor de cada meta referente ao medico em uma determinada competencia
+         * para isso soma os valores dos itens executados pelo médico e que fazem parte de uma meta
+         * Exemplo: meta com 3 itens: o valor da meta vai ser a soma da quantidade de execução desses itens
+         * IMPORTANTE: os registros devolvidos não estão salvos no banco!
+         * @param int competencia que a meta deve ser calculada
+         * @return MedicoExecutaMeta[] devolve um vetor com os valores de cada meta executada por um medico na competencia
+         */
+        public static function calculeMetasComItens($competencia){
+            $sql="SELECT med.medico_unidade_cnes AS cnes,SUM(med.quantidade) AS total, med.competencia,med.medico_cpf AS medico, m.id AS meta";
+            $sql=" $sql FROM medico_executa_item med INNER JOIN  item it ON it.id=med.item_id";
+            $sql=" $sql INNER JOIN meta m ON m.id=it.meta_id";
             $sql=" $sql GROUP BY med.competencia,m.id,med.medico_cpf HAVING med.competencia=:competencia; ";
             //
             $dbC=Yii::app()->db->createCommand($sql);

@@ -158,6 +158,10 @@ div.wide.form .row
 	clear: left;
 }
 
+button
+{
+    border: 1px solid #63812a;
+}
 div.wide.form .buttons, div.wide.form .hint, div.wide.form .errorMessage
 {
 	clear: left;

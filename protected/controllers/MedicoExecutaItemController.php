@@ -1,6 +1,6 @@
 <?php
 
-class MedicoExecutaItemController extends Controller
+class MedicoExecutaItemController extends SISPADBaseController
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -50,73 +50,149 @@ class MedicoExecutaItemController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new MedicoExecutaItem;
+		$model=new MedicoExecutaItem('valTemp');
+                $modelos=array();
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
-
+                //pegar os parâmetros necessários
+                if(isset($_GET['competencia'])){
+                    //verifica se a competencia existe mesmo
+                    if(Competencia::model()->exists('mes_ano=:comp',array(':comp'=>$_GET['competencia']))){
+                        $model->competencia=$_GET['competencia'];
+                    }
+                }
+                //verifica se o paramentro servidor e cnes existem, depois pega o medico
+                if(isset($_GET['servidor'])&& isset($_GET['cnes'])){
+                    if(Medico::model()->exists('servidor_cpf=:cpf AND unidade_cnes=:unidade', 
+                                    array(':cpf'=>$_GET['servidor'],':unidade'=>$_GET['cnes']))){
+                        
+                    $model->medico_cpf=$_GET['servidor'];
+                    $model->medico_unidade_cnes=$_GET['cnes'];
+                    }
+                }
+                //caso os parâmetros não sejam válidos vai exibir o erro!
+                $model->validate();
+                //fim dos parâmetros necessários
+                //para ada item a ser enviado vai gerar um modelo
+                $itens=Item::model()->findAll('meta_id=:meta',array(':meta'=>$_GET['meta']));
+                //verifica se o vetor está vazio
+                if(empty($itens)){
+                    $this->addMessageErro("Não existe nenhum item a ser enviado para essa meta!");
+                }
+                foreach ($itens as $iten){
+                    $m= new MedicoExecutaItem('create');
+                    $m->medico_unidade_cnes=$model->medico_unidade_cnes;
+                    $m->medico_cpf=$model->medico_cpf;
+                    $m->competencia=$model->competencia;
+                    $modelos[]=$m;
+                }
+                
 		if(isset($_POST['MedicoExecutaItem']))
 		{
-			$model->attributes=$_POST['MedicoExecutaItem'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->medico_cpf));
+                        $valide=true;
+                        foreach ($modelos as $i=>$mod){
+                            if(isset($_POST['MedicoExecutaItem'])){
+                                $mod->attributes=$_POST['MedicoExecutaItem'][$i];
+                                $valide=$valide && $mod->validate();
+                            }
+                        }
+                        //se todos os modelos são válidos
+                        if($valide){
+                            //percorre o vetor de modelos e salva no banco de dados
+                            foreach ($modelos as $i=>$mode){
+                                //verifica se já existe
+                                $exi=MedicoExecutaItem::model()->exists('medico_cpf=:medico AND medico_unidade_cnes=:unidade AND item_id=:item AND competencia=:competencia',
+                                                                        array(':medico'=>$mode->medico_cpf,':unidade'=>$mode->medico_unidade_cnes,
+                                                                          ':item'=>$mode->item_id,':competencia'=>$mode->competencia));
+                                //não existe, então salva
+                                $nome=$itens[$i]->nome;
+                                if(!$exi){
+                                    //se conseguir salvar com sucesso mostra mensagem de sucesso
+                                    if($mode->save()){
+                                        $this->addMessageSuccess("Item $nome enviado com sucesso");
+                                    }
+                                    else{
+                                        $this->addMessageErro("Falha ao enviar o item $nome.");
+                                    }
+                                }
+                                else{
+                                    $this->addMessageErro("Item já foi enviado!");
+                                }
+                            }
+                            $this->redirect(array('list','servidor'=>$model->medico_cpf,'unidade'=>$model->medico_unidade_cnes,'meta'=>$_GET['meta'],'competencia'=>$model->competencia));
+                        }
+                        else{
+                            $this->addMessageErro('Existem itens inválidos!');
+                        }
+//			if($model->save())
+				//$this->redirect(array('admin','id'=>$model->medico_cpf));
 		}
-
-		$this->render('create',array(
-			'model'=>$model,
-		));
+                //vai pegar o médico
+                $medico=  Medico::model()->with('servidor','unidade')->find('t.servidor_cpf=:cpf AND t.unidade_cnes=:unidade',
+                                                                            array(':cpf'=>$model->medico_cpf,'unidade'=>$model->medico_unidade_cnes));
+                
+                
+		$this->render('create',array('model'=>$model,'modelos'=>$modelos,'itens'=>$itens,'competencia'=>$_GET['competencia'],'medico'=>$medico));
 	}
 
 	/**
 	 * Updates a particular model.
 	 * If update is successful, the browser will be redirected to the 'view' page.
 	 */
-	public function actionUpdate()
-	{
-		$model=$this->loadModel();
-
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
-
-		if(isset($_POST['MedicoExecutaItem']))
-		{
-			$model->attributes=$_POST['MedicoExecutaItem'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->medico_cpf));
-		}
-
-		$this->render('update',array(
-			'model'=>$model,
-		));
-	}
+//	public function actionUpdate()
+//	{
+//		$model=$this->loadModel();
+//
+//		// Uncomment the following line if AJAX validation is needed
+//		// $this->performAjaxValidation($model);
+//
+//		if(isset($_POST['MedicoExecutaItem']))
+//		{
+//			$model->attributes=$_POST['MedicoExecutaItem'];
+//			if($model->save())
+//				$this->redirect(array('view','id'=>$model->medico_cpf));
+//		}
+//
+//		$this->render('update',array(
+//			'model'=>$model,
+//		));
+//	}
 
 	/**
 	 * Deletes a particular model.
 	 * If deletion is successful, the browser will be redirected to the 'index' page.
 	 */
-	public function actionDelete()
-	{
-		if(Yii::app()->request->isPostRequest)
-		{
-			// we only allow deletion via POST request
-			$this->loadModel()->delete();
-
-			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-			if(!isset($_GET['ajax']))
-				$this->redirect(array('index'));
-		}
-		else
-			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
-	}
+//	public function actionDelete()
+//	{
+//		if(Yii::app()->request->isPostRequest)
+//		{
+//			// we only allow deletion via POST request
+//			$this->loadModel()->delete();
+//
+//			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+//			if(!isset($_GET['ajax']))
+//				$this->redirect(array('index'));
+//		}
+//		else
+//			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
+//	}
 
 	/**
 	 * Lists all models.
 	 */
-	public function actionIndex()
+	public function actionList()
 	{
-		$dataProvider=new CActiveDataProvider('MedicoExecutaItem');
-		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
+		$model=new MedicoExecutaItem('search');
+                $model->unsetAttributes();
+                if(isset($_GET['servidor']) ){
+                    $model->medico_cpf=$_GET['servidor'];
+                }
+                if(isset($_GET['unidade'])){
+                    $model->medico_unidade_cnes=$_GET['unidade'];
+                }
+		$this->render('list',array(
+			'model'=>$model,
 		));
 	}
 
@@ -143,10 +219,13 @@ class MedicoExecutaItemController extends Controller
 	{
 		if($this->_model===null)
 		{
-			if(isset($_GET['id']))
-				$this->_model=MedicoExecutaItem::model()->findbyPk($_GET['id']);
+			if(isset($_GET['servidor']) && isset($_GET['item']) && isset($_GET['unidade']) && isset($_GET['competencia']) )
+                            //pega o modelo pela chave primária composta
+				$this->_model=MedicoExecutaItem::model()->with('medico.servidor','unidade','item.meta')->findByPk(array(
+                                                                          'item_id'=>$_GET['item'],'medico_unidade_cnes'=>$_GET['unidade'],
+                                                                          'competencia'=>$_GET['competencia'],'medico_cpf'=>$_GET['servidor']));
 			if($this->_model===null)
-				throw new CHttpException(404,'The requested page does not exist.');
+				throw new CHttpException(404,'A página requisitada não existe!');
 		}
 		return $this->_model;
 	}
@@ -163,4 +242,7 @@ class MedicoExecutaItemController extends Controller
 			Yii::app()->end();
 		}
 	}
+        protected function getModelName() {
+        return "MedicoExecutaItem";
+    }
 }
