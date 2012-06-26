@@ -37,9 +37,12 @@ class MedicoExecutaItem extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('medico_cpf, item_id, competencia', 'required'),
+			array('medico_cpf, competencia,medico_unidade_cnes,item_id,quantidade', 'required','on'=>'create'),
+                        array('medico_cpf, competencia,medico_unidade_cnes', 'required','on'=>'valTemp'),
+                        array('item_id, quantidade', 'safe', 'on'=>'valTemp'),
 			array('item_id, quantidade, competencia', 'numerical', 'integerOnly'=>true),
 			array('medico_cpf', 'length', 'max'=>11),
+                        array('quantidade', 'length', 'min'=>1,'max'=>11),
 			array('medico_unidade_cnes', 'length', 'max'=>10),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
@@ -56,9 +59,10 @@ class MedicoExecutaItem extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'item' => array(self::BELONGS_TO, 'Item', 'item_id'),
-			'competencia0' => array(self::BELONGS_TO, 'Competencia', 'competencia'),
-			'medico_cpf0' => array(self::BELONGS_TO, 'Medico', 'medico_cpf'),
-			'medico_unidade_cnes0' => array(self::BELONGS_TO, 'Medico', 'medico_unidade_cnes'),
+			'competencia' => array(self::BELONGS_TO, 'Competencia', 'competencia'),
+			'medico' => array(self::BELONGS_TO, 'Medico', 'medico_cpf, medico_unidade_cnes'),
+                        'unidade' => array(self::BELONGS_TO, 'Unidade', 'medico_unidade_cnes'),
+                        'unidade2' => array(self::BELONGS_TO, 'Medico', 'medico_unidade_cnes'),
 		);
 	}
 
@@ -68,11 +72,11 @@ class MedicoExecutaItem extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'medico_cpf' => 'Medico Cpf',
+			'medico_cpf' => 'Médico',
 			'item_id' => 'Item',
-			'medico_unidade_cnes' => 'Medico Unidade Cnes',
+			'medico_unidade_cnes' => 'Unidade do médico',
 			'quantidade' => 'Quantidade',
-			'competencia' => 'Competencia',
+			'competencia' => 'Competência',
 		);
 	}
 
@@ -96,6 +100,10 @@ class MedicoExecutaItem extends CActiveRecord
 		$criteria->compare('quantidade',$this->quantidade);
 
 		$criteria->compare('competencia',$this->competencia);
+                
+                $criteria->with=array('item','medico.servidor','unidade');
+                
+                $criteria->order=" competencia DESC";
 
 		return new CActiveDataProvider('MedicoExecutaItem', array(
 			'criteria'=>$criteria,
