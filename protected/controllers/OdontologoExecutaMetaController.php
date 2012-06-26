@@ -151,7 +151,19 @@ class OdontologoExecutaMetaController extends Controller
 			'model'=>$model,
 		));
 	}
+        
+         public function actionRelatorioMetas($competencia) {
+            $model = new OdontologoExecutaMeta;
+            $this->widget('application.extensions.phpexcel.EExcelView',
+                        array('dataProvider'=>$model->searchMetasExecutadas($competencia),
+                             'title'=>'metasExecutadas_odontologo',
+                             'grid_mode'=>'export',
+                             'exportType'=>'Excel2007',
+                            ));
+            Yii::app()->end();
+          
 
+        }
 	/**
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.

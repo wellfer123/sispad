@@ -152,7 +152,19 @@ class EnfermeiroExecutaMetaController extends Controller
 			'model'=>$model,
 		));
 	}
+        
+        public function actionRelatorioMetas($competencia) {
+            $model = new EnfermeiroExecutaMeta;
+            $this->widget('application.extensions.phpexcel.EExcelView',
+                        array('dataProvider'=>$model->searchMetasExecutadas($competencia),
+                             'title'=>'metasExecutadas_enfermeiro',
+                             'grid_mode'=>'export',
+                             'exportType'=>'Excel2007',
+                            ));
+            Yii::app()->end();
+          
 
+        }
 	/**
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.

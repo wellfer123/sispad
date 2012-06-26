@@ -105,6 +105,28 @@ class OdontologoExecutaMeta extends CActiveRecord
 	 * Retrieves a list of models based on the current search/filter conditions.
 	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
 	 */
+      
+        
+        public function searchMetasExecutadas($competencia) {
+
+                $dados=Yii::app()->db->createCommand('select meta.nome as meta,serv.nome as odontologo,unid.nome as unidade,meta.valor as TotalEsperado,odonto_exec_meta.total as TotalExecutado 
+                                                      from odontologo_executa_meta as odonto_exec_meta INNER JOIN meta
+                                                      ON odonto_exec_meta.meta_id = meta.id INNER JOIN servidor as serv
+                                                      ON serv.cpf = odonto_exec_meta.odontologo_cpf INNER JOIN unidade as unid
+                                                      ON unid.cnes = odonto_exec_meta.unidade_cnes where odonto_exec_meta.competencia='.$competencia)->queryAll();
+
+		 $tes=new CArrayDataProvider($dados, array(
+                                    'id'=>'odontologo_executa_meta',
+                                    'pagination'=>false
+
+		));
+                 
+                
+                
+
+                 return $tes;
+
+    }
 	public function search()
 	{
 		// Warning: Please modify the following code to remove attributes that
@@ -120,9 +142,7 @@ class OdontologoExecutaMeta extends CActiveRecord
 
 		$criteria->compare('total',$this->total);
 
-		$criteria->compare('data_inicio',$this->data_inicio,true);
-
-		$criteria->compare('data_fim',$this->data_fim,true);
+		$criteria->compare('competencia',$this->competencia,true);
 
 		return new CActiveDataProvider('odontologoExecutaMeta', array(
 			'criteria'=>$criteria,
@@ -130,8 +150,7 @@ class OdontologoExecutaMeta extends CActiveRecord
 	}
         
                 protected function afterFind() {
-            $this->data_fim=ParserDate::inverteDataEnToPt($this->data_fim);
-            $this->data_inicio=ParserDate::inverteDataEnToPt($this->data_inicio);
+            
             parent::afterFind();
         }
         /**
