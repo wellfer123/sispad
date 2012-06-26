@@ -94,7 +94,7 @@ class MetaController extends SISPADBaseController{
             $q = $_GET['term'];
             $profissao = $_GET['profissao'];
             if(isset($q)) {
-                 $metas = Meta::model()->findAllBySql(Meta::getSelectSqlProfissao($profissao::CODIGO_PROFISSAO, strtoupper(trim($q)), Meta::ITENS));//(Meta::getCDbCriteriaProfissao(Medico::CODIGO_PROFISSAO, strtoupper(trim($q)), Meta::ITENS));
+                 $metas = Meta::model()->findAllBySql(Meta::getSelectSqlProfissao($profissao, strtoupper(trim($q)), Meta::ITENS));//(Meta::getCDbCriteriaProfissao(Medico::CODIGO_PROFISSAO, strtoupper(trim($q)), Meta::ITENS));
  
                 if (!empty($metas)) {
                     $out = array();

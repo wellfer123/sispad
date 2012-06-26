@@ -49,23 +49,24 @@ class MedicoExecutaMetaController extends SISPADBaseController
 	 */
 	public function actionCreate()
 	{
-		$model=new MedicoExecutaMeta;
-
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
-
-		if(isset($_POST['MedicoExecutaMeta']))
-		{
-			$model->attributes=$_POST['MedicoExecutaMeta'];
-			if($model->save()){
-                            //$this->redirect(array('MedicoExecutaItem/Create','competencia'=>$model->competencia,'servidor'=>$model->medico_cpf,'cnes'=>$model->unidade_cnes,'meta'=>$model->meta_id));
-				$this->redirect(array('view','id'=>$model->medico_cpf));
-                        }
-		}
-
-		$this->render('create',array(
-			'model'=>$model,
-		));
+//		$model=new MedicoExecutaMeta;
+//
+//		// Uncomment the following line if AJAX validation is needed
+//		// $this->performAjaxValidation($model);
+//
+//		if(isset($_POST['MedicoExecutaMeta']))
+//		{
+//			$model->attributes=$_POST['MedicoExecutaMeta'];
+//			if($model->save()){
+//                            //$this->redirect(array('MedicoExecutaItem/Create','competencia'=>$model->competencia,'servidor'=>$model->medico_cpf,'cnes'=>$model->unidade_cnes,'meta'=>$model->meta_id));
+//				$this->redirect(array('view','id'=>$model->medico_cpf));
+//                        }
+//		}
+//
+//		$this->render('create',array(
+//			'model'=>$model,
+//		));
+            $this->redirect(array('send'));
 	}
         
         /**
