@@ -276,6 +276,7 @@ div.search-form
     background-color: #ffdead;
     height: 50px;
     text-align: center;
+    text-transform:uppercase;
     padding-top: 10px; 
 }
 
