@@ -106,6 +106,33 @@ class AgenteSaudeExecutaMeta extends CActiveRecord
 	 * Retrieves a list of models based on the current search/filter conditions.
 	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
 	 */
+        
+        public function searchMetasExecutadas($competencia) {
+
+                $dados=Yii::app()->db->createCommand('select meta.nome as meta,serv.nome as agente_de_saude,unid.nome as unidade,meta.valor as TotalEsperado,agente_exec_meta.total as TotalExecutado 
+                                                      from agente_saude_executa_meta as agente_exec_meta INNER JOIN meta
+                                                      ON agente_exec_meta.meta_id = meta.id INNER JOIN servidor as serv
+                                                      ON serv.cpf = agente_exec_meta.agente_saude_cpf INNER JOIN unidade as unid
+                                                      ON unid.cnes = agente_exec_meta.unidade_cnes where agente_exec_meta.competencia='.$competencia)->queryAll();
+
+		 $tes=new CArrayDataProvider($dados, array(
+                                    'id'=>'agente_saude_executa_meta',
+                                    'pagination'=>false
+
+		));
+                 
+                
+                
+
+                 return $tes;
+
+    }
+        public function searchCompetencias() {
+
+                 $query = $this->findAllBySql('select distinct competencia from agente_saude_executa_meta');
+                 return $query;
+     }  
+     
 	public function search()
 	{
 		// Warning: Please modify the following code to remove attributes that
@@ -129,6 +156,8 @@ class AgenteSaudeExecutaMeta extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+        
+        
         /**
          * Calcula o valor de cada meta referente ao medico em uma determinada competencia
          * para isso soma os valores dos procedimentos executados pelo medico e que fazem parte de uma meta
@@ -164,8 +193,7 @@ class AgenteSaudeExecutaMeta extends CActiveRecord
         }
         
         protected function afterFind() {
-            $this->data_fim=ParserDate::inverteDataEnToPt($this->data_fim);
-            $this->data_inicio=ParserDate::inverteDataEnToPt($this->data_inicio);
+          
             parent::afterFind();
         }
 

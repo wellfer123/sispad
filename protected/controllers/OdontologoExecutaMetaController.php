@@ -156,13 +156,34 @@ class OdontologoExecutaMetaController extends Controller
             $model = new OdontologoExecutaMeta;
             $this->widget('application.extensions.phpexcel.EExcelView',
                         array('dataProvider'=>$model->searchMetasExecutadas($competencia),
-                             'title'=>'metasExecutadas_odontologo',
+                             'title'=>'metasExecutadas_odontologo_'.$competencia,
                              'grid_mode'=>'export',
                              'exportType'=>'Excel2007',
                             ));
             Yii::app()->end();
           
 
+        }
+         public function actionPreparedAdmin()
+        {
+                $model= new OdontologoExecutaMeta;
+
+                $this->performAjaxValidation($model);
+                if(isset($_POST['OdontologoExecutaMeta']))
+		{
+                        
+                        $model->competencia= $_POST['OdontologoExecutaMeta']['competencia'];
+
+			$this->redirect(array('admin','competencia'=>$model->competencia));
+		}else
+                    $this->render('prepared_admin',array(
+			'model'=>$model,
+		));
+	}
+
+        public function buscaCompetencias() {
+            $model = new OdontologoExecutaMeta;
+            return CHtml::listData($model->searchCompetencias(),'competencia','competencia');
         }
 	/**
 	 * Returns the data model based on the primary key given in the GET variable.

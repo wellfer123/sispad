@@ -151,6 +151,36 @@ class AgenteSaudeExecutaMetaController extends Controller
 			'model'=>$model,
 		));
 	}
+        
+        public function actionRelatorioMetas($competencia) {
+            $model = new AgenteSaudeExecutaMeta;
+            $this->widget('application.extensions.phpexcel.EExcelView',
+                        array('dataProvider'=>$model->searchMetasExecutadas($competencia),
+                             'title'=>'metasExecutadas_agente_de_saude '.$competencia,
+                             'grid_mode'=>'export',
+                             'exportType'=>'Excel2007',
+                            ));
+            Yii::app()->end();
+          
+
+        }
+        
+         public function actionPreparedAdmin()
+        {
+                $model= new AgenteSaudeExecutaMeta;
+
+                $this->performAjaxValidation($model);
+                if(isset($_POST['AgenteSaudeExecutaMeta']))
+		{
+                        
+                        $model->competencia= $_POST['AgenteSaudeExecutaMeta']['competencia'];
+
+			$this->redirect(array('admin','competencia'=>$model->competencia));
+		}else
+                    $this->render('prepared_admin',array(
+			'model'=>$model,
+		));
+	}
 
 	/**
 	 * Returns the data model based on the primary key given in the GET variable.

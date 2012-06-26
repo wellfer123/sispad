@@ -127,6 +127,14 @@ class OdontologoExecutaMeta extends CActiveRecord
                  return $tes;
 
     }
+    
+     public function searchCompetencias() {
+
+                 $query = $this->findAllBySql('select distinct competencia from odontologo_executa_meta');
+                 return $query;
+     }  
+     
+    
 	public function search()
 	{
 		// Warning: Please modify the following code to remove attributes that
