@@ -1,46 +1,55 @@
 <div class="form">
 
-<?php $form=$this->beginWidget('CActiveForm', array(
-	'id'=>'odontologo-executa-meta-form',
+<?php $form=$this->beginWidget('SISPADActiveForm', array(
+	'id'=>'odontologo-executa-item-form',
+        'enableClientValidation'=>true,
 	'enableAjaxValidation'=>false,
 )); ?>
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
+	<p class="note">Todos os campos com <span class="required">*</span> tem preenchimento obrigatório.</p>
 
+        <?php echo $this->renderMessages(); ?>
 	<?php echo $form->errorSummary($model); ?>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'unidade_cnes'); ?>
-		<?php echo $form->textField($model,'unidade_cnes',array('size'=>10,'maxlength'=>10)); ?>
-		<?php echo $form->error($model,'unidade_cnes'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'meta_id'); ?>
-		<?php echo $form->textField($model,'meta_id'); ?>
-		<?php echo $form->error($model,'meta_id'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'total'); ?>
-		<?php echo $form->textField($model,'total'); ?>
-		<?php echo $form->error($model,'total'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'data_inicio'); ?>
-		<?php echo $form->textField($model,'data_inicio'); ?>
-		<?php echo $form->error($model,'data_inicio'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'data_fim'); ?>
-		<?php echo $form->textField($model,'data_fim'); ?>
-		<?php echo $form->error($model,'data_fim'); ?>
-	</div>
-
+        
+        <table>
+            <tbody>
+                <?php foreach($modelos as $i=>$m): ?>
+                
+                <tr>
+                    <td colspan="4" style="background-color: #63812a; height: 14px; color: white;">
+                       <?php echo $itens[$i]->nome ?>
+                       <?php echo CHtml::activeHiddenField($m, "[$i]item_id",array('value'=> $itens[$i]->id)); ?>
+                    </td>
+                </tr>
+                <tr >
+                    <td>
+                        <?php echo $form->labelEx($m,"[$i]quantidade"); ?>
+                        <?php echo $form->textField($m,"[$i]quantidade",array('size'=>10)); ?>
+                        <?php echo $form->error($m,"[$i]quantidade"); ?>
+                    </td>
+                    <td>
+                        <?php echo $form->labelEx($m,"[$i]competencia"); ?>
+                        <?php echo CHtml::textField("[$i]competencia", $competencia, array('disabled'=>true,'size'=>10)); ?>
+                        <?php echo $form->error($m,"[$i]competencia"); ?>
+                    </td>
+                </tr>
+                <tr >
+                    <td colspan="2">
+                        <?php echo $form->labelEx($m,"[$i]odontologo_cpf"); ?>
+                        <?php echo CHtml::textField("[$i]odontologo_cpf", $odontologo->servidor->nome, array('disabled'=>true,'size'=>60)); ?>
+                        <?php echo $form->error($m,"[$i]odontologo_cpf"); ?>
+                    </td>
+                    <td colspan="2">
+                        <?php echo $form->labelEx($m,"[$i]odontologo_unidade_cnes"); ?>
+                        <?php echo CHtml::textField("[$i]odontologo_unidade_cnes", $odontologo->unidade->nome, array('disabled'=>true,'size'=>50)); ?>
+                        <?php echo $form->error($m,"[$i]odontologo_unidade_cnes"); ?>
+                    </td>
+                </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
 	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
+		<?php echo CHtml::submitButton('Enviar'); ?>
 	</div>
 
 <?php $this->endWidget(); ?>
