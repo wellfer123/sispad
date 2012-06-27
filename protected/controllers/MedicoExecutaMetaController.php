@@ -119,6 +119,43 @@ class MedicoExecutaMetaController extends SISPADBaseController
 //		));
 //	}
         
+        private function calulaMetas(){
+            if($this->isValidaExecucaoCalculoMetas()){
+                try{
+                    //pega todos as metas já calculadas pelo, mas não salva
+                    $metas=MedicoExecutaMeta::calculeMetasComProcedimentos(22012);
+                    foreach($metas as $meta){
+                        //todo o código com try dentro
+                        try{
+                            //verifica se a meta executa pelo medico existe
+                            if(!MedicoExecutaMeta::model()->exists('medico_cpf=:medico AND unidade_cnes=:unidade AND meta_id=:meta AND competencia=:competencia',
+                                                                   array(':medico'=>$meta->medico_cpf,':unidade'=>$meta->unidade_cnes,
+                                                                          ':meta'=>$meta->meta_id,'competencia'=>$meta>competencia))){
+                                //vai salvar a meta, pis não existe
+                                if($meta->save()){
+                                    //salvou com sucesso
+                                }
+                                else{
+                                    //deu erro
+                                }
+                                
+                            }
+                        }catch(Exception $excep){
+                            
+                        }
+                    }
+                    
+                }catch(Exception $ex){
+                    
+                }
+            }
+        }
+        
+        private function isValidaExecucaoCalculoMetas(){
+            return true;
+        }
+
+
         public function actionCalculeMetas(){
             try{
                 $metas=MedicoExecutaMeta::calculeMetasComProcedimentos(22012);
