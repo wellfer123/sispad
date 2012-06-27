@@ -157,7 +157,7 @@ class EnfermeiroExecutaMetaController extends Controller
             $model = new EnfermeiroExecutaMeta;
             $this->widget('application.extensions.phpexcel.EExcelView',
                         array('dataProvider'=>$model->searchMetasExecutadas($competencia),
-                             'title'=>'metasExecutadas_enfermeiro',
+                             'title'=>'metasExecutadas_enfermeiro_'.$competencia,
                              'grid_mode'=>'export',
                              'exportType'=>'Excel2007',
                             ));
@@ -165,6 +165,23 @@ class EnfermeiroExecutaMetaController extends Controller
           
 
         }
+        
+         public function actionPreparedAdmin()
+        {
+                $model= new EnfermeiroExecutaMeta;
+
+                $this->performAjaxValidation($model);
+                if(isset($_POST['EnfermeiroExecutaMeta']))
+		{
+                        
+                        $model->competencia= $_POST['EnfermeiroExecutaMeta']['competencia'];
+
+			$this->redirect(array('admin','competencia'=>$model->competencia));
+		}else
+                    $this->render('prepared_admin',array(
+			'model'=>$model,
+		));
+	}
 	/**
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.

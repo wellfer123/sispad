@@ -22,8 +22,8 @@ return false;
 });
 ");
 ?>
-
-<h1>Gerenciamento Enfermeiro Executa Metas</h1>
+<?php  $competencia = $_GET['competencia'];?>
+<h1>Gerenciamento Enfermeiro Executa Metas - <?php echo $competencia; ?> </h1>
 
 <p>
 Você pode opcionalmente entrar com um operador de comparação(<, <=, >, >=, <> ou =) iniciar cada uma de
@@ -38,7 +38,7 @@ suas pesquisa com valores específicos de como a comparação deve ser feita.
    
 </div><!-- search-form -->
 <?php echo '</br></br>'; 
-      echo CHtml::link("Gerar Relatório",array('relatorioMetas','competencia'=>'12012'));?>
+      echo CHtml::link("Gerar Relatório",array('relatorioMetas','competencia'=>$competencia));?>
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 'id'=>'enfermeiro-executa-meta-grid',
 'dataProvider'=>$model->search(),

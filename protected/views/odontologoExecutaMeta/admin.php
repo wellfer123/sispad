@@ -22,8 +22,10 @@ $('.search-form form').submit(function(){
 });
 ");
 ?>
-
-<h1>Gerenciamento Odontologo Executa Metas</h1>
+<?php
+    $competencia = $_GET['competencia'];
+?>
+<h1>Gerenciamento Odontologo Executa Metas - <?php echo $competencia; ?></h1>
 
 <p>
 Você pode opcionalmente entrar com um operador de comparação(<, <=, >, >=, <> ou =) iniciar cada uma de
@@ -37,7 +39,7 @@ suas pesquisa com valores específicos de como a comparação deve ser feita.
 )); ?>
 </div><!-- search-form -->
 <?php echo '</br></br>'; 
-      echo CHtml::link("Gerar Relatório",array('relatorioMetas','competencia'=>'12012'));?>
+      echo CHtml::link("Gerar Relatório",array('relatorioMetas','competencia'=>$competencia));?>
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'odontologo-executa-meta-grid',
 	'dataProvider'=>$model->search(),
@@ -47,6 +49,7 @@ suas pesquisa com valores específicos de como a comparação deve ser feita.
                         'value'=>'$data->odontologo->servidor->nome',
                 ),
                 'meta.nome',
+                'competencia',
                 array(
                         'name'=>'Valor da Meta',
                         'value'=>'$data->meta->valor',

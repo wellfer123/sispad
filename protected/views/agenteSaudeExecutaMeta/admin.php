@@ -22,8 +22,8 @@ $('.search-form form').submit(function(){
 });
 ");
 ?>
-
-<h1>Gerenciamento Agente de Saúde Executa Metas</h1>
+<?php $competencia = $_GET['competencia'];?>
+<h1>Gerenciamento Agente de Saúde Executa Metas - <?php echo $competencia;?></h1>
 
 <p>
 Você pode opcionalmente entrar com um operador de comparação(<, <=, >, >=, <> ou =) iniciar cada uma de
@@ -36,7 +36,8 @@ suas pesquisa com valores específicos de como a comparação deve ser feita.
 	'model'=>$model,
 )); ?>
 </div><!-- search-form -->
-
+<?php echo '</br></br>'; 
+      echo CHtml::link("Gerar Relatório",array('relatorioMetas','competencia'=>$competencia));?>
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'agente-saude-executa-meta-grid',
 	'dataProvider'=>$model->search(),
