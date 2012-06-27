@@ -40,17 +40,21 @@ ou <b>=</b>) iniciar cada uma de suas pesquisa com valores específicos de como 
 	'dataProvider'=>$model->search(),
 	//'filter'=>$model,
 	'columns'=>array(
-//		array(
-//                        'name'=>'Médico',
-//                        'value'=>'$data->medico->servidor->nome',
-//                ),
+		array(
+                        'name'=>'Medico',
+                        'value'=>'$data->medico->servidor->nome',
+                ),
+                array(
+                        'name'=>'Unidade',
+                        'value'=>'$data->unidade_medico->nome',
+                ),
                 'meta.nome',
                 array(
                         'name'=>'Valor da Meta',
                         'value'=>'$data->meta->valor',
                 ),
                 array(
-                        'name'=>'Total de execuções',
+                        'name'=>'Total',
                         'value'=>'$data->total',
                 ),
                 array(

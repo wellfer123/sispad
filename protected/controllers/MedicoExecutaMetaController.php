@@ -147,6 +147,34 @@ class MedicoExecutaMetaController extends SISPADBaseController
             }  catch (Exception $ex){
                 echo $ex->getMessage();
             }
+            
+            try{
+                $metas=MedicoExecutaMeta::calculeMetasComItens(22012);
+                
+                foreach($metas as $meta){
+                     
+                   if(!$meta->save()){
+                     
+                       foreach($meta->getErrors() as $errors)
+			{
+				foreach($errors as $error)
+				{
+					if($error!='')
+						echo "<li>$error</li>\n";
+					if($firstError)
+						break;
+				}
+			}
+                       echo $meta->getErrors()."deu merda! <br>";
+                   }
+                    
+                   echo $meta->medico_cpf."<br>";
+                   
+                }
+                
+            }  catch (Exception $ex){
+                echo $ex->getMessage();
+            }
         }
 
 	/**

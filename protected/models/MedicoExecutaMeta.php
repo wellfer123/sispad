@@ -90,6 +90,7 @@ class MedicoExecutaMeta extends CActiveRecord
                 //compara os valores das metas
                 $per=$this->meta->percentagem;
                 if($tmp>=$per){
+                    $tmp = number_format($tmp, 2);
                     return "META BATIDA. FEZ $tmp%";
                 }
                 //formata o numero
@@ -124,7 +125,7 @@ class MedicoExecutaMeta extends CActiveRecord
 
 		$criteria->compare('competencia',$this->competencia,true);
                 
-                $criteria->with=array('meta','medico.servidor');
+                $criteria->with=array('meta','medico.servidor','unidade_medico');
 
 		return new CActiveDataProvider('MedicoExecutaMeta', array(
 			'criteria'=>$criteria,
@@ -157,7 +158,7 @@ class MedicoExecutaMeta extends CActiveRecord
                 $metExec->total=$m->total;
                 $metExec->meta_id=$m->meta;
                 $metExec->unidade_cnes=$m->cnes;
-                $metExec->competencia=date("mY");
+                $metExec->competencia=$competencia;
                 //coloca o objeto no vetor
                 $resul[]=$metExec;
             }
@@ -190,7 +191,7 @@ class MedicoExecutaMeta extends CActiveRecord
                 $metExec->total=$m->total;
                 $metExec->meta_id=$m->meta;
                 $metExec->unidade_cnes=$m->cnes;
-                $metExec->competencia=date("mY");
+                $metExec->competencia=$competencia;
                 //coloca o objeto no vetor
                 $resul[]=$metExec;
             }
