@@ -100,9 +100,16 @@ class EnfermeiroExecutaMeta extends CActiveRecord
                 }
             }
         }
+        
+        public function searchCompetencias() {
+
+                 $query = $this->findAllBySql('select distinct competencia from enfermeiro_executa_meta');
+                 return $query;
+        } 
+     
         public function searchMetasExecutadas($competencia) {
 
-                $dados=Yii::app()->db->createCommand('select meta.nome as meta,serv.nome as odontologo,unid.nome as unidade,meta.valor as TotalEsperado,enferm_exec_meta.total as TotalExecutado 
+                $dados=Yii::app()->db->createCommand('select meta.nome as meta,serv.nome as enfermeiro,unid.nome as unidade,meta.valor as TotalEsperado,enferm_exec_meta.total as TotalExecutado 
                                                       from enfermeiro_executa_meta as enferm_exec_meta INNER JOIN meta
                                                       ON enferm_exec_meta.meta_id = meta.id INNER JOIN servidor as serv
                                                       ON serv.cpf = enferm_exec_meta.enfermeiro_cpf INNER JOIN unidade as unid

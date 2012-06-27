@@ -20,8 +20,8 @@ $('.search-form form').submit(function(){
 });
 ");
 ?>
-
-<h1>Gerenciamento de metas executadas por médicos</h1>
+<?php  $competencia = $_GET['competencia'];?>
+<h1>Gerenciamento de metas executadas por médicos - <?php echo $competencia; ?> </h1>
 
 <p>
 Você pode opcionalmente entrar com um operador de comparação(<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
@@ -34,7 +34,8 @@ ou <b>=</b>) iniciar cada uma de suas pesquisa com valores específicos de como 
 	'model'=>$model,
 )); ?>
 </div><!-- search-form -->
-
+<?php echo '</br></br>'; 
+      echo CHtml::link("Gerar Relatório",array('relatorioMetas','competencia'=>$competencia));?>
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'medico-executa-meta-grid',
 	'dataProvider'=>$model->search(),

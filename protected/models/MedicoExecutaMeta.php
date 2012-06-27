@@ -99,7 +99,32 @@ class MedicoExecutaMeta extends CActiveRecord
                 }
             }
         }
+        
+         public function searchMetasExecutadas($competencia) {
 
+                $dados=Yii::app()->db->createCommand('select meta.nome as meta,serv.nome as medico,unid.nome as unidade,meta.valor as TotalEsperado,med_exec_meta.total as TotalExecutado 
+                                                      from medico_executa_meta as med_exec_meta INNER JOIN meta
+                                                      ON med_exec_meta.meta_id = meta.id INNER JOIN servidor as serv
+                                                      ON serv.cpf = med_exec_meta.medico_cpf INNER JOIN unidade as unid
+                                                      ON unid.cnes = med_exec_meta.unidade_cnes where med_exec_meta.competencia='.$competencia)->queryAll();
+
+		 $tes=new CArrayDataProvider($dados, array(
+                                    'id'=>'medico_executa_meta',
+                                    'pagination'=>false
+
+		));
+                 
+                 return $tes;
+        }   
+        
+         public function searchCompetencias() {
+
+                 $query = $this->findAllBySql('select distinct competencia from medico_executa_meta');
+                 return $query;
+        } 
+        
+        
+        
         /**
 	 * Retrieves a list of models based on the current search/filter conditions.
 	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.

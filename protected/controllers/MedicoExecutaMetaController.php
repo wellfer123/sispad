@@ -194,7 +194,37 @@ class MedicoExecutaMetaController extends SISPADBaseController
 			'model'=>$model,
 		));
 	}
+        
+         public function actionPreparedAdmin()
+        {
+                $model= new MedicoExecutaMeta;
 
+                $this->performAjaxValidation($model);
+                if(isset($_POST['MedicoExecutaMeta']))
+		{
+                        
+                        $model->competencia= $_POST['MedicoExecutaMeta']['competencia'];
+
+			$this->redirect(array('admin','competencia'=>$model->competencia));
+		}else
+                    $this->render('prepared_admin',array(
+			'model'=>$model,
+		));
+	}
+        
+        public function actionRelatorioMetas($competencia) {
+            $model = new MedicoExecutaMeta;
+            $this->widget('application.extensions.phpexcel.EExcelView',
+                        array('dataProvider'=>$model->searchMetasExecutadas($competencia),
+                             'title'=>'metasExecutadas_medico_'.$competencia,
+                             'grid_mode'=>'export',
+                             'exportType'=>'Excel2007',
+                            ));
+            Yii::app()->end();
+          
+
+        }
+        
 	/**
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.
