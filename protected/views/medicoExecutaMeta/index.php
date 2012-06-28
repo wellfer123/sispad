@@ -17,8 +17,12 @@ $this->menu=array(
 	//'filter'=>$model,
 	'columns'=>array(
 		array(
-                        'name'=>'Médico',
+                        'name'=>'Medico',
                         'value'=>'$data->medico->servidor->nome',
+                ),
+                array(
+                        'name'=>'Unidade',
+                        'value'=>'$data->unidade_medico->nome',
                 ),
                 'meta.nome',
                 array(
@@ -26,13 +30,14 @@ $this->menu=array(
                         'value'=>'$data->meta->valor',
                 ),
                 array(
-                        'name'=>'Total de execuções',
+                        'name'=>'Total',
                         'value'=>'$data->total',
                 ),
                 array(
                         'name'=>'Status da Meta',
                         'value'=>'$data->isMetaBatida()',
                 ),
+                'competencia',
 		array(
 			'class'=>'CButtonColumn',
                         'buttons'=>array(
@@ -44,6 +49,5 @@ $this->menu=array(
                                 )
                         )
 		),
-                'competencia',
 	),
 )); ?>
