@@ -1,6 +1,6 @@
 <?php
 
-class OdontologoExecutaItemController extends Controller
+class OdontologoExecutaItemController extends SISPADBaseController
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -247,4 +247,8 @@ class OdontologoExecutaItemController extends Controller
 			Yii::app()->end();
 		}
 	}
+
+    protected function getModelName() {
+        
+    }
 }

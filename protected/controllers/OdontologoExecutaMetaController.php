@@ -1,6 +1,6 @@
 <?php
 
-class OdontologoExecutaMetaController extends Controller
+class OdontologoExecutaMetaController extends SISPADBaseController
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -67,7 +67,26 @@ class OdontologoExecutaMetaController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new OdontologoExecutaMeta;
+//		$model=new OdontologoExecutaMeta;
+//
+//		// Uncomment the following line if AJAX validation is needed
+//		// $this->performAjaxValidation($model);
+//
+//		if(isset($_POST['OdontologoExecutaMeta']))
+//		{
+//			$model->attributes=$_POST['OdontologoExecutaMeta'];
+//			if($model->save())
+//				$this->redirect(array('view','id'=>$model->odontologo_cpf));
+//		}
+//
+//		$this->render('create',array(
+//			'model'=>$model,
+//		));
+            $this->redirect(array('send'));
+	}
+        public function actionSend()
+	{
+		$model=new OdontologoExecutaMeta('send');
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
@@ -75,15 +94,18 @@ class OdontologoExecutaMetaController extends Controller
 		if(isset($_POST['OdontologoExecutaMeta']))
 		{
 			$model->attributes=$_POST['OdontologoExecutaMeta'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->odontologo_cpf));
+			if($model->validate()){
+                            $this->redirect(array('OdontologoExecutaItem/Create','competencia'=>$model->competencia,'servidor'=>$model->odontologo_cpf,'cnes'=>$model->unidade_cnes,'meta'=>$model->meta_id));
+				//$this->redirect(array('view','id'=>$model->medico_cpf));
+                        }
 		}
-
-		$this->render('create',array(
-			'model'=>$model,
+                $competencias=array();
+                
+                $comp=Competencia::model()->findAll();
+		$this->render('send',array(
+			'model'=>$model, 'competencias'=> CHtml::listData(Competencia::model()->findAll(), 'mes_ano', 'mes_ano'),
 		));
 	}
-
 	/**
 	 * Updates a particular model.
 	 * If update is successful, the browser will be redirected to the 'view' page.
@@ -171,8 +193,10 @@ class OdontologoExecutaMetaController extends Controller
                 $this->performAjaxValidation($model);
                 if(isset($_POST['OdontologoExecutaMeta']))
 		{
-                        
-                        $model->competencia= $_POST['OdontologoExecutaMeta']['competencia'];
+                        if($_POST['OdontologoExecutaMeta']['competencia']==OdontologoExecutaMeta::COMPETENCIA_INEXISTENTE)
+                            $model->competencia = '';
+                        else
+                            $model->competencia= $_POST['OdontologoExecutaMeta']['competencia'];
 
 			$this->redirect(array('admin','competencia'=>$model->competencia));
 		}else
@@ -213,4 +237,8 @@ class OdontologoExecutaMetaController extends Controller
 			Yii::app()->end();
 		}
 	}
+
+    protected function getModelName() {
+        return 'OdontologoExecutaMetaController';
+    }
 }

@@ -13,6 +13,8 @@
  */
 class OdontologoExecutaMeta extends CActiveRecord
 {
+    
+        const COMPETENCIA_INEXISTENTE = "Nenhuma Meta";
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return OdontologoExecutaMeta the static model class
@@ -38,13 +40,13 @@ class OdontologoExecutaMeta extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-                        array('meta_id, total,odontologo_cpf,unidade_cnes,data_inicio,data_fim', 'required'),
-			array('meta_id, total', 'numerical', 'integerOnly'=>true),
+                        array('meta_id,odontologo_cpf,unidade_cnes', 'required'),
+			array('meta_id', 'numerical', 'integerOnly'=>true),
 			array('odontologo_cpf', 'length', 'max'=>11),
 			array('unidade_cnes', 'length', 'max'=>10),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('odontologo_cpf, unidade_cnes, meta_id, total, data_inicio, data_fim', 'safe', 'on'=>'search'),
+			array('odontologo_cpf, unidade_cnes, meta_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -131,7 +133,11 @@ class OdontologoExecutaMeta extends CActiveRecord
      public function searchCompetencias() {
 
                  $query = $this->findAllBySql('select distinct competencia from odontologo_executa_meta');
-                 return $query;
+                 
+                 if($query!=null)
+                    return $query;
+                 else 
+                     return array($this->tableName()=>array('competencia'=>OdontologoExecutaMeta::COMPETENCIA_INEXISTENTE));
      }  
      
     
@@ -196,8 +202,7 @@ class OdontologoExecutaMeta extends CActiveRecord
         }
 
         protected function beforeSave() {
-            $this->data_fim=ParserDate::inverteDataPtToEn($this->data_fim);
-            $this->data_inicio=ParserDate::inverteDataPtToEn($this->data_inicio);
+           
             return parent::beforeSave();
         }
 }
