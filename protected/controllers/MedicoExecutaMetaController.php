@@ -119,12 +119,10 @@ class MedicoExecutaMetaController extends SISPADBaseController
 //		));
 //	}
         
-        private function calulaMetas(){
+        private function calulaMetas($medicoExecutaMetas){
             if($this->isValidaExecucaoCalculoMetas()){
                 try{
-                    //pega todos as metas já calculadas pelo, mas não salva
-                    $metas=MedicoExecutaMeta::calculeMetasComProcedimentos(22012);
-                    foreach($metas as $meta){
+                    foreach($medicoExecutaMetas as $meta){
                         //todo o código com try dentro
                         try{
                             //verifica se a meta executa pelo medico existe
