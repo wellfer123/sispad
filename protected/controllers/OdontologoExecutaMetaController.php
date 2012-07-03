@@ -94,6 +94,7 @@ class OdontologoExecutaMetaController extends SISPADBaseController
 		if(isset($_POST['OdontologoExecutaMeta']))
 		{
 			$model->attributes=$_POST['OdontologoExecutaMeta'];
+                        $model->competencia=$_POST['OdontologoExecutaMeta']['competencia'];
 			if($model->validate()){
                             $this->redirect(array('OdontologoExecutaItem/Create','competencia'=>$model->competencia,'servidor'=>$model->odontologo_cpf,'cnes'=>$model->unidade_cnes,'meta'=>$model->meta_id));
 				//$this->redirect(array('view','id'=>$model->medico_cpf));
@@ -128,7 +129,11 @@ class OdontologoExecutaMetaController extends SISPADBaseController
 			'model'=>$model,
 		));
 	}
-
+        
+         public function listaCompetencias() {
+            $model = new OdontologoExecutaMeta;
+            return $model->listaCompetencias();
+         }
 	/**
 	 * Deletes a particular model.
 	 * If deletion is successful, the browser will be redirected to the 'index' page.
@@ -166,9 +171,17 @@ class OdontologoExecutaMetaController extends SISPADBaseController
 	{
 		$model=new OdontologoExecutaMeta('search');
 		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['OdontologoExecutaMeta']))
+                 if(isset($_GET['competencia'])){
+                     $model->competencia=$_GET['competencia'];
+                }
+		if(isset($_GET['OdontologoExecutaMeta'])){
 			$model->attributes=$_GET['OdontologoExecutaMeta'];
-
+                        $model->competencia=$_GET['OdontologoExecutaMeta']['competencia'];
+                        
+                }
+               
+               
+                    
 		$this->render('admin',array(
 			'model'=>$model,
 		));
@@ -205,10 +218,7 @@ class OdontologoExecutaMetaController extends SISPADBaseController
 		));
 	}
 
-        public function buscaCompetencias() {
-            $model = new OdontologoExecutaMeta;
-            return CHtml::listData($model->searchCompetencias(),'competencia','competencia');
-        }
+        
 	/**
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.

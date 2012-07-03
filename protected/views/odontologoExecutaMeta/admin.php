@@ -5,7 +5,6 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Listar Metas Executadas Por Odontologo', 'url'=>array('index')),
 	array('label'=>'Enviar Nova Execução de Meta', 'url'=>array('create')),
 );
 
@@ -15,15 +14,21 @@ $('.search-button').click(function(){
 	return false;
 });
 $('.search-form form').submit(function(){
+        
 	$.fn.yiiGridView.update('odontologo-executa-meta-grid', {
 		data: $(this).serialize()
 	});
 	return false;
 });
 ");
+
+
 ?>
 <?php
+    
     $competencia = $_GET['competencia'];
+    
+    
 ?>
 <h1>Gerenciamento Odontologo Executa Metas - <?php echo $competencia; ?></h1>
 

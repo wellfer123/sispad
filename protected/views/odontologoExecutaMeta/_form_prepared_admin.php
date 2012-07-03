@@ -11,7 +11,7 @@
 
         <div class ="row">
                             <?php echo $form->labelEx($model,'competencia'); ?>
-                            <?php echo $form->dropDownList($model,'competencia',CHtml::listData($model->searchCompetencias(),'competencia','competencia'));?>
+                            <?php echo $form->dropDownList($model,'competencia',$this->listaCompetencias());?>
                             <?php echo $form->error($model,'competencia'); ?>
         </div>
 	<div class="row buttons">

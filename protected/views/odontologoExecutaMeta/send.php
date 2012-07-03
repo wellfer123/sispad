@@ -1,11 +1,11 @@
 <?php
 $this->breadcrumbs=array(
-	'Metas executadas por odontologos'=>array('admin'),
+	'Metas executadas por odontologos'=>array('preparedAdmin'),
 	'Envio',
 );
 
 $this->menu=array(
-	array('label'=>'Gerenciar Metas Executads por Odontologos', 'url'=>array('admin')),
+	array('label'=>'Gerenciar Metas Executads por Odontologos', 'url'=>array('preparedAdmin')),
 );
 ?>
 

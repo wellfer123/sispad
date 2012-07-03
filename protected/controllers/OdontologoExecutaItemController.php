@@ -32,7 +32,7 @@ class OdontologoExecutaItemController extends SISPADBaseController
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
+				'actions'=>array('index','view','list','admin'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -143,10 +143,10 @@ class OdontologoExecutaItemController extends SISPADBaseController
 //			if($model->save())
 				//$this->redirect(array('admin','id'=>$model->odontologo_cpf));
 		}
-                //vai pegar o médico
+                //vai pegar o odontologo
                 $odontologo=  Odontologo::model()->with('servidor','unidade')->find('t.servidor_cpf=:cpf AND t.unidade_cnes=:unidade',
                                                                             array(':cpf'=>$model->odontologo_cpf,'unidade'=>$model->odontologo_unidade_cnes));
-                
+           
                 
 		$this->render('create',array('model'=>$model,'modelos'=>$modelos,'itens'=>$itens,'competencia'=>$_GET['competencia'],'odontologo'=>$odontologo));
 	}
@@ -192,17 +192,27 @@ class OdontologoExecutaItemController extends SISPADBaseController
 		else
 			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
 	}
-
-	/**
+        
+        /**
 	 * Lists all models.
 	 */
-	public function actionIndex()
+	public function actionList()
 	{
-		$dataProvider=new CActiveDataProvider('OdontologoExecutaItem');
-		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
+		$model=new OdontologoExecutaItem('search');
+                $model->unsetAttributes();
+                if(isset($_GET['servidor']) ){
+                    $model->odontologo_cpf=$_GET['servidor'];
+                }
+                if(isset($_GET['unidade'])){
+                    $model->odontologo_unidade_cnes=$_GET['unidade'];
+                }
+		$this->render('list',array(
+			'model'=>$model,
 		));
 	}
+
+
+	
 
 	/**
 	 * Manages all models.
@@ -227,10 +237,13 @@ class OdontologoExecutaItemController extends SISPADBaseController
 	{
 		if($this->_model===null)
 		{
-			if(isset($_GET['id']))
-				$this->_model=OdontologoExecutaItem::model()->findbyPk($_GET['id']);
+			if(isset($_GET['servidor']) && isset($_GET['item']) && isset($_GET['unidade']) && isset($_GET['competencia']) )
+                            //pega o modelo pela chave primária composta
+				$this->_model=OdontologoExecutaItem::model()->with('odontologo.servidor','unidade','item.meta')->findByPk(array(
+                                                                          'item_id'=>$_GET['item'],'odontologo_unidade_cnes'=>$_GET['unidade'],
+                                                                          'competencia'=>$_GET['competencia'],'odontologo_cpf'=>$_GET['servidor']));
 			if($this->_model===null)
-				throw new CHttpException(404,'The requested page does not exist.');
+				throw new CHttpException(404,'A página requisitada não existe!');
 		}
 		return $this->_model;
 	}

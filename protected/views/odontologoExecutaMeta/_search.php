@@ -6,6 +6,7 @@
 )); ?>
 
 	<div class="row">
+                
 		<?php echo $form->label($model,'odontologo_cpf'); ?>
 		<?php $this->widget('EJuiAutoCompleteFkField', array(
                                     'model'=>$model,
@@ -63,8 +64,11 @@
                                                     CHtml::listData(Competencia::model()->findAll(), 'mes_ano', 'mes_ano'),array('size'=>1,'maxlength'=>6)) ?>
         </div>
 	<div class="row buttons">
-		<?php echo CHtml::submitButton('Search'); ?>
-	</div>
+		<?php echo CHtml::submitButton('Busca');?>
+            <span class="generate">
+                <?php //    echo CHtml::submitButton("Gerar Relatório",array('name'=>'gerar-relatorio')); ?>
+            </span>    
+        </div>
 
 <?php $this->endWidget(); ?>
 
