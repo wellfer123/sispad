@@ -37,9 +37,12 @@ class AgenteSaudeExecutaItem extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('agente_saude_cpf, item_id, competencia', 'required'),
+			array('agente_saude_cpf, competencia,agente_saude_unidade_cnes,item_id,quantidade', 'required','on'=>'create'),
+                        array('agente_saude_cpf, competencia,agente_saude_unidade_cnes', 'required','on'=>'valTemp'),
+                        array('item_id, quantidade', 'safe', 'on'=>'valTemp'),
 			array('item_id, quantidade, competencia', 'numerical', 'integerOnly'=>true),
 			array('agente_saude_cpf', 'length', 'max'=>11),
+                        array('quantidade', 'length', 'min'=>1,'max'=>11),
 			array('agente_saude_unidade_cnes', 'length', 'max'=>10),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
@@ -57,8 +60,8 @@ class AgenteSaudeExecutaItem extends CActiveRecord
 		return array(
 			'item' => array(self::BELONGS_TO, 'Item', 'item_id'),
 			'competencia0' => array(self::BELONGS_TO, 'Competencia', 'competencia'),
-			'agente_saude_cpf0' => array(self::BELONGS_TO, 'AgenteSaude', 'agente_saude_cpf'),
-			'agente_saude_unidade_cnes0' => array(self::BELONGS_TO, 'AgenteSaude', 'agente_saude_unidade_cnes'),
+			'agente_saude' => array(self::BELONGS_TO, 'AgenteSaude', 'agente_saude_cpf'),
+			'unidade' => array(self::BELONGS_TO, 'AgenteSaude', 'agente_saude_unidade_cnes'),
 		);
 	}
 

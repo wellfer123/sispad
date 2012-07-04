@@ -5,11 +5,15 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List enfermeiro_executa_item', 'url'=>array('index')),
-	array('label'=>'Manage enfermeiro_executa_item', 'url'=>array('admin')),
+	array('label'=>'Escolher novo enfermeiro, meta ou competência', 'url'=>array('EnfermeiroExecutaMeta/send')),
+	array('label'=>'Gerenciamento de itens executados por Enfermeiro', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Create enfermeiro_executa_item</h1>
+<?php $this->beginWidget('zii.widgets.CPortlet', array(
+			'title'=>'Envio de Itens executados',
+                        'htmlOptions'=>array('class'=>'portlet_form')
+		));?>
 
-<?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php echo $this->renderPartial('_form', array('model'=>$model,'modelos'=>$modelos,'itens'=>$itens,'competencia'=>$competencia,'enfermeiro'=>$enfermeiro)); ?>
+<?php $this->endWidget(); ?>
