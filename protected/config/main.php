@@ -121,8 +121,20 @@ return array(
 			'routes'=>array(
 				array(
 					'class'=>'CFileLogRoute',
-					'levels'=>'error, warning',
+					'levels'=>'error, warning,info',
 				),
+                                array(
+					'class'=>'CDbLogRoute',
+					'levels'=>'error, warning,info',
+                                        'connectionID'=>'db',
+                                        'autoCreateLogTable'=>true,
+                                        'logTableName'=>'log_system'
+				),
+//                                array(
+//                                        'class'=>'CEmailLogRoute',
+//                                        'levels'=>'error, warning,info',
+//                                        'emails'=>'cesar.consultorjr@gmail.com',
+//                                ),
 				// uncomment the following to show log messages on web pages
 				/*
 				array(
