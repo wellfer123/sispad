@@ -85,7 +85,7 @@ class AgenteSaudeExecutaMetaController extends Controller
                         $model->competencia=$_POST['AgenteSaudeExecutaMeta']['competencia'];
 			if($model->validate()){
                             $this->redirect(array('AgenteSaudeExecutaItem/Create','competencia'=>$model->competencia,'servidor'=>$model->agente_saude_cpf,'cnes'=>$model->unidade_cnes,'meta'=>$model->meta_id));
-				//$this->redirect(array('view','id'=>$model->medico_cpf));
+				//$this->redirect(array('view','id'=>$model->agente_saude_cpf));
                         }
 		}
                 $competencias=array();
@@ -96,6 +96,96 @@ class AgenteSaudeExecutaMetaController extends Controller
 		));
 	}
         
+        private function calulaMetas($agenteSaudeExecutaMetas){
+            if($this->isValidaExecucaoCalculoMetas()){
+                try{
+                    foreach($agenteSaudeExecutaMetas as $meta){
+                        //todo o código com try dentro
+                        try{
+                            //verifica se a meta executa pelo agente de saude existe
+                            if(!AgenteSaudeExecutaMeta::model()->exists('agente_saude_cpf=:agente_saude AND unidade_cnes=:unidade AND meta_id=:meta AND competencia=:competencia',
+                                                                   array(':agente_saude'=>$meta->agente_saude_cpf,':unidade'=>$meta->unidade_cnes,
+                                                                          ':meta'=>$meta->meta_id,'competencia'=>$meta>competencia))){
+                                //vai salvar a meta, pois não existe
+                                if($meta->save()){
+                                    Yii::log("Meta salva com sucesso", CLogger::LEVEL_INFO);
+                                }
+                                else{
+                                    Yii::log("Erro ao salvar a meta", CLogger::LEVEL_INFO);
+                                }
+                                
+                            }
+                        }catch(Exception $excep){
+                          Yii::log("Execução da URL ".$this->route.' no método calculaMetas ao tentar salvar  ameta executada pelo médico ', CLogger::LEVEL_ERROR);  
+                        }
+                    }
+                    
+                }catch(Exception $ex){
+                        Yii::log("Execução da URL ".$this->route.' no método calculaMetas ao executá-lo', CLogger::LEVEL_ERROR);  
+                }
+            }
+        }
+        
+        private function isValidaExecucaoCalculoMetas(){
+            return true;
+        }
+        
+         public function actionCalculeMetas(){
+            set_time_limit(0);
+            try{
+                $pageSize=2;
+                $offset=0;
+                
+                $size=$pageSize;
+                $metas=array();
+                //metas com prodecimentos
+                while($size==$pageSize){
+                    try{
+                        $metas=AgenteSaudeExecutaMeta::calculeMetasComProcedimentos(22012, $offset,$pageSize) ;
+                        //calcula o tamanho do vetor
+                        $size=sizeof($metas);
+                        //muda o offset: incrementa
+                        $offset+=$pageSize;
+                        //vai salvar
+                        echo $offset;
+                        echo "<br>";
+                        $this->calulaMetas($metas);
+                    }catch(Exception $e){
+                        Yii::log("Execução da URL ".$this->route.' na busca de metas de procedimentos executadas por médicos', CLogger::LEVEL_ERROR);
+                    }
+                  //enquanto o vetor vier cheio, vai continuar buscando registros
+                  }
+                  
+                //metas com itens
+                $offset=0;
+                
+                $size=$pageSize;
+                $metas=array();
+                //metas com prodecimentos
+                //quando o ultimo vetor devolvido for menor que o tamanho
+                //da página vai parar, pois não tem mais itens
+                while($size==$pageSize){
+                    try{
+                        $metas=AgenteSaudeExecutaMeta::calculeMetasComItens(22012, $offset,$pageSize) ;
+                        //calcula o tamanho do vetor
+                        $size=sizeof($metas);
+                        //muda o offset: incrementa
+                        $offset=$offset+$pageSize;
+                        echo $offset;
+                        echo "<br>";
+                        //vai salvar
+                        $this->calulaMetas($metas);
+                    }catch(Exception $e){
+                        Yii::log("Execução da URL ".$this->route.' no na busca de metas de itens executadas por médicos. '.$e->getMessage(), CLogger::LEVEL_ERROR);
+                    }
+                  //enquanto o vetor vier cheio, vai continuar buscando registros
+                  }
+                
+            }  catch (Exception $ex){
+                Yii::log("Execução da URL ".$this->route.' na action calculeMetas: '.$ex->getMessage(), CLogger::LEVEL_ERROR);
+            }
+            Yii::app()->end();
+        }
         //retorna um array com as competencias
          public function listaCompetencias() {
             $model = new AgenteSaudeExecutaMeta;

@@ -1,12 +1,13 @@
 <div class="wide form">
 
 <?php $form=$this->beginWidget('CActiveForm', array(
-	'action'=>Yii::app()->createUrl($this->route),
+	//'action'=>Yii::app()->createUrl($this->route),
 	'method'=>'get',
 )); ?>
 
 	<div class="row">
-		<?php echo $form->label($model,'medico_cpf'); ?>
+		<?php   
+                        echo $form->label($model,'medico_cpf'); ?>
 		<?php $this->widget('EJuiAutoCompleteFkField', array(
                                     'model'=>$model,
                                     'attributes'=>array('unidade_cnes'),
@@ -63,7 +64,8 @@
                                                     CHtml::listData(Competencia::model()->findAll(), 'mes_ano', 'mes_ano'),array('size'=>1,'maxlength'=>6)) ?>
         </div>
 	<div class="row buttons">
-		<?php echo CHtml::submitButton('Pesquisar'); ?>
+            <input onclick="">
+                <?php echo CHtml::submitButton('Pesquisar',array('onclick'=>"forms.".$form->id.".action=".Yii::app()->createUrl('MedicoExecutaMeta/admin'))); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

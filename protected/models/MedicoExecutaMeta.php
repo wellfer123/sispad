@@ -165,15 +165,19 @@ class MedicoExecutaMeta extends CActiveRecord
          * @param int competencia que a meta deve ser calculada
          * @return MedicoExecutaMeta[] devolve um vetor com o s valores de cada meta executada por um medico na competencia
          */
-        public static function calculeMetasComProcedimentos($competencia){
+        public static function calculeMetasComProcedimentos($competencia,$offset,$pageSize){
             $sql="SELECT med.medico_unidade_cnes AS cnes,SUM(med.quantidade) AS total, med.competencia,med.medico_cpf AS medico, m.id AS meta";
             $sql=" $sql FROM medico_executa_procedimento med INNER JOIN  meta_procedimento mp ON mp.procedimento_codigo=med.procedimento_codigo";
             $sql=" $sql INNER JOIN meta m ON m.id=mp.meta_id";
-            $sql=" $sql GROUP BY med.competencia,m.id,med.medico_cpf HAVING med.competencia=:competencia; ";
+            $sql=" $sql GROUP BY med.competencia,m.id,med.medico_cpf HAVING med.competencia=:competencia ";
+            $sql=" $sql LIMIT :offset , :pageSize;";
             //
             $dbC=Yii::app()->db->createCommand($sql);
             $dbC->setFetchMode(PDO::FETCH_OBJ);
+            $dbC->bindParam(':pageSize', $pageSize , PDO::PARAM_INT);
+            $dbC->bindParam(':offset', $offset, PDO::PARAM_INT);
             $dbC->bindParam(':competencia', $competencia, PDO::PARAM_STR);
+            Yii::log($sql);
             $resul=array();
             foreach($dbC->queryAll() as $m){
                 $metExec= new MedicoExecutaMeta();
@@ -198,15 +202,19 @@ class MedicoExecutaMeta extends CActiveRecord
          * @param int competencia que a meta deve ser calculada
          * @return MedicoExecutaMeta[] devolve um vetor com os valores de cada meta executada por um medico na competencia
          */
-        public static function calculeMetasComItens($competencia){
+        public static function calculeMetasComItens($competencia,$offset,$pageSize){
             $sql="SELECT med.medico_unidade_cnes AS cnes,SUM(med.quantidade) AS total, med.competencia,med.medico_cpf AS medico, m.id AS meta";
             $sql=" $sql FROM medico_executa_item med INNER JOIN  item it ON it.id=med.item_id";
             $sql=" $sql INNER JOIN meta m ON m.id=it.meta_id";
-            $sql=" $sql GROUP BY med.competencia,m.id,med.medico_cpf HAVING med.competencia=:competencia; ";
+            $sql=" $sql GROUP BY med.competencia,m.id,med.medico_cpf HAVING med.competencia=:competencia ";
+            $sql=" $sql LIMIT :offset , :pageSize;";
             //
             $dbC=Yii::app()->db->createCommand($sql);
             $dbC->setFetchMode(PDO::FETCH_OBJ);
+            $dbC->bindParam(':pageSize', $pageSize , PDO::PARAM_INT);
+            $dbC->bindParam(':offset', $offset, PDO::PARAM_INT);
             $dbC->bindParam(':competencia', $competencia, PDO::PARAM_STR);
+            Yii::log($sql);
             $resul=array();
             foreach($dbC->queryAll() as $m){
                 $metExec= new MedicoExecutaMeta();
