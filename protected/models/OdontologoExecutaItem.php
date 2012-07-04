@@ -37,9 +37,12 @@ class OdontologoExecutaItem extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('odontologo_cpf, item_id, competencia', 'required'),
+			array('odontologo_cpf, competencia,odontologo_unidade_cnes,item_id,quantidade', 'required','on'=>'create'),
+                        array('odontologo_cpf, competencia,odontologo_unidade_cnes', 'required','on'=>'valTemp'),
+                        array('item_id, quantidade', 'safe', 'on'=>'valTemp'),
 			array('item_id, quantidade, competencia', 'numerical', 'integerOnly'=>true),
 			array('odontologo_cpf', 'length', 'max'=>11),
+                        array('quantidade', 'length', 'min'=>1,'max'=>11),
 			array('odontologo_unidade_cnes', 'length', 'max'=>10),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
@@ -56,9 +59,9 @@ class OdontologoExecutaItem extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'item' => array(self::BELONGS_TO, 'Item', 'item_id'),
-			'competencia0' => array(self::BELONGS_TO, 'Competencia', 'competencia'),
-			'odontologo_cpf0' => array(self::BELONGS_TO, 'Odontologo', 'odontologo_cpf'),
-			'odontologo_unidade_cnes0' => array(self::BELONGS_TO, 'Odontologo', 'odontologo_unidade_cnes'),
+			'competencia' => array(self::BELONGS_TO, 'Competencia', 'competencia'),
+			'odontologo' => array(self::BELONGS_TO, 'Odontologo', 'odontologo_cpf,odontologo_unidade_cnes'),
+			'unidade' => array(self::BELONGS_TO, 'Unidade', 'odontologo_unidade_cnes'),
 		);
 	}
 

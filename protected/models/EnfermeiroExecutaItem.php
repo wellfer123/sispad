@@ -37,9 +37,12 @@ class EnfermeiroExecutaItem extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('enfermeiro_cpf, item_id, competencia', 'required'),
+			array('enfermeiro_cpf, competencia,enfermeiro_unidade_cnes,item_id,quantidade', 'required','on'=>'create'),
+                        array('enfermeiro_cpf, competencia,enfermeiro_unidade_cnes', 'required','on'=>'valTemp'),
+                        array('item_id, quantidade', 'safe', 'on'=>'valTemp'),
 			array('item_id, quantidade, competencia', 'numerical', 'integerOnly'=>true),
 			array('enfermeiro_cpf', 'length', 'max'=>11),
+                        array('quantidade', 'length', 'min'=>1,'max'=>11),
 			array('enfermeiro_unidade_cnes', 'length', 'max'=>10),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
@@ -57,8 +60,8 @@ class EnfermeiroExecutaItem extends CActiveRecord
 		return array(
 			'item' => array(self::BELONGS_TO, 'Item', 'item_id'),
 			'competencia0' => array(self::BELONGS_TO, 'Competencia', 'competencia'),
-			'enfermeiro_cpf0' => array(self::BELONGS_TO, 'Enfermeiro', 'enfermeiro_cpf'),
-			'enfermeiro_unidade_cnes0' => array(self::BELONGS_TO, 'Enfermeiro', 'enfermeiro_unidade_cnes'),
+			'enfermeiro' => array(self::BELONGS_TO, 'Enfermeiro', 'enfermeiro_cpf'),
+			'unidade' => array(self::BELONGS_TO, 'Enfermeiro', 'enfermeiro_unidade_cnes'),
 		);
 	}
 

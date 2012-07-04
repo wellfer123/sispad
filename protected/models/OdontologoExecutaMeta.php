@@ -110,12 +110,15 @@ class OdontologoExecutaMeta extends CActiveRecord
       
         
         public function searchMetasExecutadas($competencia) {
-
-                $dados=Yii::app()->db->createCommand('select meta.nome as meta,serv.nome as odontologo,unid.nome as unidade,meta.valor as TotalEsperado,odonto_exec_meta.total as TotalExecutado 
+                $where='';
+                if($competencia!=null){
+                    $where = "where odonto_exec_meta.competencia='$competencia'";
+                }
+                $dados=Yii::app()->db->createCommand("select meta.nome as meta,serv.nome as odontologo,unid.nome as unidade,meta.valor as TotalEsperado,odonto_exec_meta.total as TotalExecutado 
                                                       from odontologo_executa_meta as odonto_exec_meta INNER JOIN meta
                                                       ON odonto_exec_meta.meta_id = meta.id INNER JOIN servidor as serv
                                                       ON serv.cpf = odonto_exec_meta.odontologo_cpf INNER JOIN unidade as unid
-                                                      ON unid.cnes = odonto_exec_meta.unidade_cnes where odonto_exec_meta.competencia='.$competencia)->queryAll();
+                                                      ON unid.cnes = odonto_exec_meta.unidade_cnes ".$where)->queryAll();
 
 		 $tes=new CArrayDataProvider($dados, array(
                                     'id'=>'odontologo_executa_meta',
@@ -129,15 +132,24 @@ class OdontologoExecutaMeta extends CActiveRecord
                  return $tes;
 
     }
-    
+    public function listaCompetencias() {
+             //recupera um array com as competenicas do banco
+             $competencias = CHtml::listData($this->searchCompetencias(),'competencia','competencia');
+             //se for nulo set opção nehuma
+             if($competencias==null)
+                 $competencias[NULL] = 'Nehuma';
+             else//senão set a opção todas
+                $competencias[NULL] = 'Todas';
+             
+             return $competencias;
+    }
      public function searchCompetencias() {
 
                  $query = $this->findAllBySql('select distinct competencia from odontologo_executa_meta');
                  
-                 if($query!=null)
-                    return $query;
-                 else 
-                     return array($this->tableName()=>array('competencia'=>OdontologoExecutaMeta::COMPETENCIA_INEXISTENTE));
+                 
+                 return $query;
+                
      }  
      
     

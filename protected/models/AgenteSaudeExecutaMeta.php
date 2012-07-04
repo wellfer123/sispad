@@ -39,13 +39,13 @@ class AgenteSaudeExecutaMeta extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-                        array('meta_id, total,agente_saude_cpf,agente_saude_microarea,unidade_cnes,data_inicio,data_fim', 'required'),
-			array('agente_saude_microarea, meta_id, total', 'numerical', 'integerOnly'=>true),
+                        array('meta_id,agente_saude_cpf,unidade_cnes', 'required'),
+			array('meta_id, total', 'numerical', 'integerOnly'=>true),
 			array('agente_saude_cpf', 'length', 'max'=>11),
 			array('unidade_cnes', 'length', 'max'=>10),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('agente_saude_cpf, agente_saude_microarea, unidade_cnes, meta_id, total, data_inicio, data_fim', 'safe', 'on'=>'search'),
+			array('agente_saude_cpf, agente_saude_microarea, unidade_cnes, meta_id, total', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -78,8 +78,6 @@ class AgenteSaudeExecutaMeta extends CActiveRecord
 			'unidade_cnes' => 'Unidade Cnes',
 			'meta_id' => 'Meta',
 			'total' => 'Total',
-			'data_inicio' => 'Data Inicio',
-			'data_fim' => 'Data Fim',
 		);
 	}
         /**
@@ -108,12 +106,15 @@ class AgenteSaudeExecutaMeta extends CActiveRecord
 	 */
         
         public function searchMetasExecutadas($competencia) {
-
+                $where='';
+                if($competencia!=null){
+                    $where = "where agente_exec_meta.competencia='$competencia'";
+                }
                 $dados=Yii::app()->db->createCommand('select meta.nome as meta,serv.nome as agente_de_saude,unid.nome as unidade,meta.valor as TotalEsperado,agente_exec_meta.total as TotalExecutado 
                                                       from agente_saude_executa_meta as agente_exec_meta INNER JOIN meta
                                                       ON agente_exec_meta.meta_id = meta.id INNER JOIN servidor as serv
                                                       ON serv.cpf = agente_exec_meta.agente_saude_cpf INNER JOIN unidade as unid
-                                                      ON unid.cnes = agente_exec_meta.unidade_cnes where agente_exec_meta.competencia='.$competencia)->queryAll();
+                                                      ON unid.cnes = agente_exec_meta.unidade_cnes '.$where)->queryAll();
 
 		 $tes=new CArrayDataProvider($dados, array(
                                     'id'=>'agente_saude_executa_meta',
@@ -127,11 +128,25 @@ class AgenteSaudeExecutaMeta extends CActiveRecord
                  return $tes;
 
     }
+          public function listaCompetencias() {
+             //recupera um array com as competenicas do banco
+             $competencias = CHtml::listData($this->searchCompetencias(),'competencia','competencia');
+             //se for nulo set opção nehuma
+             if($competencias==null)
+                 $competencias[NULL] = 'Nehuma';
+             else//senão set a opção todas
+                $competencias[NULL] = 'Todas';
+             
+             return $competencias;
+    }
         public function searchCompetencias() {
 
-                 $query = $this->findAllBySql('select distinct competencia from agente_saude_executa_meta');
-                 return $query;
-     }  
+                    $query = $this->findAllBySql('select distinct competencia from agente_saude_executa_meta');
+
+
+                    return $query;
+
+        } 
      
 	public function search()
 	{

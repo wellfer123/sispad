@@ -1,15 +1,19 @@
 <?php
 $this->breadcrumbs=array(
-	'Agente Saude Executa Items'=>array('index'),
+	'Enfermeiro Executa Items'=>array('index'),
 	'Create',
 );
 
 $this->menu=array(
-	array('label'=>'List agente_saude_executa_item', 'url'=>array('index')),
-	array('label'=>'Manage agente_saude_executa_item', 'url'=>array('admin')),
+	array('label'=>'Escolher novo agente de saúde, meta ou competência', 'url'=>array('AgenteSaudeExecutaMeta/send')),
+	array('label'=>'Gerenciamento de itens executados por Agente de Saúde', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Create agente_saude_executa_item</h1>
+<?php $this->beginWidget('zii.widgets.CPortlet', array(
+			'title'=>'Envio de Itens executados',
+                        'htmlOptions'=>array('class'=>'portlet_form')
+		));?>
 
-<?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php echo $this->renderPartial('_form', array('model'=>$model,'modelos'=>$modelos,'itens'=>$itens,'competencia'=>$competencia,'agenteSaude'=>$agenteSaude)); ?>
+<?php $this->endWidget(); ?>

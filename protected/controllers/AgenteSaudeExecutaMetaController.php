@@ -67,7 +67,14 @@ class AgenteSaudeExecutaMetaController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new AgenteSaudeExecutaMeta;
+		
+                $this->redirect(array('send'));
+	}
+        
+         
+         public function actionSend()
+	{
+		$model=new AgenteSaudeExecutaMeta('send');
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
@@ -75,15 +82,25 @@ class AgenteSaudeExecutaMetaController extends Controller
 		if(isset($_POST['AgenteSaudeExecutaMeta']))
 		{
 			$model->attributes=$_POST['AgenteSaudeExecutaMeta'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->agente_saude_cpf));
+                        $model->competencia=$_POST['AgenteSaudeExecutaMeta']['competencia'];
+			if($model->validate()){
+                            $this->redirect(array('AgenteSaudeExecutaItem/Create','competencia'=>$model->competencia,'servidor'=>$model->agente_saude_cpf,'cnes'=>$model->unidade_cnes,'meta'=>$model->meta_id));
+				//$this->redirect(array('view','id'=>$model->medico_cpf));
+                        }
 		}
-
-		$this->render('create',array(
-			'model'=>$model,
+                $competencias=array();
+                
+                $comp=Competencia::model()->findAll();
+		$this->render('send',array(
+			'model'=>$model, 'competencias'=> CHtml::listData(Competencia::model()->findAll(), 'mes_ano', 'mes_ano'),
 		));
 	}
-
+        
+        //retorna um array com as competencias
+         public function listaCompetencias() {
+            $model = new AgenteSaudeExecutaMeta;
+            return $model->listaCompetencias();
+         }
 	/**
 	 * Updates a particular model.
 	 * If update is successful, the browser will be redirected to the 'view' page.
@@ -144,6 +161,10 @@ class AgenteSaudeExecutaMetaController extends Controller
 	{
 		$model=new AgenteSaudeExecutaMeta('search');
 		$model->unsetAttributes();  // clear any default values
+                //seta a competencia
+                 if(isset($_GET['competencia'])){
+                     $model->competencia=$_GET['competencia'];
+                }
 		if(isset($_GET['AgenteSaudeExecutaMeta']))
 			$model->attributes=$_GET['AgenteSaudeExecutaMeta'];
 

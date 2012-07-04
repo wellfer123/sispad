@@ -1,11 +1,12 @@
-
+#mainmenu2{
+ margin-bottom: 40px;   
+}
 ul.menu {
  
   list-style:none;
   margin:0;
   padding:0;
   padding-top: 20px;
-  position: absolute;
   width: 950px;
   display: block;
   background: #63812a;

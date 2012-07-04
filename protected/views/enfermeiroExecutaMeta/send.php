@@ -1,16 +1,16 @@
 <?php
 $this->breadcrumbs=array(
-	'Metas executadas por odontologos'=>array('preparedAdmin'),
+	'Metas executadas por Enfermeiros'=>array('preparedAdmin'),
 	'Envio',
 );
 
 $this->menu=array(
-	array('label'=>'Gerenciar Metas Executads por Odontologos', 'url'=>array('preparedAdmin')),
+	array('label'=>'Gerenciar Metas Executads por Enfermeiros', 'url'=>array('preparedAdmin')),
 );
 ?>
 
 <?php $this->beginWidget('zii.widgets.CPortlet', array(
-			'title'=>'Envio de meta executada por odontólogo',
+			'title'=>'Envio de meta executada por Enfermeiro',
                         'htmlOptions'=>array('class'=>'portlet_form')
 		));?>
 
