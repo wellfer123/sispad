@@ -21,6 +21,21 @@ class MetaController extends SISPADBaseController{
 	}
 
 
+        public function  actionCalculo(){
+            $profissoes=array(
+                              array('label'=>'Agente de Saúde','button'=>'Lançar Meta','action'=>''),
+                              array('label'=>'Auxiliar de Enfermagem','button'=>'Lançar Meta','action'=>''),
+                              array('label'=>'Enfermeiro','button'=>'Lançar Meta','action'=>''),
+                              array('label'=>'Médico','button'=>'Lançar Meta','action'=>'MedicoExecutaMeta/calculeMetas'),
+                              array('label'=>'Odontólogo','button'=>'Lançar Meta','action'=>''),
+                              array('label'=>'Técnico em Enfermagem','button'=>'Lançar Meta','action'=>'')
+            );
+            
+            $tiposMeta=array(Meta::ITENS=>'Meta de Itens',Meta::PROCEDIMENTO=>'Meta de Procedimentos');
+           
+            
+            $this->render('calculo', array('profissoes'=>$profissoes,'tiposMeta'=>$tiposMeta,'competencias'=>CHtml::listData(Competencia::model()->findAll(), 'mes_ano', 'mes_ano')));
+        }
         public function actionCreate() {
              //$this->CheckAcessAction();
                 $model=new Meta();
