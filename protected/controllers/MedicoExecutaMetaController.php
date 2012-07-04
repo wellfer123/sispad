@@ -129,22 +129,22 @@ class MedicoExecutaMetaController extends SISPADBaseController
                             if(!MedicoExecutaMeta::model()->exists('medico_cpf=:medico AND unidade_cnes=:unidade AND meta_id=:meta AND competencia=:competencia',
                                                                    array(':medico'=>$meta->medico_cpf,':unidade'=>$meta->unidade_cnes,
                                                                           ':meta'=>$meta->meta_id,'competencia'=>$meta>competencia))){
-                                //vai salvar a meta, pis não existe
+                                //vai salvar a meta, pois não existe
                                 if($meta->save()){
-                                    //salvou com sucesso
+                                    Yii::log("Meta salva com sucesso", CLogger::LEVEL_INFO);
                                 }
                                 else{
-                                    //deu erro
+                                    Yii::log("Erro ao salvar a meta", CLogger::LEVEL_INFO);
                                 }
                                 
                             }
                         }catch(Exception $excep){
-                            
+                          Yii::log("Execução da URL ".$this->route.' no método calculaMetas ao tentar salvar  ameta executada pelo médico ', CLogger::LEVEL_ERROR);  
                         }
                     }
                     
                 }catch(Exception $ex){
-                    
+                        Yii::log("Execução da URL ".$this->route.' no método calculaMetas ao executá-lo', CLogger::LEVEL_ERROR);  
                 }
             }
         }
@@ -155,61 +155,60 @@ class MedicoExecutaMetaController extends SISPADBaseController
 
 
         public function actionCalculeMetas(){
+            set_time_limit(0);
             try{
-                $metas=MedicoExecutaMeta::calculeMetasComProcedimentos(22012);
+                $pageSize=2;
+                $offset=0;
                 
-                foreach($metas as $meta){
-                     
-                   if(!$meta->save()){
-                     
-                       foreach($meta->getErrors() as $errors)
-			{
-				foreach($errors as $error)
-				{
-					if($error!='')
-						echo "<li>$error</li>\n";
-					if($firstError)
-						break;
-				}
-			}
-                       echo $meta->getErrors()."deu merda! <br>";
-                   }
-                    
-                   echo $meta->medico_cpf."<br>";
-                   
-                }
+                $size=$pageSize;
+                $metas=array();
+                //metas com prodecimentos
+                while($size==$pageSize){
+                    try{
+                        $metas=MedicoExecutaMeta::calculeMetasComProcedimentos(22012, $offset,$pageSize) ;
+                        //calcula o tamanho do vetor
+                        $size=sizeof($metas);
+                        //muda o offset: incrementa
+                        $offset+=$pageSize;
+                        //vai salvar
+                        echo $offset;
+                        echo "<br>";
+                        $this->calulaMetas($metas);
+                    }catch(Exception $e){
+                        Yii::log("Execução da URL ".$this->route.' na busca de metas de procedimentos executadas por médicos', CLogger::LEVEL_ERROR);
+                    }
+                  //enquanto o vetor vier cheio, vai continuar buscando registros
+                  }
+                  
+                //metas com itens
+                $offset=0;
+                
+                $size=$pageSize;
+                $metas=array();
+                //metas com prodecimentos
+                //quando o ultimo vetor devolvido for menor que o tamanho
+                //da página vai parar, pois não tem mais itens
+                while($size==$pageSize){
+                    try{
+                        $metas=MedicoExecutaMeta::calculeMetasComItens(22012, $offset,$pageSize) ;
+                        //calcula o tamanho do vetor
+                        $size=sizeof($metas);
+                        //muda o offset: incrementa
+                        $offset=$offset+$pageSize;
+                        echo $offset;
+                        echo "<br>";
+                        //vai salvar
+                        $this->calulaMetas($metas);
+                    }catch(Exception $e){
+                        Yii::log("Execução da URL ".$this->route.' no na busca de metas de itens executadas por médicos. '.$e->getMessage(), CLogger::LEVEL_ERROR);
+                    }
+                  //enquanto o vetor vier cheio, vai continuar buscando registros
+                  }
                 
             }  catch (Exception $ex){
-                echo $ex->getMessage();
+                Yii::log("Execução da URL ".$this->route.' na action calculeMetas: '.$ex->getMessage(), CLogger::LEVEL_ERROR);
             }
-            
-            try{
-                $metas=MedicoExecutaMeta::calculeMetasComItens(22012);
-                
-                foreach($metas as $meta){
-                     
-                   if(!$meta->save()){
-                     
-                       foreach($meta->getErrors() as $errors)
-			{
-				foreach($errors as $error)
-				{
-					if($error!='')
-						echo "<li>$error</li>\n";
-					if($firstError)
-						break;
-				}
-			}
-                       echo $meta->getErrors()."deu merda! <br>";
-                   }
-                    
-                   echo $meta->medico_cpf."<br>";
-                   
-                }
-                
-            }  catch (Exception $ex){
-                echo $ex->getMessage();
-            }
+            Yii::app()->end();
         }
 
 	/**
