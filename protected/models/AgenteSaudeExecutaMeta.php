@@ -174,35 +174,79 @@ class AgenteSaudeExecutaMeta extends CActiveRecord
         
         
         /**
-         * Calcula o valor de cada meta referente ao medico em uma determinada competencia
-         * para isso soma os valores dos procedimentos executados pelo medico e que fazem parte de uma meta
-         * Exemplo: meta com 3 proccedimentos: o valor da meta vai ser a soma da quantidade de execução desses procedimentos
+         * Calcula o valor de cada meta referente ao Agente de Saúde em uma determinada competência
+         * para isso soma os valores dos procedimentos executados pelo Agente de Saúde e que fazem parte de uma meta
+         * Exemplo: meta com 3 procedimentos: o valor da meta vai ser a soma da quantidade de execução desses procedimentos
          * IMPORTANTE: os registros devolvidos não estão salvos no banco!
-         * @param int competencia que a meta deve ser calculada
-         * @return MedicoExecutaMeta[] devolve um vetor com o s valores de cada meta executada por um medico na competencia
+         * @param int competência que a meta deve ser calculada
+         * @param int offset número de início para pegar os registros
+         * @param int pageSize quantidade de registros que devem ser trazidas do banco de dados
+         * @return AgenteSaudeExecutaMeta[] devolve um vetor com os valores de cada meta executada por um Agente de Saúde na competência
          */
-        public static function calculeMetasComProcedimentos($competencia){
-            $sql="SELECT med.medico_unidade_cnes AS cnes,SUM(med.quantidade) AS total, med.competencia,med.medico_cpf AS medico, m.id AS meta";
-            $sql=" $sql FROM medico_executa_procedimento med INNER JOIN  meta_procedimento mp ON mp.procedimento_codigo=med.procedimento_codigo";
+        public static function calculeMetasComProcedimentos($competencia,$offset,$pageSize){
+            $sql="SELECT ag.medico_unidade_cnes AS cnes,SUM(ag.quantidade) AS total, ag.competencia,ag.agente_saude_cpf AS agenteSaude, m.id AS meta";
+            $sql=" $sql FROM agente_saude_executa_procedimento ag INNER JOIN  meta_procedimento mp ON mp.procedimento_codigo=ag.procedimento_codigo";
             $sql=" $sql INNER JOIN meta m ON m.id=mp.meta_id";
-            $sql=" $sql GROUP BY med.competencia,m.id,med.medico_cpf HAVING med.competencia=:competencia; ";
+            $sql=" $sql GROUP BY ag.competencia,m.id,ag.agente_saude_cpf HAVING ag.competencia=:competencia; ";
+            $sql=" $sql LIMIT :offset , :pageSize;";
             //
             $dbC=Yii::app()->db->createCommand($sql);
             $dbC->setFetchMode(PDO::FETCH_OBJ);
+            $dbC->bindParam(':pageSize', $pageSize , PDO::PARAM_INT);
+            $dbC->bindParam(':offset', $offset, PDO::PARAM_INT);
             $dbC->bindParam(':competencia', $competencia, PDO::PARAM_STR);
             $resul=array();
             foreach($dbC->queryAll() as $m){
-                $metExec= new MedicoExecutaMeta();
+                $agExec= new MedicoExecutaMeta();
                 
                 //popula
-                $metExec->medico_cpf= $m->medico;
-                $metExec->total=$m->total;
-                $metExec->meta_id=$m->meta;
-                $metExec->unidade_cnes=$m->cnes;
-                $metExec->data_fim=date("Y/m/d");
-                $metExec->data_inicio=date("Y/m/d");
+                $agExec->agente_saude_cpf= $m->agenteSaude;
+                $agExec->total=$m->total;
+                $agExec->meta_id=$m->meta;
+                $agExec->unidade_cnes=$m->cnes;
+                $agExec->data_fim=date("Y/m/d");
+                $agExec->data_inicio=date("Y/m/d");
                 //coloca o objeto no vetor
-                $resul[]=$metExec;
+                $resul[]=$agExec;
+            }
+            return $resul;
+        }
+        
+        /**
+         * Calcula o valor de cada meta referente ao Agente de Saúde em uma determinada competência
+         * para isso soma os valores dos itens executados pelo Agente de Saúde e que fazem parte de uma meta
+         * Exemplo: meta com 3 itens: o valor da meta vai ser a soma da quantidade de execução desses itens
+         * IMPORTANTE: os registros devolvidos não estão salvos no banco!
+         * @param int competência que a meta deve ser calculada
+         * @param int offset número de início para pegar os registros
+         * @param int pageSize quantidade de registros que devem ser trazidas do banco de dados
+         * @return AgenteSaudeExecutaMeta[] devolve um vetor com os valores de cada meta executada por um Agente de Saúde na competência
+         */
+        public static function calculeMetasComItens($competencia,$offset,$pageSize){
+            $sql="SELECT ag.medico_unidade_cnes AS cnes,SUM(ag.quantidade) AS total, ag.competencia,ag.agente_saude_cpf AS agenteSaude, m.id AS meta";
+            $sql=" $sql FROM agente_saude_executa_item ag INNER JOIN  item it ON it.id=ag.item_id";
+            $sql=" $sql INNER JOIN meta m ON m.id=it.meta_id";
+            $sql=" $sql GROUP BY ag.competencia,m.id,ag.agente_saude_cpf HAVING ag.competencia=:competencia ";
+            $sql=" $sql LIMIT :offset , :pageSize;";
+            //
+            $dbC=Yii::app()->db->createCommand($sql);
+            $dbC->setFetchMode(PDO::FETCH_OBJ);
+            $dbC->bindParam(':pageSize', $pageSize , PDO::PARAM_INT);
+            $dbC->bindParam(':offset', $offset, PDO::PARAM_INT);
+            $dbC->bindParam(':competencia', $competencia, PDO::PARAM_STR);
+            Yii::log($sql);
+            $resul=array();
+            foreach($dbC->queryAll() as $m){
+                $agExec= new MedicoExecutaMeta();
+                
+                //popula
+                $agExec->agente_saude_cpf= $m->agenteSaude;
+                $agExec->total=$m->total;
+                $agExec->meta_id=$m->meta;
+                $agExec->unidade_cnes=$m->cnes;
+                $agExec->competencia=$competencia;
+                //coloca o objeto no vetor
+                $resul[]=$agExec;
             }
             return $resul;
         }
