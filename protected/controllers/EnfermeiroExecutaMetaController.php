@@ -75,7 +75,7 @@ class EnfermeiroExecutaMetaController extends Controller
          
          public function actionSend()
 	{
-		$model=new EnfermeiroExecutaMeta('send');
+		$model=new EnfermeiroExecutaMeta;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
@@ -83,7 +83,7 @@ class EnfermeiroExecutaMetaController extends Controller
 		if(isset($_POST['EnfermeiroExecutaMeta']))
 		{
 			$model->attributes=$_POST['EnfermeiroExecutaMeta'];
-                        $model->competencia=$_POST['EnfermeiroExecutaMeta']['competencia'];
+                        
 			if($model->validate()){
                             $this->redirect(array('EnfermeiroExecutaItem/Create','competencia'=>$model->competencia,'servidor'=>$model->enfermeiro_cpf,'cnes'=>$model->unidade_cnes,'meta'=>$model->meta_id));
 				//$this->redirect(array('view','id'=>$model->medico_cpf));
