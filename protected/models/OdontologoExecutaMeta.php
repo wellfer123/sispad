@@ -8,8 +8,7 @@
  * @property string $unidade_cnes
  * @property integer $meta_id
  * @property integer $total
- * @property string $data_inicio
- * @property string $data_fim
+ * @property integer $competencia
  */
 class OdontologoExecutaMeta extends CActiveRecord
 {
@@ -40,13 +39,14 @@ class OdontologoExecutaMeta extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-                        array('meta_id,odontologo_cpf,unidade_cnes', 'required'),
-			array('meta_id', 'numerical', 'integerOnly'=>true),
+                        array('meta_id,odontologo_cpf,unidade_cnes,total,competencia', 'required'),
+			array('meta_id,total,competencia', 'numerical', 'integerOnly'=>true),
 			array('odontologo_cpf', 'length', 'max'=>11),
 			array('unidade_cnes', 'length', 'max'=>10),
+                        array('competencia', 'length', 'max'=>6),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('odontologo_cpf, unidade_cnes, meta_id', 'safe', 'on'=>'search'),
+			array('odontologo_cpf, unidade_cnes,competencia,total meta_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -74,12 +74,11 @@ class OdontologoExecutaMeta extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'odontologo_cpf' => 'Odontologo Cpf',
-			'unidade_cnes' => 'Unidade Cnes',
+			'odontologo_cpf' => 'Odontólogo',
+			'unidade_cnes' => 'Unidade',
 			'meta_id' => 'Meta',
 			'total' => 'Total',
-			'data_inicio' => 'Data Inicio',
-			'data_fim' => 'Data Fim',
+			'competencia' => 'Competência',
 		);
 	}
         /**
@@ -180,39 +179,80 @@ class OdontologoExecutaMeta extends CActiveRecord
             parent::afterFind();
         }
         /**
-         * Calcula o valor de cada meta referente ao medico em uma determinada competencia
-         * para isso soma os valores dos procedimentos executados pelo medico e que fazem parte de uma meta
+         * Calcula o valor de cada meta referente ao Odontólogo em uma determinada competência
+         * para isso soma os valores dos procedimentos executados pelo Odontólogo e que fazem parte de uma meta
          * Exemplo: meta com 3 proccedimentos: o valor da meta vai ser a soma da quantidade de execução desses procedimentos
          * IMPORTANTE: os registros devolvidos não estão salvos no banco!
          * @param int competencia que a meta deve ser calculada
-         * @return MedicoExecutaMeta[] devolve um vetor com o s valores de cada meta executada por um medico na competencia
+         * @param int offset número de início para pegar os registros
+         * @param int pageSize quantidade de registros que devem ser trazidas do banco de dados
+         * @return OdontologoExecutaMeta[] devolve um vetor com o s valores de cada meta executada por um Odontólogo na competência
          */
-        public static function calculeMetasComProcedimentos($competencia){
-            $sql="SELECT med.medico_unidade_cnes AS cnes,SUM(med.quantidade) AS total, med.competencia,med.medico_cpf AS medico, m.id AS meta";
-            $sql=" $sql FROM medico_executa_procedimento med INNER JOIN  meta_procedimento mp ON mp.procedimento_codigo=med.procedimento_codigo";
+        public static function calculeMetasComProcedimentos($competencia,$offset,$pageSize){
+            $sql="SELECT odo.odontologo_unidade_cnes AS cnes,SUM(odo.quantidade) AS total, odo.competencia,odo.odontologo_cpf AS odontologo, m.id AS meta";
+            $sql=" $sql FROM odontologo_executa_procedimento odo INNER JOIN  meta_procedimento mp ON mp.procedimento_codigo=odo.procedimento_codigo";
             $sql=" $sql INNER JOIN meta m ON m.id=mp.meta_id";
-            $sql=" $sql GROUP BY med.competencia,m.id,med.medico_cpf HAVING med.competencia=:competencia; ";
+            $sql=" $sql GROUP BY odo.competencia,m.id,odo.medico_cpf HAVING odo.competencia=:competencia; ";
+            $sql=" $sql LIMIT :offset , :pageSize;";
             //
             $dbC=Yii::app()->db->createCommand($sql);
             $dbC->setFetchMode(PDO::FETCH_OBJ);
+            $dbC->bindParam(':pageSize', $pageSize , PDO::PARAM_INT);
+            $dbC->bindParam(':offset', $offset, PDO::PARAM_INT);
             $dbC->bindParam(':competencia', $competencia, PDO::PARAM_STR);
             $resul=array();
             foreach($dbC->queryAll() as $m){
-                $metExec= new MedicoExecutaMeta();
+                $odoExec= new OdontologoExecutaMeta();
                 
                 //popula
-                $metExec->medico_cpf= $m->medico;
-                $metExec->total=$m->total;
-                $metExec->meta_id=$m->meta;
-                $metExec->unidade_cnes=$m->cnes;
-                $metExec->data_fim=date("Y/m/d");
-                $metExec->data_inicio=date("Y/m/d");
+                $odoExec->odontologo_cpf= $m->odontologo;
+                $odoExec->total=$m->total;
+                $odoExec->meta_id=$m->meta;
+                $odoExec->unidade_cnes=$m->cnes;
+                $odoExec->competencia=$m->competencia;
                 //coloca o objeto no vetor
-                $resul[]=$metExec;
+                $resul[]=$odoExec;
             }
             return $resul;
         }
-
+        /**
+         * Calcula o valor de cada meta referente ao Odontólogo em uma determinada competência
+         * para isso soma os valores dos itens executados pelo Odontólogo e que fazem parte de uma meta
+         * Exemplo: meta com 3 itens: o valor da meta vai ser a soma da quantidade de execução desses itens
+         * IMPORTANTE: os registros devolvidos não estão salvos no banco!
+         * @param int competência que a meta deve ser calculada
+         * @param int offset número de início para pegar os registros
+         * @param int pageSize quantidade de registros que devem ser trazidas do banco de dados
+         * @return OdontologoExecutaMeta[] devolve um vetor com os valores de cada meta executada por um Odontólogo na competência
+         */
+        public static function calculeMetasComItens($competencia,$offset,$pageSize){
+            $sql="SELECT odo.odontologo_unidade_cnes AS cnes,SUM(odo.quantidade) AS total, odo.competencia,odo.odontologo_cpf AS odontologo, m.id AS meta";
+            $sql=" $sql FROM odontologo_executa_item odo INNER JOIN  item it ON it.id=odo.item_id";
+            $sql=" $sql INNER JOIN meta m ON m.id=it.meta_id";
+            $sql=" $sql GROUP BY odo.competencia,m.id,odo.odontologo_cpf HAVING odo.competencia=:competencia ";
+            $sql=" $sql LIMIT :offset , :pageSize;";
+            //
+            $dbC=Yii::app()->db->createCommand($sql);
+            $dbC->setFetchMode(PDO::FETCH_OBJ);
+            $dbC->bindParam(':pageSize', $pageSize , PDO::PARAM_INT);
+            $dbC->bindParam(':offset', $offset, PDO::PARAM_INT);
+            $dbC->bindParam(':competencia', $competencia, PDO::PARAM_STR);
+            Yii::log($sql);
+            $resul=array();
+            foreach($dbC->queryAll() as $m){
+                $odoExec= new OdontologoExecutaMeta();
+                
+                //popula
+                $odoExec->odontologo_cpf= $m->odontologo;
+                $odoExec->total=$m->total;
+                $odoExec->meta_id=$m->meta;
+                $odoExec->unidade_cnes=$m->cnes;
+                $agExec->competencia=$competencia;
+                //coloca o objeto no vetor
+                $resul[]=$odoExec;
+            }
+            return $resul;
+        }
         protected function beforeSave() {
            
             return parent::beforeSave();

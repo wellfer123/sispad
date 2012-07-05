@@ -9,8 +9,7 @@
  * @property string $unidade_cnes
  * @property integer $meta_id
  * @property integer $total
- * @property string $data_inicio
- * @property string $data_fim
+ * @property integer $competencia
  */
 class AgenteSaudeExecutaMeta extends CActiveRecord
 {
@@ -39,13 +38,14 @@ class AgenteSaudeExecutaMeta extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-                        array('meta_id,agente_saude_cpf,unidade_cnes', 'required'),
-			array('meta_id, total', 'numerical', 'integerOnly'=>true),
+                        array('meta_id,agente_saude_cpf,unidade_cnes,total,agente_saude_micro_area,competencia', 'required'),
+			array('meta_id, total,competencia', 'numerical', 'integerOnly'=>true),
 			array('agente_saude_cpf', 'length', 'max'=>11),
+                        array('competencia', 'length', 'max'=>6),
 			array('unidade_cnes', 'length', 'max'=>10),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('agente_saude_cpf, agente_saude_microarea, unidade_cnes, meta_id, total', 'safe', 'on'=>'search'),
+			array('agente_saude_cpf, competencia,agente_saude_microarea, unidade_cnes, meta_id, total', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -73,11 +73,12 @@ class AgenteSaudeExecutaMeta extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'agente_saude_cpf' => 'Agente Saude Cpf',
-			'agente_saude_microarea' => 'Agente Saude Microarea',
-			'unidade_cnes' => 'Unidade Cnes',
+			'agente_saude_cpf' => 'Agente de Saúde',
+			'agente_saude_microarea' => 'Microarea',
+			'unidade_cnes' => 'Unidade',
 			'meta_id' => 'Meta',
 			'total' => 'Total',
+                        'competencia'=>'Competência',
 		);
 	}
         /**
@@ -184,7 +185,7 @@ class AgenteSaudeExecutaMeta extends CActiveRecord
          * @return AgenteSaudeExecutaMeta[] devolve um vetor com os valores de cada meta executada por um Agente de Saúde na competência
          */
         public static function calculeMetasComProcedimentos($competencia,$offset,$pageSize){
-            $sql="SELECT ag.medico_unidade_cnes AS cnes,SUM(ag.quantidade) AS total, ag.competencia,ag.agente_saude_cpf AS agenteSaude, m.id AS meta";
+            $sql="SELECT ag.agente_saude_micro_area AS microArea,ag.agente_saude_unidade_cnes AS cnes,SUM(ag.quantidade) AS total, ag.competencia,ag.agente_saude_cpf AS agenteSaude, m.id AS meta";
             $sql=" $sql FROM agente_saude_executa_procedimento ag INNER JOIN  meta_procedimento mp ON mp.procedimento_codigo=ag.procedimento_codigo";
             $sql=" $sql INNER JOIN meta m ON m.id=mp.meta_id";
             $sql=" $sql GROUP BY ag.competencia,m.id,ag.agente_saude_cpf HAVING ag.competencia=:competencia; ";
@@ -197,15 +198,15 @@ class AgenteSaudeExecutaMeta extends CActiveRecord
             $dbC->bindParam(':competencia', $competencia, PDO::PARAM_STR);
             $resul=array();
             foreach($dbC->queryAll() as $m){
-                $agExec= new MedicoExecutaMeta();
+                $agExec= new AgenteSaudeExecutaMeta();
                 
                 //popula
                 $agExec->agente_saude_cpf= $m->agenteSaude;
+                $agExec->agente_saude_micro_area= $m->microArea;
                 $agExec->total=$m->total;
                 $agExec->meta_id=$m->meta;
                 $agExec->unidade_cnes=$m->cnes;
-                $agExec->data_fim=date("Y/m/d");
-                $agExec->data_inicio=date("Y/m/d");
+                $agExec->competencia=$competencia;
                 //coloca o objeto no vetor
                 $resul[]=$agExec;
             }
@@ -223,7 +224,7 @@ class AgenteSaudeExecutaMeta extends CActiveRecord
          * @return AgenteSaudeExecutaMeta[] devolve um vetor com os valores de cada meta executada por um Agente de Saúde na competência
          */
         public static function calculeMetasComItens($competencia,$offset,$pageSize){
-            $sql="SELECT ag.medico_unidade_cnes AS cnes,SUM(ag.quantidade) AS total, ag.competencia,ag.agente_saude_cpf AS agenteSaude, m.id AS meta";
+            $sql="SELECT ag.agente_saude_micro_area AS microArea,ag.agente_saude_unidade_cnes AS cnes,SUM(ag.quantidade) AS total, ag.competencia,ag.agente_saude_cpf AS agenteSaude, m.id AS meta";
             $sql=" $sql FROM agente_saude_executa_item ag INNER JOIN  item it ON it.id=ag.item_id";
             $sql=" $sql INNER JOIN meta m ON m.id=it.meta_id";
             $sql=" $sql GROUP BY ag.competencia,m.id,ag.agente_saude_cpf HAVING ag.competencia=:competencia ";
@@ -237,10 +238,11 @@ class AgenteSaudeExecutaMeta extends CActiveRecord
             Yii::log($sql);
             $resul=array();
             foreach($dbC->queryAll() as $m){
-                $agExec= new MedicoExecutaMeta();
+                $agExec= new AgenteSaudeExecutaMeta();
                 
                 //popula
                 $agExec->agente_saude_cpf= $m->agenteSaude;
+                $agExec->agente_saude_micro_area= $m->microArea;
                 $agExec->total=$m->total;
                 $agExec->meta_id=$m->meta;
                 $agExec->unidade_cnes=$m->cnes;
@@ -257,8 +259,6 @@ class AgenteSaudeExecutaMeta extends CActiveRecord
         }
 
         protected function beforeSave() {
-            $this->data_fim=ParserDate::inverteDataPtToEn($this->data_fim);
-            $this->data_inicio=ParserDate::inverteDataPtToEn($this->data_inicio);
             return parent::beforeSave();
         }
 }
