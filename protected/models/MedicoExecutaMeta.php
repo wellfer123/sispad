@@ -7,7 +7,6 @@
  * @property string $medico_cpf
  * @property string $unidade_cnes
  * @property integer $meta_id
- * 
  * @property string $competencia
  */
 class MedicoExecutaMeta extends CActiveRecord
@@ -37,14 +36,15 @@ class MedicoExecutaMeta extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-                        array('meta_id,medico_cpf,unidade_cnes,competencia', 'required'),
+                        array('meta_id,medico_cpf,unidade_cnes,total,competencia', 'required'),
                         //array('total','safe','on'=>'send'),
-			array('meta_id,competencia', 'numerical', 'integerOnly'=>true),
+			array('meta_id,competencia,total', 'numerical', 'integerOnly'=>true),
 			array('medico_cpf', 'length', 'max'=>11),
+                        array('competencia', 'length', 'max'=>6),
 			array('unidade_cnes', 'length', 'max'=>10),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('medico_cpf, unidade_cnes, meta_id, competencia', 'safe', 'on'=>'search'),
+			array('medico_cpf, unidade_cnes, total,meta_id, competencia', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -75,7 +75,7 @@ class MedicoExecutaMeta extends CActiveRecord
 			'medico_cpf' => 'Médico',
 			'unidade_cnes' => 'Unidade',
 			'meta_id' => 'Meta',
-			//'total' => 'Total',
+			'total' => 'Total',
 			'competencia' => 'Competência'
 		);
 	}

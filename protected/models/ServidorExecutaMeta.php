@@ -7,8 +7,7 @@
  * @property string $servidor_cpf
  * @property integer $meta_id
  * @property integer $total
- * @property string $data_inicio
- * @property string $data_fim
+ * @property integer $competencia
  */
 class ServidorExecutaMeta extends CActiveRecord
 {
@@ -37,13 +36,13 @@ class ServidorExecutaMeta extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-                        array('meta_id, total,servidor_cpf,unidade_cnes,data_inicio,data_fim', 'required'),
-			array('servidor_cpf, meta_id, total, data_inicio, data_fim', 'required'),
-			array('meta_id, total', 'numerical', 'integerOnly'=>true),
+                        array('meta_id, total,servidor_cpf,competencia', 'required'),
+			array('meta_id, total,competencia', 'numerical', 'integerOnly'=>true),
 			array('servidor_cpf', 'length', 'max'=>11),
+                        array('competencia', 'length', 'max'=>6),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('servidor_cpf, meta_id, total, data_inicio, data_fim', 'safe', 'on'=>'search'),
+			array('servidor_cpf, meta_id, total, competencia', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -57,7 +56,6 @@ class ServidorExecutaMeta extends CActiveRecord
 		return array(
 			'meta' => array(self::BELONGS_TO, 'Meta', 'meta_id'),
 			'servidor' => array(self::BELONGS_TO, 'Servidor', 'servidor_cpf'),
-			'unidade_servidor' => array(self::BELONGS_TO, 'Unidade', 'unidade_cnes'),
 		);
 	}
 
@@ -67,11 +65,10 @@ class ServidorExecutaMeta extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'servidor_cpf' => 'Servidor Cpf',
+			'servidor_cpf' => 'Servidor',
 			'meta_id' => 'Meta',
 			'total' => 'Total',
-			'data_inicio' => 'Data Inicio',
-			'data_fim' => 'Data Fim',
+			'competencia' => 'Competência',
 		);
 	}
         /**
@@ -111,57 +108,92 @@ class ServidorExecutaMeta extends CActiveRecord
 
 		$criteria->compare('total',$this->total);
 
-		$criteria->compare('data_inicio',$this->data_inicio,true);
+		$criteria->compare('competencia',$this->competencia,true);
 
-		$criteria->compare('data_fim',$this->data_fim,true);
-
-		return new CActiveDataProvider('Servidor_Executa_Meta', array(
+		return new CActiveDataProvider('ServidorExecutaMeta', array(
 			'criteria'=>$criteria,
 		));
 	}
         /**
-         * Calcula o valor de cada meta referente ao medico em uma determinada competencia
-         * para isso soma os valores dos procedimentos executados pelo medico e que fazem parte de uma meta
+         * Calcula o valor de cada meta referente ao Servidor em uma determinada competência
+         * para isso soma os valores dos procedimentos executados pelo Servidor e que fazem parte de uma meta
          * Exemplo: meta com 3 proccedimentos: o valor da meta vai ser a soma da quantidade de execução desses procedimentos
          * IMPORTANTE: os registros devolvidos não estão salvos no banco!
          * @param int competencia que a meta deve ser calculada
-         * @return MedicoExecutaMeta[] devolve um vetor com o s valores de cada meta executada por um medico na competencia
+         * @param int offset número de início para pegar os registros
+         * @param int pageSize quantidade de registros que devem ser trazidas do banco de dados
+         * @return ServidorExecutaMeta[] devolve um vetor com o s valores de cada meta executada por um Servidor na competência
          */
         public static function calculeMetasComProcedimentos($competencia){
-            $sql="SELECT med.medico_unidade_cnes AS cnes,SUM(med.quantidade) AS total, med.competencia,med.medico_cpf AS medico, m.id AS meta";
-            $sql=" $sql FROM medico_executa_procedimento med INNER JOIN  meta_procedimento mp ON mp.procedimento_codigo=med.procedimento_codigo";
+            $sql="SELECT SUM(serv.quantidade) AS total, serv.competencia,serv.servidor_cpf AS servidor, m.id AS meta";
+            $sql=" $sql FROM servidor_executa_procedimento serv INNER JOIN  meta_procedimento mp ON mp.procedimento_codigo=serv.procedimento_codigo";
             $sql=" $sql INNER JOIN meta m ON m.id=mp.meta_id";
-            $sql=" $sql GROUP BY med.competencia,m.id,med.medico_cpf HAVING med.competencia=:competencia; ";
+            $sql=" $sql GROUP BY serv.competencia,m.id,serv.servidor_cpf HAVING serv.competencia=:competencia; ";
+            $sql=" $sql LIMIT :offset , :pageSize;";
             //
             $dbC=Yii::app()->db->createCommand($sql);
             $dbC->setFetchMode(PDO::FETCH_OBJ);
             $dbC->bindParam(':competencia', $competencia, PDO::PARAM_STR);
+            $dbC->bindParam(':pageSize', $pageSize , PDO::PARAM_INT);
+            $dbC->bindParam(':offset', $offset, PDO::PARAM_INT);
             $resul=array();
             foreach($dbC->queryAll() as $m){
-                $metExec= new MedicoExecutaMeta();
+                $servExec= new ServidorExecutaMeta();
                 
                 //popula
-                $metExec->medico_cpf= $m->medico;
-                $metExec->total=$m->total;
-                $metExec->meta_id=$m->meta;
-                $metExec->unidade_cnes=$m->cnes;
-                $metExec->data_fim=date("Y/m/d");
-                $metExec->data_inicio=date("Y/m/d");
+                $servExec->servidor_cpf= $m->servidor;
+                $servExec->total=$m->total;
+                $servExec->meta_id=$m->meta;
+                $servExec->competencia=$m->competencia;
                 //coloca o objeto no vetor
-                $resul[]=$metExec;
+                $resul[]=$servExec;
+            }
+            return $resul;
+        }
+        
+        /**
+         * Calcula o valor de cada meta referente ao Servidor em uma determinada competência
+         * para isso soma os valores dos itens executados pelo Servidor e que fazem parte de uma meta
+         * Exemplo: meta com 3 itens: o valor da meta vai ser a soma da quantidade de execução desses itens
+         * IMPORTANTE: os registros devolvidos não estão salvos no banco!
+         * @param int competência que a meta deve ser calculada
+         * @param int offset número de início para pegar os registros
+         * @param int pageSize quantidade de registros que devem ser trazidas do banco de dados
+         * @return ServidorExecutaMeta[] devolve um vetor com os valores de cada meta executada por um Servidor na competência
+         */
+        public static function calculeMetasComItens($competencia,$offset,$pageSize){
+            $sql="SELECT SUM(serv.quantidade) AS total, serv.competencia,serv.servidor_cpf AS servidor, m.id AS meta";
+            $sql=" $sql FROM servidor_executa_item serv INNER JOIN  item it ON it.id=serv.item_id";
+            $sql=" $sql INNER JOIN meta m ON m.id=it.meta_id";
+            $sql=" $sql GROUP BY serv.competencia,m.id,serv.odontologo_cpf HAVING serv.competencia=:competencia ";
+            $sql=" $sql LIMIT :offset , :pageSize;";
+            //
+            $dbC=Yii::app()->db->createCommand($sql);
+            $dbC->setFetchMode(PDO::FETCH_OBJ);
+            $dbC->bindParam(':pageSize', $pageSize , PDO::PARAM_INT);
+            $dbC->bindParam(':offset', $offset, PDO::PARAM_INT);
+            $dbC->bindParam(':competencia', $competencia, PDO::PARAM_STR);
+            Yii::log($sql);
+            $resul=array();
+            foreach($dbC->queryAll() as $m){
+                $servExec= new ServidorExecutaMeta();
+                
+                //popula
+                $servExec->servidor_cpf= $m->servidor;
+                $servExec->total=$m->total;
+                $servExec->meta_id=$m->meta;
+                $agExec->competencia=$competencia;
+                //coloca o objeto no vetor
+                $resul[]=$servExec;
             }
             return $resul;
         }
         
         protected function afterFind() {
-            $this->data_fim=ParserDate::inverteDataEnToPt($this->data_fim);
-            $this->data_inicio=ParserDate::inverteDataEnToPt($this->data_inicio);
             parent::afterFind();
         }
 
         protected function beforeSave() {
-            $this->data_fim=ParserDate::inverteDataPtToEn($this->data_fim);
-            $this->data_inicio=ParserDate::inverteDataPtToEn($this->data_inicio);
             return parent::beforeSave();
         }
 }
