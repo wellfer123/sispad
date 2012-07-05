@@ -187,8 +187,8 @@ class Relatorio extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-                    'servidor'=>array(self::BELONGS_TO, 'servidor', 'servidor_cpf'),
-                    'temp_arquivo'=>array(self::HAS_ONE, 'arquivo', 'relatorio_id'),
+                    'servidor'=>array(self::BELONGS_TO, 'Servidor', 'servidor_cpf'),
+                    'temp_arquivo'=>array(self::HAS_ONE, 'Arquivo', 'relatorio_id'),
 		);
 	}
 
