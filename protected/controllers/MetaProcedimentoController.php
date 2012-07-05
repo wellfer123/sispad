@@ -35,7 +35,27 @@ class MetaProcedimentoController extends SISPADBaseController
             $model = new MetaProcedimento();
             $this->render('view',array('model'=>$model));
         }
-
+        
+        //metodo validador que verifica se a profissao do procedimento corresponde a profissao do indicador
+        public function validaProcedimentoComIndicador($profissaoCodigo) {
+          $model= new MetaProcedimento;
+          
+          
+          if($profissaoCodigo!=null){ 
+             if(isset($_GET['indicador_id'])){
+                $id = $_GET['indicador_id'];
+                $indicador = Indicador::model()->findByPk($id);
+               
+                if($indicador->profissao_codigo!=$profissaoCodigo){
+                     $this->addMessageErro('Procedimento de Agente de Saude não pode estar em outro tipo de indicador');
+                     return false;
+                }else{
+                    return true;
+                }
+              }
+            }
+            return true;
+        }
          public function actionAdd()
 	{
                 //$this->CheckAcessAction();
@@ -50,12 +70,17 @@ class MetaProcedimentoController extends SISPADBaseController
 		{
 
                         $model->procedimento_codigo=$_POST['MetaProcedimento']['procedimento_codigo'];
+                        $procedimento = Procedimento::model()->findByPk($model->procedimento_codigo);
+                        
+                        if($this->validaProcedimentoComIndicador($procedimento->codigo_profissao)){
+                        
                         $model->meta_id=$_GET['meta_id'];
 			if($model->save()){
                             $model=new MetaProcedimento;
                             $this->addMessageSuccess("Procedimento adicionado a meta!");
 
                         }
+                       }
 
                 }
 
