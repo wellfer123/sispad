@@ -37,14 +37,14 @@ class EnfermeiroExecutaMeta extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-                        array('meta_id,enfermeiro_cpf,unidade_cnes,total,competencia', 'required'),
-			array('meta_id, total, competencia', 'numerical', 'integerOnly'=>true),
+                        array('meta_id,enfermeiro_cpf,competencia,unidade_cnes', 'required'),
+			array('meta_id,competencia', 'numerical', 'integerOnly'=>true),
 			array('enfermeiro_cpf', 'length', 'max'=>11),
                         array('competencia', 'length', 'max'=>6),
 			array('unidade_cnes', 'length', 'max'=>10),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('enfermeiro_cpf, unidade_cnes, meta_id, total', 'safe', 'on'=>'search'),
+			array('enfermeiro_cpf, unidade_cnes, meta_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -76,7 +76,7 @@ class EnfermeiroExecutaMeta extends CActiveRecord
 			'unidade_cnes' => 'Unidade',
 			'meta_id' => 'Meta',
 			'total' => 'Total',
-                        'total' => 'Competência',
+                        'competencia' => 'Competência',
 			
 		);
 	}
