@@ -225,7 +225,7 @@ class Relatorio extends CActiveRecord
 
 		$criteria->compare('data_envio',$this->data_envio,true);
 
-		$criteria->compare('data_trabalho',$this->data_trabalho,true);
+		$criteria->compare('data_trabalho',  ParserDate::inverteDataPtToEn($this->data_trabalho,true));
 
 		$criteria->compare('servidor_cpf',Yii::app()->user->cpfservidor);
 
