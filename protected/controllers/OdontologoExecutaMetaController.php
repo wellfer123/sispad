@@ -280,10 +280,10 @@ class OdontologoExecutaMetaController extends SISPADBaseController
         
          public function actionRelatorioMetas() {
             $model = new OdontologoExecutaMeta;
-            $model->competencia = '22012';//$_POST['OdontologoExecutaMeta']['competencia'];
+           
             $this->widget('application.extensions.phpexcel.EExcelView',
-                        array('dataProvider'=>$model->searchMetasExecutadas($model->competencia),
-                             'title'=>'metasExecutadas_odontologo_'.$model->competencia ,
+                        array('dataProvider'=>$model->searchMetasExecutadas(),
+                             'title'=>'metasExecutadas_odontologo_' ,
                              'grid_mode'=>'export',
                              'exportType'=>'Excel2007',
                             ));

@@ -268,11 +268,11 @@ class EnfermeiroExecutaMetaController extends Controller
 		));
 	}
         
-        public function actionRelatorioMetas($competencia) {
+        public function actionRelatorioMetas() {
             $model = new EnfermeiroExecutaMeta;
             $this->widget('application.extensions.phpexcel.EExcelView',
-                        array('dataProvider'=>$model->searchMetasExecutadas($competencia),
-                             'title'=>'metasExecutadas_enfermeiro_'.$competencia,
+                        array('dataProvider'=>$model->searchMetasExecutadas(),
+                             'title'=>'metasExecutadas_enfermeiro_',
                              'grid_mode'=>'export',
                              'exportType'=>'Excel2007',
                             ));

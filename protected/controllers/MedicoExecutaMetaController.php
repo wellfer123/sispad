@@ -274,11 +274,11 @@ class MedicoExecutaMetaController extends SISPADBaseController
 		));
 	}
         
-        public function actionRelatorioMetas($competencia) {
+        public function actionRelatorioMetas() {
             $model = new MedicoExecutaMeta;
             $this->widget('application.extensions.phpexcel.EExcelView',
-                        array('dataProvider'=>$model->searchMetasExecutadas($competencia),
-                             'title'=>'metasExecutadas_medico_'.$competencia,
+                        array('dataProvider'=>$model->searchMetasExecutadas(),
+                             'title'=>'metasExecutadas_medico',
                              'grid_mode'=>'export',
                              'exportType'=>'Excel2007',
                             ));
