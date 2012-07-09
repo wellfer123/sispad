@@ -72,12 +72,12 @@ class Endereco extends CActiveRecord
 		return array(
 			'id' => 'Id',
 			'logradouro' => 'Logradouro',
-			'numero' => 'Numero',
+			'numero' => 'Número',
 			'complemento' => 'Complemento',
 			'bairro' => 'Bairro',
 			'cidade_id' => 'Cidade',
 			'telefone' => 'Telefone',
-			'email' => 'Email',
+			'email' => 'E-mail',
 		);
 	}
 

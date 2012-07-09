@@ -139,7 +139,7 @@ class TecnicoEnfermagemExecutaMeta extends CActiveRecord
             $sql="SELECT tec.tecnico_enfermagem_unidade_cnes AS cnes,SUM(tec.quantidade) AS total, tec.competencia,tec.tecnico_enfermagem_cpf AS tecnico_enfermagem, m.id AS meta";
             $sql=" $sql FROM tecnico_enfermagem_executa_procedimento tec INNER JOIN  meta_procedimento mp ON mp.procedimento_codigo=tec.procedimento_codigo";
             $sql=" $sql INNER JOIN meta m ON m.id=mp.meta_id";
-            $sql=" $sql GROUP BY tec.competencia,m.id,tec.tecnico_enfermagem_cpf HAVING tec.competencia=:competencia; ";
+            $sql=" $sql GROUP BY tec.competencia,m.id,tec.tecnico_enfermagem_cpf HAVING tec.competencia=:competencia ";
             $sql=" $sql LIMIT :offset , :pageSize;";
             //
             $dbC=Yii::app()->db->createCommand($sql);

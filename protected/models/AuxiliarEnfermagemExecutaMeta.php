@@ -126,20 +126,20 @@ class AuxiliarEnfermagemExecutaMeta extends CActiveRecord
 		));
 	}
         /**
-         * Calcula o valor de cada meta referente ao Enfermeiro em uma determinada competência
-         * para isso, soma os valores dos procedimentos executados pelo Enfermeiro e que fazem parte de uma meta
+         * Calcula o valor de cada meta referente ao Auxiliar de Enfermagem em uma determinada competência
+         * para isso, soma os valores dos procedimentos executados pelo Auxiliar de Enfermagem  e que fazem parte de uma meta
          * Exemplo: meta com 3 procedimentos: o valor da meta vai ser a soma da quantidade de execução desses procedimentos
          * IMPORTANTE: os registros devolvidos não estão salvos no banco!
          * @param int competência que a meta deve ser calculada
          * @param int offset número de início para pegar os registros
          * @param int pageSize quantidade de registros que devem ser trazidas do banco de dados
-         * @return EnfermeiroExecutaMeta[] devolve um vetor com os valores de cada meta executada por um Enfermeiro na competência
+         * @return AuxiliarEnfermagemExecutaMeta[] devolve um vetor com os valores de cada meta executada por um Auxiliar de Enfermagem  na competência
          */
         public static function calculeMetasComProcedimentos($competencia,$offset,$pageSize){
-            $sql="SELECT enf.enfermeiro_unidade_cnes AS cnes,SUM(enf.quantidade) AS total, enf.competencia,enf.enfermeiro_cpf AS enfermeiro, m.id AS meta";
-            $sql=" $sql FROM enfermeiro_executa_procedimento enf INNER JOIN  meta_procedimento mp ON mp.procedimento_codigo=enf.procedimento_codigo";
+            $sql="SELECT aux.auxiliar_enfermagem_unidade_cnes AS cnes,SUM(aux.quantidade) AS total, aux.competencia,aux.auxiliar_enfermagem_cpf AS auxiliar_enfermagem, m.id AS meta";
+            $sql=" $sql FROM auxiliar_enfermagem_executa_procedimento aux INNER JOIN  meta_procedimento mp ON mp.procedimento_codigo=aux.procedimento_codigo";
             $sql=" $sql INNER JOIN meta m ON m.id=mp.meta_id";
-            $sql=" $sql GROUP BY enf.competencia,m.id,enf.enfermeiro_cpf HAVING enf.competencia=:competencia; ";
+            $sql=" $sql GROUP BY aux.competencia,m.id,aux.auxiliar_enfermagem_cpf HAVING aux.competencia=:competencia";
             $sql=" $sql LIMIT :offset , :pageSize;";
             //
             $dbC=Yii::app()->db->createCommand($sql);
@@ -149,35 +149,35 @@ class AuxiliarEnfermagemExecutaMeta extends CActiveRecord
             $dbC->bindParam(':competencia', $competencia, PDO::PARAM_STR);
             $resul=array();
             foreach($dbC->queryAll() as $m){
-                $enfExec= new EnfermeiroExecutaMeta();
+                $auxExec= new AuxiliarEnfermagemExecutaMeta();
                 
                 //popula
-                $enfExec->enfermeiro_cpf= $m->enfermeiro;
-                $enfExec->total=$m->total;
-                $enfExec->meta_id=$m->meta;
-                $enfExec->unidade_cnes=$m->cnes;
+                $auxExec->auxiliar_enfermagem_cpf= $m->auxiliar_enfermagem;
+                $auxExec->total=$m->total;
+                $auxExec->meta_id=$m->meta;
+                $auxExec->unidade_cnes=$m->cnes;
                 $agExec->competencia=$competencia;
                 //coloca o objeto no vetor
-                $resul[]=$enfExec;
+                $resul[]=$auxExec;
             }
             return $resul;
         }
         
         /**
-         * Calcula o valor de cada meta referente ao Enfermeiro em uma determinada competência
-         * para isso soma os valores dos itens executados pelo Enfermeiro e que fazem parte de uma meta
+         * Calcula o valor de cada meta referente ao Auxiliar de Enfermagem  em uma determinada competência
+         * para isso soma os valores dos itens executados pelo Auxiliar de Enfermagem  e que fazem parte de uma meta
          * Exemplo: meta com 3 itens: o valor da meta vai ser a soma da quantidade de execução desses itens
          * IMPORTANTE: os registros devolvidos não estão salvos no banco!
          * @param int competência que a meta deve ser calculada
          * @param int offset número de início para pegar os registros
          * @param int pageSize quantidade de registros que devem ser trazidas do banco de dados
-         * @return EnfermeiroExecutaMeta[] devolve um vetor com os valores de cada meta executada por um Enfermeiro na competência
+         * @return AuxiliarEnfermagemExecutaMeta[] devolve um vetor com os valores de cada meta executada por um Auxiliar de Enfermagem  na competência
          */
         public static function calculeMetasComItens($competencia,$offset,$pageSize){
-            $sql="SELECT enf.enfermeiro_unidade_cnes AS cnes,SUM(enf.quantidade) AS total, enf.competencia,enf.enfermeiro_cpf AS enfermeiro, m.id AS meta";
-            $sql=" $sql FROM enfermeiro_executa_item ag INNER JOIN  item it ON it.id=enf.item_id";
+            $sql="SELECT aux.auxiliar_enfermagem_unidade_cnes AS cnes,SUM(aux.quantidade) AS total, aux.competencia,aux.auxiliar_enfermagem_cpf AS auxiliar_enfermagem, m.id AS meta";
+            $sql=" $sql FROM auxiliar_enfermagem_executa_item aux INNER JOIN  item it ON it.id=aux.item_id";
             $sql=" $sql INNER JOIN meta m ON m.id=it.meta_id";
-            $sql=" $sql GROUP BY enf.competencia,m.id,enf.enfermeiro_cpf HAVING enf.competencia=:competencia ";
+            $sql=" $sql GROUP BY aux.competencia,m.id,aux.auxiliar_enfermagem_cpf HAVING aux.competencia=:competencia ";
             $sql=" $sql LIMIT :offset , :pageSize;";
             //
             $dbC=Yii::app()->db->createCommand($sql);
@@ -185,19 +185,18 @@ class AuxiliarEnfermagemExecutaMeta extends CActiveRecord
             $dbC->bindParam(':pageSize', $pageSize , PDO::PARAM_INT);
             $dbC->bindParam(':offset', $offset, PDO::PARAM_INT);
             $dbC->bindParam(':competencia', $competencia, PDO::PARAM_STR);
-            Yii::log($sql);
             $resul=array();
             foreach($dbC->queryAll() as $m){
-                $enfExec= new EnfermeiroExecutaMeta();
+               $auxExec= new AuxiliarEnfermagemExecutaMeta();
                 
                 //popula
-                $enfExec->enfermeiro_cpf= $m->enfermeiro;
-                $enfExec->total=$m->total;
-                $enfExec->meta_id=$m->meta;
-                $enfExec->unidade_cnes=$m->cnes;
+                $auxExec->auxiliar_enfermagem_cpf= $m->auxiliar_enfermagem;
+                $auxExec->total=$m->total;
+                $auxExec->meta_id=$m->meta;
+                $auxExec->unidade_cnes=$m->cnes;
                 $agExec->competencia=$competencia;
                 //coloca o objeto no vetor
-                $resul[]=$enfExec;
+                $resul[]=$auxExec;
             }
             return $resul;
         }
