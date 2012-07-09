@@ -13,7 +13,7 @@ $this->menu=array(
     $ano = $_GET['ano'];
     $nome_unidade = $_GET['nome_unidade'];
     $mes_model = Meses::model()->findByPk($mes);
-    $title = "Faltas: $mes_model->nome / $ano ";
+    $title = "Faltas: $mes_model->nome -- $ano ";
 ?>
 <h2><?php echo $title;?></h2>
 <h4><?php echo "Unidade: ".$nome_unidade;?></h4>

@@ -66,6 +66,7 @@ class FaltaController extends SISPADBaseController
         public function actionViewMonth()
 	{
                 $model = new Falta;
+               
 		$this->render('view_month',array(
 			'model'=>$model,
 		));
