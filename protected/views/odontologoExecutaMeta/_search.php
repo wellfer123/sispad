@@ -1,7 +1,7 @@
 <div class="wide form">
 
 <?php $form=$this->beginWidget('CActiveForm', array(
-	'action'=>Yii::app()->createUrl($this->route),
+	'action'=>Yii::app()->createUrl('odontologoExecutaMeta/relatorioMetas'),//$this->route),
 	'method'=>'get',
 )); ?>
 
@@ -65,6 +65,16 @@
         </div>
 	<div class="row buttons">
 		<?php echo CHtml::submitButton('Busca');?>
+                <?php echo CHtml::ajaxButton('Gerar relatório', Yii::app()->createUrl('OdontologoExecutaMeta/relatorioMetas'),
+                                                        array(
+                                                              
+                                                              'complete' => 'function(data){
+                                                                               alert(data);
+                                                                               }',
+                                                            
+                                                            )
+                                                        
+                                    ) ?>
             <span class="generate">
                 <?php //    echo CHtml::submitButton("Gerar Relatório",array('name'=>'gerar-relatorio')); ?>
             </span>    

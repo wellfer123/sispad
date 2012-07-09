@@ -63,6 +63,7 @@ class AgenteSaudeExecutaItem extends CActiveRecord
 			'agente_saude' => array(self::BELONGS_TO, 'AgenteSaude', 'agente_saude_cpf'),
 			'unidade' => array(self::BELONGS_TO, 'AgenteSaude', 'agente_saude_unidade_cnes'),
 		);
+               
 	}
 
 	/**

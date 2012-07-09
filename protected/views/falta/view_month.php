@@ -11,6 +11,7 @@ $this->menu=array(
 <?php
     $mes = $_GET['mes'];
     $ano = $_GET['ano'];
+    $unidade_cnes = $_GET['unidade'];
     $nome_unidade = $_GET['nome_unidade'];
     $mes_model = Meses::model()->findByPk($mes);
     $title = "Faltas: $mes_model->nome -- $ano ";
@@ -19,5 +20,5 @@ $this->menu=array(
 <h4><?php echo "Unidade: ".$nome_unidade;?></h4>
 
 <?php echo CHtml::link("Gerar Relatório",array('relatorioMensal','title'=>$title.$nome_unidade,
-   'mes'=>$mes,'ano'=>$ano));?>
+   'mes'=>$mes,'ano'=>$ano,'unidade_cnes'=>$unidade_cnes));?>
 <?php echo $this->renderPartial('_view_month', array('model'=>$model)); ?>

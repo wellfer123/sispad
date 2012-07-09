@@ -7,7 +7,7 @@
 )); ?>
 
 	<p class="note">Fields with <span class="required">*</span> are required.</p>
-
+        <?php echo $this->renderMessages(); ?>
 	<?php echo $form->errorSummary($model); ?>
 
        <table class ="table_form">

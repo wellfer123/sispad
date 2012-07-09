@@ -123,11 +123,11 @@ class TotalFalta extends CActiveRecord
 
     }
 
-     public function searchMensal2($mes, $ano) {
-
+     public function searchMensal2($mes, $ano,$unidade_cnes=null) {
+             
                 $dados=Yii::app()->db->createCommand('select serv.nome, tot.quantidade as total
                                                       from total_falta as tot INNER JOIN servidor as serv
-                                                      ON tot.servidor_cpf = serv.cpf where  tot.mes='.$mes.' AND tot.ano='.$ano.' ORDER BY serv.nome')->queryAll();
+                                                      ON tot.servidor_cpf = serv.cpf where  tot.mes='.$mes.' AND tot.ano='.$ano.' AND serv.unidade_cnes='.$unidade_cnes.' ORDER BY serv.nome')->queryAll();
 
 		return new CArrayDataProvider($dados, array(
                                     'id'=>'totalfalta',

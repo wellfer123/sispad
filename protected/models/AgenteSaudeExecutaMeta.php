@@ -38,7 +38,7 @@ class AgenteSaudeExecutaMeta extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-                        array('meta_id,agente_saude_cpf,unidade_cnes,total,agente_saude_micro_area,competencia', 'required'),
+                        array('meta_id,agente_saude_cpf,unidade_cnes,total,competencia', 'required'),
 			array('meta_id, total,competencia', 'numerical', 'integerOnly'=>true),
 			array('agente_saude_cpf', 'length', 'max'=>11),
                         array('competencia', 'length', 'max'=>6),
