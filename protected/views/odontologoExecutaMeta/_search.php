@@ -65,16 +65,8 @@
         </div>
 	<div class="row buttons">
 		<?php echo CHtml::submitButton('Busca');?>
-                <?php echo CHtml::ajaxButton('Gerar relatório', Yii::app()->createUrl('OdontologoExecutaMeta/relatorioMetas'),
-                                                        array(
-                                                              
-                                                              'complete' => 'function(data){
-                                                                               alert(data);
-                                                                               }',
-                                                            
-                                                            )
-                                                        
-                                    ) ?>
+               
+              
             <span class="generate">
                 <?php //    echo CHtml::submitButton("Gerar Relatório",array('name'=>'gerar-relatorio')); ?>
             </span>    
