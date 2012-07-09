@@ -1378,7 +1378,8 @@ class ProcedimentoController extends SISPADBaseController
             //$this->_RBAC->checkAccess('registered',true);
             $q = $_GET['term'];
             if(isset($q)) {
-                 $procedimentos = Procedimento::model()->findAll('nome like :nome',array(':nome'=> strtoupper(trim($q)).'%'));
+                $q=strtoupper(trim($q));
+                 $procedimentos = Procedimento::model()->findAll('nome like :nome',array(':nome'=> '%'.$q.'%'));
 
                 if (!empty($procedimentos)) {
                     $out = array();

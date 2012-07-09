@@ -132,6 +132,7 @@ class EnfermeiroExecutaMetaController extends Controller
         }
         
          public function actionCalculeMetas(){
+             echo 'inicio';
             set_time_limit(0);
             try{
                 $pageSize=2;

@@ -27,7 +27,7 @@ class MetaController extends SISPADBaseController{
                               array('label'=>'Auxiliar de Enfermagem','button'=>'Lançar Meta','action'=>''),
                               array('label'=>'Enfermeiro','button'=>'Lançar Meta','action'=>''),
                               array('label'=>'Médico','button'=>'Lançar Meta','action'=>'MedicoExecutaMeta/calculeMetas'),
-                              array('label'=>'Odontólogo','button'=>'Lançar Meta','action'=>''),
+                              array('label'=>'Odontólogo','button'=>'Lançar Meta','action'=>'OdontologoExecutaMeta/calculeMetas'),
                               array('label'=>'Técnico em Enfermagem','button'=>'Lançar Meta','action'=>'')
             );
             

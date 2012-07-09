@@ -85,10 +85,10 @@ class RelatorioController extends SISPADBaseController
 		// Uncomment the following line if AJAX validation is needed
 		//$this->performAjaxValidation($model);
 
-		if(isset($_POST['relatorio']))
+		if(isset($_POST['Relatorio']))
 		{
                            
-                            $model->data_trabalho=$_POST['relatorio']['data_trabalho'];
+                            $model->data_trabalho=$_POST['Relatorio']['data_trabalho'];
                            
                             $model->data_envio = date('Y/m/d  H:i:s');
                             $model->servidor_cpf=Yii::app()->user->cpfservidor;
@@ -200,7 +200,7 @@ class RelatorioController extends SISPADBaseController
 	{
             $this->CheckAcessAction();
             $model=new Relatorio('search');
-		$dataProvider=new CActiveDataProvider('relatorio');
+		$dataProvider=new CActiveDataProvider('Relatorio');
 		$this->render('index',array(
 			'model'=>$model,
 		));
@@ -214,8 +214,8 @@ class RelatorioController extends SISPADBaseController
                 $this->CheckAcessAction();
 		$model=new Relatorio('search');
 		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['relatorio']))
-			$model->attributes=$_GET['relatorio'];
+		if(isset($_GET['Relatorio']))
+			$model->attributes=$_GET['Relatorio'];
 
 		$this->render('admin',array(
 			'model'=>$model,
@@ -231,7 +231,7 @@ class RelatorioController extends SISPADBaseController
 		if($this->_model===null)
 		{
 			if(isset($_GET['id']))
-				$this->_model=Relatorio::model()->with('temp_arquivo')->findbyPk($_GET['id']);
+				$this->_model=Relatorio::model()->with('temp_arquivo','servidor')->findbyPk($_GET['id']);
 			if($this->_model===null)
 				throw new CHttpException(404,'The requested page does not exist.');
 		}
