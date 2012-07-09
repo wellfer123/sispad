@@ -37,6 +37,8 @@ class Relatorio extends CActiveRecord
 		return 'relatorio';
 	}
 
+        
+        
 	/**
 	 * @return array validation rules for model attributes.
 	 */
