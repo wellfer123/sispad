@@ -14,6 +14,8 @@
 class Relatorio extends CActiveRecord
 
 
+
+
 {
         public $arquivo;
         
