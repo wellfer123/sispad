@@ -36,21 +36,13 @@ class MetaProcedimento extends CActiveRecord
 		return array(
 			array('meta_id', 'numerical', 'integerOnly'=>true),
 			array('procedimento_codigo', 'length', 'max'=>10),
-                        array('procedimento_codigo', 'validaProcedimentoExistente'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('meta_id, procedimento_codigo', 'safe', 'on'=>'search'),
 		);
 	}
         
-         public function  validaProcedimentoExistente($attribute,$params){
-
-             if((MetaProcedimento::model()->find('procedimento_codigo= :procedimento_codigo',array(':procedimento_codigo'=>$this->procedimento_codigo)))==null){
-                 return true;
-             }
-             $this->addError('procedimento_codigo','Procedimento já cadastrado em outra meta');
-             return false;
-        }
+         
 	/**
 	 * @return array relational rules.
 	 */
