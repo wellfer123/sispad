@@ -25,13 +25,7 @@ $('.search-form form').submit(function(){
 
 
 ?>
-<?php
-    
-    $competencia = $_GET['competencia'];
-    
-    
-?>
-<h1>Gerenciamento Odontologo Executa Metas - <?php echo $competencia; ?></h1>
+<h1>Gerenciamento Odontologo Executa Metas</h1>
 
 <p>
 Você pode opcionalmente entrar com um operador de comparação(<, <=, >, >=, <> ou =) iniciar cada uma de
@@ -45,7 +39,7 @@ suas pesquisa com valores específicos de como a comparação deve ser feita.
 )); ?>
 </div><!-- search-form -->
 <?php echo '</br></br>'; 
-      echo CHtml::link("Gerar Relatório",array('relatorioMetas','competencia'=>$competencia));?>
+      echo CHtml::link("Gerar Relatório",array('relatorioMetas'));?>
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'odontologo-executa-meta-grid',
 	'dataProvider'=>$model->search(),
