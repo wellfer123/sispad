@@ -102,12 +102,15 @@ class MedicoExecutaMeta extends CActiveRecord
         }
         
          public function searchMetasExecutadas($competencia) {
-
+                $where='';
+                if($competencia!=null){
+                    $where = "where agente_exec_meta.competencia='$competencia'";
+                }
                 $dados=Yii::app()->db->createCommand('select meta.nome as meta,serv.nome as medico,unid.nome as unidade,meta.valor as TotalEsperado,med_exec_meta.total as TotalExecutado 
                                                       from medico_executa_meta as med_exec_meta INNER JOIN meta
                                                       ON med_exec_meta.meta_id = meta.id INNER JOIN servidor as serv
                                                       ON serv.cpf = med_exec_meta.medico_cpf INNER JOIN unidade as unid
-                                                      ON unid.cnes = med_exec_meta.unidade_cnes where med_exec_meta.competencia='.$competencia)->queryAll();
+                                                      ON unid.cnes = med_exec_meta.unidade_cnes '.$where)->queryAll();
 
 		 $tes=new CArrayDataProvider($dados, array(
                                     'id'=>'medico_executa_meta',
