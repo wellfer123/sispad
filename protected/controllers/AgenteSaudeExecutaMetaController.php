@@ -266,7 +266,7 @@ class AgenteSaudeExecutaMetaController extends Controller
         public function actionRelatorioMetas() {
             $model = new AgenteSaudeExecutaMeta;
             $this->widget('application.extensions.phpexcel.EExcelView',
-                        array('dataProvider'=>$model->searchMetasExecutadas(),
+                        array('dataProvider'=>$model->searchMetasExecutadas(null),
                              'title'=>'metasExecutadas_agente_de_saude ',
                              'grid_mode'=>'export',
                              'exportType'=>'Excel2007',

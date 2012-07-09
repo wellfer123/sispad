@@ -277,7 +277,7 @@ class MedicoExecutaMetaController extends SISPADBaseController
         public function actionRelatorioMetas() {
             $model = new MedicoExecutaMeta;
             $this->widget('application.extensions.phpexcel.EExcelView',
-                        array('dataProvider'=>$model->searchMetasExecutadas(),
+                        array('dataProvider'=>$model->searchMetasExecutadas(null),
                              'title'=>'metasExecutadas_medico',
                              'grid_mode'=>'export',
                              'exportType'=>'Excel2007',

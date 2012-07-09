@@ -282,7 +282,7 @@ class OdontologoExecutaMetaController extends SISPADBaseController
             $model = new OdontologoExecutaMeta;
            
             $this->widget('application.extensions.phpexcel.EExcelView',
-                        array('dataProvider'=>$model->searchMetasExecutadas(),
+                        array('dataProvider'=>$model->searchMetasExecutadas(null),
                              'title'=>'metasExecutadas_odontologo_' ,
                              'grid_mode'=>'export',
                              'exportType'=>'Excel2007',
