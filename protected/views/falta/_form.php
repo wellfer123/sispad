@@ -34,7 +34,7 @@
 
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
+		<?php echo CHtml::submitButton($model->isNewRecord ? 'Enviar' : 'Atualizar'); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

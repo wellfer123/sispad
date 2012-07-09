@@ -192,7 +192,7 @@ class OdontologoExecutaMeta extends CActiveRecord
             $sql="SELECT odo.odontologo_unidade_cnes AS cnes,SUM(odo.quantidade) AS total, odo.competencia,odo.odontologo_cpf AS odontologo, m.id AS meta";
             $sql=" $sql FROM odontologo_executa_procedimento odo INNER JOIN  meta_procedimento mp ON mp.procedimento_codigo=odo.procedimento_codigo";
             $sql=" $sql INNER JOIN meta m ON m.id=mp.meta_id";
-            $sql=" $sql GROUP BY odo.competencia,m.id,odo.medico_cpf HAVING odo.competencia=:competencia; ";
+            $sql=" $sql GROUP BY odo.competencia,m.id,odo.odontologo_cpf HAVING odo.competencia=:competencia ";
             $sql=" $sql LIMIT :offset , :pageSize;";
             //
             $dbC=Yii::app()->db->createCommand($sql);

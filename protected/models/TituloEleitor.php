@@ -64,7 +64,7 @@ class TituloEleitor extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'servidor_cpf' => 'CPF do Servidor',
+			'servidor_cpf' => 'Servidor',
 			'numero' => 'Número',
 			'zona' => 'Zona',
 			'secao' => 'Seção',

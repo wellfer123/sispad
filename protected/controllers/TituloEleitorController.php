@@ -12,6 +12,7 @@ class TituloEleitorController extends Controller
 	 * @var CActiveRecord the currently loaded data model instance.
 	 */
 	private $_model;
+        private $_servidor;
 
 	/**
 	 * @return array action filters
@@ -30,23 +31,7 @@ class TituloEleitorController extends Controller
 	 */
 	public function accessRules()
 	{
-		return array(
-			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
-				'users'=>array('*'),
-			),
-			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
-				'users'=>array('@'),
-			),
-			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
-				'users'=>array('admin'),
-			),
-			array('deny',  // deny all users
-				'users'=>array('*'),
-			),
-		);
+		return array();
 	}
 
 	/**
@@ -55,7 +40,7 @@ class TituloEleitorController extends Controller
 	public function actionIndex()
 	{
 		$this->render('view',array(
-			'model'=>$this->loadModel(),
+			'model'=>$this->loadModel(),'servidor'=>$this->loadModelServidor(),
 		));
 	}
 
@@ -78,9 +63,7 @@ class TituloEleitorController extends Controller
 				$this->redirect(array('view','id'=>$model->servidor_cpf));
 		}
 
-		$this->render('create',array(
-			'model'=>$model,
-		));
+		$this->render('create',array('model'=>$model,'servidor'=>$this->loadModelServidor()));
 	}
 
 	/**
@@ -102,7 +85,7 @@ class TituloEleitorController extends Controller
 		}
 
 		$this->render('update',array(
-			'model'=>$model,
+			'model'=>$model,'servidor'=>$this->loadModelServidor(),
 		));
 	}
 
@@ -130,6 +113,16 @@ class TituloEleitorController extends Controller
 		return $this->_model;
 	}
 
+        public function loadModelServidor()
+	{
+                //pega o servidor pelo parâmetro
+            if($this->_servidor===null){
+		if(isset($_GET['id']))
+                    $this->_servidor=Servidor::model()->findbyPk($_GET['id']);
+                
+            }
+		return $this->_servidor;
+	}
 	/**
 	 * Performs the AJAX validation.
 	 * @param CModel the model to be validated
@@ -141,5 +134,13 @@ class TituloEleitorController extends Controller
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
 		}
+	}
+        
+        public function actionView()
+	{
+                //recupera o o endereçoe o servidor
+		$this->render('view',array(
+			'model'=>$this->loadModel(),'servidor'=>$this->loadModelServidor(),
+		));
 	}
 }

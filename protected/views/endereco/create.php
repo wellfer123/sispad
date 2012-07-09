@@ -1,15 +1,21 @@
 <?php
 $this->breadcrumbs=array(
-	'Enderecos'=>array('index'),
-	'Create',
+        'Servidor'=>array('Servidor/view','id'=>$servidor->cpf),
+	'Endereço',
+	'Cadastro',
 );
 
 $this->menu=array(
-	array('label'=>'List Endereco', 'url'=>array('index')),
-	array('label'=>'Manage Endereco', 'url'=>array('admin')),
+	array('label'=>'Visualizar Servidor', 'url'=>array('Servidor/view','id'=>$servidor->cpf)),
 );
+
 ?>
 
-<h1>Create Endereco</h1>
+<?php $this->beginWidget('zii.widgets.CPortlet', array(
+			'title'=>'Cadastro de Endereço de '.$servidor->nome,
+                        'htmlOptions'=>array('class'=>'portlet_form')
+		));?>
 
-<?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php echo $this->renderPartial('_form', array('model'=>$model,'servidor'=>$servidor)); ?>
+
+<?php $this->endWidget(); ?>

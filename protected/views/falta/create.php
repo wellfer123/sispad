@@ -2,7 +2,7 @@
 $this->breadcrumbs=array(
 	'Faltas'=>array('Falta/preparedViewDetail'),
 	'Enviar Faltas '=>array('Falta/preparedCreate'),
-        'Enviar'
+        'Envio'
 );
 
 $this->menu=array(
@@ -14,7 +14,7 @@ $this->menu=array(
 ?>
 
 <?php $this->beginWidget('zii.widgets.CPortlet', array(
-			'title'=>"Falta: $servidor->nome - $mes->nome/$model->ano",
+			'title'=>"Servidor: $servidor->nome Falta:$mes->nome/$model->ano",
                         'htmlOptions'=>array('class'=>'portlet_form')
 		));?>
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

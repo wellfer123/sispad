@@ -1,7 +1,7 @@
 <?php
 $this->breadcrumbs=array(
-	'Total Relatorios'=>array('index'),
-	'Manage',
+	'Total de Relatorios'=>array('index'),
+	'Gerenciamento',
 );
 
 $this->menu=array(

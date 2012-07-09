@@ -1,11 +1,12 @@
 <?php
 $this->breadcrumbs=array(
-	'Metas executadas por médicos'=>array('preparedAdmin'),
+        'Metas'=>array('admin'),
+	'Executadas por Médicos'=>array('Admin'),
 	'Envio',
 );
 
 $this->menu=array(
-	array('label'=>'Gerenciar Metas Executads por Médicos', 'url'=>array('preparedAdmin')),
+	array('label'=>'Gerenciar Metas Executads por Médicos', 'url'=>array('admin')),
 );
 ?>
 

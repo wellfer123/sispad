@@ -1,6 +1,7 @@
 <?php
 $this->breadcrumbs=array(
-	'MedicoExecutaMetas'=>array('admin'),
+	'Metas'=>array('admin'),
+	'Executadas por Médicos'=>array('Admin'),
 	'Escolher Competência',
 );
 

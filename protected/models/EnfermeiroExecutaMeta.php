@@ -44,7 +44,7 @@ class EnfermeiroExecutaMeta extends CActiveRecord
 			array('unidade_cnes', 'length', 'max'=>10),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('enfermeiro_cpf, unidade_cnes, meta_id', 'safe', 'on'=>'search'),
+			array('enfermeiro_cpf, competencia, unidade_cnes, meta_id, total', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -182,7 +182,7 @@ class EnfermeiroExecutaMeta extends CActiveRecord
             $sql="SELECT enf.enfermeiro_unidade_cnes AS cnes,SUM(enf.quantidade) AS total, enf.competencia,enf.enfermeiro_cpf AS enfermeiro, m.id AS meta";
             $sql=" $sql FROM enfermeiro_executa_procedimento enf INNER JOIN  meta_procedimento mp ON mp.procedimento_codigo=enf.procedimento_codigo";
             $sql=" $sql INNER JOIN meta m ON m.id=mp.meta_id";
-            $sql=" $sql GROUP BY enf.competencia,m.id,enf.enfermeiro_cpf HAVING enf.competencia=:competencia; ";
+            $sql=" $sql GROUP BY enf.competencia,m.id,enf.enfermeiro_cpf HAVING enf.competencia=:competencia ";
             $sql=" $sql LIMIT :offset , :pageSize;";
             //
             $dbC=Yii::app()->db->createCommand($sql);
@@ -228,7 +228,6 @@ class EnfermeiroExecutaMeta extends CActiveRecord
             $dbC->bindParam(':pageSize', $pageSize , PDO::PARAM_INT);
             $dbC->bindParam(':offset', $offset, PDO::PARAM_INT);
             $dbC->bindParam(':competencia', $competencia, PDO::PARAM_STR);
-            Yii::log($sql);
             $resul=array();
             foreach($dbC->queryAll() as $m){
                 $enfExec= new EnfermeiroExecutaMeta();

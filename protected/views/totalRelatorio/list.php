@@ -1,12 +1,13 @@
 <?php
 $this->breadcrumbs=array(
-	'Total Relatorios',
+	'Total de Relatórios',
+        'Meus relatórios enviados',
 );
 
 
 ?>
 
-<h1>Total Relatorios</h1>
+<h1>Total de Relatórios</h1>
 
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'total-relatorio-grid',

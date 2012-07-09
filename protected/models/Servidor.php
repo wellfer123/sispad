@@ -113,7 +113,7 @@ class Servidor extends CActiveRecord
 
 		//$criteria->compare('endereco_id',$this->endereco_id);
 
-		//$criteria->compare('unidade_cnes',$this->unidade_cnes,true);
+		$criteria->compare('unidade_cnes',$this->unidade_cnes,true);
 
 
 

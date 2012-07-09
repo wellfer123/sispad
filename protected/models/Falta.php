@@ -69,8 +69,8 @@ class Falta extends CActiveRecord {
         return array(
             'dia' => 'Dia',
             'mes' => 'Mes',
-            'servidor_cpf' => 'Servidor Cpf',
-            'data_envio' => 'Data Envio',
+            'servidor_cpf' => 'Servidor',
+            'data_envio' => 'Data de Envio',
             'obs_motivo' => 'Observação',
             'motivo_id' => 'Motivo',
             'ano' => 'Ano',

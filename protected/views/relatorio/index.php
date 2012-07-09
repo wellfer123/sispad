@@ -5,8 +5,8 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Create relatorio', 'url'=>array('create')),
-	array('label'=>'Manage relatorio', 'url'=>array('admin')),
+	array('label'=>'Enviar Relatório', 'url'=>array('create')),
+	array('label'=>'Gerenciar Relatórios', 'url'=>array('admin')),
 );
 ?>
 
@@ -20,7 +20,7 @@ $this->menu=array(
 	'columns'=>array(
 		'id',
 		array(
-                    'name'=>'Data Trabalho',
+                    'name'=>'Data do Trabalho',
                     'value'=> 'FormataData::inverteData($data->data_trabalho,"-")',
                 ),
 		array(

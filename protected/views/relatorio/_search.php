@@ -5,10 +5,6 @@
 	'method'=>'get',
 )); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'id'); ?>
-		<?php echo $form->textField($model,'id'); ?>
-	</div>
 
 	<div class="row">
 		<?php //echo $form->label($model,'conteudo'); ?>
@@ -16,13 +12,43 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'data_envio'); ?>
-		<?php echo $form->textField($model,'data_envio'); ?>
+                <?php echo $form->labelEx($model,'data_envio'); ?>
+                <?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
+                                                //'name'=>'data_admisao',
+                                                'options'=>array(
+                                                    'changeMonth'=>'true', 
+                                                    'changeYear'=>'true',   
+                                                    'yearRange' => '-99:+0', 
+                                                    'showAnim'=>'fadeIn', // 'show' (the default), 'slideDown', 'fadeIn', 'fold'
+                                                    'showOn'=>'button',
+                                                    'buttonText'=>Yii::t('ui','Selecione a data'), 
+                                                    'buttonImage'=>Yii::app()->request->baseUrl.'/images/calendar.png', 
+                                                    'buttonImageOnly'=>true,
+                                                ),
+                                                'language'=>'pt',
+                                                'model'=>$model,
+                                                'attribute'=>'data_envio'))
+                 ?>
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'data_trabalho'); ?>
-		<?php echo $form->textField($model,'data_trabalho'); ?>
+		<?php echo $form->labelEx($model,'data_trabalho'); ?>
+                <?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
+                                                //'name'=>'data_admisao',
+                                                'options'=>array(
+                                                    'changeMonth'=>'true', 
+                                                    'changeYear'=>'true',   
+                                                    'yearRange' => '-99:+0', 
+                                                    'showAnim'=>'fadeIn', // 'show' (the default), 'slideDown', 'fadeIn', 'fold'
+                                                    'showOn'=>'button',
+                                                    'buttonText'=>Yii::t('ui','Selecione a data'), 
+                                                    'buttonImage'=>Yii::app()->request->baseUrl.'/images/calendar.png', 
+                                                    'buttonImageOnly'=>true,
+                                                ),
+                                                'language'=>'pt',
+                                                'model'=>$model,
+                                                'attribute'=>'data_trabalho'))
+                 ?>
 	</div>
 
         <div class="row">

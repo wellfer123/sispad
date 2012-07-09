@@ -188,7 +188,7 @@ class AgenteSaudeExecutaMeta extends CActiveRecord
             $sql="SELECT ag.agente_saude_micro_area AS microArea,ag.agente_saude_unidade_cnes AS cnes,SUM(ag.quantidade) AS total, ag.competencia,ag.agente_saude_cpf AS agenteSaude, m.id AS meta";
             $sql=" $sql FROM agente_saude_executa_procedimento ag INNER JOIN  meta_procedimento mp ON mp.procedimento_codigo=ag.procedimento_codigo";
             $sql=" $sql INNER JOIN meta m ON m.id=mp.meta_id";
-            $sql=" $sql GROUP BY ag.competencia,m.id,ag.agente_saude_cpf HAVING ag.competencia=:competencia; ";
+            $sql=" $sql GROUP BY ag.competencia,m.id,ag.agente_saude_cpf HAVING ag.competencia=:competencia ";
             $sql=" $sql LIMIT :offset , :pageSize;";
             //
             $dbC=Yii::app()->db->createCommand($sql);
