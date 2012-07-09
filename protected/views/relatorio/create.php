@@ -1,12 +1,12 @@
 <?php
 $this->breadcrumbs=array(
-	'Relatorios'=>array('index'),
-	'Create',
+	'Relatórios'=>array('index'),
+	'Envio',
 );
 
 $this->menu=array(
 	array('label'=>'Listar Relatórios', 'url'=>array('index')),
-	array('label'=>'Gerenciamento de relatórios', 'url'=>array('admin')),
+	array('label'=>'Gerenciamento de Relatórios', 'url'=>array('admin')),
 );
 ?>
 <?php $this->beginWidget('zii.widgets.CPortlet', array(

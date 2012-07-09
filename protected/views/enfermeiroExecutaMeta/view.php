@@ -1,25 +1,26 @@
 <?php
 $this->breadcrumbs=array(
-'Enfermeiro Executa Metas'=>array('index'),
-$model->enfermeiro_cpf,
+    'Metas'=>array('admin'),
+    'Executadas por Enfermeiro '=>array('index'),
+    $model->enfermeiro_cpf,
 );
 
 $this->menu=array(
-array('label'=>'Listar Metas Executadas Por Enfermeiro', 'url'=>array('index')),
-array('label'=>'Enviar Nova Execução de Meta', 'url'=>array('create')),
-array('label'=>'Gerenciar Metas Executadas Por Enfermeiro ', 'url'=>array('admin')),
+    array('label'=>'Listar Metas Executadas Por Enfermeiro', 'url'=>array('index')),
+    array('label'=>'Enviar Nova Execução de Meta', 'url'=>array('create')),
+    array('label'=>'Gerenciar Metas Executadas Por Enfermeiro ', 'url'=>array('admin')),
 );
 ?>
 
 
 
 <div class="update">
-<h3>Meta: <?php echo $model->meta->nome.' executada por '.$model->enfermeiro->servidor->nome; ?></h3>
+    <h3>Meta: <?php echo $model->meta->nome.' executada por '.$model->enfermeiro->servidor->nome; ?></h3>
 </div>
 
 <?php $this->widget('zii.widgets.CDetailView', array(
-'data'=>$model,
-'attributes'=>array(
+    'data'=>$model,
+    'attributes'=>array(
                 array(
                         'label'=>'Indicador',
                         'value'=>$model->meta->indicador->nome
@@ -48,7 +49,7 @@ array('label'=>'Gerenciar Metas Executadas Por Enfermeiro ', 'url'=>array('admin
                         'label'=>'Status da Meta',
                         'value'=>$model->isMetaBatida(),
                 ),
-'data_inicio',
-'data_fim',
+                'data_inicio',
+                'data_fim',
 ),
 )); ?>

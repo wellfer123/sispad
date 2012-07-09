@@ -1,7 +1,8 @@
 <?php
 $this->breadcrumbs=array(
-        'Metas executadas por médicos'=>array('admin'),
-	'Meta'=>array('admin'),
+        'Metas'=>array('admin'),
+	'Executadas por Médicos'=>array('Admin'),
+        'Visualização',
 //	$model->medico->servidor->nome,
 );
 

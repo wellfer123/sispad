@@ -14,7 +14,7 @@
                                      // controller method to return the autoComplete data (from CJuiAutoComplete)
                                     'sourceUrl'=>Yii::app()->createUrl('Servidor/findEnfermeiros'),
                                     // defaults to false. set 'true' to display the FK field with 'readonly' attribute.
-                                    'showFKField'=>true,
+                                    'showFKField'=>false,
                                     // display size of the FK field. only matters if not hidden. defaults to 10
                                     'FKFieldSize'=>11,
                                     'relName'=>'enfermeiro', // the relation name defined above
@@ -56,10 +56,7 @@
                                 ));?>
 </div>
 
-<div class="row">
-<?php echo $form->label($model,'total'); ?>
-<?php echo $form->textField($model,'total'); ?>
-</div>
+
 
 <div class="row">
                 <?php echo $form->labelEx($model,'competencia'); ?>
@@ -68,7 +65,7 @@
         </div>
 
 <div class="row buttons">
-<?php echo CHtml::submitButton('Search'); ?>
+<?php echo CHtml::submitButton('Pesquisar'); ?>
 </div>
 
 <?php $this->endWidget(); ?>

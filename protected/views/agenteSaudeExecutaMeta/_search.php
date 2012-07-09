@@ -14,7 +14,7 @@
                                      // controller method to return the autoComplete data (from CJuiAutoComplete)
                                     'sourceUrl'=>Yii::app()->createUrl('Servidor/findAgentesDeSaude'),
                                     // defaults to false.  set 'true' to display the FK field with 'readonly' attribute.
-                                    'showFKField'=>true,
+                                    'showFKField'=>false,
                                     // display size of the FK field.  only matters if not hidden.  defaults to 10
                                     'FKFieldSize'=>11,
                                     'relName'=>'agente_saude', // the relation name defined above

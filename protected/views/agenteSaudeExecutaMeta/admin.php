@@ -1,7 +1,8 @@
 <?php
 $this->breadcrumbs=array(
-	'Agente Saude Executa Metas'=>array('index'),
-	'Manage',
+	'Meta'=>array('admin'),
+	'Agente Saude Executa Metas'=>array('admin'),
+	'Gerenciamento',
 );
 
 $this->menu=array(
@@ -23,7 +24,7 @@ $('.search-form form').submit(function(){
 ");
 ?>
 <?php $competencia = $_GET['competencia'];?>
-<h1>Gerenciamento Agente de Saúde Executa Metas - <?php echo $competencia;?></h1>
+<h2>Gerenciamento de Metas Executadas por Agente de Saúde - <?php echo $competencia;?></h2>
 
 <p>
 Você pode opcionalmente entrar com um operador de comparação(<, <=, >, >=, <> ou =) iniciar cada uma de

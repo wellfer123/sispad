@@ -1,7 +1,8 @@
 <?php
 $this->breadcrumbs=array(
-	'Agente Saude Executa Metas'=>array('index'),
-	$model->agente_saude_cpf,
+	'Meta'=>array('admin'),
+	'Agente Saude Executa Metas'=>array('admin'),
+        'Visualização'
 );
 
 $this->menu=array(

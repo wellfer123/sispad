@@ -1,6 +1,6 @@
 <?php
 $this->breadcrumbs=array(
-	'Servidors'=>array('index'),
+	'Servidores'=>array('index'),
 	'Cadastro',
 );
 

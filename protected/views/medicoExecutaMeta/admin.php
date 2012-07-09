@@ -1,6 +1,8 @@
 <?php
 $this->breadcrumbs=array(
-	'Metas executadas por médicos',
+	'Metas'=>array('admin'),
+	'Executadas por Médicos'=>array('Admin'),
+        'Gerenciamento',
 );
 
 $this->menu=array(

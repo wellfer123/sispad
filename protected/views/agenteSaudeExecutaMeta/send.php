@@ -1,11 +1,13 @@
 <?php
 $this->breadcrumbs=array(
-	'Metas executadas por Agentes de Saúde'=>array('preparedAdmin'),
+	'Meta'=>array('admin'),
+	'Agente Saude Executa Metas'=>array('admin'),
 	'Envio',
+
 );
 
 $this->menu=array(
-	array('label'=>'Gerenciar Metas Executads por Agentes de Saúde', 'url'=>array('preparedAdmin')),
+	array('label'=>'Gerenciar Metas Executads por Agentes de Saúde', 'url'=>array('admin')),
 );
 ?>
 

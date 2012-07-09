@@ -15,7 +15,7 @@
                                      // controller method to return the autoComplete data (from CJuiAutoComplete)
                                     'sourceUrl'=>Yii::app()->createUrl('Servidor/findMedicos'),
                                     // defaults to false.  set 'true' to display the FK field with 'readonly' attribute.
-                                    'showFKField'=>true,
+                                    'showFKField'=>false,
                                     // display size of the FK field.  only matters if not hidden.  defaults to 10
                                     'FKFieldSize'=>11,
                                     'relName'=>'medico', // the relation name defined above
@@ -64,7 +64,6 @@
                                                     CHtml::listData(Competencia::model()->findAll(), 'mes_ano', 'mes_ano'),array('size'=>1,'maxlength'=>6)) ?>
         </div>
 	<div class="row buttons">
-            <input onclick="">
                 <?php echo CHtml::submitButton('Pesquisar',array('onclick'=>"forms.".$form->id.".action=".Yii::app()->createUrl('MedicoExecutaMeta/admin'))); ?>
 	</div>
 
