@@ -141,7 +141,7 @@ class ServidorEquipe extends CActiveRecord
 		return array(
 			'equipe_codigo_area' => 'Equipe Codigo Area',
 			'equipe_unidade_cnes' => 'Equipe Unidade Cnes',
-			'servidor_cpf' => 'Servidor Cpf',
+			'servidor_cpf' => 'Servidor',
                         'funcao'=>'Função'
 		);
 	}
