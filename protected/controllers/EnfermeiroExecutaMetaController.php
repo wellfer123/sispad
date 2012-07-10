@@ -106,7 +106,7 @@ class EnfermeiroExecutaMetaController extends Controller
                             //verifica se a meta executa pelo Enfermeiro existe
                             if(!EnfermeiroExecutaMeta::model()->exists('enfermeiro_cpf=:enfermeiro AND unidade_cnes=:unidade AND meta_id=:meta AND competencia=:competencia',
                                                                    array(':enfermeiro'=>$meta->enfermeiro_cpf,':unidade'=>$meta->unidade_cnes,
-                                                                          ':meta'=>$meta->meta_id,'competencia'=>$meta>competencia))){
+                                                                          ':meta'=>$meta->meta_id,'competencia'=>$meta->competencia))){
                                 //vai salvar a meta, pois não existe
                                 if($meta->save()){
                                     Yii::log("Meta salva com sucesso", CLogger::LEVEL_INFO);
@@ -137,13 +137,13 @@ class EnfermeiroExecutaMetaController extends Controller
             try{
                 $pageSize=2;
                 $offset=0;
-                
+                $competencia = $_POST['competencia'];
                 $size=$pageSize;
                 $metas=array();
                 //metas com prodecimentos
                 while($size==$pageSize){
                     try{
-                        $metas=EnfermeiroExecutaMeta::calculeMetasComProcedimentos(22012, $offset,$pageSize) ;
+                        $metas=EnfermeiroExecutaMeta::calculeMetasComProcedimentos($competencia, $offset,$pageSize) ;
                         //calcula o tamanho do vetor
                         $size=sizeof($metas);
                         //muda o offset: incrementa
@@ -168,7 +168,7 @@ class EnfermeiroExecutaMetaController extends Controller
                 //da página vai parar, pois não tem mais itens
                 while($size==$pageSize){
                     try{
-                        $metas=EnfermeiroExecutaMeta::calculeMetasComItens(22012, $offset,$pageSize) ;
+                        $metas=EnfermeiroExecutaMeta::calculeMetasComItens($competencia, $offset,$pageSize) ;
                         //calcula o tamanho do vetor
                         $size=sizeof($metas);
                         //muda o offset: incrementa

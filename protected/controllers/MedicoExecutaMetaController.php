@@ -159,13 +159,13 @@ class MedicoExecutaMetaController extends SISPADBaseController
             try{
                 $pageSize=2;
                 $offset=0;
-                
+                $competencia = $_POST['competencia'];
                 $size=$pageSize;
                 $metas=array();
                 //metas com prodecimentos
                 while($size==$pageSize){
                     try{
-                        $metas=MedicoExecutaMeta::calculeMetasComProcedimentos(22012, $offset,$pageSize) ;
+                        $metas=MedicoExecutaMeta::calculeMetasComProcedimentos($competencia, $offset,$pageSize) ;
                         //calcula o tamanho do vetor
                         $size=sizeof($metas);
                         //muda o offset: incrementa
@@ -190,7 +190,7 @@ class MedicoExecutaMetaController extends SISPADBaseController
                 //da página vai parar, pois não tem mais itens
                 while($size==$pageSize){
                     try{
-                        $metas=MedicoExecutaMeta::calculeMetasComItens(22012, $offset,$pageSize) ;
+                        $metas=MedicoExecutaMeta::calculeMetasComItens($competencia, $offset,$pageSize) ;
                         //calcula o tamanho do vetor
                         $size=sizeof($metas);
                         //muda o offset: incrementa

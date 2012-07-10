@@ -22,10 +22,11 @@ class MetaController extends SISPADBaseController{
 
 
         public function  actionCalculo(){
+           
             $profissoes=array(
-                              array('label'=>'Agente de Saúde','button'=>'Lançar Meta','action'=>''),
+                              array('label'=>'Agente de Saúde','button'=>'Lançar Meta','action'=>'AgenteSaudeExecutaMeta/calculeMetas'),
                               array('label'=>'Auxiliar de Enfermagem','button'=>'Lançar Meta','action'=>''),
-                              array('label'=>'Enfermeiro','button'=>'Lançar Meta','action'=>''),
+                              array('label'=>'Enfermeiro','button'=>'Lançar Meta','action'=>'EnfermeiroExecutaMeta/calculeMetas'),
                               array('label'=>'Médico','button'=>'Lançar Meta','action'=>'MedicoExecutaMeta/calculeMetas'),
                               array('label'=>'Odontólogo','button'=>'Lançar Meta','action'=>'OdontologoExecutaMeta/calculeMetas'),
                               array('label'=>'Técnico em Enfermagem','button'=>'Lançar Meta','action'=>'')

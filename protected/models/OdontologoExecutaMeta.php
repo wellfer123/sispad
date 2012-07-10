@@ -39,7 +39,7 @@ class OdontologoExecutaMeta extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-                        array('meta_id,odontologo_cpf,unidade_cnes,total,competencia', 'required'),
+                        array('meta_id,odontologo_cpf,unidade_cnes,competencia', 'required'),
 			array('meta_id,total,competencia', 'numerical', 'integerOnly'=>true),
 			array('odontologo_cpf', 'length', 'max'=>11),
 			array('unidade_cnes', 'length', 'max'=>10),
@@ -247,7 +247,7 @@ class OdontologoExecutaMeta extends CActiveRecord
                 $odoExec->total=$m->total;
                 $odoExec->meta_id=$m->meta;
                 $odoExec->unidade_cnes=$m->cnes;
-                $agExec->competencia=$competencia;
+                $odoExec->competencia=$competencia;
                 //coloca o objeto no vetor
                 $resul[]=$odoExec;
             }
