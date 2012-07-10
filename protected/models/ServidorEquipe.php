@@ -21,7 +21,7 @@ class ServidorEquipe extends CActiveRecord
         const DESATIVO=0;
 
         public $erro;
-        
+        public $_microarea;
         /**
          * @var string unidade que  faz parte a equipe
          * @soap
@@ -68,7 +68,7 @@ class ServidorEquipe extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('equipe_codigo_area', 'numerical', 'integerOnly'=>true),
-                        
+                        array('_microarea','required','on'=>'agenteSaude'),
 			array('equipe_unidade_cnes', 'length', 'max'=>10),
 			array('servidor_cpf', 'length', 'max'=>11),
                         array('servidor_cpf','verificaServidorExistente','on'=>'create'),
@@ -78,7 +78,13 @@ class ServidorEquipe extends CActiveRecord
 			array('equipe_codigo_area, equipe_unidade_cnes, servidor_cpf', 'safe', 'on'=>'search'),
 		);
 	}
-
+        function validaMicroarea($attribute,$params) {
+            if(!isset($this->_microarea)){
+                $this->addError('microarea','Campo nao pode estar vazio');
+                return false;
+            }
+            return true;
+        }
 	/**
 	 * @return array relational rules.
 	 */

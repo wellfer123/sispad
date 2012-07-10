@@ -65,8 +65,11 @@ $ourscript = "$(document).ready(function(){
                     </td>
                     
                     <td id="microarea">
-                        <?php echo CHtml::label('Microarea',false); ?>
-                        <?php echo CHtml::textField('codigo_microarea');?>
+                         <?php echo $form->labelEx($model,'_microarea'); ?>
+                         <?php echo $form->textField($model,'_microarea'); ?>
+                        <?php echo $form->error($model,'_microarea'); ?>
+                        <?php //echo CHtml::label('Microarea',false); ?>
+                        <?php //echo CHtml::textField('_microarea');?>
                     </td>
                 </tr>
             </tbody>

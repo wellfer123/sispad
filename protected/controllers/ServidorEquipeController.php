@@ -51,8 +51,14 @@ class ServidorEquipeController extends SISPADBaseController
                         $model->ativo = 1;
 
                         $model2 = new $model->funcao;
-                        if($model->funcao=='AgenteSaude')
-                            $model2->micro_area = $_POST['codigo_microarea'];
+                        if($model->funcao=='AgenteSaude'){
+                            $model->scenario='agenteSaude';
+                            $model2->micro_area = $_POST['ServidorEquipe']['_microarea'];
+                           
+                            
+                        }
+                       
+                        
                         $model2->servidor_cpf = $model->servidor_cpf;
                         $model2->unidade_cnes = $model->equipe_unidade_cnes;
                         $model2->data_cadastro = date("Y-m-d");
