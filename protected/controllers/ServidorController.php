@@ -265,6 +265,7 @@ class ServidorController extends SISPADBaseController
                             'label' => $agen->getServidorUnidade(),  
                             'value' => $agen->getServidorUnidade(),
                             'unidade_cnes' => $agen->unidade_cnes,
+                            'micro_area'=>$agen->micro_area,
                             'id' => $agen->servidor_cpf, // return value from autocomplete
                      );
                     }

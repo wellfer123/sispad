@@ -30,9 +30,7 @@ class AgenteSaudeExecutaMetaController extends Controller
 	 */
 	public function accessRules()
 	{
-		return array(array('allow',  // deny all users
-				'users'=>array('*'),
-			),
+		return array(
 //			array('allow',  // allow all users to perform 'index' and 'view' actions
 //				'actions'=>array('index','view'),
 //				'users'=>array('*'),
@@ -103,9 +101,9 @@ class AgenteSaudeExecutaMetaController extends Controller
                         //todo o código com try dentro
                         try{
                             //verifica se a meta executa pelo agente de saude existe
-                            if(!AgenteSaudeExecutaMeta::model()->exists('agente_saude_cpf=:agente_saude AND unidade_cnes=:unidade AND meta_id=:meta AND competencia=:competencia',
+                            if(!AgenteSaudeExecutaMeta::model()->exists('agente_saude_micro_area=:microArea AND  agente_saude_cpf=:agente_saude AND unidade_cnes=:unidade AND meta_id=:meta AND competencia=:competencia',
                                                                    array(':agente_saude'=>$meta->agente_saude_cpf,':unidade'=>$meta->unidade_cnes,
-                                                                          ':meta'=>$meta->meta_id,'competencia'=>$meta>competencia))){
+                                                                          ':meta'=>$meta->meta_id,'competencia'=>$meta->competencia,':microArea'=>$meta->agente_saude_micro_area))){
                                 //vai salvar a meta, pois não existe
                                 if($meta->save()){
                                     Yii::log("Meta salva com sucesso", CLogger::LEVEL_INFO);
@@ -116,7 +114,7 @@ class AgenteSaudeExecutaMetaController extends Controller
                                 
                             }
                         }catch(Exception $excep){
-                          Yii::log("Execução da URL ".$this->route.' no método calculaMetas ao tentar salvar  ameta executada pelo médico ', CLogger::LEVEL_ERROR);  
+                          Yii::log("Execução da URL ".$this->route.' no método calculaMetas ao tentar salvar  a meta executada pelo agente de saúde '.$excep->getMessage(), CLogger::LEVEL_ERROR);  
                         }
                     }
                     
@@ -131,6 +129,7 @@ class AgenteSaudeExecutaMetaController extends Controller
         }
         
          public function actionCalculeMetas(){
+             Yii::log("inicio");
             set_time_limit(0);
             try{
                 $pageSize=2;
