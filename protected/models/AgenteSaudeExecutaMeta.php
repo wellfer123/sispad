@@ -5,7 +5,7 @@
  *
  * The followings are the available columns in table 'agente_saude_executa_meta':
  * @property string $agente_saude_cpf
- * @property integer $agente_saude_microarea
+ * @property integer $agente_saude_micro_area
  * @property string $unidade_cnes
  * @property integer $meta_id
  * @property integer $total
@@ -38,14 +38,14 @@ class AgenteSaudeExecutaMeta extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-                        array('meta_id,agente_saude_cpf,unidade_cnes,total,competencia', 'required'),
-			array('meta_id, total,competencia', 'numerical', 'integerOnly'=>true),
+                        array('meta_id,agente_saude_cpf,agente_saude_micro_area,unidade_cnes,total,competencia', 'required'),
+			array('meta_id, total,competencia,agente_saude_micro_area', 'numerical', 'integerOnly'=>true),
 			array('agente_saude_cpf', 'length', 'max'=>11),
                         array('competencia', 'length', 'max'=>6),
 			array('unidade_cnes', 'length', 'max'=>10),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('agente_saude_cpf, competencia,agente_saude_microarea, unidade_cnes, meta_id, total', 'safe', 'on'=>'search'),
+			array('agente_saude_cpf, competencia,agente_saude_micro_area, unidade_cnes, meta_id, total', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -60,7 +60,7 @@ class AgenteSaudeExecutaMeta extends CActiveRecord
 			'meta' => array(self::BELONGS_TO, 'Meta', 'meta_id'),
                         //Esse faz referência ao agente de saúde presente na tabela agente_saude,
                         //mas para buscar buscá-lo, aqui, referencia a tabela servidor
-			'agente_saude' => array(self::BELONGS_TO, 'AgenteSaude', 'agente_saude_cpf,unidade_cnes'),
+			'agente_saude' => array(self::BELONGS_TO, 'AgenteSaude', 'agente_saude_cpf,unidade_cnes,agente_saude_micro_area'),
                         //essa unidade faz referência a unidade presente na tabela agente_saude,
                         //mas para buscar a unidade, aqui, referencia a tabela unidade
 			'unidade_agente_saude' => array(self::BELONGS_TO, 'Unidade', 'unidade_cnes'),
@@ -74,7 +74,7 @@ class AgenteSaudeExecutaMeta extends CActiveRecord
 	{
 		return array(
 			'agente_saude_cpf' => 'Agente de Saúde',
-			'agente_saude_microarea' => 'Microarea',
+			'agente_saude_micro_area' => 'Microarea',
 			'unidade_cnes' => 'Unidade',
 			'meta_id' => 'Meta',
 			'total' => 'Total',
@@ -158,7 +158,7 @@ class AgenteSaudeExecutaMeta extends CActiveRecord
 
 		$criteria->compare('agente_saude_cpf',$this->agente_saude_cpf,true);
 
-		$criteria->compare('agente_saude_microarea',$this->agente_saude_microarea);
+		$criteria->compare('agente_saude_micro_area',$this->agente_saude_micro_area);
 
 		$criteria->compare('unidade_cnes',$this->unidade_cnes,true);
 
@@ -179,13 +179,13 @@ class AgenteSaudeExecutaMeta extends CActiveRecord
          * para isso soma os valores dos procedimentos executados pelo Agente de Saúde e que fazem parte de uma meta
          * Exemplo: meta com 3 procedimentos: o valor da meta vai ser a soma da quantidade de execução desses procedimentos
          * IMPORTANTE: os registros devolvidos não estão salvos no banco!
-         * @param int competência que a meta deve ser calculada
+         * @param int competencia que a meta deve ser calculada
          * @param int offset número de início para pegar os registros
          * @param int pageSize quantidade de registros que devem ser trazidas do banco de dados
          * @return AgenteSaudeExecutaMeta[] devolve um vetor com os valores de cada meta executada por um Agente de Saúde na competência
          */
         public static function calculeMetasComProcedimentos($competencia,$offset,$pageSize){
-            $sql="SELECT ag.agente_saude_micro_area AS microArea,ag.agente_saude_unidade_cnes AS cnes,SUM(ag.quantidade) AS total, ag.competencia,ag.agente_saude_cpf AS agenteSaude, m.id AS meta";
+            $sql="SELECT ag.agente_saude_micro_area AS micro_area,ag.agente_saude_unidade_cnes AS cnes,SUM(ag.quantidade) AS total, ag.competencia,ag.agente_saude_cpf AS agente_saude, m.id AS meta";
             $sql=" $sql FROM agente_saude_executa_procedimento ag INNER JOIN  meta_procedimento mp ON mp.procedimento_codigo=ag.procedimento_codigo";
             $sql=" $sql INNER JOIN meta m ON m.id=mp.meta_id";
             $sql=" $sql GROUP BY ag.competencia,m.id,ag.agente_saude_cpf HAVING ag.competencia=:competencia ";
@@ -201,8 +201,8 @@ class AgenteSaudeExecutaMeta extends CActiveRecord
                 $agExec= new AgenteSaudeExecutaMeta();
                 
                 //popula
-                $agExec->agente_saude_cpf= $m->agenteSaude;
-                $agExec->agente_saude_micro_area= $m->microArea;
+                $agExec->agente_saude_cpf= $m->agente_saude;
+                $agExec->agente_saude_micro_area= $m->micro_area;
                 $agExec->total=$m->total;
                 $agExec->meta_id=$m->meta;
                 $agExec->unidade_cnes=$m->cnes;
@@ -218,13 +218,13 @@ class AgenteSaudeExecutaMeta extends CActiveRecord
          * para isso soma os valores dos itens executados pelo Agente de Saúde e que fazem parte de uma meta
          * Exemplo: meta com 3 itens: o valor da meta vai ser a soma da quantidade de execução desses itens
          * IMPORTANTE: os registros devolvidos não estão salvos no banco!
-         * @param int competência que a meta deve ser calculada
+         * @param int competencia que a meta deve ser calculada
          * @param int offset número de início para pegar os registros
          * @param int pageSize quantidade de registros que devem ser trazidas do banco de dados
          * @return AgenteSaudeExecutaMeta[] devolve um vetor com os valores de cada meta executada por um Agente de Saúde na competência
          */
         public static function calculeMetasComItens($competencia,$offset,$pageSize){
-            $sql="SELECT ag.agente_saude_micro_area AS microArea,ag.agente_saude_unidade_cnes AS cnes,SUM(ag.quantidade) AS total, ag.competencia,ag.agente_saude_cpf AS agenteSaude, m.id AS meta";
+            $sql="SELECT ag.agente_saude_micro_area AS micro_area,ag.agente_saude_unidade_cnes AS cnes,SUM(ag.quantidade) AS total, ag.competencia,ag.agente_saude_cpf AS agente_saude, m.id AS meta";
             $sql=" $sql FROM agente_saude_executa_item ag INNER JOIN  item it ON it.id=ag.item_id";
             $sql=" $sql INNER JOIN meta m ON m.id=it.meta_id";
             $sql=" $sql GROUP BY ag.competencia,m.id,ag.agente_saude_cpf HAVING ag.competencia=:competencia ";
@@ -235,14 +235,13 @@ class AgenteSaudeExecutaMeta extends CActiveRecord
             $dbC->bindParam(':pageSize', $pageSize , PDO::PARAM_INT);
             $dbC->bindParam(':offset', $offset, PDO::PARAM_INT);
             $dbC->bindParam(':competencia', $competencia, PDO::PARAM_STR);
-            Yii::log($sql);
             $resul=array();
             foreach($dbC->queryAll() as $m){
                 $agExec= new AgenteSaudeExecutaMeta();
                 
                 //popula
-                $agExec->agente_saude_cpf= $m->agenteSaude;
-                $agExec->agente_saude_micro_area= $m->microArea;
+                $agExec->agente_saude_cpf= $m->agente_saude;
+                $agExec->agente_saude_micro_area= $m->micro_area;
                 $agExec->total=$m->total;
                 $agExec->meta_id=$m->meta;
                 $agExec->unidade_cnes=$m->cnes;
