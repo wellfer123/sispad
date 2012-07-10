@@ -43,8 +43,11 @@
                     </td>
                     <td>
                         <div class="row buttons">
-                            <?php echo CHtml::ajaxButton($pro['button'], Yii::app()->createUrl($pro['action']),
-                                                        array('success' => 'function( data ){
+                            <?php echo CHtml::ajaxSubmitButton($pro['button'], Yii::app()->createUrl($pro['action']),
+                                                        
+                                                        array(
+                                                            //'data'=>array('competencia'=>'22012'),
+                                                            'success' => 'function( data ){
                                                                             // handle return data
                                                                                 //alert();
                                                                             $("#'.$i.'").attr("disabled", true);
@@ -53,6 +56,7 @@
                                                                                $("#main").addClass("loading");}',
                                                               'complete' => 'function(){
                                                                                 $("#main").removeClass("loading");}',
+                                                              
                                                             ),
                                                          array('id'=>$i)
                                     ) ?>

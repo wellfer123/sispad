@@ -139,7 +139,7 @@ class OdontologoExecutaMetaController extends SISPADBaseController
                             //verifica se a meta executa pelo Odontologo existe
                             if(!OdontologoExecutaMeta::model()->exists('odontologo_cpf=:odontologo AND unidade_cnes=:unidade AND meta_id=:meta AND competencia=:competencia',
                                                                    array(':odontologo'=>$meta->odontologo_cpf,':unidade'=>$meta->unidade_cnes,
-                                                                          ':meta'=>$meta->meta_id,'competencia'=>$meta>competencia))){
+                                                                          ':meta'=>$meta->meta_id,'competencia'=>$meta->competencia))){
                                 //vai salvar a meta, pois não existe
                                 if($meta->save()){
                                     Yii::log("Meta salva com sucesso", CLogger::LEVEL_INFO);
@@ -169,13 +169,13 @@ class OdontologoExecutaMetaController extends SISPADBaseController
             try{
                 $pageSize=2;
                 $offset=0;
-                
+                $competencia = $_POST['competencia'];
                 $size=$pageSize;
                 $metas=array();
                 //metas com prodecimentos
                 while($size==$pageSize){
                     try{
-                        $metas=OdontologoExecutaMeta::calculeMetasComProcedimentos(22012, $offset,$pageSize) ;
+                        $metas=OdontologoExecutaMeta::calculeMetasComProcedimentos($competencia, $offset,$pageSize) ;
                         //calcula o tamanho do vetor
                         $size=sizeof($metas);
                         //muda o offset: incrementa
@@ -200,7 +200,7 @@ class OdontologoExecutaMetaController extends SISPADBaseController
                 //da página vai parar, pois não tem mais itens
                 while($size==$pageSize){
                     try{
-                        $metas=OdontologoExecutaMeta::calculeMetasComItens(22012, $offset,$pageSize) ;
+                        $metas=OdontologoExecutaMeta::calculeMetasComItens($competencia, $offset,$pageSize) ;
                         //calcula o tamanho do vetor
                         $size=sizeof($metas);
                         //muda o offset: incrementa

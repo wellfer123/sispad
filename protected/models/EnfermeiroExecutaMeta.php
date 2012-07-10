@@ -199,7 +199,7 @@ class EnfermeiroExecutaMeta extends CActiveRecord
                 $enfExec->total=$m->total;
                 $enfExec->meta_id=$m->meta;
                 $enfExec->unidade_cnes=$m->cnes;
-                $agExec->competencia=$competencia;
+                $enfExec->competencia=$competencia;
                 //coloca o objeto no vetor
                 $resul[]=$enfExec;
             }
@@ -237,7 +237,7 @@ class EnfermeiroExecutaMeta extends CActiveRecord
                 $enfExec->total=$m->total;
                 $enfExec->meta_id=$m->meta;
                 $enfExec->unidade_cnes=$m->cnes;
-                $agExec->competencia=$competencia;
+                $enfExec->competencia=$competencia;
                 //coloca o objeto no vetor
                 $resul[]=$enfExec;
             }
