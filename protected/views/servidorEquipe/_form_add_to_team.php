@@ -31,7 +31,7 @@ $ourscript = "$(document).ready(function(){
         <table>
             <tbody>
                 <tr>
-                    <td>
+                    <td colspan="2">
                         <?php echo $form->labelEx($model,'servidor_cpf'); ?>
                         <?php $this->widget('EJuiAutoCompleteFkField', array(
                                     'model'=>$model,
@@ -63,8 +63,7 @@ $ourscript = "$(document).ready(function(){
                         <?php echo $form->dropDownList($model,'funcao',array('Odontologo'=>'Odontólogo','Medico'=>'Médico',
                  'Enfermeiro'=>'Enfermeiro','AgenteSaude'=>'Agente de Saúde'));?>
                     </td>
-                </tr>
-                <tr>
+                    
                     <td id="microarea">
                         <?php echo CHtml::label('Microarea',false); ?>
                         <?php echo CHtml::textField('codigo_microarea');?>

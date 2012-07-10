@@ -77,10 +77,10 @@ class Equipe extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'codigo_segmento' => 'Codigo Segmento',
-			'codigo_area' => 'Codigo Area',
+			'codigo_segmento' => 'Código do Segmento',
+			'codigo_area' => 'Código da Área',
 			'tipo' => 'Tipo',
-			'unidade_cnes' => 'Unidade Cnes',
+			'unidade_cnes' => 'Unidade',
 		);
 	}
 

@@ -1,7 +1,7 @@
 <?php
 $this->breadcrumbs=array(
 	'Equipes'=>array('index'),
-	'Create',
+	'Cadastro',
 );
 
 $this->menu=array(
@@ -11,7 +11,7 @@ $this->menu=array(
 ?>
 
 <?php $this->beginWidget('zii.widgets.CPortlet', array(
-			'title'=>"Cadastrar Equipe",
+			'title'=>"Cadastro de Equipe",
                         'htmlOptions'=>array('class'=>'portlet_form')
 		));?>
 
