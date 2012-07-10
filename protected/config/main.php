@@ -123,13 +123,13 @@ return array(
 //					'class'=>'CFileLogRoute',
 //					'levels'=>'error, warning,info',
 //				),
-//                                array(
-//					'class'=>'CDbLogRoute',
-//					'levels'=>'error, warning,info',
-//                                        'connectionID'=>'db',
-//                                        'autoCreateLogTable'=>true,
-//                                        'logTableName'=>'log_system'
-//				),
+                                array(
+					'class'=>'CDbLogRoute',
+					'levels'=>'error, warning,info',
+                                        'connectionID'=>'db',
+                                        'autoCreateLogTable'=>true,
+                                        'logTableName'=>'log_system'
+				),
 //                                array(
 //                                        'class'=>'CEmailLogRoute',
 //                                        'levels'=>'error, warning,info',
