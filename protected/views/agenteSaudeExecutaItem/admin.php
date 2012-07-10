@@ -22,7 +22,7 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Gerenciamento de itens executados por Enfermeiros</h1>
+<h1>Gerenciamento de itens executados por Agentes de Saúde</h1>
 
 <p>
 Você pode opcionalmente entrar com um operador de comparação(<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
