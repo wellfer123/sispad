@@ -23,11 +23,14 @@ div.uploader,
 div.uploader span.action,
 div.button,
 div.button span {
-	background-image: url(../images/sprite.png);
+       
+	background-image: url(../images/sprite2.png);
 	background-repeat: no-repeat;
 	-webkit-font-smoothing: antialiased;
 }
-
+div.button.button{
+     color: #fff;
+}
 .selector, 
 .radio, 
 .checker, 
@@ -374,7 +377,7 @@ div.button:disabled span {
 /* Button */
 
 div.button {
-	height: 50px;
+	height: 30px;
 }
 
 div.button span {
