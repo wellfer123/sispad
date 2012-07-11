@@ -134,13 +134,13 @@ class AgenteSaudeExecutaMetaController extends Controller
             try{
                 $pageSize=2;
                 $offset=0;
-                
+                $competencia=$_POST['competencia'];
                 $size=$pageSize;
                 $metas=array();
                 //metas com prodecimentos
                 while($size==$pageSize){
                     try{
-                        $metas=AgenteSaudeExecutaMeta::calculeMetasComProcedimentos(22012, $offset,$pageSize) ;
+                        $metas=AgenteSaudeExecutaMeta::calculeMetasComProcedimentos($competencia, $offset,$pageSize) ;
                         //calcula o tamanho do vetor
                         $size=sizeof($metas);
                         //muda o offset: incrementa
@@ -165,7 +165,7 @@ class AgenteSaudeExecutaMetaController extends Controller
                 //da página vai parar, pois não tem mais itens
                 while($size==$pageSize){
                     try{
-                        $metas=AgenteSaudeExecutaMeta::calculeMetasComItens(22012, $offset,$pageSize) ;
+                        $metas=AgenteSaudeExecutaMeta::calculeMetasComItens($competencia, $offset,$pageSize) ;
                         //calcula o tamanho do vetor
                         $size=sizeof($metas);
                         //muda o offset: incrementa
