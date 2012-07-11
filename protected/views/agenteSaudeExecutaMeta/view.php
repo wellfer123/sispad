@@ -6,7 +6,7 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Listar Metas Executadas Por Agentes de Saúde', 'url'=>array('index')),
+	//array('label'=>'Listar Metas Executadas Por Agentes de Saúde', 'url'=>array('index')),
 	array('label'=>'Enviar Nova Execução de Meta', 'url'=>array('create')),
 	array('label'=>'Gerenciar Metas Executads por Agentes de Saúde', 'url'=>array('admin')),
 );
