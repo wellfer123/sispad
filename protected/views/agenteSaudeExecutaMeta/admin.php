@@ -1,7 +1,8 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <?php
 $this->breadcrumbs=array(
-	'Meta'=>array('admin'),
-	'Agente Saude Executa Metas'=>array('admin'),
+	'Metas'=>array('Meta/admin'),
+	'Executadas por Agente de Saúde'=>array('admin'),
 	'Gerenciamento',
 );
 
@@ -43,7 +44,7 @@ suas pesquisa com valores específicos de como a comparação deve ser feita.
 	'dataProvider'=>$model->search(),
 	'columns'=>array(
 		array(
-                        'name'=>'Agente de Saúde',
+                        'name'=>'Agente de Saude',
                         'value'=>'$data->agente_saude->servidor->nome',
                 ),
                 'meta.nome',
@@ -59,6 +60,7 @@ suas pesquisa com valores específicos de como a comparação deve ser feita.
                         'name'=>'Status da Meta',
                         'value'=>'$data->isMetaBatida()',
                 ),
+                'competencia',
                 array(
                         'class'=>'CButtonColumn',
                                                 'template'=>'{view}',

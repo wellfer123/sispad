@@ -64,6 +64,7 @@ ou <b>=</b>) iniciar cada uma de suas pesquisa com valores específicos de como 
                         'name'=>'Status da Meta',
                         'value'=>'$data->isMetaBatida()',
                 ),
+                'competencia',
 		array(
 			'class'=>'CButtonColumn',
                         'buttons'=>array(

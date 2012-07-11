@@ -1,6 +1,6 @@
 <?php
 $this->breadcrumbs=array(
-	'Metas'=>array('admin'),
+	'Metas'=>array('Meta/admin'),
 	'Executadas por Odontólogos'=>array('Admin'),
         'Visualização',
 );
@@ -47,6 +47,6 @@ $this->menu=array(
                         'label'=>'Status da Meta',
                         'value'=>$model->isMetaBatida(),
                 ),
-		//'competencia',
+		'competencia',
 	),
 )); ?>

@@ -1,6 +1,6 @@
 <?php
 $this->breadcrumbs=array(
-	'Metas'=>array('admin'),
+	'Metas'=>array('Meta/admin'),
 	'Executadas por Odontólogos'=>array('Admin'),
         'Gerenciamento',
 );
@@ -25,7 +25,7 @@ $('.search-form form').submit(function(){
 
 
 ?>
-<h1>Gerenciamento Odontologo Executa Metas</h1>
+<h1>Gerenciamento de Metas Executadas por Odontólogo</h1>
 
 <p>
 Você pode opcionalmente entrar com um operador de comparação(<, <=, >, >=, <> ou =) iniciar cada uma de
@@ -49,7 +49,6 @@ suas pesquisa com valores específicos de como a comparação deve ser feita.
                         'value'=>'$data->odontologo->servidor->nome',
                 ),
                 'meta.nome',
-                'competencia',
                 array(
                         'name'=>'Valor da Meta',
                         'value'=>'$data->meta->valor',
@@ -62,6 +61,7 @@ suas pesquisa com valores específicos de como a comparação deve ser feita.
                         'name'=>'Status da Meta',
                         'value'=>'$data->isMetaBatida()',
                 ),
+                'competencia',
                 array(
                         'class'=>'CButtonColumn',
                                                 'template'=>'{view}',

@@ -1,7 +1,7 @@
 <?php
 $this->breadcrumbs=array(
-	'Meta'=>array('admin'),
-	'Agente Saude Executa Metas'=>array('admin'),
+	'Metas'=>array('Meta/admin'),
+	'Executas por Agente de Saúde'=>array('admin'),
 	'Envio',
 
 );

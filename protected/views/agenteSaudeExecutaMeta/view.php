@@ -1,7 +1,7 @@
 <?php
 $this->breadcrumbs=array(
-	'Meta'=>array('admin'),
-	'Agente Saude Executa Metas'=>array('admin'),
+	'Metas'=>array('Meta/admin'),
+	'Executadas por Agente de Saúde'=>array('admin'),
         'Visualização'
 );
 
@@ -46,6 +46,6 @@ $this->menu=array(
                         'label'=>'Status da Meta',
                         'value'=>$model->isMetaBatida(),
                 ),
-		//'competencia',
+		'competencia',
 	),
 )); ?>

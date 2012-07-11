@@ -158,7 +158,7 @@ class AuxiliarEnfermagemExecutaMeta extends CActiveRecord
                 $auxExec->total=$m->total;
                 $auxExec->meta_id=$m->meta;
                 $auxExec->unidade_cnes=$m->cnes;
-                $agExec->competencia=$competencia;
+                $auxExec->competencia=$competencia;
                 //coloca o objeto no vetor
                 $resul[]=$auxExec;
             }
@@ -196,7 +196,7 @@ class AuxiliarEnfermagemExecutaMeta extends CActiveRecord
                 $auxExec->total=$m->total;
                 $auxExec->meta_id=$m->meta;
                 $auxExec->unidade_cnes=$m->cnes;
-                $agExec->competencia=$competencia;
+                $auxExec->competencia=$competencia;
                 //coloca o objeto no vetor
                 $resul[]=$auxExec;
             }

@@ -1,7 +1,8 @@
 <?php
 $this->breadcrumbs=array(
-	'Enfermeiro Executa Metas'=>array('index'),
-	'Create',
+        'Metas'=>array('Meta/admin'),
+	'Executadas por Agente de Saúde'=>array('admin'),
+	'Cadastro',
 );
 
 $this->menu=array(

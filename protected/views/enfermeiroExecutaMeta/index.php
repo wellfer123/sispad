@@ -1,6 +1,8 @@
 <?php
 $this->breadcrumbs=array(
-	'Enfermeiro Executa Metas',
+	'Metas'=>array('Meta/admin'),
+	'Executadas por Enfermeiro'=>array('admin'),
+        'Listagem',
 );
 
 $this->menu=array(

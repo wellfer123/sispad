@@ -9,7 +9,7 @@
 		<?php echo $form->label($model,'agente_saude_cpf'); ?>
 		<?php $this->widget('EJuiAutoCompleteFkField', array(
                                     'model'=>$model,
-                                    'attributes'=>array('unidade_cnes'),
+                                    'attributes'=>array('unidade_cnes','agente_saude_micro_area'),
                                     'attribute'=>'agente_saude_cpf', //the FK field (from CJuiInputWidget)
                                      // controller method to return the autoComplete data (from CJuiAutoComplete)
                                     'sourceUrl'=>Yii::app()->createUrl('Servidor/findAgentesDeSaude'),
@@ -63,7 +63,7 @@
                                                     CHtml::listData(Competencia::model()->findAll(), 'mes_ano', 'mes_ano'),array('size'=>1,'maxlength'=>6)) ?>
         </div>
 	<div class="row buttons">
-		<?php echo CHtml::submitButton('Search'); ?>
+		<?php echo CHtml::submitButton('Pesquisar'); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

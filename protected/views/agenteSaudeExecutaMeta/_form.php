@@ -48,7 +48,7 @@
                        
                         <?php $this->widget('EJuiAutoCompleteFkField', array(
                                     'model'=>$model,
-                                    'attributes'=>array('unidade_cnes'),
+                                    'attributes'=>array('unidade_cnes','agente_saude_micro_area'),
                                     'attribute'=>'agente_saude_cpf', //the FK field (from CJuiInputWidget)
                                      // controller method to return the autoComplete data (from CJuiAutoComplete)
                                     'sourceUrl'=>Yii::app()->createUrl('Servidor/findAgentesDeSaude'),

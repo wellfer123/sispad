@@ -1,6 +1,6 @@
 <?php
 $this->breadcrumbs=array(
-	'Metas'=>array('admin'),
+	'Metas'=>array('Meta/admin'),
 	'Executadas por Odontólogos'=>array('Admin'),
         'Envio',
 );

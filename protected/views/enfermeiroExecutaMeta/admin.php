@@ -1,28 +1,29 @@
 <?php
 $this->breadcrumbs=array(
-'Enfermeiro Executa Metas'=>array('index'),
-'Manage',
+        'Metas'=>array('Meta/admin'),
+	'Executadas por Enfermeiro'=>array('admin'),
+        'Gerenciamento',
 );
 
 $this->menu=array(
-array('label'=>'Enviar Nova Execução de Meta', 'url'=>array('create')),
+        array('label'=>'Enviar Nova Execução de Meta', 'url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
-$('.search-button').click(function(){
-$('.search-form').toggle();
-return false;
-});
-$('.search-form form').submit(function(){
-$.fn.yiiGridView.update('enfermeiro-executa-meta-grid', {
-data: $(this).serialize()
-});
-return false;
-});
-");
+        $('.search-button').click(function(){
+        $('.search-form').toggle();
+        return false;
+    });
+    $('.search-form form').submit(function(){
+        $.fn.yiiGridView.update('enfermeiro-executa-meta-grid', {
+    data: $(this).serialize()
+    });
+    return false;
+    });
+    ");
 ?>
 
-<h1>Gerenciamento Enfermeiro Executa Metas</h1>
+<h1>Gerenciamento de Metas Executadas por Enfermeiro</h1>
 
 <p>
 Você pode opcionalmente entrar com um operador de comparação(<, <=, >, >=, <> ou =) iniciar cada uma de
@@ -59,6 +60,7 @@ suas pesquisa com valores específicos de como a comparação deve ser feita.
                         'name'=>'Status da Meta',
                         'value'=>'$data->isMetaBatida()',
                 ),
+                'competencia',
                 array(
                         'class'=>'CButtonColumn',
                                                 'template'=>'{view}',

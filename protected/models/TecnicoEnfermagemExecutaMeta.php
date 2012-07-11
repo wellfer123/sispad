@@ -194,7 +194,7 @@ class TecnicoEnfermagemExecutaMeta extends CActiveRecord
                 $tecExec->total=$m->total;
                 $tecExec->meta_id=$m->meta;
                 $tecExec->unidade_cnes=$m->cnes;
-                $agExec->competencia=$competencia;
+                $tecExec->competencia=$competencia;
                 //coloca o objeto no vetor
                 $resul[]=$tecExec;
             }

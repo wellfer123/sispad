@@ -1,13 +1,13 @@
 <?php
 $this->breadcrumbs=array(
-    'Metas'=>array('admin'),
-    'Executadas por Enfermeiro '=>array('index'),
-    $model->enfermeiro_cpf,
+        'Metas'=>array('Meta/admin'),
+	'Executadas por Enfermeiro'=>array('admin'),
+        'Visualização',
 );
 
 $this->menu=array(
     array('label'=>'Listar Metas Executadas Por Enfermeiro', 'url'=>array('index')),
-    array('label'=>'Enviar Nova Execução de Meta', 'url'=>array('create')),
+    array('label'=>'Enviar Nova Execução de Meta', 'url'=>array('send')),
     array('label'=>'Gerenciar Metas Executadas Por Enfermeiro ', 'url'=>array('admin')),
 );
 ?>
@@ -49,7 +49,6 @@ $this->menu=array(
                         'label'=>'Status da Meta',
                         'value'=>$model->isMetaBatida(),
                 ),
-                'data_inicio',
-                'data_fim',
+                'competencia',
 ),
 )); ?>

@@ -64,7 +64,7 @@
                                                     CHtml::listData(Competencia::model()->findAll(), 'mes_ano', 'mes_ano'),array('size'=>1,'maxlength'=>6)) ?>
         </div>
 	<div class="row buttons">
-		<?php echo CHtml::submitButton('Busca');?>
+		<?php echo CHtml::submitButton('Pesquisar');?>
                
               
             <span class="generate">
