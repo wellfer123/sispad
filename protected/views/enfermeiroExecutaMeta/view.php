@@ -6,8 +6,7 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-    array('label'=>'Listar Metas Executadas Por Enfermeiro', 'url'=>array('index')),
-    array('label'=>'Enviar Nova Execução de Meta', 'url'=>array('send')),
+    array('label'=>'Enviar Nova Execução de Meta', 'url'=>array('create')),
     array('label'=>'Gerenciar Metas Executadas Por Enfermeiro ', 'url'=>array('admin')),
 );
 ?>

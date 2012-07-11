@@ -38,7 +38,7 @@ class Arquivo extends CActiveRecord
 		// will receive user inputs.
 		return array(
                         //array('file_data','required'),
-                        array('file_data', 'file', 'types'=>'txt,doc,docx,pdf,log'),
+                        array('file_data', 'file', 'types'=>'txt,doc,docx,pdf'),
 			//array('relatorio_id', 'length', 'max'=>11),
 			//array('file_name', 'length', 'max'=>45),
 			//array('file_type', 'length', 'max'=>200),

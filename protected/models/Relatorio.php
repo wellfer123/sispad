@@ -98,13 +98,13 @@ class Relatorio extends CActiveRecord
             //$data_trabalho = //new DateTime(FormataData::inverteData($this->data_trabalho, "/"));
 
 
-            $result = FormataData::calculaDiferencaDatas($data_envio,$this->data_trabalho,"br", "/");//($data_envio - $data_trabalho->getTimestamp())/(60*60*24);
+            $result = FormataData::calculaDiferencaDatas($this->data_trabalho,$data_envio,"br", "/");//($data_envio - $data_trabalho->getTimestamp())/(60*60*24);
             if(($result >= 0) && ($result <=$params["dias"])){
                 $this->data_trabalho=  FormataData::inverteData($this->data_trabalho, "/");
                 ////$this->formataDataDeTrabalho();
                 return true;
             }
-            $this->addError('data_trabalho','Data inválida. Insira uma data de até 7 dias até a data atual ');
+            $this->addError('data_trabalho','Data inválida. Você só pode enviar um relatório até no máximo 7 dias após a data do mesmo.');
             return false;
 
         }
