@@ -94,6 +94,26 @@ class ServidorController extends SISPADBaseController
 			'model'=>$model,
 		));
 	}
+        
+        public function actionCreateAjax()
+	{
+		$model=$this->loadModel();
+
+		// Uncomment the following line if AJAX validation is needed
+		// $this->performAjaxValidation($model);
+                $data='errado';
+		if(isset($_POST['Servidor']))
+		{
+			$model->attributes=$_POST['Servidor'];
+			if($model->save()){
+                            $data='certo';
+                        }
+		}
+
+                echo CJSON::encode(array('cesar','65'));
+                Yii::app()->end();
+           
+	}
 
 	/**
 	 * Lists all models.

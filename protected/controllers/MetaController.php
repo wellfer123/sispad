@@ -20,6 +20,38 @@ class MetaController extends SISPADBaseController{
 		);
 	}
 
+        public function actionCleanTeste(){
+            //agente de saude
+            AgenteSaudeExecutaItem::model()->deleteAll();
+            AgenteSaudeExecutaProcedimento::model()->deleteAll();
+            AgenteSaudeExecutaMeta::model()->deleteAll();
+            
+            //auxiliar enfermagem
+            
+            AuxiliarEnfermagemExecutaItem::model()->deleteAll();
+            AuxiliarEnfermagemExecutaMeta::model()->deleteAll();
+            AuxiliarEnfermagemExecutaProcedimento::model()->deleteAll();
+            
+            //enfermeiro
+            EnfermeiroExecutaItem::model()->deleteAll();
+            EnfermeiroExecutaMeta::model()->deleteAll();
+            EnfermeiroExecutaProcedimento::model()->deleteAll();
+            
+            //medico
+            MedicoExecutaItem::model()->deleteAll();
+            MedicoExecutaMeta::model()->deleteAll();
+            MedicoExecutaProcedimento::model()->deleteAll();
+            
+            //odontologo
+            OdontologoExecutaItem::model()->deleteAll();
+            OdontologoExecutaMeta::model()->deleteAll();
+            OdontologoExecutaProcedimento::model()->deleteAll();
+            
+            //tecnico em enfermagem
+            TecnicoEnfermagemExecutaItem::model()->deleteAll();
+            TecnicoEnfermagemExecutaMeta::model()->deleteAll();
+            TecnicoEnfermagemExecutaProcedimento::model()->deleteAll();
+        }
 
         public function  actionCalculo(){
            

@@ -275,13 +275,25 @@ class MedicoExecutaMetaController extends SISPADBaseController
 	}
         
         public function actionRelatorioMetas() {
+            
+            if(isset($_GET['teste']))
+                Yii::log("dando certo rapaz".$_GET['teste']);
             $model = new MedicoExecutaMeta;
+//            $t= new EExcelView();
+//            $t->dataProvider=$model->searchMetasExecutadas(null);
+//            $t->title=metasExecutadas_medico;
+//            $t->grid_mode='export';
+//            $t->exportType='Excel2007';
+//            
+//            $t->run();
             $this->widget('application.extensions.phpexcel.EExcelView',
                         array('dataProvider'=>$model->searchMetasExecutadas(null),
                              'title'=>'metasExecutadas_medico',
                              'grid_mode'=>'export',
                              'exportType'=>'Excel2007',
                             ));
+       
+           
             Yii::app()->end();
           
 

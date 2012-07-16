@@ -5,7 +5,7 @@
 	'enableAjaxValidation'=>false,
 )); ?>
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
+	<p class="note">Todos os campos com <span class="required">*</span> têm preenchimento obrigatório.</p>
         <?php echo $this->renderMessages(); ?>
 	<?php echo $form->errorSummary($model); ?>
         <table>

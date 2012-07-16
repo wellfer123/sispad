@@ -172,7 +172,7 @@ class MedicoExecutaMeta extends CActiveRecord
             $sql="SELECT med.medico_unidade_cnes AS cnes,SUM(med.quantidade) AS total, med.competencia,med.medico_cpf AS medico, m.id AS meta";
             $sql=" $sql FROM medico_executa_procedimento med INNER JOIN  meta_procedimento mp ON mp.procedimento_codigo=med.procedimento_codigo";
             $sql=" $sql INNER JOIN meta m ON m.id=mp.meta_id";
-            $sql=" $sql GROUP BY med.competencia,m.id,med.medico_cpf HAVING med.competencia=:competencia ";
+            $sql=" $sql GROUP BY med.competencia,m.id,med.medico_cpf,med.medico_unidade_cnes HAVING med.competencia=:competencia ";
             $sql=" $sql LIMIT :offset , :pageSize;";
             //
             $dbC=Yii::app()->db->createCommand($sql);
@@ -209,7 +209,7 @@ class MedicoExecutaMeta extends CActiveRecord
             $sql="SELECT med.medico_unidade_cnes AS cnes,SUM(med.quantidade) AS total, med.competencia,med.medico_cpf AS medico, m.id AS meta";
             $sql=" $sql FROM medico_executa_item med INNER JOIN  item it ON it.id=med.item_id";
             $sql=" $sql INNER JOIN meta m ON m.id=it.meta_id";
-            $sql=" $sql GROUP BY med.competencia,m.id,med.medico_cpf HAVING med.competencia=:competencia ";
+            $sql=" $sql GROUP BY med.competencia,m.id,med.medico_cpf,med.medico_unidade_cnes HAVING med.competencia=:competencia ";
             $sql=" $sql LIMIT :offset , :pageSize;";
             //
             $dbC=Yii::app()->db->createCommand($sql);
