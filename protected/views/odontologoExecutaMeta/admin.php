@@ -11,7 +11,7 @@ $this->menu=array(
 
 Yii::app()->clientScript->registerScript('search', "
 $('.search-button').click(function(){
-	$('.search-form').toggle();
+	$('#sub').toggle();
 	return false;
 });
 $('.search-form form').submit(function(){
@@ -33,7 +33,7 @@ suas pesquisa com valores específicos de como a comparação deve ser feita.
 </p>
 
 <?php echo CHtml::link('Pesquisa Avançada','#',array('class'=>'search-button')); ?>
-<div class="search-form" style="display:none">
+<div id="sub"  style="display:none">
 <?php $this->renderPartial('_search',array(
 	'model'=>$model,
 )); ?>

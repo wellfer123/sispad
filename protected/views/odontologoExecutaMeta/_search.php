@@ -1,7 +1,7 @@
 <div class="wide form">
 
 <?php $form=$this->beginWidget('CActiveForm', array(
-	'action'=>Yii::app()->createUrl('odontologoExecutaMeta/relatorioMetas'),//$this->route),
+	'action'=>Yii::app()->createUrl('odontologoExecutaMeta/relatorioMetas'),
 	'method'=>'get',
 )); ?>
 
@@ -64,8 +64,32 @@
                                                     CHtml::listData(Competencia::model()->findAll(), 'mes_ano', 'mes_ano'),array('size'=>1,'maxlength'=>6)) ?>
         </div>
 	<div class="row buttons">
-		<?php echo CHtml::submitButton('Pesquisar');?>
-               
+            
+		<?php echo CHtml::submitButton('gerar Relatorio');?>
+            
+                <?php echo CHtml::ajaxSubmitButton('Pesquisar',Yii::app()->createUrl('odontologoExecutaMeta/admin'),
+                                                        
+                                                        array(
+                                                            //'data'=>array('competencia'=>'22012'),
+                                                            'success' => 'function( data ){
+                                                                            // handle return data
+                                                                                //alert();
+                                                                           
+                                                                            }',
+                                                             'beforeSend' => 'function(){
+                                                                               $("#sub").addClass("search-form");
+                                                                               $("form").attr("action","http://localhost/sispad/index.php?r=odontologoExecutaMeta/admin");
+                                                                               $("form").attr("method","post");
+                                                                               console.log("FOI");
+                                                                               }',
+                                                              'complete' => 'function(){
+                                                                   $("#sub").removeClass("search-form");
+                                                                    $("form").attr("action","http://localhost/sispad/index.php?r=odontologoExecutaMeta/relatorioMetas");
+                                                                               }',
+                                                              
+                                                            )
+                                                         
+                                    ) ?>
               
             <span class="generate">
                 <?php //    echo CHtml::submitButton("Gerar Relatório",array('name'=>'gerar-relatorio')); ?>
