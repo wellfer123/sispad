@@ -1,13 +1,13 @@
 <?php 
 $this->breadcrumbs=array(
-	'Medico Executa Items'=>array('index'),
-	'Create',
+	'Metas'=>array('indicador/admin'),
+	'Lançamento',
 );
 
-$this->menu=array(
-	array('label'=>'Escolher novo médico, meta ou competência', 'url'=>array('MedicoExecutaMeta/send')),
-	array('label'=>'Gerenciamento de itens executados por médico', 'url'=>array('admin')),
-);
+//$this->menu=array(
+//	array('label'=>'Escolher novo médico, meta ou competência', 'url'=>array('MedicoExecutaMeta/send')),
+//	array('label'=>'Gerenciamento de itens executados por médico', 'url'=>array('admin')),
+//);
 ?>
 
 <?php $this->beginWidget('zii.widgets.CPortlet', array(

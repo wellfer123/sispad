@@ -184,7 +184,7 @@ class EnfermeiroExecutaMeta extends CActiveRecord
             $sql="SELECT enf.enfermeiro_unidade_cnes AS cnes,SUM(enf.quantidade) AS total, enf.competencia,enf.enfermeiro_cpf AS enfermeiro, m.id AS meta";
             $sql=" $sql FROM enfermeiro_executa_procedimento enf INNER JOIN  meta_procedimento mp ON mp.procedimento_codigo=enf.procedimento_codigo";
             $sql=" $sql INNER JOIN meta m ON m.id=mp.meta_id";
-            $sql=" $sql GROUP BY enf.competencia,m.id,enf.enfermeiro_cpf HAVING enf.competencia=:competencia ";
+            $sql=" $sql GROUP BY enf.competencia,m.id,enf.enfermeiro_cpf,enf.enfermeiro_unidade_cnes HAVING enf.competencia=:competencia ";
             $sql=" $sql LIMIT :offset , :pageSize;";
             //
             $dbC=Yii::app()->db->createCommand($sql);
@@ -222,7 +222,7 @@ class EnfermeiroExecutaMeta extends CActiveRecord
             $sql="SELECT enf.enfermeiro_unidade_cnes AS cnes,SUM(enf.quantidade) AS total, enf.competencia,enf.enfermeiro_cpf AS enfermeiro, m.id AS meta";
             $sql=" $sql FROM enfermeiro_executa_item enf INNER JOIN  item it ON it.id=enf.item_id";
             $sql=" $sql INNER JOIN meta m ON m.id=it.meta_id";
-            $sql=" $sql GROUP BY enf.competencia,m.id,enf.enfermeiro_cpf HAVING enf.competencia=:competencia ";
+            $sql=" $sql GROUP BY enf.competencia,m.id,enf.enfermeiro_cpf,enf.enfermeiro_unidade_cnes HAVING enf.competencia=:competencia ";
             $sql=" $sql LIMIT :offset , :pageSize;";
             //
             $dbC=Yii::app()->db->createCommand($sql);

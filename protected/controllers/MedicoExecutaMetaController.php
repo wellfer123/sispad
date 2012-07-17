@@ -275,6 +275,9 @@ class MedicoExecutaMetaController extends SISPADBaseController
 	}
         //action que gera um relatorio para o excel das metas executadas 
         public function actionRelatorioMetas() {
+            
+            if(isset($_GET['teste']))
+                Yii::log("dando certo rapaz".$_GET['teste']);
             $model = new MedicoExecutaMeta;
              if(isset($_POST['MedicoExecutaMeta'])){
                 $model->attributes= $_POST['MedicoExecutaMeta']; 
@@ -287,6 +290,8 @@ class MedicoExecutaMetaController extends SISPADBaseController
                              'grid_mode'=>'export',
                              'exportType'=>'Excel2007',
                             ));
+       
+           
             Yii::app()->end();
           
 

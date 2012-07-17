@@ -1,15 +1,14 @@
 <?php
 $this->breadcrumbs=array(
-	'Servidors'=>array('index'),
-	$model->cpf=>array('view','id'=>$model->cpf),
-	'Update',
+	'Servidores'=>array('admin'),
+	$model->nome=>array('view','id'=>$model->cpf),
+	'Atualização',
 );
 
 $this->menu=array(
-	array('label'=>'List Servidor', 'url'=>array('index')),
-	array('label'=>'Create Servidor', 'url'=>array('create')),
-	array('label'=>'View Servidor', 'url'=>array('view', 'id'=>$model->cpf)),
-	array('label'=>'Manage Servidor', 'url'=>array('admin')),
+	array('label'=>'Cadastrar Servidor', 'url'=>array('servidor/create')),
+	array('label'=>'Visualizar Servidor', 'url'=>array('view', 'id'=>$model->cpf)),
+	array('label'=>'Gerenciamento de Servidores', 'url'=>array('admin')),
 );
 ?>
 
