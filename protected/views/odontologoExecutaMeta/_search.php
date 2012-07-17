@@ -1,7 +1,7 @@
 <div class="wide form">
 
 <?php $form=$this->beginWidget('CActiveForm', array(
-	'action'=>Yii::app()->createUrl('odontologoExecutaMeta/relatorioMetas'),
+	'action'=>Yii::app()->createUrl($this->route),
 	'method'=>'get',
 )); ?>
 
@@ -65,9 +65,9 @@
         </div>
 	<div class="row buttons">
             
-		<?php echo CHtml::submitButton('gerar Relatorio');?>
+		<?php echo CHtml::submitButton('Pesquisar');?>
             
-                <?php echo CHtml::ajaxSubmitButton('Pesquisar',Yii::app()->createUrl('odontologoExecutaMeta/admin'),
+                <?php /*echo CHtml::ajaxSubmitButton('Pesquisar',Yii::app()->createUrl('odontologoExecutaMeta/admin'),
                                                         
                                                         array(
                                                             //'data'=>array('competencia'=>'22012'),
@@ -89,7 +89,7 @@
                                                               
                                                             )
                                                          
-                                    ) ?>
+                                    )*/ ?>
               
             <span class="generate">
                 <?php //    echo CHtml::submitButton("Gerar Relatório",array('name'=>'gerar-relatorio')); ?>

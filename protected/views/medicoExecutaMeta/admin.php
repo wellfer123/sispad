@@ -14,6 +14,10 @@ $('.search-button').click(function(){
 	$('.search-form').toggle();
 	return false;
 });
+  $('.search-relatorio').click(function(){
+	$('.search-form-relatorio').toggle();
+	return false;
+});
 $('.search-form form').submit(function(){
 	$.fn.yiiGridView.update('medico-executa-meta-grid', {
 		data: $(this).serialize()
@@ -36,8 +40,13 @@ ou <b>=</b>) iniciar cada uma de suas pesquisa com valores específicos de como 
 	'model'=>$model,
 )); ?>
 </div><!-- search-form -->
-<?php echo '</br></br>'; 
-      echo CHtml::link("Gerar Relatório",array('relatorioMetas'));?>
+<?php echo CHtml::link('Gerar Relatório','#',array('class'=>'search-relatorio')); ?>
+<div id="sub" class="search-form-relatorio" style="display:none">
+<?php $this->renderPartial('_relatorio',array(
+	'model'=>$model,
+)); ?>
+</div>
+
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'medico-executa-meta-grid',
 	'dataProvider'=>$model->search(),

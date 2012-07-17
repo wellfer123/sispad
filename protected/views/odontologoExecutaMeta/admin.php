@@ -11,10 +11,14 @@ $this->menu=array(
 
 Yii::app()->clientScript->registerScript('search', "
 $('.search-button').click(function(){
-	$('#sub').toggle();
+	$('.search-form').toggle();
 	return false;
 });
-$('.search-form form').submit(function(){
+$('.search-relatorio').click(function(){
+	$('.search-form-relatorio').toggle();
+	return false;
+});
+$('.search-form form ').submit(function(){
         
 	$.fn.yiiGridView.update('odontologo-executa-meta-grid', {
 		data: $(this).serialize()
@@ -33,13 +37,18 @@ suas pesquisa com valores específicos de como a comparação deve ser feita.
 </p>
 
 <?php echo CHtml::link('Pesquisa Avançada','#',array('class'=>'search-button')); ?>
-<div id="sub"  style="display:none">
+<div id="sub" class="search-form" style="display:none">
 <?php $this->renderPartial('_search',array(
 	'model'=>$model,
 )); ?>
 </div><!-- search-form -->
-<?php echo '</br></br>'; 
-      echo CHtml::link("Gerar Relatório",array('relatorioMetas'));?>
+<?php echo CHtml::link('Gerar Relatório','#',array('class'=>'search-relatorio')); ?>
+<div id="sub" class="search-form-relatorio" style="display:none">
+<?php $this->renderPartial('_relatorio',array(
+	'model'=>$model,
+)); ?>
+</div><!-- search-form -->
+
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'odontologo-executa-meta-grid',
 	'dataProvider'=>$model->search(),

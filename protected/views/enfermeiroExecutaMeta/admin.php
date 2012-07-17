@@ -14,6 +14,10 @@ Yii::app()->clientScript->registerScript('search', "
         $('.search-form').toggle();
         return false;
     });
+    $('.search-relatorio').click(function(){
+	$('.search-form-relatorio').toggle();
+	return false;
+});
     $('.search-form form').submit(function(){
         $.fn.yiiGridView.update('enfermeiro-executa-meta-grid', {
     data: $(this).serialize()
@@ -37,8 +41,13 @@ suas pesquisa com valores específicos de como a comparação deve ser feita.
 )); ?>
    
 </div><!-- search-form -->
-<?php echo '</br></br>'; 
-      echo CHtml::link("Gerar Relatório",array('relatorioMetas'));?>
+<?php echo CHtml::link('Gerar Relatório','#',array('class'=>'search-relatorio')); ?>
+<div id="sub" class="search-form-relatorio" style="display:none">
+<?php $this->renderPartial('_relatorio',array(
+	'model'=>$model,
+)); ?>
+</div><!-- search-form -->
+
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 'id'=>'enfermeiro-executa-meta-grid',
 'dataProvider'=>$model->search(),

@@ -260,7 +260,7 @@ class OdontologoExecutaMetaController extends SISPADBaseController
 	 */
 	public function actionAdmin()
 	{
-                YII::log("FOI");
+               
                 
 		$model=new OdontologoExecutaMeta('search');
 		$model->unsetAttributes();  // clear any default values
@@ -280,14 +280,17 @@ class OdontologoExecutaMetaController extends SISPADBaseController
 			'model'=>$model,
 		));
 	}
-        
+         //action que gera um relatorio para o excel das metas executadas 
          public function actionRelatorioMetas() {
-            //$competencia = 12012;//$_GET['competencia']; 
+           
             $model = new OdontologoExecutaMeta;
-            Yii::log('relatorioMetas');
+            
+            if(isset($_POST['OdontologoExecutaMeta'])){
+                $model->attributes= $_POST['OdontologoExecutaMeta']; 
+            }
             $this->widget('application.extensions.phpexcel.EExcelView',
-                        array('dataProvider'=>$model->searchMetasExecutadas('12012'),
-                             'title'=>'metasExecutadas_odontologo_' ,
+                        array('dataProvider'=>$model->searchMetasExecutadas(),
+                             'title'=>'metasExecutadas_odontologo_'.$model->competencia ,
                              'grid_mode'=>'export',
                              'exportType'=>'Excel2007',
                             ));

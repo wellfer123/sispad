@@ -186,7 +186,7 @@ class MedicoExecutaMetaController extends SISPADBaseController
                 $size=$pageSize;
                 $metas=array();
                 //metas com prodecimentos
-                //quando o ultimo vetor devolvido for menor que o tamanho
+                //quando o ultimo vetor devolvido fresor menor que o tamanho
                 //da página vai parar, pois não tem mais itens
                 while($size==$pageSize){
                     try{
@@ -273,12 +273,17 @@ class MedicoExecutaMetaController extends SISPADBaseController
 			'model'=>$model,
 		));
 	}
-        
+        //action que gera um relatorio para o excel das metas executadas 
         public function actionRelatorioMetas() {
             $model = new MedicoExecutaMeta;
+             if(isset($_POST['MedicoExecutaMeta'])){
+                $model->attributes= $_POST['MedicoExecutaMeta']; 
+                 
+               
+            }
             $this->widget('application.extensions.phpexcel.EExcelView',
                         array('dataProvider'=>$model->searchMetasExecutadas(null),
-                             'title'=>'metasExecutadas_medico',
+                             'title'=>'metasExecutadas_medico'.$model->competencia,
                              'grid_mode'=>'export',
                              'exportType'=>'Excel2007',
                             ));

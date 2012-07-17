@@ -261,12 +261,17 @@ class AgenteSaudeExecutaMetaController extends Controller
 			'model'=>$model,
 		));
 	}
-        
+        //action que gera um relatorio para o excel das metas executadas 
         public function actionRelatorioMetas() {
             $model = new AgenteSaudeExecutaMeta;
+            if(isset($_POST['AgenteSaudeExecutaMeta'])){
+                $model->attributes= $_POST['AgenteSaudeExecutaMeta']; 
+                 
+               
+            }
             $this->widget('application.extensions.phpexcel.EExcelView',
-                        array('dataProvider'=>$model->searchMetasExecutadas(null),
-                             'title'=>'metasExecutadas_agente_de_saude ',
+                        array('dataProvider'=>$model->searchMetasExecutadas(),
+                             'title'=>'metasExecutadas_agente_de_saude_'.$model->competencia,
                              'grid_mode'=>'export',
                              'exportType'=>'Excel2007',
                             ));

@@ -108,27 +108,60 @@ class OdontologoExecutaMeta extends CActiveRecord
 	 */
       
         
-        public function searchMetasExecutadas($competencia) {
+        public function searchMetasExecutadas() {
+            
+               $criteria=new CDbCriteria;
+                 
+
+		
+
+//                 //$criteria->select='meta.nome as meta,serv.nome as odontologo,unid.nome as unidade,meta.valor as TotalEsperado,t.total as TotalExecutado';
+//                
+//                 //$criteria->join=' INNER JOIN meta ON t.meta_id = meta.id INNER JOIN servidor as serv ON serv.cpf = t.odontologo_cpf INNER JOIN unidade as unid ON unid.cnes = t.unidade_cnes';
+//                 //$criteria->condition='C.ta_id = 1';
+//                $criteria->compare('odontologo_cpf',$this->odontologo_cpf,true);
+//
+//		$criteria->compare('unidade_cnes',$this->unidade_cnes,true);
+//
+//		$criteria->compare('meta_id',$this->meta_id);
+//
+//		$criteria->compare('total',$this->total);
+//
+//		$criteria->compare('competencia',$this->competencia,true);
+//               
+                
+                //$dados = ontologoExecutaMeta::model()->find($criteria);
+                $competencia = $this->competencia;
                 $where='';
+//                $condition = '';
+               
+//                foreach ($this->attributeLabels() as $name => $label) {
+//                    
+//                    if( $this->getAttribute($name)!=null){
+//                     $condition = $condition.' odonto_exec_meta.'.$name.'='.$this->getAttribute($name).' AND';   
+//                   }
+//                }
+             
                 if($competencia!=null){
                     $where = "where odonto_exec_meta.competencia='$competencia'";
-                }
-                $dados=Yii::app()->db->createCommand("select meta.nome as meta,serv.nome as odontologo,unid.nome as unidade,meta.valor as TotalEsperado,odonto_exec_meta.total as TotalExecutado 
+               }
+                $dados=Yii::app()->db->createCommand("select serv.nome as odontologo,meta.nome as meta,unid.nome as unidade,meta.valor as TotalEsperado,odonto_exec_meta.total as TotalExecutado 
                                                       from odontologo_executa_meta as odonto_exec_meta INNER JOIN meta
                                                       ON odonto_exec_meta.meta_id = meta.id INNER JOIN servidor as serv
                                                       ON serv.cpf = odonto_exec_meta.odontologo_cpf INNER JOIN unidade as unid
-                                                      ON unid.cnes = odonto_exec_meta.unidade_cnes ".$where)->queryAll();
-
+                
+                                                                                            ON unid.cnes = odonto_exec_meta.unidade_cnes ".$where)->queryAll();
+               
+                
+		
 		 $tes=new CArrayDataProvider($dados, array(
                                     'id'=>'odontologo_executa_meta',
                                     'pagination'=>false
 
 		));
                  
-                
-                
-
                  return $tes;
+     
 
     }
     public function listaCompetencias() {
