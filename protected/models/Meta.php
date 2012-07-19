@@ -84,7 +84,14 @@ class Meta extends CActiveRecord
 			'indicador_id' => 'Indicador',
 		);
 	}
-
+        function exibeNomeTipo() {
+            if($this->tipo==Meta::PROCEDIMENTO){
+                return 'Procedimento';
+            }elseif($this->tipo==Meta::ITENS){
+                return 'Item';
+            }
+            
+        }
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
 	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.

@@ -7,9 +7,14 @@ $this->widget('zii.widgets.grid.CGridView', array(
 	'columns'=>array(
 		'id',
                 'nome',
-                'valor',
+               
+                 array(
+                        'name'=>'Tipo',
+                        'value'=>'$data->exibeNomeTipo()',
+                 ),
                  array('name'=>'periodicidade',
                       'value'=>'$data->periodicidade->nome',),
+                'valor',
                 'percentagem',
                  array(
 			'class'=>'CButtonColumn',
