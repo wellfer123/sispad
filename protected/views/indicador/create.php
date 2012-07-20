@@ -1,7 +1,7 @@
 <?php
 $this->breadcrumbs=array(
 	'Indicador'=>array('admin'),
-	'Create',
+	'Novo Indicador',
 );
 
 $this->menu=array(
