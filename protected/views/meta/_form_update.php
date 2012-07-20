@@ -18,14 +18,15 @@
                 <tr>
                     <td>
                         <?php echo $form->labelEx($model,'nome'); ?>
-                        <?php echo $form->textField($model,'nome'); ?>
+                        <?php echo $form->textField($model,'nome',array('disabled'=>true)); ?>
                         <?php echo $form->error($model,'nome'); ?> 
                     </td>
                 </tr>
                 <tr>
                     <td>
                         <?php echo $form->labelEx($model,'periodicidade_id'); ?>
-                        <?php echo $form->dropDownList($model,'periodicidade_id',CHtml::listData(Periodicidade::model()->findAll(),'id','nome'));?>
+                        <?php echo $form->dropDownList($model,'periodicidade_id',CHtml::listData(Periodicidade::model()->findAll(),'id','nome'
+                                                        ),array('disabled'=>true))    ;?>
                         <?php echo $form->error($model,'periodicidade_id'); ?>
                     </td>
                 </tr>
@@ -46,7 +47,7 @@
                 <tr>
                     <td>
                         <?php echo $form->labelEx($model,'tipo'); ?>
-                        <?php echo $form->dropDownList($model,'tipo',array("IT"=>'Itens',"PR"=>'Procedimento'));?>
+                        <?php echo $form->dropDownList($model,'tipo',array("IT"=>'Itens',"PR"=>'Procedimento'),array('disabled'=>true));?>
                         <?php echo $form->error($model,'tipo'); ?>
                     </td>
                 </tr>

@@ -1,18 +1,14 @@
 <?php
 $this->breadcrumbs=array(
-	'Odontologo Executa Items'=>array('index'),
-	$model->odontologo_cpf=>array('view','id'=>$model->odontologo_cpf),
-	'Update',
+         'Indicador'=>array('indicador/admin'),
+	 'Metas'=>array('meta/view','indicador_id',$_GET['indicador_id']),
 );
 
 $this->menu=array(
-	array('label'=>'List odontologo_executa_item', 'url'=>array('index')),
-	array('label'=>'Create odontologo_executa_item', 'url'=>array('create')),
-	array('label'=>'View odontologo_executa_item', 'url'=>array('view', 'id'=>$model->odontologo_cpf)),
-	array('label'=>'Manage odontologo_executa_item', 'url'=>array('admin')),
+	array('label'=>'Adicionar Meta', 'url'=>array("/meta/create","indicador_id"=>$_GET['indicador_id'])),
 );
 ?>
 
-<h1>Update odontologo_executa_item <?php echo $model->odontologo_cpf; ?></h1>
+<h1>Update da Meta <?php echo $model->nome; ?></h1>
 
-<?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php echo $this->renderPartial('_form_update', array('model'=>$model)); ?>

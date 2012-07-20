@@ -71,7 +71,7 @@ class MetaController extends SISPADBaseController{
         }
         public function actionCreate() {
              //$this->CheckAcessAction();
-                $model=new Meta();
+                $model=new Meta('create');
 
 
 
@@ -108,6 +108,25 @@ class MetaController extends SISPADBaseController{
 		));
 
         }
+        
+        public function actionUpdate()
+	{
+		$model=$this->loadModel();
+                $model->scenario='update';
+		// Uncomment the following line if AJAX validation is needed
+		// $this->performAjaxValidation($model);
+
+		if(isset($_POST['Meta']))
+		{
+			$model->attributes=$_POST['Meta'];
+			if($model->save())
+				$this->redirect(array('view','id'=>$model->id,'indicador_id'=>$_GET['indicador_id']));
+		}
+
+		$this->render('update',array(
+			'model'=>$model,
+		));
+	}
         
        
 
@@ -159,5 +178,7 @@ class MetaController extends SISPADBaseController{
            }
        }
     }
+    
+    
 }
 ?>

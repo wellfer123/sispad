@@ -18,7 +18,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
                 'percentagem',
                  array(
 			'class'=>'CButtonColumn',
-                        'template'=>'{ver_meta}{ver_itens}{ver_procedimento}{adicionar_item}{adicionar_procedimento}',
+                        'template'=>'{ver_meta}{edit}{ver_itens}{ver_procedimento}{adicionar_item}{adicionar_procedimento}',
                         'buttons'=>array(
                                             'ver_meta'=>array(
                                             'label'=>'Ver Meta',
@@ -51,6 +51,13 @@ $this->widget('zii.widgets.grid.CGridView', array(
                                                         'url'=> 'Yii::app()->createUrl("/metaProcedimento/add",array("meta_id"=>$data->id,"indicador_id"=>$_GET["indicador_id"]))',
                                                         //'options'=>array('class'=>'active', 'style'=>"padding-right:10px"),
                                                         'imageUrl'=>  Yii::app()->request->baseUrl.'/images/add2.png',
+                                                ),
+                                         'edit'=>array(
+                                                        
+                                                        'label'=>'Editar Meta',
+                                                        'url'=> 'Yii::app()->createUrl("/meta/update",array("id"=>$data->id,"indicador_id"=>$_GET["indicador_id"]))',
+                                                        //'options'=>array('class'=>'active', 'style'=>"padding-right:10px"),
+                                                        'imageUrl'=>  Yii::app()->request->baseUrl.'/images/update.png',
                                                 ),
 
 
