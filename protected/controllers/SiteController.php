@@ -29,7 +29,7 @@ class SiteController extends SISPADBaseController
 	{
 		// renders the view file 'protected/views/site/index.php'
 		// using the default layout 'protected/views/layouts/main.php'
-		$this->redirect(yii::app()->baseUrl.'/index.php?r=perfil/home');
+		$this->redirect(array('perfil/home'));
 	}
         
         public function actionPage()

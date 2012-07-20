@@ -60,6 +60,9 @@ return array(
                
                         ),
                 ),
+                'urlManager'=>array(
+                        'urlFormat'=>'path',
+                ),
 		'user'=>array(
 			// enable cookie-based authentication
 			'allowAutoLogin'=>true,
