@@ -85,27 +85,27 @@ $this->widget('zii.widgets.grid.CGridView', array(
                                         'adicionar_meta'=>array(
 
                                                         'label'=>'Adicionar Meta',
-                                                        'url'=> 'Yii::app()->createUrl("/meta/create",array("indicador_id"=>$data->id))',
+                                                        'url'=> 'Yii::app()->createUrl("/metas/meta/create",array("indicador_id"=>$data->id))',
                                                         'options'=>array('class'=>'meta', 'style'=>"padding-right:2px"),
                                                         'imageUrl'=>  Yii::app()->request->baseUrl.'/images/add.png',
                                                 ),
                                         'ver_metas'=>array(
 
                                                         'label'=>'Ver Metas',
-                                                        'url'=> 'Yii::app()->createUrl("/meta/view",array("indicador_id"=>$data->id))',
+                                                        'url'=> 'Yii::app()->createUrl("/metas/meta/view",array("indicador_id"=>$data->id))',
                                                         //'options'=>array('class'=>'active', 'style'=>"padding-right:10px"),
                                                         'imageUrl'=>  Yii::app()->request->baseUrl.'/images/view.png',
                                                 ),
                                           'active'=>array(
                                                         'visible'=>'$data->status==Indicador::DESATIVO',
                                                         'label'=>'Ativar Indicador',
-                                                        'url'=> 'Yii::app()->createUrl("/indicador/active",array("id"=>$data->id))',
+                                                        'url'=> 'Yii::app()->createUrl("/metas/indicador/active",array("id"=>$data->id))',
                                                         'options'=>array('class'=>'active', 'style'=>"padding-right:2px"),
                                                         'imageUrl'=>  Yii::app()->request->baseUrl.'/images/unlocked.png',
                                                 ),
                                         'inactive'=>array(
                                                         'visible'=>'$data->status==Indicador::ATIVO',
-                                                        'url'=> 'Yii::app()->createUrl("/indicador/inactive",array("id"=>$data->id))',
+                                                        'url'=> 'Yii::app()->createUrl("/metas/indicador/inactive",array("id"=>$data->id))',
                                                         'label'=>'Desativar Indicador',
                                                         'options'=>array('class'=>'inactive','style'=>"padding-right:2px"),
                                                         'imageUrl'=>  Yii::app()->request->baseUrl.'/images/locked.png',

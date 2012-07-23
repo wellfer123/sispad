@@ -6,7 +6,7 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Adicionar Meta', 'url'=>array("/meta/create","indicador_id"=>$_GET['indicador_id'])),
+	array('label'=>'Adicionar Meta', 'url'=>array("/metas/meta/create","indicador_id"=>$_GET['indicador_id'])),
 );
 
 

@@ -1,7 +1,7 @@
 <div class="form">
 
 <?php $form=$this->beginWidget('SISPADActiveForm', array(
-	'id'=>'odontologo-executa-meta-form',
+	'id'=>'enfermeiro-executa-meta-form',
 	'enableAjaxValidation'=>false,
 )); ?>
 
@@ -20,7 +20,7 @@
                                     'model'=>$model, 
                                     'attribute'=>'meta_id', //the FK field (from CJuiInputWidget)
                                      // controller method to return the autoComplete data (from CJuiAutoComplete)
-                                    'sourceUrl'=>Yii::app()->createUrl('Meta/findMetas',array('profissao'=>Odontologo::CODIGO_PROFISSAO)), 
+                                    'sourceUrl'=>Yii::app()->createUrl('metas/Meta/findMetas',array('profissao'=>Enfermeiro::CODIGO_PROFISSAO)), 
                                     // defaults to false.  set 'true' to display the FK field with 'readonly' attribute.
                                     'showFKField'=>false,
                                     // display size of the FK field.  only matters if not hidden.  defaults to 10
@@ -44,19 +44,19 @@
                 </tr>
                 <tr>
                     <td colspan="2">
-                       <?php echo $form->labelEx($model,'odontologo_cpf'); ?>
+                       <?php echo $form->labelEx($model,'enfermeiro_cpf'); ?>
                        
                         <?php $this->widget('EJuiAutoCompleteFkField', array(
                                     'model'=>$model,
                                     'attributes'=>array('unidade_cnes'),
-                                    'attribute'=>'odontologo_cpf', //the FK field (from CJuiInputWidget)
+                                    'attribute'=>'enfermeiro_cpf', //the FK field (from CJuiInputWidget)
                                      // controller method to return the autoComplete data (from CJuiAutoComplete)
-                                    'sourceUrl'=>Yii::app()->createUrl('Servidor/findOdontologos'),
+                                    'sourceUrl'=>Yii::app()->createUrl('Servidor/findEnfermeiros'),
                                     // defaults to false.  set 'true' to display the FK field with 'readonly' attribute.
                                     'showFKField'=>false,
                                     // display size of the FK field.  only matters if not hidden.  defaults to 10
                                     'FKFieldSize'=>11,
-                                    'relName'=>'odontologo', // the relation name defined above
+                                    'relName'=>'enfermeiro', // the relation name defined above
                                     'displayAttr'=>'ServidorUnidade',  // attribute or pseudo-attribute to display
                                     // length of the AutoComplete/display field, defaults to 50
                                     'autoCompleteLength'=>60,
@@ -68,7 +68,7 @@
                                         'minLength'=>4,
                                         ),
                                 ));?>
-                        <?php echo $form->error($model,'odontologo_cpf'); ?>
+                        <?php echo $form->error($model,'enfermeiro_cpf'); ?>
                     </td>
                 </tr>
                  <tr>
@@ -77,7 +77,7 @@
                              <?php echo $form->labelEx($model,'competencia'); ?>
                             <?php echo Chtml::activeDropDownList($model, 'competencia', 
                                                     CHtml::listData(Competencia::model()->findAll(), 'mes_ano', 'mes_ano'),array('size'=>1,'maxlength'=>6)) ?>
-                            <?php echo $form->error($model,'estado_civil'); ?> 
+                            <?php echo $form->error($model,'competencia'); ?> 
                         </td>
                 </tr>
                 

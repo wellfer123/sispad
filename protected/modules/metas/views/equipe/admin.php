@@ -51,12 +51,12 @@ ou <b>=</b>)
                         'buttons'=>array(
                             'view'=>array(
                                 'label'=>'visualizar',
-                                'url'=>'Yii::app()->createUrl("/equipe/view",
+                                'url'=>'Yii::app()->createUrl("/metas/equipe/view",
                                         array("area"=>$data->codigo_area,"cnes"=>$data->unidade_cnes))',
                             ),
                             'update'=>array(
                                 'label'=>'atualizar',
-                                'url'=>'Yii::app()->createUrl("/equipe/update",
+                                'url'=>'Yii::app()->createUrl("/metas/equipe/update",
                                         array("area"=>$data->codigo_area,"cnes"=>$data->unidade_cnes))',
                             ),
 //                            'delete'=>array(
