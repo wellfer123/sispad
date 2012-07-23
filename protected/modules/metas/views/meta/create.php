@@ -2,7 +2,7 @@
 $this->breadcrumbs=array(
         'Indicador'=>array('indicador/admin'),
 	'Meta',
-	'Create',
+	'Cadastro',
 );
 
 

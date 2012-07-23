@@ -31,4 +31,4 @@ $this->menu=array(
 )); ?>
 
 <?php $model2 = new ServidorEquipe;
-      echo $this->renderPartial('//servidorEquipe/_view', array('model'=>$model2)); ?>
+      echo $this->renderPartial('/servidorEquipe/_view', array('model'=>$model2)); ?>
