@@ -60,7 +60,7 @@ class AgenteSaudeExecutaMeta extends CActiveRecord
 			'meta' => array(self::BELONGS_TO, 'Meta', 'meta_id'),
                         //Esse faz referência ao agente de saúde presente na tabela agente_saude,
                         //mas para buscar buscá-lo, aqui, referencia a tabela servidor
-			'agente_saude' => array(self::BELONGS_TO, 'AgenteSaude', 'agente_saude_cpf,unidade_cnes,agente_saude_micro_area'),
+			'agente_saude' => array(self::BELONGS_TO, 'AgenteSaude', 'agente_saude_cpf, unidade_cnes,agente_saude_micro_area'),
                         //essa unidade faz referência a unidade presente na tabela agente_saude,
                         //mas para buscar a unidade, aqui, referencia a tabela unidade
 			'unidade_agente_saude' => array(self::BELONGS_TO, 'Unidade', 'unidade_cnes'),

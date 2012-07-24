@@ -110,7 +110,7 @@ class Meta extends CActiveRecord
 
 		$criteria->compare('periodicidade_id',$this->periodicidade_id);
 
-		$criteria->compare('tipo',$this->tipo,true);
+		$criteria->compare('tipo',$this->tipo);
 
 		$criteria->compare('valor',$this->valor);
 
