@@ -6,7 +6,6 @@
 )); ?>
 
 	<div class="row">
-                <?php echo Yii::app()->createUrl('indicador/search');?>
 		<?php echo $form->label($model,'id'); ?>
 		<?php echo $form->textField($model,'id'); ?>
 	</div>
