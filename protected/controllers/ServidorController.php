@@ -1,4 +1,5 @@
 <?php
+Yii::app()->getModule('metas');
 
 class ServidorController extends SISPADBaseController
 {
@@ -172,7 +173,7 @@ class ServidorController extends SISPADBaseController
              $this->_RBAC->checkAccess('registered',true);
             $q = $_GET['term'];
             if(isset($q)) {
-                 $servidores = Servidor::model()->findAll('nome like :nome',array(':nome'=> strtoupper(trim($q)).'%'));
+                 $servidores = Servidor::model()->findAll('nome like :nome',array(':nome'=> '%'.strtoupper(trim($q)).'%'));
  
                 if (!empty($servidores)) {
                     $out = array();
@@ -286,6 +287,7 @@ class ServidorController extends SISPADBaseController
                             'value' => $agen->getServidorUnidade(),
                             'unidade_cnes' => $agen->unidade_cnes,
                             'micro_area'=>$agen->micro_area,
+                            'agente_saude_micro_area'=>$agen->micro_area,
                             'id' => $agen->servidor_cpf, // return value from autocomplete
                      );
                     }
