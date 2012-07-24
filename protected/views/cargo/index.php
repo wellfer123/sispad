@@ -4,8 +4,8 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Create Cargo', 'url'=>array('create')),
-	array('label'=>'Manage Cargo', 'url'=>array('admin')),
+	array('label'=>'Criar Cargo', 'url'=>array('create')),
+	array('label'=>'Administrar Cargos', 'url'=>array('admin')),
 );
 ?>
 

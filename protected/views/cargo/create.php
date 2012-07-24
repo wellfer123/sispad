@@ -1,12 +1,12 @@
 <?php
 $this->breadcrumbs=array(
 	'Cargos'=>array('index'),
-	'Create',
+	'Criar',
 );
 
 $this->menu=array(
-	array('label'=>'List Cargo', 'url'=>array('index')),
-	array('label'=>'Manage Cargo', 'url'=>array('admin')),
+	array('label'=>'Listar Cargos', 'url'=>array('index')),
+	array('label'=>'Administrar Cargos', 'url'=>array('admin')),
 );
 ?>
 

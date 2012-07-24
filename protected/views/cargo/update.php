@@ -6,10 +6,10 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List Cargo', 'url'=>array('index')),
-	array('label'=>'Create Cargo', 'url'=>array('create')),
-	array('label'=>'View Cargo', 'url'=>array('view', 'id'=>$model->id)),
-	array('label'=>'Manage Cargo', 'url'=>array('admin')),
+	array('label'=>'Listar Cargos', 'url'=>array('index')),
+	array('label'=>'Criar Cargo', 'url'=>array('create')),
+	array('label'=>'Ver Cargo', 'url'=>array('view', 'id'=>$model->id)),
+	array('label'=>'Administrar Cargos', 'url'=>array('admin')),
 );
 ?>
 
