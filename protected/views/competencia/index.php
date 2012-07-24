@@ -4,8 +4,8 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Create Competencia', 'url'=>array('create')),
-	array('label'=>'Manage Competencia', 'url'=>array('admin')),
+	array('label'=>'Criar Competencia', 'url'=>array('create')),
+	array('label'=>'Administrar Competencias', 'url'=>array('admin')),
 );
 ?>
 

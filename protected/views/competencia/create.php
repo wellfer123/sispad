@@ -1,12 +1,12 @@
 <?php
 $this->breadcrumbs=array(
 	'Competencias'=>array('index'),
-	'Create',
+	'Criar',
 );
 
 $this->menu=array(
-	array('label'=>'List Competencia', 'url'=>array('index')),
-	array('label'=>'Manage Competencia', 'url'=>array('admin')),
+	array('label'=>'Listar Competencias', 'url'=>array('index')),
+	array('label'=>'Gerenciar Competencias', 'url'=>array('admin')),
 );
 ?>
 

@@ -12,11 +12,11 @@
 
 	<div class="row">
 		<?php echo $form->label($model,'ativo'); ?>
-		<?php echo $form->textField($model,'ativo'); ?>
+		<?php echo $form->dropDownList($model,'ativo',array(''=>'TODAS',1=>'ABERTA',0=>'FECHADA'));?>
 	</div>
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton('Search'); ?>
+		<?php echo CHtml::submitButton('Buscar'); ?>
 	</div>
 
 <?php $this->endWidget(); ?>
