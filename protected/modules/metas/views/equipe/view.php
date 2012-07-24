@@ -1,7 +1,7 @@
 <?php
 $this->breadcrumbs=array(
 	'Equipes'=>array('index'),
-	"Equipe da unidade".$model->unidade_cnes,
+	"Equipe da unidade ".$model->unidade->nome,
 );
 
 $this->menu=array(
@@ -16,7 +16,7 @@ $this->menu=array(
 ?>
 
 <div class="update">
-<h2>Equipe da unidade <?php echo $model->unidade_cnes; ?></h2>
+<h2>Equipe da unidade <?php echo $model->unidade->nome; ?></h2>
 </div>
 
 <?php $this->widget('zii.widgets.CDetailView', array(
@@ -25,7 +25,10 @@ $this->menu=array(
 		'codigo_segmento',
 		'codigo_area',
 		'tipo',
-		'unidade_cnes',
+		 array(
+                        'label'=>'Unidade',
+                        'value'=>$model->unidade->nome.''.$data->unidade_cnes,
+                ),
 		
 	),
 )); ?>

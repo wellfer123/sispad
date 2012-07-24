@@ -1,4 +1,5 @@
 <?php
+Yii::app()->getModule('metas');
 
 class ServidorController extends SISPADBaseController
 {
@@ -172,7 +173,7 @@ class ServidorController extends SISPADBaseController
              $this->_RBAC->checkAccess('registered',true);
             $q = $_GET['term'];
             if(isset($q)) {
-                 $servidores = Servidor::model()->findAll('nome like :nome',array(':nome'=> strtoupper(trim($q)).'%'));
+                 $servidores = Servidor::model()->findAll('nome like :nome',array(':nome'=> '%'.strtoupper(trim($q)).'%'));
  
                 if (!empty($servidores)) {
                     $out = array();

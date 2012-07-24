@@ -117,12 +117,13 @@ class EquipeController extends Controller
 	 */
 	public function actionIndex()
 	{
-                $model = new Equipe;
-                $model->unsetAttributes();
-		$dataProvider=new CActiveDataProvider('Equipe');
-		$this->render('index',array(
-			'model'=>$model,
-		));
+//                $model = new Equipe;
+//                $model->unsetAttributes();
+//		$dataProvider=new CActiveDataProvider('Equipe');
+//		$this->render('index',array(
+//			'model'=>$model,
+//		));
+            $this->redirect(array('admin'));
 	}
 
 	/**
@@ -149,7 +150,7 @@ class EquipeController extends Controller
 		if($this->_model===null)
 		{
 			if(isset($_GET['area'])&& isset($_GET['cnes']))
-				$this->_model=Equipe::model()->findbyPk(
+				$this->_model=Equipe::model()->with('unidade')->findbyPk(
                                         array('codigo_area'=>$_GET['area'],'unidade_cnes'=>$_GET['cnes']));
 			if($this->_model===null)
 				throw new CHttpException(404,'The requested page does not exist.');

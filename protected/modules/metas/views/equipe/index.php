@@ -15,7 +15,6 @@ $this->menu=array(
    $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'equipe-grid',
 	'dataProvider'=>$model->search(),
-	'filter'=>$model,
 	'columns'=>array(
 		'codigo_segmento',
 		'codigo_area',

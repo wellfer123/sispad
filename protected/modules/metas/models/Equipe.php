@@ -94,6 +94,8 @@ class Equipe extends CActiveRecord
 		// should not be searched.
 
 		$criteria=new CDbCriteria;
+                
+                $criteria->with='unidade';
 
 		$criteria->compare('codigo_segmento',$this->codigo_segmento);
 

@@ -39,12 +39,18 @@ ou <b>=</b>)
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'equipe-grid',
 	'dataProvider'=>$model->search(),
-	'filter'=>$model,
 	'columns'=>array(
 		'codigo_segmento',
 		'codigo_area',
 		'tipo',
-		'unidade_cnes',
+                array(
+                        'name'=>'Unidade',
+                        'value'=>'$data->unidade->nome',
+                ),
+                 array(
+                        'name'=>'CNES',
+                        'value'=>'$data->unidade->cnes',
+                ),
 		array(
 			'class'=>'CButtonColumn',
                         'template'=>'{view}{update}',

@@ -64,6 +64,7 @@ textarea.uniform {
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
 	border-radius: 3px;
+        text-transform:uppercase;
 	outline: 0;
 }
 

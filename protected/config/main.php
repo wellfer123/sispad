@@ -18,6 +18,8 @@ return array(
 		'application.models.*',
                 'application.extensions.*',
 		'application.components.*',
+                'application.modules.*',
+                'application.modules.metas.*',
                 'application.extensions.yii-mail.*',
 
 	),
