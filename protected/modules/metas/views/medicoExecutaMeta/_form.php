@@ -20,7 +20,7 @@
                                     'model'=>$model, 
                                     'attribute'=>'meta_id', //the FK field (from CJuiInputWidget)
                                      // controller method to return the autoComplete data (from CJuiAutoComplete)
-                                    'sourceUrl'=>Yii::app()->createUrl('metas/Meta/findMetas',array('profissao'=>Medico::CODIGO_PROFISSAO)), 
+                                    'sourceUrl'=>Yii::app()->createUrl('metas/Meta/findMetas',array('tipo'=>  Meta::ITENS,'profissao'=>Medico::CODIGO_PROFISSAO)), 
                                     // defaults to false.  set 'true' to display the FK field with 'readonly' attribute.
                                     'showFKField'=>false,
                                     // display size of the FK field.  only matters if not hidden.  defaults to 10

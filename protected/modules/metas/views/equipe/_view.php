@@ -17,7 +17,7 @@
                         'buttons'=>array(
                                   'adicionar_servidor'=>array(
                                                         'label'=>'Adicionar Servidor',
-                                                        'url'=>'Yii::app()->createUrl("/servidorEquipe/addToTeam",
+                                                        'url'=>'Yii::app()->createUrl("/metas/servidorEquipe/addToTeam",
                                                                 array("area"=>$data->codigo_area,"cnes"=>$data->unidade_cnes))',
                                                         'imageUrl'=>  Yii::app()->request->baseUrl.'/images/add.png',
                                   ),

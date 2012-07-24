@@ -6,7 +6,7 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Gerenciar Metas Executads por Odontologos', 'url'=>array('preparedAdmin')),
+	array('label'=>'Gerenciar Metas Executads por Odontólogos', 'url'=>array('admin')),
 );
 ?>
 
