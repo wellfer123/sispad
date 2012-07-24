@@ -157,11 +157,22 @@ class MetaController extends SISPADBaseController{
 	}
        public function actionFindMetas() {
             
-             $this->_RBAC->checkAccess('registered',true);
+            $this->_RBAC->checkAccess('registered',true);
+            $criteria= new CDbCriteria();
+            
+            $criteria->join='INNER JOIN indicador ind ON ind.id=t.indicador_id';
+            $criteria->condition=' ind.profissao_codigo=:profissao AND ind.status=:status';
+            $criteria->params=array(
+                                    ':profissao'=> isset($_GET['profissao'])?$_GET['profissao']:null,
+                                    ':status'=>  Indicador::ATIVO);
+            
+            $criteria->compare('tipo', isset($_GET['tipo'])?$_GET['tipo']:null);
+            $criteria->compare('t.nome', isset($_GET['term'])? strtoupper(trim($_GET['term'])):null,true);
+            
+            
             $q = $_GET['term'];
-            $profissao = $_GET['profissao'];
             if(isset($q)) {
-                 $metas = Meta::model()->findAllBySql(Meta::getSelectSqlProfissao($profissao, strtoupper(trim($q)), Meta::ITENS));//(Meta::getCDbCriteriaProfissao(Medico::CODIGO_PROFISSAO, strtoupper(trim($q)), Meta::ITENS));
+                 $metas = Meta::model()->findAll($criteria);//Meta::model()->findAllBySql(Meta::getSelectSqlProfissao($profissao, strtoupper(trim($q)), Meta::ITENS));//(Meta::getCDbCriteriaProfissao(Medico::CODIGO_PROFISSAO, strtoupper(trim($q)), Meta::ITENS));
  
                 if (!empty($metas)) {
                     $out = array();
