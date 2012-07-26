@@ -14,7 +14,7 @@ $this->menu=array(
     $ano = $_GET['ano'];
     $servidor = Servidor::model()->findByPk($cpf);
     $mes_model = Meses::model()->findByPk($mes);
-    $title = "Faltas: $servidor->nome - $mes_model->nome / $ano ";
+    $title = "Faltas: $servidor->nome - $mes_model->nome - $ano ";
 ?>
 <h2><?php echo $title;?></h2>
 

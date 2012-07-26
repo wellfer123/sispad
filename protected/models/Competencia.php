@@ -38,6 +38,7 @@ class Competencia extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('mes_ano, ativo', 'numerical', 'integerOnly'=>true),
+                        array('mes_ano', 'length', 'min'=>5, 'max'=>5),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('mes_ano, ativo', 'safe', 'on'=>'search'),
@@ -61,11 +62,20 @@ class Competencia extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'mes_ano' => 'Mes Ano',
+			'mes_ano' => 'MesAno',
 			'ativo' => 'Ativo',
 		);
 	}
-
+        
+        public function labelStatus(){
+            if($this->ativo== Competencia::ABERTA){
+                return 'ABERTA';
+            }
+            else if($this->ativo==Competencia::FECHADA){
+                return 'FECHADA';
+            }
+            return 'DESCONHECIDO';
+        }
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
 	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.

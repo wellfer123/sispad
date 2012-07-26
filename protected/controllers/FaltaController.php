@@ -66,6 +66,7 @@ class FaltaController extends SISPADBaseController
         public function actionViewMonth()
 	{
                 $model = new Falta;
+               
 		$this->render('view_month',array(
 			'model'=>$model,
 		));
@@ -73,7 +74,7 @@ class FaltaController extends SISPADBaseController
 
         public function actionPreparedCreate()
         {
-                $model= new Falta;
+                $model= new Falta('preparedCreate');
 
                 $this->performAjaxValidation($model);
                 if(isset($_POST['Falta']))
@@ -82,18 +83,20 @@ class FaltaController extends SISPADBaseController
                         $model->mes= $_POST['Falta']['mes'];
                         $model->ano= $_POST['Falta']['ano'];
                         
-
-			$this->redirect(array('create','cpf'=>$model->servidor_cpf,'mes'=>$model->mes,
+                        if($model->validate()){
+                            
+                            $this->redirect(array('create','cpf'=>$model->servidor_cpf,'mes'=>$model->mes,
                             'ano'=>$model->ano));
-		}else
+                        }
+		}
                     $this->render('prepared_create',array(
 			'model'=>$model,
 		));
 	}
 
          public function actionPreparedViewDetail()
-        {
-                $model= new Falta;
+        {       
+                $model= new Falta('viewDetail');
 
                 $this->performAjaxValidation($model);
                 if(isset($_POST['Falta']))
@@ -101,18 +104,20 @@ class FaltaController extends SISPADBaseController
                         $model->servidor_cpf= $_POST['Falta']['servidor_cpf'];
                         $model->mes= $_POST['Falta']['mes'];
                         $model->ano= $_POST['Falta']['ano'];
-
-			$this->redirect(array('viewDetail','cpf'=>$model->servidor_cpf,'mes'=>$model->mes,
+                        if($model->validate()){
+                            $this->redirect(array('viewDetail','cpf'=>$model->servidor_cpf,'mes'=>$model->mes,
                             'ano'=>$model->ano));
-		}else
+                        }
+		}
                     $this->render('prepared_view_detail',array(
 			'model'=>$model,
 		));
 	}
-
+        
          public function actionPreparedViewMonth()
         {
                 $model= new Falta;
+                $servidor = new Servidor('preparedViewMonth');
 
                 $this->performAjaxValidation($model);
                 if(isset($_POST['Falta']))
@@ -120,13 +125,16 @@ class FaltaController extends SISPADBaseController
                         
                         $model->mes= $_POST['Falta']['mes'];
                         $model->ano= $_POST['Falta']['ano'];
-                        $unidade = $_POST['Servidor']['unidade_cnes'];
+                        $servidor->unidade_cnes = $_POST['Servidor']['unidade_cnes'];
                         $nome_unidade = $_POST['Servidor_unidade_cnes_lookup'];
-
+                        if($model->validate() && $servidor->validate()){
 			$this->redirect(array('viewMonth','mes'=>$model->mes,
-                            'ano'=>$model->ano,'unidade'=>$unidade,'nome_unidade'=>$nome_unidade));
-		}else
-                    $this->render('prepared_view_month',array(
+                            'ano'=>$model->ano,'unidade'=>$servidor->unidade_cnes,'nome_unidade'=>$nome_unidade));
+                        }
+                        
+		}
+                    
+                    $this->render('prepared_view_month',array('servidor'=>$servidor,
 			'model'=>$model,
 		));
 	}
@@ -137,7 +145,7 @@ class FaltaController extends SISPADBaseController
 	 */
 	public function actionCreate()
 	{
-		$model=new Falta;
+		$model=new Falta('create');
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
@@ -153,9 +161,11 @@ class FaltaController extends SISPADBaseController
                         $model->motivo_id = $_POST['Falta']['motivo_id'];
                         $model->obs_motivo= $_POST['Falta']['obs_motivo'];
 			if($model->save()){
-                          $this->redirect(array('create','cpf'=>$model->servidor_cpf,'mes'=>$model->mes,
-                            'ano'=>$model->ano));
-                        }
+                          $this->addMessageSuccess('Falta enviada com Sucesso!');  
+                          //$this->redirect(array('create','cpf'=>$model->servidor_cpf,'mes'=>$model->mes,
+                           // 'ano'=>$model->ano));
+                        }else
+                            $this->addMessageErro('Falta não enviada!');  
 				//$this->redirect(array('view','id'=>$model->dia));
 		}
 
@@ -177,10 +187,10 @@ class FaltaController extends SISPADBaseController
 
         }
 
-        public function actionRelatorioMensal($title,$mes,$ano) {
+        public function actionRelatorioMensal($title,$mes,$ano,$unidade_cnes) {
             $model = new TotalFalta;
             $this->widget('application.extensions.phpexcel.EExcelView',
-                        array('dataProvider'=>$model->searchMensal2($mes,$ano),
+                        array('dataProvider'=>$model->searchMensal2($mes,$ano,$unidade_cnes),
                              'title'=>$title,
                              'grid_mode'=>'export',
                              'exportType'=>'Excel2007',

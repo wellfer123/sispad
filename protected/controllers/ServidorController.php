@@ -1,4 +1,5 @@
 <?php
+Yii::app()->getModule('metas');
 
 class ServidorController extends SISPADBaseController
 {
@@ -94,6 +95,26 @@ class ServidorController extends SISPADBaseController
 			'model'=>$model,
 		));
 	}
+        
+        public function actionCreateAjax()
+	{
+		$model=$this->loadModel();
+
+		// Uncomment the following line if AJAX validation is needed
+		// $this->performAjaxValidation($model);
+                $data='errado';
+		if(isset($_POST['Servidor']))
+		{
+			$model->attributes=$_POST['Servidor'];
+			if($model->save()){
+                            $data='certo';
+                        }
+		}
+
+                echo CJSON::encode(array('cesar','65'));
+                Yii::app()->end();
+           
+	}
 
 	/**
 	 * Lists all models.
@@ -152,7 +173,7 @@ class ServidorController extends SISPADBaseController
              $this->_RBAC->checkAccess('registered',true);
             $q = $_GET['term'];
             if(isset($q)) {
-                 $servidores = Servidor::model()->findAll('nome like :nome',array(':nome'=> strtoupper(trim($q)).'%'));
+                 $servidores = Servidor::model()->findAll('nome like :nome',array(':nome'=> '%'.strtoupper(trim($q)).'%'));
  
                 if (!empty($servidores)) {
                     $out = array();
@@ -265,6 +286,8 @@ class ServidorController extends SISPADBaseController
                             'label' => $agen->getServidorUnidade(),  
                             'value' => $agen->getServidorUnidade(),
                             'unidade_cnes' => $agen->unidade_cnes,
+                            'micro_area'=>$agen->micro_area,
+                            'agente_saude_micro_area'=>$agen->micro_area,
                             'id' => $agen->servidor_cpf, // return value from autocomplete
                      );
                     }

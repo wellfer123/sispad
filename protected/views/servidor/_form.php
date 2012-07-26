@@ -86,6 +86,13 @@
        
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Cadastrar' : 'Atualizar'); ?>
+                <?php echo CHtml::ajaxSubmitButton($model->isNewRecord ? 'ACadastrar' : 'AAtualizar', Yii::app()->createUrl('servidor/createAjax'), 
+                                                    array(
+                                                          'complete' => 'function( data ){
+                                                                            // handle return data
+                                                                            alert(data);
+                                                                            }',
+                                                    )); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

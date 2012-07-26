@@ -1,18 +1,21 @@
 <?php
 $this->breadcrumbs=array(
-	'Titulo Eleitors'=>array('index'),
-	$model->servidor_cpf=>array('view','id'=>$model->servidor_cpf),
-	'Update',
+	'Servidor'=>array('Servidor/view','id'=>$servidor->cpf),
+	'Titulo de Eleitor'=>array('index'),
+	'Atualização',
 );
 
 $this->menu=array(
-	array('label'=>'List TituloEleitor', 'url'=>array('index')),
-	array('label'=>'Create TituloEleitor', 'url'=>array('create')),
-	array('label'=>'View TituloEleitor', 'url'=>array('view', 'id'=>$model->servidor_cpf)),
-	array('label'=>'Manage TituloEleitor', 'url'=>array('admin')),
+	array('label'=>'Visualizar Servidor', 'url'=>array('Servidor/view','id'=>$servidor->cpf)),
+	array('label'=>'Visualizar Título de Eleitor', 'url'=>array('view')),
 );
 ?>
 
-<h1>Update TituloEleitor <?php echo $model->servidor_cpf; ?></h1>
+<?php $this->beginWidget('zii.widgets.CPortlet', array(
+			'title'=>'Atualização do Título de Eleitor de '.$servidor->nome,
+                        'htmlOptions'=>array('class'=>'portlet_form')
+		));?>
 
-<?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php echo $this->renderPartial('_form', array('model'=>$model,'servidor'=>$servidor)); ?>
+
+<?php $this->endWidget(); ?>

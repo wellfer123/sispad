@@ -56,24 +56,29 @@ class EnderecoController  extends SISPADBaseController
 		if(isset($_POST['Endereco']))
 		{
 			$model->attributes=$_POST['Endereco'];
+                        //se salvar com sucesso, vai colocar o endereço no servidor
 			if($model->save())
                                 $this->salvaEmServidor($model);
 				
 		}
-
+                $servidor=$this->loadModelServidor();
 		$this->render('create',array(
-			'model'=>$model,
+			'model'=>$model, 'servidor'=>$servidor,
 		));
 	}
 
         public function salvaEmServidor($model) {
             
+            //recupera o servidor
             $servidor =$this->loadModelServidor();
             
+            //atribui o endereço ao servidor
             $servidor->endereco_id = $model->id;
             
+            //se salvou com sucesso, redireciona para o modelo em questão
             if($servidor->save()){
-              $this->redirect(array('view','id'=>$model->id));
+                //passa o id do endereço e redireciona para visulizar
+              $this->redirect(array('view','id'=>$model->id,'cpf'=>$_GET['cpf']));
             }else{
                 $this->addmessageErro("Erro ao cadastrar o endereço: verifique se os dados do servidor foram
                     cadastrados corretamente");
@@ -85,7 +90,8 @@ class EnderecoController  extends SISPADBaseController
 	 */
 	public function actionUpdate()
 	{
-            if(isset($_GET['id']) && isset($_GET['model']) && isset($_GET['idModel'])){
+            if(isset($_GET['id']) && isset($_GET['cpf'])){
+                $servidor=$this->loadModelServidor();
 		$model=Endereco::model()->findByPk($_GET['id']);
 
 		// Uncomment the following line if AJAX validation is needed
@@ -94,22 +100,25 @@ class EnderecoController  extends SISPADBaseController
 		if(isset($_POST['Endereco']))
 		{
 			$model->attributes=$_POST['Endereco'];
-			if($model->save())
-				$this->redirectViewModel($model);
+			if($model->save()){
+			//	$this->redirectViewModel($model);
+                            $this->redirect(array('view','id'=>$model->id,'cpf'=>$_GET['cpf']));
+                        }
 		}
 
 		$this->render('update',array(
-			'model'=>$model,
+			'model'=>$model,'servidor'=>$servidor
 		));
             } else{
-                throw new CHttpException(404,'Você acessou indevidamente uma página! Não repita a operção!');
+                throw new CHttpException(404,'Você acessou indevidamente uma página! Não repita a operação!');
             }
 	}
 
         public function actionView()
 	{
+                //recupera o o endereçoe o servidor
 		$this->render('view',array(
-			'model'=>$this->loadModel(),
+			'model'=>$this->loadModel(),'servidor'=>$this->loadModelServidor(),
 		));
 	}
 
@@ -121,6 +130,7 @@ class EnderecoController  extends SISPADBaseController
 	{
 		if($this->_model===null)
 		{
+                        //pega o endereço
 			if(isset($_GET['id']))
 				$this->_model=Endereco::model()->findbyPk($_GET['id']);
 			if($this->_model===null)
@@ -132,7 +142,7 @@ class EnderecoController  extends SISPADBaseController
 
         public function loadModelServidor()
 	{
-
+                //pega o servidor pelo parâmetro
 		if(isset($_GET['cpf']))
                     $modelServidor=Servidor::model()->findbyPk($_GET['cpf']);
                 

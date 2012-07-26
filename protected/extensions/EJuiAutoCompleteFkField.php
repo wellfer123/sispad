@@ -212,7 +212,7 @@ class EJuiAutoCompleteFkField extends CJuiAutoComplete {
         $script='';
         if(is_array($this->attributes)){
             foreach ($this->attributes as $atr){
-                 $htmlOpt;
+                 $htmlOpt=null;
                 CHtml::resolveNameID($this->model, $atr, $htmlOpt);
                 $script=$script."\$('#".$htmlOpt['id']."').val(ui.item.".$atr.");";
             }

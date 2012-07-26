@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>yii</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="jquery.min.js" type="text/javascript"></script>
+    <script src="highcharts.js" type="text/javascript"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+          var classCoverageDistribution = new Highcharts.Chart({
+             chart: {
+                renderTo: 'classCoverageDistribution',
+                type: 'column'
+             },
+             title: {text: ''},
+             legend: {enabled: false},
+             credits: {enabled: false},
+             tooltip: {enabled: false},
+             xAxis: {
+                 labels: {style: {fontSize: '8px'}},
+                 categories: [
+                 '0%','0-10%','10-20%','20-30%','30-40%','40-50%','50-60%','60-70%','70-80%','80-90%','90-100%','100%'
+                 ]
+            },
+            yAxis: {
+                title: '',
+                labels: {style: {fontSize: '8px'}},
+            },
+            series: [{
+                data: [12,6,6,2,1,2,3,5,2,0,1,9]
+            }],
+          });
+
+        var classComplexity = new Highcharts.Chart({
+            chart: {
+              renderTo: 'classComplexity',
+              type: 'scatter'
+            },
+            title: {text: ''},
+            legend: {enabled: false},
+            credits: {enabled: false},
+            xAxis: {
+               labels: {enabled: false},
+            },
+            yAxis: {
+              title: '',
+              labels: {enabled: false},
+            },
+            tooltip: {
+                formatter: function() {
+                    return this.point.config[2];
+                }
+            },
+            series: [{
+              data: [[43.414634146341,91,"<a href=\"yii_framework_YiiBase.php.html#56\">YiiBase<\/a>"],[0.73260073260073,119,"<a href=\"yii_framework_base_CApplication.php.html#79\">CApplication<\/a>"],[75,2,"<a href=\"yii_framework_base_CApplicationComponent.php.html#27\">CApplicationComponent<\/a>"],[7.4468085106383,101,"<a href=\"yii_framework_base_CComponent.php.html#90\">CComponent<\/a>"],[100,1,"<a href=\"yii_framework_base_CComponent.php.html#632\">CEvent<\/a>"],[100,0,"<a href=\"yii_framework_base_CComponent.php.html#684\">CEnumerable<\/a>"],[100,0,"<a href=\"yii_framework_base_CException.php.html#19\">CException<\/a>"],[34.328358208955,76,"<a href=\"yii_framework_base_CModel.php.html#30\">CModel<\/a>"],[100,0,"<a href=\"yii_framework_base_CModelEvent.php.html#22\">CModelEvent<\/a>"],[8.7591240875912,69,"<a href=\"yii_framework_base_CModule.php.html#39\">CModule<\/a>"],[0,19,"<a href=\"yii_framework_collections_CAttributeCollection.php.html#32\">CAttributeCollection<\/a>"],[16.85393258427,50,"<a href=\"yii_framework_collections_CList.php.html#39\">CList<\/a>"],[90.909090909091,6,"<a href=\"yii_framework_collections_CListIterator.php.html#21\">CListIterator<\/a>"],[0,49,"<a href=\"yii_framework_collections_CMap.php.html#36\">CMap<\/a>"],[21.641791044776,222,"<a href=\"yii_framework_db_CDbCommand.php.html#65\">CDbCommand<\/a>"],[42.446043165468,70,"<a href=\"yii_framework_db_CDbConnection.php.html#107\">CDbConnection<\/a>"],[100,1,"<a href=\"yii_framework_db_CDbException.php.html#19\">CDbException<\/a>"],[11.151079136691,230,"<a href=\"yii_framework_db_ar_CActiveRecord.php.html#41\">CActiveRecord<\/a>"],[10.526315789474,32,"<a href=\"yii_framework_db_ar_CActiveRecord.php.html#1867\">CBaseActiveRelation<\/a>"],[0,3,"<a href=\"yii_framework_db_ar_CActiveRecord.php.html#2008\">CStatRelation<\/a>"],[0,15,"<a href=\"yii_framework_db_ar_CActiveRecord.php.html#2045\">CActiveRelation<\/a>"],[100,0,"<a href=\"yii_framework_db_ar_CActiveRecord.php.html#2139\">CBelongsToRelation<\/a>"],[100,0,"<a href=\"yii_framework_db_ar_CActiveRecord.php.html#2151\">CHasOneRelation<\/a>"],[0,7,"<a href=\"yii_framework_db_ar_CActiveRecord.php.html#2169\">CHasManyRelation<\/a>"],[100,0,"<a href=\"yii_framework_db_ar_CActiveRecord.php.html#2220\">CManyManyRelation<\/a>"],[54.285714285714,16,"<a href=\"yii_framework_db_ar_CActiveRecord.php.html#2233\">CActiveRecordMetaData<\/a>"],[65.714285714286,23,"<a href=\"yii_framework_db_schema_CDbColumnSchema.php.html#19\">CDbColumnSchema<\/a>"],[9.2219020172911,123,"<a href=\"yii_framework_db_schema_CDbCommandBuilder.php.html#22\">CDbCommandBuilder<\/a>"],[18.666666666667,75,"<a href=\"yii_framework_db_schema_CDbSchema.php.html#26\">CDbSchema<\/a>"],[50,3,"<a href=\"yii_framework_db_schema_CDbTableSchema.php.html#33\">CDbTableSchema<\/a>"],[69.230769230769,16,"<a href=\"yii_framework_db_schema_mysql_CMysqlColumnSchema.php.html#19\">CMysqlColumnSchema<\/a>"],[65.420560747664,37,"<a href=\"yii_framework_db_schema_mysql_CMysqlSchema.php.html#19\">CMysqlSchema<\/a>"],[100,0,"<a href=\"yii_framework_db_schema_mysql_CMysqlTableSchema.php.html#19\">CMysqlTableSchema<\/a>"],[0.97087378640777,73,"<a href=\"yii_framework_i18n_CLocale.php.html#38\">CLocale<\/a>"],[57.142857142857,14,"<a href=\"yii_framework_i18n_CMessageSource.php.html#28\">CMessageSource<\/a>"],[0,1,"<a href=\"yii_framework_i18n_CMessageSource.php.html#139\">CMissingTranslationEvent<\/a>"],[62.857142857143,13,"<a href=\"yii_framework_i18n_CPhpMessageSource.php.html#44\">CPhpMessageSource<\/a>"],[0,12,"<a href=\"yii_framework_logging_CLogRouter.php.html#53\">CLogRouter<\/a>"],[6.0240963855422,42,"<a href=\"yii_framework_logging_CLogger.php.html#33\">CLogger<\/a>"],[72.262773722628,50,"<a href=\"yii_framework_test_CDbFixtureManager.php.html#42\">CDbFixtureManager<\/a>"],[0,12,"<a href=\"yii_framework_test_CWebTestCase.php.html#26\">CWebTestCase<\/a>"],[20,23,"<a href=\"yii_framework_validators_CNumberValidator.php.html#32\">CNumberValidator<\/a>"],[17.142857142857,13,"<a href=\"yii_framework_validators_CRequiredValidator.php.html#27\">CRequiredValidator<\/a>"],[0,1,"<a href=\"yii_framework_validators_CSafeValidator.php.html#19\">CSafeValidator<\/a>"],[18.461538461538,23,"<a href=\"yii_framework_validators_CStringValidator.php.html#34\">CStringValidator<\/a>"],[63.04347826087,26,"<a href=\"yii_framework_validators_CValidator.php.html#57\">CValidator<\/a>"],[0,161,"<a href=\"yii_framework_web_CHttpRequest.php.html#60\">CHttpRequest<\/a>"],[0,19,"<a href=\"yii_framework_web_CHttpRequest.php.html#953\">CCookieCollection<\/a>"],[0,68,"<a href=\"yii_framework_web_CWebApplication.php.html#59\">CWebApplication<\/a>"]],
+              marker: {
+                  symbol: 'diamond'
+              }
+            }],
+        });
+    });
+    </script>
+  </head>
+
+  <body>
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr><td class="title">yii</td></tr>
+      <tr><td><div align="center"><p><a href="yii.html">Back to Code Coverage report</a></p></div></td></tr>
+      <tr><td class="ruler"><img src="glass.png" width="3" height="3" alt=""></td></tr>
+    </table>
+
+    <br />
+
+    <center>
+      <table width="90%" cellpadding="2" cellspacing="1" border="0">
+        <tr>
+          <td valign="top">
+            <h2>Class Coverage Distribution</h2>
+            <div id="classCoverageDistribution"></div>
+          </td>
+
+          <td valign="top">
+            <h2>Class Complexity</h2>
+            <div id="classComplexity"></div>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top">
+            <h2>Top Project Risks</h2>
+            <ul>
+              <li><a href="yii_framework_db_ar_CActiveRecord.php.html#41">CActiveRecord</a> (37333)</li>
+              <li><a href="yii_framework_web_CHttpRequest.php.html#60">CHttpRequest</a> (26082)</li>
+              <li><a href="yii_framework_db_CDbCommand.php.html#65">CDbCommand</a> (23933)</li>
+              <li><a href="yii_framework_base_CApplication.php.html#79">CApplication</a> (13971)</li>
+              <li><a href="yii_framework_db_schema_CDbCommandBuilder.php.html#22">CDbCommandBuilder</a> (11440)</li>
+              <li><a href="yii_framework_base_CComponent.php.html#90">CComponent</a> (8188)</li>
+              <li><a href="yii_framework_i18n_CLocale.php.html#38">CLocale</a> (5248)</li>
+              <li><a href="yii_framework_web_CWebApplication.php.html#59">CWebApplication</a> (4692)</li>
+              <li><a href="yii_framework_base_CModule.php.html#39">CModule</a> (3685)</li>
+              <li><a href="yii_framework_db_schema_CDbSchema.php.html#26">CDbSchema</a> (3101)</li>
+
+            </ul>
+          </td>
+
+          <td valign="top">
+            <h2>Least Tested Methods</h2>
+            <ul>
+              <li><a href="yii_framework_db_schema_CDbCommandBuilder.php.html#112">CDbCommandBuilder::createCountCommand</a> (0%)</li>
+              <li><a href="yii_framework_db_schema_CDbCommandBuilder.php.html#166">CDbCommandBuilder::createDeleteCommand</a> (0%)</li>
+              <li><a href="yii_framework_db_schema_CDbCommandBuilder.php.html#238">CDbCommandBuilder::createUpdateCommand</a> (0%)</li>
+              <li><a href="yii_framework_db_schema_CDbCommandBuilder.php.html#75">CDbCommandBuilder::createFindCommand</a> (0%)</li>
+              <li><a href="yii_framework_db_schema_CDbCommandBuilder.php.html#49">CDbCommandBuilder::getSchema</a> (0%)</li>
+              <li><a href="yii_framework_db_schema_CDbColumnSchema.php.html#91">CDbColumnSchema::extractType</a> (0%)</li>
+              <li><a href="yii_framework_db_schema_CDbCommandBuilder.php.html#41">CDbCommandBuilder::getDbConnection</a> (0%)</li>
+              <li><a href="yii_framework_db_schema_CDbCommandBuilder.php.html#291">CDbCommandBuilder::createUpdateCounterCommand</a> (0%)</li>
+              <li><a href="yii_framework_db_schema_CDbCommandBuilder.php.html#328">CDbCommandBuilder::createSqlCommand</a> (0%)</li>
+              <li><a href="yii_framework_db_schema_CDbCommandBuilder.php.html#400">CDbCommandBuilder::applyGroup</a> (0%)</li>
+
+            </ul>
+          </td>
+        </tr>
+      </table>
+    </center>
+
+    <br />
+
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr><td class="ruler"><img src="glass.png" width="3" height="3" alt=""></td></tr>
+      <tr><td class="versionInfo">Generated by <a href="http://github.com/sebastianbergmann/php-code-coverage" target="_top">PHP_CodeCoverage 1.1.3</a> using <a href="http://www.php.net/" target="_top">PHP 5.3.1</a> and PHPUnit 3.6.11 at Tue Jul 10 13:08:56 BRT 2012.</td></tr>
+    </table>
+
+    <br/>
+  </body>
+</html>

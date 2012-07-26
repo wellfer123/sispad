@@ -85,6 +85,8 @@ class TotalRelatorio extends CActiveRecord
 		// should not be searched.
 
 		$criteria=new CDbCriteria;
+                
+                $criteria->with='servidor';
 
 		$criteria->compare('ano',$this->ano);
 
@@ -93,10 +95,7 @@ class TotalRelatorio extends CActiveRecord
 	        $criteria->compare('servidor_cpf',$this->servidor_cpf,true);
                 
 		return new CActiveDataProvider('TotalRelatorio', array(
-			'criteria'=>array(
-                            'select'=>'ano,mes,quantidade,data_envio,servidor_cpf',
-                            'with'=>array('servidor'=>array('select'=>'nome')),
-                            ),
+			'criteria'=>$criteria,
                             
                     ////$criteria,
                         'pagination'=>array(

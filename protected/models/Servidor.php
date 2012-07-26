@@ -41,7 +41,8 @@ class Servidor extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('cpf, matricula,nome,estado_civil', 'required'),
+			array('cpf, matricula,nome,estado_civil', 'required','on'=>'create'),
+                        array('unidade_cnes', 'required','on'=>'preparedViewMonth'),
 			array('endereco_id, matricula, cpf', 'numerical', 'integerOnly'=>true),
 			array('cpf', 'length', 'max'=>11, 'min'=>11),
                         array('cpf', 'servidorExiste', 'on'=>'create'),
@@ -112,7 +113,7 @@ class Servidor extends CActiveRecord
 
 		//$criteria->compare('endereco_id',$this->endereco_id);
 
-		//$criteria->compare('unidade_cnes',$this->unidade_cnes,true);
+		$criteria->compare('unidade_cnes',$this->unidade_cnes,true);
 
 
 

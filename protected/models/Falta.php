@@ -36,8 +36,10 @@ class Falta extends CActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
+            array('mes,ano','required'),
+            array('servidor_cpf','required','on'=>'viewDetail,preparedCreate'),
             array('servidor_cpf', 'length', 'max' => 11),
-            array('dia', 'verificaFaltaExistente'),
+            array('dia', 'verificaFaltaExistente','on'=>'create'),
             // array('mes','ano','dia','required'),
             //array('obs_motivo', 'length', 'max'=>45),
             array('motivo_id', 'length', 'max' => 10),
@@ -67,8 +69,8 @@ class Falta extends CActiveRecord {
         return array(
             'dia' => 'Dia',
             'mes' => 'Mes',
-            'servidor_cpf' => 'Servidor Cpf',
-            'data_envio' => 'Data Envio',
+            'servidor_cpf' => 'Servidor',
+            'data_envio' => 'Data de Envio',
             'obs_motivo' => 'Observação',
             'motivo_id' => 'Motivo',
             'ano' => 'Ano',
