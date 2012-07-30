@@ -5,8 +5,8 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Listar Competencias', 'url'=>array('index')),
-	array('label'=>'Criar Competencia', 'url'=>array('create')),
+	array('label'=>'Listar Competências', 'url'=>array('index')),
+	array('label'=>'Cadastrar Competência', 'url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "

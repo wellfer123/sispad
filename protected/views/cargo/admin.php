@@ -6,7 +6,7 @@ $this->breadcrumbs=array(
 
 $this->menu=array(
 	array('label'=>'Listar Cargos', 'url'=>array('index')),
-	array('label'=>'Criar Cargo', 'url'=>array('create')),
+	array('label'=>'Cadastrar Cargo', 'url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -40,12 +40,16 @@ ou <b>=</b>) iniciar cada uma de suas pesquisa com valores específicos de como 
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'cargo-grid',
 	'dataProvider'=>$model->search(),
-	'filter'=>$model,
 	'columns'=>array(
 		'id',
 		'nome',
 		array(
 			'class'=>'CButtonColumn',
+                        'buttons'=>array(
+                                        'delete'=>array(
+                                                        'visible'=>'false'
+                                        ),
+                        ),
 		),
 	),
 )); ?>

@@ -1,7 +1,7 @@
 <?php
 $this->breadcrumbs=array(
-	'Cargos'=>array('index'),
-	'Criar',
+	'Cargos'=>array('admin'),
+	'Cadastro',
 );
 
 $this->menu=array(
@@ -10,6 +10,11 @@ $this->menu=array(
 );
 ?>
 
-<h1>Create Cargo</h1>
+<?php $this->beginWidget('zii.widgets.CPortlet', array(
+			'title'=>'Cadastro de cargo',
+                        'htmlOptions'=>array('class'=>'portlet_form')
+		));?>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
+
+<?php $this->endWidget(); ?>

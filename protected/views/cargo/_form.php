@@ -1,11 +1,11 @@
 <div class="form">
 
-<?php $form=$this->beginWidget('CActiveForm', array(
+<?php $form=$this->beginWidget('SISPADActiveForm', array(
 	'id'=>'cargo-form',
 	'enableAjaxValidation'=>false,
 )); ?>
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
+	<p class="note">Todos os campos com <span class="required">*</span> são requeridos.</p>
 
 	<?php echo $form->errorSummary($model); ?>
 
@@ -16,7 +16,7 @@
 	</div>
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Criar' : 'Salvar'); ?>
+		<?php echo CHtml::submitButton($model->isNewRecord ? 'Cadastrar' : 'Atualizar'); ?>
 	</div>
 
 <?php $this->endWidget(); ?>
