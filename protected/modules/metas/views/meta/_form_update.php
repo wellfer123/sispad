@@ -51,6 +51,21 @@
                         <?php echo $form->error($model,'tipo'); ?>
                     </td>
                 </tr>
+                <tr>
+                    <td>
+                        
+                        <?php
+                                $this->widget('application.extensions.jmultiselect2side.Jmultiselect2side',array(
+                                    'model'=>$model,
+                                    'attribute'=>'cargos',
+                                    'labelsx'=>'Disponíveis',
+                                    'labeldx'=>'Selecionados',
+                                    'moveOptions'=>false,
+                                  'list'=>  CHtml::listData($cargos, 'id', 'nome'),
+                             ));
+                         ?>
+                    </td>
+                </tr>
             </tbody>
         </table>
         

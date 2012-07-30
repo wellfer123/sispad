@@ -2,6 +2,7 @@
 $this->breadcrumbs=array(
          'Indicador'=>array('indicador/admin'),
 	 'Metas'=>array('meta/view','indicador_id',$_GET['indicador_id']),
+         'Atualização',
 );
 
 $this->menu=array(
@@ -9,13 +10,12 @@ $this->menu=array(
 );
 ?>
 
-<h1>Update da Meta <?php echo $model->nome; ?></h1>
 
 <?php $this->beginWidget('zii.widgets.CPortlet', array(
-			'title'=>'Atualização de Meta',
+			'title'=>'Atualização da Meta '.$model->nome,
                         'htmlOptions'=>array('class'=>'portlet_form')
 		));?>
 
-<?php echo $this->renderPartial('_form_update', array('model'=>$model)); ?>
+<?php echo $this->renderPartial('_form_update', array('model'=>$model,'cargos'=>$cargos)); ?>
 
 <?php $this->endWidget(); ?>
