@@ -72,9 +72,6 @@ class MetaController extends SISPADBaseController{
         public function actionCreate() {
              //$this->CheckAcessAction();
                 $model=new Meta('create');
-
-
-
 		//Uncomment the following line if AJAX validation is needed
 		$this->performAjaxValidation($model);
 
@@ -83,15 +80,39 @@ class MetaController extends SISPADBaseController{
 
                         $model->attributes=$_POST['Meta'];
                         $model->indicador_id=$_GET['indicador_id'];
-			if($model->save()){
-                            $this->addMessageSuccess("Meta criada!");
-                                  $model=new Meta;
+                        //$tes=explode(',',$_POST['Meta']['cargos']);
+                        try{
+                            //abre uma transação
+                            $tran=$model->dbConnection->beginTransaction();
+                            if($model->save()){
+                                //pega todos os id dos cargos
+                                if(is_array($_POST['Meta']['cargos'])){
+                                    foreach ($_POST['Meta']['cargos'] as $t){
+
+                                        //salva um cargo qu faz parte de uma meta
+                                        $m=new MetaCargo();
+                                        $m->cargo_id=$t;
+                                        $m->meta_id=$model->id;
+                                        $m->save();
+                                    }//confirma a transaçao
+                                }
+                                $tran->commit();
+                                $this->addMessageSuccess("Meta criada!");
+                                $model=new Meta;
+                            }
+                            else{//caso não tenha salvado com sucesso defaz alterações feitas
+                                $tran->rollback();
+                            }
+                        }catch(Exception $ex){
+                            //deu errro, então defaz as alterações
+                            $tran->rollback();
                         }
 
-                }
 
+                }
+                $cargos=  Cargo::model()->findAll();
 		$this->render('create',array(
-			'model'=>$model
+			'model'=>$model,'cargos'=>$cargos
 		));
 
         }
@@ -119,13 +140,38 @@ class MetaController extends SISPADBaseController{
 		if(isset($_POST['Meta']))
 		{
 			$model->attributes=$_POST['Meta'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->id,'indicador_id'=>$_GET['indicador_id']));
+			try{
+                            //abre uma transação
+                            $tran=$model->dbConnection->beginTransaction();
+                            if($model->save()){
+                                //vai deletar todos os cargos relacionado a essa meta
+                                MetaCargo::model()->deleteAll('meta_id=:meta',array(':meta'=>$model->id));
+                                //pega todos os id dos cargos
+                                if(is_array($_POST['Meta']['cargos'])){
+                                    foreach ($_POST['Meta']['cargos'] as $t){
+
+                                        //salva um cargo qu faz parte de uma meta
+                                        $m=new MetaCargo();
+                                        $m->cargo_id=$t;
+                                        $m->meta_id=$model->id;
+                                        $m->save();
+                                    }//confirma a transaçao
+                                }
+                                $tran->commit();
+                                $this->redirect(array('view','id'=>$model->id,'indicador_id'=>$_GET['indicador_id']));
+                            }
+                            else{//caso não tenha salvado com sucesso defaz alterações feitas
+                                $tran->rollback();
+                            }
+                        }catch(Exception $ex){
+                            //deu errro, então defaz as alterações
+                            $tran->rollback();
+                        }
+				//$this->redirect(array('view','id'=>$model->id,'indicador_id'=>$_GET['indicador_id']));
 		}
 
-		$this->render('update',array(
-			'model'=>$model,
-		));
+                $cargos=  Cargo::model()->findAll();
+		$this->render('update',array('model'=>$model,'cargos'=>$cargos));
 	}
         
        
