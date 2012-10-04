@@ -10,11 +10,11 @@
  * @property string $data_nascimento
  * @property string $cidade
  * @property string $nacionalidade
- * @property string $idade
  * @property string $raca
  * @property string $etnia
  * @property string $ultima_atualizacao
  * @property string $data_cadastro
+ * @property integer $id
  */
 class Paciente extends CActiveRecord
 {
@@ -60,7 +60,34 @@ class Paciente extends CActiveRecord
          public $etnia;    
     
     
-	/**
+//         function __construct($paciente=null) {
+//             if($paciente!= null){
+//                 $this->cidade=$paciente->cidade;
+//                 $this->cns=$paciente->cns;
+//                 $this->data_nascimento=$paciente->data_nascimento;
+//                 $this->etnia=$paciente->etnia;
+//                 $this->nacionalidade=$paciente->nacionalidade;
+//                 $this->nome=$paciente->nome;
+//                 $this->raca=$paciente->raca;
+//                 $this->sexo=$paciente->sexo;
+//             }
+//             
+//         }
+         
+         public function setPaciente($paciente){
+             
+                 $this->cidade=$paciente->cidade;
+                 $this->cns=$paciente->cns;
+                 $this->data_nascimento=$paciente->data_nascimento;
+                 $this->etnia=$paciente->etnia;
+                 $this->nacionalidade=$paciente->nacionalidade;
+                 $this->nome=$paciente->nome;
+                 $this->raca=$paciente->raca;
+                 $this->sexo=$paciente->sexo;
+         }
+         
+         
+         /**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
 	 * @return Paciente the static model class
@@ -86,7 +113,7 @@ class Paciente extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('cns, nome, sexo, data_nascimento, cidade, nacionalidade,  raca, etnia, ultima_atualizacao, data_cadastro', 'required'),
+			array('nome, sexo, data_nascimento, cidade, nacionalidade,  raca, ultima_atualizacao', 'required'),
 			array('cns', 'length', 'max'=>15),
 			array('nome', 'length', 'max'=>30),
 			array('sexo', 'length', 'max'=>1),
@@ -94,6 +121,7 @@ class Paciente extends CActiveRecord
 			array('nacionalidade', 'length', 'max'=>3),
 			array('raca', 'length', 'max'=>2),
 			array('etnia', 'length', 'max'=>4),
+                        array('data_cadastro,id,etnia', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('cns, nome, sexo, data_nascimento, cidade, nacionalidade,  raca, etnia, ultima_atualizacao, data_cadastro', 'safe', 'on'=>'search'),
@@ -127,6 +155,7 @@ class Paciente extends CActiveRecord
 			'etnia' => 'Etnia',
 			'ultima_atualizacao' => 'Ultima Atualizacao',
 			'data_cadastro' => 'Data Cadastro',
+                        'id' => 'ID',
 		);
 	}
 
