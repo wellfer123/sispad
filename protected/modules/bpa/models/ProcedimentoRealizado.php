@@ -23,6 +23,9 @@
  * @property string $equipe
  * @property string $classificacao
  * @property string $data_cadastro
+ * @property integer $idade_paciente
+ * @property integer $id_paciente
+ * @property string $ultima_atualizacao
  */
 class ProcedimentoRealizado extends CActiveRecord
 {
@@ -142,6 +145,38 @@ class ProcedimentoRealizado extends CActiveRecord
           */
          public $idade_paciente;
          
+         public function setProcedimentoRealizado($procedimentoRealizado) {
+             if($procedimentoRealizado!= null){
+                 $this->caracter_atendimento=$procedimentoRealizado->caracter_atendimento;
+                 $this->cid=$procedimentoRealizado->cid;
+                 $this->classificacao=$procedimentoRealizado->classificacao;
+                 $this->competencia=$procedimentoRealizado->competencia;
+                 $this->competencia_movimento=$procedimentoRealizado->competencia_movimento;
+                 $this->data_atendimento=$procedimentoRealizado->data_atendimento;
+                 $this->equipe=$procedimentoRealizado->equipe;
+                 $this->folha=$procedimentoRealizado->folha;
+                 $this->idade_paciente=$procedimentoRealizado->idade_paciente;
+                 $this->numero_autorizacao=$procedimentoRealizado->numero_autorizacao;
+                 $this->origem=$procedimentoRealizado->origem;
+                 $this->procedimento=$procedimentoRealizado->procedimento;
+                 $this->profissional_cbo=$procedimentoRealizado->profissional_cbo;
+                 $this->profissional_cns=$procedimentoRealizado->profissional_cns;
+                 $this->quantidade=$procedimentoRealizado->quantidade;
+                 $this->sequencia=$procedimentoRealizado->sequencia;
+                 $this->servico=$procedimentoRealizado->servico;
+                 $this->unidade=$procedimentoRealizado->unidade;
+            }
+
+         }
+         
+         public function setPaciente($paciente){
+             if($paciente!=null){
+                 $this->paciente=$paciente;
+                 $this->paciente_cns=$paciente->cns;
+             }
+         }
+         
+         
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
@@ -168,18 +203,18 @@ class ProcedimentoRealizado extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('unidade, competencia, profissional_cns, profissional_cbo, folha, sequencia, procedimento, paciente_cns, data_atendimento, quantidade, caracter_atendimento, origem, competencia_movimento, data_cadastro', 'required'),
+			array('unidade, id_paciente, idade_paciente,competencia, profissional_cns, profissional_cbo, folha, sequencia, procedimento, data_atendimento, quantidade, caracter_atendimento, origem, competencia_movimento', 'required'),
 			array('unidade, procedimento, quantidade', 'length', 'max'=>10),
 			array('competencia, profissional_cbo, competencia_movimento', 'length', 'max'=>6),
 			array('profissional_cns, paciente_cns', 'length', 'max'=>15),
-			array('folha, origem, servico, classificacao', 'length', 'max'=>3),
+			array('folha,idade_paciente, origem, servico, classificacao', 'length', 'max'=>3),
 			array('sequencia, caracter_atendimento', 'length', 'max'=>2),
 			array('cid', 'length', 'max'=>4),
 			array('numero_autorizacao', 'length', 'max'=>13),
 			array('equipe', 'length', 'max'=>12),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('unidade, competencia, profissional_cns, profissional_cbo, folha, sequencia, procedimento, paciente_cns, data_atendimento, cid, quantidade, caracter_atendimento, numero_autorizacao, origem, competencia_movimento, servico, equipe, classificacao, data_cadastro', 'safe', 'on'=>'search'),
+			array('unidade, ultima_atualizacao,competencia, idade_paciente,profissional_cns, profissional_cbo, folha, sequencia, procedimento, paciente_cns, data_atendimento, cid, quantidade, caracter_atendimento, numero_autorizacao, origem, competencia_movimento, servico, equipe, classificacao, data_cadastro', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -210,6 +245,7 @@ class ProcedimentoRealizado extends CActiveRecord
 			'paciente_cns' => 'Paciente Cns',
 			'data_atendimento' => 'Data Atendimento',
 			'cid' => 'Cid',
+                        'idade_paciente'=>'Idade do Paciente',
 			'quantidade' => 'Quantidade',
 			'caracter_atendimento' => 'Caracter Atendimento',
 			'numero_autorizacao' => 'Numero Autorizacao',
@@ -219,6 +255,8 @@ class ProcedimentoRealizado extends CActiveRecord
 			'equipe' => 'Equipe',
 			'classificacao' => 'Classificacao',
 			'data_cadastro' => 'Data Cadastro',
+                        'id_paciente' => 'Id Paciente',
+                        'ultima_atualizacao' => 'Ultima Atualização',
 		);
 	}
 
@@ -243,6 +281,7 @@ class ProcedimentoRealizado extends CActiveRecord
 		$criteria->compare('paciente_cns',$this->paciente_cns,true);
 		$criteria->compare('data_atendimento',$this->data_atendimento,true);
 		$criteria->compare('cid',$this->cid,true);
+                $criteria->compare('idade_paciente',$this->idade_paciente,true);
 		$criteria->compare('quantidade',$this->quantidade,true);
 		$criteria->compare('caracter_atendimento',$this->caracter_atendimento,true);
 		$criteria->compare('numero_autorizacao',$this->numero_autorizacao,true);
@@ -252,9 +291,19 @@ class ProcedimentoRealizado extends CActiveRecord
 		$criteria->compare('equipe',$this->equipe,true);
 		$criteria->compare('classificacao',$this->classificacao,true);
 		$criteria->compare('data_cadastro',$this->data_cadastro,true);
+                $criteria->compare('ultima_atualizacao',$this->ultima_atualizacao,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
 	}
+        
+        public function getCriteriaPrimaryKey(){
+            $criteria= new CDbCriteria;
+            $criteria->condition="unidade=:unidade AND competencia=:comp AND profissional_cns=:cns AND profissional_cbo=:cbo AND folha=:folha AND sequencia=:seq";
+            $criteria->params=array(':unidade'=>$this->unidade,':comp'=>$this->competencia,
+                                    ':cns'=>$this->profissional_cns,':cbo'=>$this->profissional_cbo,
+                                    ':folha'=>$this->folha,':seq'=>$this->sequencia);
+            return $criteria;
+        }
 }
