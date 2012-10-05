@@ -82,6 +82,7 @@ class ServicoController extends Controller
                     //coloca a data de atualização do usuário
                     $data=Date('Y-m-d h:i:s');
                     $paciente->ultima_atualizacao=$data;
+                    $procedimentoRealizado->ultima_atualizacao=$data;
                     $trans=null;
                         try{
                             
@@ -237,7 +238,7 @@ class ServicoController extends Controller
                     $procedimentoRealizado->setPaciente($procedReal->paciente);
                     $paciente->setPaciente($procedReal->paciente);
 
-                    //coloca a data de atualização do usuário
+                    //coloca a data de atualização 
                     $data=Date('Y-m-d h:i:s');
                     
                     $trans=null;
@@ -307,78 +308,7 @@ class ServicoController extends Controller
                             return false;
                             //início para atualizar o paciente
                             //-------------------------------------------------------------------
-                            
-                            
-                            //inicia uma transação
-                            $trans=$procedimentoRealizado->dbConnection->beginTransaction();
-                            //verifica se o usuário já está cadastrado no sistema
-                            $cns=trim($paciente->cns);
-                            $pacienteExiste=false;
-                            if(sizeof($cns)==15){
-                                $paci=Paciente::model()->find('cns=:cns',array(':cns'=>$cns));
-                                //verifica se o paciente já existe com um cns
-                                if($paci!=null){
-                                    //caso faça a atualização com suceso do paciente
-                                    $paci->setPaciente($paciente);
-                                    if($paci->update()){
-                                        $pacienteExiste=true;
-                                        $paciente->id=$paci->id;
-                                    }
-                                    else{
-                                        //-----registrar erros
-                                        $trans->rollback();
-                                        return false;
-                                    }
-                                }
-                            }
-                            //o paciente não tem CNS ou não está cadastrado
-                            else if(!$pacienteExiste){
-                                //caso não salve o paciente
-                                if(!$paciente->save()){
-                                   foreach($paciente->getErrors() as $errors){
-                                        foreach($errors as $error){  
-                                           //Yii::getLogger()->log("Erro ao salvar o paciente => ".$paciente->nome);
-                                        }
-                                    }
-                                    //encerra o método e dá um rollaback
-                                    $trans->rollback();
-                                    return false;
-                                } 
-                            }
-                            //fim do código que atualizar o paciente
-                            //----------------------------------------------------------------------
-                            
-                            
-                            //início do código para salvar o procedimentoRealizado
-                            //----------------------------------------------------------------------
-                            //verifica se o paciente foi salvo com sucesso
-                            if($paciente->id > 0){
-                                //verifica se o procedimentoRealizado existe
-                                $proced=ProcedimentoRealizado::model()->exists($procedimentoRealizado->getCriteriaPrimaryKey());
-                                if($proced){
-                                    $procedimentoRealizado->id_paciente=$paciente->id;
-                                    if($procedimentoRealizado->update()){
-                                        //conseguiu atualizar o procedimentoRealizado e o paciente
-                                    } 
-                                    else{
-                                        foreach($procedimentoRealizado->getErrors() as $errors){
-                                            foreach($errors as $error){
-                                                //Yii::getLogger()->log("Erro ao salvar o procedimentoRealizado => ".$error);  
-                                                
-                                            }
-                                        } 
-                                        $trans->rollback();
-                                        return false;
-                                    }
-                                }
-                                //o procedimento já foi enviado
-                                $trans->commit();
-                                return true;
-                            }
-                            //-------------------------------------------------------------------------
-                            //fim do código para salvar o procedimento
-                            $trans->rollback();
-                        
+        
                         }catch(Exception $e){
                           if($trans!=null){
                               $trans->rollback();
