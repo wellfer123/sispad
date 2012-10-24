@@ -53,8 +53,11 @@ class PacienteController extends Controller
 		if(isset($_POST['Paciente']))
 		{
 			$model->attributes=$_POST['Paciente'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->cns));
+			if($model->validate()){  
+                            $this->redirect('http://localhost:8080/sispadreport/');
+                        }
+                            
+				//$this->redirect(array('view','id'=>$model->cns));
 		}
 
 		$this->render('create',array(

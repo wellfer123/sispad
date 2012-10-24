@@ -24,10 +24,6 @@
 	<?php echo CHtml::encode($data->nacionalidade); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('idade')); ?>:</b>
-	<?php echo CHtml::encode($data->idade); ?>
-	<br />
-
 	<?php /*
 	<b><?php echo CHtml::encode($data->getAttributeLabel('raca')); ?>:</b>
 	<?php echo CHtml::encode($data->raca); ?>

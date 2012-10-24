@@ -24,7 +24,6 @@ $this->menu=array(
 		'data_nascimento',
 		'cidade',
 		'nacionalidade',
-		'idade',
 		'raca',
 		'etnia',
 		'ultima_atualizacao',

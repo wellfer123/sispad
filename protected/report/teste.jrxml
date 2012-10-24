@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4c6c9aef-b30b-47bd-8ccf-575e541ec507">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
+	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true" pdfFontName="Times-Roman"/>
+	<style name="Detail" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman"/>
+	<style name="Row" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#F0EFEF"/>
+		</conditionalStyle>
+	</style>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     bpa_procedimento_realizado.`unidade` AS bpa_procedimento_realizado_unidade,
+     SUM(bpa_procedimento_realizado.`quantidade`) AS bpa_procedimento_realizado_quantidade,
+     bpa_procedimento_realizado.`procedimento` AS bpa_procedimento_realizado_procedimento,
+     bpa_procedimento_realizado.`competencia_movimento` AS bpa_procedimento_realizado_competencia_movimento
+FROM
+     `bpa_procedimento_realizado` bpa_procedimento_realizado
+GROUP BY
+     bpa_procedimento_realizado.`unidade`,
+     bpa_procedimento_realizado.`procedimento`]]>
+	</queryString>
+	<field name="bpa_procedimento_realizado_unidade" class="java.lang.String"/>
+	<field name="bpa_procedimento_realizado_quantidade" class="java.lang.Long"/>
+	<field name="bpa_procedimento_realizado_procedimento" class="java.lang.String"/>
+	<field name="bpa_procedimento_realizado_competencia_movimento" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="132" splitType="Stretch">
+			<image>
+				<reportElement uuid="6286d776-a175-4fbc-9703-b119dc1402fb" x="456" y="0" width="99" height="132"/>
+				<imageExpression><![CDATA["cherry.jpg"]]></imageExpression>
+			</image>
+			<frame>
+				<reportElement uuid="d2258040-ffcb-461c-a2c7-608d2fad78d4" mode="Opaque" x="0" y="0" width="451" height="95" backcolor="#000000"/>
+				<staticText>
+					<reportElement uuid="da1295e3-99a2-47f2-8cd5-3dfaa4ee367f" style="Title" x="0" y="0" width="370" height="66"/>
+					<textElement>
+						<font isBold="false"/>
+					</textElement>
+					<text><![CDATA[Cherry Title]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="2fdf7ebc-c814-4fe6-bfc8-9a50c09c445e" style="SubTitle" x="157" y="66" width="249" height="29"/>
+					<textElement>
+						<font size="22" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Cherry SubTitle]]></text>
+				</staticText>
+			</frame>
+			<frame>
+				<reportElement uuid="4da4d1a5-5b18-4b84-ac2b-54590c340f75" mode="Opaque" x="0" y="100" width="451" height="32" forecolor="#000000" backcolor="#CC0000"/>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement uuid="4a85bdc9-d46e-4985-bf72-2f57d3ed67b2" x="307" y="12" width="144" height="20" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Right">
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="26" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="50fff021-4641-47c7-8df6-16e12c5ab64f" style="Column header" x="0" y="7" width="138" height="18" forecolor="#000000"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[CNES/Unidade]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="327ad1fb-4565-47a1-b477-a79474d53ab6" style="Column header" x="138" y="7" width="138" height="18" forecolor="#000000"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[Quantidade]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="81eafd4f-6346-4568-bef3-f30235371573" style="Column header" x="276" y="7" width="138" height="18" forecolor="#000000"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[Procedimento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="711acd1f-2735-4270-a993-682024169437" style="Column header" x="414" y="7" width="138" height="18" forecolor="#000000"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[Competência]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="18" splitType="Stretch">
+			<frame>
+				<reportElement uuid="52231322-c37d-49c3-93a7-8147267354c1" style="Row" mode="Opaque" x="0" y="0" width="555" height="18"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="79b6bd6f-2338-442a-9b48-72de964c6e6d" style="Detail" positionType="Float" x="0" y="0" width="138" height="18"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{bpa_procedimento_realizado_unidade}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="f5c3dc0b-2968-484e-86fa-3fd5a24aed72" style="Detail" positionType="Float" x="138" y="0" width="138" height="18"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{bpa_procedimento_realizado_quantidade}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="d6de34c6-21dd-460f-8885-4fe52d49c993" style="Detail" positionType="Float" x="276" y="0" width="138" height="18"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{bpa_procedimento_realizado_procedimento}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="80c8a9f8-0453-43fa-89cf-b4aa9bde817a" style="Detail" positionType="Float" x="414" y="0" width="138" height="18"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{bpa_procedimento_realizado_competencia_movimento}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="7" splitType="Stretch">
+			<line>
+				<reportElement uuid="6999b9e6-c087-48a6-b902-b811c13b0cca" positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="25" splitType="Stretch">
+			<frame>
+				<reportElement uuid="e662fd5f-709f-4f81-bdc7-f88f6ea4996b" mode="Opaque" x="0" y="1" width="555" height="24" forecolor="#D0B48E" backcolor="#000000"/>
+				<textField evaluationTime="Report">
+					<reportElement uuid="c6e129d0-0b50-46e8-9032-7e909001b6fb" style="Column header" x="513" y="0" width="40" height="20" forecolor="#FFFFFF"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="9ea5804f-e4c9-439d-aa3d-53420eb7128f" style="Column header" x="433" y="0" width="80" height="20" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+				</textField>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement uuid="61331417-ac5e-453c-a4ca-a0f6f2abf4a4" style="Column header" x="2" y="1" width="197" height="20" forecolor="#FFFFFF"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

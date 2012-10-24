@@ -46,12 +46,6 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'idade'); ?>
-		<?php echo $form->textField($model,'idade',array('size'=>3,'maxlength'=>3)); ?>
-		<?php echo $form->error($model,'idade'); ?>
-	</div>
-
-	<div class="row">
 		<?php echo $form->labelEx($model,'raca'); ?>
 		<?php echo $form->textField($model,'raca',array('size'=>2,'maxlength'=>2)); ?>
 		<?php echo $form->error($model,'raca'); ?>

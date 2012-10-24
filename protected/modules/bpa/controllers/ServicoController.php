@@ -151,7 +151,7 @@ class ServicoController extends Controller
                                 }
                                 else{
                                     //o procedimento já foi enviado
-                                    Yii::getLogger()->log("Procedimento ja foi enviado=>");
+                                    Yii::getLogger()->log("Procedimento ja foi enviado=> unidade: ".$procedimentoRealizado->unidade.' competência: '.$procedimentoRealizado->competencia.' profissional cns: '.$procedimentoRealizado->profissional_cns.' profissional cbo: '.$procedimentoRealizado->unidade.' folha: '.$procedimentoRealizado->folha.' sequência: '.$procedimentoRealizado->sequencia);
                                     $trans->rollback();
                                     return true;
                                 }
