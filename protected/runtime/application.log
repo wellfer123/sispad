@@ -158,3 +158,12 @@ Stack trace:
 #10 C:\xampp\xampp\htdocs\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
 #11 C:\xampp\xampp\htdocs\sispad\index.php(13): CWebApplication->run()
 REQUEST_URI=/sispad/index.php/teste/t
+2012/10/26 13:43:50 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Não foi possível resolver a requisição "bpa/http://localhost:8080/sispadreport/teste/unidade/2345560".' in C:\xampp\xampp\htdocs\yii\framework\web\CWebApplication.php:280
+Stack trace:
+#0 C:\xampp\xampp\htdocs\yii\framework\web\CWebApplication.php(135): CWebApplication->runController('bpa/http://loca...')
+#1 C:\xampp\xampp\htdocs\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 C:\xampp\xampp\htdocs\sispad\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/sispad/index.php/bpa/http://localhost:8080/sispadreport/teste/unidade/2345560
+HTTP_REFERER=http://localhost/sispad/index.php/bpa/procedimentorealizado/relatorio
+---

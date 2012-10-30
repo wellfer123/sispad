@@ -25,7 +25,6 @@ return array(
                 'application.extensions.yii-mail.*',
 
 	),
-
 	'modules'=>array(
                 'rbac',
                 'metas',

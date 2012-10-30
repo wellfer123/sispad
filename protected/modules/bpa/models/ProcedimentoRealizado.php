@@ -26,6 +26,9 @@
  * @property integer $idade_paciente
  * @property integer $id_paciente
  * @property string $ultima_atualizacao
+ * @property string $equipe_sequencia
+ * @property string $equipe_area
+ * @property string $cnpj
  */
 class ProcedimentoRealizado extends CActiveRecord
 {
@@ -134,6 +137,24 @@ class ProcedimentoRealizado extends CActiveRecord
          public $equipe;
          /**
           *
+          * @var string cnpj
+          * @soap 
+          */
+         public $cnpj;
+         /**
+          *
+          * @var string código da área da equipe
+          * @soap 
+          */
+         public $equipe_area;
+         /**
+          *
+          * @var string código da sequência da equipe
+          * @soap 
+          */
+         public $equipe_sequencia;
+         /**
+          *
           * @var string código da classificacao do servico
           * @soap 
           */
@@ -154,6 +175,9 @@ class ProcedimentoRealizado extends CActiveRecord
                  $this->competencia_movimento=$procedimentoRealizado->competencia_movimento;
                  $this->data_atendimento=$procedimentoRealizado->data_atendimento;
                  $this->equipe=$procedimentoRealizado->equipe;
+                 $this->equipe_area=$procedimentoRealizado->equipe_area;
+                 $this->equipe_sequencia=$procedimentoRealizado->equipe_sequencia;
+                 $this->cnpj=$procedimentoRealizado->cnpj;
                  $this->folha=$procedimentoRealizado->folha;
                  $this->idade_paciente=$procedimentoRealizado->idade_paciente;
                  $this->numero_autorizacao=$procedimentoRealizado->numero_autorizacao;
@@ -203,7 +227,7 @@ class ProcedimentoRealizado extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('unidade, id_paciente, idade_paciente,competencia, profissional_cns, profissional_cbo, folha, sequencia, procedimento, data_atendimento, quantidade, caracter_atendimento, origem, competencia_movimento', 'required'),
+			array('unidade, cnpj,equipe_area, equipe_sequencia,competencia, profissional_cns, profissional_cbo, folha, sequencia, procedimento, data_atendimento, quantidade, caracter_atendimento, origem, competencia_movimento', 'required'),
 			array('unidade, procedimento, quantidade', 'length', 'max'=>10),
 			array('competencia, profissional_cbo, competencia_movimento', 'length', 'max'=>6),
 			array('profissional_cns, paciente_cns', 'length', 'max'=>15),
@@ -253,6 +277,9 @@ class ProcedimentoRealizado extends CActiveRecord
 			'competencia_movimento' => 'Competencia Movimento',
 			'servico' => 'Servico',
 			'equipe' => 'Equipe',
+                        'equipe_area' => 'Área da Equipe',
+                        'cnpj' => 'CNPJ',
+                        'equipe_sequencia' => 'Sequência da Equipe',
 			'classificacao' => 'Classificacao',
 			'data_cadastro' => 'Data Cadastro',
                         'id_paciente' => 'Id Paciente',
@@ -289,6 +316,9 @@ class ProcedimentoRealizado extends CActiveRecord
 		$criteria->compare('competencia_movimento',$this->competencia_movimento,true);
 		$criteria->compare('servico',$this->servico,true);
 		$criteria->compare('equipe',$this->equipe,true);
+                $criteria->compare('equipe_sequencia',$this->equipe_sequencia,true);
+                $criteria->compare('equipe_area',$this->equipe_area,true);
+                $criteria->compare('cnpj',$this->cnpj,true);
 		$criteria->compare('classificacao',$this->classificacao,true);
 		$criteria->compare('data_cadastro',$this->data_cadastro,true);
                 $criteria->compare('ultima_atualizacao',$this->ultima_atualizacao,true);
