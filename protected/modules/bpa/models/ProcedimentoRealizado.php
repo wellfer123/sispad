@@ -227,7 +227,7 @@ class ProcedimentoRealizado extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('unidade, cnpj,equipe_area, equipe_sequencia,competencia, profissional_cns, profissional_cbo, folha, sequencia, procedimento, data_atendimento, quantidade, caracter_atendimento, origem, competencia_movimento', 'required'),
+			array('unidade,competencia, profissional_cns, profissional_cbo, folha, sequencia, procedimento, data_atendimento, quantidade, caracter_atendimento, origem, competencia_movimento', 'required'),
 			array('unidade, procedimento, quantidade', 'length', 'max'=>10),
 			array('competencia, profissional_cbo, competencia_movimento', 'length', 'max'=>6),
 			array('profissional_cns, paciente_cns', 'length', 'max'=>15),

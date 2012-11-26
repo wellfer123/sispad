@@ -50,7 +50,17 @@ class ServicoController extends Controller
          * @soap
          */
         public function enviarProcedimentoRealizado($procedimentoRealizado, $usuario){
-            return $this->save($procedimentoRealizado);
+            try{
+                $autenticador= new Autenticacao;
+               if ($autenticador->loginViaHttp() == null){
+                    Yii::log("login falho!");
+                }
+//                 Yii::log("login meio caminho!");
+                return $this->save($procedimentoRealizado);
+            }catch(Exception $ex){
+               Yii::log($ex->getMessage(), CLogger::LEVEL_ERROR);
+               return false;
+            }
         }        
         /**
          *
