@@ -62,8 +62,8 @@ class Competencia extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'mes_ano' => 'MesAno',
-			'ativo' => 'Ativo',
+			'mes_ano' => 'Mês/Ano',
+			'ativo' => 'Status',
 		);
 	}
         

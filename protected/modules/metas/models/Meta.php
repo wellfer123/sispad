@@ -66,8 +66,28 @@ class Meta extends CActiveRecord
                              'itens'=>array(self::HAS_MANY,'item','Meta_id'),
                              'periodicidade'=>array(self::BELONGS_TO,'Periodicidade','periodicidade_id'),
                              'metaProcedimento'=>array(self::HAS_MANY,'MetaProcedimento','meta_id'),
+                             'cargos'=>array(self::MANY_MANY,'Cargo','meta_cargo(meta_id,cargo_id)'),
 		);
 	}
+        
+        public function saveWithCargos($idCargos){
+            try{
+                $con=$this->dbConnection;
+                $trans=$con->beginTransaction();
+                $this->save();
+                foreach ($idCargos as $t){
+                            $m=new MetaCargo();
+                            $m->cargo_id=$t;
+                            $m->meta_id=$this->id;
+                            $m->save();
+                        }
+                $trans->commit();
+                return true;
+            }catch(Exception $ex){
+                $trans->rollback();
+            }
+            return false;
+        }
 
 	/**
 	 * @return array customized attribute labels (name=>label)

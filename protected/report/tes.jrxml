@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="tes" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="17371351-c719-411e-8143-51fce58d46ef">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="99"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     bpa_procedimento_realizado.`unidade` AS bpa_procedimento_realizado_unidade,
+     bpa_procedimento_realizado.`id_paciente` AS bpa_procedimento_realizado_id_paciente,
+     bpa_procedimento_realizado.`competencia` AS bpa_procedimento_realizado_competencia,
+     bpa_procedimento_realizado.`cid` AS bpa_procedimento_realizado_cid,
+     bpa_procedimento_realizado.`procedimento` AS bpa_procedimento_realizado_procedimento
+FROM
+     `bpa_procedimento_realizado` bpa_procedimento_realizado]]>
+	</queryString>
+	<field name="bpa_procedimento_realizado_unidade" class="java.lang.String"/>
+	<field name="bpa_procedimento_realizado_id_paciente" class="java.lang.Long"/>
+	<field name="bpa_procedimento_realizado_competencia" class="java.lang.String"/>
+	<field name="bpa_procedimento_realizado_cid" class="java.lang.String"/>
+	<field name="bpa_procedimento_realizado_procedimento" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="f5989963-3882-4525-afaa-5835a5657253" x="65" y="2" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[bpa_procedimento_realizado_unidade]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="3b8995d1-b031-49c0-898c-f1c0c60b1b50" x="273" y="2" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[bpa_procedimento_realizado_id_paciente]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement uuid="12112adb-6c6c-408a-8088-c7525f337b9a" x="65" y="50" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{bpa_procedimento_realizado_unidade}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="f7271afb-c62e-42ac-88d7-67d137ffbfe6" x="273" y="17" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{bpa_procedimento_realizado_id_paciente}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

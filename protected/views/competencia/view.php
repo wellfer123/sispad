@@ -1,18 +1,19 @@
 <?php
 $this->breadcrumbs=array(
-	'Competencias'=>array('index'),
-	$model->mes_ano,
+	'Competências'=>array('index'),
+	'Visualização',
 );
 
 $this->menu=array(
-	array('label'=>'Listar Competencias', 'url'=>array('index')),
-	array('label'=>'Criar Competencia', 'url'=>array('create')),
-	array('label'=>'Administrar Competencias', 'url'=>array('admin')),
+	array('label'=>'Listar Competências', 'url'=>array('index')),
+	array('label'=>'Cadastrar Competência', 'url'=>array('create')),
+	array('label'=>'Administrar Competências', 'url'=>array('admin')),
 );
 ?>
+<div class="update">
+<h2>Competencia <?php echo $model->mes_ano; ?></h2>
 
-<h1>Competencia <?php echo $model->mes_ano; ?></h1>
-
+</div>
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
 	'attributes'=>array(
