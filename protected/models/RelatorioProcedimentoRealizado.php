@@ -13,28 +13,64 @@
 class RelatorioProcedimentoRealizado extends CFormModel{
     //put your code here
     
+    //mapeamento para cada relatório
     public static $TIPOS_RELATORIOS= array('RelatoriolUnidadeProcedimento'=>'Unidade/Procedimento',
                                   'RelatoriolUnidadeProfissional'=>'Unidade/Profissional',
                                   'RelatoriolUnidadeProfissionalProcedimento'=>'Unidade/Profissional/Procedimento',
                                   'RelatorioUnidadeTotal'=>'Unidade Total',
                                   );
+    //mapeamento para cada parâmetro do relatório
     public static $DE_ATRIBUTO_PARA_PARAMETRO= array('relatorio'=>'jkwf8923r8923nh9hiwqehnd',
                                                      'unidade_cnes'=>'wkdn23je9329032900932',
                                                      'profissional_cns'=>'weioewi2438u8aiujnui',
                                                      'competencia_movimento'=>'934uehf784y37823e',
-                                                      'profissional_cbo'=>'921ij32io09wAINVHBDSO'
+                                                      'profissional_cbo'=>'921ij32io09wAINVHBDSO',
+                                                      'equipe'=>'jkwqnd38u38ugyfr56uhc78yd',
+                                                      'competencia'=>'35u90wnd7BVYGFQEG74',
+                                                      'folha'=>'93i432jeq8f8qf89ADJI3',
+                                                      'paciente_cns'=>'[]aokoweo93e9937487qwg',
+                                                      'paciente_nome'=>'kwemijiojew932490kifi',
+                                                      'paciente_sexo'=>'kfioewrfiji34i3kio',
+                                                      'paciente_data_nascimento'=>'LKASCJNJXZC89Y34',
+                                                      'paciente_cidade'=>'jkwnv89wqf883r',
+                                                      'paciente_raca'=>'9mqjnui2eh82',
+                                                      'paciente_etnia'=>'jnaiofi93489034nfwqj',
+                                                      'data_atendimento'=>'nkjd8234bnfb823hd',
+                                                      'procedimento'=>'903nsag873rbqbucw',
+                                                      'cid'=>'9jkdfn89213n8923njsdj',
+                                                      'carater_atendimento'=>'092i13nq8u9hff38',
+                                                      'servico'=>'09dqjn8234hn89sdio',
+                                                      'classificacao_servico'=>'923noaf0932rkdkw',
+                                                      'sequencia'=>'93unhf8934ruisudh',
+                                                      'competencia_movimento'=>'9i329dfqwjnui238',
+                                                      'data_inicial'=>'398u32nw8932jkwfdf',
+                                                      'data_final'=>'okcsdk832nfdnwek',
+                                                      'paciente_id'=>'3unadfq78bf784r',
+                                                      'equipe_area'=>'jrna8489we3282dwe',
+                                                      'equipe_sequencia'=>'324nfh8348cfy436f',
+                                                      'paciente_idade'=>'kc98u23dn389rh383',
+                                                      'origem'=>'93248nvcq7ghDJKDF',
+                                                      'cnpj'=>'pk349fqier3490FJKNS',
+                                                      'numero_autorizacao'=>'93chqe756dgwe65zxc83'
                                                     );
+    
+    
+    //parametros adicionais
     public $relatorio;
     public $data_inicial;
     public $data_final;
     
+    //cabeçalho do procedimento realizado
     public $unidade_cnes;
     public $profissional_cns;
     public $profissional_cbo;
     public $equipe;
+    public $equipe_area;
+    public $equipe_sequencia;
     public $competencia;
     public $folha;
     
+    //dados referente ao paciente
     public $paciente_cns;
     public $paciente_nome;
     public $paciente_sexo;
@@ -43,7 +79,10 @@ class RelatorioProcedimentoRealizado extends CFormModel{
     public $paciente_nacionalidade;
     public $paciente_raca;
     public $paciente_etnia;
+    public $paciente_id;
+    public $paciente_idade;
     
+    //dados procedimento
     public $data_atendimento;
     public $procedimento;
     public $cid;
@@ -52,6 +91,9 @@ class RelatorioProcedimentoRealizado extends CFormModel{
     public $classificacao_servico;
     public $sequencia;
     public $competencia_movimento;
+    public $numero_autorizacao;
+    public $origem;
+    public $cnpj;
     
     
     public function rules() {
@@ -69,6 +111,8 @@ class RelatorioProcedimentoRealizado extends CFormModel{
                     'profissional_cns'=>'CNS do Profissional',
                     'profissional_cbo'=>'CBO do profissional',
                     'equipe'=>'Equipe',
+                    'equipe_area'=>'Área da Equipe',
+                    'equipe_sequencia'=>'Sequência da Equipe',
                     'competencia'=>'Competência',
                     'folha'=>'Folha',
                     'paciente_cns'=>'CNS do Paciente',
@@ -79,6 +123,8 @@ class RelatorioProcedimentoRealizado extends CFormModel{
                     'paciente_nacionalidade'=>'Nacionalidade do Paciente',
                     'paciente_etnia'=>'Etnia do Paciente',
                     'paciente_raca'=>'Raça do Paciente',
+                    'paciente_idade'=>'Idade do Paciente',
+                    'paciente_id'=>'Id do Paciente',
                     'data_atendimento'=>'Data de Atendimento',
                     'procedimento_codigo'=>'Procedimento Ambulatorial',
                     'cid'=>'CID',
@@ -86,7 +132,10 @@ class RelatorioProcedimentoRealizado extends CFormModel{
                     'servico'=>'Serviço',
                     'classificacao_servico'=>'Classificação do serviço',
                     'sequencia'=>'Sequência',
-                    'competencia_movimento'=>'Competência Movimento'
+                    'competencia_movimento'=>'Competência Movimento',
+                    'numero_autorizacao'=>'Número de Autorização',
+                    'cnpj'=>'CNPJ',
+                    'origem'=>'Origem'
         );
     }
 
