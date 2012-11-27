@@ -1,0 +1,94 @@
+2012/07/26 17:27:48 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::execute(): SQLSTATE[42S02]: Base table or view not found: 1146 Table 'sispad.log_system' doesn't exist. A declaração SQL executada foi: DELETE FROM log_system WHERE 0=1.
+in C:\wamp\www\sispad\index.php (13)
+2012/07/26 17:28:14 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Não foi possível resolver a requisição "procedimento/service/ws/1".' in C:\wamp\www\yii\framework\web\CWebApplication.php:280
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CWebApplication.php(135): CWebApplication->runController('procedimento/se...')
+#1 C:\wamp\www\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 C:\wamp\www\sispad\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/sispad/index.php/procedimento/service/ws/1
+---
+2012/07/26 18:06:00 [error] [php] Trying to get property of non-object (C:\wamp\www\sispad\protected\modules\metas\controllers\ProcedimentoController.php:584)
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\services\CWebServiceAction.php(104): CWebService->run()
+#1 C:\wamp\www\yii\framework\web\actions\CAction.php(75): CWebServiceAction->run()
+#2 C:\wamp\www\yii\framework\web\CController.php(309): CWebServiceAction->runWithParams()
+#3 C:\wamp\www\yii\framework\web\CController.php(287): ProcedimentoController->runAction()
+#4 C:\wamp\www\yii\framework\web\CController.php(266): ProcedimentoController->runActionWithFilters()
+#5 C:\wamp\www\yii\framework\web\CWebApplication.php(276): ProcedimentoController->run()
+#6 C:\wamp\www\yii\framework\web\CWebApplication.php(135): CWebApplication->runController()
+#7 C:\wamp\www\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#8 C:\wamp\www\sispad\index.php(13): CWebApplication->run()
+REQUEST_URI=/sispad/index.php/metas/procedimento/service/ws/1
+in C:\wamp\www\sispad\protected\modules\metas\controllers\ProcedimentoController.php (584)
+in C:\wamp\www\sispad\index.php (13)
+2012/07/26 18:11:04 [error] [php] Trying to get property of non-object (C:\wamp\www\sispad\protected\modules\metas\controllers\ProcedimentoController.php:584)
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\services\CWebServiceAction.php(104): CWebService->run()
+#1 C:\wamp\www\yii\framework\web\actions\CAction.php(75): CWebServiceAction->run()
+#2 C:\wamp\www\yii\framework\web\CController.php(309): CWebServiceAction->runWithParams()
+#3 C:\wamp\www\yii\framework\web\CController.php(287): ProcedimentoController->runAction()
+#4 C:\wamp\www\yii\framework\web\CController.php(266): ProcedimentoController->runActionWithFilters()
+#5 C:\wamp\www\yii\framework\web\CWebApplication.php(276): ProcedimentoController->run()
+#6 C:\wamp\www\yii\framework\web\CWebApplication.php(135): CWebApplication->runController()
+#7 C:\wamp\www\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#8 C:\wamp\www\sispad\index.php(13): CWebApplication->run()
+REQUEST_URI=/sispad/index.php/metas/procedimento/service/ws/1
+in C:\wamp\www\sispad\protected\modules\metas\controllers\ProcedimentoController.php (584)
+in C:\wamp\www\sispad\index.php (13)
+2012/07/30 16:43:44 [error] [php] Trying to get property of non-object (C:\wamp\www\sispad\protected\modules\metas\controllers\ProcedimentoController.php:584)
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\services\CWebServiceAction.php(104): CWebService->run()
+#1 C:\wamp\www\yii\framework\web\actions\CAction.php(75): CWebServiceAction->run()
+#2 C:\wamp\www\yii\framework\web\CController.php(309): CWebServiceAction->runWithParams()
+#3 C:\wamp\www\yii\framework\web\CController.php(287): ProcedimentoController->runAction()
+#4 C:\wamp\www\yii\framework\web\CController.php(266): ProcedimentoController->runActionWithFilters()
+#5 C:\wamp\www\yii\framework\web\CWebApplication.php(276): ProcedimentoController->run()
+#6 C:\wamp\www\yii\framework\web\CWebApplication.php(135): CWebApplication->runController()
+#7 C:\wamp\www\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#8 C:\wamp\www\sispad\index.php(13): CWebApplication->run()
+REQUEST_URI=/sispad/index.php/metas/procedimento/service/ws/1
+in C:\wamp\www\sispad\protected\modules\metas\controllers\ProcedimentoController.php (584)
+in C:\wamp\www\sispad\index.php (13)
+2012/07/30 17:48:06 [error] [php] Trying to get property of non-object (C:\wamp\www\sispad\protected\modules\metas\controllers\ProcedimentoController.php:584)
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\services\CWebServiceAction.php(104): CWebService->run()
+#1 C:\wamp\www\yii\framework\web\actions\CAction.php(75): CWebServiceAction->run()
+#2 C:\wamp\www\yii\framework\web\CController.php(309): CWebServiceAction->runWithParams()
+#3 C:\wamp\www\yii\framework\web\CController.php(287): ProcedimentoController->runAction()
+#4 C:\wamp\www\yii\framework\web\CController.php(266): ProcedimentoController->runActionWithFilters()
+#5 C:\wamp\www\yii\framework\web\CWebApplication.php(276): ProcedimentoController->run()
+#6 C:\wamp\www\yii\framework\web\CWebApplication.php(135): CWebApplication->runController()
+#7 C:\wamp\www\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#8 C:\wamp\www\sispad\index.php(13): CWebApplication->run()
+REQUEST_URI=/sispad/index.php/metas/procedimento/service/ws/1
+in C:\wamp\www\sispad\protected\modules\metas\controllers\ProcedimentoController.php (584)
+in C:\wamp\www\sispad\index.php (13)
+2012/07/30 17:50:21 [error] [php] Trying to get property of non-object (C:\wamp\www\sispad\protected\modules\metas\controllers\ProcedimentoController.php:584)
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\services\CWebServiceAction.php(104): CWebService->run()
+#1 C:\wamp\www\yii\framework\web\actions\CAction.php(75): CWebServiceAction->run()
+#2 C:\wamp\www\yii\framework\web\CController.php(309): CWebServiceAction->runWithParams()
+#3 C:\wamp\www\yii\framework\web\CController.php(287): ProcedimentoController->runAction()
+#4 C:\wamp\www\yii\framework\web\CController.php(266): ProcedimentoController->runActionWithFilters()
+#5 C:\wamp\www\yii\framework\web\CWebApplication.php(276): ProcedimentoController->run()
+#6 C:\wamp\www\yii\framework\web\CWebApplication.php(135): CWebApplication->runController()
+#7 C:\wamp\www\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#8 C:\wamp\www\sispad\index.php(13): CWebApplication->run()
+REQUEST_URI=/sispad/index.php/metas/procedimento/service/ws/1
+in C:\wamp\www\sispad\protected\modules\metas\controllers\ProcedimentoController.php (584)
+in C:\wamp\www\sispad\index.php (13)
+2012/07/30 17:51:01 [error] [php] Trying to get property of non-object (C:\wamp\www\sispad\protected\modules\metas\controllers\ProcedimentoController.php:1081)
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\services\CWebServiceAction.php(104): CWebService->run()
+#1 C:\wamp\www\yii\framework\web\actions\CAction.php(75): CWebServiceAction->run()
+#2 C:\wamp\www\yii\framework\web\CController.php(309): CWebServiceAction->runWithParams()
+#3 C:\wamp\www\yii\framework\web\CController.php(287): ProcedimentoController->runAction()
+#4 C:\wamp\www\yii\framework\web\CController.php(266): ProcedimentoController->runActionWithFilters()
+#5 C:\wamp\www\yii\framework\web\CWebApplication.php(276): ProcedimentoController->run()
+#6 C:\wamp\www\yii\framework\web\CWebApplication.php(135): CWebApplication->runController()
+#7 C:\wamp\www\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#8 C:\wamp\www\sispad\index.php(13): CWebApplication->run()
+REQUEST_URI=/sispad/index.php/metas/procedimento/service/ws/1
+in C:\wamp\www\sispad\protected\modules\metas\controllers\ProcedimentoController.php (1081)
+in C:\wamp\www\sispad\index.php (13)
