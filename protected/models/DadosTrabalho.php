@@ -49,7 +49,7 @@ class DadosTrabalho extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('servidor_cpf,profissao_codigo,vinculo,situacao_funcional,turno,data_admissao, carga_horaria, salario', 'required'),
-			array('carga_horaria,profissao_codigo', 'numerical', 'integerOnly'=>true),
+			array('carga_horaria', 'numerical', 'integerOnly'=>true),
 			array('servidor_cpf, pis', 'length', 'max'=>11),
                         array('servidor_cpf', 'cpfExiste', 'on'=>'create'),
 			array('turno, vinculo', 'length', 'max'=>1),

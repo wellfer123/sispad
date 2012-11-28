@@ -19,6 +19,26 @@ class RelatorioProcedimentoRealizado extends CFormModel{
                                   'RelatoriolUnidadeProfissionalProcedimento'=>'Unidade/Profissional/Procedimento',
                                   'RelatorioUnidadeTotal'=>'Unidade Total',
                                   );
+    //CARATERS DE ATENDIMENTOS
+    public static $CARATER_ATENDIMENTO = array(
+                                                '00'=>'SEM INFORMAÇÃO',
+                                                '01'=>'ELETIVO',
+                                                '02'=>'URGÊNCIA',
+                                                '03'=>'ACIDENTE NO LOCAL DE TRABALHO OU A SERVIÇO DA EMPRESA',
+                                                '04'=>'ACIDENTE NO TRAJETO PARA O TRABALHO',
+                                                '05'=>'OUTROS TIPOS DE ACIDENTES DE TRÂNSITO',
+                                                '06'=>'OUTROS TIPOS DE LESÕES E EVENENAMENTO POR AGENTES QUÍMICOS OU FÍSICOS'
+    );
+    
+    //RAÇA/COR
+    public static $RACA_COR = array(
+                                    '01'=>'BRANCA',
+                                    '02'=>'PRETA',
+                                    '03'=>'PARDA',
+                                    '04'=>'AMARELA',
+                                    '05'=>'INDÍGENA',
+                                    '99'=>'SEM INFORMAÇÃO'
+    );
     //mapeamento para cada parâmetro do relatório
     public static $DE_ATRIBUTO_PARA_PARAMETRO= array('relatorio'=>'jkwf8923r8923nh9hiwqehnd',
                                                      'unidade_cnes'=>'wkdn23je9329032900932',
