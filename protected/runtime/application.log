@@ -92,3 +92,544 @@ Stack trace:
 REQUEST_URI=/sispad/index.php/metas/procedimento/service/ws/1
 in C:\wamp\www\sispad\protected\modules\metas\controllers\ProcedimentoController.php (1081)
 in C:\wamp\www\sispad\index.php (13)
+2012/11/27 18:41:27 [error] [exception.CException] exception 'CException' with message 'A propriedade "RelatorioProcedimentoRealizado.competenica_movimento" não está definida.' in C:\xampp\htdocs\yii\framework\base\CComponent.php:131
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\web\helpers\CHtml.php(2044): CComponent->__get('competenica_mov...')
+#1 C:\xampp\htdocs\yii\framework\web\helpers\CHtml.php(1774): CHtml::resolveValue(Object(RelatorioProcedimentoRealizado), 'competenica_mov...')
+#2 C:\xampp\htdocs\yii\framework\web\helpers\CHtml.php(1205): CHtml::activeInputField('text', Object(RelatorioProcedimentoRealizado), 'competenica_mov...', Array)
+#3 C:\xampp\htdocs\yii\framework\web\widgets\CActiveForm.php(575): CHtml::activeTextField(Object(RelatorioProcedimentoRealizado), 'competenica_mov...', Array)
+#4 C:\xampp\htdocs\sispad\protected\modules\bpa\views\relatorioProcedimentoRealizado\_relatorio.php(56): CActiveForm->textField(Object(RelatorioProcedimentoRealizado), 'competenica_mov...', Array)
+#5 C:\xampp\htdocs\yii\framework\web\CBaseController.php(127): require('C:\xampp\htdocs...')
+#6 C:\xampp\htdocs\yii\framework\web\CBaseController.php(96): CBaseController->renderInternal('C:\xampp\htdocs...', Array, true)
+#7 C:\xampp\htdocs\yii\framework\web\CController.php(870): CBaseController->renderFile('C:\xampp\htdocs...', Array, true)
+#8 C:\xampp\htdocs\sispad\protected\modules\bpa\views\relatorioProcedimentoRealizado\relatorio.php(15): CController->renderPartial('_relatorio', Array)
+#9 C:\xampp\htdocs\yii\framework\web\CBaseController.php(127): require('C:\xampp\htdocs...')
+#10 C:\xampp\htdocs\yii\framework\web\CBaseController.php(96): CBaseController->renderInternal('C:\xampp\htdocs...', Array, true)
+#11 C:\xampp\htdocs\yii\framework\web\CController.php(870): CBaseController->renderFile('C:\xampp\htdocs...', Array, true)
+#12 C:\xampp\htdocs\yii\framework\web\CController.php(783): CController->renderPartial('relatorio', Array, true)
+#13 C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php(60): CController->render('relatorio', Array)
+#14 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(50): RelatorioProcedimentoRealizadoController->actionBuscar()
+#15 C:\xampp\htdocs\yii\framework\web\CController.php(309): CInlineAction->runWithParams(Array)
+#16 C:\xampp\htdocs\yii\framework\web\CController.php(287): CController->runAction(Object(CInlineAction))
+#17 C:\xampp\htdocs\yii\framework\web\CController.php(266): CController->runActionWithFilters(Object(CInlineAction), Array)
+#18 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(276): CController->run('buscar')
+#19 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(135): CWebApplication->runController('bpa/RelatorioPr...')
+#20 C:\xampp\htdocs\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#21 C:\xampp\htdocs\sispad\index.php(13): CApplication->run()
+#22 {main}
+REQUEST_URI=/sispad/index.php/bpa/RelatorioProcedimentorealizado/buscar
+---
+2012/11/27 18:59:49 [error] [php] Use of undefined constant profissional_cns - assumed 'profissional_cns' (C:\xampp\htdocs\sispad\protected\modules\bpa\views\relatorioProcedimentoRealizado\_relatorio.php:37)
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\web\CController.php(870): RelatorioProcedimentoRealizadoController->renderFile()
+#1 C:\xampp\htdocs\sispad\protected\modules\bpa\views\relatorioProcedimentoRealizado\relatorio.php(15): RelatorioProcedimentoRealizadoController->renderPartial()
+#2 C:\xampp\htdocs\yii\framework\web\CBaseController.php(127): require()
+#3 C:\xampp\htdocs\yii\framework\web\CBaseController.php(96): RelatorioProcedimentoRealizadoController->renderInternal()
+#4 C:\xampp\htdocs\yii\framework\web\CController.php(870): RelatorioProcedimentoRealizadoController->renderFile()
+#5 C:\xampp\htdocs\yii\framework\web\CController.php(783): RelatorioProcedimentoRealizadoController->renderPartial()
+#6 C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php(60): RelatorioProcedimentoRealizadoController->render()
+#7 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(50): RelatorioProcedimentoRealizadoController->actionBuscar()
+#8 C:\xampp\htdocs\yii\framework\web\CController.php(309): CInlineAction->runWithParams()
+#9 C:\xampp\htdocs\yii\framework\web\CController.php(287): RelatorioProcedimentoRealizadoController->runAction()
+#10 C:\xampp\htdocs\yii\framework\web\CController.php(266): RelatorioProcedimentoRealizadoController->runActionWithFilters()
+#11 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(276): RelatorioProcedimentoRealizadoController->run()
+#12 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(135): CWebApplication->runController()
+#13 C:\xampp\htdocs\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#14 C:\xampp\htdocs\sispad\index.php(13): CWebApplication->run()
+REQUEST_URI=/sispad/index.php/bpa/RelatorioProcedimentorealizado/buscar
+in C:\xampp\htdocs\sispad\protected\modules\bpa\views\relatorioProcedimentoRealizado\_relatorio.php (37)
+in C:\xampp\htdocs\sispad\protected\modules\bpa\views\relatorioProcedimentoRealizado\relatorio.php (15)
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (60)
+2012/11/27 20:35:19 [warning] [application] Failed to set unsafe attribute "competencia" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/27 20:35:19 [warning] [application] Failed to set unsafe attribute "procedimento" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/27 20:35:19 [warning] [application] Failed to set unsafe attribute "competencia_movimento" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/27 20:35:19 [warning] [application] Failed to set unsafe attribute "paciente_cns" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/27 20:35:19 [warning] [application] Failed to set unsafe attribute "paciente_sexo" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/27 20:35:19 [warning] [application] Failed to set unsafe attribute "data_atendimento" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/27 20:35:19 [warning] [application] Failed to set unsafe attribute "equipe" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/27 20:35:19 [warning] [application] Failed to set unsafe attribute "paciente_data_nascimento" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/27 20:35:19 [warning] [application] Failed to set unsafe attribute "paciente_cidade" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/27 20:35:19 [warning] [application] Failed to set unsafe attribute "paciente_raca" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/27 20:35:19 [warning] [application] Failed to set unsafe attribute "paciente_etnia" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/27 20:35:19 [warning] [application] Failed to set unsafe attribute "cid" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/27 20:35:19 [warning] [application] Failed to set unsafe attribute "carater_atendimento" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/27 20:35:19 [warning] [application] Failed to set unsafe attribute "servico" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/27 20:35:19 [warning] [application] Failed to set unsafe attribute "classificacao_servico" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/27 20:35:19 [warning] [application] Failed to set unsafe attribute "paciente_idade" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/27 20:35:19 [warning] [application] Failed to set unsafe attribute "cnpj" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/27 20:35:19 [warning] [application] Failed to set unsafe attribute "numero_autorizacao" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/27 20:35:25 [warning] [application] Failed to set unsafe attribute "competencia" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/27 20:35:25 [warning] [application] Failed to set unsafe attribute "procedimento" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/27 20:35:25 [warning] [application] Failed to set unsafe attribute "competencia_movimento" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/27 20:35:25 [warning] [application] Failed to set unsafe attribute "paciente_cns" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/27 20:35:25 [warning] [application] Failed to set unsafe attribute "paciente_sexo" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/27 20:35:25 [warning] [application] Failed to set unsafe attribute "data_atendimento" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/27 20:35:25 [warning] [application] Failed to set unsafe attribute "equipe" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/27 20:35:25 [warning] [application] Failed to set unsafe attribute "paciente_data_nascimento" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/27 20:35:25 [warning] [application] Failed to set unsafe attribute "paciente_cidade" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/27 20:35:25 [warning] [application] Failed to set unsafe attribute "paciente_raca" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/27 20:35:25 [warning] [application] Failed to set unsafe attribute "paciente_etnia" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/27 20:35:25 [warning] [application] Failed to set unsafe attribute "cid" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/27 20:35:25 [warning] [application] Failed to set unsafe attribute "carater_atendimento" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/27 20:35:25 [warning] [application] Failed to set unsafe attribute "servico" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/27 20:35:25 [warning] [application] Failed to set unsafe attribute "classificacao_servico" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/27 20:35:25 [warning] [application] Failed to set unsafe attribute "paciente_idade" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/27 20:35:25 [warning] [application] Failed to set unsafe attribute "cnpj" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/27 20:35:25 [warning] [application] Failed to set unsafe attribute "numero_autorizacao" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/27 20:35:36 [warning] [application] Failed to set unsafe attribute "competencia" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/27 20:35:36 [warning] [application] Failed to set unsafe attribute "procedimento" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/27 20:35:36 [warning] [application] Failed to set unsafe attribute "competencia_movimento" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/27 20:35:36 [warning] [application] Failed to set unsafe attribute "paciente_cns" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/27 20:35:36 [warning] [application] Failed to set unsafe attribute "paciente_sexo" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/27 20:35:36 [warning] [application] Failed to set unsafe attribute "data_atendimento" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/27 20:35:36 [warning] [application] Failed to set unsafe attribute "equipe" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/27 20:35:36 [warning] [application] Failed to set unsafe attribute "paciente_data_nascimento" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/27 20:35:36 [warning] [application] Failed to set unsafe attribute "paciente_cidade" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/27 20:35:36 [warning] [application] Failed to set unsafe attribute "paciente_raca" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/27 20:35:36 [warning] [application] Failed to set unsafe attribute "paciente_etnia" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/27 20:35:36 [warning] [application] Failed to set unsafe attribute "cid" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/27 20:35:36 [warning] [application] Failed to set unsafe attribute "carater_atendimento" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/27 20:35:36 [warning] [application] Failed to set unsafe attribute "servico" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/27 20:35:36 [warning] [application] Failed to set unsafe attribute "classificacao_servico" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/27 20:35:36 [warning] [application] Failed to set unsafe attribute "paciente_idade" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/27 20:35:36 [warning] [application] Failed to set unsafe attribute "cnpj" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/27 20:35:36 [warning] [application] Failed to set unsafe attribute "numero_autorizacao" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/27 20:53:25 [warning] [application] Failed to set unsafe attribute "competencia" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/27 20:53:25 [warning] [application] Failed to set unsafe attribute "procedimento" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/27 20:53:25 [warning] [application] Failed to set unsafe attribute "competencia_movimento" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/27 20:53:25 [warning] [application] Failed to set unsafe attribute "paciente_cns" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/27 20:53:25 [warning] [application] Failed to set unsafe attribute "paciente_sexo" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/27 20:53:25 [warning] [application] Failed to set unsafe attribute "data_atendimento" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/27 20:53:25 [warning] [application] Failed to set unsafe attribute "equipe" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/27 20:53:25 [warning] [application] Failed to set unsafe attribute "paciente_data_nascimento" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/27 20:53:25 [warning] [application] Failed to set unsafe attribute "paciente_cidade" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/27 20:53:25 [warning] [application] Failed to set unsafe attribute "paciente_raca" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/27 20:53:25 [warning] [application] Failed to set unsafe attribute "paciente_etnia" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/27 20:53:25 [warning] [application] Failed to set unsafe attribute "cid" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/27 20:53:25 [warning] [application] Failed to set unsafe attribute "carater_atendimento" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/27 20:53:25 [warning] [application] Failed to set unsafe attribute "servico" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/27 20:53:25 [warning] [application] Failed to set unsafe attribute "classificacao_servico" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/27 20:53:25 [warning] [application] Failed to set unsafe attribute "paciente_idade" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/27 20:53:25 [warning] [application] Failed to set unsafe attribute "cnpj" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/27 20:53:25 [warning] [application] Failed to set unsafe attribute "numero_autorizacao" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/27 21:26:00 [error] [php] Undefined variable: cidades (C:\xampp\htdocs\sispad\protected\modules\bpa\views\relatorioProcedimentoRealizado\_relatorio.php:111)
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\web\CController.php(870): RelatorioProcedimentoRealizadoController->renderFile()
+#1 C:\xampp\htdocs\sispad\protected\modules\bpa\views\relatorioProcedimentoRealizado\relatorio.php(15): RelatorioProcedimentoRealizadoController->renderPartial()
+#2 C:\xampp\htdocs\yii\framework\web\CBaseController.php(127): require()
+#3 C:\xampp\htdocs\yii\framework\web\CBaseController.php(96): RelatorioProcedimentoRealizadoController->renderInternal()
+#4 C:\xampp\htdocs\yii\framework\web\CController.php(870): RelatorioProcedimentoRealizadoController->renderFile()
+#5 C:\xampp\htdocs\yii\framework\web\CController.php(783): RelatorioProcedimentoRealizadoController->renderPartial()
+#6 C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php(60): RelatorioProcedimentoRealizadoController->render()
+#7 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(50): RelatorioProcedimentoRealizadoController->actionBuscar()
+#8 C:\xampp\htdocs\yii\framework\web\CController.php(309): CInlineAction->runWithParams()
+#9 C:\xampp\htdocs\yii\framework\web\CController.php(287): RelatorioProcedimentoRealizadoController->runAction()
+#10 C:\xampp\htdocs\yii\framework\web\CController.php(266): RelatorioProcedimentoRealizadoController->runActionWithFilters()
+#11 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(276): RelatorioProcedimentoRealizadoController->run()
+#12 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(135): CWebApplication->runController()
+#13 C:\xampp\htdocs\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#14 C:\xampp\htdocs\sispad\index.php(13): CWebApplication->run()
+REQUEST_URI=/sispad/index.php/bpa/RelatorioProcedimentorealizado/buscar
+in C:\xampp\htdocs\sispad\protected\modules\bpa\views\relatorioProcedimentoRealizado\_relatorio.php (111)
+in C:\xampp\htdocs\sispad\protected\modules\bpa\views\relatorioProcedimentoRealizado\relatorio.php (15)
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (60)
+2012/11/27 21:26:40 [error] [exception.CException] exception 'CException' with message 'A propriedade "Cidades.cidade" não está definida.' in C:\xampp\htdocs\yii\framework\base\CComponent.php:131
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\db\ar\CActiveRecord.php(144): CComponent->__get('cidade')
+#1 C:\xampp\htdocs\sispad\protected\extensions\EJuiAutoCompleteFkField.php(195): CActiveRecord->__get('cidade')
+#2 C:\xampp\htdocs\yii\framework\web\CBaseController.php(148): EJuiAutoCompleteFkField->init()
+#3 C:\xampp\htdocs\yii\framework\web\CBaseController.php(173): CBaseController->createWidget('EJuiAutoComplet...', Array)
+#4 C:\xampp\htdocs\sispad\protected\modules\bpa\views\relatorioProcedimentoRealizado\_relatorio.php(130): CBaseController->widget('EJuiAutoComplet...', Array)
+#5 C:\xampp\htdocs\yii\framework\web\CBaseController.php(127): require('C:\xampp\htdocs...')
+#6 C:\xampp\htdocs\yii\framework\web\CBaseController.php(96): CBaseController->renderInternal('C:\xampp\htdocs...', Array, true)
+#7 C:\xampp\htdocs\yii\framework\web\CController.php(870): CBaseController->renderFile('C:\xampp\htdocs...', Array, true)
+#8 C:\xampp\htdocs\sispad\protected\modules\bpa\views\relatorioProcedimentoRealizado\relatorio.php(15): CController->renderPartial('_relatorio', Array)
+#9 C:\xampp\htdocs\yii\framework\web\CBaseController.php(127): require('C:\xampp\htdocs...')
+#10 C:\xampp\htdocs\yii\framework\web\CBaseController.php(96): CBaseController->renderInternal('C:\xampp\htdocs...', Array, true)
+#11 C:\xampp\htdocs\yii\framework\web\CController.php(870): CBaseController->renderFile('C:\xampp\htdocs...', Array, true)
+#12 C:\xampp\htdocs\yii\framework\web\CController.php(783): CController->renderPartial('relatorio', Array, true)
+#13 C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php(60): CController->render('relatorio', Array)
+#14 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(50): RelatorioProcedimentoRealizadoController->actionBuscar()
+#15 C:\xampp\htdocs\yii\framework\web\CController.php(309): CInlineAction->runWithParams(Array)
+#16 C:\xampp\htdocs\yii\framework\web\CController.php(287): CController->runAction(Object(CInlineAction))
+#17 C:\xampp\htdocs\yii\framework\web\CController.php(266): CController->runActionWithFilters(Object(CInlineAction), Array)
+#18 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(276): CController->run('buscar')
+#19 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(135): CWebApplication->runController('bpa/RelatorioPr...')
+#20 C:\xampp\htdocs\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#21 C:\xampp\htdocs\sispad\index.php(13): CApplication->run()
+#22 {main}
+REQUEST_URI=/sispad/index.php/bpa/RelatorioProcedimentorealizado/buscar
+---
+2012/11/27 21:26:55 [error] [exception.CException] exception 'CException' with message 'A propriedade "Cidades." não está definida.' in C:\xampp\htdocs\yii\framework\base\CComponent.php:131
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\db\ar\CActiveRecord.php(144): CComponent->__get('')
+#1 C:\xampp\htdocs\sispad\protected\extensions\EJuiAutoCompleteFkField.php(195): CActiveRecord->__get('')
+#2 C:\xampp\htdocs\yii\framework\web\CBaseController.php(148): EJuiAutoCompleteFkField->init()
+#3 C:\xampp\htdocs\yii\framework\web\CBaseController.php(173): CBaseController->createWidget('EJuiAutoComplet...', Array)
+#4 C:\xampp\htdocs\sispad\protected\modules\bpa\views\relatorioProcedimentoRealizado\_relatorio.php(130): CBaseController->widget('EJuiAutoComplet...', Array)
+#5 C:\xampp\htdocs\yii\framework\web\CBaseController.php(127): require('C:\xampp\htdocs...')
+#6 C:\xampp\htdocs\yii\framework\web\CBaseController.php(96): CBaseController->renderInternal('C:\xampp\htdocs...', Array, true)
+#7 C:\xampp\htdocs\yii\framework\web\CController.php(870): CBaseController->renderFile('C:\xampp\htdocs...', Array, true)
+#8 C:\xampp\htdocs\sispad\protected\modules\bpa\views\relatorioProcedimentoRealizado\relatorio.php(15): CController->renderPartial('_relatorio', Array)
+#9 C:\xampp\htdocs\yii\framework\web\CBaseController.php(127): require('C:\xampp\htdocs...')
+#10 C:\xampp\htdocs\yii\framework\web\CBaseController.php(96): CBaseController->renderInternal('C:\xampp\htdocs...', Array, true)
+#11 C:\xampp\htdocs\yii\framework\web\CController.php(870): CBaseController->renderFile('C:\xampp\htdocs...', Array, true)
+#12 C:\xampp\htdocs\yii\framework\web\CController.php(783): CController->renderPartial('relatorio', Array, true)
+#13 C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php(60): CController->render('relatorio', Array)
+#14 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(50): RelatorioProcedimentoRealizadoController->actionBuscar()
+#15 C:\xampp\htdocs\yii\framework\web\CController.php(309): CInlineAction->runWithParams(Array)
+#16 C:\xampp\htdocs\yii\framework\web\CController.php(287): CController->runAction(Object(CInlineAction))
+#17 C:\xampp\htdocs\yii\framework\web\CController.php(266): CController->runActionWithFilters(Object(CInlineAction), Array)
+#18 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(276): CController->run('buscar')
+#19 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(135): CWebApplication->runController('bpa/RelatorioPr...')
+#20 C:\xampp\htdocs\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#21 C:\xampp\htdocs\sispad\index.php(13): CApplication->run()
+#22 {main}
+REQUEST_URI=/sispad/index.php/bpa/RelatorioProcedimentorealizado/buscar
+---
+2012/11/27 21:27:29 [error] [php] Trying to get property of non-object (C:\xampp\htdocs\sispad\protected\extensions\EJuiAutoCompleteFkField.php:195)
+Stack trace:
+#0 C:\xampp\htdocs\sispad\protected\modules\bpa\views\relatorioProcedimentoRealizado\_relatorio.php(130): RelatorioProcedimentoRealizadoController->widget()
+#1 C:\xampp\htdocs\yii\framework\web\CBaseController.php(127): require()
+#2 C:\xampp\htdocs\yii\framework\web\CBaseController.php(96): RelatorioProcedimentoRealizadoController->renderInternal()
+#3 C:\xampp\htdocs\yii\framework\web\CController.php(870): RelatorioProcedimentoRealizadoController->renderFile()
+#4 C:\xampp\htdocs\sispad\protected\modules\bpa\views\relatorioProcedimentoRealizado\relatorio.php(15): RelatorioProcedimentoRealizadoController->renderPartial()
+#5 C:\xampp\htdocs\yii\framework\web\CBaseController.php(127): require()
+#6 C:\xampp\htdocs\yii\framework\web\CBaseController.php(96): RelatorioProcedimentoRealizadoController->renderInternal()
+#7 C:\xampp\htdocs\yii\framework\web\CController.php(870): RelatorioProcedimentoRealizadoController->renderFile()
+#8 C:\xampp\htdocs\yii\framework\web\CController.php(783): RelatorioProcedimentoRealizadoController->renderPartial()
+#9 C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php(60): RelatorioProcedimentoRealizadoController->render()
+#10 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(50): RelatorioProcedimentoRealizadoController->actionBuscar()
+#11 C:\xampp\htdocs\yii\framework\web\CController.php(309): CInlineAction->runWithParams()
+#12 C:\xampp\htdocs\yii\framework\web\CController.php(287): RelatorioProcedimentoRealizadoController->runAction()
+#13 C:\xampp\htdocs\yii\framework\web\CController.php(266): RelatorioProcedimentoRealizadoController->runActionWithFilters()
+#14 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(276): RelatorioProcedimentoRealizadoController->run()
+#15 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(135): CWebApplication->runController()
+#16 C:\xampp\htdocs\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#17 C:\xampp\htdocs\sispad\index.php(13): CWebApplication->run()
+REQUEST_URI=/sispad/index.php/bpa/RelatorioProcedimentorealizado/buscar
+in C:\xampp\htdocs\sispad\protected\extensions\EJuiAutoCompleteFkField.php (195)
+in C:\xampp\htdocs\sispad\protected\modules\bpa\views\relatorioProcedimentoRealizado\_relatorio.php (130)
+in C:\xampp\htdocs\sispad\protected\modules\bpa\views\relatorioProcedimentoRealizado\relatorio.php (15)
+2012/11/28 17:27:54 [error] [php] Trying to get property of non-object (C:\xampp\htdocs\sispad\protected\extensions\EJuiAutoCompleteFkField.php:195)
+Stack trace:
+#0 C:\xampp\htdocs\sispad\protected\modules\bpa\views\relatorioProcedimentoRealizado\_relatorio.php(130): RelatorioProcedimentoRealizadoController->widget()
+#1 C:\xampp\htdocs\yii\framework\web\CBaseController.php(127): require()
+#2 C:\xampp\htdocs\yii\framework\web\CBaseController.php(96): RelatorioProcedimentoRealizadoController->renderInternal()
+#3 C:\xampp\htdocs\yii\framework\web\CController.php(870): RelatorioProcedimentoRealizadoController->renderFile()
+#4 C:\xampp\htdocs\sispad\protected\modules\bpa\views\relatorioProcedimentoRealizado\relatorio.php(15): RelatorioProcedimentoRealizadoController->renderPartial()
+#5 C:\xampp\htdocs\yii\framework\web\CBaseController.php(127): require()
+#6 C:\xampp\htdocs\yii\framework\web\CBaseController.php(96): RelatorioProcedimentoRealizadoController->renderInternal()
+#7 C:\xampp\htdocs\yii\framework\web\CController.php(870): RelatorioProcedimentoRealizadoController->renderFile()
+#8 C:\xampp\htdocs\yii\framework\web\CController.php(783): RelatorioProcedimentoRealizadoController->renderPartial()
+#9 C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php(60): RelatorioProcedimentoRealizadoController->render()
+#10 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(50): RelatorioProcedimentoRealizadoController->actionBuscar()
+#11 C:\xampp\htdocs\yii\framework\web\CController.php(309): CInlineAction->runWithParams()
+#12 C:\xampp\htdocs\yii\framework\web\CController.php(287): RelatorioProcedimentoRealizadoController->runAction()
+#13 C:\xampp\htdocs\yii\framework\web\CController.php(266): RelatorioProcedimentoRealizadoController->runActionWithFilters()
+#14 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(276): RelatorioProcedimentoRealizadoController->run()
+#15 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(135): CWebApplication->runController()
+#16 C:\xampp\htdocs\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#17 C:\xampp\htdocs\sispad\index.php(13): CWebApplication->run()
+REQUEST_URI=/sispad/index.php/bpa/RelatorioProcedimentorealizado/buscar
+in C:\xampp\htdocs\sispad\protected\extensions\EJuiAutoCompleteFkField.php (195)
+in C:\xampp\htdocs\sispad\protected\modules\bpa\views\relatorioProcedimentoRealizado\_relatorio.php (130)
+in C:\xampp\htdocs\sispad\protected\modules\bpa\views\relatorioProcedimentoRealizado\relatorio.php (15)
+2012/11/28 17:31:49 [error] [php] Trying to get property of non-object (C:\xampp\htdocs\sispad\protected\extensions\EJuiAutoCompleteFkField.php:195)
+Stack trace:
+#0 C:\xampp\htdocs\sispad\protected\modules\bpa\views\relatorioProcedimentoRealizado\_relatorio.php(130): RelatorioProcedimentoRealizadoController->widget()
+#1 C:\xampp\htdocs\yii\framework\web\CBaseController.php(127): require()
+#2 C:\xampp\htdocs\yii\framework\web\CBaseController.php(96): RelatorioProcedimentoRealizadoController->renderInternal()
+#3 C:\xampp\htdocs\yii\framework\web\CController.php(870): RelatorioProcedimentoRealizadoController->renderFile()
+#4 C:\xampp\htdocs\sispad\protected\modules\bpa\views\relatorioProcedimentoRealizado\relatorio.php(15): RelatorioProcedimentoRealizadoController->renderPartial()
+#5 C:\xampp\htdocs\yii\framework\web\CBaseController.php(127): require()
+#6 C:\xampp\htdocs\yii\framework\web\CBaseController.php(96): RelatorioProcedimentoRealizadoController->renderInternal()
+#7 C:\xampp\htdocs\yii\framework\web\CController.php(870): RelatorioProcedimentoRealizadoController->renderFile()
+#8 C:\xampp\htdocs\yii\framework\web\CController.php(783): RelatorioProcedimentoRealizadoController->renderPartial()
+#9 C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php(60): RelatorioProcedimentoRealizadoController->render()
+#10 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(50): RelatorioProcedimentoRealizadoController->actionBuscar()
+#11 C:\xampp\htdocs\yii\framework\web\CController.php(309): CInlineAction->runWithParams()
+#12 C:\xampp\htdocs\yii\framework\web\CController.php(287): RelatorioProcedimentoRealizadoController->runAction()
+#13 C:\xampp\htdocs\yii\framework\web\CController.php(266): RelatorioProcedimentoRealizadoController->runActionWithFilters()
+#14 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(276): RelatorioProcedimentoRealizadoController->run()
+#15 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(135): CWebApplication->runController()
+#16 C:\xampp\htdocs\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#17 C:\xampp\htdocs\sispad\index.php(13): CWebApplication->run()
+REQUEST_URI=/sispad/index.php/bpa/RelatorioProcedimentorealizado/buscar
+in C:\xampp\htdocs\sispad\protected\extensions\EJuiAutoCompleteFkField.php (195)
+in C:\xampp\htdocs\sispad\protected\modules\bpa\views\relatorioProcedimentoRealizado\_relatorio.php (130)
+in C:\xampp\htdocs\sispad\protected\modules\bpa\views\relatorioProcedimentoRealizado\relatorio.php (15)
+2012/11/28 17:39:55 [error] [exception.CException] exception 'CException' with message 'A propriedade "RelatorioProcedimentoRealizado.data_nascimento" não está definida.' in C:\xampp\htdocs\yii\framework\base\CComponent.php:131
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\web\helpers\CHtml.php(2044): CComponent->__get('data_nascimento')
+#1 C:\xampp\htdocs\yii\framework\web\helpers\CHtml.php(1774): CHtml::resolveValue(Object(RelatorioProcedimentoRealizado), 'data_nascimento')
+#2 C:\xampp\htdocs\yii\framework\web\helpers\CHtml.php(1205): CHtml::activeInputField('text', Object(RelatorioProcedimentoRealizado), 'data_nascimento', Array)
+#3 C:\xampp\htdocs\yii\framework\zii\widgets\jui\CJuiDatePicker.php(87): CHtml::activeTextField(Object(RelatorioProcedimentoRealizado), 'data_nascimento', Array)
+#4 C:\xampp\htdocs\yii\framework\web\CBaseController.php(174): CJuiDatePicker->run()
+#5 C:\xampp\htdocs\sispad\protected\modules\bpa\views\relatorioProcedimentoRealizado\_relatorio.php(99): CBaseController->widget('zii.widgets.jui...', Array)
+#6 C:\xampp\htdocs\yii\framework\web\CBaseController.php(127): require('C:\xampp\htdocs...')
+#7 C:\xampp\htdocs\yii\framework\web\CBaseController.php(96): CBaseController->renderInternal('C:\xampp\htdocs...', Array, true)
+#8 C:\xampp\htdocs\yii\framework\web\CController.php(870): CBaseController->renderFile('C:\xampp\htdocs...', Array, true)
+#9 C:\xampp\htdocs\sispad\protected\modules\bpa\views\relatorioProcedimentoRealizado\relatorio.php(15): CController->renderPartial('_relatorio', Array)
+#10 C:\xampp\htdocs\yii\framework\web\CBaseController.php(127): require('C:\xampp\htdocs...')
+#11 C:\xampp\htdocs\yii\framework\web\CBaseController.php(96): CBaseController->renderInternal('C:\xampp\htdocs...', Array, true)
+#12 C:\xampp\htdocs\yii\framework\web\CController.php(870): CBaseController->renderFile('C:\xampp\htdocs...', Array, true)
+#13 C:\xampp\htdocs\yii\framework\web\CController.php(783): CController->renderPartial('relatorio', Array, true)
+#14 C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php(60): CController->render('relatorio', Array)
+#15 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(50): RelatorioProcedimentoRealizadoController->actionBuscar()
+#16 C:\xampp\htdocs\yii\framework\web\CController.php(309): CInlineAction->runWithParams(Array)
+#17 C:\xampp\htdocs\yii\framework\web\CController.php(287): CController->runAction(Object(CInlineAction))
+#18 C:\xampp\htdocs\yii\framework\web\CController.php(266): CController->runActionWithFilters(Object(CInlineAction), Array)
+#19 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(276): CController->run('buscar')
+#20 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(135): CWebApplication->runController('bpa/RelatorioPr...')
+#21 C:\xampp\htdocs\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#22 C:\xampp\htdocs\sispad\index.php(13): CApplication->run()
+#23 {main}
+REQUEST_URI=/sispad/index.php/bpa/RelatorioProcedimentorealizado/buscar
+---
+2012/11/28 17:53:24 [warning] [application] Failed to set unsafe attribute "competencia" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/28 17:53:24 [warning] [application] Failed to set unsafe attribute "procedimento" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/28 17:53:24 [warning] [application] Failed to set unsafe attribute "competencia_movimento" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/28 17:53:24 [warning] [application] Failed to set unsafe attribute "paciente_cns" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/28 17:53:24 [warning] [application] Failed to set unsafe attribute "paciente_sexo" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/28 17:53:24 [warning] [application] Failed to set unsafe attribute "data_atendimento" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/28 17:53:24 [warning] [application] Failed to set unsafe attribute "equipe" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/28 17:53:24 [warning] [application] Failed to set unsafe attribute "paciente_cidade" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/28 17:53:24 [warning] [application] Failed to set unsafe attribute "paciente_raca" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/28 17:53:24 [warning] [application] Failed to set unsafe attribute "paciente_etnia" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/28 17:53:24 [warning] [application] Failed to set unsafe attribute "cid" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/28 17:53:24 [warning] [application] Failed to set unsafe attribute "carater_atendimento" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/28 17:53:24 [warning] [application] Failed to set unsafe attribute "servico" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/28 17:53:24 [warning] [application] Failed to set unsafe attribute "classificacao_servico" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/28 17:53:24 [warning] [application] Failed to set unsafe attribute "paciente_idade" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/28 17:53:24 [warning] [application] Failed to set unsafe attribute "cnpj" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/28 17:53:24 [warning] [application] Failed to set unsafe attribute "numero_autorizacao" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/28 17:53:55 [warning] [application] Failed to set unsafe attribute "competencia" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/28 17:53:55 [warning] [application] Failed to set unsafe attribute "procedimento" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/28 17:53:55 [warning] [application] Failed to set unsafe attribute "competencia_movimento" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/28 17:53:55 [warning] [application] Failed to set unsafe attribute "paciente_cns" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/28 17:53:55 [warning] [application] Failed to set unsafe attribute "paciente_sexo" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/28 17:53:55 [warning] [application] Failed to set unsafe attribute "data_atendimento" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/28 17:53:55 [warning] [application] Failed to set unsafe attribute "equipe" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/28 17:53:55 [warning] [application] Failed to set unsafe attribute "paciente_cidade" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/28 17:53:55 [warning] [application] Failed to set unsafe attribute "paciente_raca" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/28 17:53:55 [warning] [application] Failed to set unsafe attribute "paciente_etnia" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/28 17:53:55 [warning] [application] Failed to set unsafe attribute "cid" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/28 17:53:55 [warning] [application] Failed to set unsafe attribute "carater_atendimento" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/28 17:53:55 [warning] [application] Failed to set unsafe attribute "servico" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/28 17:53:55 [warning] [application] Failed to set unsafe attribute "classificacao_servico" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/28 17:53:55 [warning] [application] Failed to set unsafe attribute "paciente_idade" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/28 17:53:55 [warning] [application] Failed to set unsafe attribute "cnpj" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/28 17:53:55 [warning] [application] Failed to set unsafe attribute "numero_autorizacao" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
