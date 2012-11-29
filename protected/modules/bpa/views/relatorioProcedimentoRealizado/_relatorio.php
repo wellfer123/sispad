@@ -53,8 +53,7 @@
                         <?php echo $form->textField($model,'competencia',array('size'=>6,'maxlength'=>6)); ?>
                         <?php echo $form->error($model,'competencia'); ?>
                     </td>
-                    
-                      
+
                     <td colspan="2">
                        <?php echo $form->labelEx($model,'profissional_cbo'); ?>
                         <?php $this->widget('EJuiAutoCompleteFkField', array(
@@ -75,7 +74,7 @@
                                             'options'=>array(
                                                 // number of characters that must be typed before
                                                     // autoCompleter returns a value, defaults to 2
-                                                'minLength'=>6,
+                                                'minLength'=>4,
                                                 ),
                                         ));?>
                         <?php echo $form->error($model,'profissional_cbo'); ?>
