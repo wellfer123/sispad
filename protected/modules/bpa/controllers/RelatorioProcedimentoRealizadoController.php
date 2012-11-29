@@ -59,6 +59,11 @@ class RelatorioProcedimentoRealizadoController extends SISPADBaseController{
                 
         $this->render('relatorio', array('model'=>$model,));
     }
+    
+    public function actionArquivo(){
+        $teste = new FileModel('tb_cid.txt', 'tb_cid_layout', new ProcedimentoRealizado());
+        $teste->popularModels(array());
+    }
 }
 
 ?>
