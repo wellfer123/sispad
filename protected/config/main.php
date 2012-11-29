@@ -111,7 +111,7 @@ return array(
 		*/
 		//169.254.18.175
 		'db'=>array(
-			'connectionString' => 'mysql:host=localhost;dbname=sispad',
+			'connectionString' => 'mysql:host=192.168.0.155;dbname=sispad',
 			'emulatePrepare' => true,
 			'username' => 'root',
 			'password' => '',

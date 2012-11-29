@@ -633,3 +633,153 @@ in C:\xampp\htdocs\sispad\index.php (13)
 2012/11/28 17:53:55 [warning] [application] Failed to set unsafe attribute "numero_autorizacao" of "RelatorioProcedimentoRealizado".
 in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
 in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/29 18:19:24 [warning] [application] Failed to set unsafe attribute "competencia_movimento" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/29 18:19:24 [warning] [application] Failed to set unsafe attribute "competencia" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/29 18:19:24 [warning] [application] Failed to set unsafe attribute "paciente_cns" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/29 18:19:24 [warning] [application] Failed to set unsafe attribute "paciente_sexo" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/29 18:19:24 [warning] [application] Failed to set unsafe attribute "paciente_idade" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/29 18:19:24 [warning] [application] Failed to set unsafe attribute "paciente_cidade" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/29 18:19:24 [warning] [application] Failed to set unsafe attribute "procedimento" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/29 18:19:24 [warning] [application] Failed to set unsafe attribute "cnpj" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/29 18:19:24 [warning] [application] Failed to set unsafe attribute "data_atendimento" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/29 18:19:24 [warning] [application] Failed to set unsafe attribute "cid" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/29 18:21:00 [warning] [application] Failed to set unsafe attribute "competencia_movimento" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/29 18:21:00 [warning] [application] Failed to set unsafe attribute "competencia" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/29 18:21:00 [warning] [application] Failed to set unsafe attribute "paciente_cns" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/29 18:21:00 [warning] [application] Failed to set unsafe attribute "paciente_sexo" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/29 18:21:00 [warning] [application] Failed to set unsafe attribute "paciente_idade" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/29 18:21:00 [warning] [application] Failed to set unsafe attribute "paciente_cidade" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/29 18:21:00 [warning] [application] Failed to set unsafe attribute "procedimento" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/29 18:21:00 [warning] [application] Failed to set unsafe attribute "cnpj" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/29 18:21:00 [warning] [application] Failed to set unsafe attribute "data_atendimento" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/29 18:21:00 [warning] [application] Failed to set unsafe attribute "cid" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/29 18:21:40 [warning] [application] Failed to set unsafe attribute "competencia_movimento" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/29 18:21:40 [warning] [application] Failed to set unsafe attribute "competencia" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/29 18:21:40 [warning] [application] Failed to set unsafe attribute "paciente_cns" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/29 18:21:40 [warning] [application] Failed to set unsafe attribute "paciente_sexo" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/29 18:21:40 [warning] [application] Failed to set unsafe attribute "paciente_idade" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/29 18:21:40 [warning] [application] Failed to set unsafe attribute "paciente_cidade" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/29 18:21:40 [warning] [application] Failed to set unsafe attribute "procedimento" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/29 18:21:40 [warning] [application] Failed to set unsafe attribute "cnpj" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/29 18:21:40 [warning] [application] Failed to set unsafe attribute "data_atendimento" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/29 18:21:40 [warning] [application] Failed to set unsafe attribute "cid" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/29 18:21:55 [warning] [application] Failed to set unsafe attribute "competencia_movimento" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/29 18:21:55 [warning] [application] Failed to set unsafe attribute "competencia" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/29 18:21:55 [warning] [application] Failed to set unsafe attribute "paciente_cns" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/29 18:21:55 [warning] [application] Failed to set unsafe attribute "paciente_sexo" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/29 18:21:55 [warning] [application] Failed to set unsafe attribute "paciente_idade" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/29 18:21:55 [warning] [application] Failed to set unsafe attribute "paciente_cidade" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/29 18:21:55 [warning] [application] Failed to set unsafe attribute "procedimento" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/29 18:21:55 [warning] [application] Failed to set unsafe attribute "cnpj" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/29 18:21:55 [warning] [application] Failed to set unsafe attribute "data_atendimento" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/29 18:21:55 [warning] [application] Failed to set unsafe attribute "cid" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/29 18:22:11 [warning] [application] Failed to set unsafe attribute "competencia_movimento" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/29 18:22:11 [warning] [application] Failed to set unsafe attribute "competencia" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/29 18:22:11 [warning] [application] Failed to set unsafe attribute "paciente_cns" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/29 18:22:11 [warning] [application] Failed to set unsafe attribute "paciente_sexo" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/29 18:22:11 [warning] [application] Failed to set unsafe attribute "paciente_idade" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/29 18:22:11 [warning] [application] Failed to set unsafe attribute "paciente_cidade" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/29 18:22:11 [warning] [application] Failed to set unsafe attribute "procedimento" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/29 18:22:11 [warning] [application] Failed to set unsafe attribute "cnpj" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/29 18:22:11 [warning] [application] Failed to set unsafe attribute "data_atendimento" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
+2012/11/29 18:22:11 [warning] [application] Failed to set unsafe attribute "cid" of "RelatorioProcedimentoRealizado".
+in C:\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php (33)
+in C:\xampp\htdocs\sispad\index.php (13)
