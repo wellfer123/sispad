@@ -167,3 +167,597 @@ Stack trace:
 REQUEST_URI=/sispad/index.php/bpa/http://localhost:8080/sispadreport/teste/unidade/2345560
 HTTP_REFERER=http://localhost/sispad/index.php/bpa/procedimentorealizado/relatorio
 ---
+2012/11/20 14:56:26 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Não foi possível resolver a requisição "BPA/procedimentoRealizado/create".' in C:\xampp\xampp\htdocs\yii\framework\web\CWebApplication.php:280
+Stack trace:
+#0 C:\xampp\xampp\htdocs\yii\framework\web\CWebApplication.php(135): CWebApplication->runController('BPA/procediment...')
+#1 C:\xampp\xampp\htdocs\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 C:\xampp\xampp\htdocs\sispad\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/sispad/index.php/BPA/procedimentoRealizado/create
+---
+2012/11/21 16:17:18 [info] [application] usuário =>  senha => 
+2012/11/21 16:21:41 [info] [application] usuário => demo senha => teste
+2012/11/21 22:59:16 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Não foi possível resolver a requisição "cgi".' in C:\xampp\xampp\htdocs\yii\framework\web\CWebApplication.php:280
+Stack trace:
+#0 C:\xampp\xampp\htdocs\yii\framework\web\CWebApplication.php(135): CWebApplication->runController('cgi')
+#1 C:\xampp\xampp\htdocs\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 C:\xampp\xampp\htdocs\sispad\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/sispad/index.php/cgi
+---
+2012/11/22 00:28:13 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::fetch(): SQLSTATE[42S22]: Column not found: 1054 Unknown column 'senha' in 'where clause'. A declaração SQL executada foi: SELECT * FROM `User` `t` WHERE username=:user and senha=:senha LIMIT 1.
+2012/11/22 00:28:13 [error] [application] exception 'CDbException' with message 'CDbCommand falhou ao executar o comando SQL: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'senha' in 'where clause'' in C:\xampp\xampp\htdocs\yii\framework\db\CDbCommand.php:528
+Stack trace:
+#0 C:\xampp\xampp\htdocs\yii\framework\db\CDbCommand.php(408): CDbCommand->queryInternal('fetch', Array, Array)
+#1 C:\xampp\xampp\htdocs\yii\framework\db\ar\CActiveRecord.php(1287): CDbCommand->queryRow()
+#2 C:\xampp\xampp\htdocs\yii\framework\db\ar\CActiveRecord.php(1392): CActiveRecord->query(Object(CDbCriteria))
+#3 C:\xampp\xampp\htdocs\sispad\protected\components\Autenticacao.php(30): CActiveRecord->find('username=:user ...', Array)
+#4 C:\xampp\xampp\htdocs\sispad\protected\modules\bpa\controllers\ServicoController.php(55): Autenticacao->login()
+#5 [internal function]: ServicoController->enviarProcedimentoRealizado(Object(ProcedimentoRealizado), Object(UsuarioDesktop))
+#6 C:\xampp\xampp\htdocs\yii\framework\web\services\CWebService.php(181): SoapServer->handle()
+#7 C:\xampp\xampp\htdocs\yii\framework\web\services\CWebServiceAction.php(104): CWebService->run()
+#8 C:\xampp\xampp\htdocs\yii\framework\web\actions\CAction.php(75): CWebServiceAction->run()
+#9 C:\xampp\xampp\htdocs\yii\framework\web\CController.php(309): CAction->runWithParams(Array)
+#10 C:\xampp\xampp\htdocs\yii\framework\web\CController.php(287): CController->runAction(Object(CWebServiceAction))
+#11 C:\xampp\xampp\htdocs\yii\framework\web\CController.php(266): CController->runActionWithFilters(Object(CWebServiceAction), Array)
+#12 C:\xampp\xampp\htdocs\yii\framework\web\CWebApplication.php(276): CController->run('main')
+#13 C:\xampp\xampp\htdocs\yii\framework\web\CWebApplication.php(135): CWebApplication->runController('bpa/servico/mai...')
+#14 C:\xampp\xampp\htdocs\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#15 C:\xampp\xampp\htdocs\sispad\index.php(13): CApplication->run()
+#16 {main}
+2012/11/22 00:30:00 [info] [application] usuário => demo senha => teste
+2012/11/22 00:33:34 [info] [application] login falho 
+2012/11/22 00:37:35 [info] [application] if 1 
+2012/11/22 00:37:35 [info] [application] login falho 
+2012/11/22 00:41:19 [info] [application] if 1 
+2012/11/22 00:41:19 [info] [application] if 2 
+2012/11/22 00:41:19 [info] [application] if 3 
+2012/11/22 00:41:19 [info] [application] if 4 
+2012/11/23 17:41:46 [error] [php] array_slice() expects parameter 1 to be array, string given (C:\xampp\xampp\htdocs\yii\framework\base\CModel.php:285)
+Stack trace:
+#0 C:\xampp\xampp\htdocs\yii\framework\base\CModel.php(544): RelatorioProcedimentoRealizado->getValidators()
+#1 C:\xampp\xampp\htdocs\yii\framework\gii\generators\form\FormCode.php(92): RelatorioProcedimentoRealizado->getSafeAttributeNames()
+#2 C:\xampp\xampp\htdocs\yii\framework\gii\generators\form\templates\default\form.php(19): FormCode->getModelAttributes()
+#3 C:\xampp\xampp\htdocs\yii\framework\gii\CCodeModel.php(320): require()
+#4 C:\xampp\xampp\htdocs\yii\framework\gii\generators\form\FormCode.php(80): FormCode->render()
+#5 C:\xampp\xampp\htdocs\yii\framework\gii\CCodeGenerator.php(161): FormCode->prepare()
+#6 C:\xampp\xampp\htdocs\yii\framework\gii\CCodeGenerator.php(64): FormGenerator->prepare()
+#7 C:\xampp\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(50): FormGenerator->actionIndex()
+#8 C:\xampp\xampp\htdocs\yii\framework\web\CController.php(309): CInlineAction->runWithParams()
+#9 C:\xampp\xampp\htdocs\yii\framework\web\CController.php(287): FormGenerator->runAction()
+#10 C:\xampp\xampp\htdocs\yii\framework\web\CController.php(266): FormGenerator->runActionWithFilters()
+#11 C:\xampp\xampp\htdocs\yii\framework\web\CWebApplication.php(276): FormGenerator->run()
+#12 C:\xampp\xampp\htdocs\yii\framework\web\CWebApplication.php(135): CWebApplication->runController()
+#13 C:\xampp\xampp\htdocs\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#14 C:\xampp\xampp\htdocs\sispad\index.php(13): CWebApplication->run()
+REQUEST_URI=/sispad/index.php/gii/form
+2012/11/23 17:42:49 [error] [php] array_slice() expects parameter 1 to be array, string given (C:\xampp\xampp\htdocs\yii\framework\base\CModel.php:285)
+Stack trace:
+#0 C:\xampp\xampp\htdocs\yii\framework\base\CModel.php(544): RelatorioProcedimentoRealizado->getValidators()
+#1 C:\xampp\xampp\htdocs\yii\framework\gii\generators\form\FormCode.php(92): RelatorioProcedimentoRealizado->getSafeAttributeNames()
+#2 C:\xampp\xampp\htdocs\yii\framework\gii\generators\form\templates\default\form.php(19): FormCode->getModelAttributes()
+#3 C:\xampp\xampp\htdocs\yii\framework\gii\CCodeModel.php(320): require()
+#4 C:\xampp\xampp\htdocs\yii\framework\gii\generators\form\FormCode.php(80): FormCode->render()
+#5 C:\xampp\xampp\htdocs\yii\framework\gii\CCodeGenerator.php(161): FormCode->prepare()
+#6 C:\xampp\xampp\htdocs\yii\framework\gii\CCodeGenerator.php(64): FormGenerator->prepare()
+#7 C:\xampp\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(50): FormGenerator->actionIndex()
+#8 C:\xampp\xampp\htdocs\yii\framework\web\CController.php(309): CInlineAction->runWithParams()
+#9 C:\xampp\xampp\htdocs\yii\framework\web\CController.php(287): FormGenerator->runAction()
+#10 C:\xampp\xampp\htdocs\yii\framework\web\CController.php(266): FormGenerator->runActionWithFilters()
+#11 C:\xampp\xampp\htdocs\yii\framework\web\CWebApplication.php(276): FormGenerator->run()
+#12 C:\xampp\xampp\htdocs\yii\framework\web\CWebApplication.php(135): CWebApplication->runController()
+#13 C:\xampp\xampp\htdocs\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#14 C:\xampp\xampp\htdocs\sispad\index.php(13): CWebApplication->run()
+REQUEST_URI=/sispad/index.php/gii/form
+2012/11/23 17:43:17 [error] [php] array_slice() expects parameter 1 to be array, string given (C:\xampp\xampp\htdocs\yii\framework\base\CModel.php:285)
+Stack trace:
+#0 C:\xampp\xampp\htdocs\yii\framework\base\CModel.php(544): RelatorioProcedimentoRealizado->getValidators()
+#1 C:\xampp\xampp\htdocs\yii\framework\gii\generators\form\FormCode.php(92): RelatorioProcedimentoRealizado->getSafeAttributeNames()
+#2 C:\xampp\xampp\htdocs\yii\framework\gii\generators\form\templates\default\form.php(19): FormCode->getModelAttributes()
+#3 C:\xampp\xampp\htdocs\yii\framework\gii\CCodeModel.php(320): require()
+#4 C:\xampp\xampp\htdocs\yii\framework\gii\generators\form\FormCode.php(80): FormCode->render()
+#5 C:\xampp\xampp\htdocs\yii\framework\gii\CCodeGenerator.php(161): FormCode->prepare()
+#6 C:\xampp\xampp\htdocs\yii\framework\gii\CCodeGenerator.php(64): FormGenerator->prepare()
+#7 C:\xampp\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(50): FormGenerator->actionIndex()
+#8 C:\xampp\xampp\htdocs\yii\framework\web\CController.php(309): CInlineAction->runWithParams()
+#9 C:\xampp\xampp\htdocs\yii\framework\web\CController.php(287): FormGenerator->runAction()
+#10 C:\xampp\xampp\htdocs\yii\framework\web\CController.php(266): FormGenerator->runActionWithFilters()
+#11 C:\xampp\xampp\htdocs\yii\framework\web\CWebApplication.php(276): FormGenerator->run()
+#12 C:\xampp\xampp\htdocs\yii\framework\web\CWebApplication.php(135): CWebApplication->runController()
+#13 C:\xampp\xampp\htdocs\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#14 C:\xampp\xampp\htdocs\sispad\index.php(13): CWebApplication->run()
+REQUEST_URI=/sispad/index.php/gii/form
+2012/11/26 14:56:53 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Não foi possível resolver a requisição "bpa/relatorioProcedimentoRealizado/buscar".' in C:\xampp\xampp\htdocs\yii\framework\web\CWebApplication.php:280
+Stack trace:
+#0 C:\xampp\xampp\htdocs\yii\framework\web\CWebApplication.php(135): CWebApplication->runController('bpa/relatorioPr...')
+#1 C:\xampp\xampp\htdocs\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 C:\xampp\xampp\htdocs\sispad\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/sispad/index.php/bpa/relatorioProcedimentoRealizado/buscar
+---
+2012/11/26 14:57:05 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Não foi possível resolver a requisição "bpa/RelatorioProcedimentoRealizado/buscar".' in C:\xampp\xampp\htdocs\yii\framework\web\CWebApplication.php:280
+Stack trace:
+#0 C:\xampp\xampp\htdocs\yii\framework\web\CWebApplication.php(135): CWebApplication->runController('bpa/RelatorioPr...')
+#1 C:\xampp\xampp\htdocs\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 C:\xampp\xampp\htdocs\sispad\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/sispad/index.php/bpa/RelatorioProcedimentoRealizado/buscar
+---
+2012/11/26 14:58:51 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Não foi possível resolver a requisição "bpa/RelatorioProcedimentoRealizado/buscar".' in C:\xampp\xampp\htdocs\yii\framework\web\CWebApplication.php:280
+Stack trace:
+#0 C:\xampp\xampp\htdocs\yii\framework\web\CWebApplication.php(135): CWebApplication->runController('bpa/RelatorioPr...')
+#1 C:\xampp\xampp\htdocs\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 C:\xampp\xampp\htdocs\sispad\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/sispad/index.php/bpa/RelatorioProcedimentoRealizado/buscar
+---
+2012/11/26 14:58:54 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Não foi possível resolver a requisição "bpa/RelatorioProcedimentoRealizado/buscar".' in C:\xampp\xampp\htdocs\yii\framework\web\CWebApplication.php:280
+Stack trace:
+#0 C:\xampp\xampp\htdocs\yii\framework\web\CWebApplication.php(135): CWebApplication->runController('bpa/RelatorioPr...')
+#1 C:\xampp\xampp\htdocs\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 C:\xampp\xampp\htdocs\sispad\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/sispad/index.php/bpa/RelatorioProcedimentoRealizado/buscar
+---
+2012/11/26 14:59:47 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Não foi possível resolver a requisição "bpa/relatorioprocedimentorealizado/buscar".' in C:\xampp\xampp\htdocs\yii\framework\web\CWebApplication.php:280
+Stack trace:
+#0 C:\xampp\xampp\htdocs\yii\framework\web\CWebApplication.php(135): CWebApplication->runController('bpa/relatoriopr...')
+#1 C:\xampp\xampp\htdocs\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 C:\xampp\xampp\htdocs\sispad\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/sispad/index.php/bpa/relatorioprocedimentorealizado/buscar
+---
+2012/11/26 15:01:32 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Não foi possível resolver a requisição "bpa/relatorioprocedimentorealizado/buscar".' in C:\xampp\xampp\htdocs\yii\framework\web\CWebApplication.php:280
+Stack trace:
+#0 C:\xampp\xampp\htdocs\yii\framework\web\CWebApplication.php(135): CWebApplication->runController('bpa/relatoriopr...')
+#1 C:\xampp\xampp\htdocs\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 C:\xampp\xampp\htdocs\sispad\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/sispad/index.php/bpa/relatorioprocedimentorealizado/buscar
+---
+2012/11/26 15:01:35 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Não foi possível resolver a requisição "bpa/relatorioprocedimentorealizado/buscar".' in C:\xampp\xampp\htdocs\yii\framework\web\CWebApplication.php:280
+Stack trace:
+#0 C:\xampp\xampp\htdocs\yii\framework\web\CWebApplication.php(135): CWebApplication->runController('bpa/relatoriopr...')
+#1 C:\xampp\xampp\htdocs\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 C:\xampp\xampp\htdocs\sispad\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/sispad/index.php/bpa/relatorioprocedimentorealizado/buscar
+---
+2012/11/26 15:01:45 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Não foi possível resolver a requisição "bpa/RelatorioProcedimentoRealizado/buscar".' in C:\xampp\xampp\htdocs\yii\framework\web\CWebApplication.php:280
+Stack trace:
+#0 C:\xampp\xampp\htdocs\yii\framework\web\CWebApplication.php(135): CWebApplication->runController('bpa/RelatorioPr...')
+#1 C:\xampp\xampp\htdocs\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 C:\xampp\xampp\htdocs\sispad\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/sispad/index.php/bpa/RelatorioProcedimentoRealizado/buscar
+---
+2012/11/26 15:02:34 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Não foi possível resolver a requisição "bpa/RelatorioProcedimentoRealizado/buscar".' in C:\xampp\xampp\htdocs\yii\framework\web\CWebApplication.php:280
+Stack trace:
+#0 C:\xampp\xampp\htdocs\yii\framework\web\CWebApplication.php(135): CWebApplication->runController('bpa/RelatorioPr...')
+#1 C:\xampp\xampp\htdocs\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 C:\xampp\xampp\htdocs\sispad\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/sispad/index.php/bpa/RelatorioProcedimentoRealizado/buscar
+---
+2012/11/26 15:02:38 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Não foi possível resolver a requisição "bpa/RelatorioProcedimentoRealizado/buscar".' in C:\xampp\xampp\htdocs\yii\framework\web\CWebApplication.php:280
+Stack trace:
+#0 C:\xampp\xampp\htdocs\yii\framework\web\CWebApplication.php(135): CWebApplication->runController('bpa/RelatorioPr...')
+#1 C:\xampp\xampp\htdocs\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 C:\xampp\xampp\htdocs\sispad\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/sispad/index.php/bpa/RelatorioProcedimentoRealizado/buscar
+---
+2012/11/26 15:02:41 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Não foi possível resolver a requisição "bpa/RelatorioProcedimentoRealizado/buscar".' in C:\xampp\xampp\htdocs\yii\framework\web\CWebApplication.php:280
+Stack trace:
+#0 C:\xampp\xampp\htdocs\yii\framework\web\CWebApplication.php(135): CWebApplication->runController('bpa/RelatorioPr...')
+#1 C:\xampp\xampp\htdocs\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 C:\xampp\xampp\htdocs\sispad\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/sispad/index.php/bpa/RelatorioProcedimentoRealizado/buscar
+---
+2012/11/26 15:05:50 [error] [php] array_slice() expects parameter 1 to be array, string given (C:\xampp\xampp\htdocs\yii\framework\base\CModel.php:285)
+Stack trace:
+#0 C:\xampp\xampp\htdocs\yii\framework\base\CModel.php(302): RelatorioProcedimentoRealizado->getValidators()
+#1 C:\xampp\xampp\htdocs\yii\framework\web\helpers\CHtml.php(1185): RelatorioProcedimentoRealizado->isAttributeRequired()
+#2 C:\xampp\xampp\htdocs\yii\framework\web\widgets\CActiveForm.php(560): activeLabelEx()
+#3 C:\xampp\xampp\htdocs\sispad\protected\modules\bpa\views\relatorioProcedimentoRealizado\_relatorio.php(16): SISPADActiveForm->labelEx()
+#4 C:\xampp\xampp\htdocs\yii\framework\web\CBaseController.php(127): require()
+#5 C:\xampp\xampp\htdocs\yii\framework\web\CBaseController.php(96): RelatorioProcedimentoRealizadoController->renderInternal()
+#6 C:\xampp\xampp\htdocs\yii\framework\web\CController.php(870): RelatorioProcedimentoRealizadoController->renderFile()
+#7 C:\xampp\xampp\htdocs\sispad\protected\modules\bpa\views\relatorioProcedimentoRealizado\relatorio.php(15): RelatorioProcedimentoRealizadoController->renderPartial()
+#8 C:\xampp\xampp\htdocs\yii\framework\web\CBaseController.php(127): require()
+#9 C:\xampp\xampp\htdocs\yii\framework\web\CBaseController.php(96): RelatorioProcedimentoRealizadoController->renderInternal()
+#10 C:\xampp\xampp\htdocs\yii\framework\web\CController.php(870): RelatorioProcedimentoRealizadoController->renderFile()
+#11 C:\xampp\xampp\htdocs\yii\framework\web\CController.php(783): RelatorioProcedimentoRealizadoController->renderPartial()
+#12 C:\xampp\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php(30): RelatorioProcedimentoRealizadoController->render()
+#13 C:\xampp\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(50): RelatorioProcedimentoRealizadoController->actionBuscar()
+#14 C:\xampp\xampp\htdocs\yii\framework\web\CController.php(309): CInlineAction->runWithParams()
+#15 C:\xampp\xampp\htdocs\yii\framework\web\CController.php(287): RelatorioProcedimentoRealizadoController->runAction()
+#16 C:\xampp\xampp\htdocs\yii\framework\web\CController.php(266): RelatorioProcedimentoRealizadoController->runActionWithFilters()
+#17 C:\xampp\xampp\htdocs\yii\framework\web\CWebApplication.php(276): RelatorioProcedimentoRealizadoController->run()
+#18 C:\xampp\xampp\htdocs\yii\framework\web\CWebApplication.php(135): CWebApplication->runController()
+#19 C:\xampp\xampp\htdocs\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#20 C:\xampp\xampp\htdocs\sispad\index.php(13): CWebApplication->run()
+REQUEST_URI=/sispad/index.php/bpa/RelatorioProcedimentoRealizado/buscar
+2012/11/26 15:06:34 [error] [php] array_slice() expects parameter 1 to be array, string given (C:\xampp\xampp\htdocs\yii\framework\base\CModel.php:285)
+Stack trace:
+#0 C:\xampp\xampp\htdocs\yii\framework\base\CModel.php(302): RelatorioProcedimentoRealizado->getValidators()
+#1 C:\xampp\xampp\htdocs\yii\framework\web\helpers\CHtml.php(1185): RelatorioProcedimentoRealizado->isAttributeRequired()
+#2 C:\xampp\xampp\htdocs\yii\framework\web\widgets\CActiveForm.php(560): activeLabelEx()
+#3 C:\xampp\xampp\htdocs\sispad\protected\modules\bpa\views\relatorioProcedimentoRealizado\_relatorio.php(16): SISPADActiveForm->labelEx()
+#4 C:\xampp\xampp\htdocs\yii\framework\web\CBaseController.php(127): require()
+#5 C:\xampp\xampp\htdocs\yii\framework\web\CBaseController.php(96): RelatorioProcedimentoRealizadoController->renderInternal()
+#6 C:\xampp\xampp\htdocs\yii\framework\web\CController.php(870): RelatorioProcedimentoRealizadoController->renderFile()
+#7 C:\xampp\xampp\htdocs\sispad\protected\modules\bpa\views\relatorioProcedimentoRealizado\relatorio.php(15): RelatorioProcedimentoRealizadoController->renderPartial()
+#8 C:\xampp\xampp\htdocs\yii\framework\web\CBaseController.php(127): require()
+#9 C:\xampp\xampp\htdocs\yii\framework\web\CBaseController.php(96): RelatorioProcedimentoRealizadoController->renderInternal()
+#10 C:\xampp\xampp\htdocs\yii\framework\web\CController.php(870): RelatorioProcedimentoRealizadoController->renderFile()
+#11 C:\xampp\xampp\htdocs\yii\framework\web\CController.php(783): RelatorioProcedimentoRealizadoController->renderPartial()
+#12 C:\xampp\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php(30): RelatorioProcedimentoRealizadoController->render()
+#13 C:\xampp\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(50): RelatorioProcedimentoRealizadoController->actionBuscar()
+#14 C:\xampp\xampp\htdocs\yii\framework\web\CController.php(309): CInlineAction->runWithParams()
+#15 C:\xampp\xampp\htdocs\yii\framework\web\CController.php(287): RelatorioProcedimentoRealizadoController->runAction()
+#16 C:\xampp\xampp\htdocs\yii\framework\web\CController.php(266): RelatorioProcedimentoRealizadoController->runActionWithFilters()
+#17 C:\xampp\xampp\htdocs\yii\framework\web\CWebApplication.php(276): RelatorioProcedimentoRealizadoController->run()
+#18 C:\xampp\xampp\htdocs\yii\framework\web\CWebApplication.php(135): CWebApplication->runController()
+#19 C:\xampp\xampp\htdocs\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#20 C:\xampp\xampp\htdocs\sispad\index.php(13): CWebApplication->run()
+REQUEST_URI=/sispad/index.php/bpa/RelatorioProcedimentoRealizado/buscar
+2012/11/26 15:10:18 [error] [php] array_slice() expects parameter 1 to be array, string given (C:\xampp\xampp\htdocs\yii\framework\base\CModel.php:285)
+Stack trace:
+#0 C:\xampp\xampp\htdocs\yii\framework\base\CModel.php(302): RelatorioProcedimentoRealizado->getValidators()
+#1 C:\xampp\xampp\htdocs\yii\framework\web\helpers\CHtml.php(1185): RelatorioProcedimentoRealizado->isAttributeRequired()
+#2 C:\xampp\xampp\htdocs\yii\framework\web\widgets\CActiveForm.php(560): activeLabelEx()
+#3 C:\xampp\xampp\htdocs\sispad\protected\modules\bpa\views\relatorioProcedimentoRealizado\_relatorio.php(16): SISPADActiveForm->labelEx()
+#4 C:\xampp\xampp\htdocs\yii\framework\web\CBaseController.php(127): require()
+#5 C:\xampp\xampp\htdocs\yii\framework\web\CBaseController.php(96): RelatorioProcedimentoRealizadoController->renderInternal()
+#6 C:\xampp\xampp\htdocs\yii\framework\web\CController.php(870): RelatorioProcedimentoRealizadoController->renderFile()
+#7 C:\xampp\xampp\htdocs\sispad\protected\modules\bpa\views\relatorioProcedimentoRealizado\relatorio.php(15): RelatorioProcedimentoRealizadoController->renderPartial()
+#8 C:\xampp\xampp\htdocs\yii\framework\web\CBaseController.php(127): require()
+#9 C:\xampp\xampp\htdocs\yii\framework\web\CBaseController.php(96): RelatorioProcedimentoRealizadoController->renderInternal()
+#10 C:\xampp\xampp\htdocs\yii\framework\web\CController.php(870): RelatorioProcedimentoRealizadoController->renderFile()
+#11 C:\xampp\xampp\htdocs\yii\framework\web\CController.php(783): RelatorioProcedimentoRealizadoController->renderPartial()
+#12 C:\xampp\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php(30): RelatorioProcedimentoRealizadoController->render()
+#13 C:\xampp\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(50): RelatorioProcedimentoRealizadoController->actionBuscar()
+#14 C:\xampp\xampp\htdocs\yii\framework\web\CController.php(309): CInlineAction->runWithParams()
+#15 C:\xampp\xampp\htdocs\yii\framework\web\CController.php(287): RelatorioProcedimentoRealizadoController->runAction()
+#16 C:\xampp\xampp\htdocs\yii\framework\web\CController.php(266): RelatorioProcedimentoRealizadoController->runActionWithFilters()
+#17 C:\xampp\xampp\htdocs\yii\framework\web\CWebApplication.php(276): RelatorioProcedimentoRealizadoController->run()
+#18 C:\xampp\xampp\htdocs\yii\framework\web\CWebApplication.php(135): CWebApplication->runController()
+#19 C:\xampp\xampp\htdocs\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#20 C:\xampp\xampp\htdocs\sispad\index.php(13): CWebApplication->run()
+REQUEST_URI=/sispad/index.php/bpa/RelatorioProcedimentoRealizado/buscar
+2012/11/26 15:11:08 [error] [php] array_slice() expects parameter 1 to be array, string given (C:\xampp\xampp\htdocs\yii\framework\base\CModel.php:285)
+Stack trace:
+#0 C:\xampp\xampp\htdocs\yii\framework\base\CModel.php(302): RelatorioProcedimentoRealizado->getValidators()
+#1 C:\xampp\xampp\htdocs\yii\framework\web\helpers\CHtml.php(1185): RelatorioProcedimentoRealizado->isAttributeRequired()
+#2 C:\xampp\xampp\htdocs\yii\framework\web\widgets\CActiveForm.php(560): activeLabelEx()
+#3 C:\xampp\xampp\htdocs\sispad\protected\modules\bpa\views\relatorioProcedimentoRealizado\_relatorio.php(20): SISPADActiveForm->labelEx()
+#4 C:\xampp\xampp\htdocs\yii\framework\web\CBaseController.php(127): require()
+#5 C:\xampp\xampp\htdocs\yii\framework\web\CBaseController.php(96): RelatorioProcedimentoRealizadoController->renderInternal()
+#6 C:\xampp\xampp\htdocs\yii\framework\web\CController.php(870): RelatorioProcedimentoRealizadoController->renderFile()
+#7 C:\xampp\xampp\htdocs\sispad\protected\modules\bpa\views\relatorioProcedimentoRealizado\relatorio.php(15): RelatorioProcedimentoRealizadoController->renderPartial()
+#8 C:\xampp\xampp\htdocs\yii\framework\web\CBaseController.php(127): require()
+#9 C:\xampp\xampp\htdocs\yii\framework\web\CBaseController.php(96): RelatorioProcedimentoRealizadoController->renderInternal()
+#10 C:\xampp\xampp\htdocs\yii\framework\web\CController.php(870): RelatorioProcedimentoRealizadoController->renderFile()
+#11 C:\xampp\xampp\htdocs\yii\framework\web\CController.php(783): RelatorioProcedimentoRealizadoController->renderPartial()
+#12 C:\xampp\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php(30): RelatorioProcedimentoRealizadoController->render()
+#13 C:\xampp\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(50): RelatorioProcedimentoRealizadoController->actionBuscar()
+#14 C:\xampp\xampp\htdocs\yii\framework\web\CController.php(309): CInlineAction->runWithParams()
+#15 C:\xampp\xampp\htdocs\yii\framework\web\CController.php(287): RelatorioProcedimentoRealizadoController->runAction()
+#16 C:\xampp\xampp\htdocs\yii\framework\web\CController.php(266): RelatorioProcedimentoRealizadoController->runActionWithFilters()
+#17 C:\xampp\xampp\htdocs\yii\framework\web\CWebApplication.php(276): RelatorioProcedimentoRealizadoController->run()
+#18 C:\xampp\xampp\htdocs\yii\framework\web\CWebApplication.php(135): CWebApplication->runController()
+#19 C:\xampp\xampp\htdocs\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#20 C:\xampp\xampp\htdocs\sispad\index.php(13): CWebApplication->run()
+REQUEST_URI=/sispad/index.php/bpa/RelatorioProcedimentoRealizado/buscar
+2012/11/26 15:14:09 [error] [php] array_slice() expects parameter 1 to be array, string given (C:\xampp\xampp\htdocs\yii\framework\base\CModel.php:285)
+Stack trace:
+#0 C:\xampp\xampp\htdocs\yii\framework\base\CModel.php(302): RelatorioProcedimentoRealizado->getValidators()
+#1 C:\xampp\xampp\htdocs\yii\framework\web\helpers\CHtml.php(1185): RelatorioProcedimentoRealizado->isAttributeRequired()
+#2 C:\xampp\xampp\htdocs\yii\framework\web\widgets\CActiveForm.php(560): activeLabelEx()
+#3 C:\xampp\xampp\htdocs\sispad\protected\modules\bpa\views\relatorioProcedimentoRealizado\_relatorio.php(16): SISPADActiveForm->labelEx()
+#4 C:\xampp\xampp\htdocs\yii\framework\web\CBaseController.php(127): require()
+#5 C:\xampp\xampp\htdocs\yii\framework\web\CBaseController.php(96): RelatorioProcedimentoRealizadoController->renderInternal()
+#6 C:\xampp\xampp\htdocs\yii\framework\web\CController.php(870): RelatorioProcedimentoRealizadoController->renderFile()
+#7 C:\xampp\xampp\htdocs\sispad\protected\modules\bpa\views\relatorioProcedimentoRealizado\relatorio.php(15): RelatorioProcedimentoRealizadoController->renderPartial()
+#8 C:\xampp\xampp\htdocs\yii\framework\web\CBaseController.php(127): require()
+#9 C:\xampp\xampp\htdocs\yii\framework\web\CBaseController.php(96): RelatorioProcedimentoRealizadoController->renderInternal()
+#10 C:\xampp\xampp\htdocs\yii\framework\web\CController.php(870): RelatorioProcedimentoRealizadoController->renderFile()
+#11 C:\xampp\xampp\htdocs\yii\framework\web\CController.php(783): RelatorioProcedimentoRealizadoController->renderPartial()
+#12 C:\xampp\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php(30): RelatorioProcedimentoRealizadoController->render()
+#13 C:\xampp\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(50): RelatorioProcedimentoRealizadoController->actionBuscar()
+#14 C:\xampp\xampp\htdocs\yii\framework\web\CController.php(309): CInlineAction->runWithParams()
+#15 C:\xampp\xampp\htdocs\yii\framework\web\CController.php(287): RelatorioProcedimentoRealizadoController->runAction()
+#16 C:\xampp\xampp\htdocs\yii\framework\web\CController.php(266): RelatorioProcedimentoRealizadoController->runActionWithFilters()
+#17 C:\xampp\xampp\htdocs\yii\framework\web\CWebApplication.php(276): RelatorioProcedimentoRealizadoController->run()
+#18 C:\xampp\xampp\htdocs\yii\framework\web\CWebApplication.php(135): CWebApplication->runController()
+#19 C:\xampp\xampp\htdocs\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#20 C:\xampp\xampp\htdocs\sispad\index.php(13): CWebApplication->run()
+REQUEST_URI=/sispad/index.php/bpa/RelatorioProcedimentoRealizado/buscar
+2012/11/26 15:16:33 [error] [php] array_slice() expects parameter 1 to be array, string given (C:\xampp\xampp\htdocs\yii\framework\base\CModel.php:285)
+Stack trace:
+#0 C:\xampp\xampp\htdocs\yii\framework\base\CModel.php(302): RelatorioProcedimentoRealizado->getValidators()
+#1 C:\xampp\xampp\htdocs\yii\framework\web\helpers\CHtml.php(1185): RelatorioProcedimentoRealizado->isAttributeRequired()
+#2 C:\xampp\xampp\htdocs\yii\framework\web\widgets\CActiveForm.php(560): activeLabelEx()
+#3 C:\xampp\xampp\htdocs\sispad\protected\modules\bpa\views\relatorioProcedimentoRealizado\_relatorio.php(16): SISPADActiveForm->labelEx()
+#4 C:\xampp\xampp\htdocs\yii\framework\web\CBaseController.php(127): require()
+#5 C:\xampp\xampp\htdocs\yii\framework\web\CBaseController.php(96): RelatorioProcedimentoRealizadoController->renderInternal()
+#6 C:\xampp\xampp\htdocs\yii\framework\web\CController.php(870): RelatorioProcedimentoRealizadoController->renderFile()
+#7 C:\xampp\xampp\htdocs\sispad\protected\modules\bpa\views\relatorioProcedimentoRealizado\relatorio.php(15): RelatorioProcedimentoRealizadoController->renderPartial()
+#8 C:\xampp\xampp\htdocs\yii\framework\web\CBaseController.php(127): require()
+#9 C:\xampp\xampp\htdocs\yii\framework\web\CBaseController.php(96): RelatorioProcedimentoRealizadoController->renderInternal()
+#10 C:\xampp\xampp\htdocs\yii\framework\web\CController.php(870): RelatorioProcedimentoRealizadoController->renderFile()
+#11 C:\xampp\xampp\htdocs\yii\framework\web\CController.php(783): RelatorioProcedimentoRealizadoController->renderPartial()
+#12 C:\xampp\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php(30): RelatorioProcedimentoRealizadoController->render()
+#13 C:\xampp\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(50): RelatorioProcedimentoRealizadoController->actionBuscar()
+#14 C:\xampp\xampp\htdocs\yii\framework\web\CController.php(309): CInlineAction->runWithParams()
+#15 C:\xampp\xampp\htdocs\yii\framework\web\CController.php(287): RelatorioProcedimentoRealizadoController->runAction()
+#16 C:\xampp\xampp\htdocs\yii\framework\web\CController.php(266): RelatorioProcedimentoRealizadoController->runActionWithFilters()
+#17 C:\xampp\xampp\htdocs\yii\framework\web\CWebApplication.php(276): RelatorioProcedimentoRealizadoController->run()
+#18 C:\xampp\xampp\htdocs\yii\framework\web\CWebApplication.php(135): CWebApplication->runController()
+#19 C:\xampp\xampp\htdocs\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#20 C:\xampp\xampp\htdocs\sispad\index.php(13): CWebApplication->run()
+REQUEST_URI=/sispad/index.php/bpa/RelatorioProcedimentoRealizado/buscar
+2012/11/26 15:16:53 [error] [exception.CException] exception 'CException' with message 'A propriedade "RelatorioProcedimentoRealizado.isNewRecord" não está definida.' in C:\xampp\xampp\htdocs\yii\framework\base\CComponent.php:131
+Stack trace:
+#0 C:\xampp\xampp\htdocs\sispad\protected\modules\bpa\views\relatorioProcedimentoRealizado\_relatorio.php(18): CComponent->__get('isNewRecord')
+#1 C:\xampp\xampp\htdocs\yii\framework\web\CBaseController.php(127): require('C:\xampp\xampp\...')
+#2 C:\xampp\xampp\htdocs\yii\framework\web\CBaseController.php(96): CBaseController->renderInternal('C:\xampp\xampp\...', Array, true)
+#3 C:\xampp\xampp\htdocs\yii\framework\web\CController.php(870): CBaseController->renderFile('C:\xampp\xampp\...', Array, true)
+#4 C:\xampp\xampp\htdocs\sispad\protected\modules\bpa\views\relatorioProcedimentoRealizado\relatorio.php(15): CController->renderPartial('_relatorio', Array)
+#5 C:\xampp\xampp\htdocs\yii\framework\web\CBaseController.php(127): require('C:\xampp\xampp\...')
+#6 C:\xampp\xampp\htdocs\yii\framework\web\CBaseController.php(96): CBaseController->renderInternal('C:\xampp\xampp\...', Array, true)
+#7 C:\xampp\xampp\htdocs\yii\framework\web\CController.php(870): CBaseController->renderFile('C:\xampp\xampp\...', Array, true)
+#8 C:\xampp\xampp\htdocs\yii\framework\web\CController.php(783): CController->renderPartial('relatorio', Array, true)
+#9 C:\xampp\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php(30): CController->render('relatorio', Array)
+#10 C:\xampp\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(50): RelatorioProcedimentoRealizadoController->actionBuscar()
+#11 C:\xampp\xampp\htdocs\yii\framework\web\CController.php(309): CInlineAction->runWithParams(Array)
+#12 C:\xampp\xampp\htdocs\yii\framework\web\CController.php(287): CController->runAction(Object(CInlineAction))
+#13 C:\xampp\xampp\htdocs\yii\framework\web\CController.php(266): CController->runActionWithFilters(Object(CInlineAction), Array)
+#14 C:\xampp\xampp\htdocs\yii\framework\web\CWebApplication.php(276): CController->run('buscar')
+#15 C:\xampp\xampp\htdocs\yii\framework\web\CWebApplication.php(135): CWebApplication->runController('bpa/RelatorioPr...')
+#16 C:\xampp\xampp\htdocs\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#17 C:\xampp\xampp\htdocs\sispad\index.php(13): CApplication->run()
+#18 {main}
+REQUEST_URI=/sispad/index.php/bpa/RelatorioProcedimentoRealizado/buscar
+---
+2012/11/26 15:18:07 [error] [php] array_slice() expects parameter 1 to be array, string given (C:\xampp\xampp\htdocs\yii\framework\base\CModel.php:285)
+Stack trace:
+#0 C:\xampp\xampp\htdocs\yii\framework\base\CModel.php(302): RelatorioProcedimentoRealizado->getValidators()
+#1 C:\xampp\xampp\htdocs\yii\framework\web\helpers\CHtml.php(1185): RelatorioProcedimentoRealizado->isAttributeRequired()
+#2 C:\xampp\xampp\htdocs\yii\framework\web\widgets\CActiveForm.php(560): activeLabelEx()
+#3 C:\xampp\xampp\htdocs\sispad\protected\modules\bpa\views\relatorioProcedimentoRealizado\_relatorio.php(16): SISPADActiveForm->labelEx()
+#4 C:\xampp\xampp\htdocs\yii\framework\web\CBaseController.php(127): require()
+#5 C:\xampp\xampp\htdocs\yii\framework\web\CBaseController.php(96): RelatorioProcedimentoRealizadoController->renderInternal()
+#6 C:\xampp\xampp\htdocs\yii\framework\web\CController.php(870): RelatorioProcedimentoRealizadoController->renderFile()
+#7 C:\xampp\xampp\htdocs\sispad\protected\modules\bpa\views\relatorioProcedimentoRealizado\relatorio.php(15): RelatorioProcedimentoRealizadoController->renderPartial()
+#8 C:\xampp\xampp\htdocs\yii\framework\web\CBaseController.php(127): require()
+#9 C:\xampp\xampp\htdocs\yii\framework\web\CBaseController.php(96): RelatorioProcedimentoRealizadoController->renderInternal()
+#10 C:\xampp\xampp\htdocs\yii\framework\web\CController.php(870): RelatorioProcedimentoRealizadoController->renderFile()
+#11 C:\xampp\xampp\htdocs\yii\framework\web\CController.php(783): RelatorioProcedimentoRealizadoController->renderPartial()
+#12 C:\xampp\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php(30): RelatorioProcedimentoRealizadoController->render()
+#13 C:\xampp\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(50): RelatorioProcedimentoRealizadoController->actionBuscar()
+#14 C:\xampp\xampp\htdocs\yii\framework\web\CController.php(309): CInlineAction->runWithParams()
+#15 C:\xampp\xampp\htdocs\yii\framework\web\CController.php(287): RelatorioProcedimentoRealizadoController->runAction()
+#16 C:\xampp\xampp\htdocs\yii\framework\web\CController.php(266): RelatorioProcedimentoRealizadoController->runActionWithFilters()
+#17 C:\xampp\xampp\htdocs\yii\framework\web\CWebApplication.php(276): RelatorioProcedimentoRealizadoController->run()
+#18 C:\xampp\xampp\htdocs\yii\framework\web\CWebApplication.php(135): CWebApplication->runController()
+#19 C:\xampp\xampp\htdocs\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#20 C:\xampp\xampp\htdocs\sispad\index.php(13): CWebApplication->run()
+REQUEST_URI=/sispad/index.php/bpa/RelatorioProcedimentoRealizado/buscar
+2012/11/26 15:18:25 [error] [php] array_slice() expects parameter 1 to be array, string given (C:\xampp\xampp\htdocs\yii\framework\base\CModel.php:285)
+Stack trace:
+#0 C:\xampp\xampp\htdocs\yii\framework\base\CModel.php(302): RelatorioProcedimentoRealizado->getValidators()
+#1 C:\xampp\xampp\htdocs\yii\framework\web\helpers\CHtml.php(1185): RelatorioProcedimentoRealizado->isAttributeRequired()
+#2 C:\xampp\xampp\htdocs\yii\framework\web\widgets\CActiveForm.php(560): activeLabelEx()
+#3 C:\xampp\xampp\htdocs\sispad\protected\modules\bpa\views\relatorioProcedimentoRealizado\_relatorio.php(18): SISPADActiveForm->labelEx()
+#4 C:\xampp\xampp\htdocs\yii\framework\web\CBaseController.php(127): require()
+#5 C:\xampp\xampp\htdocs\yii\framework\web\CBaseController.php(96): RelatorioProcedimentoRealizadoController->renderInternal()
+#6 C:\xampp\xampp\htdocs\yii\framework\web\CController.php(870): RelatorioProcedimentoRealizadoController->renderFile()
+#7 C:\xampp\xampp\htdocs\sispad\protected\modules\bpa\views\relatorioProcedimentoRealizado\relatorio.php(15): RelatorioProcedimentoRealizadoController->renderPartial()
+#8 C:\xampp\xampp\htdocs\yii\framework\web\CBaseController.php(127): require()
+#9 C:\xampp\xampp\htdocs\yii\framework\web\CBaseController.php(96): RelatorioProcedimentoRealizadoController->renderInternal()
+#10 C:\xampp\xampp\htdocs\yii\framework\web\CController.php(870): RelatorioProcedimentoRealizadoController->renderFile()
+#11 C:\xampp\xampp\htdocs\yii\framework\web\CController.php(783): RelatorioProcedimentoRealizadoController->renderPartial()
+#12 C:\xampp\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php(30): RelatorioProcedimentoRealizadoController->render()
+#13 C:\xampp\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(50): RelatorioProcedimentoRealizadoController->actionBuscar()
+#14 C:\xampp\xampp\htdocs\yii\framework\web\CController.php(309): CInlineAction->runWithParams()
+#15 C:\xampp\xampp\htdocs\yii\framework\web\CController.php(287): RelatorioProcedimentoRealizadoController->runAction()
+#16 C:\xampp\xampp\htdocs\yii\framework\web\CController.php(266): RelatorioProcedimentoRealizadoController->runActionWithFilters()
+#17 C:\xampp\xampp\htdocs\yii\framework\web\CWebApplication.php(276): RelatorioProcedimentoRealizadoController->run()
+#18 C:\xampp\xampp\htdocs\yii\framework\web\CWebApplication.php(135): CWebApplication->runController()
+#19 C:\xampp\xampp\htdocs\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#20 C:\xampp\xampp\htdocs\sispad\index.php(13): CWebApplication->run()
+REQUEST_URI=/sispad/index.php/bpa/RelatorioProcedimentoRealizado/buscar
+2012/11/26 16:07:42 [error] [exception.CException] exception 'CException' with message 'A propriedade "RelatorioProcedimentoRealizado.get" não está definida.' in C:\xampp\xampp\htdocs\yii\framework\base\CComponent.php:131
+Stack trace:
+#0 C:\xampp\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php(38): CComponent->__get('get')
+#1 C:\xampp\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(50): RelatorioProcedimentoRealizadoController->actionBuscar()
+#2 C:\xampp\xampp\htdocs\yii\framework\web\CController.php(309): CInlineAction->runWithParams(Array)
+#3 C:\xampp\xampp\htdocs\yii\framework\web\CController.php(287): CController->runAction(Object(CInlineAction))
+#4 C:\xampp\xampp\htdocs\yii\framework\web\CController.php(266): CController->runActionWithFilters(Object(CInlineAction), Array)
+#5 C:\xampp\xampp\htdocs\yii\framework\web\CWebApplication.php(276): CController->run('buscar')
+#6 C:\xampp\xampp\htdocs\yii\framework\web\CWebApplication.php(135): CWebApplication->runController('bpa/RelatorioPr...')
+#7 C:\xampp\xampp\htdocs\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#8 C:\xampp\xampp\htdocs\sispad\index.php(13): CApplication->run()
+#9 {main}
+REQUEST_URI=/sispad/index.php/bpa/RelatorioProcedimentoRealizado/buscar
+HTTP_REFERER=http://localhost/sispad/index.php/bpa/RelatorioProcedimentoRealizado/buscar
+---
+2012/11/28 17:41:53 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::fetchAll(): SQLSTATE[42S02]: Base table or view not found: 1146 Table 'sispad.AuthAssignment' doesn't exist. A declaração SQL executada foi: SELECT *
+FROM `AuthAssignment`
+WHERE userid=:userid.
+2012/11/28 17:41:53 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falhou ao executar o comando SQL: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'sispad.AuthAssignment' doesn't exist' in C:\xampp\xampp\htdocs\yii\framework\db\CDbCommand.php:528
+Stack trace:
+#0 C:\xampp\xampp\htdocs\yii\framework\db\CDbCommand.php(390): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 C:\xampp\xampp\htdocs\yii\framework\web\auth\CDbAuthManager.php(334): CDbCommand->queryAll()
+#2 C:\xampp\xampp\htdocs\yii\framework\web\auth\CDbAuthManager.php(74): CDbAuthManager->getAuthAssignments('1')
+#3 C:\xampp\xampp\htdocs\yii\framework\web\auth\CWebUser.php(794): CDbAuthManager->checkAccess('SuperAdmin', '1', Array)
+#4 C:\xampp\xampp\htdocs\sispad\protected\modules\rbac\components\RBACAccessVerifier.php(163): CWebUser->checkAccess('SuperAdmin', Array, false)
+#5 C:\xampp\xampp\htdocs\sispad\themes\sispadred\views\layouts\main.php(63): RBACAccessVerifier->checkAccess('SuperAdmin')
+#6 C:\xampp\xampp\htdocs\yii\framework\web\CBaseController.php(127): require('C:\xampp\xampp\...')
+#7 C:\xampp\xampp\htdocs\yii\framework\web\CBaseController.php(96): CBaseController->renderInternal('C:\xampp\xampp\...', Array, true)
+#8 C:\xampp\xampp\htdocs\yii\framework\web\widgets\CContentDecorator.php(77): CBaseController->renderFile('C:\xampp\xampp\...', Array, true)
+#9 C:\xampp\xampp\htdocs\yii\framework\web\widgets\CContentDecorator.php(55): CContentDecorator->decorate('<div class="spa...')
+#10 C:\xampp\xampp\htdocs\yii\framework\web\widgets\COutputProcessor.php(45): CContentDecorator->processOutput('<div class="spa...')
+#11 C:\xampp\xampp\htdocs\yii\framework\web\CBaseController.php(207): COutputProcessor->run()
+#12 C:\xampp\xampp\htdocs\yii\framework\web\CBaseController.php(301): CBaseController->endWidget('CContentDecorat...')
+#13 C:\xampp\xampp\htdocs\sispad\protected\views\layouts\column2.php(22): CBaseController->endContent()
+#14 C:\xampp\xampp\htdocs\yii\framework\web\CBaseController.php(127): require('C:\xampp\xampp\...')
+#15 C:\xampp\xampp\htdocs\yii\framework\web\CBaseController.php(96): CBaseController->renderInternal('C:\xampp\xampp\...', Array, true)
+#16 C:\xampp\xampp\htdocs\yii\framework\web\CController.php(785): CBaseController->renderFile('C:\xampp\xampp\...', Array, true)
+#17 C:\xampp\xampp\htdocs\sispad\protected\controllers\CompetenciaController.php(134): CController->render('admin', Array)
+#18 C:\xampp\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(50): CompetenciaController->actionAdmin()
+#19 C:\xampp\xampp\htdocs\yii\framework\web\CController.php(309): CInlineAction->runWithParams(Array)
+#20 C:\xampp\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#21 C:\xampp\xampp\htdocs\yii\framework\web\filters\CFilter.php(41): CFilterChain->run()
+#22 C:\xampp\xampp\htdocs\yii\framework\web\CController.php(1146): CFilter->filter(Object(CFilterChain))
+#23 C:\xampp\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#24 C:\xampp\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#25 C:\xampp\xampp\htdocs\yii\framework\web\CController.php(292): CFilterChain->run()
+#26 C:\xampp\xampp\htdocs\yii\framework\web\CController.php(266): CController->runActionWithFilters(Object(CInlineAction), Array)
+#27 C:\xampp\xampp\htdocs\yii\framework\web\CWebApplication.php(276): CController->run('admin')
+#28 C:\xampp\xampp\htdocs\yii\framework\web\CWebApplication.php(135): CWebApplication->runController('competencia/adm...')
+#29 C:\xampp\xampp\htdocs\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#30 C:\xampp\xampp\htdocs\sispad\index.php(13): CApplication->run()
+#31 {main}
+REQUEST_URI=/sispad/index.php/competencia/admin
+---
+2012/11/28 17:41:53 [error] [system.db.CDbCommand] Falha ao executar CDbCommand::fetchAll(): SQLSTATE[42S02]: Base table or view not found: 1146 Table 'sispad.AuthAssignment' doesn't exist. A declaração SQL executada foi: SELECT *
+FROM `AuthAssignment`
+WHERE userid=:userid.
+2012/11/29 16:41:00 [info] [application] deu merda
+2012/11/29 16:42:49 [error] [php] require_once(../runtime/app/tb_cid_layout.txt) [<a href='function.require-once'>function.require-once</a>]: failed to open stream: No such file or directory (C:\xampp\xampp\htdocs\sispad\protected\components\ReaderFileToFillingModel.php:13)
+Stack trace:
+#0 unknown(0): autoload()
+#1 C:\xampp\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php(64): spl_autoload_call()
+#2 C:\xampp\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(50): RelatorioProcedimentoRealizadoController->actionArquivo()
+#3 C:\xampp\xampp\htdocs\yii\framework\web\CController.php(309): CInlineAction->runWithParams()
+#4 C:\xampp\xampp\htdocs\yii\framework\web\CController.php(287): RelatorioProcedimentoRealizadoController->runAction()
+#5 C:\xampp\xampp\htdocs\yii\framework\web\CController.php(266): RelatorioProcedimentoRealizadoController->runActionWithFilters()
+#6 C:\xampp\xampp\htdocs\yii\framework\web\CWebApplication.php(276): RelatorioProcedimentoRealizadoController->run()
+#7 C:\xampp\xampp\htdocs\yii\framework\web\CWebApplication.php(135): CWebApplication->runController()
+#8 C:\xampp\xampp\htdocs\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#9 C:\xampp\xampp\htdocs\sispad\index.php(13): CWebApplication->run()
+REQUEST_URI=/sispad/index.php/bpa/relatorioProcedimentoRealizado/arquivo
+2012/11/29 16:45:38 [error] [php] require_once(../../files/tb_cid_layout.txt) [<a href='function.require-once'>function.require-once</a>]: failed to open stream: No such file or directory (C:\xampp\xampp\htdocs\sispad\protected\components\ReaderFileToFillingModel.php:13)
+Stack trace:
+#0 unknown(0): autoload()
+#1 C:\xampp\xampp\htdocs\sispad\protected\modules\bpa\controllers\RelatorioProcedimentoRealizadoController.php(64): spl_autoload_call()
+#2 C:\xampp\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(50): RelatorioProcedimentoRealizadoController->actionArquivo()
+#3 C:\xampp\xampp\htdocs\yii\framework\web\CController.php(309): CInlineAction->runWithParams()
+#4 C:\xampp\xampp\htdocs\yii\framework\web\CController.php(287): RelatorioProcedimentoRealizadoController->runAction()
+#5 C:\xampp\xampp\htdocs\yii\framework\web\CController.php(266): RelatorioProcedimentoRealizadoController->runActionWithFilters()
+#6 C:\xampp\xampp\htdocs\yii\framework\web\CWebApplication.php(276): RelatorioProcedimentoRealizadoController->run()
+#7 C:\xampp\xampp\htdocs\yii\framework\web\CWebApplication.php(135): CWebApplication->runController()
+#8 C:\xampp\xampp\htdocs\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#9 C:\xampp\xampp\htdocs\sispad\index.php(13): CWebApplication->run()
+REQUEST_URI=/sispad/index.php/bpa/relatorioProcedimentoRealizado/arquivo
+2012/11/29 16:49:45 [info] [application] deu merda
+2012/11/29 16:51:04 [info] [application] deu merda
+2012/11/29 16:52:42 [info] [application] deu merda
+2012/11/29 16:53:58 [info] [application] deu merda
+2012/11/29 16:54:51 [info] [application] deu merda
+2012/11/29 16:59:04 [info] [application] deu merda/sispad
+2012/11/29 17:03:13 [info] [application] deu merda
+2012/11/29 17:06:08 [error] [php] file(/../../files/tb_cid_layout.txt) [<a href='function.file'>function.file</a>]: failed to open stream: No such file or directory (C:\xampp\xampp\htdocs\sispad\protected\components\ReaderFileToFillingModel.php:29)
+Stack trace:
+#0 C:\xampp\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(50): RelatorioProcedimentoRealizadoController->actionArquivo()
+#1 C:\xampp\xampp\htdocs\yii\framework\web\CController.php(309): CInlineAction->runWithParams()
+#2 C:\xampp\xampp\htdocs\yii\framework\web\CController.php(287): RelatorioProcedimentoRealizadoController->runAction()
+#3 C:\xampp\xampp\htdocs\yii\framework\web\CController.php(266): RelatorioProcedimentoRealizadoController->runActionWithFilters()
+#4 C:\xampp\xampp\htdocs\yii\framework\web\CWebApplication.php(276): RelatorioProcedimentoRealizadoController->run()
+#5 C:\xampp\xampp\htdocs\yii\framework\web\CWebApplication.php(135): CWebApplication->runController()
+#6 C:\xampp\xampp\htdocs\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#7 C:\xampp\xampp\htdocs\sispad\index.php(13): CWebApplication->run()
+REQUEST_URI=/sispad/index.php/bpa/relatorioProcedimentoRealizado/arquivo
+2012/11/29 17:06:36 [error] [php] file(/../../files/tb_cid_layout.txt) [<a href='function.file'>function.file</a>]: failed to open stream: No such file or directory (C:\xampp\xampp\htdocs\sispad\protected\components\ReaderFileToFillingModel.php:29)
+Stack trace:
+#0 C:\xampp\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(50): RelatorioProcedimentoRealizadoController->actionArquivo()
+#1 C:\xampp\xampp\htdocs\yii\framework\web\CController.php(309): CInlineAction->runWithParams()
+#2 C:\xampp\xampp\htdocs\yii\framework\web\CController.php(287): RelatorioProcedimentoRealizadoController->runAction()
+#3 C:\xampp\xampp\htdocs\yii\framework\web\CController.php(266): RelatorioProcedimentoRealizadoController->runActionWithFilters()
+#4 C:\xampp\xampp\htdocs\yii\framework\web\CWebApplication.php(276): RelatorioProcedimentoRealizadoController->run()
+#5 C:\xampp\xampp\htdocs\yii\framework\web\CWebApplication.php(135): CWebApplication->runController()
+#6 C:\xampp\xampp\htdocs\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#7 C:\xampp\xampp\htdocs\sispad\index.php(13): CWebApplication->run()
+REQUEST_URI=/sispad/index.php/bpa/relatorioProcedimentoRealizado/arquivo
+2012/11/29 17:06:46 [error] [php] file(../../files/tb_cid_layout.txt) [<a href='function.file'>function.file</a>]: failed to open stream: No such file or directory (C:\xampp\xampp\htdocs\sispad\protected\components\ReaderFileToFillingModel.php:29)
+Stack trace:
+#0 C:\xampp\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(50): RelatorioProcedimentoRealizadoController->actionArquivo()
+#1 C:\xampp\xampp\htdocs\yii\framework\web\CController.php(309): CInlineAction->runWithParams()
+#2 C:\xampp\xampp\htdocs\yii\framework\web\CController.php(287): RelatorioProcedimentoRealizadoController->runAction()
+#3 C:\xampp\xampp\htdocs\yii\framework\web\CController.php(266): RelatorioProcedimentoRealizadoController->runActionWithFilters()
+#4 C:\xampp\xampp\htdocs\yii\framework\web\CWebApplication.php(276): RelatorioProcedimentoRealizadoController->run()
+#5 C:\xampp\xampp\htdocs\yii\framework\web\CWebApplication.php(135): CWebApplication->runController()
+#6 C:\xampp\xampp\htdocs\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#7 C:\xampp\xampp\htdocs\sispad\index.php(13): CWebApplication->run()
+REQUEST_URI=/sispad/index.php/bpa/relatorioProcedimentoRealizado/arquivo
+2012/11/29 17:10:46 [error] [php] file(../../files/tb_cid_layout.txt) [<a href='function.file'>function.file</a>]: failed to open stream: No such file or directory (C:\xampp\xampp\htdocs\sispad\protected\components\ReaderFileToFillingModel.php:29)
+Stack trace:
+#0 C:\xampp\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(50): RelatorioProcedimentoRealizadoController->actionArquivo()
+#1 C:\xampp\xampp\htdocs\yii\framework\web\CController.php(309): CInlineAction->runWithParams()
+#2 C:\xampp\xampp\htdocs\yii\framework\web\CController.php(287): RelatorioProcedimentoRealizadoController->runAction()
+#3 C:\xampp\xampp\htdocs\yii\framework\web\CController.php(266): RelatorioProcedimentoRealizadoController->runActionWithFilters()
+#4 C:\xampp\xampp\htdocs\yii\framework\web\CWebApplication.php(276): RelatorioProcedimentoRealizadoController->run()
+#5 C:\xampp\xampp\htdocs\yii\framework\web\CWebApplication.php(135): CWebApplication->runController()
+#6 C:\xampp\xampp\htdocs\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#7 C:\xampp\xampp\htdocs\sispad\index.php(13): CWebApplication->run()
+REQUEST_URI=/sispad/index.php/bpa/relatorioProcedimentoRealizado/arquivo
+2012/11/29 17:14:45 [info] [application] Coluna => 
+2012/11/29 17:14:45 [info] [application] Coluna => 
+2012/11/29 17:14:45 [info] [application] Coluna => 
+2012/11/29 17:14:45 [info] [application] Coluna => 
+2012/11/29 17:14:45 [info] [application] Coluna => 
+2012/11/29 17:14:45 [info] [application] Coluna => 
+2012/11/29 17:21:29 [info] [application] Coluna => 
+2012/11/29 17:21:29 [info] [application] Coluna => 
+2012/11/29 17:21:29 [info] [application] Coluna => 
+2012/11/29 17:21:29 [info] [application] Coluna => 
+2012/11/29 17:21:29 [info] [application] Coluna => 
+2012/11/29 17:21:29 [info] [application] Coluna => 
+2012/11/29 17:23:40 [info] [application] Coluna => CO_CID
+2012/11/29 17:23:40 [info] [application] Tamanho => 4
+2012/11/29 17:23:40 [info] [application] Inicio => 1
+2012/11/29 17:23:40 [info] [application] Fim => 4
+2012/11/29 17:23:40 [info] [application] Tipo
+ => VARCHAR2
+
+2012/11/29 17:23:40 [info] [application] Coluna => NO_CID
+2012/11/29 17:23:40 [info] [application] Tamanho => 100
+2012/11/29 17:23:40 [info] [application] Inicio => 5
+2012/11/29 17:23:40 [info] [application] Fim => 104
+2012/11/29 17:23:40 [info] [application] Tipo
+ => VARCHAR2
+
+2012/11/29 17:23:40 [info] [application] Coluna => TP_AGRAVO
+2012/11/29 17:23:40 [info] [application] Tamanho => 1
+2012/11/29 17:23:40 [info] [application] Inicio => 105
+2012/11/29 17:23:40 [info] [application] Fim => 105
+2012/11/29 17:23:40 [info] [application] Tipo
+ => CHAR
+
+2012/11/29 17:23:40 [info] [application] Coluna => TP_SEXO
+2012/11/29 17:23:40 [info] [application] Tamanho => 1
+2012/11/29 17:23:40 [info] [application] Inicio => 106
+2012/11/29 17:23:40 [info] [application] Fim => 106
+2012/11/29 17:23:40 [info] [application] Tipo
+ => CHAR
+
+2012/11/29 17:23:40 [info] [application] Coluna => TP_ESTADIO
+2012/11/29 17:23:40 [info] [application] Tamanho => 1
+2012/11/29 17:23:40 [info] [application] Inicio => 107
+2012/11/29 17:23:40 [info] [application] Fim => 107
+2012/11/29 17:23:40 [info] [application] Tipo
+ => CHAR
+
+2012/11/29 17:23:40 [info] [application] Coluna => VL_CAMPOS_IRRADIADOS
+2012/11/29 17:23:40 [info] [application] Tamanho => 4
+2012/11/29 17:23:40 [info] [application] Inicio => 108
+2012/11/29 17:23:40 [info] [application] Fim => 111
+2012/11/29 17:23:40 [info] [application] Tipo
+ => NUMBER
+
+2012/11/29 18:04:31 [info] [application] pires é gay!
+2012/11/29 18:48:18 [info] [application] pires é gay!
