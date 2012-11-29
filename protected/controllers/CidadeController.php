@@ -66,6 +66,29 @@ class CidadeController extends SISPADBaseController{
            }
        }
    }
+   
+   public function actionFindCidadesIbge() {
+            
+            //$this->_RBAC->checkAccess('registered',true);
+            $q = $_GET['term'];
+            if(isset($q)) {
+                 $cidades = Cidades::model()->findAll('cidade_nome like :nome',array(':nome'=> strtoupper(trim($q)).'%'));
+ 
+                if (!empty($cidades)) {
+                    $out = array();
+                    foreach ($cidades as $s) {
+                            $out[] = array(
+                            // expression to give the string for the autoComplete drop-down
+                            'label' => $s->NomeEstado,  
+                            'value' => $s->NomeEstado,
+                            'id' => $s->cidade_codigo_ibge, // return value from autocomplete
+                     );
+                    }
+                echo CJSON::encode($out);
+                Yii::app()->end();
+           }
+       }
+   }
 
     protected function getModelName() {
         return 'Cidade';

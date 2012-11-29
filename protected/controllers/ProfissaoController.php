@@ -37,5 +37,28 @@ class ProfissaoController extends SISPADBaseController {
             }
         }
     }
+    
+    public function actionFindProfissoesCbo() {
+
+      //$this->CheckAcessAction();
+        $q = $_GET['term'];
+        if (isset($q)) {
+            $profissoes = Profissao::model()->findAll('nome or codigo like :nome', array(':nome' => strtoupper(trim($q)) . '%'));
+
+            if (!empty($profissoes)) {
+                $out = array();
+                foreach ($profissoes as $p) {
+                    $out[] = array(
+                        // expression to give the string for the autoComplete drop-down
+                        'label' => $p->CboNome,
+                        'value' => $p->CboNome,
+                        'id' => $p->codigo, // return value from autocomplete
+                    );
+                }
+                echo CJSON::encode($out);
+                Yii::app()->end();
+            }
+        }
+    }
 
 }

@@ -109,4 +109,6 @@ class Cidades extends CActiveRecord
         public function getNomeEstado(){
             return $this->cidade_nome.'/'.$this->estado->estado_nome;
         }
+        
+        
 }

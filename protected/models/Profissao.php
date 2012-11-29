@@ -84,4 +84,8 @@ class Profissao extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+        
+         public function getCboNome(){
+            return $this->nome.'/'.$this->codigo;
+        }
 }

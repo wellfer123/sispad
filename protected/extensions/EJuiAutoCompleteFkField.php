@@ -191,11 +191,12 @@ class EJuiAutoCompleteFkField extends CJuiAutoComplete {
         $this->_fieldID = $id;
         $this->_saveID = $id . '_save';
         $this->_lookupID = $id .'_lookup';
-
-        $related = $this->model->{$this->relName}; // get the related record
-        $value = CHtml::resolveValue($this->model, $this->attribute);
-        $this->_display=(!empty($value) ? $related->{$this->displayAttr} : '');
         
+        if(isset($this->relName)){
+            $related = $this->model->{$this->relName}; // get the related record
+            $value = CHtml::resolveValue($this->model, $this->attribute);
+            $this->_display=(!empty($value) ? $related->{$this->displayAttr} : '');
+        }
         if (!isset($this->options['minLength']))
             $this->options['minLength'] = 2;
 
