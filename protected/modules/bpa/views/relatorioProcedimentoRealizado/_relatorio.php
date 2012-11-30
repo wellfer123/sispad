@@ -104,6 +104,16 @@
                     </td>
                </tr>
                <tr>
+                   <td>
+                        <?php //echo $form->labelEx($model,'paciente_cidade'); ?>
+                        <?php //echo $form->textField($model,'paciente_cidade',array('size'=>6,'maxlength'=>6)); ?>
+                        <?php //echo $form->error($model,'paciente_cidade'); ?>
+                        <?php echo $form->labelEx($model,'procedimento'); ?>
+                        <?php echo $form->textField($model,'procedimento',array('size'=>10,'maxlength'=>10)); ?>
+                        <?php echo $form->error($model,'procedimento'); ?>
+                        
+                     
+                    </td>
                     <td colspan="2">
                         <?php echo $form->labelEx($model,'paciente_cidade'); ?>
                         <?php $this->widget('EJuiAutoCompleteFkField', array(
@@ -128,18 +138,10 @@
                                                 ),
                                         ));?>
                         <?php echo $form->error($model,'paciente_cidade'); ?>
-                    </td>
-                    </td>
+                   
 
-                    <td>
-                        <?php //echo $form->labelEx($model,'paciente_cidade'); ?>
-                        <?php //echo $form->textField($model,'paciente_cidade',array('size'=>6,'maxlength'=>6)); ?>
-                        <?php //echo $form->error($model,'paciente_cidade'); ?>
-                        <?php echo $form->labelEx($model,'procedimento'); ?>
-                        <?php echo $form->textField($model,'procedimento',array('size'=>10,'maxlength'=>10)); ?>
-                        <?php echo $form->error($model,'procedimento'); ?>
-                        
-                     
+                    
+                     </td>
                     </td>
                </tr>
                <tr>
@@ -148,8 +150,44 @@
                         <?php echo $form->textField($model,'cnpj',array('size'=>10,'maxlength'=>10)); ?>
                         <?php echo $form->error($model,'cnpj'); ?>
                     </td>
+                    
+
+                    <td colspan="2">
+                        <?php //echo $form->labelEx($model,'cid'); ?>
+                        <?php //echo $form->textField($model,'cid',array('size'=>6,'maxlength'=>6)); ?>
+                        <?php //echo $form->error($model,'cid'); ?>
+                        
+                         <?php echo $form->labelEx($model,'cid'); ?>
+                        <?php $this->widget('EJuiAutoCompleteFkField', array(
+                                            'model'=>$model,
+                                            'attribute'=>'cid', //the FK field (from CJuiInputWidget)
+                                            // controller method to return the autoComplete data (from CJuiAutoComplete)
+                                            'sourceUrl'=>Yii::app()->createUrl('Cid/findCids'),
+                                            // defaults to false.  set 'true' to display the FK field with 'readonly' attribute.
+                                            'showFKField'=>true,
+                                            // display size of the FK field.  only matters if not hidden.  defaults to 10
+                                            'FKFieldSize'=>6,
+                                           // 'relName'=>'servidor', // the relation name defined above
+                                            'displayAttr'=>'nome',  // attribute or pseudo-attribute to display
+                                            // length of the AutoComplete/display field, defaults to 50
+                                            'autoCompleteLength'=>60,
+                                            // any attributes of CJuiAutoComplete and jQuery JUI AutoComplete widget may
+                                            // also be defined.  read the code and docs for all options
+                                            'options'=>array(
+                                                // number of characters that must be typed before
+                                                    // autoCompleter returns a value, defaults to 2
+                                                'minLength'=>2,
+                                                ),
+                                        ));?>
+                        <?php echo $form->error($model,'cid'); ?>
+                    </td>
                     <td>
-                        <?php echo $form->labelEx($model,'data_atendimento'); ?>
+                      
+                    </td>
+                    
+               </tr>
+               <tr>
+                   <td>  <?php echo $form->labelEx($model,'data_atendimento'); ?>
                        
                         <?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
                                 'name'=>'Data',
@@ -157,14 +195,9 @@
                                 'model'=>$model,
                                 'attribute'=>'data_atendimento',
                                 ))?>
-                        <?php echo $form->error($model,'data_atendimento'); ?>
-                    </td>
-
-                    <td>
-                        <?php echo $form->labelEx($model,'cid'); ?>
-                        <?php echo $form->textField($model,'cid',array('size'=>6,'maxlength'=>6)); ?>
-                        <?php echo $form->error($model,'cid'); ?>
-                    </td>
+                        <?php echo $form->error($model,'data_atendimento'); ?></td>
+                   <td></td>
+                   <td></td>
                </tr>
              
            </tbody>

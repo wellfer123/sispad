@@ -86,6 +86,6 @@ class Profissao extends CActiveRecord
 	}
         
          public function getCboNome(){
-            return $this->nome.'/'.$this->codigo;
+              return $this->codigo.'/'.$this->nome;
         }
 }
