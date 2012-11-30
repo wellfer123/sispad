@@ -19,7 +19,7 @@ class Cid extends CActiveRecord
      * da coluna no arquivo referente aa tabela CID no arquivo Tabela Unificada
      * do SIGTAP. E o valor é atributo desta cllasse que corresponde a coluna do arquivo.
      */
-    public static $MAPEAMENTO_CAMPO_ARQUIVO=array('CO_CID'=>'codigo','NO_CID'=>'nome',
+    public static final $MAPEAMENTO_CAMPO_ARQUIVO=array('CO_CID'=>'codigo','NO_CID'=>'nome',
                                                   'TP_AGRAVO'=>'tipo_agravo','TP_SEXO'=>'tipo_sexo',
                                                   'TP_ESTADIO'=>'tipo_estadio','VL_CAMPOS_IRRADIADOS'=>'valor_campos_irradiados'
                                                   );
