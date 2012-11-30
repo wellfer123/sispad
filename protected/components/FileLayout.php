@@ -69,7 +69,7 @@ class FileLayout {
                 }
             }
             else{
-                Yii::log('pires é gay!');
+                Yii::log('Arquivo não encontrado');
             }
             $this->columns=null;
     }
