@@ -33,4 +33,32 @@ class ProcedimentoAmbulatorialController extends Controller
 		);
 	}
 	*/
+        
+        
+         public function actionFindProcedimentos() {
+            
+            //$this->_RBAC->checkAccess('registered',true);
+            $q = $_GET['term'];
+            if(isset($q)) {
+                 $procedimentos = ProcedimentoAmbulatorial::model()->findAll('nome  like :pesquisa or codigo like :pesquisa',array(':pesquisa'=> '%'.strtoupper(trim($q)).'%'));
+ 
+                if (!empty($procedimentos)) {
+                    $out = array();
+                    foreach ($procedimentos as $s) {
+                            $out[] = array(
+                            // expression to give the string for the autoComplete drop-down
+                            'label' => $s->NomeCodigo,  
+                            'value' => $s->NomeCodigo,
+                            'id' => $s->codigo, // return value from autocomplete
+                     );
+                    }
+                echo CJSON::encode($out);
+                Yii::app()->end();
+           }
+       }
+   }
+
+    protected function getModelName() {
+        return 'ProcedimentoAmbulatorial';
+    }
 }

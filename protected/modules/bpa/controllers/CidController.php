@@ -31,11 +31,11 @@ class CidController extends SISPADBaseController{
             //$this->_RBAC->checkAccess('registered',true);
             $q = $_GET['term'];
             if(isset($q)) {
-                 $cidades = Cid::model()->findAll('nome  like :pesquisa or codigo like :pesquisa',array(':pesquisa'=> '%'.strtoupper(trim($q)).'%'));
+                 $cids = Cid::model()->findAll('nome  like :pesquisa or codigo like :pesquisa',array(':pesquisa'=> '%'.strtoupper(trim($q)).'%'));
  
-                if (!empty($cidades)) {
+                if (!empty($cids)) {
                     $out = array();
-                    foreach ($cidades as $s) {
+                    foreach ($cids as $s) {
                             $out[] = array(
                             // expression to give the string for the autoComplete drop-down
                             'label' => $s->NomeCodigo,  
