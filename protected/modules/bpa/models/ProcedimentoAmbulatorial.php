@@ -12,7 +12,7 @@
  * @property string $quantidade_dias_permanencia
  * @property string $quantidade_pontos
  * @property string $validade_idade_minima
- * @property string $vaidade_idade_maxima
+ * @property string $validade_idade_maxima
  * @property string $validade_sh
  * @property string $validade_sa
  * @property string $validade_sp
@@ -23,7 +23,7 @@
  */
 class ProcedimentoAmbulatorial extends CActiveRecord
 {
-        public static final $MAPEAMENTO_CAMPO_ARQUIVO= array(
+        public static $MAPEAMENTO_CAMPO_ARQUIVO= array(
                                                              'CO_PROCEDIMENTO'=>'codigo',
                                                              'NO_PROCEDIMENTO'=>'nome',
                                                              'TP_COMPLEXIDADE'=>'tipo_complexidade',
@@ -68,16 +68,16 @@ class ProcedimentoAmbulatorial extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('codigo, nome, tipo_complexidade, tipo_sexo, quantidade_maxima_execucao, quantidade_dias_permanencia, quantidade_pontos, validade_idade_minima, vaidade_idade_maxima, validade_sh, validade_sa, validade_sp, codigo_financiamento, codigo_rubrica, quantidade_tempo_permanencia, competencia', 'required'),
+			array('codigo, nome, tipo_complexidade, tipo_sexo, quantidade_maxima_execucao, quantidade_dias_permanencia, quantidade_pontos, validade_idade_minima, validade_idade_maxima, validade_sh, validade_sa, validade_sp, codigo_financiamento, codigo_rubrica, quantidade_tempo_permanencia, competencia', 'required'),
 			array('codigo, validade_sh, validade_sa, validade_sp', 'length', 'max'=>10),
 			array('nome', 'length', 'max'=>250),
 			array('tipo_complexidade, tipo_sexo', 'length', 'max'=>1),
-			array('quantidade_maxima_execucao, quantidade_dias_permanencia, quantidade_pontos, validade_idade_minima, vaidade_idade_maxima, quantidade_tempo_permanencia', 'length', 'max'=>4),
+			array('quantidade_maxima_execucao, quantidade_dias_permanencia, quantidade_pontos, validade_idade_minima, validade_idade_maxima, quantidade_tempo_permanencia', 'length', 'max'=>4),
 			array('codigo_financiamento', 'length', 'max'=>2),
 			array('codigo_rubrica, competencia', 'length', 'max'=>6),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('codigo, nome, tipo_complexidade, tipo_sexo, quantidade_maxima_execucao, quantidade_dias_permanencia, quantidade_pontos, validade_idade_minima, vaidade_idade_maxima, validade_sh, validade_sa, validade_sp, codigo_financiamento, codigo_rubrica, quantidade_tempo_permanencia, competencia', 'safe', 'on'=>'search'),
+			array('codigo, nome, tipo_complexidade, tipo_sexo, quantidade_maxima_execucao, quantidade_dias_permanencia, quantidade_pontos, validade_idade_minima, validade_idade_maxima, validade_sh, validade_sa, validade_sp, codigo_financiamento, codigo_rubrica, quantidade_tempo_permanencia, competencia', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -106,7 +106,7 @@ class ProcedimentoAmbulatorial extends CActiveRecord
 			'quantidade_dias_permanencia' => 'Quantidade Dias Permanencia',
 			'quantidade_pontos' => 'Quantidade Pontos',
 			'validade_idade_minima' => 'Validade Idade Minima',
-			'vaidade_idade_maxima' => 'Vaidade Idade Maxima',
+			'validade_idade_maxima' => 'Vaidade Idade Maxima',
 			'validade_sh' => 'Validade Sh',
 			'validade_sa' => 'Validade Sa',
 			'validade_sp' => 'Validade Sp',
@@ -136,7 +136,7 @@ class ProcedimentoAmbulatorial extends CActiveRecord
 		$criteria->compare('quantidade_dias_permanencia',$this->quantidade_dias_permanencia,true);
 		$criteria->compare('quantidade_pontos',$this->quantidade_pontos,true);
 		$criteria->compare('validade_idade_minima',$this->validade_idade_minima,true);
-		$criteria->compare('vaidade_idade_maxima',$this->vaidade_idade_maxima,true);
+		$criteria->compare('validade_idade_maxima',$this->vaidade_idade_maxima,true);
 		$criteria->compare('validade_sh',$this->validade_sh,true);
 		$criteria->compare('validade_sa',$this->validade_sa,true);
 		$criteria->compare('validade_sp',$this->validade_sp,true);

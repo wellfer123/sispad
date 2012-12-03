@@ -61,8 +61,8 @@ class RelatorioProcedimentoRealizadoController extends SISPADBaseController{
     }
     
     public function actionArquivo(){
-        $teste = new FileModel('tb_cid.txt', 'tb_cid_layout.txt', 'Cid');
-        $teste->popularModels(Cid::$MAPEAMENTO_CAMPO_ARQUIVO);
+        $teste = new FileModel('tb_procedimento.txt', 'tb_procedimento_layout.txt', 'ProcedimentoAmbulatorial');
+        $teste->popularModels(ProcedimentoAmbulatorial::$MAPEAMENTO_CAMPO_ARQUIVO);
     }
 }
 
