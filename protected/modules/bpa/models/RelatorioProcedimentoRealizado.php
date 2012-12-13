@@ -14,10 +14,10 @@ class RelatorioProcedimentoRealizado extends CFormModel{
     //put your code here
     
     //mapeamento para cada relatório
-    public static $TIPOS_RELATORIOS= array('RelatoriolUnidadeProcedimento'=>'Unidade/Procedimento',
-                                  'RelatoriolUnidadeProfissional'=>'Unidade/Profissional',
-                                  'RelatoriolUnidadeProfissionalProcedimento'=>'Unidade/Profissional/Procedimento',
-                                  'RelatorioUnidadeTotal'=>'Unidade Total',
+    public static $TIPOS_RELATORIOS= array('RelatoriolUnidadeProcedimento'=>'Unidade por procedimento',
+                                  'RelatoriolUnidadeProfissional'=>'Unidade por profissional',
+                                  'RelatoriolUnidadeProfissionalProcedimento'=>'Unidade por profissional e procedimento',
+                                  'RelatorioUnidadeTotal'=>'Unidade produção total',
                                   );
     //CARATERS DE ATENDIMENTOS
     public static $CARATER_ATENDIMENTO = array(
@@ -71,12 +71,17 @@ class RelatorioProcedimentoRealizado extends CFormModel{
                                                       'paciente_idade'=>'kc98u23dn389rh383',
                                                       'origem'=>'93248nvcq7ghDJKDF',
                                                       'cnpj'=>'pk349fqier3490FJKNS',
-                                                      'numero_autorizacao'=>'93chqe756dgwe65zxc83'
+                                                      'numero_autorizacao'=>'93chqe756dgwe65zxc83',
+                                                      'user'=>'user',
+                                                      'password'=>'password'
                                                     );
     
     
     //parametros adicionais
     public $relatorio;
+    public $user;
+    public $password;
+    
     public $data_inicial;
     public $data_final;
     
@@ -119,6 +124,7 @@ class RelatorioProcedimentoRealizado extends CFormModel{
     public function rules() {
         return array(
                         array('unidade_cnes, relatorio', 'required'),
+                        array('user','required','message'=>'Você não está logado. Por favor faça login!'),
                         array('profissional_cbo, profissional_cns', 'safe'),
         );
     }
