@@ -160,4 +160,31 @@ class PacienteController extends Controller
 			Yii::app()->end();
 		}
 	}
+        
+        public function actionFindCns(){
+            
+             //$this->_RBAC->checkAccess('registered',true);
+            $q = $_GET['term'];
+            if(isset($q)) {
+                $pesq=strtoupper(trim($q));
+                 $pacientes = Paciente::model()->findAll('(nome like :nome or cns like :cns) AND cns IS NOT NULL ',
+                                                            array(
+                                                                  ':nome'=> '%'.$pesq.'%',
+                                                                   ':cns'=> '%'.$pesq.'%'));
+ 
+                if (!empty($pacientes)) {
+                    $out = array();
+                    foreach ($pacientes as $pac) {
+                            $out[] = array(
+                            // expression to give the string for the autoComplete drop-down
+                            'label' => $pac->getCnsNome(),  
+                            'value' => $pac->getCnsNome(),
+                            'id' => $pac->cns, // returna o cns
+                     );
+                    }
+                echo CJSON::encode($out);
+                Yii::app()->end();
+                }
+            }
+        }
 }
