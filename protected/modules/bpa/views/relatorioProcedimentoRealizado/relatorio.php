@@ -1,15 +1,19 @@
 <?php
 $this->breadcrumbs=array(
 	'Procedimento Realizados'=>array('index'),
-	'Create',
+	'Relatórios',
 );
 
-$this->menu=array(
-	array('label'=>'List ProcedimentoRealizado', 'url'=>array('index')),
-	array('label'=>'Manage ProcedimentoRealizado', 'url'=>array('admin')),
-);
 ?>
 
-<h1>Create ProcedimentoRealizado</h1>
+<?php $this->beginWidget('zii.widgets.CPortlet', array(
+			'title'=>'Relatórios de Produção Ambulatorial',
+                        'htmlOptions'=>array('class'=>'portlet_form')
+		));?>
 
-<?php echo $this->renderPartial('_relatorio', array('model'=>$model)); ?>
+<?php echo $this->renderPartial('_relatorio', array(
+                                                    'model'=>$model,
+                                                    'relatorios'=>$relatorios,
+                                                    'competencias'=>$competencias,
+                                                    'competencias_movimento'=>$competencias_movimento)); ?>
+<?php $this->endWidget()?>
