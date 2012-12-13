@@ -80,19 +80,19 @@
                                 ));?>
                         <?php echo $form->error($model,'unidade_cnes'); ?>
                     </td>
+                    
+                    <td >
+                        <?php echo $form->labelEx($model,'cns'); ?>
+                        <?php echo $form->textField($model,'cns',array('size'=>15,'maxlength'=>15,'style'=>'text-transform:uppercase')); ?>
+                        <?php echo $form->error($model,'cns'); ?>
+                    </td>
+                    
                 </tr>
             </tbody>
         </table>
        
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Cadastrar' : 'Atualizar'); ?>
-                <?php echo CHtml::ajaxSubmitButton($model->isNewRecord ? 'ACadastrar' : 'AAtualizar', Yii::app()->createUrl('servidor/createAjax'), 
-                                                    array(
-                                                          'complete' => 'function( data ){
-                                                                            // handle return data
-                                                                            alert(data);
-                                                                            }',
-                                                    )); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

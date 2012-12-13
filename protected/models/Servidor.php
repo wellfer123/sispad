@@ -10,6 +10,7 @@
  * @property string $estado_civil
  * @property integer $endereco_id
  * @property string $unidade_cnes
+ * @property string $cns
  */
 class Servidor extends CActiveRecord
 {
@@ -43,8 +44,9 @@ class Servidor extends CActiveRecord
 		return array(
 			array('cpf, matricula,nome,estado_civil', 'required','on'=>'create'),
                         array('unidade_cnes', 'required','on'=>'preparedViewMonth'),
-			array('endereco_id, matricula, cpf', 'numerical', 'integerOnly'=>true),
+			array('endereco_id, matricula, cpf,cns', 'numerical', 'integerOnly'=>true),
 			array('cpf', 'length', 'max'=>11, 'min'=>11),
+                        array('cns', 'length', 'max'=>15, 'min'=>15),
                         array('cpf', 'servidorExiste', 'on'=>'create'),
 			array('matricula', 'length', 'min'=>5 ,'max'=>20),
 			array('nome', 'length', 'max'=>40),
@@ -52,7 +54,7 @@ class Servidor extends CActiveRecord
 			array('unidade_cnes', 'length', 'max'=>10,'min'=>6),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('cpf, matricula, nome, estado_civil, endereco_id, unidade_cnes', 'safe', 'on'=>'search'),
+			array('cpf, cns, matricula, nome, estado_civil, endereco_id, unidade_cnes', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -89,6 +91,7 @@ class Servidor extends CActiveRecord
 			'estado_civil' => 'Estado Civil',
 			'endereco_id' => 'Endereço',
 			'unidade_cnes' => 'Unidade Pertencente',
+                        'cns' => 'CNS',
 		);
 	}
 
@@ -108,6 +111,8 @@ class Servidor extends CActiveRecord
 		$criteria->compare('matricula',$this->matricula,true);
 
 		$criteria->compare('nome',$this->nome,true);
+                
+                $criteria->compare('cns',$this->cns,true);
 
 		//$criteria->compare('estado_civil',$this->estado_civil,true);
 

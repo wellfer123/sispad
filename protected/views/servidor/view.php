@@ -23,6 +23,7 @@ $this->menu=array(
 	'attributes'=>array(
 		'cpf',
 		'matricula',
+                'cns',
                 array(
                     'label'=>'Estado Civil',
                     'value'=>$model->getLabelEstadoCivil(),
