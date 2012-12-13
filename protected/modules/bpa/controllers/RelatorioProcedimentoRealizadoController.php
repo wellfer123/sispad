@@ -74,7 +74,11 @@ class RelatorioProcedimentoRealizadoController extends SISPADBaseController{
                             
         }//fim do if
                 
-        $this->render('relatorio', array('model'=>$model,));
+        $this->render('relatorio', 
+                                array('model'=>$model,
+                                      'relatorios'=>RelatorioProcedimentoRealizado::$TIPOS_RELATORIOS,
+                                      'competencias'=>ProcedimentoRealizado::getCompetencias(),
+                                      'competencias_movimento'=>ProcedimentoRealizado::getCompetenciasMovimento()));
     }
     
     public function actionArquivo(){
