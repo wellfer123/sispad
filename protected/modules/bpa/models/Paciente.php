@@ -185,4 +185,8 @@ class Paciente extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+        
+        public function getCnsNome(){
+            return $this->cns.'/'.$this->nome;
+        }
 }
