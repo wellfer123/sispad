@@ -184,4 +184,8 @@ class Servidor extends CActiveRecord
         public function getLabelEstadoCivil(){
             return Servidor::$ESTADOS_CIVIS[$this->estado_civil];
         }
+        
+        public function getCnsNome(){
+            return $this->cns.'/'.$this->nome;
+        }
 }

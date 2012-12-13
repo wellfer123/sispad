@@ -116,7 +116,7 @@ class Unidade extends CActiveRecord
         
         
         public function getNomeDescricao(){
-            return $this->nome."-".$this->descricao;
+            return $this->cnes.'/'.$this->nome."-".$this->descricao;
         }
         
         public function upperCaseAllFieds(){
