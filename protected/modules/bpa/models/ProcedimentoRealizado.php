@@ -336,4 +336,28 @@ class ProcedimentoRealizado extends CActiveRecord
                                     ':folha'=>$this->folha,':seq'=>$this->sequencia);
             return $criteria;
         }
+        
+        public static function getCompetencias(){
+            $sql="SELECT competencia FROM bpa_procedimento_realizado GROUP BY competencia;";
+            $dbC=Yii::app()->db->createCommand($sql);
+            $dbC->setFetchMode(PDO::FETCH_OBJ);
+            $competencias=array();
+            foreach ($dbC->queryAll() as $comp){
+                $c=$comp->competencia;
+                $competencias[$c]= substr($c, 4) .'/'.substr($c, 0, 4);
+            }
+            return $competencias;
+        }
+        
+        public static function getCompetenciasMovimento(){
+            $sql="SELECT competencia_movimento FROM bpa_procedimento_realizado GROUP BY competencia_movimento;";
+            $dbC=Yii::app()->db->createCommand($sql);
+            $dbC->setFetchMode(PDO::FETCH_OBJ);
+            $competencias_movimento=array();
+            foreach ($dbC->queryAll() as $comp){
+                $c=$comp->competencia_movimento;
+                $competencias_movimento[$c]= substr($c, 4) .'/'.substr($c, 0, 4);
+            }
+            return $competencias_movimento;
+        }
 }
