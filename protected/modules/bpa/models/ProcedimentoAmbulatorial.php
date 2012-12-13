@@ -149,4 +149,8 @@ class ProcedimentoAmbulatorial extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+        
+        public function getNomeCodigo(){
+            return $this->codigo.'/'.$this->nome;
+        }
 }

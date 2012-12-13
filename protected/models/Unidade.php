@@ -129,4 +129,8 @@ class Unidade extends CActiveRecord
             return parent::beforeSave();
         }
         
+        public function getCnesNome(){
+            return $this->cnes.'/'.$this->nome;
+        }
+        
 }
