@@ -191,6 +191,33 @@ class ServidorController extends SISPADBaseController
        }
     }
     
+    public function actionFindServidoresCns() {
+            
+             //$this->_RBAC->checkAccess('registered',true);
+            $q = $_GET['term'];
+            if(isset($q)) {
+                $pesq=strtoupper(trim($q));
+                 $servidores = Servidor::model()->findAll("(nome like :nome or cns like :cns) AND cns IS NOT NULL",
+                                                            array(
+                                                                  ':nome'=> '%'.$pesq.'%',
+                                                                   ':cns'=> '%'.$pesq.'%'));
+ 
+                if (!empty($servidores)) {
+                    $out = array();
+                    foreach ($servidores as $s) {
+                            $out[] = array(
+                            // expression to give the string for the autoComplete drop-down
+                            'label' => $s->getCnsNome(),  
+                            'value' => $s->getCnsNome(),
+                            'id' => $s->cns, // returna o cns
+                     );
+                    }
+                echo CJSON::encode($out);
+                Yii::app()->end();
+           }
+       }
+    }
+    
     public function actionFindMedicos() {
             
              //$this->_RBAC->checkAccess('registered',true);
