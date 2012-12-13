@@ -131,9 +131,10 @@ class RelatorioProcedimentoRealizado extends CFormModel{
 
     public function attributeLabels() {
         return array(
+                    'unidade_cnes'=>'Unidade',
                     'relatorio'=>'Tipo de relatório',
-                    'data_inicial'=>'Data inicial de atendimento',
-                    'data_final'=>'Data final de atendimento',
+                    'data_inicial'=>'Data inicial do atendimento',
+                    'data_final'=>'Data final do atendimento',
                     'profissional_cns'=>'CNS do Profissional',
                     'profissional_cbo'=>'CBO do profissional',
                     'equipe'=>'Equipe',
