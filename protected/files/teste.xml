@@ -1,0 +1,17 @@
+<Recurso_list>
+    <Recurso>
+        <nomeLocal>/banco/aitacerto</nomeLocal>
+        <nomeRemoto>tb_cid</nomeRemoto>
+        <mensagem>Ai boiola</mensagem>
+        <extensao>txt</extensao>
+        <seNaoExistir>true</seNaoExistir>
+    </Recurso>
+    <Recurso>
+        <nomeLocal>/banco/aitacerto</nomeLocal>
+        <nomeRemoto>tb_cid</nomeRemoto>
+        <mensagem>Ai boiola</mensagem>
+        <extensao>txt</extensao>
+        <seNaoExistir>true</seNaoExistir>
+    </Recurso>
+</Recurso_list>
+ 

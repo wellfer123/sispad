@@ -1,0 +1,2060 @@
+<biprocedimentorealizado__lista>
+  <procedimento__realizado>
+    <chave__primaria>
+      <cnes__unidade>2345854</cnes__unidade>
+      <competencia>201212</competencia>
+      <cns__profissional>204322890750003</cns__profissional>
+      <cbo__profissional>223293</cbo__profissional>
+      <numero__folha>004</numero__folha>
+      <sequencia__folha>01</sequencia__folha>
+    </chave__primaria>
+    <codigo__procedimento>0301010048</codigo__procedimento>
+    <data__atendimento>20121212</data__atendimento>
+    <cns__paciente>000000000000000</cns__paciente>
+    <nome__paciente>DADOS GLOBALIZADOS</nome__paciente>
+    <data__nascimento__paciente>19710101</data__nascimento__paciente>
+    <sexo__paciente>F</sexo__paciente>
+    <cidade__paciente>260410</cidade__paciente>
+    <cid__procedimento>    </cid__procedimento>
+    <idade__paciente>41</idade__paciente>
+    <quantidade__realizada>2.0</quantidade__realizada>
+    <carater__atendimento>01</carater__atendimento>
+    <numero__autorizacao>             </numero__autorizacao>
+    <origem__procedimento>BPA</origem__procedimento>
+    <competencia__movimento>201212</competencia__movimento>
+    <ignore__prd__flpa>0</ignore__prd__flpa>
+    <ignore__prd__flcbo>0</ignore__prd__flcbo>
+    <ignore__prd__flca>0</ignore__prd__flca>
+    <ignore__prd__flida>0</ignore__prd__flida>
+    <ignore__prd__flqt>0</ignore__prd__flqt>
+    <ignore__prd__fler>0</ignore__prd__fler>
+    <ignore__prd__flmun>0</ignore__prd__flmun>
+    <ignore__prd__flcid>0</ignore__prd__flcid>
+    <raca__paciente>99</raca__paciente>
+    <etnia__paciente>    </etnia__paciente>
+    <nacionalidade__paciente>010</nacionalidade__paciente>
+    <ignore__prd__advqt>  </ignore__prd__advqt>
+    <codigo__servico>   </codigo__servico>
+    <codigo__classificao__servico>   </codigo__classificao__servico>
+    <equipe>            </equipe>
+    <cnpj>            </cnpj>
+    <equipe__area>    </equipe__area>
+    <equipe__sequencia>        </equipe__sequencia>
+  </procedimento__realizado>
+  <procedimento__realizado>
+    <chave__primaria>
+      <cnes__unidade>2345854</cnes__unidade>
+      <competencia>201212</competencia>
+      <cns__profissional>204322890750003</cns__profissional>
+      <cbo__profissional>223293</cbo__profissional>
+      <numero__folha>004</numero__folha>
+      <sequencia__folha>07</sequencia__folha>
+    </chave__primaria>
+    <codigo__procedimento>0301010030</codigo__procedimento>
+    <data__atendimento>20120213</data__atendimento>
+    <cns__paciente>000000000000000</cns__paciente>
+    <nome__paciente>DADOS GLOBALIZADOS</nome__paciente>
+    <data__nascimento__paciente>19710101</data__nascimento__paciente>
+    <sexo__paciente>F</sexo__paciente>
+    <cidade__paciente>260410</cidade__paciente>
+    <cid__procedimento>    </cid__procedimento>
+    <idade__paciente>41</idade__paciente>
+    <quantidade__realizada>2.0</quantidade__realizada>
+    <carater__atendimento>01</carater__atendimento>
+    <numero__autorizacao>             </numero__autorizacao>
+    <origem__procedimento>BPA</origem__procedimento>
+    <competencia__movimento>201212</competencia__movimento>
+    <ignore__prd__flpa>0</ignore__prd__flpa>
+    <ignore__prd__flcbo>0</ignore__prd__flcbo>
+    <ignore__prd__flca>0</ignore__prd__flca>
+    <ignore__prd__flida>0</ignore__prd__flida>
+    <ignore__prd__flqt>0</ignore__prd__flqt>
+    <ignore__prd__fler>0</ignore__prd__fler>
+    <ignore__prd__flmun>0</ignore__prd__flmun>
+    <ignore__prd__flcid>0</ignore__prd__flcid>
+    <raca__paciente>99</raca__paciente>
+    <etnia__paciente>    </etnia__paciente>
+    <nacionalidade__paciente>010</nacionalidade__paciente>
+    <ignore__prd__advqt>  </ignore__prd__advqt>
+    <codigo__servico>   </codigo__servico>
+    <codigo__classificao__servico>   </codigo__classificao__servico>
+    <equipe>            </equipe>
+    <cnpj>            </cnpj>
+    <equipe__area>    </equipe__area>
+    <equipe__sequencia>        </equipe__sequencia>
+  </procedimento__realizado>
+  <procedimento__realizado>
+    <chave__primaria>
+      <cnes__unidade>2345854</cnes__unidade>
+      <competencia>201212</competencia>
+      <cns__profissional>204322890750003</cns__profissional>
+      <cbo__profissional>223293</cbo__profissional>
+      <numero__folha>004</numero__folha>
+      <sequencia__folha>04</sequencia__folha>
+    </chave__primaria>
+    <codigo__procedimento>0307010015</codigo__procedimento>
+    <data__atendimento>20121212</data__atendimento>
+    <cns__paciente>898002956453973</cns__paciente>
+    <nome__paciente>MARILENE CONCEICAO SILVA      </nome__paciente>
+    <data__nascimento__paciente>19780912</data__nascimento__paciente>
+    <sexo__paciente>F</sexo__paciente>
+    <cidade__paciente>260410</cidade__paciente>
+    <cid__procedimento>    </cid__procedimento>
+    <idade__paciente>34</idade__paciente>
+    <quantidade__realizada>1.0</quantidade__realizada>
+    <carater__atendimento>01</carater__atendimento>
+    <numero__autorizacao>             </numero__autorizacao>
+    <origem__procedimento>BPA</origem__procedimento>
+    <competencia__movimento>201212</competencia__movimento>
+    <ignore__prd__flpa>0</ignore__prd__flpa>
+    <ignore__prd__flcbo>0</ignore__prd__flcbo>
+    <ignore__prd__flca>0</ignore__prd__flca>
+    <ignore__prd__flida>0</ignore__prd__flida>
+    <ignore__prd__flqt>0</ignore__prd__flqt>
+    <ignore__prd__fler>0</ignore__prd__fler>
+    <ignore__prd__flmun>0</ignore__prd__flmun>
+    <ignore__prd__flcid>0</ignore__prd__flcid>
+    <raca__paciente>99</raca__paciente>
+    <etnia__paciente>    </etnia__paciente>
+    <nacionalidade__paciente>010</nacionalidade__paciente>
+    <ignore__prd__advqt>  </ignore__prd__advqt>
+    <codigo__servico>114</codigo__servico>
+    <codigo__classificao__servico>007</codigo__classificao__servico>
+    <equipe>            </equipe>
+    <cnpj>            </cnpj>
+    <equipe__area>    </equipe__area>
+    <equipe__sequencia>        </equipe__sequencia>
+  </procedimento__realizado>
+  <procedimento__realizado>
+    <chave__primaria>
+      <cnes__unidade>2345854</cnes__unidade>
+      <competencia>201212</competencia>
+      <cns__profissional>206790223460007</cns__profissional>
+      <cbo__profissional>223208</cbo__profissional>
+      <numero__folha>001</numero__folha>
+      <sequencia__folha>01</sequencia__folha>
+    </chave__primaria>
+    <codigo__procedimento>0301010030</codigo__procedimento>
+    <data__atendimento>20121212</data__atendimento>
+    <cns__paciente>898002956453973</cns__paciente>
+    <nome__paciente>MARILENE CONCEICAO SILVA      </nome__paciente>
+    <data__nascimento__paciente>19780912</data__nascimento__paciente>
+    <sexo__paciente>F</sexo__paciente>
+    <cidade__paciente>260410</cidade__paciente>
+    <cid__procedimento>    </cid__procedimento>
+    <idade__paciente>34</idade__paciente>
+    <quantidade__realizada>2.0</quantidade__realizada>
+    <carater__atendimento>01</carater__atendimento>
+    <numero__autorizacao>             </numero__autorizacao>
+    <origem__procedimento>BPA</origem__procedimento>
+    <competencia__movimento>201212</competencia__movimento>
+    <ignore__prd__flpa>0</ignore__prd__flpa>
+    <ignore__prd__flcbo>0</ignore__prd__flcbo>
+    <ignore__prd__flca>0</ignore__prd__flca>
+    <ignore__prd__flida>0</ignore__prd__flida>
+    <ignore__prd__flqt>0</ignore__prd__flqt>
+    <ignore__prd__fler>0</ignore__prd__fler>
+    <ignore__prd__flmun>0</ignore__prd__flmun>
+    <ignore__prd__flcid>0</ignore__prd__flcid>
+    <raca__paciente>99</raca__paciente>
+    <etnia__paciente>    </etnia__paciente>
+    <nacionalidade__paciente>010</nacionalidade__paciente>
+    <ignore__prd__advqt>  </ignore__prd__advqt>
+    <codigo__servico>   </codigo__servico>
+    <codigo__classificao__servico>   </codigo__classificao__servico>
+    <equipe>            </equipe>
+    <cnpj>            </cnpj>
+    <equipe__area>    </equipe__area>
+    <equipe__sequencia>        </equipe__sequencia>
+  </procedimento__realizado>
+  <procedimento__realizado>
+    <chave__primaria>
+      <cnes__unidade>2345854</cnes__unidade>
+      <competencia>201212</competencia>
+      <cns__profissional>206790223460007</cns__profissional>
+      <cbo__profissional>223208</cbo__profissional>
+      <numero__folha>002</numero__folha>
+      <sequencia__folha>01</sequencia__folha>
+    </chave__primaria>
+    <codigo__procedimento>0301010030</codigo__procedimento>
+    <data__atendimento>20121223</data__atendimento>
+    <cns__paciente>898002956453973</cns__paciente>
+    <nome__paciente>MARILENE CONCEICAO SILVA      </nome__paciente>
+    <data__nascimento__paciente>19780912</data__nascimento__paciente>
+    <sexo__paciente>F</sexo__paciente>
+    <cidade__paciente>260410</cidade__paciente>
+    <cid__procedimento>    </cid__procedimento>
+    <idade__paciente>34</idade__paciente>
+    <quantidade__realizada>2.0</quantidade__realizada>
+    <carater__atendimento>01</carater__atendimento>
+    <numero__autorizacao>             </numero__autorizacao>
+    <origem__procedimento>BPA</origem__procedimento>
+    <competencia__movimento>201212</competencia__movimento>
+    <ignore__prd__flpa>0</ignore__prd__flpa>
+    <ignore__prd__flcbo>0</ignore__prd__flcbo>
+    <ignore__prd__flca>0</ignore__prd__flca>
+    <ignore__prd__flida>0</ignore__prd__flida>
+    <ignore__prd__flqt>0</ignore__prd__flqt>
+    <ignore__prd__fler>0</ignore__prd__fler>
+    <ignore__prd__flmun>0</ignore__prd__flmun>
+    <ignore__prd__flcid>0</ignore__prd__flcid>
+    <raca__paciente>99</raca__paciente>
+    <etnia__paciente>    </etnia__paciente>
+    <nacionalidade__paciente>010</nacionalidade__paciente>
+    <ignore__prd__advqt>  </ignore__prd__advqt>
+    <codigo__servico>   </codigo__servico>
+    <codigo__classificao__servico>   </codigo__classificao__servico>
+    <equipe>            </equipe>
+    <cnpj>            </cnpj>
+    <equipe__area>    </equipe__area>
+    <equipe__sequencia>        </equipe__sequencia>
+  </procedimento__realizado>
+  <procedimento__realizado>
+    <chave__primaria>
+      <cnes__unidade>2345854</cnes__unidade>
+      <competencia>201212</competencia>
+      <cns__profissional>204322890750003</cns__profissional>
+      <cbo__profissional>223293</cbo__profissional>
+      <numero__folha>002</numero__folha>
+      <sequencia__folha>01</sequencia__folha>
+    </chave__primaria>
+    <codigo__procedimento>0101020074</codigo__procedimento>
+    <data__atendimento>20121204</data__atendimento>
+    <cns__paciente>898002956266502</cns__paciente>
+    <nome__paciente>GILZA RAMOS PEREIRA</nome__paciente>
+    <data__nascimento__paciente>19720822</data__nascimento__paciente>
+    <sexo__paciente>F</sexo__paciente>
+    <cidade__paciente>260410</cidade__paciente>
+    <cid__procedimento>    </cid__procedimento>
+    <idade__paciente>40</idade__paciente>
+    <quantidade__realizada>1.0</quantidade__realizada>
+    <carater__atendimento>01</carater__atendimento>
+    <numero__autorizacao>             </numero__autorizacao>
+    <origem__procedimento>BPA</origem__procedimento>
+    <competencia__movimento>201212</competencia__movimento>
+    <ignore__prd__flpa>0</ignore__prd__flpa>
+    <ignore__prd__flcbo>0</ignore__prd__flcbo>
+    <ignore__prd__flca>0</ignore__prd__flca>
+    <ignore__prd__flida>0</ignore__prd__flida>
+    <ignore__prd__flqt>0</ignore__prd__flqt>
+    <ignore__prd__fler>0</ignore__prd__fler>
+    <ignore__prd__flmun>0</ignore__prd__flmun>
+    <ignore__prd__flcid>0</ignore__prd__flcid>
+    <raca__paciente>99</raca__paciente>
+    <etnia__paciente>    </etnia__paciente>
+    <nacionalidade__paciente>010</nacionalidade__paciente>
+    <ignore__prd__advqt>  </ignore__prd__advqt>
+    <codigo__servico>   </codigo__servico>
+    <codigo__classificao__servico>   </codigo__classificao__servico>
+    <equipe>            </equipe>
+    <cnpj>            </cnpj>
+    <equipe__area>    </equipe__area>
+    <equipe__sequencia>        </equipe__sequencia>
+  </procedimento__realizado>
+  <procedimento__realizado>
+    <chave__primaria>
+      <cnes__unidade>2345854</cnes__unidade>
+      <competencia>201212</competencia>
+      <cns__profissional>204322890750003</cns__profissional>
+      <cbo__profissional>223293</cbo__profissional>
+      <numero__folha>002</numero__folha>
+      <sequencia__folha>02</sequencia__folha>
+    </chave__primaria>
+    <codigo__procedimento>0301010153</codigo__procedimento>
+    <data__atendimento>20121204</data__atendimento>
+    <cns__paciente>               </cns__paciente>
+    <nome__paciente>LATANNY WESLIANNY MELO GOMES</nome__paciente>
+    <data__nascimento__paciente>19931017</data__nascimento__paciente>
+    <sexo__paciente>F</sexo__paciente>
+    <cidade__paciente>260410</cidade__paciente>
+    <cid__procedimento>    </cid__procedimento>
+    <idade__paciente>19</idade__paciente>
+    <quantidade__realizada>1.0</quantidade__realizada>
+    <carater__atendimento>01</carater__atendimento>
+    <numero__autorizacao>             </numero__autorizacao>
+    <origem__procedimento>BPA</origem__procedimento>
+    <competencia__movimento>201212</competencia__movimento>
+    <ignore__prd__flpa>0</ignore__prd__flpa>
+    <ignore__prd__flcbo>0</ignore__prd__flcbo>
+    <ignore__prd__flca>0</ignore__prd__flca>
+    <ignore__prd__flida>0</ignore__prd__flida>
+    <ignore__prd__flqt>0</ignore__prd__flqt>
+    <ignore__prd__fler>0</ignore__prd__fler>
+    <ignore__prd__flmun>0</ignore__prd__flmun>
+    <ignore__prd__flcid>0</ignore__prd__flcid>
+    <raca__paciente>99</raca__paciente>
+    <etnia__paciente>    </etnia__paciente>
+    <nacionalidade__paciente>010</nacionalidade__paciente>
+    <ignore__prd__advqt>  </ignore__prd__advqt>
+    <codigo__servico>   </codigo__servico>
+    <codigo__classificao__servico>   </codigo__classificao__servico>
+    <equipe>            </equipe>
+    <cnpj>            </cnpj>
+    <equipe__area>    </equipe__area>
+    <equipe__sequencia>        </equipe__sequencia>
+  </procedimento__realizado>
+  <procedimento__realizado>
+    <chave__primaria>
+      <cnes__unidade>2345854</cnes__unidade>
+      <competencia>201212</competencia>
+      <cns__profissional>204322890750003</cns__profissional>
+      <cbo__profissional>223293</cbo__profissional>
+      <numero__folha>002</numero__folha>
+      <sequencia__folha>03</sequencia__folha>
+    </chave__primaria>
+    <codigo__procedimento>0307030016</codigo__procedimento>
+    <data__atendimento>20121204</data__atendimento>
+    <cns__paciente>               </cns__paciente>
+    <nome__paciente>LAYANNY WESLANNY MELO GOMES</nome__paciente>
+    <data__nascimento__paciente>19931017</data__nascimento__paciente>
+    <sexo__paciente>F</sexo__paciente>
+    <cidade__paciente>260410</cidade__paciente>
+    <cid__procedimento>    </cid__procedimento>
+    <idade__paciente>19</idade__paciente>
+    <quantidade__realizada>4.0</quantidade__realizada>
+    <carater__atendimento>01</carater__atendimento>
+    <numero__autorizacao>             </numero__autorizacao>
+    <origem__procedimento>BPA</origem__procedimento>
+    <competencia__movimento>201212</competencia__movimento>
+    <ignore__prd__flpa>0</ignore__prd__flpa>
+    <ignore__prd__flcbo>0</ignore__prd__flcbo>
+    <ignore__prd__flca>0</ignore__prd__flca>
+    <ignore__prd__flida>0</ignore__prd__flida>
+    <ignore__prd__flqt>0</ignore__prd__flqt>
+    <ignore__prd__fler>0</ignore__prd__fler>
+    <ignore__prd__flmun>0</ignore__prd__flmun>
+    <ignore__prd__flcid>0</ignore__prd__flcid>
+    <raca__paciente>99</raca__paciente>
+    <etnia__paciente>    </etnia__paciente>
+    <nacionalidade__paciente>010</nacionalidade__paciente>
+    <ignore__prd__advqt>  </ignore__prd__advqt>
+    <codigo__servico>   </codigo__servico>
+    <codigo__classificao__servico>   </codigo__classificao__servico>
+    <equipe>            </equipe>
+    <cnpj>            </cnpj>
+    <equipe__area>    </equipe__area>
+    <equipe__sequencia>        </equipe__sequencia>
+  </procedimento__realizado>
+  <procedimento__realizado>
+    <chave__primaria>
+      <cnes__unidade>2345854</cnes__unidade>
+      <competencia>201212</competencia>
+      <cns__profissional>204322890750003</cns__profissional>
+      <cbo__profissional>223293</cbo__profissional>
+      <numero__folha>002</numero__folha>
+      <sequencia__folha>04</sequencia__folha>
+    </chave__primaria>
+    <codigo__procedimento>0101020074</codigo__procedimento>
+    <data__atendimento>20121204</data__atendimento>
+    <cns__paciente>               </cns__paciente>
+    <nome__paciente>LAYANNY WESLANNY MELO GOMES</nome__paciente>
+    <data__nascimento__paciente>19931017</data__nascimento__paciente>
+    <sexo__paciente>F</sexo__paciente>
+    <cidade__paciente>260410</cidade__paciente>
+    <cid__procedimento>    </cid__procedimento>
+    <idade__paciente>19</idade__paciente>
+    <quantidade__realizada>1.0</quantidade__realizada>
+    <carater__atendimento>01</carater__atendimento>
+    <numero__autorizacao>             </numero__autorizacao>
+    <origem__procedimento>BPA</origem__procedimento>
+    <competencia__movimento>201212</competencia__movimento>
+    <ignore__prd__flpa>0</ignore__prd__flpa>
+    <ignore__prd__flcbo>0</ignore__prd__flcbo>
+    <ignore__prd__flca>0</ignore__prd__flca>
+    <ignore__prd__flida>0</ignore__prd__flida>
+    <ignore__prd__flqt>0</ignore__prd__flqt>
+    <ignore__prd__fler>0</ignore__prd__fler>
+    <ignore__prd__flmun>0</ignore__prd__flmun>
+    <ignore__prd__flcid>0</ignore__prd__flcid>
+    <raca__paciente>99</raca__paciente>
+    <etnia__paciente>    </etnia__paciente>
+    <nacionalidade__paciente>010</nacionalidade__paciente>
+    <ignore__prd__advqt>  </ignore__prd__advqt>
+    <codigo__servico>   </codigo__servico>
+    <codigo__classificao__servico>   </codigo__classificao__servico>
+    <equipe>            </equipe>
+    <cnpj>            </cnpj>
+    <equipe__area>    </equipe__area>
+    <equipe__sequencia>        </equipe__sequencia>
+  </procedimento__realizado>
+  <procedimento__realizado>
+    <chave__primaria>
+      <cnes__unidade>2345854</cnes__unidade>
+      <competencia>201212</competencia>
+      <cns__profissional>204322890750003</cns__profissional>
+      <cbo__profissional>223293</cbo__profissional>
+      <numero__folha>002</numero__folha>
+      <sequencia__folha>05</sequencia__folha>
+    </chave__primaria>
+    <codigo__procedimento>0307030016</codigo__procedimento>
+    <data__atendimento>20121204</data__atendimento>
+    <cns__paciente>               </cns__paciente>
+    <nome__paciente>MARIA MADELENA FERREIRA</nome__paciente>
+    <data__nascimento__paciente>19710311</data__nascimento__paciente>
+    <sexo__paciente>F</sexo__paciente>
+    <cidade__paciente>260410</cidade__paciente>
+    <cid__procedimento>    </cid__procedimento>
+    <idade__paciente>41</idade__paciente>
+    <quantidade__realizada>1.0</quantidade__realizada>
+    <carater__atendimento>01</carater__atendimento>
+    <numero__autorizacao>             </numero__autorizacao>
+    <origem__procedimento>BPA</origem__procedimento>
+    <competencia__movimento>201212</competencia__movimento>
+    <ignore__prd__flpa>0</ignore__prd__flpa>
+    <ignore__prd__flcbo>0</ignore__prd__flcbo>
+    <ignore__prd__flca>0</ignore__prd__flca>
+    <ignore__prd__flida>0</ignore__prd__flida>
+    <ignore__prd__flqt>0</ignore__prd__flqt>
+    <ignore__prd__fler>0</ignore__prd__fler>
+    <ignore__prd__flmun>0</ignore__prd__flmun>
+    <ignore__prd__flcid>0</ignore__prd__flcid>
+    <raca__paciente>99</raca__paciente>
+    <etnia__paciente>    </etnia__paciente>
+    <nacionalidade__paciente>010</nacionalidade__paciente>
+    <ignore__prd__advqt>  </ignore__prd__advqt>
+    <codigo__servico>   </codigo__servico>
+    <codigo__classificao__servico>   </codigo__classificao__servico>
+    <equipe>            </equipe>
+    <cnpj>            </cnpj>
+    <equipe__area>    </equipe__area>
+    <equipe__sequencia>        </equipe__sequencia>
+  </procedimento__realizado>
+  <procedimento__realizado>
+    <chave__primaria>
+      <cnes__unidade>2345854</cnes__unidade>
+      <competencia>201212</competencia>
+      <cns__profissional>204322890750003</cns__profissional>
+      <cbo__profissional>223293</cbo__profissional>
+      <numero__folha>002</numero__folha>
+      <sequencia__folha>06</sequencia__folha>
+    </chave__primaria>
+    <codigo__procedimento>0301010030</codigo__procedimento>
+    <data__atendimento>20121204</data__atendimento>
+    <cns__paciente>               </cns__paciente>
+    <nome__paciente>MARIA MADALENA FERREIRA</nome__paciente>
+    <data__nascimento__paciente>19710311</data__nascimento__paciente>
+    <sexo__paciente>F</sexo__paciente>
+    <cidade__paciente>260410</cidade__paciente>
+    <cid__procedimento>    </cid__procedimento>
+    <idade__paciente>41</idade__paciente>
+    <quantidade__realizada>1.0</quantidade__realizada>
+    <carater__atendimento>01</carater__atendimento>
+    <numero__autorizacao>             </numero__autorizacao>
+    <origem__procedimento>BPA</origem__procedimento>
+    <competencia__movimento>201212</competencia__movimento>
+    <ignore__prd__flpa>0</ignore__prd__flpa>
+    <ignore__prd__flcbo>0</ignore__prd__flcbo>
+    <ignore__prd__flca>0</ignore__prd__flca>
+    <ignore__prd__flida>0</ignore__prd__flida>
+    <ignore__prd__flqt>0</ignore__prd__flqt>
+    <ignore__prd__fler>0</ignore__prd__fler>
+    <ignore__prd__flmun>0</ignore__prd__flmun>
+    <ignore__prd__flcid>0</ignore__prd__flcid>
+    <raca__paciente>99</raca__paciente>
+    <etnia__paciente>    </etnia__paciente>
+    <nacionalidade__paciente>010</nacionalidade__paciente>
+    <ignore__prd__advqt>  </ignore__prd__advqt>
+    <codigo__servico>   </codigo__servico>
+    <codigo__classificao__servico>   </codigo__classificao__servico>
+    <equipe>            </equipe>
+    <cnpj>            </cnpj>
+    <equipe__area>    </equipe__area>
+    <equipe__sequencia>        </equipe__sequencia>
+  </procedimento__realizado>
+  <procedimento__realizado>
+    <chave__primaria>
+      <cnes__unidade>2345854</cnes__unidade>
+      <competencia>201212</competencia>
+      <cns__profissional>204322890750003</cns__profissional>
+      <cbo__profissional>223293</cbo__profissional>
+      <numero__folha>002</numero__folha>
+      <sequencia__folha>07</sequencia__folha>
+    </chave__primaria>
+    <codigo__procedimento>0101020074</codigo__procedimento>
+    <data__atendimento>20121204</data__atendimento>
+    <cns__paciente>               </cns__paciente>
+    <nome__paciente>MARIA MADALENA FERREIRA</nome__paciente>
+    <data__nascimento__paciente>19710311</data__nascimento__paciente>
+    <sexo__paciente>F</sexo__paciente>
+    <cidade__paciente>260410</cidade__paciente>
+    <cid__procedimento>    </cid__procedimento>
+    <idade__paciente>41</idade__paciente>
+    <quantidade__realizada>1.0</quantidade__realizada>
+    <carater__atendimento>01</carater__atendimento>
+    <numero__autorizacao>             </numero__autorizacao>
+    <origem__procedimento>BPA</origem__procedimento>
+    <competencia__movimento>201212</competencia__movimento>
+    <ignore__prd__flpa>0</ignore__prd__flpa>
+    <ignore__prd__flcbo>0</ignore__prd__flcbo>
+    <ignore__prd__flca>0</ignore__prd__flca>
+    <ignore__prd__flida>0</ignore__prd__flida>
+    <ignore__prd__flqt>0</ignore__prd__flqt>
+    <ignore__prd__fler>0</ignore__prd__fler>
+    <ignore__prd__flmun>0</ignore__prd__flmun>
+    <ignore__prd__flcid>0</ignore__prd__flcid>
+    <raca__paciente>99</raca__paciente>
+    <etnia__paciente>    </etnia__paciente>
+    <nacionalidade__paciente>010</nacionalidade__paciente>
+    <ignore__prd__advqt>  </ignore__prd__advqt>
+    <codigo__servico>   </codigo__servico>
+    <codigo__classificao__servico>   </codigo__classificao__servico>
+    <equipe>            </equipe>
+    <cnpj>            </cnpj>
+    <equipe__area>    </equipe__area>
+    <equipe__sequencia>        </equipe__sequencia>
+  </procedimento__realizado>
+  <procedimento__realizado>
+    <chave__primaria>
+      <cnes__unidade>2345854</cnes__unidade>
+      <competencia>201212</competencia>
+      <cns__profissional>204322890750003</cns__profissional>
+      <cbo__profissional>223293</cbo__profissional>
+      <numero__folha>002</numero__folha>
+      <sequencia__folha>08</sequencia__folha>
+    </chave__primaria>
+    <codigo__procedimento>0301010030</codigo__procedimento>
+    <data__atendimento>20121204</data__atendimento>
+    <cns__paciente>161065738330003</cns__paciente>
+    <nome__paciente>ELISANGELA BENTO SILVA</nome__paciente>
+    <data__nascimento__paciente>19771011</data__nascimento__paciente>
+    <sexo__paciente>F</sexo__paciente>
+    <cidade__paciente>260410</cidade__paciente>
+    <cid__procedimento>    </cid__procedimento>
+    <idade__paciente>35</idade__paciente>
+    <quantidade__realizada>1.0</quantidade__realizada>
+    <carater__atendimento>01</carater__atendimento>
+    <numero__autorizacao>             </numero__autorizacao>
+    <origem__procedimento>BPA</origem__procedimento>
+    <competencia__movimento>201212</competencia__movimento>
+    <ignore__prd__flpa>0</ignore__prd__flpa>
+    <ignore__prd__flcbo>0</ignore__prd__flcbo>
+    <ignore__prd__flca>0</ignore__prd__flca>
+    <ignore__prd__flida>0</ignore__prd__flida>
+    <ignore__prd__flqt>0</ignore__prd__flqt>
+    <ignore__prd__fler>0</ignore__prd__fler>
+    <ignore__prd__flmun>0</ignore__prd__flmun>
+    <ignore__prd__flcid>0</ignore__prd__flcid>
+    <raca__paciente>99</raca__paciente>
+    <etnia__paciente>    </etnia__paciente>
+    <nacionalidade__paciente>010</nacionalidade__paciente>
+    <ignore__prd__advqt>  </ignore__prd__advqt>
+    <codigo__servico>   </codigo__servico>
+    <codigo__classificao__servico>   </codigo__classificao__servico>
+    <equipe>            </equipe>
+    <cnpj>            </cnpj>
+    <equipe__area>    </equipe__area>
+    <equipe__sequencia>        </equipe__sequencia>
+  </procedimento__realizado>
+  <procedimento__realizado>
+    <chave__primaria>
+      <cnes__unidade>2345854</cnes__unidade>
+      <competencia>201212</competencia>
+      <cns__profissional>204322890750003</cns__profissional>
+      <cbo__profissional>223293</cbo__profissional>
+      <numero__folha>002</numero__folha>
+      <sequencia__folha>09</sequencia__folha>
+    </chave__primaria>
+    <codigo__procedimento>0307010040</codigo__procedimento>
+    <data__atendimento>20121204</data__atendimento>
+    <cns__paciente>161065738330003</cns__paciente>
+    <nome__paciente>ELISANGELA BENTO SILVA</nome__paciente>
+    <data__nascimento__paciente>19771011</data__nascimento__paciente>
+    <sexo__paciente>F</sexo__paciente>
+    <cidade__paciente>260410</cidade__paciente>
+    <cid__procedimento>    </cid__procedimento>
+    <idade__paciente>35</idade__paciente>
+    <quantidade__realizada>1.0</quantidade__realizada>
+    <carater__atendimento>01</carater__atendimento>
+    <numero__autorizacao>             </numero__autorizacao>
+    <origem__procedimento>BPA</origem__procedimento>
+    <competencia__movimento>201212</competencia__movimento>
+    <ignore__prd__flpa>0</ignore__prd__flpa>
+    <ignore__prd__flcbo>0</ignore__prd__flcbo>
+    <ignore__prd__flca>0</ignore__prd__flca>
+    <ignore__prd__flida>0</ignore__prd__flida>
+    <ignore__prd__flqt>0</ignore__prd__flqt>
+    <ignore__prd__fler>0</ignore__prd__fler>
+    <ignore__prd__flmun>0</ignore__prd__flmun>
+    <ignore__prd__flcid>0</ignore__prd__flcid>
+    <raca__paciente>99</raca__paciente>
+    <etnia__paciente>    </etnia__paciente>
+    <nacionalidade__paciente>010</nacionalidade__paciente>
+    <ignore__prd__advqt>  </ignore__prd__advqt>
+    <codigo__servico>   </codigo__servico>
+    <codigo__classificao__servico>   </codigo__classificao__servico>
+    <equipe>            </equipe>
+    <cnpj>            </cnpj>
+    <equipe__area>    </equipe__area>
+    <equipe__sequencia>        </equipe__sequencia>
+  </procedimento__realizado>
+  <procedimento__realizado>
+    <chave__primaria>
+      <cnes__unidade>2345854</cnes__unidade>
+      <competencia>201212</competencia>
+      <cns__profissional>204322890750003</cns__profissional>
+      <cbo__profissional>223293</cbo__profissional>
+      <numero__folha>002</numero__folha>
+      <sequencia__folha>10</sequencia__folha>
+    </chave__primaria>
+    <codigo__procedimento>0307010015</codigo__procedimento>
+    <data__atendimento>20121204</data__atendimento>
+    <cns__paciente>161065738330003</cns__paciente>
+    <nome__paciente>ELISANGELA BENTO SILVA</nome__paciente>
+    <data__nascimento__paciente>19771011</data__nascimento__paciente>
+    <sexo__paciente>F</sexo__paciente>
+    <cidade__paciente>260410</cidade__paciente>
+    <cid__procedimento>    </cid__procedimento>
+    <idade__paciente>35</idade__paciente>
+    <quantidade__realizada>1.0</quantidade__realizada>
+    <carater__atendimento>01</carater__atendimento>
+    <numero__autorizacao>             </numero__autorizacao>
+    <origem__procedimento>BPA</origem__procedimento>
+    <competencia__movimento>201212</competencia__movimento>
+    <ignore__prd__flpa>0</ignore__prd__flpa>
+    <ignore__prd__flcbo>0</ignore__prd__flcbo>
+    <ignore__prd__flca>0</ignore__prd__flca>
+    <ignore__prd__flida>0</ignore__prd__flida>
+    <ignore__prd__flqt>0</ignore__prd__flqt>
+    <ignore__prd__fler>0</ignore__prd__fler>
+    <ignore__prd__flmun>0</ignore__prd__flmun>
+    <ignore__prd__flcid>0</ignore__prd__flcid>
+    <raca__paciente>99</raca__paciente>
+    <etnia__paciente>    </etnia__paciente>
+    <nacionalidade__paciente>010</nacionalidade__paciente>
+    <ignore__prd__advqt>  </ignore__prd__advqt>
+    <codigo__servico>   </codigo__servico>
+    <codigo__classificao__servico>   </codigo__classificao__servico>
+    <equipe>            </equipe>
+    <cnpj>            </cnpj>
+    <equipe__area>    </equipe__area>
+    <equipe__sequencia>        </equipe__sequencia>
+  </procedimento__realizado>
+  <procedimento__realizado>
+    <chave__primaria>
+      <cnes__unidade>2345854</cnes__unidade>
+      <competencia>201212</competencia>
+      <cns__profissional>204322890750003</cns__profissional>
+      <cbo__profissional>223293</cbo__profissional>
+      <numero__folha>002</numero__folha>
+      <sequencia__folha>11</sequencia__folha>
+    </chave__primaria>
+    <codigo__procedimento>0101020074</codigo__procedimento>
+    <data__atendimento>20121204</data__atendimento>
+    <cns__paciente>161065738330003</cns__paciente>
+    <nome__paciente>ELISANGELA BENTO SILVA</nome__paciente>
+    <data__nascimento__paciente>19771011</data__nascimento__paciente>
+    <sexo__paciente>F</sexo__paciente>
+    <cidade__paciente>260410</cidade__paciente>
+    <cid__procedimento>    </cid__procedimento>
+    <idade__paciente>35</idade__paciente>
+    <quantidade__realizada>1.0</quantidade__realizada>
+    <carater__atendimento>01</carater__atendimento>
+    <numero__autorizacao>             </numero__autorizacao>
+    <origem__procedimento>BPA</origem__procedimento>
+    <competencia__movimento>201212</competencia__movimento>
+    <ignore__prd__flpa>0</ignore__prd__flpa>
+    <ignore__prd__flcbo>0</ignore__prd__flcbo>
+    <ignore__prd__flca>0</ignore__prd__flca>
+    <ignore__prd__flida>0</ignore__prd__flida>
+    <ignore__prd__flqt>0</ignore__prd__flqt>
+    <ignore__prd__fler>0</ignore__prd__fler>
+    <ignore__prd__flmun>0</ignore__prd__flmun>
+    <ignore__prd__flcid>0</ignore__prd__flcid>
+    <raca__paciente>99</raca__paciente>
+    <etnia__paciente>    </etnia__paciente>
+    <nacionalidade__paciente>010</nacionalidade__paciente>
+    <ignore__prd__advqt>  </ignore__prd__advqt>
+    <codigo__servico>   </codigo__servico>
+    <codigo__classificao__servico>   </codigo__classificao__servico>
+    <equipe>            </equipe>
+    <cnpj>            </cnpj>
+    <equipe__area>    </equipe__area>
+    <equipe__sequencia>        </equipe__sequencia>
+  </procedimento__realizado>
+  <procedimento__realizado>
+    <chave__primaria>
+      <cnes__unidade>2345854</cnes__unidade>
+      <competencia>201212</competencia>
+      <cns__profissional>204322890750003</cns__profissional>
+      <cbo__profissional>223293</cbo__profissional>
+      <numero__folha>002</numero__folha>
+      <sequencia__folha>12</sequencia__folha>
+    </chave__primaria>
+    <codigo__procedimento>0301010153</codigo__procedimento>
+    <data__atendimento>20121204</data__atendimento>
+    <cns__paciente>898002970168679</cns__paciente>
+    <nome__paciente>EMANUELLA RIBEIRO DA SILVA</nome__paciente>
+    <data__nascimento__paciente>19950808</data__nascimento__paciente>
+    <sexo__paciente>F</sexo__paciente>
+    <cidade__paciente>260410</cidade__paciente>
+    <cid__procedimento>    </cid__procedimento>
+    <idade__paciente>17</idade__paciente>
+    <quantidade__realizada>1.0</quantidade__realizada>
+    <carater__atendimento>01</carater__atendimento>
+    <numero__autorizacao>             </numero__autorizacao>
+    <origem__procedimento>BPA</origem__procedimento>
+    <competencia__movimento>201212</competencia__movimento>
+    <ignore__prd__flpa>0</ignore__prd__flpa>
+    <ignore__prd__flcbo>0</ignore__prd__flcbo>
+    <ignore__prd__flca>0</ignore__prd__flca>
+    <ignore__prd__flida>0</ignore__prd__flida>
+    <ignore__prd__flqt>0</ignore__prd__flqt>
+    <ignore__prd__fler>0</ignore__prd__fler>
+    <ignore__prd__flmun>0</ignore__prd__flmun>
+    <ignore__prd__flcid>0</ignore__prd__flcid>
+    <raca__paciente>99</raca__paciente>
+    <etnia__paciente>    </etnia__paciente>
+    <nacionalidade__paciente>010</nacionalidade__paciente>
+    <ignore__prd__advqt>  </ignore__prd__advqt>
+    <codigo__servico>   </codigo__servico>
+    <codigo__classificao__servico>   </codigo__classificao__servico>
+    <equipe>            </equipe>
+    <cnpj>            </cnpj>
+    <equipe__area>    </equipe__area>
+    <equipe__sequencia>        </equipe__sequencia>
+  </procedimento__realizado>
+  <procedimento__realizado>
+    <chave__primaria>
+      <cnes__unidade>2345854</cnes__unidade>
+      <competencia>201212</competencia>
+      <cns__profissional>204322890750003</cns__profissional>
+      <cbo__profissional>223293</cbo__profissional>
+      <numero__folha>002</numero__folha>
+      <sequencia__folha>13</sequencia__folha>
+    </chave__primaria>
+    <codigo__procedimento>0307010015</codigo__procedimento>
+    <data__atendimento>20121204</data__atendimento>
+    <cns__paciente>898002970168679</cns__paciente>
+    <nome__paciente>EMANUELLA RIBEIRO DA SILVA</nome__paciente>
+    <data__nascimento__paciente>19950808</data__nascimento__paciente>
+    <sexo__paciente>F</sexo__paciente>
+    <cidade__paciente>260410</cidade__paciente>
+    <cid__procedimento>    </cid__procedimento>
+    <idade__paciente>17</idade__paciente>
+    <quantidade__realizada>1.0</quantidade__realizada>
+    <carater__atendimento>01</carater__atendimento>
+    <numero__autorizacao>             </numero__autorizacao>
+    <origem__procedimento>BPA</origem__procedimento>
+    <competencia__movimento>201212</competencia__movimento>
+    <ignore__prd__flpa>0</ignore__prd__flpa>
+    <ignore__prd__flcbo>0</ignore__prd__flcbo>
+    <ignore__prd__flca>0</ignore__prd__flca>
+    <ignore__prd__flida>0</ignore__prd__flida>
+    <ignore__prd__flqt>0</ignore__prd__flqt>
+    <ignore__prd__fler>0</ignore__prd__fler>
+    <ignore__prd__flmun>0</ignore__prd__flmun>
+    <ignore__prd__flcid>0</ignore__prd__flcid>
+    <raca__paciente>99</raca__paciente>
+    <etnia__paciente>    </etnia__paciente>
+    <nacionalidade__paciente>010</nacionalidade__paciente>
+    <ignore__prd__advqt>  </ignore__prd__advqt>
+    <codigo__servico>   </codigo__servico>
+    <codigo__classificao__servico>   </codigo__classificao__servico>
+    <equipe>            </equipe>
+    <cnpj>            </cnpj>
+    <equipe__area>    </equipe__area>
+    <equipe__sequencia>        </equipe__sequencia>
+  </procedimento__realizado>
+  <procedimento__realizado>
+    <chave__primaria>
+      <cnes__unidade>2345854</cnes__unidade>
+      <competencia>201212</competencia>
+      <cns__profissional>204322890750003</cns__profissional>
+      <cbo__profissional>223293</cbo__profissional>
+      <numero__folha>002</numero__folha>
+      <sequencia__folha>14</sequencia__folha>
+    </chave__primaria>
+    <codigo__procedimento>0307010040</codigo__procedimento>
+    <data__atendimento>20121204</data__atendimento>
+    <cns__paciente>898002970168679</cns__paciente>
+    <nome__paciente>EMANUELLA RIBEIRO DA SILVA</nome__paciente>
+    <data__nascimento__paciente>19950808</data__nascimento__paciente>
+    <sexo__paciente>F</sexo__paciente>
+    <cidade__paciente>260410</cidade__paciente>
+    <cid__procedimento>    </cid__procedimento>
+    <idade__paciente>17</idade__paciente>
+    <quantidade__realizada>1.0</quantidade__realizada>
+    <carater__atendimento>01</carater__atendimento>
+    <numero__autorizacao>             </numero__autorizacao>
+    <origem__procedimento>BPA</origem__procedimento>
+    <competencia__movimento>201212</competencia__movimento>
+    <ignore__prd__flpa>0</ignore__prd__flpa>
+    <ignore__prd__flcbo>0</ignore__prd__flcbo>
+    <ignore__prd__flca>0</ignore__prd__flca>
+    <ignore__prd__flida>0</ignore__prd__flida>
+    <ignore__prd__flqt>0</ignore__prd__flqt>
+    <ignore__prd__fler>0</ignore__prd__fler>
+    <ignore__prd__flmun>0</ignore__prd__flmun>
+    <ignore__prd__flcid>0</ignore__prd__flcid>
+    <raca__paciente>99</raca__paciente>
+    <etnia__paciente>    </etnia__paciente>
+    <nacionalidade__paciente>010</nacionalidade__paciente>
+    <ignore__prd__advqt>  </ignore__prd__advqt>
+    <codigo__servico>   </codigo__servico>
+    <codigo__classificao__servico>   </codigo__classificao__servico>
+    <equipe>            </equipe>
+    <cnpj>            </cnpj>
+    <equipe__area>    </equipe__area>
+    <equipe__sequencia>        </equipe__sequencia>
+  </procedimento__realizado>
+  <procedimento__realizado>
+    <chave__primaria>
+      <cnes__unidade>2345854</cnes__unidade>
+      <competencia>201212</competencia>
+      <cns__profissional>204322890750003</cns__profissional>
+      <cbo__profissional>223293</cbo__profissional>
+      <numero__folha>002</numero__folha>
+      <sequencia__folha>15</sequencia__folha>
+    </chave__primaria>
+    <codigo__procedimento>0307030016</codigo__procedimento>
+    <data__atendimento>20121204</data__atendimento>
+    <cns__paciente>898002970168679</cns__paciente>
+    <nome__paciente>EMANUELLA RIBEIRO DA SILVA</nome__paciente>
+    <data__nascimento__paciente>19950808</data__nascimento__paciente>
+    <sexo__paciente>F</sexo__paciente>
+    <cidade__paciente>260410</cidade__paciente>
+    <cid__procedimento>    </cid__procedimento>
+    <idade__paciente>17</idade__paciente>
+    <quantidade__realizada>4.0</quantidade__realizada>
+    <carater__atendimento>01</carater__atendimento>
+    <numero__autorizacao>             </numero__autorizacao>
+    <origem__procedimento>BPA</origem__procedimento>
+    <competencia__movimento>201212</competencia__movimento>
+    <ignore__prd__flpa>0</ignore__prd__flpa>
+    <ignore__prd__flcbo>0</ignore__prd__flcbo>
+    <ignore__prd__flca>0</ignore__prd__flca>
+    <ignore__prd__flida>0</ignore__prd__flida>
+    <ignore__prd__flqt>0</ignore__prd__flqt>
+    <ignore__prd__fler>0</ignore__prd__fler>
+    <ignore__prd__flmun>0</ignore__prd__flmun>
+    <ignore__prd__flcid>0</ignore__prd__flcid>
+    <raca__paciente>99</raca__paciente>
+    <etnia__paciente>    </etnia__paciente>
+    <nacionalidade__paciente>010</nacionalidade__paciente>
+    <ignore__prd__advqt>  </ignore__prd__advqt>
+    <codigo__servico>   </codigo__servico>
+    <codigo__classificao__servico>   </codigo__classificao__servico>
+    <equipe>            </equipe>
+    <cnpj>            </cnpj>
+    <equipe__area>    </equipe__area>
+    <equipe__sequencia>        </equipe__sequencia>
+  </procedimento__realizado>
+  <procedimento__realizado>
+    <chave__primaria>
+      <cnes__unidade>2345854</cnes__unidade>
+      <competencia>201212</competencia>
+      <cns__profissional>204322890750003</cns__profissional>
+      <cbo__profissional>223293</cbo__profissional>
+      <numero__folha>002</numero__folha>
+      <sequencia__folha>16</sequencia__folha>
+    </chave__primaria>
+    <codigo__procedimento>0101020074</codigo__procedimento>
+    <data__atendimento>20121204</data__atendimento>
+    <cns__paciente>898002970168679</cns__paciente>
+    <nome__paciente>EMANUELLA RIBEIRO DA SILVA</nome__paciente>
+    <data__nascimento__paciente>19950808</data__nascimento__paciente>
+    <sexo__paciente>F</sexo__paciente>
+    <cidade__paciente>260410</cidade__paciente>
+    <cid__procedimento>    </cid__procedimento>
+    <idade__paciente>17</idade__paciente>
+    <quantidade__realizada>1.0</quantidade__realizada>
+    <carater__atendimento>01</carater__atendimento>
+    <numero__autorizacao>             </numero__autorizacao>
+    <origem__procedimento>BPA</origem__procedimento>
+    <competencia__movimento>201212</competencia__movimento>
+    <ignore__prd__flpa>0</ignore__prd__flpa>
+    <ignore__prd__flcbo>0</ignore__prd__flcbo>
+    <ignore__prd__flca>0</ignore__prd__flca>
+    <ignore__prd__flida>0</ignore__prd__flida>
+    <ignore__prd__flqt>0</ignore__prd__flqt>
+    <ignore__prd__fler>0</ignore__prd__fler>
+    <ignore__prd__flmun>0</ignore__prd__flmun>
+    <ignore__prd__flcid>0</ignore__prd__flcid>
+    <raca__paciente>99</raca__paciente>
+    <etnia__paciente>    </etnia__paciente>
+    <nacionalidade__paciente>010</nacionalidade__paciente>
+    <ignore__prd__advqt>  </ignore__prd__advqt>
+    <codigo__servico>   </codigo__servico>
+    <codigo__classificao__servico>   </codigo__classificao__servico>
+    <equipe>            </equipe>
+    <cnpj>            </cnpj>
+    <equipe__area>    </equipe__area>
+    <equipe__sequencia>        </equipe__sequencia>
+  </procedimento__realizado>
+  <procedimento__realizado>
+    <chave__primaria>
+      <cnes__unidade>2345854</cnes__unidade>
+      <competencia>201212</competencia>
+      <cns__profissional>204322890750003</cns__profissional>
+      <cbo__profissional>223293</cbo__profissional>
+      <numero__folha>002</numero__folha>
+      <sequencia__folha>17</sequencia__folha>
+    </chave__primaria>
+    <codigo__procedimento>0301010030</codigo__procedimento>
+    <data__atendimento>20121205</data__atendimento>
+    <cns__paciente>706808785833327</cns__paciente>
+    <nome__paciente>ELIANE DO NASCIMENTO BARBOSA</nome__paciente>
+    <data__nascimento__paciente>19881010</data__nascimento__paciente>
+    <sexo__paciente>F</sexo__paciente>
+    <cidade__paciente>260410</cidade__paciente>
+    <cid__procedimento>    </cid__procedimento>
+    <idade__paciente>24</idade__paciente>
+    <quantidade__realizada>1.0</quantidade__realizada>
+    <carater__atendimento>01</carater__atendimento>
+    <numero__autorizacao>             </numero__autorizacao>
+    <origem__procedimento>BPA</origem__procedimento>
+    <competencia__movimento>201212</competencia__movimento>
+    <ignore__prd__flpa>0</ignore__prd__flpa>
+    <ignore__prd__flcbo>0</ignore__prd__flcbo>
+    <ignore__prd__flca>0</ignore__prd__flca>
+    <ignore__prd__flida>0</ignore__prd__flida>
+    <ignore__prd__flqt>0</ignore__prd__flqt>
+    <ignore__prd__fler>0</ignore__prd__fler>
+    <ignore__prd__flmun>0</ignore__prd__flmun>
+    <ignore__prd__flcid>0</ignore__prd__flcid>
+    <raca__paciente>99</raca__paciente>
+    <etnia__paciente>    </etnia__paciente>
+    <nacionalidade__paciente>010</nacionalidade__paciente>
+    <ignore__prd__advqt>  </ignore__prd__advqt>
+    <codigo__servico>   </codigo__servico>
+    <codigo__classificao__servico>   </codigo__classificao__servico>
+    <equipe>            </equipe>
+    <cnpj>            </cnpj>
+    <equipe__area>    </equipe__area>
+    <equipe__sequencia>        </equipe__sequencia>
+  </procedimento__realizado>
+  <procedimento__realizado>
+    <chave__primaria>
+      <cnes__unidade>2345854</cnes__unidade>
+      <competencia>201212</competencia>
+      <cns__profissional>204322890750003</cns__profissional>
+      <cbo__profissional>223293</cbo__profissional>
+      <numero__folha>002</numero__folha>
+      <sequencia__folha>18</sequencia__folha>
+    </chave__primaria>
+    <codigo__procedimento>0307010015</codigo__procedimento>
+    <data__atendimento>20121205</data__atendimento>
+    <cns__paciente>706808785833327</cns__paciente>
+    <nome__paciente>ELIANE DO NASCIMENTO BARBOSA</nome__paciente>
+    <data__nascimento__paciente>19881010</data__nascimento__paciente>
+    <sexo__paciente>F</sexo__paciente>
+    <cidade__paciente>260410</cidade__paciente>
+    <cid__procedimento>    </cid__procedimento>
+    <idade__paciente>24</idade__paciente>
+    <quantidade__realizada>1.0</quantidade__realizada>
+    <carater__atendimento>01</carater__atendimento>
+    <numero__autorizacao>             </numero__autorizacao>
+    <origem__procedimento>BPA</origem__procedimento>
+    <competencia__movimento>201212</competencia__movimento>
+    <ignore__prd__flpa>0</ignore__prd__flpa>
+    <ignore__prd__flcbo>0</ignore__prd__flcbo>
+    <ignore__prd__flca>0</ignore__prd__flca>
+    <ignore__prd__flida>0</ignore__prd__flida>
+    <ignore__prd__flqt>0</ignore__prd__flqt>
+    <ignore__prd__fler>0</ignore__prd__fler>
+    <ignore__prd__flmun>0</ignore__prd__flmun>
+    <ignore__prd__flcid>0</ignore__prd__flcid>
+    <raca__paciente>99</raca__paciente>
+    <etnia__paciente>    </etnia__paciente>
+    <nacionalidade__paciente>010</nacionalidade__paciente>
+    <ignore__prd__advqt>  </ignore__prd__advqt>
+    <codigo__servico>   </codigo__servico>
+    <codigo__classificao__servico>   </codigo__classificao__servico>
+    <equipe>            </equipe>
+    <cnpj>            </cnpj>
+    <equipe__area>    </equipe__area>
+    <equipe__sequencia>        </equipe__sequencia>
+  </procedimento__realizado>
+  <procedimento__realizado>
+    <chave__primaria>
+      <cnes__unidade>2345854</cnes__unidade>
+      <competencia>201212</competencia>
+      <cns__profissional>204322890750003</cns__profissional>
+      <cbo__profissional>223293</cbo__profissional>
+      <numero__folha>002</numero__folha>
+      <sequencia__folha>19</sequencia__folha>
+    </chave__primaria>
+    <codigo__procedimento>0307010040</codigo__procedimento>
+    <data__atendimento>20121205</data__atendimento>
+    <cns__paciente>706808785833327</cns__paciente>
+    <nome__paciente>ELIANE DO NASCIMENTO BARBOSA</nome__paciente>
+    <data__nascimento__paciente>19881010</data__nascimento__paciente>
+    <sexo__paciente>F</sexo__paciente>
+    <cidade__paciente>260410</cidade__paciente>
+    <cid__procedimento>    </cid__procedimento>
+    <idade__paciente>24</idade__paciente>
+    <quantidade__realizada>1.0</quantidade__realizada>
+    <carater__atendimento>01</carater__atendimento>
+    <numero__autorizacao>             </numero__autorizacao>
+    <origem__procedimento>BPA</origem__procedimento>
+    <competencia__movimento>201212</competencia__movimento>
+    <ignore__prd__flpa>0</ignore__prd__flpa>
+    <ignore__prd__flcbo>0</ignore__prd__flcbo>
+    <ignore__prd__flca>0</ignore__prd__flca>
+    <ignore__prd__flida>0</ignore__prd__flida>
+    <ignore__prd__flqt>0</ignore__prd__flqt>
+    <ignore__prd__fler>0</ignore__prd__fler>
+    <ignore__prd__flmun>0</ignore__prd__flmun>
+    <ignore__prd__flcid>0</ignore__prd__flcid>
+    <raca__paciente>99</raca__paciente>
+    <etnia__paciente>    </etnia__paciente>
+    <nacionalidade__paciente>010</nacionalidade__paciente>
+    <ignore__prd__advqt>  </ignore__prd__advqt>
+    <codigo__servico>   </codigo__servico>
+    <codigo__classificao__servico>   </codigo__classificao__servico>
+    <equipe>            </equipe>
+    <cnpj>            </cnpj>
+    <equipe__area>    </equipe__area>
+    <equipe__sequencia>        </equipe__sequencia>
+  </procedimento__realizado>
+  <procedimento__realizado>
+    <chave__primaria>
+      <cnes__unidade>2345854</cnes__unidade>
+      <competencia>201212</competencia>
+      <cns__profissional>204322890750003</cns__profissional>
+      <cbo__profissional>223293</cbo__profissional>
+      <numero__folha>002</numero__folha>
+      <sequencia__folha>20</sequencia__folha>
+    </chave__primaria>
+    <codigo__procedimento>0101020074</codigo__procedimento>
+    <data__atendimento>20121205</data__atendimento>
+    <cns__paciente>706808785833327</cns__paciente>
+    <nome__paciente>ELIANE DO NASCIMENTO BARBOSA</nome__paciente>
+    <data__nascimento__paciente>19881010</data__nascimento__paciente>
+    <sexo__paciente>F</sexo__paciente>
+    <cidade__paciente>260410</cidade__paciente>
+    <cid__procedimento>    </cid__procedimento>
+    <idade__paciente>24</idade__paciente>
+    <quantidade__realizada>1.0</quantidade__realizada>
+    <carater__atendimento>01</carater__atendimento>
+    <numero__autorizacao>             </numero__autorizacao>
+    <origem__procedimento>BPA</origem__procedimento>
+    <competencia__movimento>201212</competencia__movimento>
+    <ignore__prd__flpa>0</ignore__prd__flpa>
+    <ignore__prd__flcbo>0</ignore__prd__flcbo>
+    <ignore__prd__flca>0</ignore__prd__flca>
+    <ignore__prd__flida>0</ignore__prd__flida>
+    <ignore__prd__flqt>0</ignore__prd__flqt>
+    <ignore__prd__fler>0</ignore__prd__fler>
+    <ignore__prd__flmun>0</ignore__prd__flmun>
+    <ignore__prd__flcid>0</ignore__prd__flcid>
+    <raca__paciente>99</raca__paciente>
+    <etnia__paciente>    </etnia__paciente>
+    <nacionalidade__paciente>010</nacionalidade__paciente>
+    <ignore__prd__advqt>  </ignore__prd__advqt>
+    <codigo__servico>   </codigo__servico>
+    <codigo__classificao__servico>   </codigo__classificao__servico>
+    <equipe>            </equipe>
+    <cnpj>            </cnpj>
+    <equipe__area>    </equipe__area>
+    <equipe__sequencia>        </equipe__sequencia>
+  </procedimento__realizado>
+  <procedimento__realizado>
+    <chave__primaria>
+      <cnes__unidade>2345854</cnes__unidade>
+      <competencia>201212</competencia>
+      <cns__profissional>204322890750003</cns__profissional>
+      <cbo__profissional>223293</cbo__profissional>
+      <numero__folha>003</numero__folha>
+      <sequencia__folha>01</sequencia__folha>
+    </chave__primaria>
+    <codigo__procedimento>0301010030</codigo__procedimento>
+    <data__atendimento>20121205</data__atendimento>
+    <cns__paciente>898003714153863</cns__paciente>
+    <nome__paciente>TACIANA PATRICIA DA SILVA</nome__paciente>
+    <data__nascimento__paciente>19880218</data__nascimento__paciente>
+    <sexo__paciente>F</sexo__paciente>
+    <cidade__paciente>260410</cidade__paciente>
+    <cid__procedimento>    </cid__procedimento>
+    <idade__paciente>24</idade__paciente>
+    <quantidade__realizada>1.0</quantidade__realizada>
+    <carater__atendimento>01</carater__atendimento>
+    <numero__autorizacao>             </numero__autorizacao>
+    <origem__procedimento>BPA</origem__procedimento>
+    <competencia__movimento>201212</competencia__movimento>
+    <ignore__prd__flpa>0</ignore__prd__flpa>
+    <ignore__prd__flcbo>0</ignore__prd__flcbo>
+    <ignore__prd__flca>0</ignore__prd__flca>
+    <ignore__prd__flida>0</ignore__prd__flida>
+    <ignore__prd__flqt>0</ignore__prd__flqt>
+    <ignore__prd__fler>0</ignore__prd__fler>
+    <ignore__prd__flmun>0</ignore__prd__flmun>
+    <ignore__prd__flcid>0</ignore__prd__flcid>
+    <raca__paciente>99</raca__paciente>
+    <etnia__paciente>    </etnia__paciente>
+    <nacionalidade__paciente>010</nacionalidade__paciente>
+    <ignore__prd__advqt>  </ignore__prd__advqt>
+    <codigo__servico>   </codigo__servico>
+    <codigo__classificao__servico>   </codigo__classificao__servico>
+    <equipe>            </equipe>
+    <cnpj>            </cnpj>
+    <equipe__area>    </equipe__area>
+    <equipe__sequencia>        </equipe__sequencia>
+  </procedimento__realizado>
+  <procedimento__realizado>
+    <chave__primaria>
+      <cnes__unidade>2345854</cnes__unidade>
+      <competencia>201212</competencia>
+      <cns__profissional>204322890750003</cns__profissional>
+      <cbo__profissional>223293</cbo__profissional>
+      <numero__folha>003</numero__folha>
+      <sequencia__folha>02</sequencia__folha>
+    </chave__primaria>
+    <codigo__procedimento>0307010015</codigo__procedimento>
+    <data__atendimento>20121205</data__atendimento>
+    <cns__paciente>898003714153863</cns__paciente>
+    <nome__paciente>TACIANA PATRICIA DA SILVA</nome__paciente>
+    <data__nascimento__paciente>19880218</data__nascimento__paciente>
+    <sexo__paciente>F</sexo__paciente>
+    <cidade__paciente>260410</cidade__paciente>
+    <cid__procedimento>    </cid__procedimento>
+    <idade__paciente>24</idade__paciente>
+    <quantidade__realizada>1.0</quantidade__realizada>
+    <carater__atendimento>01</carater__atendimento>
+    <numero__autorizacao>             </numero__autorizacao>
+    <origem__procedimento>BPA</origem__procedimento>
+    <competencia__movimento>201212</competencia__movimento>
+    <ignore__prd__flpa>0</ignore__prd__flpa>
+    <ignore__prd__flcbo>0</ignore__prd__flcbo>
+    <ignore__prd__flca>0</ignore__prd__flca>
+    <ignore__prd__flida>0</ignore__prd__flida>
+    <ignore__prd__flqt>0</ignore__prd__flqt>
+    <ignore__prd__fler>0</ignore__prd__fler>
+    <ignore__prd__flmun>0</ignore__prd__flmun>
+    <ignore__prd__flcid>0</ignore__prd__flcid>
+    <raca__paciente>99</raca__paciente>
+    <etnia__paciente>    </etnia__paciente>
+    <nacionalidade__paciente>010</nacionalidade__paciente>
+    <ignore__prd__advqt>  </ignore__prd__advqt>
+    <codigo__servico>   </codigo__servico>
+    <codigo__classificao__servico>   </codigo__classificao__servico>
+    <equipe>            </equipe>
+    <cnpj>            </cnpj>
+    <equipe__area>    </equipe__area>
+    <equipe__sequencia>        </equipe__sequencia>
+  </procedimento__realizado>
+  <procedimento__realizado>
+    <chave__primaria>
+      <cnes__unidade>2345854</cnes__unidade>
+      <competencia>201212</competencia>
+      <cns__profissional>204322890750003</cns__profissional>
+      <cbo__profissional>223293</cbo__profissional>
+      <numero__folha>003</numero__folha>
+      <sequencia__folha>03</sequencia__folha>
+    </chave__primaria>
+    <codigo__procedimento>0101020090</codigo__procedimento>
+    <data__atendimento>20121205</data__atendimento>
+    <cns__paciente>898003714153863</cns__paciente>
+    <nome__paciente>TACIANA PATRICIA DA SILVA</nome__paciente>
+    <data__nascimento__paciente>19880218</data__nascimento__paciente>
+    <sexo__paciente>F</sexo__paciente>
+    <cidade__paciente>260410</cidade__paciente>
+    <cid__procedimento>    </cid__procedimento>
+    <idade__paciente>24</idade__paciente>
+    <quantidade__realizada>1.0</quantidade__realizada>
+    <carater__atendimento>01</carater__atendimento>
+    <numero__autorizacao>             </numero__autorizacao>
+    <origem__procedimento>BPA</origem__procedimento>
+    <competencia__movimento>201212</competencia__movimento>
+    <ignore__prd__flpa>0</ignore__prd__flpa>
+    <ignore__prd__flcbo>0</ignore__prd__flcbo>
+    <ignore__prd__flca>0</ignore__prd__flca>
+    <ignore__prd__flida>0</ignore__prd__flida>
+    <ignore__prd__flqt>0</ignore__prd__flqt>
+    <ignore__prd__fler>0</ignore__prd__fler>
+    <ignore__prd__flmun>0</ignore__prd__flmun>
+    <ignore__prd__flcid>0</ignore__prd__flcid>
+    <raca__paciente>99</raca__paciente>
+    <etnia__paciente>    </etnia__paciente>
+    <nacionalidade__paciente>010</nacionalidade__paciente>
+    <ignore__prd__advqt>  </ignore__prd__advqt>
+    <codigo__servico>   </codigo__servico>
+    <codigo__classificao__servico>   </codigo__classificao__servico>
+    <equipe>            </equipe>
+    <cnpj>            </cnpj>
+    <equipe__area>    </equipe__area>
+    <equipe__sequencia>        </equipe__sequencia>
+  </procedimento__realizado>
+  <procedimento__realizado>
+    <chave__primaria>
+      <cnes__unidade>2345854</cnes__unidade>
+      <competencia>201212</competencia>
+      <cns__profissional>204322890750003</cns__profissional>
+      <cbo__profissional>223293</cbo__profissional>
+      <numero__folha>003</numero__folha>
+      <sequencia__folha>04</sequencia__folha>
+    </chave__primaria>
+    <codigo__procedimento>0101020074</codigo__procedimento>
+    <data__atendimento>20121205</data__atendimento>
+    <cns__paciente>898003714153863</cns__paciente>
+    <nome__paciente>TACIANA PATRICIA DA SILVA</nome__paciente>
+    <data__nascimento__paciente>19880218</data__nascimento__paciente>
+    <sexo__paciente>F</sexo__paciente>
+    <cidade__paciente>260410</cidade__paciente>
+    <cid__procedimento>    </cid__procedimento>
+    <idade__paciente>24</idade__paciente>
+    <quantidade__realizada>1.0</quantidade__realizada>
+    <carater__atendimento>01</carater__atendimento>
+    <numero__autorizacao>             </numero__autorizacao>
+    <origem__procedimento>BPA</origem__procedimento>
+    <competencia__movimento>201212</competencia__movimento>
+    <ignore__prd__flpa>0</ignore__prd__flpa>
+    <ignore__prd__flcbo>0</ignore__prd__flcbo>
+    <ignore__prd__flca>0</ignore__prd__flca>
+    <ignore__prd__flida>0</ignore__prd__flida>
+    <ignore__prd__flqt>0</ignore__prd__flqt>
+    <ignore__prd__fler>0</ignore__prd__fler>
+    <ignore__prd__flmun>0</ignore__prd__flmun>
+    <ignore__prd__flcid>0</ignore__prd__flcid>
+    <raca__paciente>99</raca__paciente>
+    <etnia__paciente>    </etnia__paciente>
+    <nacionalidade__paciente>010</nacionalidade__paciente>
+    <ignore__prd__advqt>  </ignore__prd__advqt>
+    <codigo__servico>   </codigo__servico>
+    <codigo__classificao__servico>   </codigo__classificao__servico>
+    <equipe>            </equipe>
+    <cnpj>            </cnpj>
+    <equipe__area>    </equipe__area>
+    <equipe__sequencia>        </equipe__sequencia>
+  </procedimento__realizado>
+  <procedimento__realizado>
+    <chave__primaria>
+      <cnes__unidade>2345854</cnes__unidade>
+      <competencia>201212</competencia>
+      <cns__profissional>204322890750003</cns__profissional>
+      <cbo__profissional>223293</cbo__profissional>
+      <numero__folha>003</numero__folha>
+      <sequencia__folha>05</sequencia__folha>
+    </chave__primaria>
+    <codigo__procedimento>0301010153</codigo__procedimento>
+    <data__atendimento>20121205</data__atendimento>
+    <cns__paciente>124297159980001</cns__paciente>
+    <nome__paciente>MARIA SONIA SILVA             </nome__paciente>
+    <data__nascimento__paciente>19691126</data__nascimento__paciente>
+    <sexo__paciente>F</sexo__paciente>
+    <cidade__paciente>260410</cidade__paciente>
+    <cid__procedimento>    </cid__procedimento>
+    <idade__paciente>43</idade__paciente>
+    <quantidade__realizada>1.0</quantidade__realizada>
+    <carater__atendimento>01</carater__atendimento>
+    <numero__autorizacao>             </numero__autorizacao>
+    <origem__procedimento>BPA</origem__procedimento>
+    <competencia__movimento>201212</competencia__movimento>
+    <ignore__prd__flpa>0</ignore__prd__flpa>
+    <ignore__prd__flcbo>0</ignore__prd__flcbo>
+    <ignore__prd__flca>0</ignore__prd__flca>
+    <ignore__prd__flida>0</ignore__prd__flida>
+    <ignore__prd__flqt>0</ignore__prd__flqt>
+    <ignore__prd__fler>0</ignore__prd__fler>
+    <ignore__prd__flmun>0</ignore__prd__flmun>
+    <ignore__prd__flcid>0</ignore__prd__flcid>
+    <raca__paciente>99</raca__paciente>
+    <etnia__paciente>    </etnia__paciente>
+    <nacionalidade__paciente>010</nacionalidade__paciente>
+    <ignore__prd__advqt>  </ignore__prd__advqt>
+    <codigo__servico>   </codigo__servico>
+    <codigo__classificao__servico>   </codigo__classificao__servico>
+    <equipe>            </equipe>
+    <cnpj>            </cnpj>
+    <equipe__area>    </equipe__area>
+    <equipe__sequencia>        </equipe__sequencia>
+  </procedimento__realizado>
+  <procedimento__realizado>
+    <chave__primaria>
+      <cnes__unidade>2345854</cnes__unidade>
+      <competencia>201212</competencia>
+      <cns__profissional>204322890750003</cns__profissional>
+      <cbo__profissional>223293</cbo__profissional>
+      <numero__folha>003</numero__folha>
+      <sequencia__folha>06</sequencia__folha>
+    </chave__primaria>
+    <codigo__procedimento>0101020090</codigo__procedimento>
+    <data__atendimento>20121205</data__atendimento>
+    <cns__paciente>124297159980001</cns__paciente>
+    <nome__paciente>MARIA SONIA SILVA             </nome__paciente>
+    <data__nascimento__paciente>19691126</data__nascimento__paciente>
+    <sexo__paciente>F</sexo__paciente>
+    <cidade__paciente>260410</cidade__paciente>
+    <cid__procedimento>    </cid__procedimento>
+    <idade__paciente>43</idade__paciente>
+    <quantidade__realizada>1.0</quantidade__realizada>
+    <carater__atendimento>01</carater__atendimento>
+    <numero__autorizacao>             </numero__autorizacao>
+    <origem__procedimento>BPA</origem__procedimento>
+    <competencia__movimento>201212</competencia__movimento>
+    <ignore__prd__flpa>0</ignore__prd__flpa>
+    <ignore__prd__flcbo>0</ignore__prd__flcbo>
+    <ignore__prd__flca>0</ignore__prd__flca>
+    <ignore__prd__flida>0</ignore__prd__flida>
+    <ignore__prd__flqt>0</ignore__prd__flqt>
+    <ignore__prd__fler>0</ignore__prd__fler>
+    <ignore__prd__flmun>0</ignore__prd__flmun>
+    <ignore__prd__flcid>0</ignore__prd__flcid>
+    <raca__paciente>99</raca__paciente>
+    <etnia__paciente>    </etnia__paciente>
+    <nacionalidade__paciente>010</nacionalidade__paciente>
+    <ignore__prd__advqt>  </ignore__prd__advqt>
+    <codigo__servico>   </codigo__servico>
+    <codigo__classificao__servico>   </codigo__classificao__servico>
+    <equipe>            </equipe>
+    <cnpj>            </cnpj>
+    <equipe__area>    </equipe__area>
+    <equipe__sequencia>        </equipe__sequencia>
+  </procedimento__realizado>
+  <procedimento__realizado>
+    <chave__primaria>
+      <cnes__unidade>2345854</cnes__unidade>
+      <competencia>201212</competencia>
+      <cns__profissional>204322890750003</cns__profissional>
+      <cbo__profissional>223293</cbo__profissional>
+      <numero__folha>003</numero__folha>
+      <sequencia__folha>07</sequencia__folha>
+    </chave__primaria>
+    <codigo__procedimento>0307010015</codigo__procedimento>
+    <data__atendimento>20121205</data__atendimento>
+    <cns__paciente>124297159980001</cns__paciente>
+    <nome__paciente>MARIA SONIA SILVA             </nome__paciente>
+    <data__nascimento__paciente>19691126</data__nascimento__paciente>
+    <sexo__paciente>F</sexo__paciente>
+    <cidade__paciente>260410</cidade__paciente>
+    <cid__procedimento>    </cid__procedimento>
+    <idade__paciente>43</idade__paciente>
+    <quantidade__realizada>1.0</quantidade__realizada>
+    <carater__atendimento>01</carater__atendimento>
+    <numero__autorizacao>             </numero__autorizacao>
+    <origem__procedimento>BPA</origem__procedimento>
+    <competencia__movimento>201212</competencia__movimento>
+    <ignore__prd__flpa>0</ignore__prd__flpa>
+    <ignore__prd__flcbo>0</ignore__prd__flcbo>
+    <ignore__prd__flca>0</ignore__prd__flca>
+    <ignore__prd__flida>0</ignore__prd__flida>
+    <ignore__prd__flqt>0</ignore__prd__flqt>
+    <ignore__prd__fler>0</ignore__prd__fler>
+    <ignore__prd__flmun>0</ignore__prd__flmun>
+    <ignore__prd__flcid>0</ignore__prd__flcid>
+    <raca__paciente>99</raca__paciente>
+    <etnia__paciente>    </etnia__paciente>
+    <nacionalidade__paciente>010</nacionalidade__paciente>
+    <ignore__prd__advqt>  </ignore__prd__advqt>
+    <codigo__servico>   </codigo__servico>
+    <codigo__classificao__servico>   </codigo__classificao__servico>
+    <equipe>            </equipe>
+    <cnpj>            </cnpj>
+    <equipe__area>    </equipe__area>
+    <equipe__sequencia>        </equipe__sequencia>
+  </procedimento__realizado>
+  <procedimento__realizado>
+    <chave__primaria>
+      <cnes__unidade>2345854</cnes__unidade>
+      <competencia>201212</competencia>
+      <cns__profissional>204322890750003</cns__profissional>
+      <cbo__profissional>223293</cbo__profissional>
+      <numero__folha>003</numero__folha>
+      <sequencia__folha>08</sequencia__folha>
+    </chave__primaria>
+    <codigo__procedimento>0101020074</codigo__procedimento>
+    <data__atendimento>20121205</data__atendimento>
+    <cns__paciente>124297159980001</cns__paciente>
+    <nome__paciente>MARIA SONIA SILVA             </nome__paciente>
+    <data__nascimento__paciente>19691126</data__nascimento__paciente>
+    <sexo__paciente>F</sexo__paciente>
+    <cidade__paciente>260410</cidade__paciente>
+    <cid__procedimento>    </cid__procedimento>
+    <idade__paciente>43</idade__paciente>
+    <quantidade__realizada>1.0</quantidade__realizada>
+    <carater__atendimento>01</carater__atendimento>
+    <numero__autorizacao>             </numero__autorizacao>
+    <origem__procedimento>BPA</origem__procedimento>
+    <competencia__movimento>201212</competencia__movimento>
+    <ignore__prd__flpa>0</ignore__prd__flpa>
+    <ignore__prd__flcbo>0</ignore__prd__flcbo>
+    <ignore__prd__flca>0</ignore__prd__flca>
+    <ignore__prd__flida>0</ignore__prd__flida>
+    <ignore__prd__flqt>0</ignore__prd__flqt>
+    <ignore__prd__fler>0</ignore__prd__fler>
+    <ignore__prd__flmun>0</ignore__prd__flmun>
+    <ignore__prd__flcid>0</ignore__prd__flcid>
+    <raca__paciente>99</raca__paciente>
+    <etnia__paciente>    </etnia__paciente>
+    <nacionalidade__paciente>010</nacionalidade__paciente>
+    <ignore__prd__advqt>  </ignore__prd__advqt>
+    <codigo__servico>   </codigo__servico>
+    <codigo__classificao__servico>   </codigo__classificao__servico>
+    <equipe>            </equipe>
+    <cnpj>            </cnpj>
+    <equipe__area>    </equipe__area>
+    <equipe__sequencia>        </equipe__sequencia>
+  </procedimento__realizado>
+  <procedimento__realizado>
+    <chave__primaria>
+      <cnes__unidade>2345854</cnes__unidade>
+      <competencia>201212</competencia>
+      <cns__profissional>204322890750003</cns__profissional>
+      <cbo__profissional>223293</cbo__profissional>
+      <numero__folha>003</numero__folha>
+      <sequencia__folha>09</sequencia__folha>
+    </chave__primaria>
+    <codigo__procedimento>0301010153</codigo__procedimento>
+    <data__atendimento>20121205</data__atendimento>
+    <cns__paciente>               </cns__paciente>
+    <nome__paciente>MARIA CICERA DE LIMA</nome__paciente>
+    <data__nascimento__paciente>19710228</data__nascimento__paciente>
+    <sexo__paciente>F</sexo__paciente>
+    <cidade__paciente>260410</cidade__paciente>
+    <cid__procedimento>    </cid__procedimento>
+    <idade__paciente>41</idade__paciente>
+    <quantidade__realizada>1.0</quantidade__realizada>
+    <carater__atendimento>01</carater__atendimento>
+    <numero__autorizacao>             </numero__autorizacao>
+    <origem__procedimento>BPA</origem__procedimento>
+    <competencia__movimento>201212</competencia__movimento>
+    <ignore__prd__flpa>0</ignore__prd__flpa>
+    <ignore__prd__flcbo>0</ignore__prd__flcbo>
+    <ignore__prd__flca>0</ignore__prd__flca>
+    <ignore__prd__flida>0</ignore__prd__flida>
+    <ignore__prd__flqt>0</ignore__prd__flqt>
+    <ignore__prd__fler>0</ignore__prd__fler>
+    <ignore__prd__flmun>0</ignore__prd__flmun>
+    <ignore__prd__flcid>0</ignore__prd__flcid>
+    <raca__paciente>99</raca__paciente>
+    <etnia__paciente>    </etnia__paciente>
+    <nacionalidade__paciente>010</nacionalidade__paciente>
+    <ignore__prd__advqt>  </ignore__prd__advqt>
+    <codigo__servico>   </codigo__servico>
+    <codigo__classificao__servico>   </codigo__classificao__servico>
+    <equipe>            </equipe>
+    <cnpj>            </cnpj>
+    <equipe__area>    </equipe__area>
+    <equipe__sequencia>        </equipe__sequencia>
+  </procedimento__realizado>
+  <procedimento__realizado>
+    <chave__primaria>
+      <cnes__unidade>2345854</cnes__unidade>
+      <competencia>201212</competencia>
+      <cns__profissional>204322890750003</cns__profissional>
+      <cbo__profissional>223293</cbo__profissional>
+      <numero__folha>003</numero__folha>
+      <sequencia__folha>10</sequencia__folha>
+    </chave__primaria>
+    <codigo__procedimento>0307010015</codigo__procedimento>
+    <data__atendimento>20121205</data__atendimento>
+    <cns__paciente>               </cns__paciente>
+    <nome__paciente>MARIA CICERA DE LIMA</nome__paciente>
+    <data__nascimento__paciente>19710228</data__nascimento__paciente>
+    <sexo__paciente>F</sexo__paciente>
+    <cidade__paciente>260410</cidade__paciente>
+    <cid__procedimento>    </cid__procedimento>
+    <idade__paciente>41</idade__paciente>
+    <quantidade__realizada>1.0</quantidade__realizada>
+    <carater__atendimento>01</carater__atendimento>
+    <numero__autorizacao>             </numero__autorizacao>
+    <origem__procedimento>BPA</origem__procedimento>
+    <competencia__movimento>201212</competencia__movimento>
+    <ignore__prd__flpa>0</ignore__prd__flpa>
+    <ignore__prd__flcbo>0</ignore__prd__flcbo>
+    <ignore__prd__flca>0</ignore__prd__flca>
+    <ignore__prd__flida>0</ignore__prd__flida>
+    <ignore__prd__flqt>0</ignore__prd__flqt>
+    <ignore__prd__fler>0</ignore__prd__fler>
+    <ignore__prd__flmun>0</ignore__prd__flmun>
+    <ignore__prd__flcid>0</ignore__prd__flcid>
+    <raca__paciente>99</raca__paciente>
+    <etnia__paciente>    </etnia__paciente>
+    <nacionalidade__paciente>010</nacionalidade__paciente>
+    <ignore__prd__advqt>  </ignore__prd__advqt>
+    <codigo__servico>   </codigo__servico>
+    <codigo__classificao__servico>   </codigo__classificao__servico>
+    <equipe>            </equipe>
+    <cnpj>            </cnpj>
+    <equipe__area>    </equipe__area>
+    <equipe__sequencia>        </equipe__sequencia>
+  </procedimento__realizado>
+  <procedimento__realizado>
+    <chave__primaria>
+      <cnes__unidade>2345854</cnes__unidade>
+      <competencia>201212</competencia>
+      <cns__profissional>204322890750003</cns__profissional>
+      <cbo__profissional>223293</cbo__profissional>
+      <numero__folha>003</numero__folha>
+      <sequencia__folha>11</sequencia__folha>
+    </chave__primaria>
+    <codigo__procedimento>0307010031</codigo__procedimento>
+    <data__atendimento>20121205</data__atendimento>
+    <cns__paciente>               </cns__paciente>
+    <nome__paciente>MARIA CICERA DE LIMA</nome__paciente>
+    <data__nascimento__paciente>19710228</data__nascimento__paciente>
+    <sexo__paciente>F</sexo__paciente>
+    <cidade__paciente>260410</cidade__paciente>
+    <cid__procedimento>    </cid__procedimento>
+    <idade__paciente>41</idade__paciente>
+    <quantidade__realizada>1.0</quantidade__realizada>
+    <carater__atendimento>01</carater__atendimento>
+    <numero__autorizacao>             </numero__autorizacao>
+    <origem__procedimento>BPA</origem__procedimento>
+    <competencia__movimento>201212</competencia__movimento>
+    <ignore__prd__flpa>0</ignore__prd__flpa>
+    <ignore__prd__flcbo>0</ignore__prd__flcbo>
+    <ignore__prd__flca>0</ignore__prd__flca>
+    <ignore__prd__flida>0</ignore__prd__flida>
+    <ignore__prd__flqt>0</ignore__prd__flqt>
+    <ignore__prd__fler>0</ignore__prd__fler>
+    <ignore__prd__flmun>0</ignore__prd__flmun>
+    <ignore__prd__flcid>0</ignore__prd__flcid>
+    <raca__paciente>99</raca__paciente>
+    <etnia__paciente>    </etnia__paciente>
+    <nacionalidade__paciente>010</nacionalidade__paciente>
+    <ignore__prd__advqt>  </ignore__prd__advqt>
+    <codigo__servico>   </codigo__servico>
+    <codigo__classificao__servico>   </codigo__classificao__servico>
+    <equipe>            </equipe>
+    <cnpj>            </cnpj>
+    <equipe__area>    </equipe__area>
+    <equipe__sequencia>        </equipe__sequencia>
+  </procedimento__realizado>
+  <procedimento__realizado>
+    <chave__primaria>
+      <cnes__unidade>2345854</cnes__unidade>
+      <competencia>201212</competencia>
+      <cns__profissional>204322890750003</cns__profissional>
+      <cbo__profissional>223293</cbo__profissional>
+      <numero__folha>003</numero__folha>
+      <sequencia__folha>12</sequencia__folha>
+    </chave__primaria>
+    <codigo__procedimento>0101020074</codigo__procedimento>
+    <data__atendimento>20121205</data__atendimento>
+    <cns__paciente>               </cns__paciente>
+    <nome__paciente>MARIA CICERA DE LIA</nome__paciente>
+    <data__nascimento__paciente>19711228</data__nascimento__paciente>
+    <sexo__paciente>F</sexo__paciente>
+    <cidade__paciente>260410</cidade__paciente>
+    <cid__procedimento>    </cid__procedimento>
+    <idade__paciente>40</idade__paciente>
+    <quantidade__realizada>1.0</quantidade__realizada>
+    <carater__atendimento>01</carater__atendimento>
+    <numero__autorizacao>             </numero__autorizacao>
+    <origem__procedimento>BPA</origem__procedimento>
+    <competencia__movimento>201212</competencia__movimento>
+    <ignore__prd__flpa>0</ignore__prd__flpa>
+    <ignore__prd__flcbo>0</ignore__prd__flcbo>
+    <ignore__prd__flca>0</ignore__prd__flca>
+    <ignore__prd__flida>0</ignore__prd__flida>
+    <ignore__prd__flqt>0</ignore__prd__flqt>
+    <ignore__prd__fler>0</ignore__prd__fler>
+    <ignore__prd__flmun>0</ignore__prd__flmun>
+    <ignore__prd__flcid>0</ignore__prd__flcid>
+    <raca__paciente>99</raca__paciente>
+    <etnia__paciente>    </etnia__paciente>
+    <nacionalidade__paciente>010</nacionalidade__paciente>
+    <ignore__prd__advqt>  </ignore__prd__advqt>
+    <codigo__servico>   </codigo__servico>
+    <codigo__classificao__servico>   </codigo__classificao__servico>
+    <equipe>            </equipe>
+    <cnpj>            </cnpj>
+    <equipe__area>    </equipe__area>
+    <equipe__sequencia>        </equipe__sequencia>
+  </procedimento__realizado>
+  <procedimento__realizado>
+    <chave__primaria>
+      <cnes__unidade>2345854</cnes__unidade>
+      <competencia>201212</competencia>
+      <cns__profissional>204322890750003</cns__profissional>
+      <cbo__profissional>223293</cbo__profissional>
+      <numero__folha>003</numero__folha>
+      <sequencia__folha>13</sequencia__folha>
+    </chave__primaria>
+    <codigo__procedimento>0307020029</codigo__procedimento>
+    <data__atendimento>20120105</data__atendimento>
+    <cns__paciente>898000159254908</cns__paciente>
+    <nome__paciente>MARIA SIMONE DE ARAUJO</nome__paciente>
+    <data__nascimento__paciente>19870214</data__nascimento__paciente>
+    <sexo__paciente>F</sexo__paciente>
+    <cidade__paciente>260410</cidade__paciente>
+    <cid__procedimento>    </cid__procedimento>
+    <idade__paciente>24</idade__paciente>
+    <quantidade__realizada>1.0</quantidade__realizada>
+    <carater__atendimento>01</carater__atendimento>
+    <numero__autorizacao>             </numero__autorizacao>
+    <origem__procedimento>BPA</origem__procedimento>
+    <competencia__movimento>201212</competencia__movimento>
+    <ignore__prd__flpa>0</ignore__prd__flpa>
+    <ignore__prd__flcbo>0</ignore__prd__flcbo>
+    <ignore__prd__flca>0</ignore__prd__flca>
+    <ignore__prd__flida>0</ignore__prd__flida>
+    <ignore__prd__flqt>0</ignore__prd__flqt>
+    <ignore__prd__fler>0</ignore__prd__fler>
+    <ignore__prd__flmun>0</ignore__prd__flmun>
+    <ignore__prd__flcid>0</ignore__prd__flcid>
+    <raca__paciente>99</raca__paciente>
+    <etnia__paciente>    </etnia__paciente>
+    <nacionalidade__paciente>010</nacionalidade__paciente>
+    <ignore__prd__advqt>  </ignore__prd__advqt>
+    <codigo__servico>   </codigo__servico>
+    <codigo__classificao__servico>   </codigo__classificao__servico>
+    <equipe>            </equipe>
+    <cnpj>            </cnpj>
+    <equipe__area>    </equipe__area>
+    <equipe__sequencia>        </equipe__sequencia>
+  </procedimento__realizado>
+  <procedimento__realizado>
+    <chave__primaria>
+      <cnes__unidade>2345854</cnes__unidade>
+      <competencia>201212</competencia>
+      <cns__profissional>204322890750003</cns__profissional>
+      <cbo__profissional>223293</cbo__profissional>
+      <numero__folha>003</numero__folha>
+      <sequencia__folha>14</sequencia__folha>
+    </chave__primaria>
+    <codigo__procedimento>0307030016</codigo__procedimento>
+    <data__atendimento>20121205</data__atendimento>
+    <cns__paciente>898000159254908</cns__paciente>
+    <nome__paciente>MARIA SIMONE DE ARAUJO</nome__paciente>
+    <data__nascimento__paciente>19870214</data__nascimento__paciente>
+    <sexo__paciente>F</sexo__paciente>
+    <cidade__paciente>260410</cidade__paciente>
+    <cid__procedimento>    </cid__procedimento>
+    <idade__paciente>25</idade__paciente>
+    <quantidade__realizada>4.0</quantidade__realizada>
+    <carater__atendimento>01</carater__atendimento>
+    <numero__autorizacao>             </numero__autorizacao>
+    <origem__procedimento>BPA</origem__procedimento>
+    <competencia__movimento>201212</competencia__movimento>
+    <ignore__prd__flpa>0</ignore__prd__flpa>
+    <ignore__prd__flcbo>0</ignore__prd__flcbo>
+    <ignore__prd__flca>0</ignore__prd__flca>
+    <ignore__prd__flida>0</ignore__prd__flida>
+    <ignore__prd__flqt>0</ignore__prd__flqt>
+    <ignore__prd__fler>0</ignore__prd__fler>
+    <ignore__prd__flmun>0</ignore__prd__flmun>
+    <ignore__prd__flcid>0</ignore__prd__flcid>
+    <raca__paciente>99</raca__paciente>
+    <etnia__paciente>    </etnia__paciente>
+    <nacionalidade__paciente>010</nacionalidade__paciente>
+    <ignore__prd__advqt>  </ignore__prd__advqt>
+    <codigo__servico>   </codigo__servico>
+    <codigo__classificao__servico>   </codigo__classificao__servico>
+    <equipe>            </equipe>
+    <cnpj>            </cnpj>
+    <equipe__area>    </equipe__area>
+    <equipe__sequencia>        </equipe__sequencia>
+  </procedimento__realizado>
+  <procedimento__realizado>
+    <chave__primaria>
+      <cnes__unidade>2345854</cnes__unidade>
+      <competencia>201212</competencia>
+      <cns__profissional>204322890750003</cns__profissional>
+      <cbo__profissional>223293</cbo__profissional>
+      <numero__folha>003</numero__folha>
+      <sequencia__folha>15</sequencia__folha>
+    </chave__primaria>
+    <codigo__procedimento>0301010153</codigo__procedimento>
+    <data__atendimento>20121205</data__atendimento>
+    <cns__paciente>898003432647753</cns__paciente>
+    <nome__paciente>MARCOS ANTONIO DE SOUZA</nome__paciente>
+    <data__nascimento__paciente>19551205</data__nascimento__paciente>
+    <sexo__paciente>M</sexo__paciente>
+    <cidade__paciente>260410</cidade__paciente>
+    <cid__procedimento>    </cid__procedimento>
+    <idade__paciente>57</idade__paciente>
+    <quantidade__realizada>1.0</quantidade__realizada>
+    <carater__atendimento>01</carater__atendimento>
+    <numero__autorizacao>             </numero__autorizacao>
+    <origem__procedimento>BPA</origem__procedimento>
+    <competencia__movimento>201212</competencia__movimento>
+    <ignore__prd__flpa>0</ignore__prd__flpa>
+    <ignore__prd__flcbo>0</ignore__prd__flcbo>
+    <ignore__prd__flca>0</ignore__prd__flca>
+    <ignore__prd__flida>0</ignore__prd__flida>
+    <ignore__prd__flqt>0</ignore__prd__flqt>
+    <ignore__prd__fler>0</ignore__prd__fler>
+    <ignore__prd__flmun>0</ignore__prd__flmun>
+    <ignore__prd__flcid>0</ignore__prd__flcid>
+    <raca__paciente>99</raca__paciente>
+    <etnia__paciente>    </etnia__paciente>
+    <nacionalidade__paciente>010</nacionalidade__paciente>
+    <ignore__prd__advqt>  </ignore__prd__advqt>
+    <codigo__servico>   </codigo__servico>
+    <codigo__classificao__servico>   </codigo__classificao__servico>
+    <equipe>            </equipe>
+    <cnpj>            </cnpj>
+    <equipe__area>    </equipe__area>
+    <equipe__sequencia>        </equipe__sequencia>
+  </procedimento__realizado>
+  <procedimento__realizado>
+    <chave__primaria>
+      <cnes__unidade>2345854</cnes__unidade>
+      <competencia>201212</competencia>
+      <cns__profissional>204322890750003</cns__profissional>
+      <cbo__profissional>223293</cbo__profissional>
+      <numero__folha>003</numero__folha>
+      <sequencia__folha>16</sequencia__folha>
+    </chave__primaria>
+    <codigo__procedimento>0101020090</codigo__procedimento>
+    <data__atendimento>20121205</data__atendimento>
+    <cns__paciente>898003432647753</cns__paciente>
+    <nome__paciente>MARCOS ANTONIO DE SOUZA</nome__paciente>
+    <data__nascimento__paciente>19551205</data__nascimento__paciente>
+    <sexo__paciente>M</sexo__paciente>
+    <cidade__paciente>260410</cidade__paciente>
+    <cid__procedimento>    </cid__procedimento>
+    <idade__paciente>57</idade__paciente>
+    <quantidade__realizada>1.0</quantidade__realizada>
+    <carater__atendimento>01</carater__atendimento>
+    <numero__autorizacao>             </numero__autorizacao>
+    <origem__procedimento>BPA</origem__procedimento>
+    <competencia__movimento>201212</competencia__movimento>
+    <ignore__prd__flpa>0</ignore__prd__flpa>
+    <ignore__prd__flcbo>0</ignore__prd__flcbo>
+    <ignore__prd__flca>0</ignore__prd__flca>
+    <ignore__prd__flida>0</ignore__prd__flida>
+    <ignore__prd__flqt>0</ignore__prd__flqt>
+    <ignore__prd__fler>0</ignore__prd__fler>
+    <ignore__prd__flmun>0</ignore__prd__flmun>
+    <ignore__prd__flcid>0</ignore__prd__flcid>
+    <raca__paciente>99</raca__paciente>
+    <etnia__paciente>    </etnia__paciente>
+    <nacionalidade__paciente>010</nacionalidade__paciente>
+    <ignore__prd__advqt>  </ignore__prd__advqt>
+    <codigo__servico>   </codigo__servico>
+    <codigo__classificao__servico>   </codigo__classificao__servico>
+    <equipe>            </equipe>
+    <cnpj>            </cnpj>
+    <equipe__area>    </equipe__area>
+    <equipe__sequencia>        </equipe__sequencia>
+  </procedimento__realizado>
+  <procedimento__realizado>
+    <chave__primaria>
+      <cnes__unidade>2345854</cnes__unidade>
+      <competencia>201212</competencia>
+      <cns__profissional>204322890750003</cns__profissional>
+      <cbo__profissional>223293</cbo__profissional>
+      <numero__folha>003</numero__folha>
+      <sequencia__folha>17</sequencia__folha>
+    </chave__primaria>
+    <codigo__procedimento>0301010153</codigo__procedimento>
+    <data__atendimento>20121205</data__atendimento>
+    <cns__paciente>206314016140004</cns__paciente>
+    <nome__paciente>ANA PAULA DODO DA SILVA</nome__paciente>
+    <data__nascimento__paciente>19771224</data__nascimento__paciente>
+    <sexo__paciente>F</sexo__paciente>
+    <cidade__paciente>260410</cidade__paciente>
+    <cid__procedimento>    </cid__procedimento>
+    <idade__paciente>34</idade__paciente>
+    <quantidade__realizada>1.0</quantidade__realizada>
+    <carater__atendimento>01</carater__atendimento>
+    <numero__autorizacao>             </numero__autorizacao>
+    <origem__procedimento>BPA</origem__procedimento>
+    <competencia__movimento>201212</competencia__movimento>
+    <ignore__prd__flpa>0</ignore__prd__flpa>
+    <ignore__prd__flcbo>0</ignore__prd__flcbo>
+    <ignore__prd__flca>0</ignore__prd__flca>
+    <ignore__prd__flida>0</ignore__prd__flida>
+    <ignore__prd__flqt>0</ignore__prd__flqt>
+    <ignore__prd__fler>0</ignore__prd__fler>
+    <ignore__prd__flmun>0</ignore__prd__flmun>
+    <ignore__prd__flcid>0</ignore__prd__flcid>
+    <raca__paciente>99</raca__paciente>
+    <etnia__paciente>    </etnia__paciente>
+    <nacionalidade__paciente>010</nacionalidade__paciente>
+    <ignore__prd__advqt>  </ignore__prd__advqt>
+    <codigo__servico>   </codigo__servico>
+    <codigo__classificao__servico>   </codigo__classificao__servico>
+    <equipe>            </equipe>
+    <cnpj>            </cnpj>
+    <equipe__area>    </equipe__area>
+    <equipe__sequencia>        </equipe__sequencia>
+  </procedimento__realizado>
+  <procedimento__realizado>
+    <chave__primaria>
+      <cnes__unidade>2345854</cnes__unidade>
+      <competencia>201212</competencia>
+      <cns__profissional>204322890750003</cns__profissional>
+      <cbo__profissional>223293</cbo__profissional>
+      <numero__folha>003</numero__folha>
+      <sequencia__folha>18</sequencia__folha>
+    </chave__primaria>
+    <codigo__procedimento>0101020090</codigo__procedimento>
+    <data__atendimento>20121205</data__atendimento>
+    <cns__paciente>206314016140004</cns__paciente>
+    <nome__paciente>ANA PAULA DODO DA SILVA</nome__paciente>
+    <data__nascimento__paciente>19771224</data__nascimento__paciente>
+    <sexo__paciente>F</sexo__paciente>
+    <cidade__paciente>260410</cidade__paciente>
+    <cid__procedimento>    </cid__procedimento>
+    <idade__paciente>34</idade__paciente>
+    <quantidade__realizada>1.0</quantidade__realizada>
+    <carater__atendimento>01</carater__atendimento>
+    <numero__autorizacao>             </numero__autorizacao>
+    <origem__procedimento>BPA</origem__procedimento>
+    <competencia__movimento>201212</competencia__movimento>
+    <ignore__prd__flpa>0</ignore__prd__flpa>
+    <ignore__prd__flcbo>0</ignore__prd__flcbo>
+    <ignore__prd__flca>0</ignore__prd__flca>
+    <ignore__prd__flida>0</ignore__prd__flida>
+    <ignore__prd__flqt>0</ignore__prd__flqt>
+    <ignore__prd__fler>0</ignore__prd__fler>
+    <ignore__prd__flmun>0</ignore__prd__flmun>
+    <ignore__prd__flcid>0</ignore__prd__flcid>
+    <raca__paciente>99</raca__paciente>
+    <etnia__paciente>    </etnia__paciente>
+    <nacionalidade__paciente>010</nacionalidade__paciente>
+    <ignore__prd__advqt>  </ignore__prd__advqt>
+    <codigo__servico>   </codigo__servico>
+    <codigo__classificao__servico>   </codigo__classificao__servico>
+    <equipe>            </equipe>
+    <cnpj>            </cnpj>
+    <equipe__area>    </equipe__area>
+    <equipe__sequencia>        </equipe__sequencia>
+  </procedimento__realizado>
+  <procedimento__realizado>
+    <chave__primaria>
+      <cnes__unidade>2345854</cnes__unidade>
+      <competencia>201212</competencia>
+      <cns__profissional>204322890750003</cns__profissional>
+      <cbo__profissional>223293</cbo__profissional>
+      <numero__folha>003</numero__folha>
+      <sequencia__folha>19</sequencia__folha>
+    </chave__primaria>
+    <codigo__procedimento>0307010015</codigo__procedimento>
+    <data__atendimento>20121205</data__atendimento>
+    <cns__paciente>206314016140004</cns__paciente>
+    <nome__paciente>ANA PAULA DODO DA SILVA</nome__paciente>
+    <data__nascimento__paciente>19771224</data__nascimento__paciente>
+    <sexo__paciente>F</sexo__paciente>
+    <cidade__paciente>260410</cidade__paciente>
+    <cid__procedimento>    </cid__procedimento>
+    <idade__paciente>34</idade__paciente>
+    <quantidade__realizada>1.0</quantidade__realizada>
+    <carater__atendimento>01</carater__atendimento>
+    <numero__autorizacao>             </numero__autorizacao>
+    <origem__procedimento>BPA</origem__procedimento>
+    <competencia__movimento>201212</competencia__movimento>
+    <ignore__prd__flpa>0</ignore__prd__flpa>
+    <ignore__prd__flcbo>0</ignore__prd__flcbo>
+    <ignore__prd__flca>0</ignore__prd__flca>
+    <ignore__prd__flida>0</ignore__prd__flida>
+    <ignore__prd__flqt>0</ignore__prd__flqt>
+    <ignore__prd__fler>0</ignore__prd__fler>
+    <ignore__prd__flmun>0</ignore__prd__flmun>
+    <ignore__prd__flcid>0</ignore__prd__flcid>
+    <raca__paciente>99</raca__paciente>
+    <etnia__paciente>    </etnia__paciente>
+    <nacionalidade__paciente>010</nacionalidade__paciente>
+    <ignore__prd__advqt>  </ignore__prd__advqt>
+    <codigo__servico>   </codigo__servico>
+    <codigo__classificao__servico>   </codigo__classificao__servico>
+    <equipe>            </equipe>
+    <cnpj>            </cnpj>
+    <equipe__area>    </equipe__area>
+    <equipe__sequencia>        </equipe__sequencia>
+  </procedimento__realizado>
+  <procedimento__realizado>
+    <chave__primaria>
+      <cnes__unidade>2345854</cnes__unidade>
+      <competencia>201212</competencia>
+      <cns__profissional>204322890750003</cns__profissional>
+      <cbo__profissional>223293</cbo__profissional>
+      <numero__folha>003</numero__folha>
+      <sequencia__folha>20</sequencia__folha>
+    </chave__primaria>
+    <codigo__procedimento>0307010031</codigo__procedimento>
+    <data__atendimento>20121205</data__atendimento>
+    <cns__paciente>206314016140004</cns__paciente>
+    <nome__paciente>ANA PAULA DODO DA SILVA</nome__paciente>
+    <data__nascimento__paciente>19771224</data__nascimento__paciente>
+    <sexo__paciente>F</sexo__paciente>
+    <cidade__paciente>260410</cidade__paciente>
+    <cid__procedimento>    </cid__procedimento>
+    <idade__paciente>34</idade__paciente>
+    <quantidade__realizada>1.0</quantidade__realizada>
+    <carater__atendimento>01</carater__atendimento>
+    <numero__autorizacao>             </numero__autorizacao>
+    <origem__procedimento>BPA</origem__procedimento>
+    <competencia__movimento>201212</competencia__movimento>
+    <ignore__prd__flpa>0</ignore__prd__flpa>
+    <ignore__prd__flcbo>0</ignore__prd__flcbo>
+    <ignore__prd__flca>0</ignore__prd__flca>
+    <ignore__prd__flida>0</ignore__prd__flida>
+    <ignore__prd__flqt>0</ignore__prd__flqt>
+    <ignore__prd__fler>0</ignore__prd__fler>
+    <ignore__prd__flmun>0</ignore__prd__flmun>
+    <ignore__prd__flcid>0</ignore__prd__flcid>
+    <raca__paciente>99</raca__paciente>
+    <etnia__paciente>    </etnia__paciente>
+    <nacionalidade__paciente>010</nacionalidade__paciente>
+    <ignore__prd__advqt>  </ignore__prd__advqt>
+    <codigo__servico>   </codigo__servico>
+    <codigo__classificao__servico>   </codigo__classificao__servico>
+    <equipe>            </equipe>
+    <cnpj>            </cnpj>
+    <equipe__area>    </equipe__area>
+    <equipe__sequencia>        </equipe__sequencia>
+  </procedimento__realizado>
+  <procedimento__realizado>
+    <chave__primaria>
+      <cnes__unidade>2345854</cnes__unidade>
+      <competencia>201212</competencia>
+      <cns__profissional>204322890750003</cns__profissional>
+      <cbo__profissional>223293</cbo__profissional>
+      <numero__folha>004</numero__folha>
+      <sequencia__folha>02</sequencia__folha>
+    </chave__primaria>
+    <codigo__procedimento>0301010030</codigo__procedimento>
+    <data__atendimento>20121205</data__atendimento>
+    <cns__paciente>               </cns__paciente>
+    <nome__paciente>ADRIENE MARIA DE MENEZES </nome__paciente>
+    <data__nascimento__paciente>19690510</data__nascimento__paciente>
+    <sexo__paciente>F</sexo__paciente>
+    <cidade__paciente>260410</cidade__paciente>
+    <cid__procedimento>    </cid__procedimento>
+    <idade__paciente>43</idade__paciente>
+    <quantidade__realizada>1.0</quantidade__realizada>
+    <carater__atendimento>01</carater__atendimento>
+    <numero__autorizacao>             </numero__autorizacao>
+    <origem__procedimento>BPA</origem__procedimento>
+    <competencia__movimento>201212</competencia__movimento>
+    <ignore__prd__flpa>0</ignore__prd__flpa>
+    <ignore__prd__flcbo>0</ignore__prd__flcbo>
+    <ignore__prd__flca>0</ignore__prd__flca>
+    <ignore__prd__flida>0</ignore__prd__flida>
+    <ignore__prd__flqt>0</ignore__prd__flqt>
+    <ignore__prd__fler>0</ignore__prd__fler>
+    <ignore__prd__flmun>0</ignore__prd__flmun>
+    <ignore__prd__flcid>0</ignore__prd__flcid>
+    <raca__paciente>99</raca__paciente>
+    <etnia__paciente>    </etnia__paciente>
+    <nacionalidade__paciente>010</nacionalidade__paciente>
+    <ignore__prd__advqt>  </ignore__prd__advqt>
+    <codigo__servico>   </codigo__servico>
+    <codigo__classificao__servico>   </codigo__classificao__servico>
+    <equipe>            </equipe>
+    <cnpj>            </cnpj>
+    <equipe__area>    </equipe__area>
+    <equipe__sequencia>        </equipe__sequencia>
+  </procedimento__realizado>
+  <procedimento__realizado>
+    <chave__primaria>
+      <cnes__unidade>2345854</cnes__unidade>
+      <competencia>201212</competencia>
+      <cns__profissional>204322890750003</cns__profissional>
+      <cbo__profissional>223293</cbo__profissional>
+      <numero__folha>004</numero__folha>
+      <sequencia__folha>03</sequencia__folha>
+    </chave__primaria>
+    <codigo__procedimento>0301010030</codigo__procedimento>
+    <data__atendimento>20121210</data__atendimento>
+    <cns__paciente>898002956453973</cns__paciente>
+    <nome__paciente>MARILENE CONCEICAO SILVA      </nome__paciente>
+    <data__nascimento__paciente>19780912</data__nascimento__paciente>
+    <sexo__paciente>F</sexo__paciente>
+    <cidade__paciente>260410</cidade__paciente>
+    <cid__procedimento>    </cid__procedimento>
+    <idade__paciente>34</idade__paciente>
+    <quantidade__realizada>2.0</quantidade__realizada>
+    <carater__atendimento>01</carater__atendimento>
+    <numero__autorizacao>             </numero__autorizacao>
+    <origem__procedimento>BPA</origem__procedimento>
+    <competencia__movimento>201212</competencia__movimento>
+    <ignore__prd__flpa>0</ignore__prd__flpa>
+    <ignore__prd__flcbo>0</ignore__prd__flcbo>
+    <ignore__prd__flca>0</ignore__prd__flca>
+    <ignore__prd__flida>0</ignore__prd__flida>
+    <ignore__prd__flqt>0</ignore__prd__flqt>
+    <ignore__prd__fler>0</ignore__prd__fler>
+    <ignore__prd__flmun>0</ignore__prd__flmun>
+    <ignore__prd__flcid>0</ignore__prd__flcid>
+    <raca__paciente>99</raca__paciente>
+    <etnia__paciente>    </etnia__paciente>
+    <nacionalidade__paciente>010</nacionalidade__paciente>
+    <ignore__prd__advqt>  </ignore__prd__advqt>
+    <codigo__servico>   </codigo__servico>
+    <codigo__classificao__servico>   </codigo__classificao__servico>
+    <equipe>            </equipe>
+    <cnpj>            </cnpj>
+    <equipe__area>    </equipe__area>
+    <equipe__sequencia>        </equipe__sequencia>
+  </procedimento__realizado>
+  <procedimento__realizado>
+    <chave__primaria>
+      <cnes__unidade>2345854</cnes__unidade>
+      <competencia>201212</competencia>
+      <cns__profissional>204322890750003</cns__profissional>
+      <cbo__profissional>223293</cbo__profissional>
+      <numero__folha>004</numero__folha>
+      <sequencia__folha>05</sequencia__folha>
+    </chave__primaria>
+    <codigo__procedimento>0301010030</codigo__procedimento>
+    <data__atendimento>20121205</data__atendimento>
+    <cns__paciente>               </cns__paciente>
+    <nome__paciente>ZE LEZIN</nome__paciente>
+    <data__nascimento__paciente>19710401</data__nascimento__paciente>
+    <sexo__paciente>F</sexo__paciente>
+    <cidade__paciente>260410</cidade__paciente>
+    <cid__procedimento>    </cid__procedimento>
+    <idade__paciente>41</idade__paciente>
+    <quantidade__realizada>5.0</quantidade__realizada>
+    <carater__atendimento>01</carater__atendimento>
+    <numero__autorizacao>             </numero__autorizacao>
+    <origem__procedimento>BPA</origem__procedimento>
+    <competencia__movimento>201212</competencia__movimento>
+    <ignore__prd__flpa>0</ignore__prd__flpa>
+    <ignore__prd__flcbo>0</ignore__prd__flcbo>
+    <ignore__prd__flca>0</ignore__prd__flca>
+    <ignore__prd__flida>0</ignore__prd__flida>
+    <ignore__prd__flqt>0</ignore__prd__flqt>
+    <ignore__prd__fler>0</ignore__prd__fler>
+    <ignore__prd__flmun>0</ignore__prd__flmun>
+    <ignore__prd__flcid>0</ignore__prd__flcid>
+    <raca__paciente>99</raca__paciente>
+    <etnia__paciente>    </etnia__paciente>
+    <nacionalidade__paciente>010</nacionalidade__paciente>
+    <ignore__prd__advqt>  </ignore__prd__advqt>
+    <codigo__servico>   </codigo__servico>
+    <codigo__classificao__servico>   </codigo__classificao__servico>
+    <equipe>            </equipe>
+    <cnpj>            </cnpj>
+    <equipe__area>    </equipe__area>
+    <equipe__sequencia>        </equipe__sequencia>
+  </procedimento__realizado>
+  <procedimento__realizado>
+    <chave__primaria>
+      <cnes__unidade>2345854</cnes__unidade>
+      <competencia>201212</competencia>
+      <cns__profissional>204322890750003</cns__profissional>
+      <cbo__profissional>223293</cbo__profissional>
+      <numero__folha>004</numero__folha>
+      <sequencia__folha>06</sequencia__folha>
+    </chave__primaria>
+    <codigo__procedimento>0301010030</codigo__procedimento>
+    <data__atendimento>20121205</data__atendimento>
+    <cns__paciente>               </cns__paciente>
+    <nome__paciente>ZE BESTÃO </nome__paciente>
+    <data__nascimento__paciente>20000112</data__nascimento__paciente>
+    <sexo__paciente>F</sexo__paciente>
+    <cidade__paciente>260410</cidade__paciente>
+    <cid__procedimento>    </cid__procedimento>
+    <idade__paciente>12</idade__paciente>
+    <quantidade__realizada>4.0</quantidade__realizada>
+    <carater__atendimento>01</carater__atendimento>
+    <numero__autorizacao>             </numero__autorizacao>
+    <origem__procedimento>BPA</origem__procedimento>
+    <competencia__movimento>201212</competencia__movimento>
+    <ignore__prd__flpa>0</ignore__prd__flpa>
+    <ignore__prd__flcbo>0</ignore__prd__flcbo>
+    <ignore__prd__flca>0</ignore__prd__flca>
+    <ignore__prd__flida>0</ignore__prd__flida>
+    <ignore__prd__flqt>0</ignore__prd__flqt>
+    <ignore__prd__fler>0</ignore__prd__fler>
+    <ignore__prd__flmun>0</ignore__prd__flmun>
+    <ignore__prd__flcid>0</ignore__prd__flcid>
+    <raca__paciente>99</raca__paciente>
+    <etnia__paciente>    </etnia__paciente>
+    <nacionalidade__paciente>010</nacionalidade__paciente>
+    <ignore__prd__advqt>  </ignore__prd__advqt>
+    <codigo__servico>   </codigo__servico>
+    <codigo__classificao__servico>   </codigo__classificao__servico>
+    <equipe>            </equipe>
+    <cnpj>            </cnpj>
+    <equipe__area>    </equipe__area>
+    <equipe__sequencia>        </equipe__sequencia>
+  </procedimento__realizado>
+</biprocedimentorealizado__lista>

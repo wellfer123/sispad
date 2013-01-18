@@ -30,10 +30,24 @@
  * @property string $equipe_area
  * @property string $cnpj
  */
-class ProcedimentoRealizado extends CActiveRecord
+class ProcedimentoRealizado extends CActiveRecord implements XMLModel
 {
          
-         /**
+        public static $CAMPOS_FILE_ATTIBUTES=array('codigo__procedimento'=>'procedimento',
+                                          'quantidade__realizada'=>'quantidade',
+                                          'data__atendimento'=>'data_atendimento',
+                                          'cnes__unidade'=>'unidade',
+                                          'competencia'=>'competencia',
+                                          'cns__profissional'=>'profissional_cns',
+                                          'cbo__profissional'=>'profissional_cbo',
+                                          'numero__folha'=>'folha',
+                                          'sequencia__folha'=>'sequencia',
+                                          'cns__paciente'=>'paciente_cns',
+                                          'nome__paciente'=>"paciente->nome",
+                                          'idade__paciente'=>'idade_paciente'
+                                          
+                                          );
+         /*
           *
           * @var string cns da unidade 
           * @soap 
@@ -250,6 +264,7 @@ class ProcedimentoRealizado extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+                            'pac'=>array(self::HAS_ONE,'Paciente','id_paciente')
 		);
 	}
 
@@ -360,4 +375,8 @@ class ProcedimentoRealizado extends CActiveRecord
             }
             return $competencias_movimento;
         }
+
+    public function getFileFieldsToModelAttributes() {
+        return ProcedimentoRealizado::$CAMPOS_FILE_ATTIBUTES;
+    }
 }
