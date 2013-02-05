@@ -219,9 +219,8 @@ class ProcedimentoRealizadoController extends SISPADBaseController {
                                 //pega os novos dados
                                 $paci->setPaciente($pro->paciente);
                                 //guardar o paciente no vetor para atualizar posteriormente
-                                
-                                 $pacientes[] = $paci;
-                                
+
+                                $pacientes[] = $paci;
                             }
                         }
                         if (!$pacienteExiste) {
@@ -270,7 +269,7 @@ class ProcedimentoRealizadoController extends SISPADBaseController {
                         //insere a produção
                         $producaoDao->insertMultiple($producao, $con);
                         //atualiza os dados dos pacientes
-                        $pacientes=array_unique($pacientes);
+                        $pacientes = array_unique($pacientes);
                         if (count($pacientes) > 0) {
 
                             $pacienteDao->updatetMultiple($pacientes, array('id', 'cns'), $con);
@@ -295,7 +294,7 @@ class ProcedimentoRealizadoController extends SISPADBaseController {
                     $msg[] = new MessageWebService('BPAPRD002', 'Pacientes com erro: ' . $errosPaciente, MessageWebService::ERRO);
                     $msg[] = new MessageWebService('BPAPRD003', 'Produção: ' . $erros, MessageWebService::ERRO);
                     $this->_sendResponse(200, CJSON::encode($msg), 'application/json');
-                    return ;
+                    return;
                 }
             }//fim do for de $_FILES
         } catch (Exception $ex) {
@@ -313,55 +312,57 @@ class ProcedimentoRealizadoController extends SISPADBaseController {
      * Recebe o arquivo de produção do BPAI através de um post
      */
     public function actionEnvio() {
-        
-        //primeiro verifica se os parâmetros foram passados corretamente.
-        try {
-            if (isset($_POST['competencia']) && isset($_POST['unidade']) &&
-                    isset($_POST['usuario']) && isset($_POST['senha'])) {
-                //agora valida o login
-                $res = $this->login($_POST['usuario'], $_POST['senha']);
-                if (count($res) === 0) {
-                    //continua
-                    $res = $this->envioValidarCompetencia($_POST['competencia'], $_POST['unidade']);
-                    if (count($res) === 0) {
-                        //verifica se tem somente um arquivo na requisição
-                        if (count($_FILES) === 1) {
-                            //pode demorar muito
-                            set_time_limit(0);
-                            
-                            //agora faz o envio
-                            $this->envio($_POST['competencia'], $_POST['unidade']);
-                        } else {
+        //permite a chamada somente por post
+        if (Yii::app()->request->isPostRequest)
 
-                            $msg = array();
-                            $msg[] = new MessageWebService("BPAUPLOAD001", "Mais de arquivo foi enviado.", MessageWebService::ERRO);
-                            $this->_sendResponse(200, CJSON::encode($msg), 'application/json');
+        //primeiro verifica se os parâmetros foram passados corretamente.
+            try {
+                if (isset($_POST['competencia']) && isset($_POST['unidade']) &&
+                        isset($_POST['usuario']) && isset($_POST['senha'])) {
+                    //agora valida o login
+                    $res = $this->login($_POST['usuario'], $_POST['senha']);
+                    if (count($res) === 0) {
+                        //continua
+                        $res = $this->envioValidarCompetencia($_POST['competencia'], $_POST['unidade']);
+                        if (count($res) === 0) {
+                            //verifica se tem somente um arquivo na requisição
+                            if (count($_FILES) === 1) {
+                                //pode demorar muito
+                                set_time_limit(0);
+
+                                //agora faz o envio
+                                $this->envio($_POST['competencia'], $_POST['unidade']);
+                            } else {
+
+                                $msg = array();
+                                $msg[] = new MessageWebService("BPAUPLOAD001", "Mais de arquivo foi enviado.", MessageWebService::ERRO);
+                                $this->_sendResponse(200, CJSON::encode($msg), 'application/json');
+                                return;
+                            }
+                        }
+                        //erro na competência
+                        else {
+                            $this->_sendResponse(200, CJSON::encode($res), 'application/json');
                             return;
                         }
                     }
-                    //erro na competência
+                    //login incorreto
                     else {
                         $this->_sendResponse(200, CJSON::encode($res), 'application/json');
                         return;
                     }
-                }
-                //login incorreto
-                else {
-                    $this->_sendResponse(200, CJSON::encode($res), 'application/json');
+                } else {
+                    $msg = array();
+                    $msg[] = new MessageWebService("BPAPARAMETROS001", "Falta parâmetros na requisição. Informe aos desenvolvedores do sistema o problema.", MessageWebService::ERRO);
+                    $this->_sendResponse(200, CJSON::encode($msg), 'application/json');
                     return;
                 }
-            } else {
+            } catch (Exception $ex) {
+                Yii::log($ex->getMessage(), CLogger::LEVEL_ERROR);
                 $msg = array();
-                $msg[] = new MessageWebService("BPAPARAMETROS001", "Falta parâmetros na requisição. Informe aos desenvolvedores do sistema o problema.", MessageWebService::ERRO);
+                $msg[] = new MessageWebService("BPA001", "Falta parâmetros na requisição. Informe aos desenvolvedores do sistema o problema.", MessageWebService::ERRO);
                 $this->_sendResponse(200, CJSON::encode($msg), 'application/json');
-                return;
             }
-        } catch (Exception $ex) {
-            Yii::log($ex->getMessage(), CLogger::LEVEL_ERROR);
-            $msg = array();
-            $msg[] = new MessageWebService("BPA001", "Falta parâmetros na requisição. Informe aos desenvolvedores do sistema o problema.", MessageWebService::ERRO);
-            $this->_sendResponse(200, CJSON::encode($msg), 'application/json');
-        }
     }
 
     /**
