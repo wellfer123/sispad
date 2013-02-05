@@ -111,7 +111,7 @@ class ModelDao {
                         //primeiro cria a tabela temporária
                         $command = $connection->createCommand($tabela);
                         $command->execute();
-                        //depois inseri os registros
+                        //depois insere os registros
                         $command = $connection->createCommand($insert);
                         $command->execute();
                         //depois atualiza a tabela do banco
@@ -242,7 +242,7 @@ class ModelDao {
             //verifica se o atributo é diferente do campo na chave primária
             if (!in_array($atri, $primaryKey)) {
                 if ($cont !== 0) {
-                    $update = $update . ' AND tbl.' . $atri . ' = t.' . $atri;
+                    $update = $update . ' , tbl.' . $atri . ' = t.' . $atri;
                 } else {
                     $update = $update . ' SET tbl.' . $atri . ' = t.' . $atri;
                 }
