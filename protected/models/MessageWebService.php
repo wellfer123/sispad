@@ -34,6 +34,12 @@ class MessageWebService {
      */
      public $tipo;
     
+     function __construct($codigo=null, $message=null, $tipo=null) {
+         $this->codigo = $codigo;
+         $this->message = $message;
+         $this->tipo = $tipo;
+     }
+
      public function getCodigo() {
          return $this->codigo;
      }
