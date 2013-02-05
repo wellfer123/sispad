@@ -155,10 +155,14 @@ class CompetenciaController extends SISPADBaseController
 		if(Yii::app()->request->isPostRequest)
 		{
 			// we only allow deletion via POST request
+                    //Yii::log($_POST['id'].' ai get '.$_GET['id']);
                         $mo=$this->loadModel();
                         if($mo!=null){
                             $mo->ativo=  Competencia::ABERTA;
-                            $mo->save();
+                            if ($mo->save()){
+                                Competencia::model()->updateAll(array('ativo'=>Competencia::FECHADA),'mes_ano<>:mes_ano',
+                                                                array(':mes_ano'=>$mo->mes_ano));
+                            }
                         }
 
 			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
@@ -175,7 +179,7 @@ class CompetenciaController extends SISPADBaseController
 		if(Yii::app()->request->isPostRequest)
 		{
 			// we only allow  via POST request
-			$mo=$this->loadModel();
+			$mo=$mo=$this->loadModel();
                         if($mo!=null){
                             $mo->ativo=  Competencia::FECHADA;
                             $mo->save();
