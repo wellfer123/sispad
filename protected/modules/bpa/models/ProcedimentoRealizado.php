@@ -33,19 +33,37 @@
 class ProcedimentoRealizado extends CActiveRecord implements XMLModel
 {
          
-        public static $CAMPOS_FILE_ATTIBUTES=array('codigo__procedimento'=>'procedimento',
-                                          'quantidade__realizada'=>'quantidade',
-                                          'data__atendimento'=>'data_atendimento',
+        public static $CAMPOS_FILE_ATTIBUTES=array(
                                           'cnes__unidade'=>'unidade',
                                           'competencia'=>'competencia',
                                           'cns__profissional'=>'profissional_cns',
                                           'cbo__profissional'=>'profissional_cbo',
                                           'numero__folha'=>'folha',
                                           'sequencia__folha'=>'sequencia',
+                                          'codigo__procedimento'=>'procedimento',
+                                          'quantidade__realizada'=>'quantidade',
+                                          'data__atendimento'=>'data_atendimento',
                                           'cns__paciente'=>'paciente_cns',
                                           'nome__paciente'=>"paciente->nome",
-                                          'idade__paciente'=>'idade_paciente'
-                                          
+                                          'data__nascimento'=>'data_atendimento',
+                                          'sexo__paciente'=>'paciente->sexo',
+                                          'cidade__paciente'=>'paciente->cidade',
+                                          'cid__procedimento'=>'cid',
+                                          'idade__paciente'=>'idade_paciente',
+                                          'carater__atendimento'=>'caracter_atendimento',
+                                          'competencia__movimento'=>'competencia_movimento',
+                                          'numero__autorizao'=>'numero_autorizacao',
+                                          'origem__procedimento'=>'origem',
+                                          'raca__paciente'=>'paciente->raca',
+                                          'etnia__paciente'=>'paciente->etnia',
+                                          'nacionalidade__paciente'=>'paciente->nacionalidade',
+                                          'codigo__servico'=>'servico',
+                                          'codigo__classificao'=>'classificao',
+                                          'equipe'=>'equipe',
+                                          'cnpj'=>'cnpj',
+                                          'equipe_area'=>'equipe_area',
+                                          'equipe_sequencia'=>'equipe_sequencia',
+                                          'data__nascimento__paciente'=>'paciente->data_nascimento',
                                           );
          /*
           *
