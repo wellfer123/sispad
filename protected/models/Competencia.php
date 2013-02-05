@@ -10,9 +10,15 @@
 class Competencia extends CActiveRecord
 {
     
-        const FECHADA=0;
-        const ABERTA=1;
-	/**
+        const FECHADA='0';
+        const ABERTA='1';
+        
+        function __construct($mes=null,$ano=null) {
+            if ($mes != null && $ano!= null)
+            $this->mes_ano=(int) $mes.$ano;
+        }
+
+        /**
 	 * Returns the static model of the specified AR class.
 	 * @return Competencia the static model class
 	 */
@@ -38,7 +44,7 @@ class Competencia extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('mes_ano, ativo', 'numerical', 'integerOnly'=>true),
-                        array('mes_ano', 'length', 'min'=>5, 'max'=>5),
+                        array('mes_ano', 'length', 'min'=>6, 'max'=>6),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('mes_ano, ativo', 'safe', 'on'=>'search'),
@@ -123,5 +129,28 @@ class Competencia extends CActiveRecord
             $this->mes_ano=$mes_ano;
         }
         
+        /**
+         *
+         * @return boolean true se a competencia estiver aberta, caso contrário false 
+         */
+        public function isAberta(){
+            if ( $this->ativo === Competencia::ABERTA){
+                return true;
+            }
+            return false;
+        }
 
+
+        /**
+         * Recebe uma competencia no estilo ano/mes (201201) e inverte para
+         * mês/ano (12012) 
+         * Obs. transforma em um inteiro.
+         * @param string $competencia no formato anomes (201212)
+         * @return int 
+         */
+        public static function inverterCompetenciaMesAno($competencia){
+            if (strlen($competencia) === 6){
+                return (int)substr($competencia, -2).substr($competencia, 0, 4);
+            }
+        }
 }
