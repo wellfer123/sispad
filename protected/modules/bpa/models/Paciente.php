@@ -189,4 +189,41 @@ class Paciente extends CActiveRecord
         public function getCnsNome(){
             return $this->cns.'/'.$this->nome;
         }
+        /**
+         * Deleta os apcientes de acordo com os ids passados
+         * @param array $ids todos os pacientes que deve ser deletados
+         */
+        public static function deleteAllNovosESemCNS($ids){
+            $sql='DELETE FROM bpa_paciente WHERE (cns IS NULL) AND id IN(';
+            $cont=0;
+            foreach ($ids as $key => $value) {
+                if ( $cont !== 0){
+                $sql=$sql.',:'.$key;
+                }
+                else{
+                  $sql=$sql.':'.$key;  
+                }
+            }
+            $sql=$sql.');';
+            
+            $con=Yii::app()->db;
+            $transc=$con->beginTransaction();
+            try{
+                $command=$con->createCommand($sql);
+                //bind os parâmetros
+                foreach ($ids as $key => $value) {
+                    
+                $command->bindParam(':'.$key, $value, PDO::PARAM_INT);
+                }
+                $command->execute();
+                $transc->commit();
+            }catch(Exception $ex){
+                $transc->rollback();
+                Yii::log($ex->getMessage(), CLogger::LEVEL_ERROR);
+            }
+        }
+        public function __toString() {
+            return $this->cns;
+        }
+
 }
