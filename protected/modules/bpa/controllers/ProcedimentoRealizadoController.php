@@ -1,6 +1,6 @@
 <?php
 
-class ProcedimentoRealizadoController extends Controller {
+class ProcedimentoRealizadoController extends SISPADBaseController {
 
     /**
      * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -161,60 +161,290 @@ class ProcedimentoRealizadoController extends Controller {
         }
     }
 
-    public function actionTeste() {
+    private function envio($competencia, $unidade) {
+        try {
+            $ReaderXML = new ReaderElementXMLToModel();
+            $quebra = chr(13) . chr(10);
+            $erros = 0;
+            $errosPaciente = 0;
+            $producaoDao = new ModelDao('ProcedimentoRealizado');
+            $pacienteDao = new ModelDao('Paciente');
+            $ids = array();
+            $msg = array();
+            //percorre o arquivo
+            foreach ($_FILES as $fileName => $file) {
+                //verifica se arquivo contém erros
+                $msg = $this->envioValidarArquivo($file);
+                if (count($msg) !== 0) {
+                    $this->_sendResponse(200, CJSON::encode($msg), 'application/json');
+                    return;
+                }
+                //vai popular os objetos e enviar
+                $xml = simplexml_load_file($file['tmp_name']);
+                //array com a produção
+                $producao = array();
+                $pacientes = array();
+                foreach ($xml->children() as $key => $value) {
+                    try {
+                        //cria os objetos
+                        $pro = new ProcedimentoRealizado();
+                        $pro->paciente = new Paciente();
+                        //datas de cadastro e ultima atualização
+                        $pro->ultima_atualizacao = $pro->data_cadastro = $pro->paciente->ultima_atualizacao = $pro->paciente->data_cadastro = Date('Y-m-d h:i:s');
+                        //prenche
+                        $ReaderXML->preencherModeloXML($value, $pro);
+                        //verifica se o paciente existe
+                        ///===========================================================================
+                        //$pac
+                        $cns = trim($pro->paciente_cns);
+                        $pacienteExiste = false;
+                        $paci = null;
+                        $size = strlen($cns);
+                        if ($size != 15) {
+                            $pro->paciente_cns = null;
+                            $pro->paciente->cns = null;
+                        } else {
+                            $pro->paciente_cns = $cns;
+                            $pro->paciente->cns = $cns;
+                        }
 
-        $xml = simplexml_load_file(dirname(__FILE__) . '/../../../files/bck.xml');
-        echo $xml->getName() . '<br>';
-        foreach ($xml->children() as $key => $value) {
-            $pro = new ProcedimentoRealizado();
-            $pro->paciente =new Paciente();
-//                
-//                    foreach ($value->children() as $key=>$value2){
-//                        echo $value->{$key}.'<br>';
-//                    }
-            $this->preencherModeloXML($value, $pro);
-            echo $pro->procedimento . '<br>';
-            echo $pro->paciente->nome . '<br>';
+                        if ($size == 15) {
+                            $paci = Paciente::model()->find('cns=:cns', array(':cns' => $cns));
+                            if ($paci !== null) {
+                                $paci->setPaciente($pro->paciente);
+                                //paciente deve ser atualizado
+                                $pacienteExiste = true;
+                                //primeiro set o id em procedimentoRealizado
+                                $pro->id_paciente = $paci->id;
+                                //pega os novos dados
+                                $paci->setPaciente($pro->paciente);
+                                //guardar o paciente no vetor para atualizar posteriormente
+                                
+                                 $pacientes[] = $paci;
+                                
+                            }
+                        }
+                        if (!$pacienteExiste) {
+                            //paciente não tem CNS ou não está cadastrado ainda
+                            $paci = $pro->paciente;
+                            $paci->validate();
+                            if (count($paci->getErrors()) === 0) {
+                                if ($paci->save()) {
+                                    //salvou com sucesso.
+                                    $pro->paciente_cns = $paci->cns;
+                                    $pro->id_paciente = $paci->id;
+                                    //guarda o id, caso algum erro ocorra
+                                    if ($size !== 15) {
+                                        $ids[] = $paci->id;
+                                    }
+                                } else {
+                                    $errosPaciente+=1;
+                                }
+                            } else {
+                                $errosPaciente+=1;
+                            }
+                        }
+                        //=============================================================================
+                        //verifica os dados do procedimento
+                        $pro->validate();
+                        if (count($pro->getErrors()) == 0) {
+                            $producao[] = $pro;
+                        } else {
+                            $erros+=1;
+                        }
+                        //um erro de leitura de arquivo
+                    } catch (Exception $exce) {
+                        $erros+=1;
+                        Yii::log($exce->getMessage(), CLogger::LEVEL_ERROR);
+                    }
+                }//terminou o for que popula os objetos
+                //vai salvar a produção no banco de dados
+                //se não teve nenhum erro
+                if ($errosPaciente === 0 && $erros === 0) {
+                    //pegar conexão como banco
+                    $con = Yii::app()->db;
+                    $transac = $con->beginTransaction();
+                    try {
+                        //exclui a produção anterior, caso exista
+                        ProcedimentoRealizado::model()->deleteAll('competencia=:competencia AND unidade=:unidade', array(':competencia' => $competencia, ':unidade' => $unidade));
+                        //insere a produção
+                        $producaoDao->insertMultiple($producao, $con);
+                        //atualiza os dados dos pacientes
+                        $pacientes=array_unique($pacientes);
+                        if (count($pacientes) > 0) {
+
+                            $pacienteDao->updatetMultiple($pacientes, array('id', 'cns'), $con);
+                        }
+                        //commita as modificações
+                        $transac->commit();
+                        $msg[] = new MessageWebService('BPAPRD011', 'Produção enviada com suceso!', MessageWebService::SUCESSO);
+                    } catch (Exception $exc) {
+                        Yii::log($exc->getMessage(), CLogger::LEVEL_ERROR);
+                        //algum erro aconteceu, então deve reverter as modificações
+                        //e excluir aqueles pacientes que são novos e sem CNS
+                        $transac->rollback();
+                        Paciente::deleteAllNovosESemCNS($ids);
+                        $msg[] = new MessageWebService('BPAPRD012', 'Ops! Não foi possível armazenar a produção! Informe aos desenvoldedores do sistema ou tente novamente!', MessageWebService::ERRO);
+                        $this->_sendResponse(200, CJSON::encode($msg), 'application/json');
+                        return;
+                    }
+                }
+                //contém erros ou do paciente ou da produção
+                else {
+                    $msg[] = new MessageWebService('BPAPRD001', 'Produção contém erros', MessageWebService::ERRO);
+                    $msg[] = new MessageWebService('BPAPRD002', 'Pacientes com erro: ' . $errosPaciente, MessageWebService::ERRO);
+                    $msg[] = new MessageWebService('BPAPRD003', 'Produção: ' . $erros, MessageWebService::ERRO);
+                    $this->_sendResponse(200, CJSON::encode($msg), 'application/json');
+                    return ;
+                }
+            }//fim do for de $_FILES
+        } catch (Exception $ex) {
+            $msg[] = new MessageWebService('BPAPRD004', 'Ops! Ocorreu um erro inesperado.! Informe aos desenvoldedores do sistema ou tente novamente!', MessageWebService::ERRO);
+            Yii::log($ex->getMessage(), CLogger::LEVEL_ERROR);
+            $this->_sendResponse(200, CJSON::encode($msg), 'application/json');
+            return;
+        }
+        //envia as mensagens em JSON
+        $this->_sendResponse(200, CJSON::encode($msg), 'application/json');
+        return;
+    }
+
+    /**
+     * Recebe o arquivo de produção do BPAI através de um post
+     */
+    public function actionEnvio() {
+        
+        //primeiro verifica se os parâmetros foram passados corretamente.
+        try {
+            if (isset($_POST['competencia']) && isset($_POST['unidade']) &&
+                    isset($_POST['usuario']) && isset($_POST['senha'])) {
+                //agora valida o login
+                $res = $this->login($_POST['usuario'], $_POST['senha']);
+                if (count($res) === 0) {
+                    //continua
+                    $res = $this->envioValidarCompetencia($_POST['competencia'], $_POST['unidade']);
+                    if (count($res) === 0) {
+                        //verifica se tem somente um arquivo na requisição
+                        if (count($_FILES) === 1) {
+                            //pode demorar muito
+                            set_time_limit(0);
+                            
+                            //agora faz o envio
+                            $this->envio($_POST['competencia'], $_POST['unidade']);
+                        } else {
+
+                            $msg = array();
+                            $msg[] = new MessageWebService("BPAUPLOAD001", "Mais de arquivo foi enviado.", MessageWebService::ERRO);
+                            $this->_sendResponse(200, CJSON::encode($msg), 'application/json');
+                            return;
+                        }
+                    }
+                    //erro na competência
+                    else {
+                        $this->_sendResponse(200, CJSON::encode($res), 'application/json');
+                        return;
+                    }
+                }
+                //login incorreto
+                else {
+                    $this->_sendResponse(200, CJSON::encode($res), 'application/json');
+                    return;
+                }
+            } else {
+                $msg = array();
+                $msg[] = new MessageWebService("BPAPARAMETROS001", "Falta parâmetros na requisição. Informe aos desenvolvedores do sistema o problema.", MessageWebService::ERRO);
+                $this->_sendResponse(200, CJSON::encode($msg), 'application/json');
+                return;
+            }
+        } catch (Exception $ex) {
+            Yii::log($ex->getMessage(), CLogger::LEVEL_ERROR);
+            $msg = array();
+            $msg[] = new MessageWebService("BPA001", "Falta parâmetros na requisição. Informe aos desenvolvedores do sistema o problema.", MessageWebService::ERRO);
+            $this->_sendResponse(200, CJSON::encode($msg), 'application/json');
         }
     }
 
-    public function preencherModeloXML($elemento, $modelXML) {
-        if ($modelXML instanceof XMLModel) {
-            //caso base para recursividade
-            if (!is_object($elemento)){
-                return;
-            }
-            //pega os elementos filhos
-            $children = $elemento->children();
-            //verifica sem tem filhos
-            if (count($children) > 0) {
-                //pega os atributos para mapear
-                $vet = $modelXML->getFileFieldsToModelAttributes();
-                //percorre o filhos que sao as propriedades do objeto
-                foreach ($children as $no => $value) {
-                    //verifica se esse no tem outros
-                    $size=count($value);
-                    if ($size > 0) {
-                        //recursividade
-                        $this->preencherModeloXML($no, $modelXML);
-                    } else {
-                        $atributo = $vet[$no];
-                        if ($atributo != null) {
-                            //quebra o atributo, caso esse seja um objeto.
-                            $t=explode('->', $atributo);
-                            if(count($t) === 2 ){
-                                $at=$modelXML->{$t[0]};
-                                $at->{$t[1]}=$elemento->{$no};
-                                $modelXML->{$t[0]}=$at;
-                            }
-                            else{
-                                $modelXML->{$atributo} = $elemento->{$no};
-                            }
-                        }
-                    }
-                }
-            }
+    /**
+     *
+     * @param type $erro codigo do erro http
+     * @return MessageWebService[] vazio se não tiver nenhum erro.
+     */
+    private function getErroUpload($erro) {
+        $message[] = array();
+        switch ($erro) {
+            case UPLOAD_ERR_CANT_WRITE:
+                $message[] = new MessageWebService("BPAUPLOAD011", "Servidor sem permissão para escrita! Informe aos desenvolvedores.", MessageWebService::ERRO);
+                break;
+            case UPLOAD_ERR_INI_SIZE:
+                $message[] = new MessageWebService("BPAUPLOAD012", "Arquivo muito grande!", MessageWebService::ERRO);
+                break;
+            case UPLOAD_ERR_PARTIAL:
+                $message[] = new MessageWebService("BPAUPLOAD013", "O upload do arquivo foi feito parcialmente. Tente novamente.", MessageWebService::ERRO);
+                break;
+            case UPLOAD_ERR_NO_FILE:
+                $message[] = new MessageWebService("BPAUPLOAD014", "O upload do arquivo não foi feito. Tente novamente", MessageWebService::ERRO);
+                break;
+            default:
+                $message[] = new MessageWebService("BPAUPLOAD015", "Erro não identificado no arquivo!", MessageWebService::ERRO);
+                break;
         }
+        return $message;
+    }
+
+    /**
+     *
+     * @param string $competencia no formato anomes (201212)
+     * @param string $cnes da unidade
+     * @return MessageWebService[] vazio se não tiver nenhum erro. 
+     */
+    private function envioValidarCompetencia($competencia, $cnes) {
+        $msg = array();
+        //prefixo do codigo do erro
+        $com = Competencia::model()->findByPk(Competencia::inverterCompetenciaMesAno($competencia));
+        $unidade = Unidade::model()->findByPk($cnes);
+        //valida a competência
+        if ($com === null) {
+            $msg[] = new MessageWebService("BPACMP011", "Competência inexistente!", MessageWebService::ERRO);
+        } else if (!$com->isAberta()) {
+            $msg[] = new MessageWebService("BPACMP012", "A competência está fechada para o envio de produção!", MessageWebService::ERRO);
+        }
+        //
+        if ($unidade === null) {
+            $msg[] = new MessageWebService("BPACMP013", "A unidade não está cadastrada!", MessageWebService::ERRO);
+        }
+        return $msg;
+    }
+
+    private function login($usuario, $senha) {
+        $msg = array();
+        $user = User::model()->find('username=:user', array(':user' => strtoupper($usuario)));
+
+        if ($user === null) {
+            $msg[] = new MessageWebService("BPALOGIN011", "Usuário não encontrado. Informe aos desenvolvedores do sistema!", MessageWebService::ERRO);
+        } else if ($user->password !== MD5($senha)) {
+            $msg[] = new MessageWebService("BPALOGIN011", "Senha incorreta. Informe aos desenvolvedores do sistema!", MessageWebService::ERRO);
+        }
+        return $msg;
+    }
+
+    private function envioValidarArquivo($arquivo) {
+        $msg = array();
+        //verifica a extensão do arquivo
+        $temp = explode('.', $arquivo['name']);
+        // não é um arquivo XML
+        if ($temp[1] != 'xml') {
+            return $msg[] = new MessageWebService("BPAARQUIVO001", "Envie um arquivo XML!", MessageWebService::ERRO);
+        }
+        //verifica se contém algum erro durante o upload
+        if ($arquivo['error'] !== UPLOAD_ERR_OK) {
+            //recebe um vetor
+            $msg = $this->getErroUpload($arquivo['error']);
+            return $msg;
+        }
+    }
+
+    protected function getModelName() {
+        return "ProcedimentoRealizado";
     }
 
 }
