@@ -152,7 +152,25 @@ abstract class SISPADBaseController extends Controller {
         );
         return (isset($codes[$status])) ? $codes[$status] : '';
     }
+        /**
+     *Verifica se o usuário e a senha existem no banco
+     * @param string $usuario
+     * @param string $senha
+     * @return MessageWebService[] devolve um array vazio se o usuário e a senha estiverem corretos 
+     */
+    protected function login($usuario, $senha) {
+        $msg = array();
+        $user = User::model()->find('username=:user', array(':user' => strtoupper($usuario)));
 
+        if ($user === null) {
+            $msg[] = new MessageWebService("BPALOGIN011", "Usuário não encontrado.", MessageWebService::ERRO);
+        }else if($user->ativo === User::DESATIVO ){
+            $msg[] = new MessageWebService("BPALOGIN012", "Usuário desativado.", MessageWebService::ERRO);
+        } else if ($user->password !== MD5($senha)) {
+            $msg[] = new MessageWebService("BPALOGIN013", "Senha incorreta.", MessageWebService::ERRO);
+        }
+        return $msg;
+    }
 }
 
 ?>
