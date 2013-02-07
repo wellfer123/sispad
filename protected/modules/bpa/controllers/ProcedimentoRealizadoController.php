@@ -208,10 +208,9 @@ class ProcedimentoRealizadoController extends SISPADBaseController {
                             $pro->paciente->cns = $cns;
                         }
 
-                        if ($size == 15) {
+                        if ($size === 15) {
                             $paci = Paciente::model()->find('cns=:cns', array(':cns' => $cns));
                             if ($paci !== null) {
-                                $paci->setPaciente($pro->paciente);
                                 //paciente deve ser atualizado
                                 $pacienteExiste = true;
                                 //primeiro set o id em procedimentoRealizado
@@ -219,7 +218,6 @@ class ProcedimentoRealizadoController extends SISPADBaseController {
                                 //pega os novos dados
                                 $paci->setPaciente($pro->paciente);
                                 //guardar o paciente no vetor para atualizar posteriormente
-
                                 $pacientes[] = $paci;
                             }
                         }
@@ -230,7 +228,6 @@ class ProcedimentoRealizadoController extends SISPADBaseController {
                             if (count($paci->getErrors()) === 0) {
                                 if ($paci->save()) {
                                     //salvou com sucesso.
-                                    $pro->paciente_cns = $paci->cns;
                                     $pro->id_paciente = $paci->id;
                                     //guarda o id, caso algum erro ocorra
                                     if ($size !== 15) {
@@ -258,8 +255,9 @@ class ProcedimentoRealizadoController extends SISPADBaseController {
                     }
                 }//terminou o for que popula os objetos
                 //vai salvar a produção no banco de dados
-                //se não teve nenhum erro
-                if ($errosPaciente === 0 && $erros === 0) {
+                //se não teve nenhum erro e a produção tiver dados
+                $qtd=count($producao);
+                if ( ($errosPaciente === 0 && $erros === 0) &&  $qtd> 0) {
                     //pegar conexão como banco
                     $con = Yii::app()->db;
                     $transac = $con->beginTransaction();
@@ -287,6 +285,10 @@ class ProcedimentoRealizadoController extends SISPADBaseController {
                         $this->_sendResponse(200, CJSON::encode($msg), 'application/json');
                         return;
                     }
+                }else if ($qtd === 0){
+                   $msg[] = new MessageWebService('BPAPRD004', 'Não existe produção!: ', MessageWebService::ERRO);
+                    $this->_sendResponse(200, CJSON::encode($msg), 'application/json');
+                    return; 
                 }
                 //contém erros ou do paciente ou da produção
                 else {
@@ -412,18 +414,6 @@ class ProcedimentoRealizadoController extends SISPADBaseController {
         //
         if ($unidade === null) {
             $msg[] = new MessageWebService("BPACMP013", "A unidade não está cadastrada!", MessageWebService::ERRO);
-        }
-        return $msg;
-    }
-
-    private function login($usuario, $senha) {
-        $msg = array();
-        $user = User::model()->find('username=:user', array(':user' => strtoupper($usuario)));
-
-        if ($user === null) {
-            $msg[] = new MessageWebService("BPALOGIN011", "Usuário não encontrado. Informe aos desenvolvedores do sistema!", MessageWebService::ERRO);
-        } else if ($user->password !== MD5($senha)) {
-            $msg[] = new MessageWebService("BPALOGIN011", "Senha incorreta. Informe aos desenvolvedores do sistema!", MessageWebService::ERRO);
         }
         return $msg;
     }
