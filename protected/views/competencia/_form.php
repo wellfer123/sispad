@@ -11,7 +11,7 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'mes_ano'); ?>
-		<?php echo $form->textField($model,'mes_ano'); ?>
+		<?php echo $form->textField($model,'mes_ano',array('length'=>6)); ?>
 		<?php echo $form->error($model,'mes_ano'); ?>
 	</div>
 
