@@ -112,9 +112,17 @@ class PacienteController extends SISPADBaseController {
     }
 
     public function actionConsulta() {
-        if (isset($_GET['cns'])) {
-            $list = Paciente::model()->find('cns=:cns', array(':cns' => $_GET['cns']));
-            $this->_sendResponse(200, CJSON::encode($list), $this->format);
+        //verifica se a requisicao é ajax
+        if (Yii::app()->request->isPostRequest) {
+            //existe os parâmetros exigidos
+            if (isset($_POST['cns']) && isset($_POST['usuario']) && isset($_POST['senha'])) {
+                //verifica se o uruário e a senha são válidos
+                $res = $this->login($_POST['usuario'], $_POST['senha']);
+                if (count($res) === 0) {
+                    $list = Paciente::model()->find('cns=:cns', array(':cns' => $_POST['cns']));
+                    $this->_sendResponse(200, CJSON::encode($list), $this->format);
+                }
+            }
         }
     }
 
