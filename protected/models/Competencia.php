@@ -13,10 +13,10 @@ class Competencia extends CActiveRecord
         const FECHADA='0';
         const ABERTA='1';
         
-        function __construct($mes=null,$ano=null) {
-            if ($mes != null && $ano!= null)
-            $this->mes_ano=(int) $mes.$ano;
-        }
+//        function __construct($mes=null,$ano=null) {
+//            if ($mes != null && $ano!= null)
+//            $this->mes_ano=(int) $mes.$ano;
+//        }
 
         /**
 	 * Returns the static model of the specified AR class.
@@ -74,10 +74,10 @@ class Competencia extends CActiveRecord
 	}
         
         public function labelStatus(){
-            if($this->ativo== Competencia::ABERTA){
+            if($this->ativo === Competencia::ABERTA){
                 return 'ABERTA';
             }
-            else if($this->ativo==Competencia::FECHADA){
+            else if($this->ativo === Competencia::FECHADA){
                 return 'FECHADA';
             }
             return 'DESCONHECIDO';
@@ -104,7 +104,7 @@ class Competencia extends CActiveRecord
         
         public function __toString() {
             $str=(string) $this->mes_ano;
-            if(strlen($str)){
+            if(strlen($str) === 5){
                 $str="0$str";
             }
             return $str;
@@ -147,6 +147,7 @@ class Competencia extends CActiveRecord
          * Obs. transforma em um inteiro.
          * @param string $competencia no formato anomes (201212)
          * @return int 
+         * @deprecated
          */
         public static function inverterCompetenciaMesAno($competencia){
             if (strlen($competencia) === 6){
