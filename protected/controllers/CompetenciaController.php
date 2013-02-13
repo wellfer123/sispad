@@ -49,7 +49,7 @@ class CompetenciaController extends SISPADBaseController
 	 */
 	public function actionCreate()
 	{
-		$model=new Competencia;
+		$model=new Competencia();
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
