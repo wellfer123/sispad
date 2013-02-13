@@ -402,8 +402,7 @@ class ProcedimentoRealizadoController extends SISPADBaseController {
      */
     private function envioValidarCompetencia($competencia, $cnes) {
         $msg = array();
-        //prefixo do codigo do erro
-        $com = Competencia::model()->findByPk(Competencia::inverterCompetenciaMesAno($competencia));
+        $com = Competencia::model()->findByPk($competencia);
         $unidade = Unidade::model()->findByPk($cnes);
         //valida a competência
         if ($com === null) {
