@@ -180,7 +180,9 @@ class ProcedimentoRealizadoController extends SISPADBaseController {
                     return;
                 }
                 //vai popular os objetos e enviar
-                $xml = simplexml_load_file($file['tmp_name']);
+                $content = utf8_encode(file_get_contents($file['tmp_name']));
+                $xml = simplexml_load_string($content);
+                //$xml = simplexml_load_file($file['tmp_name']);
                 //array com a produção
                 $producao = array();
                 $pacientes = array();
