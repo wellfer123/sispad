@@ -164,6 +164,7 @@ class ProcedimentoRealizadoController extends SISPADBaseController {
     private function envio($competencia, $unidade) {
         try {
             $ReaderXML = new ReaderElementXMLToModel();
+            $readerJson = new ReaderKeyJSONToModel();
             $quebra = chr(13) . chr(10);
             $erros = 0;
             $errosPaciente = 0;
@@ -181,12 +182,14 @@ class ProcedimentoRealizadoController extends SISPADBaseController {
                 }
                 //vai popular os objetos e enviar
                 $content = utf8_encode(file_get_contents($file['tmp_name']));
-                $xml = simplexml_load_string($content);
+                //$xml = simplexml_load_string($content);
+                unlink($file['tmp_name']);
                 //$xml = simplexml_load_file($file['tmp_name']);
                 //array com a produção
                 $producao = array();
                 $pacientes = array();
-                foreach ($xml->children() as $key => $value) {
+                $json=CJSON::decode($content);
+                foreach ($json as $item => $value) {
                     try {
                         //cria os objetos
                         $pro = new ProcedimentoRealizado();
@@ -194,7 +197,8 @@ class ProcedimentoRealizadoController extends SISPADBaseController {
                         //datas de cadastro e ultima atualização
                         $pro->ultima_atualizacao = $pro->data_cadastro = $pro->paciente->ultima_atualizacao = $pro->paciente->data_cadastro = Date('Y-m-d h:i:s');
                         //prenche
-                        $ReaderXML->preencherModeloXML($value, $pro);
+                        //$ReaderXML->preencherModeloXML($value, $pro);
+                        $readerJson->preencherModeloJSON($value, $pro);
                         //verifica se o paciente existe
                         ///===========================================================================
                         //$pac
@@ -245,7 +249,7 @@ class ProcedimentoRealizadoController extends SISPADBaseController {
                         //=============================================================================
                         //verifica os dados do procedimento
                         $pro->validate();
-                        if (count($pro->getErrors()) == 0) {
+                        if (count($pro->getErrors()) === 0) {
                             $producao[] = $pro;
                         } else {
                             $erros+=1;
@@ -257,15 +261,17 @@ class ProcedimentoRealizadoController extends SISPADBaseController {
                     }
                 }//terminou o for que popula os objetos
                 //vai salvar a produção no banco de dados
-                //se não teve nenhum erro e a produção tiver dados
-                $qtd=count($producao);
-                if ( ($errosPaciente === 0 && $erros === 0) &&  $qtd> 0) {
+                //se não teve nenhum erro e a produção contém dados
+                //$producao=array_unique($producao);
+                $qtd=count( $producao);
+                if ( ($errosPaciente === 0 && $erros === 0) &&  $qtd > 0) {
                     //pegar conexão como banco
                     $con = Yii::app()->db;
                     $transac = $con->beginTransaction();
                     try {
                         //exclui a produção anterior, caso exista
-                        ProcedimentoRealizado::model()->deleteAll('competencia=:competencia AND unidade=:unidade', array(':competencia' => $competencia, ':unidade' => $unidade));
+                        ProcedimentoRealizado::model()->deleteAll('competencia=:competencia AND unidade=:unidade',
+                                                                    array(':competencia' => $competencia, ':unidade' => $unidade));
                         //insere a produção
                         $producaoDao->insertMultiple($producao, $con);
                         //atualiza os dados dos pacientes
@@ -278,12 +284,12 @@ class ProcedimentoRealizadoController extends SISPADBaseController {
                         $transac->commit();
                         $msg[] = new MessageWebService('BPAPRD011', 'Produção enviada com suceso!', MessageWebService::SUCESSO);
                     } catch (Exception $exc) {
+                        $transac->rollback();
                         Yii::log($exc->getMessage(), CLogger::LEVEL_ERROR);
                         //algum erro aconteceu, então deve reverter as modificações
                         //e excluir aqueles pacientes que são novos e sem CNS
-                        $transac->rollback();
                         Paciente::deleteAllNovosESemCNS($ids);
-                        $msg[] = new MessageWebService('BPAPRD012', 'Ops! Não foi possível armazenar a produção! Informe aos desenvoldedores do sistema ou tente novamente!', MessageWebService::ERRO);
+                        $msg[] = new MessageWebService('BPAPRD012', ' Ops! Não foi possível armazenar a produção! Informe aos desenvoldedores do sistema ou tente novamente!', MessageWebService::ERRO);
                         $this->_sendResponse(200, CJSON::encode($msg), 'application/json');
                         return;
                     }
@@ -311,7 +317,7 @@ class ProcedimentoRealizadoController extends SISPADBaseController {
         $this->_sendResponse(200, CJSON::encode($msg), 'application/json');
         return;
     }
-
+    
     /**
      * Recebe o arquivo de produção do BPAI através de um post
      */
