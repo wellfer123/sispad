@@ -36,6 +36,7 @@ class ModelDao {
                 $classe = new $this->classeModel();
                 if ($classe instanceof CModel) {
                     $insert = $this->createInsert($listModels, $classe);
+                    Yii::log($insert);
                     if ($connection === null) {
                         $connection = Yii::app()->db;
                         $transaction = $connection->beginTransaction();
@@ -58,7 +59,7 @@ class ModelDao {
                 }
             }
         } catch (Exception $ex) {
-            throw  $ex;
+            throw $ex;
         }
         return $sucess;
     }
@@ -82,22 +83,37 @@ class ModelDao {
                 $classe = new $this->classeModel();
                 if ($classe instanceof CModel) {
 
+                    //cria um insert
                     $insert = $this->createInsert($listModels, $classe);
-
+                    //substitui com o nome da tabela antiga por um temporário
                     $tb = $classe->tableName();
                     $tbTemp = 'temp_' . $classe->tableName();
                     $insert = str_replace($tb, $tbTemp, $insert);
-
+                    //gera o sql para tabela temporária
                     $tabela = $this->createSQLTempTable($tb, $tbTemp);
-
+                    //gera o update entre o tabela temporária e a fixa
                     $update = $this->createUpdate($classe, $tb, $tbTemp, $primaryKey);
+                    //cria instrução drop para deletar a tabela
+                    $dropTable = $this->createDropTable($tbTemp);
                     if ($connection === null) {
                         $connection = Yii::app()->db;
                         $transaction = $connection->beginTransaction();
                         try {
+                            //executa o comando
+                            //primeiro cria a tabela temporária
+                            $command = $connection->createCommand($tabela);
+                            $command->execute();
+
+                            //depois insere os registros e atualiza a tabela do banco
                             $command = $connection->createCommand($insert);
                             $command->execute();
+
                             $command = $connection->createCommand($update);
+                            $command->execute();
+
+//                            //exclui a tabela
+//                            $command = $connection->createCommand($dropTable);
+//                            $command->execute();
                             $transaction->commit();
                             $sucess = true;
                         } catch (Exception $ex) {
@@ -111,17 +127,22 @@ class ModelDao {
                         //primeiro cria a tabela temporária
                         $command = $connection->createCommand($tabela);
                         $command->execute();
-                        //depois insere os registros
+
+                        //depois insere os registros e atualiza a tabela do banco
                         $command = $connection->createCommand($insert);
                         $command->execute();
-                        //depois atualiza a tabela do banco
+
                         $command = $connection->createCommand($update);
                         $command->execute();
+
+//                        //exclui a tabela
+//                        $command = $connection->createCommand($dropTable);
+//                        $command->execute();
                     }
                 }
             }
         } catch (Exception $ex) {
-            throw  $ex;
+            throw $ex;
         }
         return $sucess;
     }
@@ -145,7 +166,7 @@ class ModelDao {
             $sql = str_replace('ENGINE=INNODB', 'ENGINE=memory', $sql);
             $sql = str_replace('ENGINE=MYISAM', 'ENGINE=memory', $sql);
             $sql = str_replace('CREATE TABLE', 'CREATE TEMPORARY TABLE IF NOT EXISTS ', $sql);
-            $sql = str_replace(strtoupper($tableName), strtoupper($tempTableName), $sql);
+            $sql = str_replace(strtoupper($tableName), $tempTableName, $sql);
         } catch (Exception $ex) {
             Yii::log($ex->getMessage(), CLogger::LEVEL_ERROR);
         }
@@ -176,7 +197,7 @@ class ModelDao {
         $cont = 0;
         foreach ($listModels as $key => $model) {
 
-
+            //mais de um registro por insert
             if ($cont !== 0) {
                 $insert = "$insert, ";
             }
@@ -283,6 +304,14 @@ class ModelDao {
             $cont++;
         }
         return $sql;
+    }
+
+    /**
+     * Devolve SQL para deletar uma tabela
+     * @param String $tableName noma da tabela que será deletada
+     */
+    private function createDropTable($tableName) {
+        return "DROP TABLE $tableName ;";
     }
 
 }
