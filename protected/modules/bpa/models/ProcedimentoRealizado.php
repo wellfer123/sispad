@@ -30,9 +30,49 @@
  * @property string $equipe_area
  * @property string $cnpj
  */
-class ProcedimentoRealizado extends CActiveRecord implements XMLModel
+class ProcedimentoRealizado extends CActiveRecord implements XMLModel, JSONModel
 {
-         
+        
+        /**
+         *
+         * @var array
+         */
+        public static $CAMPOS_JSON_TO_ATTIBUTES=array(
+                                          'cnes_unidade'=>'unidade',
+                                          'competencia'=>'competencia',
+                                          'cns_profissional'=>'profissional_cns',
+                                          'cbo_profissional'=>'profissional_cbo',
+                                          'numero_folha'=>'folha',
+                                          'sequencia_folha'=>'sequencia',
+                                          'codigo_procedimento'=>'procedimento',
+                                          'quantidade_realizada'=>'quantidade',
+                                          'data_atendimento'=>'data_atendimento',
+                                          'cns_paciente'=>'paciente_cns',
+                                          'nome_paciente'=>"paciente->nome",
+                                          'sexo_paciente'=>'paciente->sexo',
+                                          'cidade_paciente'=>'paciente->cidade',
+                                          'cid_procedimento'=>'cid',
+                                          'idade_paciente'=>'idade_paciente',
+                                          'carater_atendimento'=>'caracter_atendimento',
+                                          'competencia_movimento'=>'competencia_movimento',
+                                          'numero_autorizao'=>'numero_autorizacao',
+                                          'origem_procedimento'=>'origem',
+                                          'raca_paciente'=>'paciente->raca',
+                                          'etnia_paciente'=>'paciente->etnia',
+                                          'nacionalidade_paciente'=>'paciente->nacionalidade',
+                                          'codigo_servico'=>'servico',
+                                          'codigo_classificao'=>'classificao',
+                                          'equipe'=>'equipe',
+                                          'cnpj'=>'cnpj',
+                                          'equipe_area'=>'equipe_area',
+                                          'equipe_sequencia'=>'equipe_sequencia',
+                                          'data_nascimento_paciente'=>'paciente->data_nascimento',
+                                          );
+        /**
+         *Vetor associativo que mapeia elemento de xml para
+         * atributo do objeto
+         * @var array 
+         */
         public static $CAMPOS_FILE_ATTIBUTES=array(
                                           'cnes__unidade'=>'unidade',
                                           'competencia'=>'competencia',
@@ -45,7 +85,6 @@ class ProcedimentoRealizado extends CActiveRecord implements XMLModel
                                           'data__atendimento'=>'data_atendimento',
                                           'cns__paciente'=>'paciente_cns',
                                           'nome__paciente'=>"paciente->nome",
-                                          'data__nascimento'=>'data_atendimento',
                                           'sexo__paciente'=>'paciente->sexo',
                                           'cidade__paciente'=>'paciente->cidade',
                                           'cid__procedimento'=>'cid',
@@ -397,4 +436,13 @@ class ProcedimentoRealizado extends CActiveRecord implements XMLModel
     public function getFileFieldsToModelAttributes() {
         return ProcedimentoRealizado::$CAMPOS_FILE_ATTIBUTES;
     }
+    
+    public function __toString() {
+        $this->unidade.$this->competencia.$this->profissional_cns.$this->profissional_cbo.$this->folha.$this->sequencia;
+    }
+
+    public function getJsonFieldsToModelAttributes() {
+        return ProcedimentoRealizado::$CAMPOS_JSON_TO_ATTIBUTES;
+    }
+
 }
