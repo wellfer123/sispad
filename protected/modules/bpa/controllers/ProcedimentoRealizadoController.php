@@ -195,7 +195,8 @@ class ProcedimentoRealizadoController extends SISPADBaseController {
                         $pro = new ProcedimentoRealizado();
                         $pro->paciente = new Paciente();
                         //datas de cadastro e ultima atualização
-                        $pro->ultima_atualizacao = $pro->data_cadastro = $pro->paciente->ultima_atualizacao = $pro->paciente->data_cadastro = Date('Y-m-d h:i:s');
+                        $data=Date('Y-m-d h:i:s');
+                        $pro->ultima_atualizacao = $pro->data_cadastro = $pro->paciente->ultima_atualizacao = $pro->paciente->data_cadastro = $data;
                         //prenche
                         //$ReaderXML->preencherModeloXML($value, $pro);
                         $readerJson->preencherModeloJSON($value, $pro);
@@ -223,7 +224,8 @@ class ProcedimentoRealizadoController extends SISPADBaseController {
                                 $pro->id_paciente = $paci->id;
                                 //pega os novos dados
                                 $paci->setPaciente($pro->paciente);
-                                //guardar o paciente no vetor para atualizar posteriormente
+                                $paci->ultima_atualizacao=$data;
+                                //guarda o paciente no vetor para atualizar posteriormente
                                 $pacientes[] = $paci;
                             }
                         }
