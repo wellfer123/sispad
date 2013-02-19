@@ -36,7 +36,7 @@ class ModelDao {
                 $classe = new $this->classeModel();
                 if ($classe instanceof CModel) {
                     $insert = $this->createInsert($listModels, $classe);
-                    Yii::log($insert);
+                    
                     if ($connection === null) {
                         $connection = Yii::app()->db;
                         $transaction = $connection->beginTransaction();
