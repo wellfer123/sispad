@@ -190,7 +190,7 @@ class Paciente extends CActiveRecord {
     }
 
     /**
-     * Deleta os apcientes de acordo com os ids passados
+     * Deleta os pacientes de acordo com os ids passados
      * @param array $ids todos os pacientes que deve ser deletados
      */
     public static function deleteAllNovosESemCNS($ids) {
@@ -222,7 +222,37 @@ class Paciente extends CActiveRecord {
             Yii::log($ex->getMessage(), CLogger::LEVEL_ERROR);
         }
     }
-
+    /**
+     * Exclui todos os pacientes relacionados à produção daquela competência (Movimento) e unidade.
+     * Caso $connection seja passada, precisa-se abrir uma transação e comitar.
+     * @param string $competencia
+     * @param string $unidade
+     * @param CDBConnection $connection 
+     */
+    public static function deleteAllOfProducaoESemCNS($competencia,$unidade,$connection=null){
+        $sql='DELETE pac FROM bpa_paciente pac INNER JOIN bpa_procedimento_realizado p ON (p.id_paciente=pac.id AND pac.cns IS NULL)';
+        $sql=$sql.' WHERE p.competencia=:competencia AND p.unidade=:unidade;';
+        if ($connection === null){
+            $connection=Yii::app()->db;
+            $transaction=$connection->beginTransaction();
+            try{
+                $command=$connection->createCommand($sql);
+                $command->bindParam(':competencia', $competencia,PDO::PARAM_STR);
+                $command->bindParam(':unidade', $unidade,PDO::PARAM_STR);
+                $command->execute();
+                $transaction->commit();
+            }  catch (Exception $ex){
+                $transaction->rollback(); 
+                throw $ex;
+            }
+        }
+        else{
+            $command=$connection->createCommand($sql);
+                $command->bindParam(':competencia', $competencia,PDO::PARAM_STR);
+                $command->bindParam(':unidade', $unidade,PDO::PARAM_STR);
+                $command->execute();
+        }
+    }
     public function __toString() {
         return $this->cns;
     }
