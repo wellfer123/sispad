@@ -161,12 +161,15 @@ class ProcedimentoRealizadoController extends SISPADBaseController {
         }
     }
 
-    private function envio($competencia, $unidade) {
+    private function envio($competencia, $unidade,$token) {
         try {
+            //declarações
             $ReaderXML = new ReaderElementXMLToModel();
             $readerJson = new ReaderKeyJSONToModel();
             $quebra = chr(13) . chr(10);
             $erros = 0;
+            $soma=0;
+            $codigos='';
             $errosPaciente = 0;
             $producaoDao = new ModelDao('ProcedimentoRealizado');
             $pacienteDao = new ModelDao('Paciente');
@@ -256,6 +259,8 @@ class ProcedimentoRealizadoController extends SISPADBaseController {
                         } else {
                             $erros+=1;
                         }
+                        $soma+=(int)$pro->quantidade;
+                        $codigos=$codigos.$pro->procedimento;
                         //um erro de leitura de arquivo
                     } catch (Exception $exce) {
                         $erros+=1;
@@ -266,14 +271,17 @@ class ProcedimentoRealizadoController extends SISPADBaseController {
                 //se não teve nenhum erro e a produção contém dados
                 //$producao=array_unique($producao);
                 $qtd=count( $producao);
-                if ( ($errosPaciente === 0 && $erros === 0) &&  $qtd > 0) {
+                //gera o token
+                $tok=md5($codigos.$qtd.$soma);
+                if ( ($errosPaciente === 0 && $erros === 0) &&  $qtd > 0 && $tok === $token) {
                     //pegar conexão como banco
                     $con = Yii::app()->db;
                     $transac = $con->beginTransaction();
                     try {
                         //exclui a produção anterior, caso exista
-                        ProcedimentoRealizado::model()->deleteAll('competencia=:competencia AND unidade=:unidade',
+                        ProcedimentoRealizado::model()->deleteAll('competencia_movimento=:competencia AND unidade=:unidade',
                                                                     array(':competencia' => $competencia, ':unidade' => $unidade));
+                        Paciente::deleteAllOfProducaoESemCNS($competencia, $unidade, $con);
                         //insere a produção
                         $producaoDao->insertMultiple($producao, $con);
                         //atualiza os dados dos pacientes
@@ -295,8 +303,12 @@ class ProcedimentoRealizadoController extends SISPADBaseController {
                         $this->_sendResponse(200, CJSON::encode($msg), 'application/json');
                         return;
                     }
+                }else if ( $tok !== $token){
+                     $msg[] = new MessageWebService('BPAPRD000', 'O token gerado é diferente do recebido!', MessageWebService::ERRO);
+                    $this->_sendResponse(200, CJSON::encode($msg), 'application/json');
+                    return; 
                 }else if ($qtd === 0){
-                   $msg[] = new MessageWebService('BPAPRD004', 'Não existe produção!: ', MessageWebService::ERRO);
+                   $msg[] = new MessageWebService('BPAPRD004', 'Não existe produção!', MessageWebService::ERRO);
                     $this->_sendResponse(200, CJSON::encode($msg), 'application/json');
                     return; 
                 }
@@ -330,7 +342,7 @@ class ProcedimentoRealizadoController extends SISPADBaseController {
         //primeiro verifica se os parâmetros foram passados corretamente.
             try {
                 if (isset($_POST['competencia']) && isset($_POST['unidade']) &&
-                        isset($_POST['usuario']) && isset($_POST['senha'])) {
+                        isset($_POST['usuario']) && isset($_POST['senha']) && isset($_POST['token'])) {
                     //agora valida o login
                     $res = $this->login($_POST['usuario'], $_POST['senha']);
                     if (count($res) === 0) {
@@ -343,7 +355,7 @@ class ProcedimentoRealizadoController extends SISPADBaseController {
                                 set_time_limit(0);
 
                                 //agora faz o envio
-                                $this->envio($_POST['competencia'], $_POST['unidade']);
+                                $this->envio($_POST['competencia'], $_POST['unidade'],$_POST['token']);
                             } else {
 
                                 $msg = array();
