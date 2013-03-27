@@ -129,10 +129,16 @@ class UserController extends SISPADBaseController
 		if(isset($_POST['User']))
 		{
 			$model->attributes=$_POST['User'];
+                        $senha=$model->password;
                         $model->criptografarPassword();
                         $model->ativo=0;
-			if($model->save())
+			if($model->save()){
                                $this->redirect(array('view','id'=>$model->id));
+                        }
+                        else{
+                            $model->password=$senha;
+                        }
+                        
 		}
                 if(Yii::app()->user->isGuest){
                     $this->render('register_frontend',array(
