@@ -1,14 +1,36 @@
 <?php
 $this->pageTitle=Yii::app()->name . ' - Home';
 $this->breadcrumbs=array(
-	'Home',
+	'Perfil',
 );
 
 
 ?>
 
-<!--<h1>Perfil do usuário</h1>-->
-<?php echo $this->renderPartial('_notification'); ?>
-<?php echo $this->renderPartial('_menuAdmin'); ?>
-<?php echo $this->renderPartial('_menuCreate'); ?>
+<?php  $this->widget('ext.jnterface.fisheye',
+            array(
+                'name'=>'fish',
+                'menu'=>array(
+                    array(
+                        'link'=>Yii::app()->createAbsoluteUrl('producaoDiaria/create'),
+                        'image'=>'images/production.png',
+                        'title'=>'Enviar Produção Diária',
+                    ),
+                    array(
+                        'link'=>Yii::app()->createAbsoluteUrl('unidadeEspecialidade/add',array('unidade'=>$this->model->unidade->cnes)),
+                        'image'=>'images/hospital.png',
+                        'title'=>'Adicionar Especialidade a Unidade',
+                    ),
+                    array(
+                        'link'=>Yii::app()->createAbsoluteUrl('producaoDiaria/adminGestor'),
+                        'image'=>'images/report.png',
+                        'title'=>'Consultar Produção Diária',
+                    ),
+                    array(
+                        'link'=>Yii::app()->createAbsoluteUrl('producaoDiaria/admin'),
+                        'image'=>'images/history.png',
+                        'title'=>'Histórico da Produção Diária',
+                    ),
+                ),
+            )); ?>
 <!-- form -->
