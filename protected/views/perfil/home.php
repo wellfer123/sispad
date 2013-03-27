@@ -17,7 +17,7 @@ $this->breadcrumbs=array(
                         'title'=>'Enviar Produção Diária',
                     ),
                     array(
-                        'link'=>Yii::app()->createAbsoluteUrl('unidadeEspecialidade/add',array('unidade'=>$this->model->unidade->cnes)),
+                        'link'=>Yii::app()->createAbsoluteUrl('unidadeEspecialidade/add',array('unidade'=> isset($this->model->unidade) ? $this->model->unidade->cnes : 0)),
                         'image'=>'images/hospital.png',
                         'title'=>'Adicionar Especialidade a Unidade',
                     ),
