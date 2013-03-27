@@ -168,7 +168,7 @@
 	
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Cadastrar' : 'Atualizar'); ?>
+		<?php echo CHtml::submitButton('Enviar'); ?>
 	</div>
         
 <?php $this->endWidget(); ?>
