@@ -19,7 +19,7 @@ class User extends CActiveRecord
 	public function tableName()
 	{
 		// DO NOT CHANGE
-		return 'user';//Yii::app()->controller->module->tableUser;
+		return Yii::app()->controller->module->tableUser;
 
 		// or use your known table name like
 		// return 'TableUser';
