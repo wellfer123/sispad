@@ -9,8 +9,9 @@
 <div class="span-inf_perfil">
 	<div id="sidebar_perfil">
 	<?php
+                $unidade= isset($this->model->unidade) ? $this->model->unidade->nome : null;
 		$this->beginWidget('zii.widgets.CPortlet', array(
-			'title'=>'Informações',
+			'title'=>'Perfil',
                         'htmlOptions'=>array('class'=>'portlet_perfil')
 		));
 
@@ -18,10 +19,13 @@
                         'data'=>$this->model,
                         'cssFile' => Yii::app()->theme->baseUrl .'/css/details_perfil.css',
                         'attributes'=>array(
-                         'nome',
-                         'user.username',
-                         'matricula',
-                         'cpf',
+                            'nome',
+                            'matricula',
+                            array(
+                                'label'=>'Unidade',
+                                'value'=>$unidade,
+                            ),
+                            'cpf',
                            
                         ),
                     ));
