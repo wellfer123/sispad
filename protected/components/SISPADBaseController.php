@@ -61,7 +61,7 @@ abstract class SISPADBaseController extends Controller {
     protected abstract function getModelName();
 
     /**
-     * Devolve o noma da action mais o modelo para verificar o acesso.
+     * Devolve o nome da action mais o modelo para verificar o acesso.
      * Segue o seguinte padrão: id da action +  o nome fornecido pelo método getModelName()
      */
     protected function factoryActionName() {
@@ -74,6 +74,14 @@ abstract class SISPADBaseController extends Controller {
      */
     protected function CheckAcessAction() {
         $this->_RBAC->checkAccess($this->factoryActionName(), true);
+    }
+
+    /**
+     *
+     * @return RBACAccessVerifier 
+     */
+    public function getRBACManeger() {
+        return $this->_RBAC;
     }
 
     protected function _sendResponse($status = 200, $body = '', $content_type = 'text/html') {
@@ -152,8 +160,9 @@ abstract class SISPADBaseController extends Controller {
         );
         return (isset($codes[$status])) ? $codes[$status] : '';
     }
-        /**
-     *Verifica se o usuário e a senha existem no banco
+
+    /**
+     * Verifica se o usuário e a senha existem no banco
      * @param string $usuario
      * @param string $senha
      * @return MessageWebService[] devolve um array vazio se o usuário e a senha estiverem corretos 
@@ -164,13 +173,14 @@ abstract class SISPADBaseController extends Controller {
 
         if ($user === null) {
             $msg[] = new MessageWebService("BPALOGIN011", "Usuário não encontrado.", MessageWebService::ERRO);
-        }else if($user->ativo === User::DESATIVO ){
+        } else if ($user->ativo === User::DESATIVO) {
             $msg[] = new MessageWebService("BPALOGIN012", "Usuário desativado.", MessageWebService::ERRO);
         } else if ($user->password !== MD5($senha)) {
             $msg[] = new MessageWebService("BPALOGIN013", "Senha incorreta.", MessageWebService::ERRO);
         }
         return $msg;
     }
+
 }
 
 ?>
