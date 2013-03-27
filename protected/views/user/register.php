@@ -7,6 +7,11 @@ $this->breadcrumbs=array(
 
 ?>
 
-<h1>Registro de Usuário</h1>
+<?php $this->beginWidget('zii.widgets.CPortlet', array(
+			'title'=>'Registro de Usuário',
+                        'htmlOptions'=>array('class'=>'portlet_form')
+		));?>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
+
+<?php $this->endWidget(); ?>
