@@ -1,0 +1,14 @@
+Author: Miro Zoricak
+Website: http://zori.udesign.sk
+Version: 1.1 20090116
+Purpose: display multiple images in an user friendly way, with cross browser support
+Browser Support: FF(v3 tested, v2 expected to work) | Safari v3 tested | Opera | Chrome | IE6 and IE7 tested and working
+
+This software is distributed free of charge, but if you liked it, consider donating some money on my website
+
+Changelog:
+1.1 20090116
+ - added alt display option
+ - fixed some minor issues on Webkit driven browsers
+ - in the demo, resized some images that were too large for the gallery
+ - fixed for jQuery 1.3

@@ -1,0 +1,22 @@
+.inputsTooltip
+{
+	border: 3px solid #933;
+	background-color: #600;
+	padding: 10px;
+	color: #ccc;
+}
+.linksTooltip
+{
+	border: 1px solid #000;
+	background-color: #444;
+	padding: 4px;
+	color: #ccc;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	width: 150px;
+}
+.linksTooltip #tooltipTitle
+{
+	font-weight: bold;
+}
+

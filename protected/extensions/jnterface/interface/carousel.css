@@ -1,0 +1,16 @@
+.carousel
+{
+    width: 700px;
+    height: 150px;
+    background-color: #003399;
+    position: absolute;
+    top: 60px;
+    left: 60px;
+}
+.carousel a
+{
+    position: absolute;
+    width: 110px;
+}
+
+
