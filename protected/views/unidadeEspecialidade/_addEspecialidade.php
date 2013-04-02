@@ -33,7 +33,7 @@
                             'model' => $model,
                             'attribute' => 'profissao_codigo', //the FK field (from CJuiInputWidget)
                             // controller method to return the autoComplete data (from CJuiAutoComplete)
-                            'sourceUrl' => Yii::app()->createUrl('Profissao/findProfissoesCbo'),
+                            'sourceUrl' => Yii::app()->createUrl('Profissao/findProfissoesCboSaude'),
                             // defaults to false.  set 'true' to display the FK field with 'readonly' attribute.
                             'showFKField' => false,
                             // display size of the FK field.  only matters if not hidden.  defaults to 10
