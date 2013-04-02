@@ -60,5 +60,33 @@ class ProfissaoController extends SISPADBaseController {
             }
         }
     }
+    
+    public function actionFindProfissoesCboSaude() {
+
+      //$this->CheckAcessAction();
+        $q = $_GET['term'];
+        if (isset($q)) {
+            // CBO iniciado
+            $criteria=new CDbCriteria();
+            $criteria->condition=" ((SUBSTRING(codigo,1,3)='223' OR SUBSTRING(codigo,1,4)='3222') OR SUBSTRING(codigo,1,4)='3522') AND (nome  like :pesquisa or codigo like :pesquisa)";
+            $criteria->order=" nome";
+            $criteria->params=array(':pesquisa'=> '%'.strtoupper(trim($q)).'%');
+            $profissoes = Profissao::model()->findAll($criteria);
+
+            if (!empty($profissoes)) {
+                $out = array();
+                foreach ($profissoes as $p) {
+                    $out[] = array(
+                        // expression to give the string for the autoComplete drop-down
+                        'label' => $p->CboNome,
+                        'value' => $p->CboNome,
+                        'id' => $p->codigo, // return value from autocomplete
+                    );
+                }
+                echo CJSON::encode($out);
+                Yii::app()->end();
+            }
+        }
+    }
 
 }
