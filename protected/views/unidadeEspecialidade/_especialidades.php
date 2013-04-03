@@ -8,7 +8,7 @@
 
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'unidade-especialidade-grid',
-	'dataProvider'=>$model->search(),
+	'dataProvider'=>$model->searchUnidade(),
 	'columns'=>array(
                 array(
                     'name'=>'grupo_codigo',
@@ -17,6 +17,10 @@
                 array(
                     'name'=>'profissao_codigo',
                     'value'=>'$data->especialidade->nome'
+                ),
+                array(
+                    'name'=>'quantidade',
+                    'value'=>'$data->quantidade'
                 ),
                 array(
 			'class'=>'CButtonColumn',
