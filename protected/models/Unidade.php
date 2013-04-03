@@ -58,6 +58,7 @@ class Unidade extends CActiveRecord
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('cnes, descricao, nome, cidade_id', 'safe', 'on'=>'search'),
+                        'profissionalVinculo' => array(self::HAS_MANY, 'ProfissionalVinculo', 'unidade_cnes'),
 		);
 	}
 
