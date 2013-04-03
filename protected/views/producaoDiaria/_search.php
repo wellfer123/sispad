@@ -12,18 +12,13 @@
 )); ?>
 
 	<div class="row">
-		<?php echo $form->label($model,'unidade_cnes'); ?>
-                <?php echo Chtml::activeDropDownList($model, 'unidade_cnes', $unidades); ?>
+		<?php echo $form->label($model,'unidade'); ?>
+                <?php echo Chtml::activeDropDownList($model, 'unidade', $unidades,array('empty'=>'Unidade')); ?>
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'profissao_codigo'); ?>
-                <?php echo Chtml::activeDropDownList($model, 'profissao_codigo', $especialidades); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->label($model,'data'); ?>
-		<?php echo $form->textField($model,'data'); ?>
+		<?php echo $form->label($model,'especialidade'); ?>
+                <?php echo Chtml::activeDropDownList($model, 'especialidade', $especialidades,array('empty'=>'Especialidade')); ?>
 	</div>
 
 	<div class="row buttons">
