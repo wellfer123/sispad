@@ -12,7 +12,7 @@ $this->breadcrumbs=array(
                 'name'=>'fish',
                 'menu'=>array(
                     array(
-                        'link'=>Yii::app()->createAbsoluteUrl('producaoDiaria/create'),
+                        'link'=>Yii::app()->createAbsoluteUrl('producaoDiaria/send'),
                         'image'=>'images/production.png',
                         'title'=>'Enviar Produção Diária',
                     ),
