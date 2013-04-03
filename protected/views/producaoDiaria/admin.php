@@ -42,6 +42,11 @@ $('.search-form form').submit(function(){
                 ),
                 array(
                     'filter'=>false,
+                    'header'=>'Profissional',
+                    'value'=>'$data->profissional->nome'
+                ),
+                array(
+                    'filter'=>false,
                     'name'=>'quantidade',
                     'value'=>'$data->quantidade'
                 ),
