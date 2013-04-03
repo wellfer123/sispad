@@ -75,7 +75,7 @@
                                     'options'=>array(
                                         // number of characters that must be typed before 
                                             // autoCompleter returns a value, defaults to 2
-                                        'minLength'=>6, 
+                                        'minLength'=>3, 
                                         ),
                                 ));?>
                         <?php echo $form->error($model,'unidade_cnes'); ?>
