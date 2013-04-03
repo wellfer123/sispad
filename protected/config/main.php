@@ -94,7 +94,7 @@ return array(
             ),
 
 		// uncomment the following to enable URLs in path-format
-		/*
+		
 		'urlManager'=>array(
 			'urlFormat'=>'path',
 			'rules'=>array(
@@ -102,8 +102,9 @@ return array(
 				'<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
 				'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
 			),
+                        'caseSensitive'=>false,
 		),
-		
+		/*
 		
 		'db'=>array(
 			'connectionString' => 'sqlite:'.dirname(__FILE__).'/../data/testdrive.db',
@@ -113,7 +114,7 @@ return array(
 		//169.254.18.175
 		'db'=>array(
 			//'connectionString' => 'mysql:host=localhost;dbname=sispad',
-                        'connectionString' => 'mysql:host=192.168.0.155;dbname=sispad',
+                        'connectionString' => 'mysql:host=10.0.0.62;dbname=sispad',
 			'emulatePrepare' => true,
 			'username' => 'root',
 			'password' => '',
@@ -164,5 +165,7 @@ return array(
 	'params'=>array(
 		// this is used in contact page
 		'adminEmail'=>'webmaster@example.com',
+                //URL onde o servidor de relatório está hospedado
+                'urlReport'=>'http://localhost:8080/sispadreport/buildReport',
 	),
 );
