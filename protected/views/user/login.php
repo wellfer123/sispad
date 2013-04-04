@@ -5,7 +5,7 @@ $this->breadcrumbs=array(
 );
 ?>
 
-
+<h2><?php echo $msg?></h2>
 <?php $this->beginWidget('zii.widgets.CPortlet', array(
 			'title'=>'Login',
                         'htmlOptions'=>array('class'=>'portlet_form')
