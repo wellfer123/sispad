@@ -10,6 +10,8 @@
  */
 class ProfissionalVinculo extends CActiveRecord
 {
+       const ATIVO = 1;
+       const DESATIVO = 0;
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
@@ -40,7 +42,7 @@ class ProfissionalVinculo extends CActiveRecord
 			array('cpf', 'length', 'max'=>11),
 			array('unidade_cnes', 'length', 'max'=>10),
 			array('codigo_profissao', 'length', 'max'=>6),
-                        array('cpf','validaVinculoExistente'),
+                        array('cpf','validaVinculoExistente','on'=>'create'),
 			array('cpf,unidade_cnes,codigo_profissao', 'required'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
@@ -79,6 +81,7 @@ class ProfissionalVinculo extends CActiveRecord
 			'cpf' => 'Cpf',
 			'unidade_cnes' => 'Unidade Cnes',
 			'codigo_profissao' => 'Profissao',
+			
 		);
 	}
 
@@ -101,4 +104,13 @@ class ProfissionalVinculo extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+        
+         public function labelStatus() {
+        if ($this->ativo == ProfissionalVinculo::ATIVO) {
+            return 'ATIVO';
+        } else if ($this->ativo == ProfissionalVinculo::DESATIVO) {
+            return 'DESATIVO';
+        }
+        return 'DESCONHECIDO';
+    }
 }
