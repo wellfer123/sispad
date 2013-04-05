@@ -3,12 +3,11 @@
 /* @var $model UnidadeGestor */
 
 $this->breadcrumbs=array(
-	'Unidade Gestors'=>array('index'),
+	'Unidade Gestor'=>array('index'),
 	$model->unidade_cnes,
 );
 
 $this->menu=array(
-	array('label'=>'Listar Unidade/Gestor', 'url'=>array('index')),
 	array('label'=>'Cadastrar Unidade/Gestor', 'url'=>array('create')),
 	array('label'=>'Atualizar Unidade/Gestor', 'url'=>array('update',"unidade_cnes"=>$model->unidade_cnes,"servidor_cpf"=>$model->servidor_cpf)),
 	array('label'=>'Gerenciar Unidade/Gestor', 'url'=>array('admin')),
