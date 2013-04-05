@@ -123,7 +123,7 @@ class Unidade extends CActiveRecord
          * @param Servidor $servidorGestor
          * @return Unidades[]
          */
-        public static function  getGestores($servidorGestor){
+        public static function  findAllPorGestor($servidorGestor){
             $criteria =new CDbCriteria();
             
             $criteria->alias='uni';
