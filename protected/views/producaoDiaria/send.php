@@ -10,7 +10,7 @@ $this->breadcrumbs=array(
 $this->menu=array(
 	array('label'=>'Ver Unidade', 'url'=>array('unidade/view','id'=>$servidor->unidade->cnes)),
         array('label'=>'Histórico Produção Diária', 'url'=>array('producaoDiaria/adminGestor')),
-        array('label'=>'Adicionar Especialidades', 'url'=>array('unidadeEspecialidade/add','unidade'=>$servidor->unidade->cnes)),
+        array('label'=>'Vincular Profissional', 'url'=>array('profissionalVinculo/create')),
 );
 ?>
 
@@ -24,6 +24,7 @@ $this->menu=array(
                                     'model'=>$model,
                                     'unidades'=>$unidades,
                                     'grupos' =>$grupos,
+                                    'observacoes'=>$observacoes,
                                     'profissionais'=>$profissionais,
                                     'especialidades'=>$especialidades,
                                     'servidor'=>$servidor)); ?>
