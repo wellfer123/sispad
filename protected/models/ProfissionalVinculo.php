@@ -109,7 +109,7 @@ class ProfissionalVinculo extends CActiveRecord
         if ($this->ativo == ProfissionalVinculo::ATIVO) {
             return 'ATIVO';
         } else if ($this->ativo == ProfissionalVinculo::DESATIVO) {
-            return 'DESATIVO';
+            return 'INATIVO';
         }
         return 'DESCONHECIDO';
     }
