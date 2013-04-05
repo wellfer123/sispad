@@ -20,8 +20,6 @@
 	<?php echo CHtml::encode($data->endereco_id); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('unidade_cnes')); ?>:</b>
-	<?php echo CHtml::encode($data->unidade_cnes); ?>
 	<br />
 
 

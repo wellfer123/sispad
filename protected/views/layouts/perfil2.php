@@ -9,7 +9,7 @@
 <div class="span-inf_perfil">
 	<div id="sidebar_perfil">
 	<?php
-                $unidade= isset($this->model->unidade) ? $this->model->unidade->nome : null;
+                $unidade= null;
 		$this->beginWidget('zii.widgets.CPortlet', array(
 			'title'=>'Perfil',
                         'htmlOptions'=>array('class'=>'portlet_perfil')
@@ -21,10 +21,6 @@
                         'attributes'=>array(
                             'nome',
                             'matricula',
-                            array(
-                                'label'=>'Unidade',
-                                'value'=>$unidade,
-                            ),
                             'cpf',
                            
                         ),

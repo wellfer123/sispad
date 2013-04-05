@@ -82,7 +82,6 @@ class ProfissionalVinculoController extends SISPADBaseController {
     public function getAllProfissionaisUnidade() {
         $criteria = new CDbCriteria;
         $servidor = $this->getServidor();
-        $criteria->condition = " unidade_cnes=" . $servidor->unidade->cnes;
         $dataProvider = new CActiveDataProvider('ProfissionalVinculo', array(
             'criteria' => $criteria,
             'pagination' => array(

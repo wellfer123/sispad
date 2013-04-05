@@ -28,10 +28,6 @@ $this->menu=array(
                     'label'=>'Estado Civil',
                     'value'=>$model->getLabelEstadoCivil(),
                 ),
-                array(
-                    'label'=>'Unidade',
-                    'value'=>$model->unidade->nome,
-                ),
                 array(               // related city displayed as a link
                     'label'=>'Outros Dados',
                     'type'=>'raw',

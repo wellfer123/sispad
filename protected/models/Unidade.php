@@ -73,7 +73,6 @@ class Unidade extends CActiveRecord
                     'cidade'=>array(self::BELONGS_TO,'Cidades','cidade_id'),
                     'regional'=>array(self::BELONGS_TO,'Regionais','regional_id'),
                     'departamentos'=>array(self::HAS_MANY,'Departamento','unidade_cnes'),
-                    'servidor'=>array(self::HAS_MANY,'Servidor','unidade_cnes'),
                     'enfermeiro_executa_meta'=>array(self::HAS_MANY,'EnfermeiroExecutaMeta','unidade_cnes'),
                     'profissionalVinculo' => array(self::HAS_MANY, 'ProfissionalVinculo', 'cpf'),
                     'gestor' => array(self::MANY_MANY, 'Servidor', 'unidade_gestor(unidade_cnes, servidor_cpf)'),

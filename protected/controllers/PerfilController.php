@@ -40,7 +40,7 @@ class PerfilController extends SISPADBaseController{
 	{
             if($relation!=null){
            
-            $_model=Servidor::model()->with($relation)->findbyPk($id);
+            $_model=Servidor::model()->findbyPk($id);
             }else{
                  $_model=Servidor::model()->findbyPk($id);
             }
