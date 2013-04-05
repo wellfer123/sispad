@@ -3,13 +3,13 @@
 /* @var $model UnidadeGestor */
 
 $this->breadcrumbs=array(
-	'Unidade Gestors'=>array('index'),
+	'Unidade Gestor'=>array('index'),
 	'Manage',
 );
 
 $this->menu=array(
-	array('label'=>'List UnidadeGestor', 'url'=>array('index')),
-	array('label'=>'Create UnidadeGestor', 'url'=>array('create')),
+	array('label'=>'Lista Unidade/Gestor', 'url'=>array('index')),
+	array('label'=>'Cadastrar Unidade/Gestor', 'url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -26,7 +26,7 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Manage Unidade Gestors</h1>
+<h1>Gerenciar Unidade Gestors</h1>
 
 <p>
 You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>

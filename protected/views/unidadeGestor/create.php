@@ -3,13 +3,13 @@
 /* @var $model UnidadeGestor */
 
 $this->breadcrumbs=array(
-	'Unidade Gestors'=>array('index'),
+	'Unidade Gestor'=>array('index'),
 	'Create',
 );
 
 $this->menu=array(
-	array('label'=>'Listar UnidadeGestor', 'url'=>array('index')),
-	array('label'=>'Gerenciar UnidadeGestor', 'url'=>array('admin')),
+	array('label'=>'Listar Unidade/Gestor', 'url'=>array('index')),
+	array('label'=>'Gerenciar Unidade/Gestor', 'url'=>array('admin')),
 );
 ?>
 
