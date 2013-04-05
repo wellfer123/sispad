@@ -185,4 +185,8 @@ class Servidor extends CActiveRecord
         public function getCnsNome(){
             return $this->cns.'/'.$this->nome;
         }
+        
+         public function getCpfNome(){
+            return $this->cpf.'-'.$this->nome;
+        }
 }

@@ -180,8 +180,8 @@ class ServidorController extends SISPADBaseController
                     foreach ($servidores as $s) {
                             $out[] = array(
                             // expression to give the string for the autoComplete drop-down
-                            'label' => $s->nome,  
-                            'value' => $s->nome,
+                            'label' => $s->CpfNome,  
+                            'value' => $s->CpfNome,
                             'id' => $s->cpf, // return value from autocomplete
                      );
                     }

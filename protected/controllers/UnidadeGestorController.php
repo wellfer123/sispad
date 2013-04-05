@@ -62,7 +62,7 @@ class UnidadeGestorController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new UnidadeGestor;
+		$model=new UnidadeGestor('create');
 		
                
 		// Uncomment the following line if AJAX validation is needed
@@ -95,7 +95,7 @@ class UnidadeGestorController extends Controller
 		{
 			$model->attributes=$_POST['UnidadeGestor'];
 			if($model->save())
-				$this->redirect(array('view','id'=>array('unidade_cnes'=>$model->unidade_cnes,'servidor_cpf'=>$model->servidor_cpf)));
+				$this->redirect(array('view','unidade_cnes'=>$model->unidade_cnes,'servidor_cpf'=>$model->servidor_cpf));
 		}
 
 		$this->render('update',array(
@@ -152,8 +152,9 @@ class UnidadeGestorController extends Controller
 	 */
 	public function loadModel()
 	{
-                if(isset($_GET['id']['unidade_cnes']) and isset($_GET['id']['servidor_cpf'])){
-                    $model=UnidadeGestor::model()->findByPk(array('unidade_cnes'=>$_GET['id']['unidade_cnes'],'servidor_cpf'=>$_GET['id']['servidor_cpf']));
+                $model = null;
+                if(isset($_GET['unidade_cnes']) and isset($_GET['servidor_cpf'])){
+                    $model=UnidadeGestor::model()->findByPk(array('unidade_cnes'=>$_GET['unidade_cnes'],'servidor_cpf'=>$_GET['servidor_cpf']));
                 }
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
