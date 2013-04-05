@@ -106,7 +106,7 @@ class UnidadeGestor extends CActiveRecord
         if ($this->ativo == UnidadeGestor::ATIVO) {
             return 'ATIVO';
         } else if ($this->ativo == UnidadeGestor::DESATIVO) {
-            return 'DESATIVO';
+            return 'INATIVO';
         }
         return 'DESCONHECIDO';
     }
