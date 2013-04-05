@@ -3,8 +3,7 @@
 /* @var $model ProfissionalVinculo */
 
 $this->breadcrumbs=array(
-	'Profissional Vinculos'=>array('index'),
-	'Create',
+	'Vínculo de Profissional',
 );
 
 $this->menu=array(
@@ -12,9 +11,11 @@ $this->menu=array(
 );
 ?>
 
-<h1>Cadastrar Vinculo</h1>
+<?php $this->beginWidget('zii.widgets.CPortlet', array(
+			'title'=>'Vínculo de Profissional/'.$unidade,
+                        'htmlOptions'=>array('class'=>'portlet_form')
+		));?>
 
-<?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
-<p>
-<h2>Unidade: <?php echo $unidade?></h2>
+<?php echo $this->renderPartial('_form', array('model'=>$model,'unidade'=>$unidade)); ?>
+<?php $this->endWidget(); ?>
 <?php echo $this->renderPartial('_list', array('dataProvider'=>$dataProvider)); ?>

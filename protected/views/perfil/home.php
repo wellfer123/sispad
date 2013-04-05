@@ -12,9 +12,14 @@ $this->breadcrumbs=array(
                 'name'=>'fish',
                 'menu'=>array(
                     array(
-                        'link'=>Yii::app()->createAbsoluteUrl('producaoDiaria/create'),
+                        'link'=>Yii::app()->createAbsoluteUrl('producaoDiaria/send'),
                         'image'=>'images/production.png',
                         'title'=>'Enviar Produção Diária',
+                    ),
+                    array(
+                        'link'=>Yii::app()->createAbsoluteUrl('profissionalvinculo/create'),
+                        'image'=>'images/add2.png',
+                        'title'=>'Vincular Profissional',
                     ),
                     array(
                         'link'=>Yii::app()->createAbsoluteUrl('unidadeEspecialidade/add',array('unidade'=> isset($this->model->unidade) ? $this->model->unidade->cnes : 0)),

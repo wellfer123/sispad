@@ -11,7 +11,7 @@
 	'enableAjaxValidation'=>false,
 )); ?>
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
+	<p class="note">Todos os campos com <span class="required">*</span> são obrigatórios.</p>
 
 	<?php echo $form->errorSummary($model); ?>
 
@@ -22,7 +22,8 @@
 	</div>-->
         <div class="row">
 		<?php echo $form->labelEx($model,'unidade_cnes'); ?>
-		<?php echo $form->textField($model,'unidade_cnes',array('size'=>10,'maxlength'=>10,'disabled'=>true)); ?>
+		<?php echo Chtml::textField('unidade_cnes_001', $unidade,array('readOnly'=>true,'size'=>70)); ?>
+                <?php echo CHtml::activeHiddenField($model, 'unidade_cnes'); ?>
 		<?php echo $form->error($model,'unidade_cnes');?>
 	</div>
         <div class="row">

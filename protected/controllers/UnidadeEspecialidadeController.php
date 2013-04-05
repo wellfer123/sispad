@@ -56,7 +56,7 @@ class UnidadeEspecialidadeController extends SISPADBaseController {
         //verifica se a unidade existe
         if ($unidade !== null) {
             //cria o modelo
-            $model = new UnidadeEspecialidade();
+            $model = new UnidadeEspecialidade;
 
             $model->unidade_cnes = $unidade->cnes;
             //pega a lista de grupos
@@ -66,13 +66,14 @@ class UnidadeEspecialidadeController extends SISPADBaseController {
                 
                 if ($model->validate()){
                     //verifica se o o modelo não existe para pode salvar no banco de dados
-                    $exists=UnidadeEspecialidade::model()->exists('profissao_codigo=:pro AND unidade_cnes=:cnes',
-                                                               array(
-                                                                   ':pro'=>$model->profissao_codigo,
-                                                                   ':cnes'=>$model->unidade_cnes,
-                                                            ));
+                    $criteria= new CDbCriteria();
+                    $criteria->alias='ue';
+                    $criteria->condition='ue.profissao_codigo=:pro AND ue.unidade_cnes=:cnes';
+                    $criteria->params=array(':pro'=>$model->profissao_codigo, ':cnes'=>$model->unidade_cnes);
+                       
+                    $exists=UnidadeEspecialidade::model()->exists($criteria);
                      //não existe, então salva 
-                    if( !$exists){
+                    if( ! $exists  ){
                        $model->save(); 
                     }
                     //redireciona

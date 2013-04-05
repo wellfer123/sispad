@@ -34,6 +34,18 @@
                 $RBAC2 = new RBACAccessVerifier();
                 //SOMENTE O SUPER ADMINISTRADOR PODE VER O MENU COMPLETO
                 $visible = $RBAC2->checkAccess('SuperAdmin');
+                $menuGestor=array();
+                if (false){
+                    $servidor=$this->getServidor();
+                    $menuGestor=array("url" => array(),
+                            "label" => "Gestor",
+                            array("url" => array("route" => "/producaoDiaria/send"), "label" => "Enviar Produção Diária"),
+                            array("url" => array("route" => "/producaoDiaria/adminGestor"), "label" => "Consultar Histórico"),
+                            array("url" => array("route" => "/unidadeEspecialidade/add?unidade=".$servidor->unidade->cnes), "label" => "Adicionar Especialidade"),
+                            array("url" => array("route" => "/profissionalVinculo/create"), "label" => "Vincular Profissional"),
+                            'visible' => $gestor,
+                        );
+                }
                 $this->widget('application.extensions.menu.SMenu', array(
                     "menu" => array(
                         //menu raiz
@@ -45,6 +57,7 @@
                             array("url" => array("route" => "/TotalRelatorio/list"), "label" => "Total de Relatórios (Meus)"),
                             'visible' => $visible,
                         ),
+                        $menuGestor,
                         array("url" => array(),
                             "label" => "Faltas",
                             array("url" => array("route" => "/Falta/preparedCreate"), "label" => "Enviar"),

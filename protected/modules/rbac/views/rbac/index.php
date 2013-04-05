@@ -27,7 +27,7 @@ endif;
 if($treeFormat == 'renderItemTree'):
 	?>
 	<br>
-	<a href="<?php echo $this->createUrl('//rbac/rbac',array('createNew'=>1)) ?>">Create new Item</a>
+	<a href="<?php echo $this->createUrl('//rbac/rbac/index',array('createNew'=>1)) ?>">Create new Item</a>
 	<br>
 	<?php 
 endif;

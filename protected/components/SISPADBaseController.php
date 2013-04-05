@@ -180,11 +180,8 @@ abstract class SISPADBaseController extends Controller {
         }
         return $msg;
     }
-    
-    
-     public function getServidor() {
-        return Servidor::model()->with('unidade')->find('cpf=:cpf', array(':cpf' => Yii::app()->user->cpfservidor));
-    }
+
+
 
 }
 

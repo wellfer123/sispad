@@ -10,7 +10,7 @@ $this->breadcrumbs=array(
 
 $this->menu=array(
 	array('label'=>'Ver Unidade', 'url'=>array('unidade/view','id'=>$model->unidade_cnes)),
-        array('label'=>'Enviar Produção Diária', 'url'=>array('producaoDiaria/create')),
+        array('label'=>'Enviar Produção Diária', 'url'=>array('producaoDiaria/send')),
 );
 ?>
 

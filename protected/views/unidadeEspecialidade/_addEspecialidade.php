@@ -50,6 +50,15 @@
                     <?php echo $form->error($model, 'profissao_codigo'); ?>
                 </td>
             </tr>
+            <tr>
+                <td colspan="2">
+                        <?php echo $form->labelEx($model, 'quantidade'); ?>
+                        <?php echo Chtml::activeTextField($model, 'quantidade'); ?>
+                        <?php echo $form->error($model, 'quantidade'); ?>
+                    
+                </td>
+                
+            </tr>
         </tbody>
     </table>
 

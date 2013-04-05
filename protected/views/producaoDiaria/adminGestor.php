@@ -7,7 +7,7 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Enviar Produção Diária', 'url'=>array('create')),
+	array('label'=>'Enviar Produção Diária', 'url'=>array('send')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -39,6 +39,11 @@ $('.search-form form').submit(function(){
                     'name'=>'profissao_codigo',
                     'value'=>'$data->especialidade->nome',
                     'filter'=>$especialidades,
+                ),
+                array(
+                    'filter'=>false,
+                    'header'=>'Profissional',
+                    'value'=>'$data->profissional->nome'
                 ),
                 array(
                     'filter'=>false,

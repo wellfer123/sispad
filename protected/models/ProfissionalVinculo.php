@@ -78,9 +78,9 @@ class ProfissionalVinculo extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'cpf' => 'Cpf',
-			'unidade_cnes' => 'Unidade Cnes',
-			'codigo_profissao' => 'Profissao',
+			'cpf' => 'Servidor',
+			'unidade_cnes' => 'Unidade',
+			'codigo_profissao' => 'Profissão',
 			
 		);
 	}

@@ -12,6 +12,7 @@
  * @property Grupo $grupoCodigo
  * @property Profissao $profissaoCodigo
  * @property Unidade $unidadeCnes
+ * @property Quantidade $quantidade
  */
 class UnidadeEspecialidade extends CActiveRecord
 {
@@ -41,8 +42,8 @@ class UnidadeEspecialidade extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('unidade_cnes, grupo_codigo, profissao_codigo', 'required'),
-			array('grupo_codigo, unidade_cnes', 'numerical', 'integerOnly'=>true),
+			array('unidade_cnes, grupo_codigo, quantidade,profissao_codigo', 'required'),
+			array('grupo_codigo, quantidade, unidade_cnes', 'numerical', 'integerOnly'=>true),
 			array('unidade_cnes', 'length', 'max'=>10),
 			array('profissao_codigo', 'length', 'max'=>6),
 			// The following rule is used by search().
@@ -74,6 +75,7 @@ class UnidadeEspecialidade extends CActiveRecord
 			'unidade_cnes' => 'Unidade',
 			'grupo_codigo' => 'Grupo',
 			'profissao_codigo' => 'Especialidade',
+                        'quantidade' => 'Quantidade',
 		);
 	}
 
@@ -88,9 +90,26 @@ class UnidadeEspecialidade extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('unidade_cnes',$this->unidade_cnes,true);
-		$criteria->compare('grupo_codigo',$this->grupo_codigo);
-		$criteria->compare('profissao_codigo',$this->profissao_codigo,true);
+                $criteria->alias='ue';
+		$criteria->compare('ue.unidade_cnes',$this->unidade_cnes,true);
+		$criteria->compare('ue.grupo_codigo',$this->grupo_codigo);
+		$criteria->compare('ue.profissao_codigo',$this->profissao_codigo,true);
+                $criteria->with=array('especialidade','grupo');
+
+		return new CActiveDataProvider($this, array(
+			'criteria'=>$criteria,
+		));
+	}
+        
+        public function searchUnidade()
+	{
+		// Warning: Please modify the following code to remove attributes that
+		// should not be searched.
+
+		$criteria=new CDbCriteria;
+
+                $criteria->alias='ue';
+		$criteria->compare('ue.unidade_cnes',$this->unidade_cnes,true);
                 $criteria->with=array('especialidade','grupo');
 
 		return new CActiveDataProvider($this, array(
