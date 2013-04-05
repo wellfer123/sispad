@@ -31,7 +31,7 @@ class UnidadeEspecialidade extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'unidade_especialidade';
+		return;//'unidade_especialidade';
 	}
 
 	/**
