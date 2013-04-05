@@ -108,7 +108,10 @@ class ProducaoDiariaController extends SISPADBaseController {
         $this->CheckAcessAction();
 
         $servidor = $this->getServidor();
-        $especialidades = $this->getEspecialidades($servidor->unidade->cnes);
+        $unidades = $this->getUnidades($servidor);
+        $cnes = $unidades[0]->cnes;
+        //pega pela primeira unidade
+        $especialidades = $this->getEspecialidades($cnes);
         if (!empty($especialidades)) {//verifica se a unidade tem especialidades
             //declaração de variáveis
             $model = new ProducaoDiaria;
@@ -122,8 +125,7 @@ class ProducaoDiariaController extends SISPADBaseController {
                 if ($model->validate()) { //valida o modelo
                     $exist = $this->existeProducao($model);
                     if (!$exist) { //verifica se o modelo existe no banco de dados
-                        
-                        if ($this->validarQuantidadeEspecialidades($model)) {//verifica se a quantidade de especialidades da unidade
+                        if ($this->existeEspecialidadeUnidadeEProfissional($model)) {//verifica se a quantidade de especialidades da unidade
                             $model->data = ParserDate::inverteDataPtToEn($model->data);
                             if ($model->save()) { //salvou com sucesso, cria um novo modelo
                                 $model = new ProducaoDiaria;
@@ -145,13 +147,17 @@ class ProducaoDiariaController extends SISPADBaseController {
             }
             //coloca os valores que são adminsitrados pelo sistema
             $model->servidor_cpf = $servidor->cpf;
-            $model->unidade_cnes = $servidor->unidade->cnes;
+            $model->unidade_cnes = $cnes;
             //pega os profissionais da unidade  
-            $profissionais = CHtml::listData(Servidor::model()->findAll(), 'cpf', 'nome');
+            $profissionais = $this->getProfissionais($cnes, $especialidades[0]->codigo);
+
+            $grupos = Grupo::model()->findAll();
             //renderiza a página
             $this->render('send', array(
                 'model' => $model,
                 'data' => $data,
+                'unidades' => $unidades,
+                'grupos' => $grupos,
                 'profissionais' => $profissionais,
                 'especialidades' => $especialidades,
                 'servidor' => $servidor,
@@ -160,6 +166,12 @@ class ProducaoDiariaController extends SISPADBaseController {
             //então o sistema redireciona
         } else {
             $this->redirect(array('unidadeEspecialidade/add', 'unidade' => $servidor->unidade->cnes));
+        }
+    }
+    
+    public function actionUpdateProducoes(){
+        if (Yii::app()->request->isAjaxRequest){
+            
         }
     }
 
@@ -187,6 +199,28 @@ class ProducaoDiariaController extends SISPADBaseController {
             'unidades' => $unidades,
             'especialidades' => $especialidades,
         ));
+    }
+
+    public function actionFindEspecialidades() {
+        if (isset($_POST['unidade'])) {
+            $data = CHtml::listData($this->getEspecialidades($_POST['unidade']), 'codigo', 'nome');
+            foreach ($data as $value => $name) {
+                echo CHtml::tag('option', array('value' => $value), CHtml::encode($name), true);
+            }
+        }
+    }
+
+    public function actionFindProfissionais() {
+
+        if (isset($_POST['cnes']) && isset($_POST['cbo'])) {
+            $pro = $this->getProfissionais($_POST['cnes'], $_POST['cbo']);
+            $data = CHtml::listData($pro, 'cpf', 'servidor.nome');
+            //print_r($pro);
+            foreach ($data as $value => $name) {
+
+                echo CHtml::tag('option', array('value' => $value), CHtml::encode($name), true);
+            }
+        }
     }
 
     public function actionAdminGestor() {
@@ -284,16 +318,34 @@ class ProducaoDiariaController extends SISPADBaseController {
 
         $criteria = new CDbCriteria();
         $criteria->alias = 'prof';
-        $criteria->join = "INNER JOIN unidade_especialidade uni ON uni.profissao_codigo=prof.codigo";
+        $criteria->join = "INNER JOIN profissional_vinculo pv ON pv.codigo_profissao=prof.codigo";
         if ($unidade != null) {
-            $criteria->condition = ' uni.unidade_cnes=:cnes';
+            $criteria->condition = ' pv.unidade_cnes=:cnes';
             $criteria->params = array(':cnes' => $unidade);
         } else {
             // $criteria->distinct = true;
         }
 
         $models = Profissao::model()->findAll($criteria); //' grupo_codigo IS NOT NULL AND grupo_codigo <> 0');
-        return CHtml::listData($models, 'codigo', 'nome');
+        return $models;
+    }
+
+    public function getProfissionais($cnes, $cbo = null) {
+        //pega os profissionais da unidade  
+        $criteria = new CDbCriteria();
+
+        $criteria->alias = 'pv';
+        $params = array(':cnes' => $cnes);
+        if ($cbo != null) {
+            $params[':cbo'] = $cbo;
+            $criteria->condition = 'pv.unidade_cnes=:cnes AND pv.codigo_profissao=:cbo';
+        } else {
+            $criteria->condition = 'pv.unidade_cnes=:cnes';
+        }
+        $criteria->params = $params;
+        //$criteria->order='servidor.nome';
+        //pega os dados para preencher o combobox
+        return $profi = ProfissionalVinculo::model()->with('servidor')->findAll($criteria);
     }
 
     /**
@@ -355,33 +407,50 @@ class ProducaoDiariaController extends SISPADBaseController {
      * Verifica se a quantidade
      * @param Producaodiaria $model
      */
-    private function validarQuantidadeEspecialidades($model) {
-        //vai pegar a especialidade
-        $especialidade = UnidadeEspecialidade::model()->find('unidade_cnes=:cnes AND profissao_codigo=:codigo', array(
-            ':cnes' => $model->unidade_cnes,
-            ':codigo' => $model->profissao_codigo,
-        ));
-        //pega as producões já enviada para uma determinada especialidade em uma unidade
-        if ($especialidade != null) {
-            Yii::log("passou na validação de especialidade");
-            $criteria = new CDbCriteria();
-            $criteria->condition = 'profissao_codigo=:prof AND unidade_cnes=:cnes AND data=:data';
-            $criteria->params = array(
-                ':prof' => $model->profissao_codigo,
-                ':cnes' => $model->unidade_cnes,
-                ':data' => ParserDate::inverteDataPtToEn($model->data));
-            $producoes = ProducaoDiaria::model()->findAll($criteria);
+    private function existeEspecialidadeUnidadeEProfissional($model) {
+        $profiVinc= ProfissionalVinculo::model()->find('unidade_cnes=:cnes AND codigo_profissao=:codigo AND cpf=:cpf',
+                    array(
+                        ':cnes' => $model->unidade_cnes,
+                        ':codigo' => $model->profissao_codigo,
+                        ':cpf'=> $model->profissional_cpf,
+                    ));
+        return $profiVinc != null ? count($profiVinc) > 0 : false; 
+        
+//        //vai pegar a especialidade
+//        $especialidade = UnidadeEspecialidade::model()->find('unidade_cnes=:cnes AND profissao_codigo=:codigo', array(
+//            ':cnes' => $model->unidade_cnes,
+//            ':codigo' => $model->profissao_codigo,
+//        ));
+//        //pega as producões já enviada para uma determinada especialidade em uma unidade
+//        if ($especialidade != null) {
+//            $criteria = new CDbCriteria();
+//            $criteria->condition = 'profissao_codigo=:prof AND unidade_cnes=:cnes AND data=:data';
+//            $criteria->params = array(
+//                ':prof' => $model->profissao_codigo,
+//                ':cnes' => $model->unidade_cnes,
+//                ':data' => ParserDate::inverteDataPtToEn($model->data));
+//            $producoes = ProducaoDiaria::model()->findAll($criteria);
+//
+//            if (empty($producoes)) {
+//                return true;
+//            } else {
+//                Yii::log("passou na validação de produções");
+//                return count($producoes) < $especialidade->quantidade;
+//            }
+//        }
+//
+//        return false;
+    }
 
-            if (empty($producoes)) {
-                return true;
-            }
-            else{
-                Yii::log("passou na validação de produções");
-                return count($producoes) < $especialidade->quantidade;  
-            }
-        }
-
-        return false;
+    /**
+     * 
+     * @param type $servidor
+     * @return array com todas as unidades que o servidor passado como parâmetro é gestor
+     */
+    public function getUnidades($servidor) {
+        $unidades = array();
+        $unidades[] = $servidor->unidade;
+        return $unidades;
     }
 
     protected function getModelName() {
