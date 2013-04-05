@@ -8,6 +8,7 @@ $this->breadcrumbs=array(
 
 $this->menu=array(
 	array('label'=>'Enviar Produção Diária', 'url'=>array('send')),
+        array('label'=>'Vincular Profissional', 'url'=>array('profissionalVinculo/create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
