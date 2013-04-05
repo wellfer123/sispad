@@ -49,15 +49,15 @@ jQuery('#profissional-vinculo-grid a.inactive').live('click',function() {
 	'dataProvider'=>$dataProvider,
 	'columns'=>array(
                 array(
-                    'name'=>'servidor',
+                    'header'=>'Profissional',
                     'value'=>'$data->servidor->nome',
                 ),
                 array(
-                    'name'=>'Profissao',
+                    'header'=>'Profisão',
                     'value'=>'$data->profissao->nome',
                 ),
                 array(
-                        'name'=>'ativo',
+                        'header'=>'Situação',
                         'value'=>'$data->labelStatus()',
                 ),
 		
@@ -77,13 +77,13 @@ jQuery('#profissional-vinculo-grid a.inactive').live('click',function() {
                                         'active'=>array(
                                                         'visible'=>'$data->ativo==ProfissionalVinculo::DESATIVO',
                                                         'label'=>'Ativar Profissional',
-                                                        'url'=> 'Yii::app()->createUrl("/profissionalVinculo/active",array("id"=>array("unidade_cnes"=>$data->unidade_cnes,"cpf"=>$data->cpf,"codigo_profissao"=>$data->codigo_profissao)))',
+                                                        'url'=> 'Yii::app()->createUrl("/profissionalVinculo/active",array("unidade_cnes"=>$data->unidade_cnes,"cpf"=>$data->cpf,"codigo_profissao"=>$data->codigo_profissao))',
                                                         'options'=>array('class'=>'active', 'style'=>"padding-right:10px"),
                                                         'imageUrl'=>  Yii::app()->request->baseUrl.'/images/unlocked.png',
                                                 ),
                                         'inactive'=>array(
                                                         'visible'=>'$data->ativo==ProfissionalVinculo::ATIVO',
-                                                        'url'=> 'Yii::app()->createUrl("/profissionalVinculo/inactive",array("id"=>array("unidade_cnes"=>$data->unidade_cnes,"cpf"=>$data->cpf,"codigo_profissao"=>$data->codigo_profissao)))',
+                                                        'url'=> 'Yii::app()->createUrl("/profissionalVinculo/inactive",array("unidade_cnes"=>$data->unidade_cnes,"cpf"=>$data->cpf,"codigo_profissao"=>$data->codigo_profissao))',
                                                         'label'=>'Desativar Profissional',
                                                         'options'=>array('class'=>'inactive','style'=>"padding-right:10px"),
                                                         'imageUrl'=>  Yii::app()->request->baseUrl.'/images/locked.png',

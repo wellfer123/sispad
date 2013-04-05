@@ -21,10 +21,9 @@
 		<?php //echo $form->error($model,'cpf'); ?>
 	</div>-->
         <div class="row">
-		<?php echo $form->labelEx($model,'unidade_cnes'); ?>
-		<?php echo Chtml::textField('unidade_cnes_001', $unidade,array('readOnly'=>true,'size'=>70)); ?>
-                <?php echo CHtml::activeHiddenField($model, 'unidade_cnes'); ?>
-		<?php echo $form->error($model,'unidade_cnes');?>
+		<?php echo CHtml::activeLabel($model, 'unidade_cnes'); ?>
+                <?php echo CHtml::activeDropDownList($model, 'unidade_cnes', CHtml::listData( $unidades,'cnes','nome')); ?>
+                <?php echo CHtml::error($model, 'unidade_cnes') ; ?>
 	</div>
         <div class="row">
 		<?php echo $form->labelEx($model,'cpf'); ?>

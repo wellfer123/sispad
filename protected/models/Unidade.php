@@ -76,7 +76,8 @@ class Unidade extends CActiveRecord
                     'servidor'=>array(self::HAS_MANY,'Servidor','unidade_cnes'),
                     'enfermeiro_executa_meta'=>array(self::HAS_MANY,'EnfermeiroExecutaMeta','unidade_cnes'),
                     'profissionalVinculo' => array(self::HAS_MANY, 'ProfissionalVinculo', 'cpf'),
-                    'unidadeGestor' => array(self::HAS_MANY, 'UnidadeGestor', 'unidade_cnes'),
+                    'gestor' => array(self::MANY_MANY, 'Servidor', 'unidade_gestor(unidade_cnes, servidor_cpf)'),
+                   
 		);
 	}
 
@@ -117,7 +118,24 @@ class Unidade extends CActiveRecord
 		));
 	}
         
-        
+        /**
+         * Devolve todas as unidades que o servidor fornecido é gestor
+         * @param Servidor $servidorGestor
+         * @return Unidades[]
+         */
+        public static function  findAllPorGestor($servidorGestor){
+            $criteria =new CDbCriteria();
+            
+            $criteria->alias='uni';
+            $criteria->join='INNER JOIN unidade_gestor ug ON uni.cnes=ug.unidade_cnes';
+            $criteria->condition='ug.servidor_cpf=:cpf';
+            $criteria->params=array(':cpf' => $servidorGestor->cpf);
+            $unidades = Unidade::model()->findAll($criteria);
+
+            return $unidades;
+        }
+
+
         public function getNomeDescricao(){
             return $this->cnes.'/'.$this->nome."-".$this->descricao;
         }

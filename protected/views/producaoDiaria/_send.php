@@ -65,7 +65,7 @@
             </td>
         </tr>
         <tr>
-            <td colspan="2">
+            <td>
 		<?php echo CHtml::activeLabel($model, 'data'); ?>
 		<?php $this->widget("zii.widgets.jui.CJuiDatePicker",array(
                                                 'model'=>$model,
@@ -87,6 +87,11 @@
                 <?php echo CHtml::activeLabel($model, 'quantidade'); ?>
 		<?php echo CHtml::activeTextField($model, 'quantidade') ; ?>
                 <?php echo CHtml::error($model, 'quantidade') ; ?>
+            </td>
+            <td >
+                <?php echo CHtml::activeLabel($model, 'observacao_codigo'); ?>
+		<?php echo CHtml::activeDropDownList($model, 'observacao_codigo',  CHtml::listData($observacoes, 'codigo', 'nome'),array('empty'=>'Opcional')); ?>
+                <?php echo CHtml::error($model, 'observacao_codigo') ; ?>
             </td>
         </tr>
         </tr>

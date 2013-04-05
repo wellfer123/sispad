@@ -108,69 +108,78 @@ class ProducaoDiariaController extends SISPADBaseController {
         $this->CheckAcessAction();
 
         $servidor = $this->getServidor();
-        $unidades = $this->getUnidades($servidor);
-        $cnes = $unidades[0]->cnes;
-        //pega pela primeira unidade
-        $especialidades = $this->getEspecialidades($cnes);
-        if (!empty($especialidades)) {//verifica se a unidade tem especialidades
-            //declaração de variáveis
-            $model = new ProducaoDiaria;
-            $data = Date('d/m/Y');
-            $model->data = $data;
 
-            if (isset($_POST['ProducaoDiaria'])) { //verifica se existe uma requisição post
-                //popula o modelo
-                $model->attributes = $_POST['ProducaoDiaria'];
+            $unidades = $this->getUnidades($servidor);
+            if ($unidades != null) {
+                $cnes = $unidades[0]->cnes;
+                //pega pela primeira unidade
+                $especialidades = $this->getEspecialidades($cnes);
+                if (!empty($especialidades)) {//verifica se a unidade tem especialidades
+                    //declaração de variáveis
+                    $model = new ProducaoDiaria;
+                    $data = Date('d/m/Y');
+                    $model->data = $data;
 
-                if ($model->validate()) { //valida o modelo
-                    $exist = $this->existeProducao($model);
-                    if (!$exist) { //verifica se o modelo existe no banco de dados
-                        if ($this->existeEspecialidadeUnidadeEProfissional($model)) {//verifica se a quantidade de especialidades da unidade
-                            $model->data = ParserDate::inverteDataPtToEn($model->data);
-                            if ($model->save()) { //salvou com sucesso, cria um novo modelo
-                                $model = new ProducaoDiaria;
-                                $model->data = $data;
-                                //salvou com sucesso a produção
-                                $this->addMessageSuccess("Produção enviada com sucesso!");
+                    if (isset($_POST['ProducaoDiaria'])) { //verifica se existe uma requisição post
+                        //popula o modelo
+                        $model->attributes = $_POST['ProducaoDiaria'];
+
+                        if ($model->validate()) { //valida o modelo
+                            $exist = $this->existeProducao($model);
+                            if (!$exist) { //verifica se o modelo existe no banco de dados
+                                if ($this->existeEspecialidadeUnidadeEProfissional($model)) {//verifica se a quantidade de especialidades da unidade
+                                    $model->data = ParserDate::inverteDataPtToEn($model->data);
+                                    if ($model->save()) { //salvou com sucesso, cria um novo modelo
+                                        $model = new ProducaoDiaria;
+                                        $model->data = $data;
+                                        //salvou com sucesso a produção
+                                        $this->addMessageSuccess("Produção enviada com sucesso!");
+                                    }
+                                    //não salvou
+                                    else {
+                                        $this->addMessageErro("Erro. Não foi possível enviar essa produção!");
+                                    }
+                                } else {
+                                    $this->addMessageErro("Erro. Você já enviou a produção para a especialidade escolhida!");
+                                }
+                            } else {//exibe uma mensagem para o usuário
+                                $this->addMessageInfo("Você já enviou esta produção!");
                             }
-                            //não salvou
-                            else {
-                                $this->addMessageErro("Erro. Não foi possível enviar essa produção!");
-                            }
-                        } else {
-                            $this->addMessageErro("Erro. Você já enviou a produção para a especialidade escolhida!");
                         }
-                    } else {//exibe uma mensagem para o usuário
-                        $this->addMessageInfo("Você já enviou esta produção!");
                     }
+                    //coloca os valores que são adminsitrados pelo sistema
+                    $model->servidor_cpf = $servidor->cpf;
+                    $model->unidade_cnes = $cnes;
+                    //pega os profissionais da unidade  
+                    $profissionais = $this->getProfissionais($cnes, $especialidades[0]->codigo);
+                    $observacoes = Observacao::model()->findAll();
+                    $grupos = Grupo::model()->findAll();
+                    //renderiza a página
+                    $this->render('send', array(
+                        'model' => $model,
+                        'data' => $data,
+                        'observacoes' => $observacoes,
+                        'unidades' => $unidades,
+                        'grupos' => $grupos,
+                        'profissionais' => $profissionais,
+                        'especialidades' => $especialidades,
+                        'servidor' => $servidor,
+                    ));
+                    //a unidade não tem especialidades,
+                    //então o sistema redireciona
+                } else {
+                    $this->redirect(array('unidadeEspecialidade/add', 'unidade' => $servidor->unidade->cnes));
                 }
             }
-            //coloca os valores que são adminsitrados pelo sistema
-            $model->servidor_cpf = $servidor->cpf;
-            $model->unidade_cnes = $cnes;
-            //pega os profissionais da unidade  
-            $profissionais = $this->getProfissionais($cnes, $especialidades[0]->codigo);
-
-            $grupos = Grupo::model()->findAll();
-            //renderiza a página
-            $this->render('send', array(
-                'model' => $model,
-                'data' => $data,
-                'unidades' => $unidades,
-                'grupos' => $grupos,
-                'profissionais' => $profissionais,
-                'especialidades' => $especialidades,
-                'servidor' => $servidor,
-            ));
-            //a unidade não tem especialidades,
-            //então o sistema redireciona
-        } else {
-            $this->redirect(array('unidadeEspecialidade/add', 'unidade' => $servidor->unidade->cnes));
-        }
+            //o usuário não é gestor de nenhuma unidade
+            else{
+                throw new CHttpException(404, 'Você não é gestor de nenhuma unidade!');
+            }
+            
     }
-    
-    public function actionUpdateProducoes(){
-        if (Yii::app()->request->isAjaxRequest){
+
+    public function actionUpdateProducoes() {
+        if (Yii::app()->request->isAjaxRequest) {
             
         }
     }
@@ -295,7 +304,7 @@ class ProducaoDiariaController extends SISPADBaseController {
             'data' => $d,
         ));
         if ($model === null)
-            throw new CHttpException(404, 'A página requisitada não existe!' . " $u $e $d ");
+            throw new CHttpException(404, 'A página requisitada não existe!');
         return $model;
     }
 
@@ -335,12 +344,12 @@ class ProducaoDiariaController extends SISPADBaseController {
         $criteria = new CDbCriteria();
 
         $criteria->alias = 'pv';
-        $params = array(':cnes' => $cnes);
+        $params = array(':cnes' => $cnes,':status'=>  ProfissionalVinculo::ATIVO);
         if ($cbo != null) {
             $params[':cbo'] = $cbo;
-            $criteria->condition = 'pv.unidade_cnes=:cnes AND pv.codigo_profissao=:cbo';
+            $criteria->condition = 'pv.ativo=:status AND pv.unidade_cnes=:cnes AND pv.codigo_profissao=:cbo';
         } else {
-            $criteria->condition = 'pv.unidade_cnes=:cnes';
+            $criteria->condition = 'pv.ativo=:status AND pv.unidade_cnes=:cnes';
         }
         $criteria->params = $params;
         //$criteria->order='servidor.nome';
@@ -408,14 +417,13 @@ class ProducaoDiariaController extends SISPADBaseController {
      * @param Producaodiaria $model
      */
     private function existeEspecialidadeUnidadeEProfissional($model) {
-        $profiVinc= ProfissionalVinculo::model()->find('unidade_cnes=:cnes AND codigo_profissao=:codigo AND cpf=:cpf',
-                    array(
-                        ':cnes' => $model->unidade_cnes,
-                        ':codigo' => $model->profissao_codigo,
-                        ':cpf'=> $model->profissional_cpf,
-                    ));
-        return $profiVinc != null ? count($profiVinc) > 0 : false; 
-        
+        $profiVinc = ProfissionalVinculo::model()->find('unidade_cnes=:cnes AND codigo_profissao=:codigo AND cpf=:cpf', array(
+            ':cnes' => $model->unidade_cnes,
+            ':codigo' => $model->profissao_codigo,
+            ':cpf' => $model->profissional_cpf,
+        ));
+        return $profiVinc != null ? count($profiVinc) > 0 : false;
+
 //        //vai pegar a especialidade
 //        $especialidade = UnidadeEspecialidade::model()->find('unidade_cnes=:cnes AND profissao_codigo=:codigo', array(
 //            ':cnes' => $model->unidade_cnes,
@@ -444,13 +452,14 @@ class ProducaoDiariaController extends SISPADBaseController {
 
     /**
      * 
-     * @param type $servidor
+     * @param Servidor $servidor
      * @return array com todas as unidades que o servidor passado como parâmetro é gestor
      */
     public function getUnidades($servidor) {
-        $unidades = array();
-        $unidades[] = $servidor->unidade;
-        return $unidades;
+        if ($servidor instanceof Servidor) {
+            return Unidade::findAllPorGestor($servidor);
+        }
+        return null;
     }
 
     protected function getModelName() {
