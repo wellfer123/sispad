@@ -46,7 +46,7 @@ class Controller extends CController {
     public function getServidor() {
         if ($this->_servidor == null){
         if ( isset(Yii::app()->user->cpfservidor)) {
-            return Servidor::model()->with('unidade')->find('cpf=:cpf', array(':cpf' => Yii::app()->user->cpfservidor));
+            return Servidor::model()->find('cpf=:cpf', array(':cpf' => Yii::app()->user->cpfservidor));
         }
         $this->redirect(array('user/login'));
         }
