@@ -53,6 +53,7 @@ class User extends CActiveRecord {
             array('password,username', 'required', 'on' => 'login'),
             array('password', 'length', 'max' => 32),
             array('email', 'email', 'on' => 'register'),
+            array('email','length', 'max' => '255'),
             array('email, username', 'length', 'max' => 30, 'on' => 'register'),
             array('servidor_cpf', 'servidorExiste', 'on' => 'register'),
             array('servidor_cpf', 'servidorIsUser', 'on' => 'register'),
