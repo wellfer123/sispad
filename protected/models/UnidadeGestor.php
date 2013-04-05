@@ -9,6 +9,8 @@
  */
 class UnidadeGestor extends CActiveRecord
 {
+       const ATIVO = 1;
+       const DESATIVO = 0;
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
@@ -37,7 +39,7 @@ class UnidadeGestor extends CActiveRecord
 		return array(
 			array('unidade_cnes', 'length', 'max'=>10),
 			array('servidor_cpf', 'length', 'max'=>11),
-			array('unidade_cnes,servidor_cpf', 'required'),
+			array('unidade_cnes,servidor_cpf,ativo', 'required'),
 			array('unidade_cnes,servidor_cpf', 'validaUnidadeGestorExistente','on'=>'create'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
@@ -74,7 +76,8 @@ class UnidadeGestor extends CActiveRecord
 	{
 		return array(
 			'unidade_cnes' => 'Unidade',
-			'servidor_cpf' => 'Gestor'
+			'servidor_cpf' => 'Gestor',
+			'ativo' => 'Ativo',
 		);
 	}
 
@@ -88,7 +91,8 @@ class UnidadeGestor extends CActiveRecord
 		// should not be searched.
 
 		$criteria=new CDbCriteria;
-                $criteria->with = 'servidor';
+                //$criteria->with = 'servidor';
+                $criteria->with = array('unidade','servidor');
 		$criteria->compare('unidade_cnes',$this->unidade_cnes,true);
 		$criteria->compare('servidor_cpf',$this->servidor_cpf,true);
 		
@@ -97,4 +101,13 @@ class UnidadeGestor extends CActiveRecord
 			'criteria'=>$criteria
 		));
 	}
+        
+         public function labelStatus() {
+        if ($this->ativo == UnidadeGestor::ATIVO) {
+            return 'ATIVO';
+        } else if ($this->ativo == UnidadeGestor::DESATIVO) {
+            return 'INATIVO';
+        }
+        return 'DESCONHECIDO';
+    }
 }

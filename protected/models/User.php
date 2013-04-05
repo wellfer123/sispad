@@ -98,7 +98,7 @@ class User extends CActiveRecord {
         if ($this->ativo == User::ATIVO) {
             return 'ATIVO';
         } else if ($this->ativo == User::DESATIVO) {
-            return 'DESATIVO';
+            return 'INATIVO';
         }
         return 'DESCONHECIDO';
     }
