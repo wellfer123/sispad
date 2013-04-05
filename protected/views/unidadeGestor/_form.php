@@ -35,7 +35,7 @@
                                     'options'=>array(
                                         // number of characters that must be typed before
                                             // autoCompleter returns a value, defaults to 2
-                                        'minLength'=>6,
+                                        'minLength'=>4,
                                         ),
                                 ));?>
 		<?php echo $form->error($model,'unidade_cnes'); ?>
@@ -60,7 +60,7 @@
                                     'options'=>array(
                                         // number of characters that must be typed before
                                             // autoCompleter returns a value, defaults to 2
-                                        'minLength'=>6,
+                                        'minLength'=>4,
                                         ),
                                 ));?>
 		<?php echo $form->error($model,'servidor_cpf'); ?>

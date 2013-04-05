@@ -38,12 +38,22 @@ class UnidadeGestor extends CActiveRecord
 			array('unidade_cnes', 'length', 'max'=>10),
 			array('servidor_cpf', 'length', 'max'=>11),
 			array('unidade_cnes,servidor_cpf', 'required'),
+			array('unidade_cnes,servidor_cpf', 'validaUnidadeGestorExistente','on'=>'create'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('unidade_cnes, servidor_cpf', 'safe', 'on'=>'search'),
 		);
 	}
 
+        
+          public function  validaUnidadeGestorExistente($attribute,$params){
+
+             if((UnidadeGestor::model()->find('servidor_cpf= :cpf and unidade_cnes=:unidade',array(':cpf'=>$this->servidor_cpf,':unidade'=>$this->unidade_cnes)))==null){
+                 return true;
+             }
+             $this->addError('','Unidade/Gestor já existe');
+             return false;
+        }
 	/**
 	 * @return array relational rules.
 	 */

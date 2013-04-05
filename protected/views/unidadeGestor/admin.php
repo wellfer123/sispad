@@ -57,11 +57,13 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 			'class'=>'CButtonColumn',
                          'buttons'=>array(
                                         'update'=>array(
-                                                        'visible'=>'true',
+                                                       'visible'=>'true',
+                                                       'url'=> 'Yii::app()->createUrl("/unidadeGestor/update",array("unidade_cnes"=>$data->unidade_cnes,"servidor_cpf"=>$data->servidor_cpf))',
                                                 ),
                                         'view'=>array(
                                                         'visible'=>'true',
-                                                ),
+                                                        'url'=> 'Yii::app()->createUrl("/unidadeGestor/view",array("unidade_cnes"=>$data->unidade_cnes,"servidor_cpf"=>$data->servidor_cpf))',
+                                                ),  
                                         'delete'=>array(
                                                         'visible'=>'false',
                                                 ),
