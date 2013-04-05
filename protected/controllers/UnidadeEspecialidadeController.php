@@ -25,6 +25,9 @@ class UnidadeEspecialidadeController extends SISPADBaseController {
      */
     public function accessRules() {
         return array(
+            array('deny',  // deny all users
+		  'users'=>array('*'),
+		 ),
         );
     }
 
