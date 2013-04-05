@@ -181,16 +181,7 @@ abstract class SISPADBaseController extends Controller {
         return $msg;
     }
 
-    /**
-     * 
-     * @return Servidor servidor que está logado no sistema
-     */
-    public function getServidor() {
-        if (isset(Yii::app()->user->cpfservidor)) {
-            return Servidor::model()->with('unidade')->find('cpf=:cpf', array(':cpf' => Yii::app()->user->cpfservidor));
-        }
-        $this->redirect(array('user/login'));
-    }
+
 
 }
 
