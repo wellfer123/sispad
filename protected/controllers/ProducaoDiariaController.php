@@ -232,9 +232,9 @@ class ProducaoDiariaController extends SISPADBaseController {
      * 
      * @return Servidor servidor que está logado no sistema
      */
-    private function getServidor() {
-        return Servidor::model()->with('unidade')->find('cpf=:cpf', array(':cpf' => Yii::app()->user->cpfservidor));
-    }
+//    private function getServidor() {
+//        return Servidor::model()->with('unidade')->find('cpf=:cpf', array(':cpf' => Yii::app()->user->cpfservidor));
+//    }
 
     /**
      * 
