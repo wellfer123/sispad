@@ -8,13 +8,16 @@
  * @property string $servidor_cpf
  * @property string $profissao_codigo
  * @property string $quantidade
+ * @property string $profissional_cpf
+ * @property string $grupo_codigo
  * @property string $data
  *
  * The followings are the available model relations:
- * @property Unidade $unidadeCnes
- * @property Servidor $servidorCpf
+ * @property Unidade $unidade
+ * @property Servidor $gestor
+ * @property Servidor $profissional
  * @property Profissao $profissaoCodigo
- * @property Profissional $profissional_cpf
+ * @property Grupo $grupo
  */
 class ProducaoDiaria extends CActiveRecord {
 
@@ -41,15 +44,15 @@ class ProducaoDiaria extends CActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('unidade_cnes, profissional_cpf,servidor_cpf, quantidade,profissao_codigo, data', 'required'),
-            array('unidade_cnes, profissional_cpf,servidor_cpf, quantidade', 'numerical', 'integerOnly' => true),
+            array('unidade_cnes,grupo_codigo, profissional_cpf,servidor_cpf, quantidade,profissao_codigo, data', 'required'),
+            array('unidade_cnes, profissional_cpf,grupo_codigo,servidor_cpf, quantidade', 'numerical', 'integerOnly' => true),
             array('unidade_cnes', 'length', 'min' => 7, 'max' => 7),
             array('servidor_cpf, profissional_cpf', 'length', 'min' => 11, 'max' => 11),
             array('profissao_codigo', 'length', 'min' => 6, 'max' => 6),
             array('quantidade', 'length', 'min' => 1, 'max' => 5),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
-            array('unidade_cnes, profissional_cpf,servidor_cpf, profissao_codigo, quantidade, data', 'safe', 'on' => 'search'),
+            array('unidade_cnes, grupo_codigo,profissional_cpf,servidor_cpf, profissao_codigo, quantidade, data', 'safe', 'on' => 'search'),
         );
     }
 
@@ -62,7 +65,8 @@ class ProducaoDiaria extends CActiveRecord {
         return array(
             'unidade' => array(self::BELONGS_TO, 'Unidade', 'unidade_cnes'),
             'gestor' => array(self::BELONGS_TO, 'Servidor', 'servidor_cpf'),
-            'profissional' => array(self::BELONGS_TO, 'Servidor', 'servidor_cpf'),
+            'grupo' => array(self::BELONGS_TO, 'Grupo', 'grupo_codigo'),
+            'profissional' => array(self::BELONGS_TO, 'Servidor', 'profissional_cpf'),
             'especialidade' => array(self::BELONGS_TO, 'Profissao', 'profissao_codigo'),
         );
     }
@@ -76,6 +80,7 @@ class ProducaoDiaria extends CActiveRecord {
             'servidor_cpf' => 'Gestor',
             'profissao_codigo' => 'Especialidade',
             'quantidade' => 'Quantidade',
+            'grupo' => 'Grupo',
             'profissional_cpf' => 'Profissional',
             'data' => 'Data',
         );
