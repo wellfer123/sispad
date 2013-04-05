@@ -9,6 +9,8 @@
  */
 class UnidadeGestor extends CActiveRecord
 {
+       const ATIVO = 1;
+       const DESATIVO = 0;
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
@@ -99,4 +101,13 @@ class UnidadeGestor extends CActiveRecord
 			'criteria'=>$criteria
 		));
 	}
+        
+         public function labelStatus() {
+        if ($this->ativo == UnidadeGestor::ATIVO) {
+            return 'ATIVO';
+        } else if ($this->ativo == UnidadeGestor::DESATIVO) {
+            return 'DESATIVO';
+        }
+        return 'DESCONHECIDO';
+    }
 }

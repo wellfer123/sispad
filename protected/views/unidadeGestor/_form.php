@@ -67,7 +67,7 @@
 	</div>
         <div class="row">
             <?php echo $form->labelEx($model,'ativo'); ?>
-            <?php echo $form->checkBox($model,'ativo'); ?>
+            <?php echo $form->checkBox($model,'ativo',$model->isNewRecord ? array('disabled'=>true) : array('disabled'=>false)); ?>
             <?php echo $form->error($model,'ativo'); ?>
         </div>
 	<div class="row buttons">
