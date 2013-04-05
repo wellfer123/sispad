@@ -76,9 +76,9 @@ class ProfissionalVinculo extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'cpf' => 'Cpf',
-			'unidade_cnes' => 'Unidade Cnes',
-			'codigo_profissao' => 'Profissao',
+			'cpf' => 'Servidor',
+			'unidade_cnes' => 'Unidade',
+			'codigo_profissao' => 'Profissão',
 		);
 	}
 
@@ -92,7 +92,8 @@ class ProfissionalVinculo extends CActiveRecord
 		// should not be searched.
 
 		$criteria=new CDbCriteria;
-
+                
+                
 		$criteria->compare('cpf',$this->cpf,true);
 		$criteria->compare('unidade_cnes',$this->unidade_cnes,true);
 		$criteria->compare('codigo_profissao',$this->codigo_profissao,true);
