@@ -60,7 +60,7 @@ class ProfissionalVinculoController extends SISPADBaseController {
     public function actionCreate() {
         $model = new ProfissionalVinculo('create');
         $servidor = $this->getServidor();
-        $unidades = Unidade::getGestores($servidor);
+        $unidades = Unidade::findAllPorGestor($servidor);
         //o servidor é gestor de alguma unidade
         if (count($unidades) > 0) {
             // Uncomment the following line if AJAX validation is needed

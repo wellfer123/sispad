@@ -457,7 +457,7 @@ class ProducaoDiariaController extends SISPADBaseController {
      */
     public function getUnidades($servidor) {
         if ($servidor instanceof Servidor) {
-            return Unidade::getGestores($servidor);
+            return Unidade::findAllPorGestor($servidor);
         }
         return null;
     }
