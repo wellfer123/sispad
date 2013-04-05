@@ -112,13 +112,48 @@ class ProducaoDiaria extends CActiveRecord {
     public function getMaisRecente() {
         // Warning: Please modify the following code to remove attributes that
         // should not be searched.
-
+       
         $criteria = new CDbCriteria;
         $criteria->alias='pd';
         
         $criteria->compare('pd.unidade_cnes', $this->unidade_cnes, true);
         $criteria->compare('pd.servidor_cpf', $this->servidor_cpf, true);
         $criteria->addBetweenCondition('pd.data', Date('Y-m-d') -1, Date('Y-m-d'));
+        $criteria->with = array('especialidade','profissional');
+
+        return new CActiveDataProvider($this, array(
+            'criteria' => $criteria,
+        ));
+    }
+    
+    /**
+     * Devolve um CActiveDataProvider com toda a produção das unidades passadas como parâmetro.
+     * @param array $unidades um array associativo 
+     * @return \CActiveDataProvider
+     */
+    public static function getMaisRecentePorUnidades($unidades){
+        // Warning: Please modify the following code to remove attributes that
+        // should not be searched.
+        $condition=null;
+        if(is_array($unidades) ){
+            $condition='pd.unidade_cnes IN (';
+            $cont=0;
+            foreach ($unidades as $cnes => $nome) {
+                if ($cont > 1){
+                    $condition=$condition.",' $cnes '";
+                }
+                else{
+                    $condition=$condition.",' $cnes '";
+                }
+                $cont=2;
+            }
+            $condition=$condition.")";
+        }
+
+        $criteria = new CDbCriteria;
+        $criteria->alias='pd';
+        $criteria->addBetweenCondition('pd.data', Date('Y-m-d') -1, Date('Y-m-d'));
+        $criteria->condition=$condition;
         $criteria->with = array('especialidade','profissional');
 
         return new CActiveDataProvider($this, array(
