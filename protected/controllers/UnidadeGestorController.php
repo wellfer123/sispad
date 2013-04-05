@@ -71,7 +71,7 @@ class UnidadeGestorController extends Controller
 		{
 			$model->attributes=$_POST['UnidadeGestor'];
 			if($model->save())
-				$this->redirect(array('create'));
+				$this->redirect(array('view','unidade_cnes'=>$model->unidade_cnes,'servidor_cpf'=>$model->servidor_cpf));
 		}
 
 		$this->render('create',array(

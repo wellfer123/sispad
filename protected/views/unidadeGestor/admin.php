@@ -46,9 +46,10 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 	'filter'=>$model,
 	'columns'=>array(
                 array(
-                    'name'=>'servidor',
-                    'value'=>'$data->servidor->nome'
+                    'header'=>'servidor',
+                    'value'=>'$data->servidor->nome',
                 ),
+                'servidor_cpf',
                 array(
                     'name'=>'unidade',
                     'value'=>'$data->unidade->nome'
