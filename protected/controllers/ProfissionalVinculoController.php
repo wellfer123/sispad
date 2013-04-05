@@ -95,6 +95,66 @@ class ProfissionalVinculoController extends SISPADBaseController
             return $dataProvider;
             
         }
+        
+        public function actionActive()
+	{
+            
+                //$this->CheckAcessAction();
+		if(Yii::app()->request->isPostRequest)
+		{
+			// we only allow deletion via POST request
+                        $mo=$this->loadModel();
+                        if($mo!=null){
+                            $mo->ativo=  ProfissionalVinculo::ATIVO;
+                            $mo->save();
+                            //$this->enviaEmail($mo->email,$mo->username,
+                                       // "sispadcaruaru@gmail.com","ATIVACAO DE CONTA",$this->_bodyEmail);
+                        }
+
+			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+			if(!isset($_GET['ajax']))
+				$this->redirect(array('index'));
+		}
+		else
+			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
+	}
+        
+        
+        public function actionInactive()
+	{
+                
+                //$this->CheckAcessAction();
+		if(Yii::app()->request->isPostRequest)
+		{
+			// we only allow  via POST request
+			$mo=$this->loadModel();
+                        if($mo!=null){
+                           
+                            $mo->ativo=ProfissionalVinculo::DESATIVO;
+                            $mo->save();
+                            //$this->enviaEmail($mo->email,$mo->username,
+                                       // "sispadcaruaru@gmail.com","DESATIVACAO DE CONTA",$this->_bodyEmailDes);
+                        }
+
+			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+			if(!isset($_GET['ajax']))
+				$this->redirect(array('index'));
+		}
+		else
+			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
+	}
+        
+        public function loadModel()
+	{
+                if(isset($_GET['id']['unidade_cnes']) and isset($_GET['id']['cpf']) and isset($_GET['id']['codigo_profissao'])){
+                    $model=ProfissionalVinculo::model()->findByPk(array('unidade_cnes'=>$_GET['id']['unidade_cnes'],'cpf'=>$_GET['id']['cpf'],'codigo_profissao'=>$_GET['id']['codigo_profissao']));
+                }
+		if($model===null)
+			throw new CHttpException(404,'The requested page does not exist.');
+		return $model;
+        }
+        
+        
 	// Uncomment the following methods and override them if needed
 	/*
 	public function filters()

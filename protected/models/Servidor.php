@@ -77,6 +77,8 @@ class Servidor extends CActiveRecord
                         'falta'=>array(self::HAS_MANY,'Falta','servidor_cpf'),
                         'equipe'=>array(self::BELONGS_TO,'Equipe','equipe_codigo_segmento'),
                         'profissionalVinculo' => array(self::HAS_MANY, 'ProfissionalVinculo', 'cpf'),
+                        'unidadeGestor' => array(self::HAS_MANY, 'UnidadeGestor', 'unidade_cnes'),
+                        
 		);
 	}
 

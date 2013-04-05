@@ -84,10 +84,12 @@ class UserController extends SISPADBaseController
                 //classe User do SISPAD
 		$model=new User('login');
 
-
+                $msg='';
 		// if it is ajax validation request
 		$this->performAjaxValidation($model);
-
+                if(isset($_GET['msg'])){
+                    $msg = $_GET['msg'];
+                }
 		// collect user input data
 		if(isset($_POST['User']))
 		{
@@ -99,7 +101,7 @@ class UserController extends SISPADBaseController
                         }
 		}
 		// display the login form
-		$this->render('login',array('model'=>$model));
+		$this->render('login',array('model'=>$model,'msg'=>$msg));
             }
             else{
                 $this->redirect(yii::app()->baseUrl.'/index.php?r=perfil/home');
@@ -133,7 +135,7 @@ class UserController extends SISPADBaseController
                         $model->criptografarPassword();
                         $model->ativo=0;
 			if($model->save()){
-                               $this->redirect(array('view','id'=>$model->id));
+                               $this->redirect(array('login','msg'=>'Cadastro realizado com Sucesso!'));
                         }
                         else{
                             $model->password=$senha;
