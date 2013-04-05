@@ -45,14 +45,14 @@ class ProducaoDiaria extends CActiveRecord {
         // will receive user inputs.
         return array(
             array('unidade_cnes,grupo_codigo, profissional_cpf,servidor_cpf, quantidade,profissao_codigo, data', 'required'),
-            array('unidade_cnes, profissional_cpf,grupo_codigo,servidor_cpf, quantidade', 'numerical', 'integerOnly' => true),
+            array('unidade_cnes, profissional_cpf, observacao_codigo,grupo_codigo,servidor_cpf, quantidade', 'numerical', 'integerOnly' => true),
             array('unidade_cnes', 'length', 'min' => 7, 'max' => 7),
             array('servidor_cpf, profissional_cpf', 'length', 'min' => 11, 'max' => 11),
             array('profissao_codigo', 'length', 'min' => 6, 'max' => 6),
             array('quantidade', 'length', 'min' => 1, 'max' => 5),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
-            array('unidade_cnes, grupo_codigo,profissional_cpf,servidor_cpf, profissao_codigo, quantidade, data', 'safe', 'on' => 'search'),
+            array('unidade_cnes, observacao_codigo,grupo_codigo,profissional_cpf,servidor_cpf, profissao_codigo, quantidade, data', 'safe', 'on' => 'search'),
         );
     }
 
@@ -81,6 +81,7 @@ class ProducaoDiaria extends CActiveRecord {
             'profissao_codigo' => 'Especialidade',
             'quantidade' => 'Quantidade',
             'grupo' => 'Grupo',
+            'observacao_codigo' => 'Observação',
             'profissional_cpf' => 'Profissional',
             'data' => 'Data',
         );
