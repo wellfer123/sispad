@@ -17,7 +17,7 @@ $this->breadcrumbs=array(
                         'title'=>'Enviar Produção Diária',
                     ),
                     array(
-                        'link'=>Yii::app()->createAbsoluteUrl('profissionalvinculo/create'),
+                        'link'=>Yii::app()->createAbsoluteUrl('profissionalVinculo/create'),
                         'image'=>'images/add2.png',
                         'title'=>'Vincular Profissional',
                     ),

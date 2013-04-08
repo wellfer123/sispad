@@ -50,7 +50,7 @@ class User extends CActiveRecord {
         // will receive user inputs.
         return array(
             array('password, email, username, servidor_cpf', 'required', 'on' => 'register'),
-            array('password,username', 'required', 'on' => 'login'),
+            array('password,email', 'required', 'on' => 'login'),
             array('password', 'length', 'max' => 32),
             array('email', 'email', 'on' => 'register'),
             array('email','length', 'max' => '255'),
@@ -131,6 +131,7 @@ class User extends CActiveRecord {
         if ($this->_identity === null) {
 
             $this->_identity = new UserIdentity($this->username, $this->password);
+            $this->_identity->email=$this->email;
             //autentica o usuário
             $this->_identity->authenticate();
         }
@@ -141,8 +142,8 @@ class User extends CActiveRecord {
             return true;
         }
         //o usuário errou o nome
-        elseif ($this->_identity->errorCode === UserIdentity::ERROR_USERNAME_INVALID) {
-            $this->addError('username', 'Usuário Incorreto.');
+        elseif ($this->_identity->errorCode === UserIdentity::ERROR_EMAIL_) {
+            $this->addError('email', 'E-mail inválido.');
         }
         //o usuário errou a senha
         elseif ($this->_identity->errorCode === UserIdentity::ERROR_PASSWORD_INVALID) {

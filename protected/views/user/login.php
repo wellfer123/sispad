@@ -21,14 +21,14 @@ $this->breadcrumbs=array(
         <?php echo $form->errorSummary($model); ?>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'username'); ?>
-		<?php echo $form->textField($model,'username'); ?>
-		<?php echo $form->error($model,'username'); ?>
+		<?php echo $form->labelEx($model,'email'); ?>
+		<?php echo $form->textField($model,'email',array('size'=>70)); ?>
+		<?php echo $form->error($model,'email'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'password'); ?>
-		<?php echo $form->passwordField($model,'password'); ?>
+		<?php echo $form->passwordField($model,'password',array('size'=>30)); ?>
 		<?php echo $form->error($model,'password'); ?>
 		
             <p>Caso não tenha se registrado no sistema <a href=<?php echo Yii::app()->createAbsoluteUrl('user/register') ?>>clique aqui</a></p>
