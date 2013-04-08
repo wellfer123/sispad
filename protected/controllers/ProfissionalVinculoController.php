@@ -48,6 +48,7 @@ class ProfissionalVinculoController extends SISPADBaseController {
      * Displays a particular model.
      */
     public function actionView() {
+        $this->CheckAcessAction();
         $this->render('view', array(
             'model' => $this->loadModel(),
         ));
@@ -58,6 +59,7 @@ class ProfissionalVinculoController extends SISPADBaseController {
      * If creation is successful, the browser will be redirected to the 'view' page.
      */
     public function actionCreate() {
+        $this->CheckAcessAction();
         $model = new ProfissionalVinculo('create');
         $servidor = $this->getServidor();
         $unidades = Unidade::findAllPorGestor($servidor);
@@ -80,6 +82,7 @@ class ProfissionalVinculoController extends SISPADBaseController {
     }
 
     public function getAllProfissionaisUnidade($unidades) {
+        $this->_RBAC->checkAccess('registered',true);
         $criteria=  ProfissionalVinculo::getProfissionais(CHtml::listData($unidades, 'cnes', 'nome'));
         $criteria->with=array('servidor','unidade','profissao');
         $dataProvider = new CActiveDataProvider('ProfissionalVinculo', array(
@@ -93,7 +96,7 @@ class ProfissionalVinculoController extends SISPADBaseController {
 
     public function actionActive() {
 
-        //$this->CheckAcessAction();
+        $this->CheckAcessAction();
         if (Yii::app()->request->isPostRequest) {
             // we only allow deletion via POST request
             $mo = $this->loadModel();
@@ -114,7 +117,7 @@ class ProfissionalVinculoController extends SISPADBaseController {
 
     public function actionInactive() {
 
-        //$this->CheckAcessAction();
+        $this->CheckAcessAction();
         if (Yii::app()->request->isPostRequest) {
             // we only allow  via POST request
             $mo = $this->loadModel();
