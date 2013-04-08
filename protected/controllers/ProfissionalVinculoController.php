@@ -71,7 +71,7 @@ class ProfissionalVinculoController extends SISPADBaseController {
                 if ($model->save())
                     $this->redirect(array('create'));
             }
-            $dataProvider = $this->getAllProfissionaisUnidade();
+            $dataProvider = $this->getAllProfissionaisUnidade($unidades);
             $this->render('create', array('dataProvider' => $dataProvider, 'model' => $model, 'unidades' => $unidades));
         }
         else {
@@ -79,13 +79,13 @@ class ProfissionalVinculoController extends SISPADBaseController {
         }
     }
 
-    public function getAllProfissionaisUnidade() {
-        $criteria = new CDbCriteria;
-        $servidor = $this->getServidor();
+    public function getAllProfissionaisUnidade($unidades) {
+        $criteria=  ProfissionalVinculo::getProfissionais(CHtml::listData($unidades, 'cnes', 'nome'));
+        $criteria->with=array('servidor','unidade','profissao');
         $dataProvider = new CActiveDataProvider('ProfissionalVinculo', array(
             'criteria' => $criteria,
             'pagination' => array(
-                'pageSize' => 20
+                'pageSize' => 30
             )
         ));
         return $dataProvider;

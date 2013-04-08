@@ -49,6 +49,10 @@ jQuery('#profissional-vinculo-grid a.inactive').live('click',function() {
 	'dataProvider'=>$dataProvider,
 	'columns'=>array(
                 array(
+                    'header'=>'Unidade',
+                    'value'=>'$data->unidade->nome',
+                ),
+                array(
                     'header'=>'Profissional',
                     'value'=>'$data->servidor->nome',
                 ),

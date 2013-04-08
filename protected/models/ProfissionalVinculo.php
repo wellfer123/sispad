@@ -113,4 +113,29 @@ class ProfissionalVinculo extends CActiveRecord
         }
         return 'DESCONHECIDO';
     }
+    
+    /**
+     * 
+     * @param array $unidades um vetor associativo onde a chave é o cnes.
+     */
+    public static function getProfissionais($unidades){
+        $criteria= new CDbCriteria();
+        
+        $condition=' unidade_cnes IN(';
+        $cont=0;
+        foreach ($unidades as $cnes => $nome) {
+            if ($cont > 0){
+              $condition=$condition.", '$cnes' ";  
+            }
+            else{
+               $condition=$condition." '$cnes' ";   
+            }
+            $cont=1;
+        }
+        $condition=$condition.')';
+        
+        $criteria->condition=$condition;
+        
+        return $criteria;
+    }
 }
