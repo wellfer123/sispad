@@ -4,6 +4,10 @@
 	'dataProvider'=>$model->getMaisRecente(),
 	'columns'=>array(
                 array(
+                    'header'=>'Unidade',
+                    'value'=>'$data->unidade->nome',
+                ),
+                array(
                     'name'=>'profissao_codigo',
                     'value'=>'$data->especialidade->nome',
                 ),
