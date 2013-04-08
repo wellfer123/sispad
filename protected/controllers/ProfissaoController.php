@@ -68,7 +68,7 @@ class ProfissaoController extends SISPADBaseController {
         if (isset($q)) {
             // CBO iniciado
             $criteria=new CDbCriteria();
-            $criteria->condition=" ((SUBSTRING(codigo,1,3)='223' OR SUBSTRING(codigo,1,4)='3222') OR SUBSTRING(codigo,1,4)='3522') AND (nome  like :pesquisa or codigo like :pesquisa)";
+            $criteria->condition=" ((SUBSTRING(codigo,1,3)='223' OR SUBSTRING(codigo,1,4)='3222') OR SUBSTRING(codigo,1,4)='3522' OR SUBSTRING(codigo,1,4)='2515' OR codigo='251605') AND (nome  like :pesquisa or codigo like :pesquisa)";
             $criteria->order=" nome";
             $criteria->params=array(':pesquisa'=> '%'.strtoupper(trim($q)).'%');
             $profissoes = Profissao::model()->findAll($criteria);
