@@ -119,7 +119,7 @@ class ProducaoDiaria extends CActiveRecord {
         $criteria->compare('pd.unidade_cnes', $this->unidade_cnes, true);
         $criteria->compare('pd.servidor_cpf', $this->servidor_cpf, true);
         $criteria->addBetweenCondition('pd.data', Date('Y-m-d') -1, Date('Y-m-d'));
-        $criteria->with = array('especialidade','profissional');
+        $criteria->with = array('especialidade','profissional','unidade');
 
         return new CActiveDataProvider($this, array(
             'criteria' => $criteria,
@@ -152,9 +152,9 @@ class ProducaoDiaria extends CActiveRecord {
 
         $criteria = new CDbCriteria;
         $criteria->alias='pd';
-        $criteria->addBetweenCondition('pd.data', Date('Y-m-d') -1, Date('Y-m-d'));
+        $criteria->addBetweenCondition('pd.data', Date('Y-m-d') -20, Date('Y-m-d'));
         $criteria->condition=$condition;
-        $criteria->with = array('especialidade','profissional');
+        $criteria->with = array('especialidade','profissional','unidade');
 
         return new CActiveDataProvider($this, array(
             'criteria' => $criteria,
