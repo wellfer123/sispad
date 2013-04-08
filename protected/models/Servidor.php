@@ -41,7 +41,7 @@ class Servidor extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('cpf, matricula,nome,estado_civil', 'required','on'=>'create'),
+			array('cpf,nome,estado_civil', 'required','on'=>'create'),
 			array('endereco_id, matricula, cpf,cns', 'numerical', 'integerOnly'=>true),
 			array('cpf', 'length', 'max'=>11, 'min'=>11),
                         array('cns', 'length', 'max'=>15, 'min'=>15),
