@@ -51,6 +51,7 @@ class UnidadeGestorController extends Controller
 	 */
 	public function actionView()
 	{
+                $this->CheckAcessAction();
 		$this->render('view',array(
 			'model'=>$this->loadModel(),
 		));
@@ -62,6 +63,7 @@ class UnidadeGestorController extends Controller
 	 */
 	public function actionCreate()
 	{
+                $this->CheckAcessAction();
 		$model=new UnidadeGestor('create');
 		
                
@@ -86,6 +88,7 @@ class UnidadeGestorController extends Controller
 	 */
 	public function actionUpdate()
 	{
+                $this->CheckAcessAction();
 		$model=$this->loadModel();
 
 		// Uncomment the following line if AJAX validation is needed
@@ -110,6 +113,7 @@ class UnidadeGestorController extends Controller
 	 */
 	public function actionDelete($id)
 	{
+                $this->CheckAcessAction();
 		$this->loadModel($id)->delete();
 
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
@@ -122,6 +126,7 @@ class UnidadeGestorController extends Controller
 	 */
 	public function actionIndex()
 	{
+                $this->CheckAcessAction();
 		$dataProvider=new CActiveDataProvider('UnidadeGestor');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
@@ -133,6 +138,7 @@ class UnidadeGestorController extends Controller
 	 */
 	public function actionAdmin()
 	{
+                $this->CheckAcessAction();
 		$model=new UnidadeGestor('search');
 		$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['UnidadeGestor']))
@@ -176,6 +182,7 @@ class UnidadeGestorController extends Controller
         
         
         public function getAllUnidadeGestor($cpf){
+            $this->_RBAC->checkAccess('registered',true);
             $criteria=new CDbCriteria;
             $criteria->condition=" gestor_cpf=".$cpf;
             $dataProvider=new CActiveDataProvider('UnidadeGestor', array(

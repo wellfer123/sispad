@@ -4,7 +4,7 @@
 
 $this->breadcrumbs=array(
 	'Unidade Gestor'=>array('index'),
-	'Manage',
+	'Gerenciar',
 );
 
 $this->menu=array(

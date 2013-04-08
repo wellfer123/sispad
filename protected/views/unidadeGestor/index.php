@@ -3,16 +3,16 @@
 /* @var $dataProvider CActiveDataProvider */
 
 $this->breadcrumbs=array(
-	'Unidade Gestors',
+	'Unidade Gestor',
 );
 
 $this->menu=array(
-	array('label'=>'Create UnidadeGestor', 'url'=>array('create')),
-	array('label'=>'Manage UnidadeGestor', 'url'=>array('admin')),
+	array('label'=>'Cadastrar UnidadeGestor', 'url'=>array('create')),
+	array('label'=>'Gerenciar UnidadeGestor', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Unidade Gestors</h1>
+<h1>Unidade Gestor</h1>
 
 <?php $this->widget('zii.widgets.CListView', array(
 	'dataProvider'=>$dataProvider,
