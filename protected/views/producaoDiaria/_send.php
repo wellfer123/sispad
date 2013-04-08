@@ -94,6 +94,12 @@
                 <?php echo CHtml::error($model, 'observacao_codigo') ; ?>
             </td>
         </tr>
+        <tr>
+            <td colspan="2">
+                <?php echo CHtml::label('Detalhe (Opcional)', 'detalhe'); ?>
+		<?php echo CHtml::activeTextArea($model, 'detalhe',array('rows'=>'5')); ?>
+                <?php echo CHtml::error($model, 'detalhe') ; ?>
+            </td>
         </tr>
     </tbody>
 </table>

@@ -11,6 +11,7 @@
  * @property string $profissional_cpf
  * @property string $grupo_codigo
  * @property string $data
+ * @property string $detalhe
  *
  * The followings are the available model relations:
  * @property Unidade $unidade
@@ -52,7 +53,7 @@ class ProducaoDiaria extends CActiveRecord {
             array('quantidade', 'length', 'min' => 1, 'max' => 5),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
-            array('unidade_cnes, observacao_codigo,grupo_codigo,profissional_cpf,servidor_cpf, profissao_codigo, quantidade, data', 'safe', 'on' => 'search'),
+            array('unidade_cnes,detalhe, observacao_codigo,grupo_codigo,profissional_cpf,servidor_cpf, profissao_codigo, quantidade, data', 'safe', 'on' => 'search'),
         );
     }
 
@@ -78,6 +79,7 @@ class ProducaoDiaria extends CActiveRecord {
         return array(
             'unidade_cnes' => 'Unidade',
             'servidor_cpf' => 'Gestor',
+            'detalhe' => 'Detalhe',
             'profissao_codigo' => 'Especialidade',
             'quantidade' => 'Quantidade',
             'grupo' => 'Grupo',
