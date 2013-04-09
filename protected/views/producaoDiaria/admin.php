@@ -27,7 +27,7 @@ $('.search-form form').submit(function(){
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'producao-diaria-grid',
 	'dataProvider'=>$model->search(),
-        'afterAjaxUpdate'=>"function(){ jQuery('#data').datepicker(jQuery.extend({showMonthAfterYear:false},jQuery.datepicker.regional['pt'],{'changeMonth':'true','changeYear':'true','yearRange':'-99:+0','showAnim':'fadeIn'}));  
+        'afterAjaxUpdate'=>"function(){ jQuery('#".CHtml::activeId($model, 'data')."').datepicker(jQuery.extend({showMonthAfterYear:false},jQuery.datepicker.regional['pt'],{'changeMonth':'true','changeYear':'true','yearRange':'-99:+0','showAnim':'fadeIn'}));  
                                         jQuery('#ProducaoDiaria_profissional_cpf_lookup').autocomplete({'minLength':4,'maxHeight':'100','create':function(event, ui){ $(this).val('');},'select':function(event, ui){  $('#ProducaoDiaria_profissional_cpf').val(ui.item.id);$('#ProducaoDiaria_profissional_cpf_save').val(ui.item.value);},'source':'/sispad/index.php/Servidor/findServidores'});
                                     }",
 	'filter'=>$model,
@@ -67,7 +67,8 @@ $('.search-form form').submit(function(){
                     'name'=>'data',
                     'value'=>'ParserDate::inverteDataEnToPt($data->data)',
                     'filter'=>$this->widget("zii.widgets.jui.CJuiDatePicker",array(
-                                                "name"=>"data",
+                                                "model"=>$model,
+                                                "attribute"=>"data", 
                                                 "options"=>array(
                                                     "changeMonth"=>"true", 
                                                     "changeYear"=>"true",   
