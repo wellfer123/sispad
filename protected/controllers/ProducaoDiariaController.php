@@ -93,7 +93,8 @@ class ProducaoDiariaController extends SISPADBaseController {
                     //pega os profissionais da unidade  
                     $profissionais = $this->getProfissionais($cnes, $especialidades[0]->codigo);
                     $observacoes = Observacao::model()->findAll();
-                    $grupos = Grupo::model()->findAll();
+                    //grupo 1 é inválido
+                    $grupos = Grupo::model()->findAll('codigo <> 1');
                     //renderiza a página
                     $this->render('send', array(
                         'model' => $model,
