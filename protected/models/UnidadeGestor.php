@@ -91,10 +91,10 @@ class UnidadeGestor extends CActiveRecord
 		// should not be searched.
 
 		$criteria=new CDbCriteria;
-                //$criteria->with = 'servidor';
+                $criteria->alias='ug';
                 $criteria->with = array('unidade','servidor');
-		$criteria->compare('unidade_cnes',$this->unidade_cnes,true);
-		$criteria->compare('servidor_cpf',$this->servidor_cpf,true);
+		$criteria->compare('ug.unidade_cnes',$this->unidade_cnes,true);
+		$criteria->compare('ug.servidor_cpf',$this->servidor_cpf,true);
 		
 
 		return new CActiveDataProvider($this, array(

@@ -96,9 +96,10 @@ class ProfissionalVinculo extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('cpf',$this->cpf,true);
-		$criteria->compare('unidade_cnes',$this->unidade_cnes,true);
-		$criteria->compare('codigo_profissao',$this->codigo_profissao,true);
+                $criteria->alias='pv';
+		$criteria->compare('pv.cpf',$this->cpf,true);
+		$criteria->compare('pv.unidade_cnes',$this->unidade_cnes,true);
+		$criteria->compare('pv.codigo_profissao',$this->codigo_profissao,true);
                 
                 $criteria->with=array('unidade','servidor','profissao');
 
