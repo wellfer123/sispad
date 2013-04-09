@@ -352,10 +352,11 @@ class ProducaoDiariaController extends SISPADBaseController {
     private function existeProducao($model) {
         //verifica pela chave primária
         $criteria = new CDbCriteria();
-        $criteria->condition = 'profissao_codigo=:prof AND unidade_cnes=:cnes AND profissional_cpf=:cpf AND data=:data';
+        $criteria->condition = 'profissao_codigo=:prof AND unidade_cnes=:cnes AND profissional_cpf=:cpf AND data=:data AND grupo_codigo=:grupo';
         $criteria->params = array(
             ':prof' => $model->profissao_codigo,
             ':cnes' => $model->unidade_cnes,
+            ':grupo' => $model->grupo_codigo,
             ':data' => ParserDate::inverteDataPtToEn($model->data),
             ':cpf' => $model->profissional_cpf);
         return ProducaoDiaria::model()->exists($criteria);
