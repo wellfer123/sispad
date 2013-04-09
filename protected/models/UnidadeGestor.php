@@ -43,7 +43,7 @@ class UnidadeGestor extends CActiveRecord
 			array('unidade_cnes,servidor_cpf', 'validaUnidadeGestorExistente','on'=>'create'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('unidade_cnes, servidor_cpf', 'safe', 'on'=>'search'),
+			array('unidade_cnes, servidor_cpf,ativo', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -95,6 +95,7 @@ class UnidadeGestor extends CActiveRecord
                 $criteria->with = array('unidade','servidor');
 		$criteria->compare('ug.unidade_cnes',$this->unidade_cnes,true);
 		$criteria->compare('ug.servidor_cpf',$this->servidor_cpf,true);
+		$criteria->compare('ug.ativo',$this->ativo,true);
 		
 
 		return new CActiveDataProvider($this, array(

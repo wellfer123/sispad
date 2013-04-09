@@ -141,7 +141,7 @@ class UnidadeGestorController extends SISPADBaseController
 	 */
 	public function actionAdmin()
 	{
-                $this->CheckAcessAction();
+                //$this->CheckAcessAction();
 		$model=new UnidadeGestor('search');
 		$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['UnidadeGestor']))
@@ -157,7 +157,7 @@ class UnidadeGestorController extends SISPADBaseController
         
   public function actionActive() {
 
-        $this->CheckAcessAction();
+       // $this->CheckAcessAction();
         if (Yii::app()->request->isPostRequest) {
             // we only allow deletion via POST request
             $mo = $this->loadModel();
@@ -178,7 +178,7 @@ class UnidadeGestorController extends SISPADBaseController
 
     public function actionInactive() {
 
-        $this->CheckAcessAction();
+       // $this->CheckAcessAction();
         if (Yii::app()->request->isPostRequest) {
             // we only allow  via POST request
             $mo = $this->loadModel();
