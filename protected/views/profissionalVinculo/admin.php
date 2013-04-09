@@ -82,7 +82,7 @@ $('.search-form form').submit(function(){
                 ),
                 array(
                     'filter'=>false,
-                    'header'=>'Gestor',
+                    'header'=>'Profissional',
                     'value'=>'$data->servidor->nome'
                 ),
                 array(
