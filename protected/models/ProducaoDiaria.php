@@ -120,7 +120,7 @@ class ProducaoDiaria extends CActiveRecord {
         
         $criteria->compare('pd.unidade_cnes', $this->unidade_cnes, true);
         $criteria->compare('pd.servidor_cpf', $this->servidor_cpf, true);
-        $criteria->addBetweenCondition('pd.data', Date('Y-m-d') -1, Date('Y-m-d'));
+        $criteria->addBetweenCondition('pd.data',''.Date('Y-m-d',  strtotime("- 20days")).'', ''.Date('Y-m-d').'');
         $criteria->with = array('especialidade','profissional','unidade');
 
         return new CActiveDataProvider($this, array(
@@ -134,31 +134,30 @@ class ProducaoDiaria extends CActiveRecord {
      * @return \CActiveDataProvider
      */
     public static function getMaisRecentePorUnidades($unidades){
-        // Warning: Please modify the following code to remove attributes that
-        // should not be searched.
         $condition=null;
         if(is_array($unidades) ){
             $condition='pd.unidade_cnes IN (';
             $cont=0;
             foreach ($unidades as $cnes => $nome) {
                 if ($cont > 1){
-                    $condition=$condition.",' $cnes '";
+                    $condition=$condition.", $cnes ";
                 }
                 else{
-                    $condition=$condition.",' $cnes '";
+                    $condition=$condition." $cnes ";
                 }
                 $cont=2;
             }
             $condition=$condition.")";
         }
 
+        //$condition=$condition." AND (pd.data BETWEEN '".Date('Y-m-d',  strtotime("- 10days"))."' AND '".Date('Y-m-d')."')";
         $criteria = new CDbCriteria;
         $criteria->alias='pd';
-        $criteria->addBetweenCondition('pd.data', Date('Y-m-d') -20, Date('Y-m-d'));
         $criteria->condition=$condition;
+        $criteria->addBetweenCondition('pd.data',''.Date('Y-m-d',  strtotime("- 20days")).'', ''.Date('Y-m-d').'');
         $criteria->with = array('especialidade','profissional','unidade');
 
-        return new CActiveDataProvider($this, array(
+        return new CActiveDataProvider('ProducaoDiaria', array(
             'criteria' => $criteria,
         ));
     }
