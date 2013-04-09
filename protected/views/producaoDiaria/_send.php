@@ -44,7 +44,8 @@
                 
                 <?php echo CHtml::label('Especialidade', 'especialidade'); ?>
 		<?php echo CHtml::activeDropDownList($model, 'profissao_codigo', CHtml::listData($especialidades, 'codigo', 'nome'),
-                                                           array('ajax'=>array(
+                                                           array("style"=>"width:280px" ,
+                                                                'ajax'=>array(
                                                                       'type'=>'POST',
                                                                       'url'=>  Yii::app()->createAbsoluteUrl('producaoDiaria/findProfissionais'),
                                                                       //pega o cnes da unidade e o codigo da especialidade  
@@ -73,7 +74,6 @@
 		<?php $this->widget("zii.widgets.jui.CJuiDatePicker",array(
                                                 'model'=>$model,
                                                  'attribute'=>'data',
-                                                "name"=>"data",
                                                 "options"=>array(
                                                     "changeMonth"=>"true", 
                                                     "changeYear"=>"true",  
@@ -107,9 +107,54 @@
     </tbody>
 </table>
 
-	<div class="row buttons">
-		<?php echo CHtml::submitButton('Enviar'); ?>
-	</div>
+<?php
+
+//confirma se o usuário que enviar mesmo
+    $this->beginWidget('zii.widgets.jui.CJuiDialog',array(
+    'id'=>'dialog',
+    // additional javascript options for the dialog plugin
+    'options'=>array(
+        'title'=>'Dialog box 1',
+        'autoOpen'=>false,
+        'modal'=> true,
+        'width' => '500px',
+        'buttons' => array(
+                            array('text'=>'Enviar','click'=> 'js:function(){ document.getElementById("producao-diaria-form").submit(); $(this).dialog("close"); }'),
+                            array('text'=>'Cancelar','click'=> 'js:function(){$(this).dialog("close");}'),
+                        ),
+    ),
+));
+    //cada elemento representa um campo para confirmação do usuário
+    echo '<div style="margin-border: 10px">'.CHtml::label('', 'dial_unidade', array("id"=>"dial_unidade")).'</div>';
+    echo '<div>'.CHtml::label('', 'dial_gestor', array("id"=>"dial_gestor")).'</div>';
+    echo '<div>'.CHtml::label('', 'dial_especialidade', array("id"=>"dial_especialidade")).'</div>';
+    echo '<div>'.CHtml::label('', 'dial_profissional', array("id"=>"dial_profissional")).'</div>';
+    echo '<div>'.CHtml::label('', 'dial_grupo', array("id"=>"dial_grupo")).'</div>';
+    echo '<div>'.CHtml::label('', 'dial_observacao', array("id"=>"dial_observacao")).'</div>';
+    echo '<div>'.CHtml::label('', 'dial_data', array("id"=>"dial_data")).'</div>';
+    echo '<div>'.CHtml::label('', 'dial_quantidade', array("id"=>"dial_quantidade")).'</div>';
+    echo '<div>'.CHtml::label('', 'dial_detalhe', array("id"=>"dial_detalhe")).'</div>';
+    
+    //script que atualiza os valores dos labels anteriores
+    $scriptUpdate=' $("#dial_unidade").html("Unidade: " +  $("#'. CHtml::activeId($model, 'unidade_cnes') .'").find("option").filter(":selected").text() );';
+    $scriptUpdate=$scriptUpdate.' $("#dial_gestor").html("Gestor: "+ $("#gestor_nome").val() );';
+    $scriptUpdate=$scriptUpdate.' $("#dial_especialidade").html("Especialidade: " +  $("#'. CHtml::activeId($model, 'profissao_codigo') .'").find("option").filter(":selected").text() );';
+    $scriptUpdate=$scriptUpdate.' $("#dial_profissional").html("Profissional: " +  $("#'. CHtml::activeId($model, 'profissional_cpf') .'").find("option").filter(":selected").text() );';
+    $scriptUpdate=$scriptUpdate.' $("#dial_grupo").html("Grupo: " +  $("#'. CHtml::activeId($model, 'grupo_codigo') .'").find("option").filter(":selected").text() );';
+    $scriptUpdate=$scriptUpdate.' $("#dial_observacao").html("Observação: " +  $("#'. CHtml::activeId($model, 'observacao_codigo') .'").find("option").filter(":selected").text() );';
+    $scriptUpdate=$scriptUpdate.' $("#dial_data").html("Data: " +  $("#'. CHtml::activeId($model, 'data') .'").val() );';
+    $scriptUpdate=$scriptUpdate.' $("#dial_quantidade").html("Quantidade: " +  $("#'. CHtml::activeId($model, 'quantidade') .'").val() );';
+    $scriptUpdate=$scriptUpdate.' $("#dial_detalhe").html("Detalhe: " +  $("#'. CHtml::activeId($model, 'detalhe') .'").val() );';
+    $scriptUpdate=$scriptUpdate.' $("#dialog").dialog("open"); return false;';
+    
+$this->endWidget('zii.widgets.jui.CJuiDialog');
+
+
+?>
+
+<div class="row buttons">
+	<?php echo CHtml::button('Enviar',array('onclick'=>$scriptUpdate)); ?>
+</div>
 
 <?php $this->endWidget(); ?>
 
