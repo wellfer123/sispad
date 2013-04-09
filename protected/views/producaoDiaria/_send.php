@@ -60,7 +60,7 @@
         <tr>
             <td colspan="3">
                 <?php echo CHtml::activeLabel($model, 'grupo_codigo'); ?>
-		<?php echo CHtml::activeDropDownList($model, 'grupo_codigo',  CHtml::listData($grupos,'codigo','nome')); ?>
+		<?php echo CHtml::activeDropDownList($model, 'grupo_codigo',  CHtml::listData($grupos,'codigo','nome'),array('empty'=>'Selecione um grupo')); ?>
                 <?php echo CHtml::error($model, 'grupo_codigo') ; ?>
             </td>
         </tr>
