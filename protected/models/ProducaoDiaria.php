@@ -82,7 +82,7 @@ class ProducaoDiaria extends CActiveRecord {
             'detalhe' => 'Detalhe',
             'profissao_codigo' => 'Especialidade',
             'quantidade' => 'Quantidade',
-            'grupo' => 'Grupo',
+            'grupo_codigo' => 'Grupo',
             'observacao_codigo' => 'Observação',
             'profissional_cpf' => 'Profissional',
             'data' => 'Data',
