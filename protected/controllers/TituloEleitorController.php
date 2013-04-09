@@ -39,6 +39,7 @@ class TituloEleitorController extends Controller
 	 */
 	public function actionIndex()
 	{
+                $this->CheckAcessAction();
 		$this->render('view',array(
 			'model'=>$this->loadModel(),'servidor'=>$this->loadModelServidor(),
 		));
@@ -50,6 +51,7 @@ class TituloEleitorController extends Controller
 	 */
 	public function actionCreate()
 	{
+                $this->CheckAcessAction();
 		$model=new TituloEleitor;
 
 		// Uncomment the following line if AJAX validation is needed
@@ -72,6 +74,7 @@ class TituloEleitorController extends Controller
 	 */
 	public function actionUpdate()
 	{
+                $this->CheckAcessAction();
 		$model=$this->loadModel();
 
 		// Uncomment the following line if AJAX validation is needed
@@ -138,6 +141,7 @@ class TituloEleitorController extends Controller
         
         public function actionView()
 	{
+                $this->CheckAcessAction();
                 //recupera o o endereçoe o servidor
 		$this->render('view',array(
 			'model'=>$this->loadModel(),'servidor'=>$this->loadModelServidor(),

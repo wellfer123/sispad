@@ -45,6 +45,7 @@ class ServidorController extends SISPADBaseController
 	 */
 	public function actionView()
 	{
+                $this->CheckAcessAction();
 		$this->render('view',array(
 			'model'=>$this->loadModel(),
 		));
@@ -56,6 +57,7 @@ class ServidorController extends SISPADBaseController
 	 */
 	public function actionCreate()
 	{
+                $this->CheckAcessAction();
 		$model=new Servidor('create');
 
 		// Uncomment the following line if AJAX validation is needed
@@ -79,6 +81,7 @@ class ServidorController extends SISPADBaseController
 	 */
 	public function actionUpdate()
 	{
+                $this->CheckAcessAction();
 		$model=$this->loadModel();
 
 		// Uncomment the following line if AJAX validation is needed
@@ -121,6 +124,7 @@ class ServidorController extends SISPADBaseController
 	 */
 	public function actionIndex()
 	{
+                $this->CheckAcessAction();
 		$this->redirect(array('admin'));
 	}
 
@@ -129,6 +133,7 @@ class ServidorController extends SISPADBaseController
 	 */
 	public function actionAdmin()
 	{
+                $this->CheckAcessAction();
 		$model=new Servidor('search');
 		$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['Servidor']))

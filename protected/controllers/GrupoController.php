@@ -51,6 +51,7 @@ class GrupoController extends Controller
 	 */
 	public function actionView($id)
 	{
+                $this->CheckAcessAction();
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),
 		));
@@ -62,6 +63,7 @@ class GrupoController extends Controller
 	 */
 	public function actionCreate()
 	{
+                $this->CheckAcessAction();
 		$model=new Grupo;
 
 		// Uncomment the following line if AJAX validation is needed
@@ -86,6 +88,7 @@ class GrupoController extends Controller
 	 */
 	public function actionUpdate($id)
 	{
+                $this->CheckAcessAction();
 		$model=$this->loadModel($id);
 
 		// Uncomment the following line if AJAX validation is needed
@@ -110,6 +113,7 @@ class GrupoController extends Controller
 	 */
 	public function actionDelete($id)
 	{
+                $this->CheckAcessAction();
 		$this->loadModel($id)->delete();
 
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
@@ -122,6 +126,7 @@ class GrupoController extends Controller
 	 */
 	public function actionIndex()
 	{
+                
 		$dataProvider=new CActiveDataProvider('Grupo');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
@@ -133,6 +138,7 @@ class GrupoController extends Controller
 	 */
 	public function actionAdmin()
 	{
+                $this->CheckAcessAction();
 		$model=new Grupo('search');
 		$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['Grupo']))

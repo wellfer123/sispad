@@ -41,6 +41,7 @@ class DadosTrabalhoController extends Controller
 	 */
 	public function actionCreate()
 	{
+                $this->CheckAcessAction();
 		$model=new DadosTrabalho('create');
 
 		// Uncomment the following line if AJAX validation is needed
@@ -64,6 +65,7 @@ class DadosTrabalhoController extends Controller
 	 */
 	public function actionUpdate()
 	{
+                $this->CheckAcessAction();
 		$model=$this->loadModel();
 
 		// Uncomment the following line if AJAX validation is needed

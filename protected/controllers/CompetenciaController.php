@@ -38,6 +38,7 @@ class CompetenciaController extends SISPADBaseController
 	 */
 	public function actionView()
 	{
+                $this->CheckAcessAction();
 		$this->render('view',array(
 			'model'=>$this->loadModel(),
 		));
@@ -49,6 +50,7 @@ class CompetenciaController extends SISPADBaseController
 	 */
 	public function actionCreate()
 	{
+                $this->CheckAcessAction();
 		$model=new Competencia();
 
 		// Uncomment the following line if AJAX validation is needed
@@ -72,6 +74,7 @@ class CompetenciaController extends SISPADBaseController
 	 */
 	public function actionUpdate()
 	{
+                $this->CheckAcessAction();
 		$model=$this->loadModel();
 
 		// Uncomment the following line if AJAX validation is needed
@@ -95,6 +98,7 @@ class CompetenciaController extends SISPADBaseController
 	 */
 	public function actionDelete()
 	{
+                $this->CheckAcessAction();
 		if(Yii::app()->request->isPostRequest)
 		{
 			// we only allow deletion via POST request
@@ -113,6 +117,7 @@ class CompetenciaController extends SISPADBaseController
 	 */
 	public function actionIndex()
 	{
+                $this->CheckAcessAction();
 		$dataProvider=new CActiveDataProvider('Competencia');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
@@ -124,6 +129,7 @@ class CompetenciaController extends SISPADBaseController
 	 */
 	public function actionAdmin()
 	{
+                $this->CheckAcessAction();
 		$model=new Competencia('search');
 		$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['Competencia']))

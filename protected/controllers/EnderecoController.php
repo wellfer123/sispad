@@ -46,6 +46,7 @@ class EnderecoController  extends SISPADBaseController
 	 */
 	public function actionCreate()
 	{
+                $this->CheckAcessAction();
          
                 //tem os parãmetros necessários
 		$model=new Endereco;
@@ -90,6 +91,7 @@ class EnderecoController  extends SISPADBaseController
 	 */
 	public function actionUpdate()
 	{
+            $this->CheckAcessAction();
             if(isset($_GET['id']) && isset($_GET['cpf'])){
                 $servidor=$this->loadModelServidor();
 		$model=Endereco::model()->findByPk($_GET['id']);
@@ -116,6 +118,7 @@ class EnderecoController  extends SISPADBaseController
 
         public function actionView()
 	{
+                $this->CheckAcessAction();
                 //recupera o o endereçoe o servidor
 		$this->render('view',array(
 			'model'=>$this->loadModel(),'servidor'=>$this->loadModelServidor(),

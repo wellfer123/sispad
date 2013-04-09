@@ -44,6 +44,7 @@ class TotalRelatorioController extends SISPADBaseController
 	 */
 	public function actionView()
 	{
+                $this->CheckAcessAction();
                 if(isset($_GET['serv'])){
                     //se or o dono das frequencias ou se for o gerenciador
                     if($_GET['serv']==Yii::app()->user->cpfservidor || 
@@ -66,7 +67,7 @@ class TotalRelatorioController extends SISPADBaseController
 	 */
 	public function actionCreate()
 	{
-                 $this->CheckAcessAction();
+                $this->CheckAcessAction();
 		$model=new TotalRelatorio;
 
 		// Uncomment the following line if AJAX validation is needed
@@ -151,6 +152,7 @@ class TotalRelatorioController extends SISPADBaseController
 	 */
 	public function actionIndex()
 	{
+                $this->CheckAcessAction();
 		$this->redirect(array('admin'));
 	}
         

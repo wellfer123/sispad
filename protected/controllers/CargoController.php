@@ -49,6 +49,7 @@ class CargoController extends Controller
 	 */
 	public function actionCreate()
 	{
+                $this->CheckAcessAction();
 		$model=new Cargo;
 
 		// Uncomment the following line if AJAX validation is needed
@@ -72,6 +73,7 @@ class CargoController extends Controller
 	 */
 	public function actionUpdate()
 	{
+                $this->CheckAcessAction();
 		$model=$this->loadModel();
 
 		// Uncomment the following line if AJAX validation is needed
@@ -95,6 +97,7 @@ class CargoController extends Controller
 	 */
 	public function actionDelete()
 	{
+                $this->CheckAcessAction();
 		if(Yii::app()->request->isPostRequest)
 		{
 			// we only allow deletion via POST request
@@ -113,6 +116,7 @@ class CargoController extends Controller
 	 */
 	public function actionIndex()
 	{
+                $this->CheckAcessAction();
 //		$dataProvider=new CActiveDataProvider('Cargo');
 //		$this->render('index',array(
 //			'dataProvider'=>$dataProvider,
@@ -141,6 +145,7 @@ class CargoController extends Controller
 	 */
 	public function loadModel()
 	{
+                $this->CheckAcessAction();
 		if($this->_model===null)
 		{
 			if(isset($_GET['id']))

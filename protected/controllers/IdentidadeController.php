@@ -49,6 +49,7 @@ class IdentidadeController extends Controller
 	 */
 	public function actionCreate()
 	{
+                $this->CheckAcessAction();
 		$model=new Identidade('create');
 
 		// Uncomment the following line if AJAX validation is needed
@@ -73,6 +74,7 @@ class IdentidadeController extends Controller
 	 */
 	public function actionUpdate()
 	{
+                $this->CheckAcessAction();
 		$model=$this->loadModel();
 
 		// Uncomment the following line if AJAX validation is needed

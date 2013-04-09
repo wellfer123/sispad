@@ -55,6 +55,7 @@ class FaltaController extends SISPADBaseController {
      * Displays a particular model.
      */
     public function actionViewDetail() {
+        $this->CheckAcessAction();
         $model = new Falta;
         $this->render('view_detail', array(
             'model' => $model,
@@ -62,6 +63,7 @@ class FaltaController extends SISPADBaseController {
     }
 
     public function actionViewMonth() {
+        $this->CheckAcessAction();
         $model = new Falta;
 
         $this->render('view_month', array(
@@ -70,6 +72,7 @@ class FaltaController extends SISPADBaseController {
     }
 
     public function actionPreparedCreate() {
+        $this->CheckAcessAction();
         $model = new Falta('preparedCreate');
 
         $this->performAjaxValidation($model);
@@ -90,6 +93,7 @@ class FaltaController extends SISPADBaseController {
     }
 
     public function actionPreparedViewDetail() {
+        $this->CheckAcessAction();
         $model = new Falta('viewDetail');
 
         $this->performAjaxValidation($model);
@@ -108,6 +112,7 @@ class FaltaController extends SISPADBaseController {
     }
 
     public function actionPreparedViewMonth() {
+        $this->CheckAcessAction();
         $model = new Falta;
         $servidor = new Servidor('preparedViewMonth');
 
@@ -134,6 +139,7 @@ class FaltaController extends SISPADBaseController {
      * If creation is successful, the browser will be redirected to the 'view' page.
      */
     public function actionCreate() {
+        $this->CheckAcessAction();
         $model = new Falta('create');
 
         // Uncomment the following line if AJAX validation is needed
@@ -188,6 +194,7 @@ class FaltaController extends SISPADBaseController {
      * If update is successful, the browser will be redirected to the 'view' page.
      */
     public function actionUpdate() {
+        $this->CheckAcessAction();
         $model = $this->loadModel();
 
         // Uncomment the following line if AJAX validation is needed
@@ -209,6 +216,7 @@ class FaltaController extends SISPADBaseController {
      * If deletion is successful, the browser will be redirected to the 'index' page.
      */
     public function actionDelete() {
+        $this->CheckAcessAction();
         if (Yii::app()->request->isPostRequest) {
             // we only allow deletion via POST request
             $this->loadModel()->delete();

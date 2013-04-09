@@ -43,6 +43,7 @@ class TotalFrequenciaController extends SISPADBaseController{
 	 */
 	public function actionView()
 	{
+                $this->CheckAcessAction();
                 if(isset($_GET['serv'])){
                     
                     $this->_RBAC->checkAccess('registered',true);

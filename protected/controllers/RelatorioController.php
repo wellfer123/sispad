@@ -121,6 +121,7 @@ class RelatorioController extends SISPADBaseController
 	 */
 	public function actionUpdate()
 	{
+                $this->CheckAcessAction();
                 $model=$this->loadModel();
 
 
