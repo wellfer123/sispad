@@ -42,7 +42,10 @@
                                         ),
                                 )); ?>
 	</div>
-
+        <div class="row">
+		<?php echo $form->label($model,'ativo'); ?>
+                <?php echo Chtml::activeDropDownList($model, 'ativo', array(''=>'OPÇÃO','1'=>'ATIVO','0'=>'INATIVO')) ?>
+	</div>
 	<div class="row buttons">
 		<?php echo CHtml::submitButton('Buscar'); ?>
 	</div>
