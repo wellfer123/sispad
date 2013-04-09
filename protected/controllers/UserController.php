@@ -97,8 +97,9 @@ class UserController extends SISPADBaseController
 			// validate user input and redirect to the previous page if valid
 			if($model->validate() && $model->login()){
                                 //if(Yii::app()->getController()->)
-				$this->redirect(Yii::app()->user->returnUrl);
-                        }
+                             $this->saveRolesInSession();
+                             $this->redirect(Yii::app()->user->returnUrl);
+                                        }
 		}
 		// display the login form
 		$this->render('login',array('model'=>$model,'msg'=>$msg));
@@ -109,6 +110,18 @@ class UserController extends SISPADBaseController
             
         }
         
+        /*
+         * Método que salva todos os papéis (autorização) do usuario em sessao 
+         */
+        private function saveRolesInSession(){
+             $assigned_roles = Yii::app()->authManager->getRoles(Yii::app()->user->id); //obtains all assigned roles for this user id
+             if(!empty($assigned_roles)){ //checks that there are assigned roles
+
+                 $auth=Yii::app()->authManager; //initializes the authManager
+                 Yii::app()->user->setState(User::ROLES, $assigned_roles);                                  
+            }
+            
+        }
         //desloga usuário
         
         public function actionLogout()

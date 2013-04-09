@@ -15,7 +15,11 @@ class User extends CActiveRecord {
 
     const ATIVO = 1;
     const DESATIVO = 0;
-
+    const ROLE_GESTOR = "GestorUnidade";
+    const ROLES = "roles";
+    
+    
+    
     private $_identity;
     public $verifyCode;
 
@@ -112,7 +116,7 @@ class User extends CActiveRecord {
         // should not be searched.
 
         $criteria = new CDbCriteria;
-
+        
         $criteria->compare('email', $this->email, true);
 
         $criteria->compare('username', $this->username, true);

@@ -34,18 +34,31 @@
                 $RBAC2 = new RBACAccessVerifier();
                 //SOMENTE O SUPER ADMINISTRADOR PODE VER O MENU COMPLETO
                 $visible = $RBAC2->checkAccess('SuperAdmin');
+                
+              
+                //$roles = $this->getState("roles");
+                 $gestor_visible= false;
+                 $roles =  Yii::app()->user->getState(User::ROLES);
+                 if($roles!=null){
+                    foreach($roles as $n=>$role)
+                    {
+                            if($n==User::ROLE_GESTOR){
+                                $gestor_visible = true;
+
+                            }
+                    }
+                 }
                 $menuGestor=array();
-                if (false){
-                    $servidor=$this->getServidor();
+                
+                    //$servidor=$this->getServidor();
                     $menuGestor=array("url" => array(),
                             "label" => "Gestor",
                             array("url" => array("route" => "/producaoDiaria/send"), "label" => "Enviar Produção Diária"),
                             array("url" => array("route" => "/producaoDiaria/adminGestor"), "label" => "Consultar Histórico"),
-                            array("url" => array("route" => "/unidadeEspecialidade/add?unidade=".$servidor->unidade->cnes), "label" => "Adicionar Especialidade"),
                             array("url" => array("route" => "/profissionalVinculo/create"), "label" => "Vincular Profissional"),
-                            'visible' => $gestor,
-                        );
-                }
+                            'visible' =>$gestor_visible,
+                    );
+                
                 $this->widget('application.extensions.menu.SMenu', array(
                     "menu" => array(
                         //menu raiz
