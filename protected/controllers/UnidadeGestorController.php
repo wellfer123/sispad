@@ -1,6 +1,6 @@
 <?php
 
-class UnidadeGestorController extends Controller
+class UnidadeGestorController extends SISPADBaseController
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -194,4 +194,8 @@ class UnidadeGestorController extends Controller
             return $dataProvider;
             
         }
+
+    protected function getModelName() {
+        return "UnidadeGestor";
+    }
 }
