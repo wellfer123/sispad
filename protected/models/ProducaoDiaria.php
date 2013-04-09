@@ -11,6 +11,7 @@
  * @property string $profissional_cpf
  * @property string $grupo_codigo
  * @property string $data
+ * @property string $detalhe
  *
  * The followings are the available model relations:
  * @property Unidade $unidade
@@ -52,7 +53,7 @@ class ProducaoDiaria extends CActiveRecord {
             array('quantidade', 'length', 'min' => 1, 'max' => 5),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
-            array('unidade_cnes, observacao_codigo,grupo_codigo,profissional_cpf,servidor_cpf, profissao_codigo, quantidade, data', 'safe', 'on' => 'search'),
+            array('unidade_cnes,detalhe, observacao_codigo,grupo_codigo,profissional_cpf,servidor_cpf, profissao_codigo, quantidade, data', 'safe', 'on' => 'search'),
         );
     }
 
@@ -78,9 +79,10 @@ class ProducaoDiaria extends CActiveRecord {
         return array(
             'unidade_cnes' => 'Unidade',
             'servidor_cpf' => 'Gestor',
+            'detalhe' => 'Detalhe',
             'profissao_codigo' => 'Especialidade',
             'quantidade' => 'Quantidade',
-            'grupo' => 'Grupo',
+            'grupo_codigo' => 'Grupo',
             'observacao_codigo' => 'Observação',
             'profissional_cpf' => 'Profissional',
             'data' => 'Data',
@@ -119,7 +121,7 @@ class ProducaoDiaria extends CActiveRecord {
         $criteria->compare('pd.unidade_cnes', $this->unidade_cnes, true);
         $criteria->compare('pd.servidor_cpf', $this->servidor_cpf, true);
         $criteria->addBetweenCondition('pd.data', Date('Y-m-d') -1, Date('Y-m-d'));
-        $criteria->with = array('especialidade','profissional');
+        $criteria->with = array('especialidade','profissional','unidade');
 
         return new CActiveDataProvider($this, array(
             'criteria' => $criteria,
@@ -152,9 +154,9 @@ class ProducaoDiaria extends CActiveRecord {
 
         $criteria = new CDbCriteria;
         $criteria->alias='pd';
-        $criteria->addBetweenCondition('pd.data', Date('Y-m-d') -1, Date('Y-m-d'));
+        $criteria->addBetweenCondition('pd.data', Date('Y-m-d') -20, Date('Y-m-d'));
         $criteria->condition=$condition;
-        $criteria->with = array('especialidade','profissional');
+        $criteria->with = array('especialidade','profissional','unidade');
 
         return new CActiveDataProvider($this, array(
             'criteria' => $criteria,

@@ -38,7 +38,6 @@ $this->menu=array(
 
 <?php $this->endWidget(); ?>
 
-git 
 <script type="text/javascript">
     //função que envia o código do formulário e do item a serem adicionados
 

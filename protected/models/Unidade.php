@@ -129,6 +129,8 @@ class Unidade extends CActiveRecord
             $criteria->join='INNER JOIN unidade_gestor ug ON uni.cnes=ug.unidade_cnes';
             $criteria->condition='ug.servidor_cpf=:cpf';
             $criteria->params=array(':cpf' => $servidorGestor->cpf);
+            
+            $criteria->order='uni.nome';
             $unidades = Unidade::model()->findAll($criteria);
 
             return $unidades;

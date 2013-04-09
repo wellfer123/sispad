@@ -25,13 +25,6 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Gerenciar Unidade Gestor</h1>
-
-<p>
-Você opcionalmente pode entrar com operadores de comparação (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
-or <b>=</b>) no inicio de cada busca para especificar como a comparação deve ser feita.
-</p>
-
 <?php echo CHtml::link('Pesquisa Avançada','#',array('class'=>'search-button')); ?>
 <div class="search-form" style="display:none">
 <?php $this->renderPartial('_search',array(
@@ -42,7 +35,6 @@ or <b>=</b>) no inicio de cada busca para especificar como a comparação deve s
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'unidade-gestor-grid',
 	'dataProvider'=>$model->search(),
-	'filter'=>$model,
 	'columns'=>array(
                 array(
                     'name'=>'servidor',

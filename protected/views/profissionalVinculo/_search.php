@@ -13,17 +13,50 @@
 
 	<div class="row">
 		<?php echo $form->label($model,'cpf'); ?>
-		<?php echo $form->textField($model,'cpf',array('size'=>11,'maxlength'=>11)); ?>
+		<?php $this->widget('EJuiAutoCompleteFkField', array(
+                                    'model'=>$model,
+                                    'attribute'=>'cpf', 
+                                    'sourceUrl'=>Yii::app()->createUrl('Servidor/findServidores'),
+                                    'showFKField'=>false,
+                                    'FKFieldSize'=>11, 
+                                    'displayAttr'=>'nome', 
+                                    'autoCompleteLength'=>60,
+                                    'options'=>array(
+                                        'minLength'=>4,
+                                        ),
+                                )); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->label($model,'unidade_cnes'); ?>
-		<?php echo $form->textField($model,'unidade_cnes',array('size'=>10,'maxlength'=>10)); ?>
+		<?php $this->widget('EJuiAutoCompleteFkField', array(
+                                    'model'=>$model,
+                                    'attribute'=>'unidade_cnes', 
+                                    'sourceUrl'=>Yii::app()->createUrl('Unidade/findUnidades'),
+                                    'showFKField'=>false,
+                                    'FKFieldSize'=>11, 
+                                    'displayAttr'=>'nome',  
+                                    'autoCompleteLength'=>60,
+                                    'options'=>array(
+                                        'minLength'=>4,
+                                        ),
+                                )); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->label($model,'codigo_profissao'); ?>
-		<?php echo $form->textField($model,'codigo_profissao',array('size'=>6,'maxlength'=>6)); ?>
+		<?php $this->widget('EJuiAutoCompleteFkField', array(
+                                    'model'=>$model,
+                                    'attribute'=>'codigo_profissao',
+                                    'sourceUrl'=>Yii::app()->createUrl('Profissao/findProfissoesCboSaude'),
+                                    'showFKField'=>false,
+                                    'FKFieldSize'=>11,
+                                    'displayAttr'=>'nome', 
+                                    'autoCompleteLength'=>60,
+                                    'options'=>array(
+                                        'minLength'=>4,
+                                        ),
+                                )); ?>
 	</div>
 
 	<div class="row buttons">

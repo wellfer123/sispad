@@ -7,8 +7,7 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Enviar Produção Diária', 'url'=>array('send')),
-        array('label'=>'Vincular Profissional', 'url'=>array('profissionalVinculo/create')),
+	array('label'=>'Nenhuma', 'url'=>array('#')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -81,14 +80,15 @@ $('.search-form form').submit(function(){
 			'class'=>'CButtonColumn',
                         'buttons'=>array(
                                 'delete'=>array(
-                                                'visible'=>'false',
+                                                'visible'=>'true',
+                                                'url'=>'Yii::app()->createUrl("producaoDiaria/delete",array("e"=>$data->profissao_codigo,"d"=>$data->data,"u"=>$data->unidade_cnes,"p"=>$data->profissional_cpf,"g"=>$data->grupo_codigo))',
                                 ),
                                 'update'=>array(
                                                 'visible'=>'false',
                                 ),
                                 'view'=>array(
                                                 'url'=> 'Yii::app()->createUrl("producaoDiaria/view",
-                                                        array("e"=>$data->profissao_codigo,"d"=>$data->data,"u"=>$data->unidade_cnes))',
+                                                        array("e"=>$data->profissao_codigo,"d"=>$data->data,"u"=>$data->unidade_cnes,"p"=>$data->profissional_cpf,"g"=>$data->grupo_codigo))',
                                 ),
                         )
 		),

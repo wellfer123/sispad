@@ -18,11 +18,7 @@ class ProfissionalVinculoController extends SISPADBaseController {
     }
 
     protected function getModelName() {
-        return 'ProfissaoVinculo';
-    }
-
-    public function actionIndex() {
-        $this->render('index');
+        return 'ProfissionalVinculo';
     }
 
     /**
@@ -142,34 +138,28 @@ class ProfissionalVinculoController extends SISPADBaseController {
             $model = ProfissionalVinculo::model()->findByPk(array('unidade_cnes' => $_GET['unidade_cnes'], 'cpf' => $_GET['cpf'], 'codigo_profissao' => $_GET['codigo_profissao']));
         }
         if ($model === null)
-            throw new CHttpException(404, 'The requested page does not exist.');
+            throw new CHttpException(404, 'A página requisitada não existe!');
         return $model;
     }
+    public function actionAdmin() {
+        $this->layout = '//layouts/column1';
+        $this->CheckAcessAction();
+        
+        $model = new ProfissionalVinculo('search');
+        $model->unsetAttributes();  // clear any default values
+        if (isset($_GET['ProfissionalVinculo'])) {
+            $model->attributes = $_GET['ProfissionalVinculo'];
+        }
 
-    // Uncomment the following methods and override them if needed
-    /*
-      public function filters()
-      {
-      // return the filter configuration for this controller, e.g.:
-      return array(
-      'inlineFilterName',
-      array(
-      'class'=>'path.to.FilterClass',
-      'propertyName'=>'propertyValue',
-      ),
-      );
-      }
+        $this->render('admin', array('model' => $model));
+    }
+    
+    public function actionDelete() {
+        $this->CheckAcessAction();
+        $this->loadModel()->delete();
 
-      public function actions()
-      {
-      // return external action classes, e.g.:
-      return array(
-      'action1'=>'path.to.ActionClass',
-      'action2'=>array(
-      'class'=>'path.to.AnotherActionClass',
-      'propertyName'=>'propertyValue',
-      ),
-      );
-      }
-     */
+        // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+        if (!isset($_GET['ajax']))
+            $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+    }
 }
