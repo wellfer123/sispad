@@ -51,9 +51,9 @@ class ProducaoDiariaController extends SISPADBaseController {
 
             $unidades = $this->getUnidades($servidor);
             if ($unidades != null) {
-                $cnes = $unidades[0]->cnes;
                 //pega pela primeira unidade
-                $especialidades = $this->getEspecialidades($cnes);
+                $cnes = $unidades[0]->cnes;
+                $especialidades = $this->getEspecialidades($unidades);
                 if (!empty($especialidades)) {//verifica se a unidade tem especialidades
                     //declaração de variáveis
                     $model = new ProducaoDiaria;
@@ -89,12 +89,13 @@ class ProducaoDiariaController extends SISPADBaseController {
                     }
                     //coloca os valores que são adminsitrados pelo sistema
                     $model->servidor_cpf = $servidor->cpf;
-                    $model->unidade_cnes = $cnes;
+                    //$model->unidade_cnes = $cnes;
                     //pega os profissionais da unidade  
                     $profissionais = $this->getProfissionais($cnes, $especialidades[0]->codigo);
                     $observacoes = Observacao::model()->findAll();
                     //grupo 1 é inválido
-                    $grupos = Grupo::model()->findAll('codigo <> 1');
+                    
+                    $grupos =$this->getGrupos();
                     //renderiza a página
                     $this->render('send', array(
                         'model' => $model,
@@ -155,6 +156,7 @@ class ProducaoDiariaController extends SISPADBaseController {
     public function actionFindEspecialidades() {
         if (isset($_POST['unidade'])) {
             $data = CHtml::listData($this->getEspecialidades($_POST['unidade']), 'codigo', 'nome');
+            echo "<option value=''>Selecione uma especialidade</option>";
             foreach ($data as $value => $name) {
                 echo CHtml::tag('option', array('value' => $value), CHtml::encode($name), true);
             }
@@ -307,7 +309,7 @@ class ProducaoDiariaController extends SISPADBaseController {
     }
 
     /**
-     * 
+     * @param mixed $unidade pode ser um cnes de uma unidade ou um array com Unidades
      * @return array map com o código e descrição de cada especialidade que tem um grupo
      */
     private function getEspecialidades($unidade = null) {
@@ -317,8 +319,27 @@ class ProducaoDiariaController extends SISPADBaseController {
         $criteria->order= ' prof.nome ';
         $criteria->join = "INNER JOIN profissional_vinculo pv ON pv.codigo_profissao=prof.codigo";
         if ($unidade != null) {
+            //verifica se é um array
+            if (is_array($unidade)){
+                $cond=' pv.unidade_cnes IN (';
+                $cont=0;
+                //lista de CNES
+                foreach ($unidade as $key => $unidade) {
+                    $cnes=$unidade->cnes;
+                    if ($cont > 0){
+                        $cond=$cond.", $cnes";
+                    }
+                    else{
+                        $cond=$cond." $cnes";
+                    }
+                    $cont=1;
+                }
+                $cond=$cond.")";
+            }
+            else{
             $criteria->condition = ' pv.unidade_cnes=:cnes';
             $criteria->params = array(':cnes' => $unidade);
+            }
         } else {
              $criteria->distinct = true;
         }
@@ -340,7 +361,7 @@ class ProducaoDiariaController extends SISPADBaseController {
             $criteria->condition = 'pv.ativo=:status AND pv.unidade_cnes=:cnes';
         }
         $criteria->params = $params;
-        //$criteria->order='servidor.nome';
+        $criteria->order='servidor.nome';
         //pega os dados para preencher o combobox
         return $profi = ProfissionalVinculo::model()->with('servidor')->findAll($criteria);
     }
@@ -411,6 +432,15 @@ class ProducaoDiariaController extends SISPADBaseController {
             return Unidade::findAllPorGestor($servidor);
         }
         return null;
+    }
+
+    private function getGrupos(){
+        $criteria= new CDbCriteria();
+        
+        $criteria->alias='g';
+        $criteria->order='g.nome';
+        $criteria->condition= 'g.codigo <> 1';
+        return Grupo::model()->findAll($criteria);
     }
 
     protected function getModelName() {
