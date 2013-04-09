@@ -28,7 +28,8 @@
                                                                       'url'=>  Yii::app()->createAbsoluteUrl('producaoDiaria/findEspecialidades'),
                                                                       'data' => 'js:{unidade: $(this).val()}',
                                                                       'update' => '#'.CHtml::activeId($model, 'profissao_codigo'),
-                                                            ))); ?>
+                                                                     ),
+                                                                    )); ?>
                 <?php echo CHtml::error($model, 'unidade_cnes') ; ?>
             </td>
             <td colspan="2">
@@ -40,6 +41,7 @@
         </tr>
         <tr>
             <td>
+                
                 <?php echo CHtml::label('Especialidade', 'especialidade'); ?>
 		<?php echo CHtml::activeDropDownList($model, 'profissao_codigo', CHtml::listData($especialidades, 'codigo', 'nome'),
                                                            array('ajax'=>array(
@@ -48,7 +50,8 @@
                                                                       //pega o cnes da unidade e o codigo da especialidade  
                                                                       'data' => 'js:{cbo: $(this).val(), cnes: $('.CHtml::activeId($model, "unidade_cnes").').val()}',
                                                                       'update' => '#'.CHtml::activeId($model, 'profissional_cpf'),
-                                                            ))) ; ?>
+                                                                    ),
+                                                                   'empty'=>'Selecione uma especialidade')) ; ?>
                 <?php echo CHtml::error($model, 'profissao_codigo') ; ?>
             </td>
             <td colspan="2">
@@ -110,4 +113,5 @@
 
 <?php $this->endWidget(); ?>
 
+        
 </div><!-- form -->
