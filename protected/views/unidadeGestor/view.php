@@ -27,5 +27,9 @@ $this->menu=array(
                     'name'=>'unidade',
                     'value'=>$model->unidade->nome
                 ),
+                 array(
+                    'name'=>'Status',
+                    'value'=>$model->labelStatus(),
+                ),
 	),
 )); ?>

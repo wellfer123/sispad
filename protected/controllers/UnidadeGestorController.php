@@ -2,6 +2,8 @@
 
 class UnidadeGestorController extends SISPADBaseController
 {
+    
+     
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
@@ -72,6 +74,7 @@ class UnidadeGestorController extends SISPADBaseController
 		if(isset($_POST['UnidadeGestor']))
 		{
 			$model->attributes=$_POST['UnidadeGestor'];
+                        $model->ativo = UnidadeGestor::ATIVO;
 			if($model->save())
 				$this->redirect(array('view','unidade_cnes'=>$model->unidade_cnes,'servidor_cpf'=>$model->servidor_cpf));
 		}
@@ -111,10 +114,10 @@ class UnidadeGestorController extends SISPADBaseController
 	 * If deletion is successful, the browser will be redirected to the 'admin' page.
 	 * @param integer $id the ID of the model to be deleted
 	 */
-	public function actionDelete($id)
+	public function actionDelete()
 	{
                 $this->CheckAcessAction();
-		$this->loadModel($id)->delete();
+		$this->loadModel()->delete();
 
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 		if(!isset($_GET['ajax']))
@@ -148,6 +151,53 @@ class UnidadeGestorController extends SISPADBaseController
 			'model'=>$model,
 		));
 	}
+        
+        
+        
+        
+  public function actionActive() {
+
+        $this->CheckAcessAction();
+        if (Yii::app()->request->isPostRequest) {
+            // we only allow deletion via POST request
+            $mo = $this->loadModel();
+            if ($mo != null) {
+                $mo->ativo = UnidadeGestor::ATIVO;
+                $mo->save();
+                //$this->enviaEmail($mo->email,$mo->username,
+                // "sispadcaruaru@gmail.com","ATIVACAO DE CONTA",$this->_bodyEmail);
+            }
+
+            // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+            if (!isset($_GET['ajax']))
+                $this->redirect(array('index'));
+        }
+        else
+            throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
+    }
+
+    public function actionInactive() {
+
+        $this->CheckAcessAction();
+        if (Yii::app()->request->isPostRequest) {
+            // we only allow  via POST request
+            $mo = $this->loadModel();
+            if ($mo != null) {
+
+                $mo->ativo = UnidadeGestor::DESATIVO;
+                $mo->save();
+                //$this->enviaEmail($mo->email,$mo->username,
+                // "sispadcaruaru@gmail.com","DESATIVACAO DE CONTA",$this->_bodyEmailDes);
+            }
+
+            // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+            if (!isset($_GET['ajax']))
+                $this->redirect(array('index'));
+        }
+        else
+            throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
+    }
+
 
 	/**
 	 * Returns the data model based on the primary key given in the GET variable.
