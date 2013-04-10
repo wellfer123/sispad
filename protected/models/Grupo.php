@@ -55,6 +55,7 @@ class Grupo extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'profissaos' => array(self::HAS_MANY, 'Profissao', 'grupo_codigo'),
+                        'unidades' => array(self::MANY_MANY, 'Unidade', 'unidade_gestor(grupo_codigo,unidade_cnes)'),
 		);
 	}
 

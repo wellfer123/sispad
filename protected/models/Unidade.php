@@ -76,6 +76,7 @@ class Unidade extends CActiveRecord
                     'enfermeiro_executa_meta'=>array(self::HAS_MANY,'EnfermeiroExecutaMeta','unidade_cnes'),
                     'profissionalVinculo' => array(self::HAS_MANY, 'ProfissionalVinculo', 'cpf'),
                     'gestor' => array(self::MANY_MANY, 'Servidor', 'unidade_gestor(unidade_cnes, servidor_cpf)'),
+                    'grupos' => array(self::MANY_MANY, 'Grupo', 'unidade_grupo(unidade_cnes, grupo_codigo)'),
                    
 		);
 	}
