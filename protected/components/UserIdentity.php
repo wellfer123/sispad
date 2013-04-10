@@ -13,6 +13,8 @@ class UserIdentity extends CUserIdentity
 
         const ERROR_USER_INACTIVE=10;
         const ERROR_EMAIL_=15;
+        const ROLE_GESTOR = "GestorUnidade";
+        const ROLES = "roles";
        
 
         

@@ -93,19 +93,44 @@ class ProducaoDiaria extends CActiveRecord {
      * Retrieves a list of models based on the current search/filter conditions.
      * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
      */
-    public function search() {
+    public function search($unidades = null) {
         // Warning: Please modify the following code to remove attributes that
         // should not be searched.
+        $condition = null;
+        $cont = 0;
+        $params = array();
 
+        if ($unidades != null) {
+            if (is_array($unidades)) {
+                $condition = 'pd.unidade_cnes IN (';
+                //cria os parâmetros
+                foreach ($unidades as $cnes => $nome) {
+                    if ($cont > 0) {
+                        $condition = $condition . ",:$cnes ";
+                    } else {
+                        $condition = $condition . " :$cnes ";
+                    }
+                    //seta o valor do parâmetro
+                    $params[':' . $cnes] = $cnes;
+                    $cont++;
+                }
+                $condition = $condition . ")";
+            }
+        }
         $criteria = new CDbCriteria;
-        $criteria->alias='pd';
+        $criteria->alias = 'pd';
         $criteria->compare('pd.unidade_cnes', $this->unidade_cnes, true);
         $criteria->compare('pd.servidor_cpf', $this->servidor_cpf, true);
         $criteria->compare('pd.profissao_codigo', $this->profissao_codigo, true);
         $criteria->compare('pd.quantidade', $this->quantidade, true);
         $criteria->compare('pd.data', $this->data, true);
-        $criteria->with = array('unidade', 'especialidade','profissional');
+        $criteria->with = array('unidade', 'especialidade', 'profissional');
 
+        
+        if ($cont > 0) {
+            $criteria->condition=$condition;
+            $criteria->params = $params;
+        }
         return new CActiveDataProvider($this, array(
             'criteria' => $criteria,
         ));
@@ -114,51 +139,57 @@ class ProducaoDiaria extends CActiveRecord {
     public function getMaisRecente() {
         // Warning: Please modify the following code to remove attributes that
         // should not be searched.
-       
+
         $criteria = new CDbCriteria;
-        $criteria->alias='pd';
-        
+        $criteria->alias = 'pd';
+
         $criteria->compare('pd.unidade_cnes', $this->unidade_cnes, true);
         $criteria->compare('pd.servidor_cpf', $this->servidor_cpf, true);
-        $criteria->addBetweenCondition('pd.data', Date('Y-m-d') -1, Date('Y-m-d'));
-        $criteria->with = array('especialidade','profissional','unidade');
+        $criteria->addBetweenCondition('pd.data', '' . Date('Y-m-d', strtotime("- 20days")) . '', '' . Date('Y-m-d') . '');
+        $criteria->with = array('especialidade', 'profissional', 'unidade');
 
         return new CActiveDataProvider($this, array(
             'criteria' => $criteria,
         ));
     }
-    
+
     /**
      * Devolve um CActiveDataProvider com toda a produção das unidades passadas como parâmetro.
      * @param array $unidades um array associativo 
      * @return \CActiveDataProvider
      */
-    public static function getMaisRecentePorUnidades($unidades){
-        // Warning: Please modify the following code to remove attributes that
-        // should not be searched.
-        $condition=null;
-        if(is_array($unidades) ){
-            $condition='pd.unidade_cnes IN (';
-            $cont=0;
+    public static function findAllPorUnidades($unidades, $maisRecente = true) {
+        $condition = null;
+        $cont = 0;
+        $params = array();
+        if (is_array($unidades)) {
+            $condition = 'pd.unidade_cnes IN (';
+            //cria os parâmetros
             foreach ($unidades as $cnes => $nome) {
-                if ($cont > 1){
-                    $condition=$condition.",' $cnes '";
+                if ($cont > 0) {
+                    $condition = $condition . ",:$cnes ";
+                } else {
+                    $condition = $condition . " :$cnes ";
                 }
-                else{
-                    $condition=$condition.",' $cnes '";
-                }
-                $cont=2;
+                //seta o valor do parâmetro
+                $params[':' . $cnes] = $cnes;
+                $cont++;
             }
-            $condition=$condition.")";
+            $condition = $condition . ")";
         }
 
         $criteria = new CDbCriteria;
-        $criteria->alias='pd';
-        $criteria->addBetweenCondition('pd.data', Date('Y-m-d') -20, Date('Y-m-d'));
-        $criteria->condition=$condition;
-        $criteria->with = array('especialidade','profissional','unidade');
+        $criteria->alias = 'pd';
+        $criteria->condition = $condition;
+        if ($cont > 0) {
+            $criteria->params = $params;
+        }
+        if ($maisRecente == true) {
+            $criteria->addBetweenCondition('pd.data', '' . Date('Y-m-d', strtotime("- 20days")) . '', '' . Date('Y-m-d') . '');
+        }
+        $criteria->with = array('especialidade', 'profissional', 'unidade');
 
-        return new CActiveDataProvider($this, array(
+        return new CActiveDataProvider('ProducaoDiaria', array(
             'criteria' => $criteria,
         ));
     }

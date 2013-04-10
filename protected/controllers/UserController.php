@@ -118,7 +118,7 @@ class UserController extends SISPADBaseController
              if(!empty($assigned_roles)){ //checks that there are assigned roles
 
                  $auth=Yii::app()->authManager; //initializes the authManager
-                 Yii::app()->user->setState(User::ROLES, $assigned_roles);                                  
+                 Yii::app()->user->setState(UserIdentity::ROLES, $assigned_roles);                                  
             }
             
         }

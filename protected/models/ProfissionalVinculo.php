@@ -121,23 +121,29 @@ class ProfissionalVinculo extends CActiveRecord
      * 
      * @param array $unidades um vetor associativo onde a chave é o cnes.
      */
-    public static function getProfissionais($unidades){
+    public static function findAllProfissionaisPorUnidades($unidades){
         $criteria= new CDbCriteria();
-        
+        $params=array();
         $condition=' unidade_cnes IN(';
         $cont=0;
         foreach ($unidades as $cnes => $nome) {
             if ($cont > 0){
-              $condition=$condition.", '$cnes' ";  
+              $condition=$condition.",:$cnes ";  
             }
             else{
-               $condition=$condition." '$cnes' ";   
+               $condition=$condition." :$cnes ";   
             }
-            $cont=1;
+            //seta os valores dos parâmetros
+            $params[':'.$cnes]=''.$cnes.'';
+            $cont++;
         }
         $condition=$condition.')';
         
         $criteria->condition=$condition;
+        
+        if ($cont > 0){
+            $criteria->params=$params;
+        }
         
         return $criteria;
     }

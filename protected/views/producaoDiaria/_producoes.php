@@ -1,7 +1,7 @@
 
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'producao-diaria-grid',
-	'dataProvider'=>$model->getMaisRecente(),
+	'dataProvider'=>ProducaoDiaria::findAllPorUnidades(CHtml::listData( $unidades,'cnes','nome')),
 	'columns'=>array(
                 array(
                     'header'=>'Unidade',

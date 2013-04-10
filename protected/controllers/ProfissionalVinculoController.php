@@ -79,7 +79,7 @@ class ProfissionalVinculoController extends SISPADBaseController {
 
     public function getAllProfissionaisUnidade($unidades) {
         $this->_RBAC->checkAccess('registered',true);
-        $criteria=  ProfissionalVinculo::getProfissionais(CHtml::listData($unidades, 'cnes', 'nome'));
+        $criteria=  ProfissionalVinculo::findAllProfissionaisPorUnidades(CHtml::listData($unidades, 'cnes', 'nome'));
         $criteria->with=array('servidor','unidade','profissao');
         $dataProvider = new CActiveDataProvider('ProfissionalVinculo', array(
             'criteria' => $criteria,
