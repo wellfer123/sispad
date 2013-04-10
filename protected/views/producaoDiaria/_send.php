@@ -114,7 +114,7 @@
     'id'=>'dialog',
     // additional javascript options for the dialog plugin
     'options'=>array(
-        'title'=>'Dialog box 1',
+        'title'=>'Confirmação de Dados',
         'autoOpen'=>false,
         'modal'=> true,
         'width' => '500px',
