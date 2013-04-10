@@ -8,7 +8,6 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Ver Unidade', 'url'=>array('unidade/view','id'=>123)),
         array('label'=>'Histórico Produção Diária', 'url'=>array('producaoDiaria/adminGestor')),
         array('label'=>'Vincular Profissional', 'url'=>array('profissionalVinculo/create')),
 );
