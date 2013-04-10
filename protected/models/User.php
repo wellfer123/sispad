@@ -15,8 +15,6 @@ class User extends CActiveRecord {
 
     const ATIVO = 1;
     const DESATIVO = 0;
-    const ROLE_GESTOR = "GestorUnidade";
-    const ROLES = "roles";
     
     
     

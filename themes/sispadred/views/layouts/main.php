@@ -38,11 +38,11 @@
               
                 //$roles = $this->getState("roles");
                  $gestor_visible= false;
-                 $roles =  Yii::app()->user->getState(User::ROLES);
+                 $roles =  Yii::app()->user->getState(UserIdentity::ROLES);
                  if($roles!=null){
                     foreach($roles as $n=>$role)
                     {
-                            if($n==User::ROLE_GESTOR){
+                            if($n==UserIdentity::ROLE_GESTOR){
                                 $gestor_visible = true;
 
                             }
