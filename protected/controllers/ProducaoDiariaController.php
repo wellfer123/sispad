@@ -83,7 +83,7 @@ class ProducaoDiariaController extends SISPADBaseController {
                                 $this->addMessageErro("Erro. Você já enviou a produção para a especialidade escolhida!");
                             }
                         } else {//exibe uma mensagem para o usuário
-                            $this->addMessageInfo("Você já enviou esta produção!");
+                            $this->addMessageErro("Você já enviou esta produção!");
                         }
                     }
                 }
