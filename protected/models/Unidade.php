@@ -135,6 +135,19 @@ class Unidade extends CActiveRecord
 
             return $unidades;
         }
+        
+        public static function findAllTemGestor(){
+            $criteria =new CDbCriteria();
+            
+            $criteria->alias='uni';
+            $criteria->join='INNER JOIN unidade_gestor ug ON uni.cnes=ug.unidade_cnes';
+            $criteria->distinct=true;
+            
+            $criteria->order='uni.nome';
+            $unidades = Unidade::model()->findAll($criteria);
+
+            return $unidades;
+        }
 
 
         public function getNomeDescricao(){
