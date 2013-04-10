@@ -87,9 +87,9 @@ class ProducaoDiariaController extends SISPADBaseController {
                             }
                         }
                     }
-                    //coloca os valores que são adminsitrados pelo sistema
+                    //coloca os valores que são administrados pelo sistema
                     $model->servidor_cpf = $servidor->cpf;
-                    //$model->unidade_cnes = $cnes;
+                    $model->unidade_cnes = $cnes;
                     //pega os profissionais da unidade  
                     $profissionais = $this->getProfissionais($cnes, $especialidades[0]->codigo);
                     $observacoes = Observacao::model()->findAll();
@@ -335,6 +335,7 @@ class ProducaoDiariaController extends SISPADBaseController {
                     $cont=1;
                 }
                 $cond=$cond.")";
+                $criteria->condition=$cond;
             }
             else{
             $criteria->condition = ' pv.unidade_cnes=:cnes';
@@ -395,31 +396,6 @@ class ProducaoDiariaController extends SISPADBaseController {
             ':cpf' => $model->profissional_cpf,
         ));
         return $profiVinc != null ? count($profiVinc) > 0 : false;
-
-//        //vai pegar a especialidade
-//        $especialidade = UnidadeEspecialidade::model()->find('unidade_cnes=:cnes AND profissao_codigo=:codigo', array(
-//            ':cnes' => $model->unidade_cnes,
-//            ':codigo' => $model->profissao_codigo,
-//        ));
-//        //pega as producões já enviada para uma determinada especialidade em uma unidade
-//        if ($especialidade != null) {
-//            $criteria = new CDbCriteria();
-//            $criteria->condition = 'profissao_codigo=:prof AND unidade_cnes=:cnes AND data=:data';
-//            $criteria->params = array(
-//                ':prof' => $model->profissao_codigo,
-//                ':cnes' => $model->unidade_cnes,
-//                ':data' => ParserDate::inverteDataPtToEn($model->data));
-//            $producoes = ProducaoDiaria::model()->findAll($criteria);
-//
-//            if (empty($producoes)) {
-//                return true;
-//            } else {
-//                Yii::log("passou na validação de produções");
-//                return count($producoes) < $especialidade->quantidade;
-//            }
-//        }
-//
-//        return false;
     }
 
     /**
