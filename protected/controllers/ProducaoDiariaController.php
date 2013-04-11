@@ -220,41 +220,44 @@ class ProducaoDiariaController extends SISPADBaseController {
         ));
     }
 
-    public function actionTeste() {
+    public function actionMonthEspecialidade() {
+        $this->CheckAcessAction();
         $this->layout = '//layouts/column1';
 
-        $unidades = CHtml::listData(Unidade::model()->findAll(), 'cnes', 'nome');
-        $especialidades = $this->getEspecialidades();
+        $unidades = CHtml::listData(Unidade::findAllTemGestor(), 'cnes', 'nome');
 
-        $model = new ProducaoMensalModel('search');
+        $model = new ProducaoMensalEspecialidadeModel('search');
         $model->unsetAttributes();
-        if (isset($_GET['ProducaoMensalModel'])) {
-            $model->attributes = $_GET['ProducaoMensalModel'];
+        
+        if (isset($_GET['ProducaoMensalEspecialidadeModel'])) {
+            $model->attributes = $_GET['ProducaoMensalEspecialidadeModel'];
         }
-
-        $this->render('monthHistory', array('model' => $model, 'unidades' => $unidades, 'especialidades' => $especialidades));
+        //verifica se o parâmetro ano foi passado
+        if ($model->ano == null){
+            //filtro pelo ano atual
+            $model->ano = Date('Y');
+        }
+        $this->render('monthEspecialidade', array('model' => $model, 'unidades' => $unidades, 'anos' => $this->getAnos()));
     }
 
-    public function actionTeste2() {
+    public function actionMonthGrupo() {
+        $this->CheckAcessAction();
         $this->layout = '//layouts/column1';
 
-        $criteria = new CDbCriteria();
-        $criteria->order = ' nome';
-        $unidades = CHtml::listData(Unidade::model()->findAll($criteria), 'cnes', 'nome');
+        $unidades = CHtml::listData(Unidade::findAllTemGestor(), 'cnes', 'nome');
 
-        $model = new ProducaoConsolidadaModel('search');
+        $model = new ProducaoMensalGrupoModel('search');
         $model->unsetAttributes();
-
-        if (isset($_GET['ProducaoConsolidadaModel'])) {
-            $model->attributes = $_GET['ProducaoConsolidadaModel'];
-            if ($model->data != null) {
-                $model->data = ParserDate::inverteDataPtToEn($model->data);
-            }
+        
+        if (isset($_GET['ProducaoMensalGrupoModel'])) {
+            $model->attributes = $_GET['ProducaoMensalGrupoModel'];
         }
-        if ($model->data == null) {
-            $model->data = Date('Y-m-d');
+        //verifica se o parâmetro ano foi passado
+        if ($model->ano == null){
+            //filtro pelo ano atual
+            $model->ano = Date('Y');
         }
-        $this->render('consolidadaGrupo', array('model' => $model, 'unidades' => $unidades));
+        $this->render('monthGrupo', array('model' => $model, 'unidades' => $unidades, 'anos' => $this->getAnos()));
     }
 
     /**
@@ -403,6 +406,10 @@ class ProducaoDiariaController extends SISPADBaseController {
         return null;
     }
 
+    /**
+     * 
+     * @return type
+     */
     private function getGrupos() {
         $criteria = new CDbCriteria();
 
@@ -410,6 +417,10 @@ class ProducaoDiariaController extends SISPADBaseController {
         $criteria->order = 'g.nome';
         $criteria->condition = 'g.codigo <> 1';
         return Grupo::model()->findAll($criteria);
+    }
+
+    private function getAnos(){
+        return array('2013'=>'2013');
     }
 
     protected function getModelName() {
