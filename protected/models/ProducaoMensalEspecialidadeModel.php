@@ -10,7 +10,7 @@
  *
  * @author César Albuquerque
  */
-class ProducaoMensalModel extends CFormModel {
+class ProducaoMensalEspecialidadeModel extends CFormModel {
 
     public $unidade;
     public $especialidade;
@@ -28,6 +28,7 @@ class ProducaoMensalModel extends CFormModel {
     public $dez;
     public $primaryKey;
     public $id;
+    public $ano;
     
     public $anual;
     
@@ -38,7 +39,7 @@ class ProducaoMensalModel extends CFormModel {
     
     public function rules() {
         return array(
-                    array('especialidade, unidade', 'safe', 'on'=>'search'),
+                    array('especialidade, unidade, ano', 'safe', 'on'=>'search'),
         );
     }
 
@@ -123,32 +124,30 @@ class ProducaoMensalModel extends CFormModel {
         if ($this->unidade != null){
             $where= " WHERE pd.unidade_cnes='".$this->unidade."'"; 
         }
-        //atributo especialidade (profissão)
-        if ($this->especialidade != null){
+        //filtro de ano
+        if ($this->ano != null){
             
             if ($where != null){
-                $where=$where." AND pd.profissao_codigo='".$this->especialidade."'";
+                $where=$where." AND YEAR(data)='".$this->ano."'";
             }
             else{
-               $where=" WHERE pd.profissao_codigo='".$this->especialidade."'"; 
+               $where=" WHERE YEAR(data)='".$this->ano."'"; 
             }
         }
         
         
-        $query = "SELECT uni.nome AS 'unidade', pd.unidade_cnes AS 'cnes', pro.codigo AS profissao, pro.nome AS especialidade, month(data) AS mes, SUM(quantidade) AS quantidade FROM producao_diaria pd ";
+        $query = "SELECT pd.unidade_cnes AS 'cnes', pro.codigo AS profissao, pro.nome AS especialidade, month(data) AS mes, SUM(quantidade) AS quantidade FROM producao_diaria pd ";
         $query = $query . ' INNER JOIN profissao pro ON pro.codigo=pd.profissao_codigo ';
-        $query = $query . ' INNER JOIN unidade uni ON uni.cnes=pd.unidade_cnes';
+        //$query = $query . ' INNER JOIN unidade uni ON uni.cnes=pd.unidade_cnes';
         //clausula where
         if ($where != NULL){
             $query=$query.$where;
         }
         
-        $query = $query . ' GROUP BY unidade_cnes, month(data), profissao_codigo ';
-        $query = $query . ' ORDER BY uni.nome, pro.nome, month(data) ';
+        $query = $query . ' GROUP BY month(data), profissao_codigo ';
+        $query = $query . ' ORDER BY pro.nome, month(data) ';
 
-        $rows = Yii::app()->db->createCommand($query)->queryAll(); //'SELECT unidade_cnes,  profissao_codigo, month(data) AS mes, SUM(quantidade)AS quantidade FROM producao_diaria GROUP BY unidade_cnes, month(data), profissao_codigo ORDER BY unidade_cnes, profissao_codigo, month(data)')->queryAll();
-
-        $unidade = null;
+        $rows = Yii::app()->db->createCommand($query)->queryAll(); 
         $mes = null;
         $especialidade = null;
         $list = array();
@@ -158,25 +157,22 @@ class ProducaoMensalModel extends CFormModel {
         foreach ($rows as $key => $row) {
 
             //variáveis locais
-            $prod = new ProducaoMensalModel;
-            $prod->unidade = $row['cnes'];
+            $prod = new ProducaoMensalEspecialidadeModel;
             $prod->especialidade = $row['profissao'];
             $m = $row['mes'];
 
             //mudou de unidade ou especialidade, então é um novo registro
-            if ($unidade != $prod->unidade || $especialidade != $prod->especialidade) {
+            if ( $especialidade != $prod->especialidade) {
                 //um novo modelo deve ser instanciado e o antigo deve ser armazenado no vetor
                 if (!$primeiraVez) {
                     $producaoMensal->fillAttributes();
                     $list[] = $producaoMensal;
                 }
                 //popula o model
-                $producaoMensal = new ProducaoMensalModel();
-                $producaoMensal->unidade = $row['unidade'];
+                $producaoMensal = new ProducaoMensalEspecialidadeModel();
                 $producaoMensal->especialidade = $row['especialidade'];
 
                 //guarda os valores atuais  
-                $unidade = $prod->unidade;
                 $especialidade = $prod->especialidade;
             }
 
