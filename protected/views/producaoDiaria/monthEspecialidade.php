@@ -25,14 +25,11 @@ $('.search-form form').submit(function(){
 });
 ");
 ?>
-<?php echo CHtml::link('Pesquisa','#',array('class'=>'search-button')); ?>
-<div class="search-form" style="display:none">
 <?php $this->renderPartial('_search',array(
 	'model'=>$model,
-        'especialidades'=>$especialidades,
+        'anos'=>$anos,
         'unidades'=>$unidades,
 )); ?>
-</div><!-- search-form -->
 
 <?php
         $this->widget('zii.widgets.grid.CGridView', array(
@@ -40,14 +37,9 @@ $('.search-form form').submit(function(){
             'dataProvider' => $model->search(),
             'columns' => array(
                 array(
-                    'header'=>'Unidade',
-                    'value'=>'$data->unidade',
-                    'filter'=>$unidades,
-                ),
-                array(
                     'header'=>'Especialidade',
                     'value'=>'$data->especialidade',
-                    'filter'=>$especialidades,
+                    'filter'=>false,
                 ),
                 array(
                     'header'=>'Jan',
@@ -114,14 +106,6 @@ $('.search-form form').submit(function(){
                     'header'=>'Anual',
                     'value'=>'$data->anual',
                     'filter'=>false,
-                ),
-                array(
-                    'class' => 'CButtonColumn',
-                    'buttons' => array(
-                        'delete' => array(
-                            'visible' => 'false',
-                        ),
-                    ),
                 ),
             ),
         ));

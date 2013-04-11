@@ -13,12 +13,12 @@
 
 	<div class="row">
 		<?php echo $form->label($model,'unidade'); ?>
-                <?php echo Chtml::activeDropDownList($model, 'unidade', $unidades,array('empty'=>'Unidade')); ?>
+                <?php echo Chtml::activeDropDownList($model, 'unidade', $unidades,array('empty'=>'Todas as unidades')); ?>
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'especialidade'); ?>
-                <?php echo Chtml::activeDropDownList($model, 'especialidade', $especialidades,array('empty'=>'Especialidade')); ?>
+		<?php echo $form->label($model,'ano'); ?>
+                <?php echo Chtml::activeDropDownList($model, 'ano', $anos); ?>
 	</div>
 
 	<div class="row buttons">
