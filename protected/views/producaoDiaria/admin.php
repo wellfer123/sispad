@@ -7,7 +7,8 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Nenhuma', 'url'=>array('#')),
+	array('label'=>'Relatório Por Grupo', 'url'=>array('monthGrupo')),
+        array('label'=>'Relatório Por Especialidade', 'url'=>array('monthEspecialidade')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
