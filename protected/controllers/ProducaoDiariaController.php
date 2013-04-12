@@ -200,7 +200,7 @@ class ProducaoDiariaController extends SISPADBaseController {
      */
     public function actionAdminSuper() {
         //SOMENTE O ADMINISTRADOR DO SISTEMA PODE VISUALIZAR ESTA VIEW
-        $this->_RBAC->checkAccess('admin', true);
+        //$this->_RBAC->checkAccess('admin', true);
         $unidades = CHtml::listData(Unidade::findAllTemGestor(), 'cnes', 'nome');
         $especialidades = CHtml::listData($this->getEspecialidades(), 'codigo', 'nome');
 
@@ -415,5 +415,18 @@ class ProducaoDiariaController extends SISPADBaseController {
     protected function getModelName() {
         return 'ProducaoDiaria';
     }
+    
+    
+    public function actionRelatorioGeral() {
+        $model = new ProducaoDiaria('search');
+        $model->unsetAttributes();  // clear any default values
+        $this->widget('application.extensions.phpexcel.EExcelView', array('dataProvider' => $model->search(),
+            'title' => 'teste',
+            'grid_mode' => 'export',
+            'exportType' => 'Excel2007',
+            'grid_mode'=>'export',
+        ));
+        Yii::app()->end();
+    }    
 
 }

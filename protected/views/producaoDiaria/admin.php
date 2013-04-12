@@ -23,6 +23,7 @@ $('.search-form form').submit(function(){
 });
 ");
 ?>
+<?php echo CHtml::link('Relatorio Excel',Yii::app()->createUrl("producaoDiaria/relatorioGeral")); ?>
 
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'producao-diaria-grid',
