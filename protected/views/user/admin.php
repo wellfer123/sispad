@@ -81,8 +81,14 @@ ou <b>=</b>) iniciar cada uma de suas pesquisa com valores específicos de como 
 	'id'=>'user-grid',
 	'dataProvider'=>$model->search(),
 	'columns'=>array(
-		'email',
-		'username',
+                array(
+                    'header'=>'Nome do Usuário',
+                    'value'=>'$data->username',
+                ),
+		array(
+                    'header'=>'E-mail',
+                    'value'=>'$data->email',
+                ),
                 array(
                         'name'=>'ativo',
                         'value'=>'$data->labelStatus()',

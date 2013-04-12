@@ -135,6 +135,9 @@ class ProducaoDiaria extends CActiveRecord {
             'criteria' => $criteria,
         ));
     }
+    
+    
+    
 
     public function getMaisRecente() {
         // Warning: Please modify the following code to remove attributes that

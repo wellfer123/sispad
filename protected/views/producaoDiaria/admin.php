@@ -7,7 +7,8 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Nenhuma', 'url'=>array('#')),
+	array('label'=>'Relatório Por Grupo', 'url'=>array('monthGrupo')),
+        array('label'=>'Relatório Por Especialidade', 'url'=>array('monthEspecialidade')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -23,7 +24,6 @@ $('.search-form form').submit(function(){
 });
 ");
 ?>
-<?php echo CHtml::link('Relatorio Excel',Yii::app()->createUrl("producaoDiaria/relatorioGeral")); ?>
 
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'producao-diaria-grid',

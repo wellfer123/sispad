@@ -115,14 +115,17 @@ class User extends CActiveRecord {
 
         $criteria = new CDbCriteria;
         
-        $criteria->compare('email', $this->email, true);
+        $criteria->alias='u';
+        $criteria->compare('u.email', $this->email, true);
 
-        $criteria->compare('username', $this->username, true);
+        $criteria->compare('u.username', $this->username, true);
+        
+        $criteria->compare('u.servidor_cpf', $this->servidor_cpf, true);
 
-        $criteria->compare('servidor_cpf', $this->servidor_cpf, true);
-
-        return new CArrayDataProvider(User::model()->findAll(), array(
-            //'criteria'=>$criteria,
+        $criteria->order='u.username';
+        
+        return new CActiveDataProvider('User', array(
+            'criteria'=>$criteria,
             'pagination' => array(
                 'pageSize' => 20
             )
