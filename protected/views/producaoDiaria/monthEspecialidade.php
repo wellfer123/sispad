@@ -29,6 +29,7 @@ $('.search-form form').submit(function(){
 	'model'=>$model,
         'anos'=>$anos,
         'unidades'=>$unidades,
+        'relatorio'=>$relatorio,
 )); ?>
 
 <?php

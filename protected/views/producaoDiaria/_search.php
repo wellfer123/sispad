@@ -7,7 +7,7 @@
 <div class="wide form">
 
 <?php $form=$this->beginWidget('CActiveForm', array(
-	'action'=>Yii::app()->createUrl($this->route),
+	//'action'=>Yii::app()->createUrl($this->route),
 	'method'=>'get',
 )); ?>
 
@@ -22,7 +22,14 @@
 	</div>
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton('Pesquisar'); ?>
+		<?php //echo CHtml::submitButton('Pesquisar'); ?>
+            <?php echo CHtml::button('Pesquisar', array(
+                    'submit' => CController::createUrl($this->route, array('unidade'=>$model->unidade,'ano'=>$model->ano)),
+                )); ?>
+		<?php echo CHtml::button('Relatório Excel', array(
+                    'submit' => CController::createUrl("producaoDiaria/".$relatorio, array('unidade'=>$model->unidade,'ano'=>$model->ano)),
+                )); ?>
+                <?php //echo CHtml::link('Relatorio Excel',Yii::app()->createUrl("producaoDiaria/relatorioMonthEspecialidade",array('id'=>1))); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

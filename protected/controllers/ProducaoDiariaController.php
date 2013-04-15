@@ -1,4 +1,6 @@
 <?php
+Yii::import('ext.phpexcel.PHPExcel');
+
 
 class ProducaoDiariaController extends SISPADBaseController {
 
@@ -221,7 +223,7 @@ class ProducaoDiariaController extends SISPADBaseController {
     }
 
     public function actionMonthEspecialidade() {
-        $this->CheckAcessAction();
+        //$this->CheckAcessAction();
         $this->layout = '//layouts/column1';
 
         $unidades = CHtml::listData(Unidade::findAllTemGestor(), 'cnes', 'nome');
@@ -237,11 +239,12 @@ class ProducaoDiariaController extends SISPADBaseController {
             //filtro pelo ano atual
             $model->ano = Date('Y');
         }
-        $this->render('monthEspecialidade', array('model' => $model, 'unidades' => $unidades, 'anos' => $this->getAnos()));
+         $relatorio = 'relatorioMonthEspecialidade';
+        $this->render('monthEspecialidade', array('model' => $model, 'unidades' => $unidades, 'anos' => $this->getAnos(),'relatorio'=>$relatorio));
     }
 
     public function actionMonthGrupo() {
-        $this->CheckAcessAction();
+        //$this->CheckAcessAction();
         $this->layout = '//layouts/column1';
 
         $unidades = CHtml::listData(Unidade::findAllTemGestor(), 'cnes', 'nome');
@@ -257,7 +260,8 @@ class ProducaoDiariaController extends SISPADBaseController {
             //filtro pelo ano atual
             $model->ano = Date('Y');
         }
-        $this->render('monthGrupo', array('model' => $model, 'unidades' => $unidades, 'anos' => $this->getAnos()));
+        $relatorio = 'relatorioMonthGrupo';
+        $this->render('monthGrupo', array('model' => $model, 'unidades' => $unidades, 'anos' => $this->getAnos(),'relatorio'=>$relatorio));
     }
 
     /**
@@ -428,14 +432,170 @@ class ProducaoDiariaController extends SISPADBaseController {
     }
     
     
-    public function actionRelatorioGeral() {
-        $model = new ProducaoDiaria('search');
-        $model->unsetAttributes();  // clear any default values
+    public function actionRelatorioMonthGrupo() {
+       $model = new ProducaoMensalGrupoModel('search');
+       $model->unsetAttributes();
+        
+        if (isset($_GET['ProducaoMensalGrupoModel'])) {
+            $model->attributes = $_GET['ProducaoMensalGrupoModel'];
+        }
+        //verifica se o parâmetro ano foi passado
+        if ($model->ano == null){
+            //filtro pelo ano atual
+            $model->ano = Date('Y');
+        }
+        
+        
+        
+        $columns = array(
+            array(
+                'name' => 'grupo',
+                'header' => 'Grupo',
+               
+            ),
+            array(
+                'name' => 'jan',
+                'header' => 'Jan',
+            ),
+            array(
+                'name' => 'fev',
+                'header' => 'Fev',
+            ),
+            array(
+                'name' => 'mar',
+                'header' => 'Mar',
+            ),
+            array(
+                'name' => 'abr',
+                'header' => 'Abr',
+            ),
+            array(
+                'name' => 'mai',
+                'header' => 'Mai',
+            ),
+            array(
+                'name' => 'jun',
+                'header' => 'Jun',
+            ),
+            array(
+                'name' => 'jul',
+                'header' => 'Jul',
+            ),
+            array(
+                'name' => 'ago',
+                'header' => 'Ago',
+            ),
+            array(
+                'name' => 'set',
+                'header' => 'Set',
+            ),
+            array(
+                'name' => 'out',
+                'header' => 'Out',
+            ),
+            array(
+                'name' => 'nov',
+                'header' => 'Nov',
+            ),
+            array(
+                'name' => 'dez',
+                'header' => 'Dez',
+            ),
+            array(
+                'name' => 'anual',
+                'header' => 'Anual',
+            ),
+        );
+        
         $this->widget('application.extensions.phpexcel.EExcelView', array('dataProvider' => $model->search(),
-            'title' => 'teste',
+            'title' => 'grupos'.date('Y-m-d h:i:s'),
             'grid_mode' => 'export',
             'exportType' => 'Excel2007',
-            'grid_mode'=>'export',
+            'columns'=>$columns,
+        ));
+        Yii::app()->end();
+    }    
+    
+    
+    public function actionRelatorioMonthEspecialidade() {
+        $model = new ProducaoMensalEspecialidadeModel('search');
+        $model->unsetAttributes();
+        
+        if (isset($_GET['ProducaoMensalEspecialidadeModel'])) {
+            $model->attributes = $_GET['ProducaoMensalEspecialidadeModel'];
+        }
+        //verifica se o parâmetro ano foi passado
+        if ($model->ano == null){
+            //filtro pelo ano atual
+            $model->ano = Date('Y');
+        }
+        
+         $columns = array(
+            array(
+                'name' => 'especialidade',
+                'header' => 'Especialidade',
+               
+            ),
+            array(
+                'name' => 'jan',
+                'header' => 'Jan',
+            ),
+            array(
+                'name' => 'fev',
+                'header' => 'Fev',
+            ),
+            array(
+                'name' => 'mar',
+                'header' => 'Mar',
+            ),
+            array(
+                'name' => 'abr',
+                'header' => 'Abr',
+            ),
+            array(
+                'name' => 'mai',
+                'header' => 'Mai',
+            ),
+            array(
+                'name' => 'jun',
+                'header' => 'Jun',
+            ),
+            array(
+                'name' => 'jul',
+                'header' => 'Jul',
+            ),
+            array(
+                'name' => 'ago',
+                'header' => 'Ago',
+            ),
+            array(
+                'name' => 'set',
+                'header' => 'Set',
+            ),
+            array(
+                'name' => 'out',
+                'header' => 'Out',
+            ),
+            array(
+                'name' => 'nov',
+                'header' => 'Nov',
+            ),
+            array(
+                'name' => 'dez',
+                'header' => 'Dez',
+            ),
+            array(
+                'name' => 'anual',
+                'header' => 'Anual',
+            ),
+        );
+        
+        
+        $this->widget('application.extensions.phpexcel.EExcelView', array('dataProvider' => $model->search(),
+            'title' => 'especialidades'.date('Y-m-d h:i:s'),
+            'grid_mode' => 'export',
+            'exportType' => 'Excel2007',
+            'columns'=>$columns,
         ));
         Yii::app()->end();
     }    
