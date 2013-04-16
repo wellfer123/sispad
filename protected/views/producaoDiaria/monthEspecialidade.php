@@ -1,5 +1,5 @@
 <?php
-
+Yii::import('application.services.HighChartsUtil');
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -25,6 +25,8 @@ $('.search-form form').submit(function(){
 });
 ");
 ?>
+
+
 <?php $this->renderPartial('_search',array(
 	'model'=>$model,
         'anos'=>$anos,
@@ -111,3 +113,27 @@ $('.search-form form').submit(function(){
             ),
         ));
 ?>
+
+<?php 
+
+     $labels=array('jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez','anual');
+    $this->Widget('ext.highcharts.HighchartsWidget', array(
+   'options'=>array(
+      'chart'=>array('type'=>'column'),
+      'title' => array('text' => 'Especialidadess'),
+      'xAxis' => array(
+         'categories' => array('Jan', 'Fev', 'Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez','Anual')
+      ),
+      'yAxis' => array(
+         'title' => array('text' => 'Quantidade Executada')
+      ),
+       'labels'=>array('rotation'=>-45,
+                        'align'=>'right'
+                      ),
+      'series' =>HighChartsUtil::getSeriesCharts($model->search(),'especialidade',$labels),//array(
+         //array('name' => 'MEDICO GINECOLOGISTA E OBSTETRA', 'data' => array(0, 0,0,191,0,0,0,0,0,0,0,0,191)),
+         //array('name' => 'MEDICO CLINICO', 'data' => array(10, 10,10,10,0,0,0,0,0,0,0,0,191)),
+         //array('name' => 'John', 'data' => array(5, 7, 3))
+      //)
+   )
+));?>
