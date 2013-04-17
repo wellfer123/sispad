@@ -121,7 +121,7 @@ $('.search-form form').submit(function(){
     $this->Widget('ext.highcharts.HighchartsWidget', array(
    'options'=>array(
       'chart'=>array('type'=>'column'),
-      'title' => array('text' => 'Especialidadess'),
+      'title' => array('text' => 'Especialidades'),
       'xAxis' => array(
          'categories' => array('Jan', 'Fev', 'Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez','Anual')
       ),
