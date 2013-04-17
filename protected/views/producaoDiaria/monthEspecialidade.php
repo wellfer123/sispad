@@ -35,9 +35,10 @@ $('.search-form form').submit(function(){
 )); ?>
 
 <?php
+        $dataProvider = $model->search();
         $this->widget('zii.widgets.grid.CGridView', array(
             'id' => 'producao-mensal-grid',
-            'dataProvider' => $model->search(),
+            'dataProvider' =>$dataProvider,
             'columns' => array(
                 array(
                     'header'=>'Especialidade',
@@ -120,7 +121,7 @@ $('.search-form form').submit(function(){
     $this->Widget('ext.highcharts.HighchartsWidget', array(
    'options'=>array(
       'chart'=>array('type'=>'column'),
-      'title' => array('text' => 'Especialidadess'),
+      'title' => array('text' => 'Especialidades'),
       'xAxis' => array(
          'categories' => array('Jan', 'Fev', 'Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez','Anual')
       ),
@@ -130,7 +131,7 @@ $('.search-form form').submit(function(){
        'labels'=>array('rotation'=>-45,
                         'align'=>'right'
                       ),
-      'series' =>HighChartsUtil::getSeriesCharts($model->search(),'especialidade',$labels),//array(
+      'series' =>HighChartsUtil::getSeriesCharts($dataProvider,'especialidade',$labels),//array(
          //array('name' => 'MEDICO GINECOLOGISTA E OBSTETRA', 'data' => array(0, 0,0,191,0,0,0,0,0,0,0,0,191)),
          //array('name' => 'MEDICO CLINICO', 'data' => array(10, 10,10,10,0,0,0,0,0,0,0,0,191)),
          //array('name' => 'John', 'data' => array(5, 7, 3))
