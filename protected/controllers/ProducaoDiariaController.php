@@ -70,6 +70,7 @@ class ProducaoDiariaController extends SISPADBaseController {
                         $exist = $this->existeProducao($model);
                         if (!$exist) { //verifica se o modelo existe no banco de dados
                             if ($this->existeEspecialidadeUnidadeEProfissional($model)) {//verifica se a quantidade de especialidades da unidade
+                                $data=$model->data;
                                 $model->data = ParserDate::inverteDataPtToEn($model->data);
                                 if ($model->save()) { //salvou com sucesso, cria um novo modelo
                                     $model = new ProducaoDiaria;
