@@ -240,7 +240,8 @@ class ProducaoDiariaController extends SISPADBaseController {
             //filtro pelo ano atual
             $model->ano = Date('Y');
         }
-         $relatorio = 'relatorioMonthEspecialidade';
+        //nome da action que será usada para gerar o relatorio em excel
+        $relatorio = 'relatorioMonthEspecialidade';
         $this->render('monthEspecialidade', array('model' => $model, 'unidades' => $unidades, 'anos' => $this->getAnos(),'relatorio'=>$relatorio));
     }
 
@@ -600,5 +601,8 @@ class ProducaoDiariaController extends SISPADBaseController {
         ));
         Yii::app()->end();
     }    
+    
+    
+  
 
 }
