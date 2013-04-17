@@ -76,8 +76,9 @@
                                                  'attribute'=>'data',
                                                 "options"=>array(
                                                     "changeMonth"=>"true", 
-                                                    "changeYear"=>"true",  
-                                                    'minDate'=>'-20d', //ontem
+                                                    "changeYear"=>"true", 
+                                                    'minDate'=>'01/01/2013', //ontem
+                                                   // 'minDate'=>'-20d', //ontem
                                                     'maxDate'=>'0d', //hoje
                                                     "yearRange" => "-99:+0", 
                                                     "showAnim"=>"fadeIn",
