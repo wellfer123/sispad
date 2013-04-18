@@ -123,7 +123,10 @@ class ProducaoDiaria extends CActiveRecord {
         $criteria->compare('pd.servidor_cpf', $this->servidor_cpf, true);
         $criteria->compare('pd.profissao_codigo', $this->profissao_codigo, true);
         $criteria->compare('pd.quantidade', $this->quantidade, true);
-        $criteria->compare('pd.data', $this->data, true);
+        //inverte a data para o formatado estadunidense
+        if ($this->data != null){
+            $criteria->compare('pd.data', ParserDate::inverteDataPtToEn( $this->data), true);
+        }
         $criteria->with = array('unidade', 'especialidade', 'profissional');
 
         

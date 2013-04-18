@@ -141,9 +141,6 @@ class ProducaoDiariaController extends SISPADBaseController {
         $model->unsetAttributes();  // clear any default values
         if (isset($_GET['ProducaoDiaria'])) {
             $model->attributes = $_GET['ProducaoDiaria'];
-            if ($model->data != null) {
-                $model->data = ParserDate::inverteDataPtToEn($model->data);
-            }
         }
 
         $this->render('admin', array(
@@ -211,9 +208,6 @@ class ProducaoDiariaController extends SISPADBaseController {
         $model->unsetAttributes();  // clear any default values
         if (isset($_GET['ProducaoDiaria'])) {
             $model->attributes = $_GET['ProducaoDiaria'];
-            if ($model->data != null) {
-                $model->data = ParserDate::inverteDataPtToEn($model->data);
-            }
         }
 
         $this->render('adminSuper', array(
