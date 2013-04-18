@@ -31,6 +31,7 @@ $this->menu=array(
 <?php echo $this->renderPartial('_producoes', 
                                 array(
                                     'model'=>$model,
+                                    'data'=>$data,
                                     'unidades'=>$unidades,)); ?>
 </div>
 

@@ -70,6 +70,7 @@ class ProducaoDiariaController extends SISPADBaseController {
                         $exist = $this->existeProducao($model);
                         if (!$exist) { //verifica se o modelo existe no banco de dados
                             if ($this->existeEspecialidadeUnidadeEProfissional($model)) {//verifica se a quantidade de especialidades da unidade
+                                $data=$model->data;
                                 $model->data = ParserDate::inverteDataPtToEn($model->data);
                                 if ($model->save()) { //salvou com sucesso, cria um novo modelo
                                     $model = new ProducaoDiaria;
@@ -140,9 +141,6 @@ class ProducaoDiariaController extends SISPADBaseController {
         $model->unsetAttributes();  // clear any default values
         if (isset($_GET['ProducaoDiaria'])) {
             $model->attributes = $_GET['ProducaoDiaria'];
-            if ($model->data != null) {
-                $model->data = ParserDate::inverteDataPtToEn($model->data);
-            }
         }
 
         $this->render('admin', array(
@@ -210,9 +208,6 @@ class ProducaoDiariaController extends SISPADBaseController {
         $model->unsetAttributes();  // clear any default values
         if (isset($_GET['ProducaoDiaria'])) {
             $model->attributes = $_GET['ProducaoDiaria'];
-            if ($model->data != null) {
-                $model->data = ParserDate::inverteDataPtToEn($model->data);
-            }
         }
 
         $this->render('adminSuper', array(

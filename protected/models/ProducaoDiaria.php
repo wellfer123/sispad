@@ -123,7 +123,10 @@ class ProducaoDiaria extends CActiveRecord {
         $criteria->compare('pd.servidor_cpf', $this->servidor_cpf, true);
         $criteria->compare('pd.profissao_codigo', $this->profissao_codigo, true);
         $criteria->compare('pd.quantidade', $this->quantidade, true);
-        $criteria->compare('pd.data', $this->data, true);
+        //inverte a data para o formatado estadunidense
+        if ($this->data != null){
+            $criteria->compare('pd.data', ParserDate::inverteDataPtToEn( $this->data), true);
+        }
         $criteria->with = array('unidade', 'especialidade', 'profissional');
 
         
@@ -158,10 +161,13 @@ class ProducaoDiaria extends CActiveRecord {
 
     /**
      * Devolve um CActiveDataProvider com toda a produção das unidades passadas como parâmetro.
-     * @param array $unidades um array associativo 
+     * @param array $unidades um array associativo de unidade. A chave é o CNES
+     * @param boolean $maisRecente se for true devolve as produções dos últimos 20 dias
+     *  baseado na data atual.
+     * @param date $data data no formato d/m/Y.Exemplo: 22/03/2013
      * @return \CActiveDataProvider
      */
-    public static function findAllPorUnidades($unidades, $maisRecente = true) {
+    public static function findAllPorUnidades($unidades, $maisRecente = true,$data=NULL) {
         $condition = null;
         $cont = 0;
         $params = array();
@@ -188,10 +194,19 @@ class ProducaoDiaria extends CActiveRecord {
             $criteria->params = $params;
         }
         if ($maisRecente == true) {
+            if ($data == null){
+                //data atual
             $criteria->addBetweenCondition('pd.data', '' . Date('Y-m-d', strtotime("- 20days")) . '', '' . Date('Y-m-d') . '');
+            }
+            //foi passada uma data
+            else{
+               $data=  explode('/', $data);                                 //2 dias atrás                                                          //um dia mais
+               $criteria->addBetweenCondition('pd.data', '' . Date('Y-m-d',mktime(0,0,0,$data[1],$data[0]-2,$data[2])) . '', '' . Date('Y-m-d',mktime(0,0,0,$data[1],$data[0]+1,$data[2])) . '');
+            }
         }
         $criteria->with = array('especialidade', 'profissional', 'unidade');
 
+        //$criteria->com
         return new CActiveDataProvider('ProducaoDiaria', array(
             'criteria' => $criteria,
         ));
