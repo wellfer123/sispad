@@ -56,6 +56,7 @@ class Grupo extends CActiveRecord
 		return array(
 			'profissaos' => array(self::HAS_MANY, 'Profissao', 'grupo_codigo'),
                         'unidades' => array(self::MANY_MANY, 'Unidade', 'unidade_gestor(grupo_codigo,unidade_cnes)'),
+                        'especialidades' => array(self::MANY_MANY, 'Profissao', 'especialidade_grupo(grupo_codigo,profissao_codigo)'),
 		);
 	}
 

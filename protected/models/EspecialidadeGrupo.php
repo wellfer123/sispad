@@ -3,11 +3,11 @@
 /**
  * This is the model class for table "unidade_grupo".
  *
- * The followings are the available columns in table 'unidade_grupo':
- * @property string $unidade_cnes
+ * The followings are the available columns in table 'especialidade_grupo':
+ * @property string $profissao_codigo
  * @property integer $grupo_codigo
  */
-class UnidadeGrupo extends CActiveRecord
+class EspecialidadeGrupo extends CActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
@@ -24,7 +24,7 @@ class UnidadeGrupo extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'unidade_grupo';
+		return 'especialidade_grupo';
 	}
 
 	/**
@@ -36,21 +36,22 @@ class UnidadeGrupo extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('grupo_codigo', 'numerical', 'integerOnly'=>true),
-			array('unidade_cnes', 'length', 'max'=>10),
-                        array('unidade_cnes,grupo_codigo', 'validaUnidadeGrupoExistente','on'=>'create'),
+			array('profissao_codigo', 'length', 'max'=>6),
+                        array('profissao_codigo,grupo_codigo', 'required'),
+                        array('profissao_codigo,grupo_codigo', 'validaEspecialidadeGrupoExistente','on'=>'create'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('unidade_cnes, grupo_codigo', 'safe', 'on'=>'search'),
+			array('especialidade_grupo, grupo_codigo', 'safe', 'on'=>'search'),
 		);
 	}
 
         
-           public function  validaUnidadeGrupoExistente($attribute,$params){
+           public function  validaEspecialidadeGrupoExistente($attribute,$params){
 
-             if((UnidadeGrupo::model()->find('grupo_codigo= :codigo and unidade_cnes=:unidade',array(':codigo'=>$this->grupo_codigo,':unidade'=>$this->unidade_cnes)))==null){
+             if((EspecialidadeGrupo::model()->find('grupo_codigo= :codigo and profissao_codigo=:profissao',array(':codigo'=>$this->grupo_codigo,':profissao'=>$this->profissao_codigo)))==null){
                  return true;
              }
-             $this->addError('','Unidade/Grupo já existe');
+             $this->addError('','Especialidade/Grupo já existe');
              return false;
         }
 	/**
@@ -61,7 +62,7 @@ class UnidadeGrupo extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-                    'unidade' => array(self::BELONGS_TO, 'Unidade', 'unidade_cnes'),
+                    'especialidade' => array(self::BELONGS_TO, 'Profissao', 'profissao_codigo'),
                     'grupo' => array(self::BELONGS_TO, 'Grupo', 'grupo_codigo'),
                     
 		);
@@ -73,7 +74,7 @@ class UnidadeGrupo extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'unidade_cnes' => 'Unidade',
+			'profissao_codigo' => 'Especialidade',
 			'grupo_codigo' => 'Grupo',
 		);
 	}
@@ -89,7 +90,7 @@ class UnidadeGrupo extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('unidade_cnes',$this->unidade_cnes,true);
+		$criteria->compare('profissao_codigo',$this->profissao_codigo,true);
 		$criteria->compare('grupo_codigo',$this->grupo_codigo);
 
 		return new CActiveDataProvider($this, array(
