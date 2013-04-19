@@ -106,28 +106,35 @@ $('.search-form form').submit(function(){
                     'filter'=>false,
                 ),
                 
-                array(
-                    'header'=>'Anual',
-                    'value'=>'$data->anual',
-                    'filter'=>false,
-                ),
+//                array(
+//                    'header'=>'Anual',
+//                    'value'=>'$data->anual',
+//                    'filter'=>false,
+//                ),
             ),
         ));
 ?>
 
 <?php 
 
-     $labels=array('jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez','anual');
+     $labels=array('jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez');
     $this->Widget('ext.highcharts.HighchartsWidget', array(
    'options'=>array(
       'chart'=>array('type'=>'column'),
       'title' => array('text' => 'Especialidades'),
       'xAxis' => array(
-         'categories' => array('Jan', 'Fev', 'Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez','Anual')
+         'categories' => array('Jan', 'Fev', 'Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez')
       ),
       'yAxis' => array(
          'title' => array('text' => 'Quantidade Executada')
       ),
+      'plotOptions'=>array(
+                        'series'=>array(
+                                'dataLabels'=>array(
+                                    'enabled'=>true,
+                                ),
+                        ),
+       ), 
        'labels'=>array('rotation'=>-45,
                         'align'=>'right'
                       ),
