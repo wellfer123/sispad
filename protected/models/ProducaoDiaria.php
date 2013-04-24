@@ -122,12 +122,12 @@ class ProducaoDiaria extends CActiveRecord {
         $criteria->compare('pd.unidade_cnes', $this->unidade_cnes, true);
         $criteria->compare('pd.servidor_cpf', $this->servidor_cpf, true);
         $criteria->compare('pd.profissao_codigo', $this->profissao_codigo, true);
-        $criteria->compare('pd.quantidade', $this->quantidade, true);
+       //$criteria->compare('pd.quantidade', $this->quantidade, true);
         //inverte a data para o formatado estadunidense
         if ($this->data != null){
             $criteria->compare('pd.data', ParserDate::inverteDataPtToEn( $this->data), true);
         }
-        $criteria->with = array('unidade', 'especialidade', 'profissional');
+        $criteria->with = array('unidade', 'especialidade','grupo', 'profissional');
 
         
         if ($cont > 0) {
@@ -152,7 +152,7 @@ class ProducaoDiaria extends CActiveRecord {
         $criteria->compare('pd.unidade_cnes', $this->unidade_cnes, true);
         $criteria->compare('pd.servidor_cpf', $this->servidor_cpf, true);
         $criteria->addBetweenCondition('pd.data', '' . Date('Y-m-d', strtotime("- 20days")) . '', '' . Date('Y-m-d') . '');
-        $criteria->with = array('especialidade', 'profissional', 'unidade');
+        $criteria->with = array('especialidade','grupo', 'profissional', 'unidade');
 
         return new CActiveDataProvider($this, array(
             'criteria' => $criteria,
