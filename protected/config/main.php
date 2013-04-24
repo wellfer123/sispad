@@ -9,6 +9,7 @@ return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'name'=>'SISPAD',
          'theme'=>'sispadred',
+         'language' => 'pt_br',
 
 	// preloading 'log' component
 	'preload'=>array('log'),

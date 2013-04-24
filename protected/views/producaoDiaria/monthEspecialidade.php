@@ -104,6 +104,11 @@ $('.search-form form').submit(function(){
                     'header'=>'Dez',
                     'value'=>'$data->dez',
                     'filter'=>false,
+                ),             
+                array(
+                    'header'=>'Anual',
+                    'value'=>'$data->anual',
+                    'filter'=>false,
                 ),
                 
                 array(

@@ -33,7 +33,7 @@ $this->breadcrumbs=array(
 		
            
             <p style="color: red">Caso não tenha se registrado no sistema <a href=<?php echo Yii::app()->createAbsoluteUrl('user/register') ?>>clique aqui</a></p>
-            
+            <h3 style="color: red"> ATENÇÂO: o Sispad está liberado para a digitação da produção de Janeiro, Fevereiro e Março</h3>
             <h3 style="color: red"> Utilize o nevegador (browser) Google Chrome</h3>
             <h3 style="color: red"> Email do suporte: suporte.sispad@gmail.com</h3>
             <h4 style="color: red"> Telefone: (81) 3701-1400 (ramal 227)</h4>
