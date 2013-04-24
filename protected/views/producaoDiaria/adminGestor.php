@@ -60,6 +60,11 @@ $('.search-form form').submit(function(){
                     'value'=>'$data->profissional->nome'
                 ),
                 array(
+                    'filter'=>$grupos,
+                    'name'=>'grupo_codigo',
+                    'value'=>'$data->grupo->nome'
+                ),
+                array(
                     'filter'=>false,
                     'name'=>'quantidade',
                     'value'=>'$data->quantidade'

@@ -6,22 +6,26 @@ $this->breadcrumbs=array(
 	'Histórico da Produção Diária',
 );
 
-$this->menu=array(
-	array('label'=>'Nenhuma', 'url'=>array('#')),
-);
 
 Yii::app()->clientScript->registerScript('search', "
-$('.search-button').click(function(){
-	$('.search-form').toggle();
-	return false;
-});
+
 $('.search-form form').submit(function(){
-	$('#producao-diaria-grid').yiiGridView('update', {
+	$.fn.yiiGridView.update('producao-diaria-grid', {
 		data: $(this).serialize()
 	});
 	return false;
 });
 ");
+
+?>
+
+
+<?php 
+//$this->renderPartial('_searchAdmin',array(
+//	'model'=>$model,
+//        'unidades'=>$unidades,
+//        'especialidades'=>$especialidades,
+//)); 
 ?>
 
 <?php $this->widget('zii.widgets.grid.CGridView', array(
@@ -57,6 +61,11 @@ $('.search-form form').submit(function(){
                                 ),true),
                     'header'=>'Profissional',
                     'value'=>'$data->profissional->nome'
+                ),
+                array(
+                    'filter'=>$grupos,
+                    'name'=>'grupo_codigo',
+                    'value'=>'$data->grupo->nome'
                 ),
                 array(
                     'filter'=>false,
