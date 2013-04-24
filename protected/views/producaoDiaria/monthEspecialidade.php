@@ -106,11 +106,11 @@ $('.search-form form').submit(function(){
                     'filter'=>false,
                 ),
                 
-//                array(
-//                    'header'=>'Anual',
-//                    'value'=>'$data->anual',
-//                    'filter'=>false,
-//                ),
+                array(
+                    'header'=>'Anual',
+                    'value'=>'$data->anual',
+                    'filter'=>false,
+                ),
             ),
         ));
 ?>

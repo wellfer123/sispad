@@ -25,11 +25,12 @@ $('.search-form form').submit(function(){
 });
 ");
 ?>
-<?php $this->renderPartial('_search',array(
+<?php $this->renderPartial('_searchProfissional',array(
 	'model'=>$model,
         'anos'=>$anos,
         'unidades'=>$unidades,
         'relatorio'=>$relatorio,
+        'profissionais'=>$profissionais,
 )); ?>
 
 <?php
@@ -38,6 +39,11 @@ $('.search-form form').submit(function(){
             'id' => 'producao-mensal-grid',
             'dataProvider' => $dataProvider,
             'columns' => array(
+                array(
+                    'header'=>'Profissional',
+                    'value'=>'$data->profissional',
+                    'filter'=>false,
+                ),
                 array(
                     'header'=>'Grupo',
                     'value'=>'$data->grupo',
@@ -119,7 +125,7 @@ $('.search-form form').submit(function(){
     $this->Widget('ext.highcharts.HighchartsWidget', array(
    'options'=>array(
       'chart'=>array('type'=>'column'),
-      'title' => array('text' => 'Grupos'),
+      'title' => array('text' => 'Profissionais/Grupos'),
       'xAxis' => array(
          'categories' => array('Jan', 'Fev', 'Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez')
       ),
