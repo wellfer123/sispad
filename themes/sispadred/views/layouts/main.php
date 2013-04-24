@@ -38,10 +38,12 @@
               
                 //$roles = $this->getState("roles");
                  $gestor_visible= false;
+                 //pega todos os papeis daquele profissional
                  $roles =  Yii::app()->user->getState(UserIdentity::ROLES);
                  if($roles!=null){
                     foreach($roles as $n=>$role)
                     {
+                            //verifica se ele possui o papel de gestor
                             if($n==UserIdentity::ROLE_GESTOR){
                                 $gestor_visible = true;
 
@@ -50,8 +52,8 @@
                  }
                 $menuGestor=array();
                 
-                    //$servidor=$this->getServidor();
-                    $menuGestor=array("url" => array(),
+                //$servidor=$this->getServidor();
+                $menuGestor=array("url" => array(),
                             "label" => "Gestor",
                             array("url" => array("route" => "/producaoDiaria/send"), "label" => "Enviar Produção Diária"),
                             array("url" => array("route" => "/producaoDiaria/adminGestor"), "label" => "Consultar Histórico"),
@@ -81,6 +83,7 @@
                         array("url" => array(),
                             "label" => "Cadastro",
                             array("url" => array("route" => "/cargo/create"), "label" => "Cargo"),
+                            array("url" => array("route" => "/grupo/create"), "label" => "Grupo"),
                             array("url" => array("route" => "/competencia/create"), "label" => "Competências"),
                             array("url" => array("route" => "/departamento/create"), "label" => "Departamento"),
                             array("url" => array("route" => "/Setor/create"), "label" => "Setor"),

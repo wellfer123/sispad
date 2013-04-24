@@ -1,6 +1,6 @@
 <?php
 
-class UnidadeGrupoController extends SISPADBaseController
+class EspecialidadeGrupoController extends SISPADBaseController
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -51,7 +51,7 @@ class UnidadeGrupoController extends SISPADBaseController
 	 */
 	public function actionView()
 	{
-                $this->CheckAcessAction();
+                //$this->CheckAcessAction();
 		$this->render('view',array(
 			'model'=>$this->loadModel(),
 		));
@@ -63,17 +63,17 @@ class UnidadeGrupoController extends SISPADBaseController
 	 */
 	public function actionCreate()
 	{
-                $this->CheckAcessAction();
-		$model=new UnidadeGrupo('create');
+                //$this->CheckAcessAction();
+		$model=new EspecialidadeGrupo('create');
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['UnidadeGrupo']))
+		if(isset($_POST['EspecialidadeGrupo']))
 		{
-			$model->attributes=$_POST['UnidadeGrupo'];
+			$model->attributes=$_POST['EspecialidadeGrupo'];
 			if($model->save())
-				$this->redirect(array('view','unidade_cnes'=>$model->unidade_cnes,'grupo_codigo'=>$model->grupo_codigo));
+				$this->redirect(array('view','profissao_codigo'=>$model->profissao_codigo,'grupo_codigo'=>$model->grupo_codigo));
 		}
 
 		$this->render('create',array(
@@ -88,17 +88,17 @@ class UnidadeGrupoController extends SISPADBaseController
 	 */
 	public function actionUpdate()
 	{
-                $this->CheckAcessAction();
+                //$this->CheckAcessAction();
 		$model=$this->loadModel();
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['UnidadeGrupo']))
+		if(isset($_POST['EspecialidadeGrupo']))
 		{
-			$model->attributes=$_POST['UnidadeGrupo'];
+			$model->attributes=$_POST['EspecialidadeGrupo'];
 			if($model->save())
-				$this->redirect(array('view','unidade_cnes'=>$model->unidade_cnes,'grupo_codigo'=>$model->grupo_codigo));
+				$this->redirect(array('view','profissao_codigo'=>$model->profissao_codigo,'grupo_codigo'=>$model->grupo_codigo));
 		}
 
 		$this->render('update',array(
@@ -114,7 +114,7 @@ class UnidadeGrupoController extends SISPADBaseController
 	public function actionDelete()
 	{
                 
-                $this->CheckAcessAction();
+               // $this->CheckAcessAction();
 		$this->loadModel()->delete();
 
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
@@ -127,8 +127,8 @@ class UnidadeGrupoController extends SISPADBaseController
 	 */
 	public function actionIndex()
 	{
-                $this->CheckAcessAction();
-		$dataProvider=new CActiveDataProvider('UnidadeGrupo');
+                //$this->CheckAcessAction();
+		$dataProvider=new CActiveDataProvider('EspecialidadeGrupo');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
@@ -139,11 +139,11 @@ class UnidadeGrupoController extends SISPADBaseController
 	 */
 	public function actionAdmin()
 	{
-                $this->CheckAcessAction();
-		$model=new UnidadeGrupo('search');
+                //$this->CheckAcessAction();
+		$model=new EspecialidadeGrupo('search');
 		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['UnidadeGrupo']))
-			$model->attributes=$_GET['UnidadeGrupo'];
+		if(isset($_GET['EspecialidadeGrupo']))
+			$model->attributes=$_GET['EspecialidadeGrupo'];
 
 		$this->render('admin',array(
 			'model'=>$model,
@@ -154,14 +154,14 @@ class UnidadeGrupoController extends SISPADBaseController
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.
 	 * @param integer $id the ID of the model to be loaded
-	 * @return UnidadeGrupo the loaded model
+	 * @return EspecialidadeGrupo the loaded model
 	 * @throws CHttpException
 	 */
 	public function loadModel()
 	{
                 $model = null;
-                if(isset($_GET['unidade_cnes']) and isset($_GET['grupo_codigo'])){
-                    $model=UnidadeGrupo::model()->findByPk(array('unidade_cnes'=>$_GET['unidade_cnes'],'grupo_codigo'=>$_GET['grupo_codigo']));
+                if(isset($_GET['profissao_codigo']) and isset($_GET['grupo_codigo'])){
+                    $model=EspecialidadeGrupo::model()->findByPk(array('profissao_codigo'=>$_GET['profissao_codigo'],'grupo_codigo'=>$_GET['grupo_codigo']));
                 }
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
@@ -170,11 +170,11 @@ class UnidadeGrupoController extends SISPADBaseController
 
 	/**
 	 * Performs the AJAX validation.
-	 * @param UnidadeGrupo $model the model to be validated
+	 * @param EspecialidadeGrupo $model the model to be validated
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='unidade-grupo-form')
+		if(isset($_POST['ajax']) && $_POST['ajax']==='especialidade-grupo-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
@@ -182,6 +182,6 @@ class UnidadeGrupoController extends SISPADBaseController
 	}
 
     protected function getModelName() {
-        return 'UnidadeGrupo';
+        return 'EspecialidadeGrupo';
     }
 }

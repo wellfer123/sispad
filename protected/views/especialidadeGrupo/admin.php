@@ -1,13 +1,13 @@
 <?php
-/* @var $this UnidadeGrupoController */
-/* @var $model UnidadeGrupo */
+/* @var $this EspecialidadeGrupoController */
+/* @var $model EspecialidadeGrupo */
 
 $this->breadcrumbs=array(
-	'Unidade Grupo',
+	'Especialidade Grupo',
 );
 
 $this->menu=array(
-	array('label'=>'Cadastrar Unidade/Grupo', 'url'=>array('create')),
+	array('label'=>'Cadastrar Especialidade/Grupo', 'url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -16,7 +16,7 @@ $('.search-button').click(function(){
 	return false;
 });
 $('.search-form form').submit(function(){
-	$('#unidade-grupo-grid').yiiGridView('update', {
+	$('#especialidade-grupo-grid').yiiGridView('update', {
 		data: $(this).serialize()
 	});
 	return false;
@@ -24,7 +24,7 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Gerenciar Unidade Grupo</h1>
+<h1>Gerenciar Especialidade Grupo</h1>
 
 
 <?php echo CHtml::link('Busca Avançada','#',array('class'=>'search-button')); ?>
@@ -35,14 +35,14 @@ $('.search-form form').submit(function(){
 </div><!-- search-form -->
 
 <?php $this->widget('zii.widgets.grid.CGridView', array(
-	'id'=>'unidade-grupo-grid',
+	'id'=>'especialidade-grupo-grid',
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
 	'columns'=>array(
 		
                 array(
-                    'header'=>'Unidade',
-                    'value'=>'$data->unidade->nome'
+                    'header'=>'Especialidade',
+                    'value'=>'$data->especialidade->nome'
                 ),
                 array(
                     'header'=>'Grupo',
@@ -54,15 +54,15 @@ $('.search-form form').submit(function(){
                          'buttons'=>array(
                                         'update'=>array(
                                                        'visible'=>'true',
-                                                       'url'=> 'Yii::app()->createUrl("/unidadeGrupo/update",array("unidade_cnes"=>$data->unidade_cnes,"grupo_codigo"=>$data->grupo_codigo))',
+                                                       'url'=> 'Yii::app()->createUrl("/especialidadeGrupo/update",array("profissao_codigo"=>$data->profissao_codigo,"grupo_codigo"=>$data->grupo_codigo))',
                                                 ),
                                         'view'=>array(
                                                         'visible'=>'true',
-                                                        'url'=> 'Yii::app()->createUrl("/unidadeGrupo/view",array("unidade_cnes"=>$data->unidade_cnes,"grupo_codigo"=>$data->grupo_codigo))',
+                                                        'url'=> 'Yii::app()->createUrl("/especialidadeGrupo/view",array("profissao_codigo"=>$data->profissao_codigo,"grupo_codigo"=>$data->grupo_codigo))',
                                                 ),  
                                         'delete'=>array(
                                                         'visible'=>'true',
-                                                         'url'=> 'Yii::app()->createUrl("/unidadeGrupo/delete",array("unidade_cnes"=>$data->unidade_cnes,"grupo_codigo"=>$data->grupo_codigo))',
+                                                         'url'=> 'Yii::app()->createUrl("/especialidadeGrupo/delete",array("profissao_codigo"=>$data->profissao_codigo,"grupo_codigo"=>$data->grupo_codigo))',
                                                 ),
                                         
                         ),

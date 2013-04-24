@@ -1,6 +1,6 @@
 <?php
 
-class GrupoController extends Controller
+class GrupoController extends SISPADBaseController
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -200,5 +200,9 @@ class GrupoController extends Controller
                 Yii::app()->end();
            }
        }
+    }
+
+    protected function getModelName() {
+        return "Grupo";
     }
 }

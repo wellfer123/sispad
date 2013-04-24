@@ -52,6 +52,7 @@ class Profissao extends CActiveRecord
                     'indicador'=>array(self::HAS_MANY,'Indicador','profissao_codigo'),
                     'dadosTrabalho'=>array(self::HAS_MANY,'DadosTrabalho','profissao_codigo'),
                     'profissionalVinculo' => array(self::HAS_MANY, 'ProfissionalVinculo', 'codigo_profissao'),
+                    'grupos' => array(self::MANY_MANY, 'Grupo', 'especialidade_grupo(profissao_codigo,grupo_codigo)'),
 		);
 	}
 

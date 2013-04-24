@@ -106,32 +106,39 @@ $('.search-form form').submit(function(){
                     'filter'=>false,
                 ),
                 
-                array(
-                    'header'=>'Anual',
-                    'value'=>'$data->anual',
-                    'filter'=>false,
-                ),
+//                array(
+//                    'header'=>'Anual',
+//                    'value'=>'$data->anual',
+//                    'filter'=>false,
+//                ),
             ),
         ));
 ?>
 
 <?php 
 
-     $labels=array('jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez','anual');
+     $labels=array('jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez');
     $this->Widget('ext.highcharts.HighchartsWidget', array(
    'options'=>array(
       'chart'=>array('type'=>'column'),
       'title' => array('text' => 'Especialidades'),
       'xAxis' => array(
-         'categories' => array('Jan', 'Fev', 'Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez','Anual')
+         'categories' => array('Jan', 'Fev', 'Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez')
       ),
       'yAxis' => array(
          'title' => array('text' => 'Quantidade Executada')
       ),
+      'plotOptions'=>array(
+                        'series'=>array(
+                                'dataLabels'=>array(
+                                    'enabled'=>true,
+                                ),
+                        ),
+       ), 
        'labels'=>array('rotation'=>-45,
                         'align'=>'right'
                       ),
-      'series' =>HighChartsUtil::getSeriesCharts($dataProvider,'especialidade',$labels),//array(
+      'series' =>HighChartsUtil::getSeriesCharts($dataProvider,'especialidade',$labels,false),//array(
          //array('name' => 'MEDICO GINECOLOGISTA E OBSTETRA', 'data' => array(0, 0,0,191,0,0,0,0,0,0,0,0,191)),
          //array('name' => 'MEDICO CLINICO', 'data' => array(10, 10,10,10,0,0,0,0,0,0,0,0,191)),
          //array('name' => 'John', 'data' => array(5, 7, 3))
