@@ -136,7 +136,8 @@ class ProducaoDiariaController extends SISPADBaseController {
         //pega todas as unidades
         $unidades = CHtml::listData(Unidade::findAllTemGestor(), 'cnes', 'nome');
         $especialidades = CHtml::listData($this->getEspecialidades(), 'codigo', 'nome');
-
+        $grupos =  CHtml::listData($this->getGrupos(), 'codigo', 'nome');
+        
         $model = new ProducaoDiaria('search');
         $model->unsetAttributes();  // clear any default values
         if (isset($_GET['ProducaoDiaria'])) {
@@ -147,6 +148,7 @@ class ProducaoDiariaController extends SISPADBaseController {
             'model' => $model,
             'unidades' => $unidades,
             'especialidades' => $especialidades,
+            'grupos'=> $grupos,
         ));
     }
 
@@ -179,7 +181,8 @@ class ProducaoDiariaController extends SISPADBaseController {
         $unidades = CHtml::listData($this->getUnidades($this->getServidor()), 'cnes', 'nome');
         //pega as especialidades
         $especialidades = CHtml::listData($this->getEspecialidades(), 'codigo', 'nome');
-
+        $grupos =  CHtml::listData($this->getGrupos(), 'codigo', 'nome');
+        
         $model = new ProducaoDiaria('search');
         $model->unsetAttributes();  // clear any default values
         if (isset($_GET['ProducaoDiaria'])) {
@@ -191,6 +194,7 @@ class ProducaoDiariaController extends SISPADBaseController {
             'model' => $model,
             'unidades' => $unidades,
             'especialidades' => $especialidades,
+            'grupos'=> $grupos,
         ));
     }
 
@@ -200,9 +204,12 @@ class ProducaoDiariaController extends SISPADBaseController {
      */
     public function actionAdminSuper() {
         //SOMENTE O ADMINISTRADOR DO SISTEMA PODE VISUALIZAR ESTA VIEW
-        //$this->_RBAC->checkAccess('admin', true);
+        $this->_RBAC->checkAccess('admin', true);
+        $this->layout = '//layouts/column1';
+        
         $unidades = CHtml::listData(Unidade::findAllTemGestor(), 'cnes', 'nome');
         $especialidades = CHtml::listData($this->getEspecialidades(), 'codigo', 'nome');
+        $grupos =  CHtml::listData($this->getGrupos(), 'codigo', 'nome');
 
         $model = new ProducaoDiaria('search');
         $model->unsetAttributes();  // clear any default values
@@ -214,11 +221,12 @@ class ProducaoDiariaController extends SISPADBaseController {
             'model' => $model,
             'unidades' => $unidades,
             'especialidades' => $especialidades,
+            'grupos'=> $grupos,
         ));
     }
 
     public function actionMonthEspecialidade() {
-        //$this->CheckAcessAction();
+        $this->CheckAcessAction();
         $this->layout = '//layouts/column1';
 
         $unidades = CHtml::listData(Unidade::findAllTemGestor(), 'cnes', 'nome');
@@ -240,7 +248,7 @@ class ProducaoDiariaController extends SISPADBaseController {
     }
 
     public function actionMonthGrupo() {
-        //$this->CheckAcessAction();
+        $this->CheckAcessAction();
         $this->layout = '//layouts/column1';
 
         $unidades = CHtml::listData(Unidade::findAllTemGestor(), 'cnes', 'nome');
