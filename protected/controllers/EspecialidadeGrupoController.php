@@ -68,12 +68,22 @@ class EspecialidadeGrupoController extends SISPADBaseController
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
-
+                
+                
+                if(Yii::app()->user->getState('especialidade')!=null){
+                    //pega o valor do último codigo da especialidade digitada
+                    $model->profissao_codigo = Yii::app()->user->getState('especialidade');
+                    //após isso apaga o valor da especialidade da sessao
+                    Yii::app()->user->setState('especialidade',null);
+                }
 		if(isset($_POST['EspecialidadeGrupo']))
 		{
 			$model->attributes=$_POST['EspecialidadeGrupo'];
-			if($model->save())
-				$this->redirect(array('view','profissao_codigo'=>$model->profissao_codigo,'grupo_codigo'=>$model->grupo_codigo));
+			if($model->save()){
+                                //guarda o codigo da especialidade que acabou de ser digitada em sessao
+                                Yii::app()->user->setState('especialidade',$model->profissao_codigo);
+				$this->redirect(array('create'));
+                        }
 		}
 
 		$this->render('create',array(
