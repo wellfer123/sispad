@@ -22,9 +22,7 @@ $this->menu=array(
                                 array(
                                     'model'=>$model,
                                     'unidades'=>$unidades,
-                                    'grupos' =>$grupos,
                                     'observacoes'=>$observacoes,
-                                    'profissionais'=>$profissionais,
                                     'especialidades'=>$especialidades,
                                     'servidor'=>$servidor)); ?>
 <div id="producoes">

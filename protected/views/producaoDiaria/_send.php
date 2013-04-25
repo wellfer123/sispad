@@ -16,7 +16,23 @@
         
         <?php echo $this->renderMessages(); ?>
 	<?php echo $form->errorSummary($model); ?>
+<?php 
+//requisita os grupos após a especialidade ser escolhida
+$script="$('body').on('change','#".CHtml::activeId($model, 'profissao_codigo')."',function(){
+            jQuery.ajax(
+                    {'type':'POST',
+                    'url':'".Yii::app()->createAbsoluteUrl('producaoDiaria/findGrupos')."',
+                    'data':{cbo: $(this).val()},
+                    'cache':false,
+                    'success':function(html){
+                        jQuery('#".CHtml::activeId($model, 'grupo_codigo')."').html(html)
+                        }
+                    });
+                    return false;});";
 
+Yii::app()->clientScript->registerScript('teste',$script,  CClientScript::POS_END);
+
+?>
 <table>
     <tbody>
         <tr>
@@ -34,7 +50,7 @@
             </td>
             <td colspan="2">
 		<?php echo CHtml::activeLabel($model, 'servidor_cpf'); ?>
-		<?php echo CHtml::textField('gestor_nome', $servidor->nome,array('size'=>60,'readOnly'=>true)) ?>
+		<?php echo CHtml::textField('gestor_nome', $servidor->nome,array('size'=>50,'readOnly'=>true)) ?>
                 <?php echo CHtml::error($model, 'servidor_cpf') ; ?>
                 <?php echo CHtml::activeHiddenField($model, 'servidor_cpf'); ?>
             </td>
@@ -57,14 +73,14 @@
             </td>
             <td colspan="2">
                 <?php echo CHtml::activeLabel($model, 'profissional_cpf'); ?>
-		<?php echo CHtml::activeDropDownList($model, 'profissional_cpf',  CHtml::listData($profissionais, 'cpf', 'servidor.nome')); ?>
+		<?php echo CHtml::activeDropDownList($model, 'profissional_cpf', array() ,array('empty'=>'Selecione um profissional')); ?>
                 <?php echo CHtml::error($model, 'profissional_cpf') ; ?>
             </td>
         </tr>
         <tr>
             <td colspan="3">
                 <?php echo CHtml::activeLabel($model, 'grupo_codigo'); ?>
-		<?php echo CHtml::activeDropDownList($model, 'grupo_codigo',  CHtml::listData($grupos,'codigo','nome'),array('empty'=>'Selecione um grupo')); ?>
+		<?php echo CHtml::activeDropDownList($model, 'grupo_codigo',  array(),array('empty'=>'Selecione um grupo')); ?>
                 <?php echo CHtml::error($model, 'grupo_codigo') ; ?>
             </td>
         </tr>
