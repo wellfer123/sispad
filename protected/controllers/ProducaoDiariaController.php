@@ -174,7 +174,23 @@ class ProducaoDiariaController extends SISPADBaseController {
             }
         }
     }
+    
+    public function actionFindProfissionaisPorUnidade() {
+        $cnes = null;
+        if (isset($_POST['cnes'])) {
+            $cnes = $_POST['cnes'];
+        }
+            $pro = $this->getAllProfissionais($cnes);
+            //insere no inicio do array a mensagem padrao 'TODOS OS PROFISSIONAIS' com o cpf vazio
+            array_unshift($pro,array('cpf'=>'','servidor'=>array('nome'=>'TODOS OS PROFISSIONAIS')));
+            $data = CHtml::listData($pro, 'cpf', 'servidor.nome');
+            //print_r($pro);
+            foreach ($data as $value => $name) {
 
+                echo CHtml::tag('option', array('value' => $value), CHtml::encode($name), true);
+            }
+        //}
+    }
     public function actionAdminGestor() {
         $this->CheckAcessAction();
         //pega as unidades que o usuário é gestor
@@ -264,9 +280,63 @@ class ProducaoDiariaController extends SISPADBaseController {
             //filtro pelo ano atual
             $model->ano = Date('Y');
         }
+        //nome da action que será usada para gerar o relatorio em excel
         $relatorio = 'relatorioMonthGrupo';
         $this->render('monthGrupo', array('model' => $model, 'unidades' => $unidades, 'anos' => $this->getAnos(),'relatorio'=>$relatorio));
     }
+    
+       public function actionMonthProfissional() {
+        $this->CheckAcessAction();
+        $this->layout = '//layouts/column1';
+
+        
+
+        $model = new ProducaoMensalProfissionalModel('search');
+        $model->unsetAttributes();
+        
+        if (isset($_GET['ProducaoMensalProfissionalModel'])) {
+            $model->attributes = $_GET['ProducaoMensalProfissionalModel'];
+        }
+        
+        $unidades = CHtml::listData(Unidade::findAllTemGestor(), 'cnes', 'nome');
+        $profissionais = $this->getAllProfissionais($model->unidade);
+        
+        //verifica se o parâmetro ano foi passado
+        if ($model->ano == null){
+            //filtro pelo ano atual
+            $model->ano = Date('Y');
+        }
+        //nome da action que será usada para gerar o relatorio em excel
+        $relatorio = 'relatorioMonthProfissional';
+        $this->render('monthProfissional', array('model' => $model, 'unidades' => $unidades,'profissionais'=>$profissionais,'anos' => $this->getAnos(),'relatorio'=>$relatorio));
+    }
+
+public function actionMonthEspecialidadeGrupo() {
+        $this->CheckAcessAction();
+        $this->layout = '//layouts/column1';
+
+        
+
+        $model = new ProducaoMensalEspecialidadeGrupoModel('search');
+        $model->unsetAttributes();
+        
+        if (isset($_GET['ProducaoMensalEspecialidadeGrupoModel'])) {
+            $model->attributes = $_GET['ProducaoMensalEspecialidadeGrupoModel'];
+        }
+        
+        $unidades = CHtml::listData(Unidade::findAllTemGestor(), 'cnes', 'nome');
+        $especialidades = $this->getEspecialidades();
+        
+        //verifica se o parâmetro ano foi passado
+        if ($model->ano == null){
+            //filtro pelo ano atual
+            $model->ano = Date('Y');
+        }
+        //nome da action que será usada para gerar o relatorio em excel
+        $relatorio = 'relatorioMonthEspecialidadeGrupo';
+        $this->render('monthEspecialidadeGrupo', array('model' => $model, 'unidades' => $unidades,'especialidades'=>$especialidades,'anos' => $this->getAnos(),'relatorio'=>$relatorio));
+    }
+
 
     /**
      * Returns the data model based on the primary key given in the GET variable.
@@ -364,6 +434,28 @@ class ProducaoDiariaController extends SISPADBaseController {
             $criteria->condition = 'pv.ativo=:status AND pv.unidade_cnes=:cnes AND pv.codigo_profissao=:cbo';
         } else {
             $criteria->condition = 'pv.ativo=:status AND pv.unidade_cnes=:cnes';
+        }
+        $criteria->params = $params;
+        $criteria->order = 'servidor.nome';
+        //pega os dados para preencher o combobox
+        return $profi = ProfissionalVinculo::model()->with('servidor')->findAll($criteria);
+    }
+    
+    
+    public function getAllProfissionais($cnes=null, $cbo = null) {
+        //pega os profissionais da unidade  
+        $criteria = new CDbCriteria();
+
+        $criteria->alias = 'pv';
+        $params = array(':cnes' => $cnes, ':status' => ProfissionalVinculo::ATIVO);
+        if ($cbo != null) {
+            $params[':cbo'] = $cbo;
+            $criteria->condition = 'pv.ativo=:status AND pv.unidade_cnes=:cnes AND pv.codigo_profissao=:cbo';
+        } else{ 
+            if($cnes!=null){
+                $criteria->condition = 'pv.ativo=:status AND pv.unidade_cnes=:cnes';
+            }
+        
         }
         $criteria->params = $params;
         $criteria->order = 'servidor.nome';
@@ -603,6 +695,184 @@ class ProducaoDiariaController extends SISPADBaseController {
         ));
         Yii::app()->end();
     }    
+    
+    public function actionRelatorioMonthProfissional() {
+       $model = new ProducaoMensalProfissionalModel('search');
+       $model->unsetAttributes();
+        
+        if (isset($_GET['ProducaoMensalProfissionalModel'])) {
+            $model->attributes = $_GET['ProducaoMensalProfissionalModel'];
+        }
+        //verifica se o parâmetro ano foi passado
+        if ($model->ano == null){
+            //filtro pelo ano atual
+            $model->ano = Date('Y');
+        }
+        
+        
+        
+        $columns = array(
+            array(
+                'name' => 'profissional',
+                'header' => 'Profissional',
+               
+            ),
+            array(
+                'name' => 'grupo',
+                'header' => 'Grupo',
+               
+            ),
+            array(
+                'name' => 'jan',
+                'header' => 'Jan',
+            ),
+            array(
+                'name' => 'fev',
+                'header' => 'Fev',
+            ),
+            array(
+                'name' => 'mar',
+                'header' => 'Mar',
+            ),
+            array(
+                'name' => 'abr',
+                'header' => 'Abr',
+            ),
+            array(
+                'name' => 'mai',
+                'header' => 'Mai',
+            ),
+            array(
+                'name' => 'jun',
+                'header' => 'Jun',
+            ),
+            array(
+                'name' => 'jul',
+                'header' => 'Jul',
+            ),
+            array(
+                'name' => 'ago',
+                'header' => 'Ago',
+            ),
+            array(
+                'name' => 'set',
+                'header' => 'Set',
+            ),
+            array(
+                'name' => 'out',
+                'header' => 'Out',
+            ),
+            array(
+                'name' => 'nov',
+                'header' => 'Nov',
+            ),
+            array(
+                'name' => 'dez',
+                'header' => 'Dez',
+            ),
+            array(
+                'name' => 'anual',
+                'header' => 'Anual',
+            ),
+        );
+        
+        $this->widget('application.extensions.phpexcel.EExcelView', array('dataProvider' => $model->search(),
+            'title' => 'profissionais'.date('Y-m-d h:i:s'),
+            'grid_mode' => 'export',
+            'exportType' => 'Excel2007',
+            'columns'=>$columns,
+        ));
+        Yii::app()->end();
+    } 
+    
+     public function actionRelatorioMonthEspecialidadeGrupo() {
+       $model = new ProducaoMensalEspecialidadeGrupoModel('search');
+       $model->unsetAttributes();
+        
+        if (isset($_GET['ProducaoMensalEspecialidadeGrupoModel'])) {
+            $model->attributes = $_GET['ProducaoMensalEspecialidadeGrupoModel'];
+        }
+        //verifica se o parâmetro ano foi passado
+        if ($model->ano == null){
+            //filtro pelo ano atual
+            $model->ano = Date('Y');
+        }
+        
+        
+        
+        $columns = array(
+            array(
+                'name' => 'especialidade',
+                'header' => 'especialidade',
+               
+            ),
+            array(
+                'name' => 'grupo',
+                'header' => 'Grupo',
+               
+            ),
+            array(
+                'name' => 'jan',
+                'header' => 'Jan',
+            ),
+            array(
+                'name' => 'fev',
+                'header' => 'Fev',
+            ),
+            array(
+                'name' => 'mar',
+                'header' => 'Mar',
+            ),
+            array(
+                'name' => 'abr',
+                'header' => 'Abr',
+            ),
+            array(
+                'name' => 'mai',
+                'header' => 'Mai',
+            ),
+            array(
+                'name' => 'jun',
+                'header' => 'Jun',
+            ),
+            array(
+                'name' => 'jul',
+                'header' => 'Jul',
+            ),
+            array(
+                'name' => 'ago',
+                'header' => 'Ago',
+            ),
+            array(
+                'name' => 'set',
+                'header' => 'Set',
+            ),
+            array(
+                'name' => 'out',
+                'header' => 'Out',
+            ),
+            array(
+                'name' => 'nov',
+                'header' => 'Nov',
+            ),
+            array(
+                'name' => 'dez',
+                'header' => 'Dez',
+            ),
+            array(
+                'name' => 'anual',
+                'header' => 'Anual',
+            ),
+        );
+        
+        $this->widget('application.extensions.phpexcel.EExcelView', array('dataProvider' => $model->search(),
+            'title' => 'especiaGrupos'.date('Y-m-d h:i:s'),
+            'grid_mode' => 'export',
+            'exportType' => 'Excel2007',
+            'columns'=>$columns,
+        ));
+        Yii::app()->end();
+    } 
     
     
   

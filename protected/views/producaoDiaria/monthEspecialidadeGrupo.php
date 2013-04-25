@@ -25,24 +25,28 @@ $('.search-form form').submit(function(){
 });
 ");
 ?>
-
-
-<?php $this->renderPartial('_search',array(
+<?php $this->renderPartial('_searchEspecialidadeGrupo',array(
 	'model'=>$model,
         'anos'=>$anos,
         'unidades'=>$unidades,
         'relatorio'=>$relatorio,
+        'especialidades'=>$especialidades,
 )); ?>
 
 <?php
         $dataProvider = $model->search();
         $this->widget('zii.widgets.grid.CGridView', array(
             'id' => 'producao-mensal-grid',
-            'dataProvider' =>$dataProvider,
+            'dataProvider' => $dataProvider,
             'columns' => array(
                 array(
                     'header'=>'Especialidade',
                     'value'=>'$data->especialidade',
+                    'filter'=>false,
+                ),
+                array(
+                    'header'=>'Grupo',
+                    'value'=>'$data->grupo',
                     'filter'=>false,
                 ),
                 array(
@@ -104,11 +108,6 @@ $('.search-form form').submit(function(){
                     'header'=>'Dez',
                     'value'=>'$data->dez',
                     'filter'=>false,
-                ),             
-                array(
-                    'header'=>'Anual',
-                    'value'=>'$data->anual',
-                    'filter'=>false,
                 ),
                 
                 array(
@@ -126,7 +125,7 @@ $('.search-form form').submit(function(){
     $this->Widget('ext.highcharts.HighchartsWidget', array(
    'options'=>array(
       'chart'=>array('type'=>'column'),
-      'title' => array('text' => 'Especialidades'),
+      'title' => array('text' => 'Especialidade/Grupo'),
       'xAxis' => array(
          'categories' => array('Jan', 'Fev', 'Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez')
       ),
@@ -139,14 +138,15 @@ $('.search-form form').submit(function(){
                                     'enabled'=>true,
                                 ),
                         ),
-       ), 
+       ),
        'labels'=>array('rotation'=>-45,
                         'align'=>'right'
                       ),
-      'series' =>HighChartsUtil::getSeriesCharts($dataProvider,'especialidade',$labels,false),//array(
+      'series' =>HighChartsUtil::getSeriesCharts($dataProvider,'grupo',$labels,false),//array(
          //array('name' => 'MEDICO GINECOLOGISTA E OBSTETRA', 'data' => array(0, 0,0,191,0,0,0,0,0,0,0,0,191)),
          //array('name' => 'MEDICO CLINICO', 'data' => array(10, 10,10,10,0,0,0,0,0,0,0,0,191)),
          //array('name' => 'John', 'data' => array(5, 7, 3))
       //)
    )
 ));?>
+

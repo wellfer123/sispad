@@ -10,6 +10,7 @@ return array(
 	'name'=>'SISPAD',
         'language'=>'pt_br',
          'theme'=>'sispadred',
+         'language' => 'pt_br',
 
 	// preloading 'log' component
 	'preload'=>array('log'),
