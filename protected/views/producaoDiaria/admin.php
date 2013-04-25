@@ -9,6 +9,8 @@ $this->breadcrumbs=array(
 $this->menu=array(
 	array('label'=>'Relatório Por Grupo', 'url'=>array('monthGrupo')),
         array('label'=>'Relatório Por Especialidade', 'url'=>array('monthEspecialidade')),
+        array('label'=>'Relatório Por Profissional', 'url'=>array('monthProfissional')),
+        array('label'=>'Relatório Especialidade->Grupos', 'url'=>array('monthEspecialidadeGrupo')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
