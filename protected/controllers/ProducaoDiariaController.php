@@ -61,7 +61,6 @@ class ProducaoDiariaController extends SISPADBaseController {
                 $model = new ProducaoDiaria;
                 $data = Date('d/m/Y');
                 $model->data = $data;
-
                 if (isset($_POST['ProducaoDiaria'])) { //verifica se existe uma requisição post
                     //popula o modelo
                     $model->attributes = $_POST['ProducaoDiaria'];
@@ -73,6 +72,7 @@ class ProducaoDiariaController extends SISPADBaseController {
                                 $data=$model->data;
                                 $model->data = ParserDate::inverteDataPtToEn($model->data);
                                 if ($model->save()) { //salvou com sucesso, cria um novo modelo
+                                    //pega os valores antigos
                                     $model = new ProducaoDiaria;
                                     $model->data = $data;
                                     //salvou com sucesso a produção
@@ -93,20 +93,16 @@ class ProducaoDiariaController extends SISPADBaseController {
                 //coloca os valores que são administrados pelo sistema
                 $model->servidor_cpf = $servidor->cpf;
                 $model->unidade_cnes = $cnes;
+                
                 //pega os profissionais da unidade  
-                $profissionais = $this->getProfissionais($cnes, $especialidades[0]->codigo);
                 $observacoes = Observacao::model()->findAll();
-                //grupo 1 é inválido
-
-                $grupos = $this->getGrupos();
+                
                 //renderiza a página
                 $this->render('send', array(
                     'model' => $model,
                     'data' => $data,
                     'observacoes' => $observacoes,
                     'unidades' => $unidades,
-                    'grupos' => $grupos,
-                    'profissionais' => $profissionais,
                     'especialidades' => $especialidades,
                     'servidor' => $servidor,
                 ));
@@ -167,9 +163,20 @@ class ProducaoDiariaController extends SISPADBaseController {
         if (isset($_POST['cnes']) && isset($_POST['cbo'])) {
             $pro = $this->getProfissionais($_POST['cnes'], $_POST['cbo']);
             $data = CHtml::listData($pro, 'cpf', 'servidor.nome');
-            //print_r($pro);
+            echo "<option value=''>Selecione um profissional</option>";
             foreach ($data as $value => $name) {
 
+                echo CHtml::tag('option', array('value' => $value), CHtml::encode($name), true);
+            }
+        }
+    }
+    
+     public function actionFindGrupos() {
+
+       if (isset($_POST['cbo'])) {
+            $data = CHtml::listData($this->getGrupos($_POST['cbo']), 'codigo', 'nome');
+            echo "<option value=''>Selecione um grupo</option>";
+            foreach ($data as $value => $name) {
                 echo CHtml::tag('option', array('value' => $value), CHtml::encode($name), true);
             }
         }
@@ -507,14 +514,20 @@ public function actionMonthEspecialidadeGrupo() {
     }
 
     /**
-     * 
-     * @return type
+     * Um array com Grupos
+     * @param string $cbo codigo da profissão caso exija um filtro pelas profissões
+     * @return array 
      */
-    private function getGrupos() {
+    private function getGrupos($cbo=null) {
         $criteria = new CDbCriteria();
 
         $criteria->alias = 'g';
         $criteria->order = 'g.nome';
+        if ($cbo != null){
+            $criteria->join=' INNER JOIN especialidade_grupo eg ON eg.grupo_codigo=g.codigo';
+            $criteria->condition='g.codigo <> 1 AND eg.profissao_codigo=:cbo';
+            $criteria->params=array(':cbo'=>$cbo);
+        }
         $criteria->condition = 'g.codigo <> 1';
         return Grupo::model()->findAll($criteria);
     }
