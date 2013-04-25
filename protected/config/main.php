@@ -8,6 +8,7 @@
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'name'=>'SISPAD',
+        'language'=>'pt_br',
          'theme'=>'sispadred',
 
 	// preloading 'log' component
@@ -70,9 +71,6 @@ return array(
                
                         ),
                 ),
-                'urlManager'=>array(
-                        'urlFormat'=>'path',
-                ),
 		'user'=>array(
 			// enable cookie-based authentication
 			'allowAutoLogin'=>true,
@@ -92,11 +90,9 @@ return array(
                 'logging' => true,
                 'dryRun' => false
             ),
-
-		// uncomment the following to enable URLs in path-format
-		
-		'urlManager'=>array(
+            'urlManager'=>array(
 			'urlFormat'=>'path',
+                        'class'=>'SISPADUrlManager',
 			'rules'=>array(
 				'<controller:\w+>/<id:\d+>'=>'<controller>/view',
 				'<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
@@ -113,8 +109,9 @@ return array(
 		*/
 		//169.254.18.175
 		'db'=>array(
-			//'connectionString' => 'mysql:host=localhost;dbname=sispad',
-                        'connectionString' => 'mysql:host=10.0.0.62;dbname=sispad',
+			//'connectionString' => 'mysql:host=localhost;dbname=sispad_test',
+                        'connectionString' => 'mysql:host=10.0.0.62;dbname=saudecaruaru07',
+                        //'connectionString' => 'mysql:host=10.0.0.62;dbname=sispad_teste',
 			'emulatePrepare' => true,
 			'username' => 'root',
 			'password' => '',
