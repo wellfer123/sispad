@@ -32,7 +32,13 @@ $this->menu=array(
                 ),
 		array(
 			'class'=>'CButtonColumn',
-                         'template'=>'',
+                        'template'=>'{delete}',
+                        'buttons'=>array(
+                                'delete'=>array(
+                                                'visible'=>'true',
+                                                'url'=>'Yii::app()->createUrl("/especialidadeGrupo/delete",array("profissao_codigo"=>$data->profissao_codigo,"grupo_codigo"=>$data->grupo_codigo))',
+                                ),
+                            ),
                          
 		),
 	),
