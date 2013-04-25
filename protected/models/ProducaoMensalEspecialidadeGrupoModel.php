@@ -6,15 +6,15 @@
  */
 
 /**
- * Description of ProducaoMensalProfissionalModel
+ * Description of ProducaoMensalEspecialidadeGrupoModel
  *
  * @author Júnior Pires
  */
-class ProducaoMensalProfissionalModel extends CFormModel {
+class ProducaoMensalEspecialidadeGrupoModel extends CFormModel {
 
     public $unidade;
     public $grupo;
-    public $profissional;
+    public $especialidade;
     public $jan;
     public $fev;
     public $mar;
@@ -40,7 +40,7 @@ class ProducaoMensalProfissionalModel extends CFormModel {
     
     public function rules() {
         return array(
-                    array('grupo, unidade,profissional, ano', 'safe', 'on'=>'search'),
+                    array('grupo, unidade,especialidade, ano', 'safe', 'on'=>'search'),
         );
     }
 
@@ -52,7 +52,7 @@ class ProducaoMensalProfissionalModel extends CFormModel {
             'abr' => 'Abril',
             'unidade' => 'Unidade',
             'grupo' => 'Grupo',
-            'profissional' => 'Profissional',
+            'especialidade' => 'Especialidade',
         );
     }
 
@@ -127,14 +127,14 @@ class ProducaoMensalProfissionalModel extends CFormModel {
             $where= " WHERE pd.unidade_cnes='".$this->unidade."'"; 
         }
         
-        //filtro de profissional
-        if ($this->profissional != null){
+        //filtro de especialidade
+        if ($this->especialidade != null){
             
             if ($where != null){
-                $where=$where." AND pd.profissional_cpf='".$this->profissional."'";
+                $where=$where." AND pd.profissao_codigo='".$this->especialidade."'";
             }
             else{
-               $where=" WHERE pd.profissional_cpf='".$this->profissional."'"; 
+               $where=" WHERE pd.profissao_codigo='".$this->especialidade."'"; 
             }
         }
         
@@ -151,21 +151,21 @@ class ProducaoMensalProfissionalModel extends CFormModel {
         }
         
         
-        $query = "SELECT pd.unidade_cnes AS 'cnes', gr.codigo AS grupo_cod, gr.nome AS grupo,serv.nome As profissional,pd.profissional_cpf As profissional_cpf, month(data) AS mes, SUM(quantidade) AS quantidade FROM producao_diaria pd ";
+        $query = "SELECT pd.unidade_cnes AS 'cnes', gr.codigo AS grupo_cod, gr.nome AS grupo,prof.nome as especialidade,pd.profissao_codigo As especialidade_codigo, month(data) AS mes, SUM(quantidade) AS quantidade FROM producao_diaria pd ";
         $query = $query . ' INNER JOIN grupo gr ON gr.codigo=pd.grupo_codigo ';
-        $query = $query . ' INNER JOIN servidor serv ON serv.cpf=pd.profissional_cpf';
+        $query = $query . ' INNER JOIN profissao prof ON prof.codigo=pd.profissao_codigo';
         //$query = $query . ' INNER JOIN unidade uni ON uni.cnes=pd.unidade_cnes';
         //clausula where
         if ($where != NULL){
             $query=$query.$where;
         }
         
-        $query = $query . ' GROUP BY  profissional_cpf,grupo_codigo,month(data) ';
-        $query = $query . ' ORDER BY serv.nome,gr.nome, month(data) ';
+        $query = $query . ' GROUP BY  especialidade_codigo,grupo_codigo,month(data) ';
+        $query = $query . ' ORDER BY prof.nome,gr.nome, month(data) ';
 
         $rows = Yii::app()->db->createCommand($query)->queryAll(); 
         $mes = null;
-        $profissional = null;
+        $especialidade = null;
         $grupo = null;
         $list = array();
         $producaoMensal = null;
@@ -174,25 +174,25 @@ class ProducaoMensalProfissionalModel extends CFormModel {
         foreach ($rows as $key => $row) {
 
             //variáveis locais
-            $prod = new ProducaoMensalProfissionalModel;
-            $prod->profissional = $row['profissional_cpf'];
+            $prod = new ProducaoMensalEspecialidadeGrupoModel;
+            $prod->especialidade = $row['especialidade_codigo'];
             $prod->grupo = $row['grupo_cod'];
             $m = $row['mes'];
 
-            //mudou de grupo, então é um novo registro
-            if ( $profissional != $prod->profissional || $grupo!=$prod->grupo) {
+            //mudou de grupo ou de especialidade, então é um novo registro
+            if ( $especialidade != $prod->especialidade  || $grupo!=$prod->grupo) {
                 //um novo modelo deve ser instanciado e o antigo deve ser armazenado no vetor
                 if (!$primeiraVez) {
                     $producaoMensal->fillAttributes();
                     $list[] = $producaoMensal;
                 }
                 //popula o model
-                $producaoMensal = new ProducaoMensalProfissionalModel();
+                $producaoMensal = new ProducaoMensalespecialidadeGrupoModel();
                 $producaoMensal->grupo = $row['grupo'];
-                $producaoMensal->profissional = $row['profissional'];
+                $producaoMensal->especialidade = $row['especialidade'];
 
                 //guarda os valores atuais  
-                $profissional = $prod->profissional;
+                $especialidade = $prod->especialidade;
                 $grupo = $prod->grupo;
             }
 
@@ -206,9 +206,9 @@ class ProducaoMensalProfissionalModel extends CFormModel {
             $list[] = $producaoMensal;
         }
         $dataProvider = new CArrayDataProvider($list, array(
-            'id' => 'producaoMensalProfissionalModel',
+            'id' => 'producaoMensalEspecialidadeGrupoModel',
             'pagination' => array(
-                'pageSize' => 30,
+                 'pageSize' => 30,
             ),
         ));
 

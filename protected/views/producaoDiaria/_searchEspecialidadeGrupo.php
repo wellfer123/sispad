@@ -13,17 +13,12 @@
 
 	<div class="row">
 		<?php echo $form->label($model,'unidade'); ?>
-                <?php echo Chtml::activeDropDownList($model, 'unidade', $unidades,array('ajax'=>array(
-                                                                      'type'=>'POST',
-                                                                      'url'=>  Yii::app()->createAbsoluteUrl('producaoDiaria/findProfissionaisPorUnidade'),
-                                                                      //pega o cnes da unidade e o codigo da especialidade  
-                                                                      'data' => 'js:{cnes: $(this).val()}',
-                                                                      'update' => '#'.CHtml::activeId($model, 'profissional'),
-                                                                    ),'empty'=>'Todas as unidades')); ?>
+                <?php echo Chtml::activeDropDownList($model, 'unidade', $unidades,
+                                                                  array('empty'=>'Todas as unidades')); ?>
 	</div>
         <div class="row">
-		<?php echo $form->label($model,'profissional'); ?>
-                <?php echo Chtml::activeDropDownList($model, 'profissional',CHtml::listData($profissionais, 'servidor.cpf', 'servidor.nome'),array('empty'=>'Todos os profissionais')); ?>
+		<?php echo $form->label($model,'especialidade'); ?>
+                <?php echo Chtml::activeDropDownList($model, 'especialidade',CHtml::listData($especialidades, 'codigo', 'nome'),array('empty'=>'Todos as especialidades')); ?>
 	</div>
 
 	<div class="row">
