@@ -617,7 +617,10 @@ class ProducaoDiariaController extends SISPADBaseController {
             ),
         );
 
-        $this->widget('application.extensions.phpexcel.EExcelView', array('dataProvider' => $model->search(),
+        //retira a paginação
+        $dataProvider=$model->search();
+        $dataProvider->pagination=false;
+        $this->widget('application.extensions.phpexcel.EExcelView', array('dataProvider' => $dataProvider,
             'title' => 'grupos' . date('Y-m-d h:i:s'),
             'grid_mode' => 'export',
             'exportType' => 'Excel2007',
@@ -699,8 +702,10 @@ class ProducaoDiariaController extends SISPADBaseController {
             ),
         );
 
-
-        $this->widget('application.extensions.phpexcel.EExcelView', array('dataProvider' => $model->search(),
+        //retira a paginação
+        $dataProvider=$model->search();
+        $dataProvider->pagination=false;
+        $this->widget('application.extensions.phpexcel.EExcelView', array('dataProvider' => $dataProvider,
             'title' => 'especialidades' . date('Y-m-d h:i:s'),
             'grid_mode' => 'export',
             'exportType' => 'Excel2007',
@@ -787,8 +792,11 @@ class ProducaoDiariaController extends SISPADBaseController {
                 'header' => 'Anual',
             ),
         );
-
-        $this->widget('application.extensions.phpexcel.EExcelView', array('dataProvider' => $model->search(),
+        
+        //retira a paginação
+        $dataProvider=$model->search();
+        $dataProvider->pagination=false;
+        $this->widget('application.extensions.phpexcel.EExcelView', array('dataProvider' => $dataProvider,
             'title' => 'profissionais' . date('Y-m-d h:i:s'),
             'grid_mode' => 'export',
             'exportType' => 'Excel2007',
@@ -876,7 +884,10 @@ class ProducaoDiariaController extends SISPADBaseController {
             ),
         );
 
-        $this->widget('application.extensions.phpexcel.EExcelView', array('dataProvider' => $model->search(),
+        //retira a paginação
+        $dataProvider=$model->search();
+        $dataProvider->pagination=false;
+        $this->widget('application.extensions.phpexcel.EExcelView', array('dataProvider' => $dataProvider,
             'title' => 'especiaGrupos' . date('Y-m-d h:i:s'),
             'grid_mode' => 'export',
             'exportType' => 'Excel2007',
