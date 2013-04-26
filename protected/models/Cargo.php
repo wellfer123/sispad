@@ -23,7 +23,7 @@ class Cargo extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'Cargo';
+		return 'cargo';
 	}
 
 	/**
