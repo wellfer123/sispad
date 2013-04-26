@@ -1,6 +1,6 @@
 <?php
 
-class IdentidadeController extends Controller
+class IdentidadeController extends SISPADBaseController
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -125,4 +125,8 @@ class IdentidadeController extends Controller
 			Yii::app()->end();
 		}
 	}
+
+    protected function getModelName() {
+        return 'Identidade';
+    }
 }

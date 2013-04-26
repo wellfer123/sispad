@@ -1,6 +1,6 @@
 <?php
 
-class TituloEleitorController extends Controller
+class TituloEleitorController extends SISPADBaseController
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -147,4 +147,8 @@ class TituloEleitorController extends Controller
 			'model'=>$this->loadModel(),'servidor'=>$this->loadModelServidor(),
 		));
 	}
+
+    protected function getModelName() {
+        return 'TituloEleitor';
+    }
 }

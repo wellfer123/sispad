@@ -10,7 +10,7 @@
  *
  * @author Albuquerque
  */
-class RegionaisController {
+class RegionaisController extends SISPADBaseController {
     //put your code here
      public function accessRules()
 	{
@@ -32,6 +32,10 @@ class RegionaisController {
 			),
 		);
 	}
+
+    protected function getModelName() {
+        return 'Regional';
+    }
         
     
 }

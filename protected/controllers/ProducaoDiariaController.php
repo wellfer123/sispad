@@ -175,7 +175,8 @@ class ProducaoDiariaController extends SISPADBaseController {
 
        if (isset($_POST['cbo'])) {
             $data = CHtml::listData($this->getGrupos($_POST['cbo']), 'codigo', 'nome');
-            echo "<option value=''>Selecione um grupo</option>";
+            
+            echo "<option value=''>Selecione um grupo </option>";
             foreach ($data as $value => $name) {
                 echo CHtml::tag('option', array('value' => $value), CHtml::encode($name), true);
             }
@@ -528,7 +529,9 @@ public function actionMonthEspecialidadeGrupo() {
             $criteria->condition='g.codigo <> 1 AND eg.profissao_codigo=:cbo';
             $criteria->params=array(':cbo'=>$cbo);
         }
-        $criteria->condition = 'g.codigo <> 1';
+        else{
+            $criteria->condition = 'g.codigo <> 1';
+        }
         return Grupo::model()->findAll($criteria);
     }
 

@@ -1,6 +1,6 @@
 <?php
 
-class DadosTrabalhoController extends Controller
+class DadosTrabalhoController extends SISPADBaseController
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -117,4 +117,8 @@ class DadosTrabalhoController extends Controller
 			Yii::app()->end();
 		}
 	}
+
+    protected function getModelName() {
+        return 'DadosTrabalho';
+    }
 }

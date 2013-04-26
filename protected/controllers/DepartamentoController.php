@@ -206,6 +206,4 @@ class DepartamentoController extends SISPADBaseController
             return 'Departamento';
         }
 
-
-
 }

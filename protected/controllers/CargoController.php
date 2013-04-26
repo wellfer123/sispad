@@ -1,6 +1,6 @@
 <?php
 
-class CargoController extends Controller
+class CargoController extends SISPADBaseController
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -168,4 +168,8 @@ class CargoController extends Controller
 			Yii::app()->end();
 		}
 	}
+
+    protected function getModelName() {
+        return 'Cargo';
+    }
 }

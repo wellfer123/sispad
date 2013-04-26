@@ -51,7 +51,7 @@ class SistemaController extends SISPADBaseController {
         return;
     }
     protected function getModelName() {
-        return "sistema";
+        return "Sistema";
     }
 
     private function  facaDownload($nameFile,$ext){
