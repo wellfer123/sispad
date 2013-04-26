@@ -16,8 +16,7 @@ class ProfissaoController extends SISPADBaseController {
     }
 
     public function actionFindProfissoes() {
-
-      //$this->CheckAcessAction();
+        $this->_RBAC->checkAccess('registered', true);
         $q = $_GET['term'];
         if (isset($q)) {
             $profissoes = Profissao::model()->findAll('nome like :nome', array(':nome' => strtoupper(trim($q)) . '%'));
@@ -37,13 +36,12 @@ class ProfissaoController extends SISPADBaseController {
             }
         }
     }
-    
-    public function actionFindProfissoesCbo() {
 
-      //$this->CheckAcessAction();
+    public function actionFindProfissoesCbo() {
+        $this->_RBAC->checkAccess('registered', true);
         $q = $_GET['term'];
         if (isset($q)) {
-            $profissoes = Profissao::model()->findAll('nome  like :pesquisa or codigo like :pesquisa',array(':pesquisa'=> '%'.strtoupper(trim($q)).'%'));
+            $profissoes = Profissao::model()->findAll('nome  like :pesquisa or codigo like :pesquisa', array(':pesquisa' => '%' . strtoupper(trim($q)) . '%'));
 
             if (!empty($profissoes)) {
                 $out = array();
@@ -60,17 +58,17 @@ class ProfissaoController extends SISPADBaseController {
             }
         }
     }
-    
+
     public function actionFindProfissoesCboSaude() {
 
-      //$this->CheckAcessAction();
+        $this->_RBAC->checkAccess('registered', true);
         $q = $_GET['term'];
         if (isset($q)) {
             // CBO iniciado
-            $criteria=new CDbCriteria();
-            $criteria->condition=" ((SUBSTRING(codigo,1,3)='223' OR SUBSTRING(codigo,1,4)='3222') OR SUBSTRING(codigo,1,4)='3522' OR SUBSTRING(codigo,1,4)='2515' OR codigo='251605') AND (nome  like :pesquisa or codigo like :pesquisa)";
-            $criteria->order=" nome";
-            $criteria->params=array(':pesquisa'=> '%'.strtoupper(trim($q)).'%');
+            $criteria = new CDbCriteria();
+            $criteria->condition = " ((SUBSTRING(codigo,1,3)='223' OR SUBSTRING(codigo,1,4)='3222') OR SUBSTRING(codigo,1,4)='3522' OR SUBSTRING(codigo,1,4)='2515' OR codigo='251605') AND (nome  like :pesquisa or codigo like :pesquisa)";
+            $criteria->order = " nome";
+            $criteria->params = array(':pesquisa' => '%' . strtoupper(trim($q)) . '%');
             $profissoes = Profissao::model()->findAll($criteria);
 
             if (!empty($profissoes)) {

@@ -1,6 +1,6 @@
 <?php
-Yii::import('ext.phpexcel.PHPExcel');
 
+Yii::import('ext.phpexcel.PHPExcel');
 
 class ProducaoDiariaController extends SISPADBaseController {
 
@@ -69,7 +69,7 @@ class ProducaoDiariaController extends SISPADBaseController {
                         $exist = $this->existeProducao($model);
                         if (!$exist) { //verifica se o modelo existe no banco de dados
                             if ($this->existeEspecialidadeUnidadeEProfissional($model)) {//verifica se a quantidade de especialidades da unidade
-                                $data=$model->data;
+                                $data = $model->data;
                                 $model->data = ParserDate::inverteDataPtToEn($model->data);
                                 if ($model->save()) { //salvou com sucesso, cria um novo modelo
                                     //pega os valores antigos
@@ -93,10 +93,10 @@ class ProducaoDiariaController extends SISPADBaseController {
                 //coloca os valores que são administrados pelo sistema
                 $model->servidor_cpf = $servidor->cpf;
                 $model->unidade_cnes = $cnes;
-                
+
                 //pega os profissionais da unidade  
                 $observacoes = Observacao::model()->findAll();
-                
+
                 //renderiza a página
                 $this->render('send', array(
                     'model' => $model,
@@ -132,8 +132,8 @@ class ProducaoDiariaController extends SISPADBaseController {
         //pega todas as unidades
         $unidades = CHtml::listData(Unidade::findAllTemGestor(), 'cnes', 'nome');
         $especialidades = CHtml::listData($this->getEspecialidades(), 'codigo', 'nome');
-        $grupos =  CHtml::listData($this->getGrupos(), 'codigo', 'nome');
-        
+        $grupos = CHtml::listData($this->getGrupos(), 'codigo', 'nome');
+
         $model = new ProducaoDiaria('search');
         $model->unsetAttributes();  // clear any default values
         if (isset($_GET['ProducaoDiaria'])) {
@@ -144,11 +144,12 @@ class ProducaoDiariaController extends SISPADBaseController {
             'model' => $model,
             'unidades' => $unidades,
             'especialidades' => $especialidades,
-            'grupos'=> $grupos,
+            'grupos' => $grupos,
         ));
     }
 
     public function actionFindEspecialidades() {
+        $this->_RBAC->checkAccess('registered', true);
         if (isset($_POST['unidade'])) {
             $data = CHtml::listData($this->getEspecialidades($_POST['unidade']), 'codigo', 'nome');
             echo "<option value=''>Selecione uma especialidade</option>";
@@ -159,7 +160,7 @@ class ProducaoDiariaController extends SISPADBaseController {
     }
 
     public function actionFindProfissionais() {
-
+        $this->_RBAC->checkAccess('registered', true);
         if (isset($_POST['cnes']) && isset($_POST['cbo'])) {
             $pro = $this->getProfissionais($_POST['cnes'], $_POST['cbo']);
             $data = CHtml::listData($pro, 'cpf', 'servidor.nome');
@@ -170,43 +171,45 @@ class ProducaoDiariaController extends SISPADBaseController {
             }
         }
     }
-    
-     public function actionFindGrupos() {
 
-       if (isset($_POST['cbo'])) {
+    public function actionFindGrupos() {
+        $this->_RBAC->checkAccess('registered', true);
+        if (isset($_POST['cbo'])) {
             $data = CHtml::listData($this->getGrupos($_POST['cbo']), 'codigo', 'nome');
-            
+
             echo "<option value=''>Selecione um grupo </option>";
             foreach ($data as $value => $name) {
                 echo CHtml::tag('option', array('value' => $value), CHtml::encode($name), true);
             }
         }
     }
-    
+
     public function actionFindProfissionaisPorUnidade() {
+        $this->_RBAC->checkAccess('registered', true);
         $cnes = null;
         if (isset($_POST['cnes'])) {
             $cnes = $_POST['cnes'];
         }
-            $pro = $this->getAllProfissionais($cnes);
-            //insere no inicio do array a mensagem padrao 'TODOS OS PROFISSIONAIS' com o cpf vazio
-            array_unshift($pro,array('cpf'=>'','servidor'=>array('nome'=>'TODOS OS PROFISSIONAIS')));
-            $data = CHtml::listData($pro, 'cpf', 'servidor.nome');
-            //print_r($pro);
-            foreach ($data as $value => $name) {
+        $pro = $this->getAllProfissionais($cnes);
+        //insere no inicio do array a mensagem padrao 'TODOS OS PROFISSIONAIS' com o cpf vazio
+        array_unshift($pro, array('cpf' => '', 'servidor' => array('nome' => 'TODOS OS PROFISSIONAIS')));
+        $data = CHtml::listData($pro, 'cpf', 'servidor.nome');
+        //print_r($pro);
+        foreach ($data as $value => $name) {
 
-                echo CHtml::tag('option', array('value' => $value), CHtml::encode($name), true);
-            }
+            echo CHtml::tag('option', array('value' => $value), CHtml::encode($name), true);
+        }
         //}
     }
+
     public function actionAdminGestor() {
         $this->CheckAcessAction();
         //pega as unidades que o usuário é gestor
         $unidades = CHtml::listData($this->getUnidades($this->getServidor()), 'cnes', 'nome');
         //pega as especialidades
         $especialidades = CHtml::listData($this->getEspecialidades(), 'codigo', 'nome');
-        $grupos =  CHtml::listData($this->getGrupos(), 'codigo', 'nome');
-        
+        $grupos = CHtml::listData($this->getGrupos(), 'codigo', 'nome');
+
         $model = new ProducaoDiaria('search');
         $model->unsetAttributes();  // clear any default values
         if (isset($_GET['ProducaoDiaria'])) {
@@ -218,7 +221,7 @@ class ProducaoDiariaController extends SISPADBaseController {
             'model' => $model,
             'unidades' => $unidades,
             'especialidades' => $especialidades,
-            'grupos'=> $grupos,
+            'grupos' => $grupos,
         ));
     }
 
@@ -230,10 +233,10 @@ class ProducaoDiariaController extends SISPADBaseController {
         //SOMENTE O ADMINISTRADOR DO SISTEMA PODE VISUALIZAR ESTA VIEW
         $this->_RBAC->checkAccess('admin', true);
         $this->layout = '//layouts/column1';
-        
+
         $unidades = CHtml::listData(Unidade::findAllTemGestor(), 'cnes', 'nome');
         $especialidades = CHtml::listData($this->getEspecialidades(), 'codigo', 'nome');
-        $grupos =  CHtml::listData($this->getGrupos(), 'codigo', 'nome');
+        $grupos = CHtml::listData($this->getGrupos(), 'codigo', 'nome');
 
         $model = new ProducaoDiaria('search');
         $model->unsetAttributes();  // clear any default values
@@ -245,7 +248,7 @@ class ProducaoDiariaController extends SISPADBaseController {
             'model' => $model,
             'unidades' => $unidades,
             'especialidades' => $especialidades,
-            'grupos'=> $grupos,
+            'grupos' => $grupos,
         ));
     }
 
@@ -257,18 +260,18 @@ class ProducaoDiariaController extends SISPADBaseController {
 
         $model = new ProducaoMensalEspecialidadeModel('search');
         $model->unsetAttributes();
-        
+
         if (isset($_GET['ProducaoMensalEspecialidadeModel'])) {
             $model->attributes = $_GET['ProducaoMensalEspecialidadeModel'];
         }
         //verifica se o parâmetro ano foi passado
-        if ($model->ano == null){
+        if ($model->ano == null) {
             //filtro pelo ano atual
             $model->ano = Date('Y');
         }
         //nome da action que será usada para gerar o relatorio em excel
         $relatorio = 'relatorioMonthEspecialidade';
-        $this->render('monthEspecialidade', array('model' => $model, 'unidades' => $unidades, 'anos' => $this->getAnos(),'relatorio'=>$relatorio));
+        $this->render('monthEspecialidade', array('model' => $model, 'unidades' => $unidades, 'anos' => $this->getAnos(), 'relatorio' => $relatorio));
     }
 
     public function actionMonthGrupo() {
@@ -279,72 +282,71 @@ class ProducaoDiariaController extends SISPADBaseController {
 
         $model = new ProducaoMensalGrupoModel('search');
         $model->unsetAttributes();
-        
+
         if (isset($_GET['ProducaoMensalGrupoModel'])) {
             $model->attributes = $_GET['ProducaoMensalGrupoModel'];
         }
         //verifica se o parâmetro ano foi passado
-        if ($model->ano == null){
+        if ($model->ano == null) {
             //filtro pelo ano atual
             $model->ano = Date('Y');
         }
         //nome da action que será usada para gerar o relatorio em excel
         $relatorio = 'relatorioMonthGrupo';
-        $this->render('monthGrupo', array('model' => $model, 'unidades' => $unidades, 'anos' => $this->getAnos(),'relatorio'=>$relatorio));
+        $this->render('monthGrupo', array('model' => $model, 'unidades' => $unidades, 'anos' => $this->getAnos(), 'relatorio' => $relatorio));
     }
-    
-       public function actionMonthProfissional() {
+
+    public function actionMonthProfissional() {
         $this->CheckAcessAction();
         $this->layout = '//layouts/column1';
 
-        
+
 
         $model = new ProducaoMensalProfissionalModel('search');
         $model->unsetAttributes();
-        
+
         if (isset($_GET['ProducaoMensalProfissionalModel'])) {
             $model->attributes = $_GET['ProducaoMensalProfissionalModel'];
         }
-        
+
         $unidades = CHtml::listData(Unidade::findAllTemGestor(), 'cnes', 'nome');
         $profissionais = $this->getAllProfissionais($model->unidade);
-        
+
         //verifica se o parâmetro ano foi passado
-        if ($model->ano == null){
+        if ($model->ano == null) {
             //filtro pelo ano atual
             $model->ano = Date('Y');
         }
         //nome da action que será usada para gerar o relatorio em excel
         $relatorio = 'relatorioMonthProfissional';
-        $this->render('monthProfissional', array('model' => $model, 'unidades' => $unidades,'profissionais'=>$profissionais,'anos' => $this->getAnos(),'relatorio'=>$relatorio));
+        $this->render('monthProfissional', array('model' => $model, 'unidades' => $unidades, 'profissionais' => $profissionais, 'anos' => $this->getAnos(), 'relatorio' => $relatorio));
     }
 
-public function actionMonthEspecialidadeGrupo() {
+    public function actionMonthEspecialidadeGrupo() {
         $this->CheckAcessAction();
         $this->layout = '//layouts/column1';
 
-        
+
 
         $model = new ProducaoMensalEspecialidadeGrupoModel('search');
         $model->unsetAttributes();
-        
+
         if (isset($_GET['ProducaoMensalEspecialidadeGrupoModel'])) {
             $model->attributes = $_GET['ProducaoMensalEspecialidadeGrupoModel'];
         }
-        
+
         $unidades = CHtml::listData(Unidade::findAllTemGestor(), 'cnes', 'nome');
         $especialidades = $this->getEspecialidades();
-        
+
         //verifica se o parâmetro ano foi passado
-        if ($model->ano == null){
+        if ($model->ano == null) {
             //filtro pelo ano atual
             $model->ano = Date('Y');
         }
         //nome da action que será usada para gerar o relatorio em excel
         $relatorio = 'relatorioMonthEspecialidadeGrupo';
-        $this->render('monthEspecialidadeGrupo', array('model' => $model, 'unidades' => $unidades,'especialidades'=>$especialidades,'anos' => $this->getAnos(),'relatorio'=>$relatorio));
+        $this->render('monthEspecialidadeGrupo', array('model' => $model, 'unidades' => $unidades, 'especialidades' => $especialidades, 'anos' => $this->getAnos(), 'relatorio' => $relatorio));
     }
-
 
     /**
      * Returns the data model based on the primary key given in the GET variable.
@@ -448,9 +450,8 @@ public function actionMonthEspecialidadeGrupo() {
         //pega os dados para preencher o combobox
         return $profi = ProfissionalVinculo::model()->with('servidor')->findAll($criteria);
     }
-    
-    
-    public function getAllProfissionais($cnes=null, $cbo = null) {
+
+    public function getAllProfissionais($cnes = null, $cbo = null) {
         //pega os profissionais da unidade  
         $criteria = new CDbCriteria();
 
@@ -459,11 +460,10 @@ public function actionMonthEspecialidadeGrupo() {
         if ($cbo != null) {
             $params[':cbo'] = $cbo;
             $criteria->condition = 'pv.ativo=:status AND pv.unidade_cnes=:cnes AND pv.codigo_profissao=:cbo';
-        } else{ 
-            if($cnes!=null){
+        } else {
+            if ($cnes != null) {
                 $criteria->condition = 'pv.ativo=:status AND pv.unidade_cnes=:cnes';
             }
-        
         }
         $criteria->params = $params;
         $criteria->order = 'servidor.nome';
@@ -519,51 +519,49 @@ public function actionMonthEspecialidadeGrupo() {
      * @param string $cbo codigo da profissão caso exija um filtro pelas profissões
      * @return array 
      */
-    private function getGrupos($cbo=null) {
+    private function getGrupos($cbo = null) {
         $criteria = new CDbCriteria();
 
         $criteria->alias = 'g';
         $criteria->order = 'g.nome';
-        if ($cbo != null){
-            $criteria->join=' INNER JOIN especialidade_grupo eg ON eg.grupo_codigo=g.codigo';
-            $criteria->condition='g.codigo <> 1 AND eg.profissao_codigo=:cbo';
-            $criteria->params=array(':cbo'=>$cbo);
-        }
-        else{
+        if ($cbo != null) {
+            $criteria->join = ' INNER JOIN especialidade_grupo eg ON eg.grupo_codigo=g.codigo';
+            $criteria->condition = 'g.codigo <> 1 AND eg.profissao_codigo=:cbo';
+            $criteria->params = array(':cbo' => $cbo);
+        } else {
             $criteria->condition = 'g.codigo <> 1';
         }
         return Grupo::model()->findAll($criteria);
     }
 
-    private function getAnos(){
-        return array('2013'=>'2013');
+    private function getAnos() {
+        return array('2013' => '2013');
     }
 
     protected function getModelName() {
         return 'ProducaoDiaria';
     }
-    
-    
+
     public function actionRelatorioMonthGrupo() {
-       $model = new ProducaoMensalGrupoModel('search');
-       $model->unsetAttributes();
-        
+        $this->CheckAcessAction();
+        $model = new ProducaoMensalGrupoModel('search');
+        $model->unsetAttributes();
+
         if (isset($_GET['ProducaoMensalGrupoModel'])) {
             $model->attributes = $_GET['ProducaoMensalGrupoModel'];
         }
         //verifica se o parâmetro ano foi passado
-        if ($model->ano == null){
+        if ($model->ano == null) {
             //filtro pelo ano atual
             $model->ano = Date('Y');
         }
-        
-        
-        
+
+
+
         $columns = array(
             array(
                 'name' => 'grupo',
                 'header' => 'Grupo',
-               
             ),
             array(
                 'name' => 'jan',
@@ -618,35 +616,34 @@ public function actionMonthEspecialidadeGrupo() {
                 'header' => 'Anual',
             ),
         );
-        
+
         $this->widget('application.extensions.phpexcel.EExcelView', array('dataProvider' => $model->search(),
-            'title' => 'grupos'.date('Y-m-d h:i:s'),
+            'title' => 'grupos' . date('Y-m-d h:i:s'),
             'grid_mode' => 'export',
             'exportType' => 'Excel2007',
-            'columns'=>$columns,
+            'columns' => $columns,
         ));
         Yii::app()->end();
-    }    
-    
-    
+    }
+
     public function actionRelatorioMonthEspecialidade() {
+        $this->CheckAcessAction();
         $model = new ProducaoMensalEspecialidadeModel('search');
         $model->unsetAttributes();
-        
+
         if (isset($_GET['ProducaoMensalEspecialidadeModel'])) {
             $model->attributes = $_GET['ProducaoMensalEspecialidadeModel'];
         }
         //verifica se o parâmetro ano foi passado
-        if ($model->ano == null){
+        if ($model->ano == null) {
             //filtro pelo ano atual
             $model->ano = Date('Y');
         }
-        
-         $columns = array(
+
+        $columns = array(
             array(
                 'name' => 'especialidade',
                 'header' => 'Especialidade',
-               
             ),
             array(
                 'name' => 'jan',
@@ -701,42 +698,41 @@ public function actionMonthEspecialidadeGrupo() {
                 'header' => 'Anual',
             ),
         );
-        
-        
+
+
         $this->widget('application.extensions.phpexcel.EExcelView', array('dataProvider' => $model->search(),
-            'title' => 'especialidades'.date('Y-m-d h:i:s'),
+            'title' => 'especialidades' . date('Y-m-d h:i:s'),
             'grid_mode' => 'export',
             'exportType' => 'Excel2007',
-            'columns'=>$columns,
+            'columns' => $columns,
         ));
         Yii::app()->end();
-    }    
-    
+    }
+
     public function actionRelatorioMonthProfissional() {
-       $model = new ProducaoMensalProfissionalModel('search');
-       $model->unsetAttributes();
-        
+        $this->CheckAcessAction();
+        $model = new ProducaoMensalProfissionalModel('search');
+        $model->unsetAttributes();
+
         if (isset($_GET['ProducaoMensalProfissionalModel'])) {
             $model->attributes = $_GET['ProducaoMensalProfissionalModel'];
         }
         //verifica se o parâmetro ano foi passado
-        if ($model->ano == null){
+        if ($model->ano == null) {
             //filtro pelo ano atual
             $model->ano = Date('Y');
         }
-        
-        
-        
+
+
+
         $columns = array(
             array(
                 'name' => 'profissional',
                 'header' => 'Profissional',
-               
             ),
             array(
                 'name' => 'grupo',
                 'header' => 'Grupo',
-               
             ),
             array(
                 'name' => 'jan',
@@ -791,41 +787,40 @@ public function actionMonthEspecialidadeGrupo() {
                 'header' => 'Anual',
             ),
         );
-        
+
         $this->widget('application.extensions.phpexcel.EExcelView', array('dataProvider' => $model->search(),
-            'title' => 'profissionais'.date('Y-m-d h:i:s'),
+            'title' => 'profissionais' . date('Y-m-d h:i:s'),
             'grid_mode' => 'export',
             'exportType' => 'Excel2007',
-            'columns'=>$columns,
+            'columns' => $columns,
         ));
         Yii::app()->end();
-    } 
-    
-     public function actionRelatorioMonthEspecialidadeGrupo() {
-       $model = new ProducaoMensalEspecialidadeGrupoModel('search');
-       $model->unsetAttributes();
-        
+    }
+
+    public function actionRelatorioMonthEspecialidadeGrupo() {
+        $this->CheckAcessAction();
+        $model = new ProducaoMensalEspecialidadeGrupoModel('search');
+        $model->unsetAttributes();
+
         if (isset($_GET['ProducaoMensalEspecialidadeGrupoModel'])) {
             $model->attributes = $_GET['ProducaoMensalEspecialidadeGrupoModel'];
         }
         //verifica se o parâmetro ano foi passado
-        if ($model->ano == null){
+        if ($model->ano == null) {
             //filtro pelo ano atual
             $model->ano = Date('Y');
         }
-        
-        
-        
+
+
+
         $columns = array(
             array(
                 'name' => 'especialidade',
                 'header' => 'especialidade',
-               
             ),
             array(
                 'name' => 'grupo',
                 'header' => 'Grupo',
-               
             ),
             array(
                 'name' => 'jan',
@@ -880,17 +875,14 @@ public function actionMonthEspecialidadeGrupo() {
                 'header' => 'Anual',
             ),
         );
-        
+
         $this->widget('application.extensions.phpexcel.EExcelView', array('dataProvider' => $model->search(),
-            'title' => 'especiaGrupos'.date('Y-m-d h:i:s'),
+            'title' => 'especiaGrupos' . date('Y-m-d h:i:s'),
             'grid_mode' => 'export',
             'exportType' => 'Excel2007',
-            'columns'=>$columns,
+            'columns' => $columns,
         ));
         Yii::app()->end();
-    } 
-    
-    
-  
+    }
 
 }

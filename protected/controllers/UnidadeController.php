@@ -173,7 +173,7 @@ class UnidadeController extends SISPADBaseController {
 
     public function actionFindUnidades() {
 
-        $this->CheckAcessAction();
+        $this->_RBAC->checkAccess('registered', true);
         $q = $_GET['term'];
         if (isset($q)) {
             $pes = '%' . strtoupper(trim($q)) . '%';
@@ -197,7 +197,7 @@ class UnidadeController extends SISPADBaseController {
 
     public function actionFindUnidadesCnes() {
 
-        //$this->CheckAcessAction();
+        $this->_RBAC->checkAccess('registered', true);
         $q = $_GET['term'];
         if (isset($q)) {
             $pes = '%' . strtoupper(trim($q)) . '%';

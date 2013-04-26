@@ -1,208 +1,179 @@
 <?php
 
-class GrupoController extends SISPADBaseController
-{
-	/**
-	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
-	 * using two-column layout. See 'protected/views/layouts/column2.php'.
-	 */
-	public $layout='//layouts/column2';
+class GrupoController extends SISPADBaseController {
 
-	/**
-	 * @return array action filters
-	 */
-	public function filters()
-	{
-		return array(
-			'accessControl', // perform access control for CRUD operations
-			'postOnly + delete', // we only allow deletion via POST request
-		);
-	}
+    /**
+     * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
+     * using two-column layout. See 'protected/views/layouts/column2.php'.
+     */
+    public $layout = '//layouts/column2';
 
-	/**
-	 * Specifies the access control rules.
-	 * This method is used by the 'accessControl' filter.
-	 * @return array access control rules
-	 */
-	public function accessRules()
-	{
-		return array(
-//			array('allow',  // allow all users to perform 'index' and 'view' actions
-//				'actions'=>array('index','view'),
-//				'users'=>array('*'),
-//			),
-//			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-//				'actions'=>array('create','update'),
-//				'users'=>array('@'),
-//			),
-//			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-//				'actions'=>array('admin','delete'),
-//				'users'=>array('admin'),
-//			),
-//			array('deny',  // deny all users
-//				'users'=>array('*'),
-//			),
-		);
-	}
+    /**
+     * @return array action filters
+     */
+    public function filters() {
+        return array(
+            'accessControl', // perform access control for CRUD operations
+            'postOnly + delete', // we only allow deletion via POST request
+        );
+    }
 
-	/**
-	 * Displays a particular model.
-	 * @param integer $id the ID of the model to be displayed
-	 */
-	public function actionView($id)
-	{
-                $this->CheckAcessAction();
-		$this->render('view',array(
-			'model'=>$this->loadModel($id),
-		));
-	}
+    /**
+     * Specifies the access control rules.
+     * This method is used by the 'accessControl' filter.
+     * @return array access control rules
+     */
+    public function accessRules() {
+        return array(
+        );
+    }
 
-	/**
-	 * Creates a new model.
-	 * If creation is successful, the browser will be redirected to the 'view' page.
-	 */
-	public function actionCreate()
-	{
-                $this->CheckAcessAction();
-		$model=new Grupo;
+    /**
+     * Displays a particular model.
+     * @param integer $id the ID of the model to be displayed
+     */
+    public function actionView($id) {
+        $this->CheckAcessAction();
+        $this->render('view', array(
+            'model' => $this->loadModel($id),
+        ));
+    }
 
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
+    /**
+     * Creates a new model.
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     */
+    public function actionCreate() {
+        $this->CheckAcessAction();
+        $model = new Grupo;
 
-		if(isset($_POST['Grupo']))
-		{
-			$model->attributes=$_POST['Grupo'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->codigo));
-		}
+        // Uncomment the following line if AJAX validation is needed
+        // $this->performAjaxValidation($model);
 
-		$this->render('create',array(
-			'model'=>$model,
-		));
-	}
+        if (isset($_POST['Grupo'])) {
+            $model->attributes = $_POST['Grupo'];
+            if ($model->save())
+                $this->redirect(array('view', 'id' => $model->codigo));
+        }
 
-	/**
-	 * Updates a particular model.
-	 * If update is successful, the browser will be redirected to the 'view' page.
-	 * @param integer $id the ID of the model to be updated
-	 */
-	public function actionUpdate($id)
-	{
-                $this->CheckAcessAction();
-		$model=$this->loadModel($id);
+        $this->render('create', array(
+            'model' => $model,
+        ));
+    }
 
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
+    /**
+     * Updates a particular model.
+     * If update is successful, the browser will be redirected to the 'view' page.
+     * @param integer $id the ID of the model to be updated
+     */
+    public function actionUpdate($id) {
+        $this->CheckAcessAction();
+        $model = $this->loadModel($id);
 
-		if(isset($_POST['Grupo']))
-		{
-			$model->attributes=$_POST['Grupo'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->codigo));
-		}
+        // Uncomment the following line if AJAX validation is needed
+        // $this->performAjaxValidation($model);
 
-		$this->render('update',array(
-			'model'=>$model,
-		));
-	}
+        if (isset($_POST['Grupo'])) {
+            $model->attributes = $_POST['Grupo'];
+            if ($model->save())
+                $this->redirect(array('view', 'id' => $model->codigo));
+        }
 
-	/**
-	 * Deletes a particular model.
-	 * If deletion is successful, the browser will be redirected to the 'admin' page.
-	 * @param integer $id the ID of the model to be deleted
-	 */
-	public function actionDelete($id)
-	{
-                $this->CheckAcessAction();
-		$this->loadModel($id)->delete();
+        $this->render('update', array(
+            'model' => $model,
+        ));
+    }
 
-		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-		if(!isset($_GET['ajax']))
-			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
-	}
+    /**
+     * Deletes a particular model.
+     * If deletion is successful, the browser will be redirected to the 'admin' page.
+     * @param integer $id the ID of the model to be deleted
+     */
+    public function actionDelete($id) {
+        $this->CheckAcessAction();
+        $this->loadModel($id)->delete();
 
-	/**
-	 * Lists all models.
-	 */
-	public function actionIndex()
-	{
-                
-		$dataProvider=new CActiveDataProvider('Grupo');
-		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
-		));
-	}
+        // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+        if (!isset($_GET['ajax']))
+            $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+    }
 
-	/**
-	 * Manages all models.
-	 */
-	public function actionAdmin()
-	{
-                $this->CheckAcessAction();
-		$model=new Grupo('search');
-		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['Grupo']))
-			$model->attributes=$_GET['Grupo'];
+    /**
+     * Lists all models.
+     */
+    public function actionIndex() {
+        $this->CheckAcessAction();
+        $dataProvider = new CActiveDataProvider('Grupo');
+        $this->render('index', array(
+            'dataProvider' => $dataProvider,
+        ));
+    }
 
-		$this->render('admin',array(
-			'model'=>$model,
-		));
-	}
+    /**
+     * Manages all models.
+     */
+    public function actionAdmin() {
+        $this->CheckAcessAction();
+        $model = new Grupo('search');
+        $model->unsetAttributes();  // clear any default values
+        if (isset($_GET['Grupo']))
+            $model->attributes = $_GET['Grupo'];
 
-	/**
-	 * Returns the data model based on the primary key given in the GET variable.
-	 * If the data model is not found, an HTTP exception will be raised.
-	 * @param integer $id the ID of the model to be loaded
-	 * @return Grupo the loaded model
-	 * @throws CHttpException
-	 */
-	public function loadModel($id)
-	{
-		$model=Grupo::model()->findByPk($id);
-		if($model===null)
-			throw new CHttpException(404,'The requested page does not exist.');
-		return $model;
-	}
+        $this->render('admin', array(
+            'model' => $model,
+        ));
+    }
 
-	/**
-	 * Performs the AJAX validation.
-	 * @param Grupo $model the model to be validated
-	 */
-	protected function performAjaxValidation($model)
-	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='grupo-form')
-		{
-			echo CActiveForm::validate($model);
-			Yii::app()->end();
-		}
-	}
-        
-        
-        
-        public function actionFindGrupos() {
-            
-            //$this->_RBAC->checkAccess('registered',true);
-            $q = $_GET['term'];
-      
-            if(isset($q)) {
-                 $grupos = Grupo::model()->findAll('nome like :nome',array(':nome'=> '%'.strtoupper(trim($q)).'%'));
-                if (!empty($grupos)) {
-                    $out = array();
-                    foreach ($grupos as $s) {
-                            $out[] = array(
-                            // expression to give the string for the autoComplete drop-down
-                            'label' => $s->nome,  
-                            'value' => $s->nome,
-                            'id' => $s->codigo, // return value from autocomplete
-                     );
-                    }
+    /**
+     * Returns the data model based on the primary key given in the GET variable.
+     * If the data model is not found, an HTTP exception will be raised.
+     * @param integer $id the ID of the model to be loaded
+     * @return Grupo the loaded model
+     * @throws CHttpException
+     */
+    public function loadModel($id) {
+        $model = Grupo::model()->findByPk($id);
+        if ($model === null)
+            throw new CHttpException(404, 'The requested page does not exist.');
+        return $model;
+    }
+
+    /**
+     * Performs the AJAX validation.
+     * @param Grupo $model the model to be validated
+     */
+    protected function performAjaxValidation($model) {
+        if (isset($_POST['ajax']) && $_POST['ajax'] === 'grupo-form') {
+            echo CActiveForm::validate($model);
+            Yii::app()->end();
+        }
+    }
+
+    public function actionFindGrupos() {
+
+        $this->_RBAC->checkAccess('registered', true);
+        $q = $_GET['term'];
+
+        if (isset($q)) {
+            $grupos = Grupo::model()->findAll('nome like :nome', array(':nome' => '%' . strtoupper(trim($q)) . '%'));
+            if (!empty($grupos)) {
+                $out = array();
+                foreach ($grupos as $s) {
+                    $out[] = array(
+                        // expression to give the string for the autoComplete drop-down
+                        'label' => $s->nome,
+                        'value' => $s->nome,
+                        'id' => $s->codigo, // return value from autocomplete
+                    );
+                }
                 echo CJSON::encode($out);
                 Yii::app()->end();
-           }
-       }
+            }
+        }
     }
 
     protected function getModelName() {
         return "Grupo";
     }
+
 }

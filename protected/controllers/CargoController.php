@@ -38,6 +38,7 @@ class CargoController extends SISPADBaseController
 	 */
 	public function actionView()
 	{
+            $this->CheckAcessAction();
 		$this->render('view',array(
 			'model'=>$this->loadModel(),
 		));
@@ -117,10 +118,7 @@ class CargoController extends SISPADBaseController
 	public function actionIndex()
 	{
                 $this->CheckAcessAction();
-//		$dataProvider=new CActiveDataProvider('Cargo');
-//		$this->render('index',array(
-//			'dataProvider'=>$dataProvider,
-//		));
+
             $this->redirect(array('admin'));
 	}
 
@@ -129,6 +127,7 @@ class CargoController extends SISPADBaseController
 	 */
 	public function actionAdmin()
 	{
+            $this->CheckAcessAction();
 		$model=new Cargo('search');
 		$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['Cargo']))
@@ -145,7 +144,6 @@ class CargoController extends SISPADBaseController
 	 */
 	public function loadModel()
 	{
-                $this->CheckAcessAction();
 		if($this->_model===null)
 		{
 			if(isset($_GET['id']))

@@ -78,9 +78,8 @@ class ProfissionalVinculoController extends SISPADBaseController {
     }
 
     public function getAllProfissionaisUnidade($unidades) {
-        $this->_RBAC->checkAccess('registered',true);
-        $criteria=  ProfissionalVinculo::findAllProfissionaisPorUnidades(CHtml::listData($unidades, 'cnes', 'nome'));
-        $criteria->with=array('servidor','unidade','profissao');
+        $criteria = ProfissionalVinculo::findAllProfissionaisPorUnidades(CHtml::listData($unidades, 'cnes', 'nome'));
+        $criteria->with = array('servidor', 'unidade', 'profissao');
         $dataProvider = new CActiveDataProvider('ProfissionalVinculo', array(
             'criteria' => $criteria,
             'pagination' => array(
@@ -141,10 +140,11 @@ class ProfissionalVinculoController extends SISPADBaseController {
             throw new CHttpException(404, 'A página requisitada não existe!');
         return $model;
     }
+
     public function actionAdmin() {
         $this->layout = '//layouts/column1';
         $this->CheckAcessAction();
-        
+
         $model = new ProfissionalVinculo('search');
         $model->unsetAttributes();  // clear any default values
         if (isset($_GET['ProfissionalVinculo'])) {
@@ -153,7 +153,7 @@ class ProfissionalVinculoController extends SISPADBaseController {
 
         $this->render('admin', array('model' => $model));
     }
-    
+
     public function actionDelete() {
         $this->CheckAcessAction();
         $this->loadModel()->delete();
@@ -162,4 +162,5 @@ class ProfissionalVinculoController extends SISPADBaseController {
         if (!isset($_GET['ajax']))
             $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
     }
+
 }

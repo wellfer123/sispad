@@ -1,367 +1,351 @@
 <?php
+
 Yii::app()->getModule('metas');
 
-class ServidorController extends SISPADBaseController
-{
-	/**
-	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
-	 * using two-column layout. See 'protected/views/layouts/column2.php'.
-	 */
-	public $layout='//layouts/column2';
+class ServidorController extends SISPADBaseController {
 
-	/**
-	 * @var CActiveRecord the currently loaded data model instance.
-	 */
-	private $_model;
-        
-        
-        public function __construct($id, $module = null) {
-            parent::__construct($id, $module);
+    /**
+     * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
+     * using two-column layout. See 'protected/views/layouts/column2.php'.
+     */
+    public $layout = '//layouts/column2';
+
+    /**
+     * @var CActiveRecord the currently loaded data model instance.
+     */
+    private $_model;
+
+    public function __construct($id, $module = null) {
+        parent::__construct($id, $module);
+    }
+
+    /**
+     * @return array action filters
+     */
+    public function filters() {
+        return array(
+            'accessControl', // perform access control for CRUD operations
+        );
+    }
+
+    /**
+     * Specifies the access control rules.
+     * This method is used by the 'accessControl' filter.
+     * @return array access control rules
+     */
+    public function accessRules() {
+        return array(
+        );
+    }
+
+    /**
+     * Displays a particular model.
+     */
+    public function actionView() {
+        $this->CheckAcessAction();
+        $this->render('view', array(
+            'model' => $this->loadModel(),
+        ));
+    }
+
+    /**
+     * Creates a new model.
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     */
+    public function actionCreate() {
+        $this->CheckAcessAction();
+        $model = new Servidor('create');
+
+        // Uncomment the following line if AJAX validation is needed
+        // $this->performAjaxValidation($model);
+
+        if (isset($_POST['Servidor'])) {
+            $model->attributes = $_POST['Servidor'];
+            if ($model->save())
+                $this->redirect(array('view', 'id' => $model->cpf));
         }
 
-        	/**
-	 * @return array action filters
-	 */
-	public function filters()
-	{
-		return array(
-			'accessControl', // perform access control for CRUD operations
-		);
-	}
+        $this->render('create', array(
+            'model' => $model,
+        ));
+    }
 
-	/**
-	 * Specifies the access control rules.
-	 * This method is used by the 'accessControl' filter.
-	 * @return array access control rules
-	 */
-	public function accessRules()
-	{
-		return array(
-		);
-	}
+    /**
+     * Updates a particular model.
+     * If update is successful, the browser will be redirected to the 'view' page.
+     */
+    public function actionUpdate() {
+        $this->CheckAcessAction();
+        $model = $this->loadModel();
 
-	/**
-	 * Displays a particular model.
-	 */
-	public function actionView()
-	{
-                $this->CheckAcessAction();
-		$this->render('view',array(
-			'model'=>$this->loadModel(),
-		));
-	}
+        // Uncomment the following line if AJAX validation is needed
+        // $this->performAjaxValidation($model);
 
-	/**
-	 * Creates a new model.
-	 * If creation is successful, the browser will be redirected to the 'view' page.
-	 */
-	public function actionCreate()
-	{
-                $this->CheckAcessAction();
-		$model=new Servidor('create');
+        if (isset($_POST['Servidor'])) {
+            $model->attributes = $_POST['Servidor'];
+            if ($model->save())
+                $this->redirect(array('view', 'id' => $model->cpf));
+        }
 
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
+        $this->render('update', array(
+            'model' => $model,
+        ));
+    }
 
-		if(isset($_POST['Servidor']))
-		{
-			$model->attributes=$_POST['Servidor'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->cpf));
-		}
+    public function actionCreateAjax() {
+        $this->CheckAcessAction();
+        $model = $this->loadModel();
 
-		$this->render('create',array(
-			'model'=>$model,
-		));
-	}
-        
-	/**
-	 * Updates a particular model.
-	 * If update is successful, the browser will be redirected to the 'view' page.
-	 */
-	public function actionUpdate()
-	{
-                $this->CheckAcessAction();
-		$model=$this->loadModel();
+        // Uncomment the following line if AJAX validation is needed
+        // $this->performAjaxValidation($model);
+        $data = 'errado';
+        if (isset($_POST['Servidor'])) {
+            $model->attributes = $_POST['Servidor'];
+            if ($model->save()) {
+                $data = 'certo';
+            }
+        }
 
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
+        echo CJSON::encode(array('cesar', '65'));
+        Yii::app()->end();
+    }
 
-		if(isset($_POST['Servidor']))
-		{
-			$model->attributes=$_POST['Servidor'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->cpf));
-		}
+    /**
+     * Lists all models.
+     */
+    public function actionIndex() {
+        $this->CheckAcessAction();
+        $this->redirect(array('admin'));
+    }
 
-		$this->render('update',array(
-			'model'=>$model,
-		));
-	}
-        
-        public function actionCreateAjax()
-	{
-		$model=$this->loadModel();
+    /**
+     * Manages all models.
+     */
+    public function actionAdmin() {
+        $this->CheckAcessAction();
+        $model = new Servidor('search');
+        $model->unsetAttributes();  // clear any default values
+        if (isset($_GET['Servidor']))
+            $model->attributes = $_GET['Servidor'];
 
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
-                $data='errado';
-		if(isset($_POST['Servidor']))
-		{
-			$model->attributes=$_POST['Servidor'];
-			if($model->save()){
-                            $data='certo';
-                        }
-		}
+        $this->render('admin', array(
+            'model' => $model,
+        ));
+    }
 
-                echo CJSON::encode(array('cesar','65'));
-                Yii::app()->end();
-           
-	}
+    /**
+     * Returns the data model based on the primary key given in the GET variable.
+     * If the data model is not found, an HTTP exception will be raised.
+     */
+    public function loadModel() {
+        if ($this->_model === null) {
+            if (isset($_GET['id']))
+                $this->_model = Servidor::model()->with('endereco.cidades')->findbyPk($_GET['id']);
+            if ($this->_model === null)
+                throw new CHttpException(404, 'The requested page does not exist.');
+        }
+        return $this->_model;
+    }
 
-	/**
-	 * Lists all models.
-	 */
-	public function actionIndex()
-	{
-                $this->CheckAcessAction();
-		$this->redirect(array('admin'));
-	}
+    /**
+     * Performs the AJAX validation.
+     * @param CModel the model to be validated
+     */
+    protected function performAjaxValidation($model) {
+        if (isset($_POST['ajax']) && $_POST['ajax'] === 'servidor-form') {
+            echo CActiveForm::validate($model);
+            Yii::app()->end();
+        }
+    }
 
-	/**
-	 * Manages all models.
-	 */
-	public function actionAdmin()
-	{
-                $this->CheckAcessAction();
-		$model=new Servidor('search');
-		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['Servidor']))
-			$model->attributes=$_GET['Servidor'];
+    public function actionFindServidores() {
 
-		$this->render('admin',array(
-			'model'=>$model,
-		));
-	}
+        $this->_RBAC->checkAccess('registered', true);
+        $q = $_GET['term'];
+        if (isset($q)) {
+            $servidores = Servidor::model()->findAll('nome like :nome', array(':nome' => '%' . strtoupper(trim($q)) . '%'));
 
-	/**
-	 * Returns the data model based on the primary key given in the GET variable.
-	 * If the data model is not found, an HTTP exception will be raised.
-	 */
-	public function loadModel()
-	{
-		if($this->_model===null)
-		{
-			if(isset($_GET['id']))
-				$this->_model=Servidor::model()->with('endereco.cidades')->findbyPk($_GET['id']);
-			if($this->_model===null)
-				throw new CHttpException(404,'The requested page does not exist.');
-		}
-		return $this->_model;
-	}
-
-	/**
-	 * Performs the AJAX validation.
-	 * @param CModel the model to be validated
-	 */
-	protected function performAjaxValidation($model)
-	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='servidor-form')
-		{
-			echo CActiveForm::validate($model);
-			Yii::app()->end();
-		}
-	}
-        
-        public function actionFindServidores() {
-            
-             $this->_RBAC->checkAccess('registered',true);
-            $q = $_GET['term'];
-            if(isset($q)) {
-                 $servidores = Servidor::model()->findAll('nome like :nome',array(':nome'=> '%'.strtoupper(trim($q)).'%'));
- 
-                if (!empty($servidores)) {
-                    $out = array();
-                    foreach ($servidores as $s) {
-                            $out[] = array(
-                            // expression to give the string for the autoComplete drop-down
-                            'label' => $s->CpfNome,  
-                            'value' => $s->CpfNome,
-                            'id' => $s->cpf, // return value from autocomplete
-                     );
-                    }
+            if (!empty($servidores)) {
+                $out = array();
+                foreach ($servidores as $s) {
+                    $out[] = array(
+                        // expression to give the string for the autoComplete drop-down
+                        'label' => $s->CpfNome,
+                        'value' => $s->CpfNome,
+                        'id' => $s->cpf, // return value from autocomplete
+                    );
+                }
                 echo CJSON::encode($out);
                 Yii::app()->end();
-           }
-       }
+            }
+        }
     }
-    
+
     public function actionFindServidoresCns() {
-            
-             //$this->_RBAC->checkAccess('registered',true);
-            $q = $_GET['term'];
-            if(isset($q)) {
-                $pesq=strtoupper(trim($q));
-                 $servidores = Servidor::model()->findAll("(nome like :nome or cns like :cns) AND cns IS NOT NULL",
-                                                            array(
-                                                                  ':nome'=> '%'.$pesq.'%',
-                                                                   ':cns'=> '%'.$pesq.'%'));
- 
-                if (!empty($servidores)) {
-                    $out = array();
-                    foreach ($servidores as $s) {
-                            $out[] = array(
-                            // expression to give the string for the autoComplete drop-down
-                            'label' => $s->getCnsNome(),  
-                            'value' => $s->getCnsNome(),
-                            'id' => $s->cns, // returna o cns
-                     );
-                    }
+
+        $this->_RBAC->checkAccess('registered', true);
+        $q = $_GET['term'];
+        if (isset($q)) {
+            $pesq = strtoupper(trim($q));
+            $servidores = Servidor::model()->findAll("(nome like :nome or cns like :cns) AND cns IS NOT NULL", array(
+                ':nome' => '%' . $pesq . '%',
+                ':cns' => '%' . $pesq . '%'));
+
+            if (!empty($servidores)) {
+                $out = array();
+                foreach ($servidores as $s) {
+                    $out[] = array(
+                        // expression to give the string for the autoComplete drop-down
+                        'label' => $s->getCnsNome(),
+                        'value' => $s->getCnsNome(),
+                        'id' => $s->cns, // returna o cns
+                    );
+                }
                 echo CJSON::encode($out);
                 Yii::app()->end();
-           }
-       }
+            }
+        }
     }
-    
+
     public function actionFindMedicos() {
-            
-             //$this->_RBAC->checkAccess('registered',true);
-            $q = $_GET['term'];
-            if(isset($q)) {
-                 $medicos = Medico::model()->with(array('servidor','unidade'))->findAll('servidor.nome like :nome',array(':nome'=> strtoupper(trim($q)).'%'));
-                //$servidores = Servidor::model()->findAllByAttributes(array('nome','cpf'),
-                                             // 'where nome like :nome',array(':nome'=> strtoupper(trim($q)).'%'));
- 
-                if (!empty($medicos)) {
-                    $out = array();
-                    foreach ($medicos as $med) {
-                            $out[] = array(
-                            // expression to give the string for the autoComplete drop-down
-                            'label' => $med->getServidorUnidade(),  
-                            'value' => $med->getServidorUnidade(),
-                            'unidade_cnes' => $med->unidade_cnes,
-                            'id' => $med->servidor_cpf, // return value from autocomplete
-                     );
-                    }
+
+        $this->_RBAC->checkAccess('registered', true);
+        $q = $_GET['term'];
+        if (isset($q)) {
+            $medicos = Medico::model()->with(array('servidor', 'unidade'))->findAll('servidor.nome like :nome', array(':nome' => strtoupper(trim($q)) . '%'));
+            //$servidores = Servidor::model()->findAllByAttributes(array('nome','cpf'),
+            // 'where nome like :nome',array(':nome'=> strtoupper(trim($q)).'%'));
+
+            if (!empty($medicos)) {
+                $out = array();
+                foreach ($medicos as $med) {
+                    $out[] = array(
+                        // expression to give the string for the autoComplete drop-down
+                        'label' => $med->getServidorUnidade(),
+                        'value' => $med->getServidorUnidade(),
+                        'unidade_cnes' => $med->unidade_cnes,
+                        'id' => $med->servidor_cpf, // return value from autocomplete
+                    );
+                }
                 echo CJSON::encode($out);
                 Yii::app()->end();
-           }
-       }
-   }
-   
-   public function actionFindEnfermeiros() {
-            
-             //$this->_RBAC->checkAccess('registered',true);
-            $q = $_GET['term'];
-            if(isset($q)) {
-                 $enfermeiros = Enfermeiro::model()->with(array('servidor','unidade'))->findAll('servidor.nome like :nome',array(':nome'=> strtoupper(trim($q)).'%'));
-                //$servidores = Servidor::model()->findAllByAttributes(array('nome','cpf'),
-                                             // 'where nome like :nome',array(':nome'=> strtoupper(trim($q)).'%'));
- 
-                if (!empty($enfermeiros)) {
-                    $out = array();
-                    foreach ($enfermeiros as $enf) {
-                            $out[] = array(
-                            // expression to give the string for the autoComplete drop-down
-                            'label' => $enf->getServidorUnidade(),  
-                            'value' => $enf->getServidorUnidade(),
-                            'unidade_cnes' => $enf->unidade_cnes,
-                            'id' => $enf->servidor_cpf, // return value from autocomplete
-                     );
-                    }
+            }
+        }
+    }
+
+    public function actionFindEnfermeiros() {
+
+        $this->_RBAC->checkAccess('registered', true);
+        $q = $_GET['term'];
+        if (isset($q)) {
+            $enfermeiros = Enfermeiro::model()->with(array('servidor', 'unidade'))->findAll('servidor.nome like :nome', array(':nome' => strtoupper(trim($q)) . '%'));
+            //$servidores = Servidor::model()->findAllByAttributes(array('nome','cpf'),
+            // 'where nome like :nome',array(':nome'=> strtoupper(trim($q)).'%'));
+
+            if (!empty($enfermeiros)) {
+                $out = array();
+                foreach ($enfermeiros as $enf) {
+                    $out[] = array(
+                        // expression to give the string for the autoComplete drop-down
+                        'label' => $enf->getServidorUnidade(),
+                        'value' => $enf->getServidorUnidade(),
+                        'unidade_cnes' => $enf->unidade_cnes,
+                        'id' => $enf->servidor_cpf, // return value from autocomplete
+                    );
+                }
                 echo CJSON::encode($out);
                 Yii::app()->end();
-           }
-       }
-   }
-   
-   public function actionFindOdontologos() {
-            
-             //$this->_RBAC->checkAccess('registered',true);
-            $q = $_GET['term'];
-            if(isset($q)) {
-                 $odontologos =  Odontologo::model()->with(array('servidor','unidade'))->findAll('servidor.nome like :nome',array(':nome'=> strtoupper(trim($q)).'%'));
-                //$servidores = Servidor::model()->findAllByAttributes(array('nome','cpf'),
-                                             // 'where nome like :nome',array(':nome'=> strtoupper(trim($q)).'%'));
- 
-                if (!empty($odontologos)) {
-                    $out = array();
-                    foreach ($odontologos as $odont) {
-                            $out[] = array(
-                            // expression to give the string for the autoComplete drop-down
-                            'label' => $odont->getServidorUnidade(),  
-                            'value' => $odont->getServidorUnidade(),
-                            'unidade_cnes' => $odont->unidade_cnes,
-                            'id' => $odont->servidor_cpf, // return value from autocomplete
-                     );
-                    }
+            }
+        }
+    }
+
+    public function actionFindOdontologos() {
+
+        $this->_RBAC->checkAccess('registered', true);
+        $q = $_GET['term'];
+        if (isset($q)) {
+            $odontologos = Odontologo::model()->with(array('servidor', 'unidade'))->findAll('servidor.nome like :nome', array(':nome' => strtoupper(trim($q)) . '%'));
+            //$servidores = Servidor::model()->findAllByAttributes(array('nome','cpf'),
+            // 'where nome like :nome',array(':nome'=> strtoupper(trim($q)).'%'));
+
+            if (!empty($odontologos)) {
+                $out = array();
+                foreach ($odontologos as $odont) {
+                    $out[] = array(
+                        // expression to give the string for the autoComplete drop-down
+                        'label' => $odont->getServidorUnidade(),
+                        'value' => $odont->getServidorUnidade(),
+                        'unidade_cnes' => $odont->unidade_cnes,
+                        'id' => $odont->servidor_cpf, // return value from autocomplete
+                    );
+                }
                 echo CJSON::encode($out);
                 Yii::app()->end();
-           }
-       }
-   }
-   
+            }
+        }
+    }
+
     public function actionFindAgentesDeSaude() {
-            
-             //$this->_RBAC->checkAccess('registered',true);
-            $q = $_GET['term'];
-            if(isset($q)) {
-                 $agentes = AgenteSaude::model()->with(array('servidor','unidade'))->findAll('servidor.nome like :nome',array(':nome'=> strtoupper(trim($q)).'%'));
-                //$servidores = Servidor::model()->findAllByAttributes(array('nome','cpf'),
-                                             // 'where nome like :nome',array(':nome'=> strtoupper(trim($q)).'%'));
- 
-                if (!empty($agentes)) {
-                    $out = array();
-                    foreach ($agentes as $agen) {
-                            $out[] = array(
-                            // expression to give the string for the autoComplete drop-down
-                            'label' => $agen->getServidorUnidade(),  
-                            'value' => $agen->getServidorUnidade(),
-                            'unidade_cnes' => $agen->unidade_cnes,
-                            'micro_area'=>$agen->micro_area,
-                            'agente_saude_micro_area'=>$agen->micro_area,
-                            'id' => $agen->servidor_cpf, // return value from autocomplete
-                     );
-                    }
+
+        $this->_RBAC->checkAccess('registered', true);
+        $q = $_GET['term'];
+        if (isset($q)) {
+            $agentes = AgenteSaude::model()->with(array('servidor', 'unidade'))->findAll('servidor.nome like :nome', array(':nome' => strtoupper(trim($q)) . '%'));
+            //$servidores = Servidor::model()->findAllByAttributes(array('nome','cpf'),
+            // 'where nome like :nome',array(':nome'=> strtoupper(trim($q)).'%'));
+
+            if (!empty($agentes)) {
+                $out = array();
+                foreach ($agentes as $agen) {
+                    $out[] = array(
+                        // expression to give the string for the autoComplete drop-down
+                        'label' => $agen->getServidorUnidade(),
+                        'value' => $agen->getServidorUnidade(),
+                        'unidade_cnes' => $agen->unidade_cnes,
+                        'micro_area' => $agen->micro_area,
+                        'agente_saude_micro_area' => $agen->micro_area,
+                        'id' => $agen->servidor_cpf, // return value from autocomplete
+                    );
+                }
                 echo CJSON::encode($out);
                 Yii::app()->end();
-           }
-       }
-   }
-   
+            }
+        }
+    }
+
     public function actionFindServidoresUsuarios() {
-            
-             $this->_RBAC->checkAccess('registered',true);
-            $q = $_GET['term'];
-            if(isset($q)) {
-                $criteria= new CDbCriteria();
-                $criteria->distinct=true;
-                $criteria->alias="ser";
-                $criteria->join=" INNER JOIN user us ON us.servidor_cpf=ser.cpf ";
-                $criteria->condition='nome like :nome';
-                $criteria->params=array(':nome'=> strtoupper(trim($q)).'%');
-                 $servidores = Servidor::model()->findAll($criteria);
-                //$servidores = Servidor::model()->findAllByAttributes(array('nome','cpf'),
-                                             // 'where nome like :nome',array(':nome'=> strtoupper(trim($q)).'%'));
- 
-                if (!empty($servidores)) {
-                    $out = array();
-                    foreach ($servidores as $s) {
-                            $out[] = array(
-                            // expression to give the string for the autoComplete drop-down
-                            'label' => $s->nome,  
-                            'value' => $s->nome,
-                            'id' => $s->cpf, // return value from autocomplete
-                     );
-                    }
+
+        $this->_RBAC->checkAccess('registered', true);
+        $q = $_GET['term'];
+        if (isset($q)) {
+            $criteria = new CDbCriteria();
+            $criteria->distinct = true;
+            $criteria->alias = "ser";
+            $criteria->join = " INNER JOIN user us ON us.servidor_cpf=ser.cpf ";
+            $criteria->condition = 'nome like :nome';
+            $criteria->params = array(':nome' => strtoupper(trim($q)) . '%');
+            $servidores = Servidor::model()->findAll($criteria);
+            //$servidores = Servidor::model()->findAllByAttributes(array('nome','cpf'),
+            // 'where nome like :nome',array(':nome'=> strtoupper(trim($q)).'%'));
+
+            if (!empty($servidores)) {
+                $out = array();
+                foreach ($servidores as $s) {
+                    $out[] = array(
+                        // expression to give the string for the autoComplete drop-down
+                        'label' => $s->nome,
+                        'value' => $s->nome,
+                        'id' => $s->cpf, // return value from autocomplete
+                    );
+                }
                 echo CJSON::encode($out);
                 Yii::app()->end();
-           }
-       }
-   }
-    
-   protected function getModelName() {
-       return 'Servidor';
-   }
+            }
+        }
+    }
+
+    protected function getModelName() {
+        return 'Servidor';
+    }
 
 }

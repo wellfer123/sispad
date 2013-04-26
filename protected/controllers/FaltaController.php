@@ -33,21 +33,6 @@ class FaltaController extends SISPADBaseController {
      */
     public function accessRules() {
         return array(
-                /* array('allow',  // allow all users to perform 'index' and 'view' actions
-                  'actions'=>array('index','view'),
-                  'users'=>array('*'),
-                  ),
-                  array('allow', // allow authenticated user to perform 'create' and 'update' actions
-                  'actions'=>array('create','update'),
-                  'users'=>array('@'),
-                  ),
-                  array('allow', // allow admin user to perform 'admin' and 'delete' actions
-                  'actions'=>array('admin','delete'),
-                  'users'=>array('admin'),
-                  ),
-                  array('deny',  // deny all users
-                  'users'=>array('*'),
-                  ), */
         );
     }
 
@@ -170,6 +155,7 @@ class FaltaController extends SISPADBaseController {
     }
 
     public function actionRelatorioDetalhado($title, $servidorCpf, $mes, $ano) {
+        $this->CheckAcessAction();
         $model = new Falta;
         $this->widget('application.extensions.phpexcel.EExcelView', array('dataProvider' => $model->searchPorServidor2($servidorCpf, $mes, $ano),
             'title' => $title,
@@ -180,6 +166,7 @@ class FaltaController extends SISPADBaseController {
     }
 
     public function actionRelatorioMensal($title, $mes, $ano, $unidade_cnes) {
+        $this->CheckAcessAction();
         $model = new TotalFalta;
         $this->widget('application.extensions.phpexcel.EExcelView', array('dataProvider' => $model->searchMensal2($mes, $ano, $unidade_cnes),
             'title' => $title,
@@ -233,6 +220,7 @@ class FaltaController extends SISPADBaseController {
      * Lists all models.
      */
     public function actionIndex() {
+        $this->CheckAcessAction();
         $dataProvider = new CActiveDataProvider('Falta');
         $this->render('index', array(
             'dataProvider' => $dataProvider,
@@ -243,6 +231,7 @@ class FaltaController extends SISPADBaseController {
      * Manages all models.
      */
     public function actionAdmin() {
+        $this->CheckAcessAction();
         $model = new Falta('search');
         $model->unsetAttributes();  // clear any default values
         if (isset($_GET['falta']))
