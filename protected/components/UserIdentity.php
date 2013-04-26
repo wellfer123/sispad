@@ -1,5 +1,4 @@
 <?php
-//include_once '../modules/rbac/models/User.php';
 
 /**
  * UserIdentity represents the data needed to identity a user.
@@ -13,8 +12,11 @@ class UserIdentity extends CUserIdentity
 
         const ERROR_USER_INACTIVE=10;
         const ERROR_EMAIL_=15;
-        const ROLE_GESTOR = "GestorUnidade";
+        //papéis utilizados para exibição de menus
+        const GERENTE_UNIDADE = "GerenteUnidade";
+        const GESTOR = "Gestor";
         const ROLES = "roles";
+        const ADMIN = "SuperAdmin";
        
 
         
